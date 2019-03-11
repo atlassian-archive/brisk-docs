@@ -1,5 +1,5 @@
-name: Bright Docs
-description: Bright Docs
+name: Brisk Docs
+description: Brisk Docs
 links:
   binary:
     name: docker.atl-paas.net/atlassian/jira-frontend-docs-test

@@ -20,7 +20,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <title>Bright Document</title>
+        <title>Brisk Document</title>
         <MDXProvider components={components}>
           <Component {...pageProps} />
         </MDXProvider>

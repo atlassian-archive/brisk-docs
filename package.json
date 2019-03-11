@@ -1,16 +1,16 @@
 {
-    "name": "bright-docs",
+    "name": "brisk-docs",
     "version": "1.0.0",
-    "description": "The bright-docs website generator",
+    "description": "The brisk-docs website generator",
     "main": "index.js",
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "bolt w @bright-docs/website run jest",
+        "test": "bolt w @brisk-docs/website run jest",
         "cypress": "node_modules/.bin/cypress run",
-        "dev:website": "bolt w @bright-docs/website run yarn dev",
-        "docs": "bolt w @bright-docs/website run dev",
-        "build": "bolt w @bright-docs/website run next build",
+        "dev:website": "bolt w @brisk-docs/website run yarn dev",
+        "docs": "bolt w @brisk-docs/website run dev",
+        "build": "bolt w @brisk-docs/website run next build",
         "start": "next start -p 8080",
         "prettier": "prettier --write \"**/*.js\""
     },

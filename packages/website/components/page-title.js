@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PageTitle = props => (
   <Head>
-    <title>Bright Document - {props.title}</title>
+    <title>Brisk Document - {props.title}</title>
   </Head>
 );
 

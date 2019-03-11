@@ -1,4 +1,4 @@
-# Bright Docs
+# Brisk Docs
 
 ## A cute slogan goes here
 

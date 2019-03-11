@@ -35,7 +35,7 @@ const AllPackagesNavContent = ({ data }) => (
                 size="large"
               />
             )}
-            text="Bright Documentation"
+            text="Brisk Documentation"
           />
         </div>
       )}

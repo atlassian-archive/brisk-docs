@@ -85,7 +85,7 @@ const renderRow = ({ packageId, homePath }) => {
 const GetRows = () => data.packages.map(item => renderRow(item));
 const PackagesList = () => (
   <Page>
-    <Title>Bright Documentation</Title>
+    <Title>Brisk Documentation</Title>
     <Section>
       <Table
         head={head}

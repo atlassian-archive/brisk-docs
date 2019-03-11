@@ -1,7 +1,7 @@
 {
-    "name": "@bright-docs/website",
+    "name": "@brisk-docs/website",
     "version": "1.0.0",
-    "description": "The Bright website documenter", 
+    "description": "The Brisk website documenter", 
     "main": "index.js",
     "license": "MIT",
     "private": true,

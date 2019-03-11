@@ -28,7 +28,7 @@ class NavigationWrapper extends Component {
                 {
                   // There is an AK problem as the SSR doesn't match the run code. Hence removed JiraIcon
                   icon: () => (
-                    <DocumentsIcon label="Bright Docs" size="medium" />
+                    <DocumentsIcon label="Brisk Docs" size="medium" />
                   ),
                   id: 'logo',
                   tooltip: 'Frontend docs home',
