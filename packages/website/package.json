@@ -7,10 +7,11 @@
     "private": true,
     "scripts": {
         "test": "jest",
-        "dev": "node generate-pages.js --config=website-dev-config.json && FORCE_EXTRACT_REACT_TYPES=true next dev",
+        "dev": "node start.js --config=website-dev-config.js",
         "build": "next build",
         "start": "next start"
     },
+    "bin": "./start.js",
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/button": "^8.2.4",
@@ -52,6 +53,7 @@
         "outdent": "^0.7.0",
         "pretty-proptypes": "^0.6.0",
         "prop-types": "^15.6.2",
+        "raw-loader": "^1.0.0",
         "react": "^16.7.0",
         "react-addons-text-content": "^0.0.4",
         "react-dom": "^16.7.0",
