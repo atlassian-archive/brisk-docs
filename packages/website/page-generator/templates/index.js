@@ -4,11 +4,16 @@ const outdent = require('outdent');
 
 const PageTitlePath = path.resolve(__dirname, '../../components/page-title');
 const writeFile = (pagePath, content) => {
-    fse.ensureFileSync(pagePath);
-    fse.writeFileSync(pagePath, content);
+  fse.ensureFileSync(pagePath);
+  fse.writeFileSync(pagePath, content);
 };
 
-const basicPageTemplate = (componentPath, wrapperPath, data = {}, title = '') => outdent`
+const basicPageTemplate = (
+  componentPath,
+  wrapperPath,
+  data = {},
+  title = '',
+) => outdent`
     import Component from '${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${PageTitlePath}'
@@ -23,7 +28,12 @@ const basicPageTemplate = (componentPath, wrapperPath, data = {}, title = '') =>
     );
 `;
 
-const exampleTemplate = (componentPath, wrapperPath, data = {}, title = '') => outdent`
+const exampleTemplate = (
+  componentPath,
+  wrapperPath,
+  data = {},
+  title = '',
+) => outdent`
     import Component from '${componentPath}';
     import fileContents from '!!raw-loader!${componentPath}';
 
@@ -46,7 +56,12 @@ import Component from '${componentPath}'
 export default () => <Component />
 `;
 
-const basicNonComponentTemplate = (wrapperPath, data = {}, type, title = '') => outdent`
+const basicNonComponentTemplate = (
+  wrapperPath,
+  data = {},
+  type,
+  title = '',
+) => outdent`
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${PageTitlePath}'
     
@@ -64,116 +79,162 @@ const basicNonComponentTemplate = (wrapperPath, data = {}, type, title = '') => 
  * @param to absolute path of the file being imported
  */
 const getImportPath = (from, to) => {
-    const fromDir = path.dirname(from);
+  const fromDir = path.dirname(from);
 
-    return path.relative(fromDir, to).replace('.js', '');
+  return path.relative(fromDir, to).replace('.js', '');
 };
 
-const getGenericPageInfo = (pagesPath, pagePath, componentPath, wrappersPath, wrapperName) => {
-    const absolutePagePath = path.resolve(pagesPath, pagePath);
-    const componentImportPath = getImportPath(absolutePagePath, componentPath);
-    const packageHomeWrapperPath = getImportPath(
-        absolutePagePath,
-        path.join(wrappersPath, `${wrapperName}.js`),
-    );
+const getGenericPageInfo = (
+  pagesPath,
+  pagePath,
+  componentPath,
+  wrappersPath,
+  wrapperName,
+) => {
+  const absolutePagePath = path.resolve(pagesPath, pagePath);
+  const componentImportPath = getImportPath(absolutePagePath, componentPath);
+  const packageHomeWrapperPath = getImportPath(
+    absolutePagePath,
+    path.join(wrappersPath, `${wrapperName}.js`),
+  );
 
-    return {
-        absolutePagePath,
-        componentImportPath,
-        packageHomeWrapperPath,
-    };
+  return {
+    absolutePagePath,
+    componentImportPath,
+    packageHomeWrapperPath,
+  };
 };
 
 const generateBasicPage = (
+  pagePath,
+  componentPath,
+  data,
+  wrapperName,
+  { wrappersPath, pagesPath },
+  title = '',
+) => {
+  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+    pagesPath,
     pagePath,
     componentPath,
-    data,
+    wrappersPath,
     wrapperName,
-    { wrappersPath, pagesPath },
-    title = '',
-) => {
-    const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
-        pagesPath,
-        pagePath,
-        componentPath,
-        wrappersPath,
-        wrapperName,
-    );
+  );
 
-    writeFile(
-        path.join(pagesPath, pagePath),
-        basicPageTemplate(componentImportPath, packageHomeWrapperPath, data, title),
-    );
+  writeFile(
+    path.join(pagesPath, pagePath),
+    basicPageTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+  );
 };
 
 const generateNonComponentPage = (
-    pagePath,
-    data,
-    wrapperName,
-    { wrappersPath, pagesPath },
-    type,
-    title = '',
+  pagePath,
+  data,
+  wrapperName,
+  { wrappersPath, pagesPath },
+  type,
+  title = '',
 ) => {
-    const absolutePagePath = path.resolve(pagesPath, pagePath);
-    const packageHomeWrapperPath = getImportPath(
-        absolutePagePath,
-        path.join(wrappersPath, `${wrapperName}.js`),
-    );
-    writeFile(
-        path.join(pagesPath, pagePath),
-        basicNonComponentTemplate(packageHomeWrapperPath, data, type, title),
-    );
+  const absolutePagePath = path.resolve(pagesPath, pagePath);
+  const packageHomeWrapperPath = getImportPath(
+    absolutePagePath,
+    path.join(wrappersPath, `${wrapperName}.js`),
+  );
+  writeFile(
+    path.join(pagesPath, pagePath),
+    basicNonComponentTemplate(packageHomeWrapperPath, data, type, title),
+  );
 };
 
 const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
-    generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
+  generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
 };
 
-const generatePackageDocPage = (pagePath, markdownPath, data, config, title = '') => {
-    generateBasicPage(pagePath, markdownPath, data, 'package-docs', config, title);
+const generatePackageDocPage = (
+  pagePath,
+  markdownPath,
+  data,
+  config,
+  title = '',
+) => {
+  generateBasicPage(
+    pagePath,
+    markdownPath,
+    data,
+    'package-docs',
+    config,
+    title,
+  );
 };
 
-const generateExamplePage = (pagePath, rawPagesPath, filePath, data, config, title = '') => {
-    const componentPath = filePath;
-    const wrapperName = 'package-example';
-    const { wrappersPath, pagesPath } = config;
+const generateExamplePage = (
+  pagePath,
+  rawPagesPath,
+  filePath,
+  data,
+  config,
+  title = '',
+) => {
+  const componentPath = filePath;
+  const wrapperName = 'package-example';
+  const { wrappersPath, pagesPath } = config;
 
-    const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
-        pagesPath,
-        pagePath,
-        componentPath,
-        wrappersPath,
-        wrapperName,
-    );
+  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+    pagesPath,
+    pagePath,
+    componentPath,
+    wrappersPath,
+    wrapperName,
+  );
 
-    writeFile(
-        path.join(pagesPath, pagePath),
-        exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
-    );
+  writeFile(
+    path.join(pagesPath, pagePath),
+    exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+  );
 
-    writeFile(
-        path.join(pagesPath, rawPagesPath),
-        rawTemplate(path.join('..', componentImportPath)),
-    );
+  writeFile(
+    path.join(pagesPath, rawPagesPath),
+    rawTemplate(path.join('..', componentImportPath)),
+  );
 };
 
 const generateDocsHomePage = (pagePath, data, config, title = '') => {
-    generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
+  generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
 };
 
 const generateExamplesHomePage = (pagePath, data, config, title = '') => {
-    generateNonComponentPage(pagePath, data, 'item-list', config, 'examples', title);
+  generateNonComponentPage(
+    pagePath,
+    data,
+    'item-list',
+    config,
+    'examples',
+    title,
+  );
 };
 
-const generateProjectDocPage = (pagePath, markdownPath, data, config, title = '') => {
-    generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, title);
+const generateProjectDocPage = (
+  pagePath,
+  markdownPath,
+  data,
+  config,
+  title = '',
+) => {
+  generateBasicPage(
+    pagePath,
+    markdownPath,
+    data,
+    'project-docs',
+    config,
+    title,
+  );
 };
 
 module.exports = {
-    generateHomePage,
-    generatePackageDocPage,
-    generateExamplePage,
-    generateDocsHomePage,
-    generateExamplesHomePage,
-    generateProjectDocPage,
+  generateHomePage,
+  generatePackageDocPage,
+  generateExamplePage,
+  generateDocsHomePage,
+  generateExamplesHomePage,
+  generateProjectDocPage,
 };

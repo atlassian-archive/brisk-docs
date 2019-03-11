@@ -7128,6 +7128,10 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
+prettier@^1.16.4:
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+
 pretty-format-ast@^1.0.1:
   version "1.0.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/pretty-format-ast/-/pretty-format-ast-1.0.1.tgz#1d8cff9adeeaad5376aa80997952a55a2907ca8d"

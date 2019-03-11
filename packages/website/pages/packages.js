@@ -1,50 +1,50 @@
-import Table from "@atlaskit/dynamic-table";
+import Table from '@atlaskit/dynamic-table';
 
-import styled from "styled-components";
-import Link from "next/link";
-import { gridSize as gridSizeFn } from "@atlaskit/theme";
-import titleCase from "title-case";
+import styled from 'styled-components';
+import Link from 'next/link';
+import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import titleCase from 'title-case';
 
-import Page, { Title, Section } from "../components/page";
-import NavigationWrapper from "../components/navigation-wrapper";
-import AllPackagesNavContent from "../components/navigation/all-packages-nav-content";
+import Page, { Title, Section } from '../components/page';
+import NavigationWrapper from '../components/navigation-wrapper';
+import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
-import data from "../data/pages-list.json";
-import meta from "../data/packages-data.json";
-import PageTitle from "../components/page-title";
+import data from '../data/pages-list.json';
+import meta from '../data/packages-data.json';
+import PageTitle from '../components/page-title';
 
 const gridSize = gridSizeFn();
 
 const head = {
   cells: [
     {
-      key: "name",
-      content: "Name",
+      key: 'name',
+      content: 'Name',
       isSortable: true,
-      width: 20
+      width: 20,
     },
     {
-      key: "description",
-      content: "Description",
+      key: 'description',
+      content: 'Description',
       shouldTruncate: true,
       isSortable: false,
-      width: 45
+      width: 45,
     },
     {
-      key: "version",
-      content: "Version",
+      key: 'version',
+      content: 'Version',
       shouldTruncate: true,
       isSortable: false,
-      width: 15
+      width: 15,
     },
     {
-      key: "maintainers",
-      content: "Maintainers",
+      key: 'maintainers',
+      content: 'Maintainers',
       shouldTruncate: true,
       isSortable: false,
-      width: 40
-    }
-  ]
+      width: 40,
+    },
+  ],
 };
 
 const renderRow = ({ packageId, homePath }) => {
@@ -57,28 +57,28 @@ const renderRow = ({ packageId, homePath }) => {
           <RowCell>
             <Link href={homePath}>{titleCase(packageId)}</Link>
           </RowCell>
-        )
+        ),
       },
       {
-        key: "description",
-        content: <RowCell>{metaData.description}</RowCell>
+        key: 'description',
+        content: <RowCell>{metaData.description}</RowCell>,
       },
       {
-        key: "version",
+        key: 'version',
         shouldTruncate: true,
-        content: <RowCell>{metaData.version}</RowCell>
+        content: <RowCell>{metaData.version}</RowCell>,
       },
       {
-        key: "maintainers",
+        key: 'maintainers',
         content: (
           <RowCell>
             {metaData.maintainers && metaData.maintainers.length > 0
-              ? metaData.maintainers.join(", ")
-              : ""}
+              ? metaData.maintainers.join(', ')
+              : ''}
           </RowCell>
-        )
-      }
-    ]
+        ),
+      },
+    ],
   };
 };
 

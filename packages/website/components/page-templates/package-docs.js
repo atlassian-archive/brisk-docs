@@ -5,19 +5,21 @@ import NavigationWrapper from '../navigation-wrapper';
 import Wrapper from '../content-style-wrapper';
 
 const PackageDocsWrapper = ({ data, children }) => (
-    <NavigationWrapper
-        navContent={() => <PackageNavContent packageId={data.id} packageName={data.packageName} />}
-    >
-        <Wrapper>{children}</Wrapper>
-    </NavigationWrapper>
+  <NavigationWrapper
+    navContent={() => (
+      <PackageNavContent packageId={data.id} packageName={data.packageName} />
+    )}
+  >
+    <Wrapper>{children}</Wrapper>
+  </NavigationWrapper>
 );
 
 PackageDocsWrapper.propTypes = {
-    data: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        packageName: PropTypes.string.isRequired,
-    }).isRequired,
-    children: PropTypes.node.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    packageName: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default PackageDocsWrapper;

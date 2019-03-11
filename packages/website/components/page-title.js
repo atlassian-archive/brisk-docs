@@ -1,5 +1,5 @@
-import Head from "next/head";
-import PropTypes from "prop-types";
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 const PageTitle = props => (
   <Head>
@@ -8,7 +8,7 @@ const PageTitle = props => (
 );
 
 PageTitle.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 export default PageTitle;

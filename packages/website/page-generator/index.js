@@ -5,12 +5,12 @@ const getDocsInfo = require('./get-docs-info');
 const rimraf = require('rimraf');
 const titleCase = require('title-case');
 const {
-    generateHomePage,
-    generatePackageDocPage,
-    generateExamplePage,
-    generateDocsHomePage,
-    generateExamplesHomePage,
-    generateProjectDocPage,
+  generateHomePage,
+  generatePackageDocPage,
+  generateExamplePage,
+  generateDocsHomePage,
+  generateExamplesHomePage,
+  generateProjectDocPage,
 } = require('./templates');
 
 const packagesData = [];
@@ -22,85 +22,85 @@ const packagesData = [];
  * @returns a sitemap of all the pages created
  */
 function generatePackagePages(packageInfo, generatorConfig) {
-    const packageSitemap = packageInfo.map(pkg => {
-        const pageData = { id: pkg.id, packageName: pkg.name };
-        const homePageData = {
-            description: pkg.description,
-            version: pkg.version,
-            maintainers: pkg.maintainers,
-            repository: pkg.repository,
-        };
-        packagesData.push({ id: pkg.id, ...homePageData });
-        const homePath = path.join('packages', pkg.id);
-        generateHomePage(
-            path.join(homePath, 'index.js'),
-            pkg.readmePath,
-            { ...pageData, ...homePageData },
-            generatorConfig,
-            titleCase(pkg.id),
-        );
+  const packageSitemap = packageInfo.map(pkg => {
+    const pageData = { id: pkg.id, packageName: pkg.name };
+    const homePageData = {
+      description: pkg.description,
+      version: pkg.version,
+      maintainers: pkg.maintainers,
+      repository: pkg.repository,
+    };
+    packagesData.push({ id: pkg.id, ...homePageData });
+    const homePath = path.join('packages', pkg.id);
+    generateHomePage(
+      path.join(homePath, 'index.js'),
+      pkg.readmePath,
+      { ...pageData, ...homePageData },
+      generatorConfig,
+      titleCase(pkg.id),
+    );
 
-        const docPath = path.join(homePath, 'docs');
-        generateDocsHomePage(
-            path.join(docPath, 'index.js'),
-            pageData,
-            generatorConfig,
-            'Documents',
-        );
+    const docPath = path.join(homePath, 'docs');
+    generateDocsHomePage(
+      path.join(docPath, 'index.js'),
+      pageData,
+      generatorConfig,
+      'Documents',
+    );
 
-        const examplePath = path.join(homePath, 'examples');
-        generateExamplesHomePage(
-            path.join(examplePath, 'index.js'),
-            pageData,
-            generatorConfig,
-            'Examples',
-        );
+    const examplePath = path.join(homePath, 'examples');
+    generateExamplesHomePage(
+      path.join(examplePath, 'index.js'),
+      pageData,
+      generatorConfig,
+      'Examples',
+    );
 
-        const docs = pkg.docsPaths.map(doc => {
-            const pagePath = path.join(homePath, 'docs', doc.id);
-            generatePackageDocPage(
-                `${pagePath}.js`,
-                doc.path,
-                pageData,
-                generatorConfig,
-                titleCase(doc.id),
-            );
+    const docs = pkg.docsPaths.map(doc => {
+      const pagePath = path.join(homePath, 'docs', doc.id);
+      generatePackageDocPage(
+        `${pagePath}.js`,
+        doc.path,
+        pageData,
+        generatorConfig,
+        titleCase(doc.id),
+      );
 
-            return { id: doc.id, pagePath: path.join('/', pagePath) };
-        });
-
-        const examples = pkg.examplesPaths.map(example => {
-            const pagePath = path.join(homePath, 'examples', example.id);
-
-            const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
-            const isolatedPath = path.join('/', `${rawPagesPath}`);
-
-            generateExamplePage(
-                `${pagePath}.js`,
-                `${rawPagesPath}.js`,
-                example.path,
-                { ...pageData, isolatedPath },
-                generatorConfig,
-                titleCase(example.id),
-            );
-
-            return {
-                id: example.id,
-                pagePath: path.join('/', pagePath),
-                isolatedPath,
-            };
-        });
-
-        return {
-            packageId: pkg.id,
-            homePath: path.join('/', homePath),
-            docPath: path.join('/', docPath),
-            examplePath: path.join('/', examplePath),
-            docs,
-            examples,
-        };
+      return { id: doc.id, pagePath: path.join('/', pagePath) };
     });
-    return packageSitemap;
+
+    const examples = pkg.examplesPaths.map(example => {
+      const pagePath = path.join(homePath, 'examples', example.id);
+
+      const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
+      const isolatedPath = path.join('/', `${rawPagesPath}`);
+
+      generateExamplePage(
+        `${pagePath}.js`,
+        `${rawPagesPath}.js`,
+        example.path,
+        { ...pageData, isolatedPath },
+        generatorConfig,
+        titleCase(example.id),
+      );
+
+      return {
+        id: example.id,
+        pagePath: path.join('/', pagePath),
+        isolatedPath,
+      };
+    });
+
+    return {
+      packageId: pkg.id,
+      homePath: path.join('/', homePath),
+      docPath: path.join('/', docPath),
+      examplePath: path.join('/', examplePath),
+      docs,
+      examples,
+    };
+  });
+  return packageSitemap;
 }
 
 /**
@@ -111,31 +111,31 @@ function generatePackagePages(packageInfo, generatorConfig) {
  * @returns sitemap for the generated docs pages
  */
 const generateProjectDocsPages = (docsInfo, generatorConfig) => {
-    const scanAndGenerate = (docs, docsPath) =>
-        docs.map(doc => {
-            if (doc.children) {
-                return {
-                    id: doc.id,
-                    children: scanAndGenerate(doc.children, path.join(docsPath, doc.id)),
-                };
-            }
+  const scanAndGenerate = (docs, docsPath) =>
+    docs.map(doc => {
+      if (doc.children) {
+        return {
+          id: doc.id,
+          children: scanAndGenerate(doc.children, path.join(docsPath, doc.id)),
+        };
+      }
 
-            const pagePath = path.join(docsPath, doc.id);
-            generateProjectDocPage(
-                `${pagePath}.js`,
-                doc.path,
-                {},
-                generatorConfig,
-                titleCase(doc.id),
-            );
+      const pagePath = path.join(docsPath, doc.id);
+      generateProjectDocPage(
+        `${pagePath}.js`,
+        doc.path,
+        {},
+        generatorConfig,
+        titleCase(doc.id),
+      );
 
-            return {
-                id: doc.id,
-                pagePath: path.join('/', pagePath),
-            };
-        });
+      return {
+        id: doc.id,
+        pagePath: path.join('/', pagePath),
+      };
+    });
 
-    return scanAndGenerate(docsInfo, 'docs');
+  return scanAndGenerate(docsInfo, 'docs');
 };
 
 /**
@@ -143,16 +143,16 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
  * @param pagesPath the absolute path to the `/pages` directory in next
  */
 const cleanPages = pagesPath => {
-    // This error handling should likely be lifted to when we start executing the whole thing
-    if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
-        throw new Error(
-            "We were worried we were going to erase files from the wrong place so we're stopping",
-        );
-    }
-    const oldPackagePages = path.join(pagesPath, 'packages');
-    const oldDocsPages = path.join(pagesPath, 'docs');
-    rimraf.sync(oldPackagePages);
-    rimraf.sync(oldDocsPages);
+  // This error handling should likely be lifted to when we start executing the whole thing
+  if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
+    throw new Error(
+      "We were worried we were going to erase files from the wrong place so we're stopping",
+    );
+  }
+  const oldPackagePages = path.join(pagesPath, 'packages');
+  const oldDocsPages = path.join(pagesPath, 'docs');
+  rimraf.sync(oldPackagePages);
+  rimraf.sync(oldDocsPages);
 };
 
 /**
@@ -166,28 +166,30 @@ const cleanPages = pagesPath => {
  * @returns an object representing the sitemap of the pages created
  */
 module.exports = function generatePages(
-    packagesPaths,
-    docsPath,
-    pagesPath,
-    componentsPath,
-    options = {},
+  packagesPaths,
+  docsPath,
+  pagesPath,
+  componentsPath,
+  options = {},
 ) {
-    cleanPages(pagesPath);
+  cleanPages(pagesPath);
 
-    const packageInfo = getPackageInfo(packagesPaths, { useManifests: options.useManifests });
-    const docsInfo = getDocsInfo(docsPath);
+  const packageInfo = getPackageInfo(packagesPaths, {
+    useManifests: options.useManifests,
+  });
+  const docsInfo = getDocsInfo(docsPath);
 
-    const generatorConfig = {
-        pagesPath,
-        wrappersPath: componentsPath,
-    };
+  const generatorConfig = {
+    pagesPath,
+    wrappersPath: componentsPath,
+  };
 
-    const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
-    const docsSitemap = generateProjectDocsPages(docsInfo, generatorConfig);
+  const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
+  const docsSitemap = generateProjectDocsPages(docsInfo, generatorConfig);
 
-    return {
-        packages: packageSitemap,
-        docs: docsSitemap,
-        metaData: packagesData,
-    };
+  return {
+    packages: packageSitemap,
+    docs: docsSitemap,
+    metaData: packagesData,
+  };
 };

@@ -11,14 +11,14 @@ import Button from '@atlaskit/button';
 import Link from 'next/link';
 
 const LinkButton = props => (
-    <Button
-        {...props}
-        component={({ href, children, ...rest }) => (
-            <Link href={href}>
-                <a {...rest}>{children}</a>
-            </Link>
-        )}
-    />
+  <Button
+    {...props}
+    component={({ href, children, ...rest }) => (
+      <Link href={href}>
+        <a {...rest}>{children}</a>
+      </Link>
+    )}
+  />
 );
 
 export default LinkButton;

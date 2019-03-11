@@ -5,13 +5,13 @@ import NavigationWrapper from '../navigation-wrapper';
 import Wrapper from '../content-style-wrapper';
 
 const ProjectDocsWrapper = ({ children }) => (
-    <NavigationWrapper navContent={DocsNavContent}>
-        <Wrapper>{children}</Wrapper>
-    </NavigationWrapper>
+  <NavigationWrapper navContent={DocsNavContent}>
+    <Wrapper>{children}</Wrapper>
+  </NavigationWrapper>
 );
 
 ProjectDocsWrapper.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ProjectDocsWrapper;

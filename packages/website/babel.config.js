@@ -1,14 +1,14 @@
 module.exports = {
-    presets: ['next/babel'],
-    plugins: [
-        [
-            'styled-components',
-            {
-                ssr: true,
-                displayName: true,
-                preprocess: false,
-            },
-        ],
-        'transform-flow-strip-types',
+  presets: ['next/babel'],
+  plugins: [
+    [
+      'styled-components',
+      {
+        ssr: true,
+        displayName: true,
+        preprocess: false,
+      },
     ],
+    'transform-flow-strip-types',
+  ],
 };

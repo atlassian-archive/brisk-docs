@@ -11,14 +11,15 @@
         "dev:website": "bolt w @bright-docs/website run yarn dev",
         "docs": "bolt w @bright-docs/website run dev",
         "build": "bolt w @bright-docs/website run next build",
-        "start": "next start -p 8080"
+        "start": "next start -p 8080",
+        "prettier": "prettier --write \"**/*.js\""
     },
     "bolt": {
         "version": "^0.22.1",
         "workspaces": [
-          "packages/*"
+            "packages/*"
         ]
-      },
+    },
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/button": "^8.2.4",
@@ -78,6 +79,7 @@
         "file-loader": "^2.0.0",
         "jest": "^24.1.0",
         "json-loader": "^0.5.7",
+        "prettier": "^1.16.4",
         "style-loader": "^0.23.0"
     }
 }

@@ -1,8 +1,8 @@
-import React from "react";
-import App, { Container } from "next/app";
-import "@atlaskit/css-reset";
-import { MDXProvider } from "@mdx-js/tag";
-import components from "../components/mdx";
+import React from 'react';
+import App, { Container } from 'next/app';
+import '@atlaskit/css-reset';
+import { MDXProvider } from '@mdx-js/tag';
+import components from '../components/mdx';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

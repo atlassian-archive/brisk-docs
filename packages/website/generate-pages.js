@@ -21,30 +21,39 @@ const cliOptions = [{ name: 'config', type: String }];
 const args = commandLineArgs(cliOptions, { camelCase: true });
 
 const loadConfig = () => {
-    if (args.config) {
-        const configPath = path.resolve(cwd, args.config);
-        return JSON.parse(fse.readFileSync(configPath, 'utf-8'));
-    }
+  if (args.config) {
+    const configPath = path.resolve(cwd, args.config);
+    return JSON.parse(fse.readFileSync(configPath, 'utf-8'));
+  }
 
-    return {};
+  return {};
 };
 
-const { packagesPaths, docsPath, useManifests } = processConfig(cwd, loadConfig());
+const { packagesPaths, docsPath, useManifests } = processConfig(
+  cwd,
+  loadConfig(),
+);
 
 const pagesPath = path.resolve(__dirname, './pages');
 const componentsPath = path.resolve(__dirname, './components/page-templates');
 
-const pagesList = generatePages(packagesPaths, docsPath, pagesPath, componentsPath, {
+const pagesList = generatePages(
+  packagesPaths,
+  docsPath,
+  pagesPath,
+  componentsPath,
+  {
     useManifests,
-});
+  },
+);
 const { packages, docs, metaData } = pagesList;
 
 fse.writeFileSync(
-    path.resolve(__dirname, 'data/pages-list.json'),
-    JSON.stringify({ packages, docs }, undefined, 2),
+  path.resolve(__dirname, 'data/pages-list.json'),
+  JSON.stringify({ packages, docs }, undefined, 2),
 );
 
 fse.writeFileSync(
-    path.resolve(__dirname, 'data/packages-data.json'),
-    JSON.stringify({ metaData }, undefined, 2),
+  path.resolve(__dirname, 'data/packages-data.json'),
+  JSON.stringify({ metaData }, undefined, 2),
 );

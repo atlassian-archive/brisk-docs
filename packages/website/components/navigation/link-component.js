@@ -8,21 +8,21 @@ import * as PropTypes from 'prop-types';
 // ref errors from styled-components).
 /* eslint-disable-next-line  react/prefer-stateless-function */
 class LinkComponent extends Component {
-    render() {
-        const { className, children, href } = this.props;
+  render() {
+    const { className, children, href } = this.props;
 
-        return (
-            <Link href={href}>
-                <a className={className}>{children}</a>
-            </Link>
-        );
-    }
+    return (
+      <Link href={href}>
+        <a className={className}>{children}</a>
+      </Link>
+    );
+  }
 }
 
 LinkComponent.propTypes = {
-    className: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    href: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default LinkComponent;

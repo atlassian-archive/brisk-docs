@@ -11,15 +11,15 @@ const defaultPackagesPaths = ['./packages'];
  * @throws an error if the config is in an invalid format
  */
 const resolvePathsConfig = entry => {
-    if (typeof entry === 'string') {
-        return [entry];
-    }
+  if (typeof entry === 'string') {
+    return [entry];
+  }
 
-    if (Array.isArray(entry)) {
-        return entry;
-    }
+  if (Array.isArray(entry)) {
+    return entry;
+  }
 
-    throw new Error('entry must be an array or a string');
+  throw new Error('entry must be an array or a string');
 };
 
 /**
@@ -30,20 +30,22 @@ const resolvePathsConfig = entry => {
  * @returns {{packagesPaths: *, docsPath: *}}
  */
 const processConfig = (cwd, config) => {
-    const docsPath = path.resolve(cwd, config.docs || defaultDocsPath);
+  const docsPath = path.resolve(cwd, config.docs || defaultDocsPath);
 
-    const packagesConfig = config.packages
-        ? resolvePathsConfig(config.packages)
-        : defaultPackagesPaths;
-    const packagesPaths = packagesConfig.map(packagesPath => path.resolve(cwd, packagesPath));
+  const packagesConfig = config.packages
+    ? resolvePathsConfig(config.packages)
+    : defaultPackagesPaths;
+  const packagesPaths = packagesConfig.map(packagesPath =>
+    path.resolve(cwd, packagesPath),
+  );
 
-    const useManifests = config.useManifests || false;
+  const useManifests = config.useManifests || false;
 
-    return {
-        docsPath,
-        packagesPaths,
-        useManifests,
-    };
+  return {
+    docsPath,
+    packagesPaths,
+    useManifests,
+  };
 };
 
 module.exports = processConfig;
