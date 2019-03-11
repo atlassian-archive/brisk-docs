@@ -1,24 +1,16 @@
 {
-    "name": "bright-docs",
+    "name": "@bright-docs/website",
     "version": "1.0.0",
-    "description": "The bright-docs website generator",
+    "description": "The Bright website documenter", 
     "main": "index.js",
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "cd website && jest",
-        "cypress": "node_modules/.bin/cypress run",
-        "dev:website": "cd website && yarn dev",
-        "docs": "cd website && node generate-pages.js --config=website-dev-config.json && FORCE_EXTRACT_REACT_TYPES=true next dev",
-        "build": "cd website && next build",
-        "start": "next start -p 8080"
+        "test": "jest",
+        "dev": "node generate-pages.js --config=website-dev-config.json && FORCE_EXTRACT_REACT_TYPES=true next dev",
+        "build": "next build",
+        "start": "next start"
     },
-    "bolt": {
-        "version": "^0.22.1",
-        "workspaces": [
-          "packages/*"
-        ]
-      },
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/button": "^8.2.4",
@@ -67,17 +59,5 @@
         "styled-components": "^3.2.6",
         "title-case": "^2.1.1"
     },
-    "devDependencies": {
-        "babel-plugin-emotion": "^10.0.6",
-        "babel-plugin-styled-components": "^1.10.0",
-        "css-loader": "^1.0.0",
-        "cypress": "^3.1.5",
-        "enzyme": "^3.9.0",
-        "enzyme-adapter-react-16": "^1.9.1",
-        "extracted-loader": "^1.0.7",
-        "file-loader": "^2.0.0",
-        "jest": "^24.1.0",
-        "json-loader": "^0.5.7",
-        "style-loader": "^0.23.0"
-    }
+    "devDependencies": {}
 }

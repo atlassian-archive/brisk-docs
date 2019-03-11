@@ -11,7 +11,6 @@
         "react/react-in-jsx-scope": "off",
         "react/require-default-props": "off",
         "jsx-a11y/anchor-is-valid": "off",
-        "import/extensions": ["error", "never", { "css": "ignorePackages", "json": "always" }],
-        "import/no-unresolved": "off" // comment this out during development
+        "import/extensions": ["error", "never", { "css": "ignorePackages", "json": "always" }]
     }
 }
