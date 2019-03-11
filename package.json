@@ -69,6 +69,7 @@
         "title-case": "^2.1.1"
     },
     "devDependencies": {
+        "@atlaskit/build-releases": "^3.0.3",
         "babel-plugin-emotion": "^10.0.6",
         "babel-plugin-styled-components": "^1.10.0",
         "css-loader": "^1.0.0",
