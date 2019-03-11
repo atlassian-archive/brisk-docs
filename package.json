@@ -6,11 +6,11 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "cd website && jest",
+        "test": "bolt w @bright-docs/website run jest",
         "cypress": "node_modules/.bin/cypress run",
-        "dev:website": "cd website && yarn dev",
-        "docs": "cd website && node generate-pages.js --config=website-dev-config.json && FORCE_EXTRACT_REACT_TYPES=true next dev",
-        "build": "cd website && next build",
+        "dev:website": "bolt w @bright-docs/website run yarn dev",
+        "docs": "bolt w @bright-docs/website run dev",
+        "build": "bolt w @bright-docs/website && next build",
         "start": "next start -p 8080"
     },
     "bolt": {
