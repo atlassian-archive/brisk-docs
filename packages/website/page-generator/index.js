@@ -1,9 +1,9 @@
 const path = require('path');
 
-const getPackageInfo = require('./get-package-info');
-const getDocsInfo = require('./get-docs-info');
 const rimraf = require('rimraf');
 const titleCase = require('title-case');
+const getPackageInfo = require('./get-package-info');
+const getDocsInfo = require('./get-docs-info');
 const {
   generateHomePage,
   generatePackageDocPage,

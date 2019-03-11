@@ -77,6 +77,8 @@ class HomePage extends React.Component {
   };
 
   render() {
+    const { displayAsColumn } = this.state;
+
     return (
       <Page>
         <Heading>Jira Frontend Documentation</Heading>
@@ -85,7 +87,7 @@ class HomePage extends React.Component {
           relevant usage guidelines.
         </SubHeading>
         <Section>
-          <PanelGrid displayAsColumn={this.state.displayAsColumn}>
+          <PanelGrid displayAsColumn={displayAsColumn}>
             <Panel href="/packages" {...this.packagesPanelProps} />
             <Panel href="/docs" {...this.docsPanelProps} />
           </PanelGrid>

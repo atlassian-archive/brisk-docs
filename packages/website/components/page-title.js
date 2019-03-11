@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 
-const PageTitle = props => (
+const PageTitle = ({ title }) => (
   <Head>
-    <title>Brisk Document - {props.title}</title>
+    <title>Brisk Document - {title}</title>
   </Head>
 );
 
