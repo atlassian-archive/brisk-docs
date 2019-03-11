@@ -1,0 +1,16 @@
+{
+    "name": "bright-docs",
+    "version": "1.0.0",
+    "description": "The Bright website documenter", 
+    "main": "index.js",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "test": "jest",
+        "dev": "node generate-pages.js --config=website-dev-config.json && FORCE_EXTRACT_REACT_TYPES=true next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

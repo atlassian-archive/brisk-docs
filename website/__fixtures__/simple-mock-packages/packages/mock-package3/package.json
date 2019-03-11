@@ -1,0 +1,14 @@
+{
+  "name": "mock-package-3",
+  "version": "1.0.0",
+  "description": "This is a mock package3 to be used for doc website",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Test3",
+  "license": "",
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "styled-components": "^4.1.3"
+  }
+}
