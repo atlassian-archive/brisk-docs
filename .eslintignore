@@ -1,0 +1,7 @@
+node_modules
+.next
+
+packages/website/pages/packages
+packages/website/pages/docs
+
+packages/website/data/**/*.json
