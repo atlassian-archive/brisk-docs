@@ -59,7 +59,7 @@ const getDependencyReleaseLine = async (changesets, dependenciesUpdated) => {
 
 const versionOptions = {
   // If true, we will automatically commit the version updating when the command is run
-  commit: false,
+  commit: true,
   // Adds a skipCI flag to the commit - only valid if `commit` is also true.
   skipCI: false,
   // Do not modify the `changelog.md` files for packages that are updated

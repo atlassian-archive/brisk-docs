@@ -9,13 +9,17 @@ export default class Home extends Component {
   static propTypes = {
     packageName: PropTypes.string.isRequired,
   };
+
   static getInitialProps({ query: { name } }) {
     return { packageName: name };
   }
+
   render() {
+    const { packageName } = this.props;
+
     return (
       <NavigationWrapper menuItems={data.data} subItem>
-        <h1> This is the {this.props.packageName} home page</h1>
+        <h1> This is the {packageName} home page</h1>
         <br />
         <br />
         <Button appearance="primary"> AtlasButton </Button>
