@@ -1,5 +1,5 @@
 {
-    "packages": "../../dummy-data/packages",
+    "packages": "../../dummy-data/packages/*",
     "docs": "../../dummy-data/docs",
     "siteName": "Bright Docs"
 }

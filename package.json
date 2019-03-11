@@ -10,7 +10,7 @@
         "cypress": "node_modules/.bin/cypress run",
         "dev:website": "bolt w @bright-docs/website run yarn dev",
         "docs": "bolt w @bright-docs/website run dev",
-        "build": "bolt w @bright-docs/website && next build",
+        "build": "bolt w @bright-docs/website run next build",
         "start": "next start -p 8080"
     },
     "bolt": {

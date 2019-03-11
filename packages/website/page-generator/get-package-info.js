@@ -8,17 +8,17 @@ const flatMap = require('lodash.flatmap');
 const glob = require('glob');
 
 const getFilesInDir = dirPath => {
-    const files = [];
-    if (fs.existsSync(dirPath)) {
-        // We only care about top level examples right now. This logic will need to become circular
-        fs.readdirSync(dirPath).forEach(exampleFile => {
-            files.push({
-                id: exampleFile.replace(path.extname(exampleFile), ''),
-                path: path.resolve(dirPath, exampleFile),
-            });
-        });
-    }
-    return files;
+  const files = [];
+  if (fs.existsSync(dirPath)) {
+    // We only care about top level examples right now. This logic will need to become circular
+    fs.readdirSync(dirPath).forEach(exampleFile => {
+      files.push({
+        id: exampleFile.replace(path.extname(exampleFile), ''),
+        path: path.resolve(dirPath, exampleFile),
+      });
+    });
+  }
+  return files;
 };
 
 /**
@@ -27,7 +27,7 @@ const getFilesInDir = dirPath => {
  * @returns {boolean} whether this file can be rendered as an example
  */
 const isExample = examplePath =>
-    fs.statSync(examplePath).isFile() && path.extname(examplePath) === '.js';
+  fs.statSync(examplePath).isFile() && path.extname(examplePath) === '.js';
 
 /**
  * Determines whether a file is a valid doc file
@@ -35,8 +35,10 @@ const isExample = examplePath =>
  * @returns {boolean} whether this file can be rendered as a doc page
  */
 const isDoc = docPath => {
-    const extname = path.extname(docPath);
-    return fs.statSync(docPath).isFile() && (extname === '.md' || extname === '.mdx');
+  const extname = path.extname(docPath);
+  return (
+    fs.statSync(docPath).isFile() && (extname === '.md' || extname === '.mdx')
+  );
 };
 
 /**
@@ -45,9 +47,9 @@ const isDoc = docPath => {
  * @returns An array of absolute paths
  */
 const getAllDirectories = searchPatterns =>
-    flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(dirPath =>
-        fs.statSync(dirPath).isDirectory(),
-    );
+  flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(dirPath =>
+    fs.statSync(dirPath).isDirectory(),
+  );
 
 /**
  * Gets the contents of the package.json in a directory, if it exists
@@ -55,13 +57,13 @@ const getAllDirectories = searchPatterns =>
  * @returns a package definition, or null
  */
 const getPackageDefinition = pkgPath => {
-    const pkgJSONPath = path.resolve(pkgPath, 'package.json');
+  const pkgJSONPath = path.resolve(pkgPath, 'package.json');
 
-    if (fs.existsSync(pkgJSONPath)) {
-        return JSON.parse(fs.readFileSync(pkgJSONPath, 'utf-8'));
-    }
+  if (fs.existsSync(pkgJSONPath)) {
+    return JSON.parse(fs.readFileSync(pkgJSONPath, 'utf-8'));
+  }
 
-    return null;
+  return null;
 };
 
 /**
@@ -70,13 +72,13 @@ const getPackageDefinition = pkgPath => {
  * @returns a manifest definition, or null
  */
 const getManifestDefinition = pkgPath => {
-    const manifestPath = path.resolve(pkgPath, 'manifest.json');
+  const manifestPath = path.resolve(pkgPath, 'manifest.json');
 
-    if (fs.existsSync(manifestPath)) {
-        return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-    }
+  if (fs.existsSync(manifestPath)) {
+    return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+  }
 
-    return null;
+  return null;
 };
 
 /**
@@ -86,51 +88,51 @@ const getManifestDefinition = pkgPath => {
  * @returns An array of objects representing info about each package
  */
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
-    const defaultOptions = {
-        useManifests: false,
-    };
+  const defaultOptions = {
+    useManifests: false,
+  };
 
-    const { useManifests } = { ...defaultOptions, ...options };
+  const { useManifests } = { ...defaultOptions, ...options };
 
-    return getAllDirectories(packagesPatterns)
-        .map(pkgPath => {
-            const pkgId = path.basename(pkgPath);
+  return getAllDirectories(packagesPatterns)
+    .map(pkgPath => {
+      const pkgId = path.basename(pkgPath);
 
-            // Get information about the package, either by its package.json
-            // or a manifest.json if supported
-            let pkgInfo = getPackageDefinition(pkgPath);
-            if (!pkgInfo && useManifests) {
-                pkgInfo = getManifestDefinition(pkgPath);
-            }
+      // Get information about the package, either by its package.json
+      // or a manifest.json if supported
+      let pkgInfo = getPackageDefinition(pkgPath);
+      if (!pkgInfo && useManifests) {
+        pkgInfo = getManifestDefinition(pkgPath);
+      }
 
-            if (!pkgInfo) {
-                // This isn't a package. Return false so it isn't included in the docs.
-                return false;
-            }
+      if (!pkgInfo) {
+        // This isn't a package. Return false so it isn't included in the docs.
+        return false;
+      }
 
-            const readmePath = path.resolve(pkgPath, 'README.md');
-            const exampleDirPath = path.resolve(pkgPath, 'examples');
-            const docsDirPath = path.resolve(pkgPath, 'docs');
+      const readmePath = path.resolve(pkgPath, 'README.md');
+      const exampleDirPath = path.resolve(pkgPath, 'examples');
+      const docsDirPath = path.resolve(pkgPath, 'docs');
 
-            const examplesPaths = getFilesInDir(exampleDirPath).filter(({ path: examplePath }) =>
-                isExample(examplePath),
-            );
-            const docsPaths = getFilesInDir(docsDirPath).filter(({ path: docPath }) =>
-                isDoc(docPath),
-            );
+      const examplesPaths = getFilesInDir(exampleDirPath).filter(
+        ({ path: examplePath }) => isExample(examplePath),
+      );
+      const docsPaths = getFilesInDir(docsDirPath).filter(({ path: docPath }) =>
+        isDoc(docPath),
+      );
 
-            return {
-                id: pkgId,
-                name: pkgInfo.name,
-                description: pkgInfo.description,
-                version: pkgInfo.version,
-                maintainers: pkgInfo.maintainers,
-                repository: pkgInfo.repository,
-                pkgPath,
-                readmePath,
-                examplesPaths,
-                docsPaths,
-            };
-        })
-        .filter(_ => _);
+      return {
+        id: pkgId,
+        name: pkgInfo.name,
+        description: pkgInfo.description,
+        version: pkgInfo.version,
+        maintainers: pkgInfo.maintainers,
+        repository: pkgInfo.repository,
+        pkgPath,
+        readmePath,
+        examplesPaths,
+        docsPaths,
+      };
+    })
+    .filter(_ => _);
 };
