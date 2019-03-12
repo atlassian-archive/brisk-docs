@@ -1,9 +1,18 @@
 version: 2
+
+job-set-up: &job-set-up
+  docker:
+    - image: circleci/node:8.11.3-browsers
+  working_directory: ~/repo
+
+install-bolt: &install-bolt
+  - run:
+      name: Install Bolt
+      command: sudo yarn global add bolt
+
 jobs:
   install:
-    docker:
-      - image: circleci/node:8.11.3-browsers
-    working_directory: ~/repo
+    <<: *job-set-up
     steps:
       # Fetch code
       - checkout
@@ -29,9 +38,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
   lint:
-    docker:
-      - image: circleci/node:8.11.3-browsers
-    working_directory: ~/repo
+    <<: *job-set-up
     steps:
       - checkout
 
@@ -47,10 +54,8 @@ jobs:
           name: Lint Files
           command: bolt lint
 
-  test:
-    docker:
-      - image: circleci/node:8.11.3-browsers
-    working_directory: ~/repo
+  unit_tests:
+    <<: *job-set-up
     steps:
       - checkout
 
@@ -63,6 +68,10 @@ jobs:
           command: sudo yarn global add bolt
 
       - run:
+          name: Install Dependencies
+          command: bolt
+
+      - run:
           name: Jest Suite
           command: bolt test
           environment:
@@ -71,19 +80,40 @@ jobs:
       - store_test_results:
           path: test-reports/junit
 
+
+
+  integration_tests:
+    <<: *job-set-up
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Install Bolt
+          command: sudo yarn global add bolt
+
       - run:
           name: Cypress Suite
           command: bolt cypress
+
+      - save_cache:
+          paths:
+            - .cache/Cypress
+          key: v1-dependencies-{{ checksum "package.json" }}
 
 
 workflows:
   version: 2
   build:
     jobs:
-      - install
-      - lint:
-          requires:
-            - install
-      - test:
-          requires:
-            - install
+      - unit_tests
+#      - install
+#      - lint:
+#          requires:
+#            - install
+#      - unit_tests:
+#          requires:
+#            - install
