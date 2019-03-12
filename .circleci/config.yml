@@ -40,6 +40,10 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
 
       - run:
+          name: Install Bolt
+          command: sudo yarn global add bolt
+
+      - run:
           name: Lint Files
           command: bolt lint
 
@@ -53,6 +57,10 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Install Bolt
+          command: sudo yarn global add bolt
 
       - run:
           name: Jest Suite
