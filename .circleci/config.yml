@@ -8,17 +8,64 @@ jobs:
       # Fetch code
       - checkout
 
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
       - run:
           name: Install Bolt
-          command: yarn global add bolt
+          command: sudo yarn global add bolt
 
       - run:
           name: Install Dependencies
           command: bolt
 
-      - run:
-          name: 
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
+  lint:
+    docker:
+      - image: circleci/node:8.11.3-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Lint Files
+          command: bolt lint
+
+  test:
+    docker:
+      - image: circleci/node:8.11.3-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Jest Suite
+          command: bolt test
+          environment:
+            JEST_JUNIT_OUTPUT: 'test-reports/junit/js-test-results.xml'
+
+      - store_test_results:
+          path: test-reports/junit
+
+      - run:
+          name: Cypress Suite
+          command: bolt cypress
 
 
 workflows:
@@ -26,6 +73,9 @@ workflows:
   build:
     jobs:
       - install
+      - lint:
+          requires:
+            - install
       - test:
           requires:
             - install
