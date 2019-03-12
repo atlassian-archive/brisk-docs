@@ -1,5 +1,0 @@
-{
-    "packages": "../../dummy-data/packages/*",
-    "docs": "../../dummy-data/docs",
-    "siteName": "Brisk Docs"
-}

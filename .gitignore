@@ -2,11 +2,13 @@ node_modules
 
 .next
 .DS_Store
+.idea
 
 # dependencies
 node_modules
 
 package-lock.json
+yarn-error.log
 
 /packages/website/pages/packages
 /packages/website/pages/docs
