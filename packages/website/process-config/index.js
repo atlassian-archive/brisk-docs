@@ -1,7 +1,7 @@
 const path = require('path');
 
 const defaultDocsPath = './docs';
-const defaultPackagesPaths = ['./packages'];
+const defaultPackagesPaths = ['./packages/*'];
 
 /**
  * Validates a config entry specifying a path or paths and normalises

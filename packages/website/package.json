@@ -7,7 +7,8 @@
     "private": true,
     "scripts": {
         "test": "jest",
-        "dev": "node start.js --config=website-dev-config.js",
+        "dev": "node start.js --config=dummy-data/simple-project/docs.config.js",
+        "dev:webpack": "node start.js --config=dummy-data/custom-webpack-project/docs.config.js",
         "build": "next build",
         "start": "next start"
     },
