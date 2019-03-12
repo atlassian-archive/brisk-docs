@@ -96,6 +96,10 @@ jobs:
           command: sudo yarn global add bolt
 
       - run:
+          name: Install Dependencies
+          command: bolt
+
+      - run:
           name: Cypress Suite
           command: bolt cypress
 
@@ -109,11 +113,10 @@ workflows:
   version: 2
   build:
     jobs:
-      - unit_tests
-#      - install
-#      - lint:
-#          requires:
-#            - install
-#      - unit_tests:
-#          requires:
-#            - install
+      - install
+      - lint:
+          requires:
+            - install
+      - unit_tests:
+          requires:
+            - install
