@@ -8,8 +8,8 @@
     "scripts": {
         "test": "bolt w @brisk-docs/website run jest",
         "cypress": "node_modules/.bin/cypress run",
-        "dev:website": "bolt w @brisk-docs/website run yarn dev",
-        "docs": "bolt w @brisk-docs/website run dev",
+        "dev:website": "bolt w @brisk-docs/website run dev",
+        "docs": "node packages/website/start.js",
         "build": "bolt w @brisk-docs/website run next build",
         "start": "next start -p 8080",
         "prettier": "prettier --write \"**/*.js\"",
@@ -65,6 +65,7 @@
         "pretty-proptypes": "^0.6.0",
         "prismjs": "^1.15.0",
         "prop-types": "^15.6.2",
+        "raw-loader": "^1.0.0",
         "react": "^16.7.0",
         "react-addons-text-content": "^0.0.4",
         "react-dom": "^16.7.0",
