@@ -2,7 +2,7 @@
 // Does not build pages at this point.
 
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 
 const processDirectory = dirPath =>
   fs

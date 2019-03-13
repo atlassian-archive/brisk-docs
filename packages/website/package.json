@@ -7,9 +7,9 @@
     "private": true,
     "scripts": {
         "test": "jest",
-        "dev": "node start.js --config=dummy-data/simple-project/docs.config.js",
-        "dev:webpack": "node start.js --config=dummy-data/custom-webpack-project/docs.config.js",
-        "build": "next build",
+        "dev": "node bin.js start --config=dummy-data/simple-project/docs.config.js",
+        "dev:webpack": "node bin.js start --config=dummy-data/custom-webpack-project/docs.config.js",
+        "build": "node bin.js build --config=dummy-data/simple-project/docs.config.js",
         "start": "next start"
     },
     "bin": "./start.js",

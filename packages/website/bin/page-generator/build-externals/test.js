@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
-import createBuilder from './index';
+import createBuilder from '.';
 
 jest.mock('webpack');
 
