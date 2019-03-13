@@ -7,7 +7,7 @@ const createBuilder = (inputs, destinationDir, config) => {
     return { bundles: [], run: () => Promise.resolve() };
   }
   const bundles = inputs.map(input => {
-    const basename = path.basename(input);
+    const basename = path.basename(input, '.js');
     const hash = crypto
       .createHash('md5')
       .update(input)

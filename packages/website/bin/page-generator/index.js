@@ -179,7 +179,7 @@ module.exports = async function generatePages(
   pagesPath,
   componentsPath,
   bundlesPath,
-  options = {},
+  options,
 ) {
   cleanPages(pagesPath);
 
@@ -199,7 +199,7 @@ module.exports = async function generatePages(
   const { bundles, run: buildExternalModules } = getExternalModuleBuilder(
     externalSources,
     bundlesPath,
-    {},
+    options.webpackConfiguration,
   );
 
   await buildExternalModules();

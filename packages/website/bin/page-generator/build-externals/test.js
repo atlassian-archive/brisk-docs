@@ -52,7 +52,9 @@ describe('External code builder', () => {
       const bundle = bundles.find(b => b.source === `source/${sourceName}.js`);
 
       expect(path.dirname(bundle.dest)).toBe('bundles');
-      expect(path.basename(bundle.dest, '.js').includes(sourceName)).toBe(true);
+      expect(path.basename(bundle.dest)).toMatch(
+        new RegExp(`${sourceName}_[a-z0-9]*.js`),
+      );
     };
 
     assertHasDest('a');

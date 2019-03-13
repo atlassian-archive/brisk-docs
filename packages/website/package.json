@@ -7,12 +7,12 @@
     "private": true,
     "scripts": {
         "test": "jest",
-        "dev": "node bin.js start --config=dummy-data/simple-project/docs.config.js",
-        "dev:webpack": "node bin.js start --config=dummy-data/custom-webpack-project/docs.config.js",
-        "build": "node bin.js build --config=dummy-data/simple-project/docs.config.js",
+        "dev": "node bin/index.js start --config=dummy-data/simple-project/docs.config.js",
+        "dev:webpack": "node bin/bin.js start --config=dummy-data/custom-webpack-project/docs.config.js",
+        "build": "node bin/bin.js build --config=dummy-data/simple-project/docs.config.js",
         "start": "next start"
     },
-    "bin": "./start.js",
+    "bin": "bin/index.js",
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/button": "^8.2.4",
@@ -35,6 +35,7 @@
         "@mdx-js/tag": "^0.17.5",
         "@zeit/next-css": "^1.0.1",
         "@zeit/next-mdx": "^1.2.0",
+        "babel-loader": "^8.0.5",
         "babel-plugin-transform-flow-strip-types": "^6.22.0",
         "bolt": "^0.22.6",
         "command-line-args": "^5.0.2",

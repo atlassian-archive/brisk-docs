@@ -48,6 +48,7 @@
         "@mdx-js/tag": "^0.17.5",
         "@zeit/next-css": "^1.0.1",
         "@zeit/next-mdx": "^1.2.0",
+        "babel-loader": "^8.0.5",
         "babel-plugin-transform-flow-strip-types": "^6.22.0",
         "bolt": "^0.22.6",
         "command-line-args": "^5.0.2",

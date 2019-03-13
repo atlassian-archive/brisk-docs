@@ -3,6 +3,7 @@ const path = require('path');
 const outdent = require('outdent');
 
 const pageTitlePath = path.resolve(__dirname, '../../../components/page-title');
+
 const writeFile = (pagePath, content) => {
   fse.ensureFileSync(pagePath);
   fse.writeFileSync(pagePath, content);
@@ -189,9 +190,18 @@ const generateExamplePage = (
     wrapperName,
   );
 
+  const absolutePagePath = path.resolve(pagesPath, pagePath);
+  const relativeSourcePath = getImportPath(absolutePagePath, sourceCodePath);
+
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    exampleTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      relativeSourcePath,
+      data,
+      title,
+    ),
   );
 
   writeFile(
