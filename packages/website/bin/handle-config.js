@@ -35,8 +35,6 @@ const defaultConfig = {
  */
 const processConfig = (cwd, providedCOnfig = {}) => {
   const config = { ...defaultConfig, ...providedCOnfig };
-  console.log(cwd, config, config.docs);
-
   const docsPath = path.resolve(cwd, config.docs);
 
   const packagesConfig = resolvePathsConfig(config.packages);
