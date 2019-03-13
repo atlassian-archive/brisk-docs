@@ -6,40 +6,10 @@
 
 const path = require('path');
 const fse = require('fs-extra');
-const commandLineArgs = require('command-line-args');
 
-const processConfig = require('./process-config');
 const generatePages = require('./page-generator');
 
-module.exports = () => {
-  const cwd = process.cwd();
-
-  const cliOptions = [{ name: 'config', type: String }];
-  const args = commandLineArgs(cliOptions, { camelCase: true });
-
-  const loadConfig = () => {
-    const defaultConfigPath = path.join(cwd, 'docs.config.js');
-
-    let configPath;
-    if (args.config) {
-      configPath = path.resolve(cwd, args.config);
-    } else if (fse.existsSync(defaultConfigPath)) {
-      configPath = defaultConfigPath;
-    }
-
-    if (configPath) {
-      // eslint-disable-next-line
-      return require(configPath)();
-    }
-
-    return {};
-  };
-
-  const { packagesPaths, docsPath, useManifests } = processConfig(
-    cwd,
-    loadConfig(),
-  );
-
+module.exports = ({ packagesPaths, docsPath, useManifests }) => {
   const pagesPath = path.resolve(__dirname, './pages');
   const componentsPath = path.resolve(__dirname, './components/page-templates');
 

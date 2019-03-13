@@ -1,4 +1,5 @@
-import processConfig from './index';
+import { getFixturePath } from 'jest-fixtures';
+import { processConfig, loadConfig } from './handle-config';
 
 const mockCwd = '/c/w/d';
 
@@ -40,5 +41,29 @@ describe('website configuration processor', () => {
     const config = processConfig(mockCwd, { useManifests: true });
 
     expect(config.useManifests).toEqual(true);
+  });
+});
+
+describe('loadConfig', () => {
+  let defaultConfigPath;
+
+  beforeAll(async () => {
+    defaultConfigPath = await getFixturePath(__dirname, 'default-config');
+  });
+
+  it('should load a config given a valid config path', () => {
+    expect(loadConfig(defaultConfigPath, 'custom-config-file.js')).toEqual({
+      docs: 'now/is/the/winter',
+      packages: ['of/our/disco/tents'],
+    });
+  });
+  it('should load the default config if no path is given', () => {
+    expect(loadConfig(defaultConfigPath)).toEqual({
+      docs: 'a/b/c',
+      packages: ['x/y/z'],
+    });
+  });
+  it('should return an empty object if there is no default', () => {
+    expect(loadConfig(__dirname)).toEqual({});
   });
 });
