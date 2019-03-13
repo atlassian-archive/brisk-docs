@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { spawnSync } = require('child_process');
+const path = require('path');
 const commandLineArgs = require('command-line-args');
 
 const generatePages = require('./generate-pages');
@@ -9,6 +10,8 @@ const mainDefinitions = [{ name: 'command', defaultOption: true }];
 const mainOptions = commandLineArgs(mainDefinitions, {
   stopAtFirstUnknown: true,
 });
+
+const nextRoot = path.resolve(__dirname, '..');
 
 // We have no control over this dangling underscore
 // eslint-disable-next-line no-underscore-dangle
@@ -26,7 +29,7 @@ const spawnNextProcess = command => {
       stdio: 'inherit',
       shell: true,
       env: { ...process.env, FORCE_EXTRACT_REACT_TYPES: true },
-      cwd: __dirname,
+      cwd: nextRoot,
     },
   );
 };

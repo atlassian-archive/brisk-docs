@@ -9,9 +9,14 @@ const fse = require('fs-extra');
 
 const generatePages = require('./page-generator');
 
+const packageRoot = path.resolve(__dirname, '..');
+
 module.exports = ({ packagesPaths, docsPath, useManifests }) => {
-  const pagesPath = path.resolve(__dirname, './pages');
-  const componentsPath = path.resolve(__dirname, './components/page-templates');
+  const pagesPath = path.resolve(packageRoot, './pages');
+  const componentsPath = path.resolve(
+    packageRoot,
+    './components/page-templates',
+  );
 
   const pagesList = generatePages(
     packagesPaths,
@@ -24,13 +29,18 @@ module.exports = ({ packagesPaths, docsPath, useManifests }) => {
   );
   const { packages, docs, metaData } = pagesList;
 
+  const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
+  const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
+
+  fse.ensureFileSync(pagesListPath);
   fse.writeFileSync(
-    path.resolve(__dirname, 'data/pages-list.json'),
+    pagesListPath,
     JSON.stringify({ packages, docs }, undefined, 2),
   );
 
+  fse.ensureFileSync(packagesDataPath);
   fse.writeFileSync(
-    path.resolve(__dirname, 'data/packages-data.json'),
+    packagesDataPath,
     JSON.stringify({ metaData }, undefined, 2),
   );
 };

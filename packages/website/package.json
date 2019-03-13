@@ -7,8 +7,8 @@
     "private": true,
     "scripts": {
         "test": "jest",
-        "dev": "node bin.js start --config=website-dev-config.js",
-        "build": "node bin.js build --config=website-dev-config.js",
+        "dev": "node bin/index.js start --config=website-dev-config.js",
+        "build": "node bin/index.js build --config=website-dev-config.js",
         "start": "next start"
     },
     "bin": "./start.js",
