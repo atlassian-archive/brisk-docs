@@ -14,6 +14,7 @@ restore-cache: &restore-cache
 save-cache: &save-cache
   paths:
     - node_modules
+    - ~/.cache
   key: v1-dependencies-{{ checksum "package.json" }}
 
 install-bolt: &install-bolt
@@ -39,6 +40,10 @@ jobs:
           name: Install Dependencies
           command: bolt
 
+      - run:
+          name: Install Cypress
+          command: node_modules/.bin/cypress install
+
       - save_cache: *save-cache
 
   lint:
@@ -57,10 +62,6 @@ jobs:
           command: bolt
 
       - save_cache: *save-cache
-
-      - run:
-          name: Start Website
-          command: bolt build
 
       - run:
           name: Lint Files
@@ -107,12 +108,6 @@ jobs:
       - run:
           name: Install Dependencies
           command: bolt
-
-      - save_cache:
-          paths:
-            - node_modules
-            - .cache/Cypress
-          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Start up website

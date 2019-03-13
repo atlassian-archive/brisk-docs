@@ -5,3 +5,5 @@ packages/website/pages/packages
 packages/website/pages/docs
 
 packages/website/data/**/*.json
+
+cypress/plugins
