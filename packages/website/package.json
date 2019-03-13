@@ -8,8 +8,7 @@
     "scripts": {
         "test": "jest",
         "dev": "node bin.js start --config=website-dev-config.js",
-        "build2": "node bin.js build --config=website-dev-config.js",
-        "build": "next build",
+        "build": "node bin.js build --config=website-dev-config.js",
         "start": "next start"
     },
     "bin": "./start.js",
