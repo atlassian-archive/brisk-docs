@@ -4,8 +4,7 @@
    pages-list.json is used.
 */
 
-/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import pageInfo from './data/pages-list.json';
-/* eslint-disable import/no-unresolved */
 
 export default pageInfo;
