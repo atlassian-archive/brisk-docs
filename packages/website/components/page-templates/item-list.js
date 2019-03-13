@@ -8,7 +8,7 @@ import titleCase from 'title-case';
 import NavigationWrapper from '../navigation-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
 import Page, { Title, Section } from '../page';
-import pageInfo from '../../data/pages-list.json';
+import pageInfo from '../../pages-list';
 
 const head = {
   cells: [

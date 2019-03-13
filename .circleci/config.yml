@@ -1,9 +1,20 @@
 version: 2
 
-job-set-up: &job-set-up
+job-setup: &job-setup
   docker:
     - image: circleci/node:8.11.3-browsers
   working_directory: ~/repo
+
+restore-cache: &restore-cache
+  keys:
+    - v1-dependencies-{{ checksum "package.json" }}
+    # fallback to using the latest cache if no exact match is found
+    - v1-dependencies-
+
+save-cache: &save-cache
+  paths:
+    - node_modules
+  key: v1-dependencies-{{ checksum "package.json" }}
 
 install-bolt: &install-bolt
   - run:
@@ -12,17 +23,13 @@ install-bolt: &install-bolt
 
 jobs:
   install:
-    <<: *job-set-up
+    <<: *job-setup
     steps:
       # Fetch code
       - checkout
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      - restore_cache: *restore-cache
 
       - run:
           name: Install Bolt
@@ -32,36 +39,40 @@ jobs:
           name: Install Dependencies
           command: bolt
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache: *save-cache
 
   lint:
-    <<: *job-set-up
+    <<: *job-setup
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache: *restore-cache
 
       - run:
           name: Install Bolt
           command: sudo yarn global add bolt
 
       - run:
+          name: Install Dependencies
+          command: bolt
+
+      - save_cache: *save-cache
+
+      - run:
+          name: Start Website
+          command: bolt build
+
+      - run:
           name: Lint Files
           command: bolt lint
 
+
   unit_tests:
-    <<: *job-set-up
+    <<: *job-setup
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache: *restore-cache
 
       - run:
           name: Install Bolt
@@ -83,13 +94,11 @@ jobs:
 
 
   integration_tests:
-    <<: *job-set-up
+    <<: *job-setup
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache: *restore-cache
 
       - run:
           name: Install Bolt
@@ -100,8 +109,15 @@ jobs:
           command: bolt
 
       - run:
+          name: Start up website
+          command: bolt dev:website
+          background: true
+
+      - run:
           name: Cypress Suite
-          command: bolt cypress
+          command: |
+            curl --retry-delay 5 --retry 10  --retry-connrefused http://localhost:3000
+            bolt cypress
 
       - save_cache:
           paths:
@@ -118,5 +134,8 @@ workflows:
           requires:
             - install
       - unit_tests:
+          requires:
+            - install
+      - integration_tests:
           requires:
             - install

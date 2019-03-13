@@ -9,7 +9,7 @@ import Page, { Title, Section } from '../components/page';
 import NavigationWrapper from '../components/navigation-wrapper';
 import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
-import data from '../data/pages-list.json';
+import data from '../pages-list';
 import meta from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
 
