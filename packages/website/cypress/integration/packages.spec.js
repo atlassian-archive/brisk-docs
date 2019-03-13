@@ -18,7 +18,7 @@ describe('Packages home page tests', () => {
       cy.contains('Examples');
       cy.contains('Documentation');
     });
-    cy.get('[data-testid=mock-package2-metadata]').within(() => {
+    cy.get('[data-testid=mock-package1-metadata]').within(() => {
       cy.contains('Latest version');
     });
     cy.go('back');
