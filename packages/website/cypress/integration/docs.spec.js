@@ -1,4 +1,4 @@
-describe.skip('Docs page tests', () => {
+describe('Docs page tests', () => {
   beforeEach(() => {
     cy.visit('/docs');
   });
