@@ -4,6 +4,7 @@ const rimraf = require('rimraf');
 const titleCase = require('title-case');
 const getPackageInfo = require('./get-package-info');
 const getDocsInfo = require('./get-docs-info');
+const getExternalModuleBuilder = require('./build-externals');
 const {
   generateHomePage,
   generatePackageDocPage,
@@ -21,7 +22,7 @@ const packagesData = [];
  * @param generatorConfig info about the locations of important directories used for page generation
  * @returns a sitemap of all the pages created
  */
-function generatePackagePages(packageInfo, generatorConfig) {
+function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
   const packageSitemap = packageInfo.map(pkg => {
     const pageData = { id: pkg.id, packageName: pkg.name };
     const homePageData = {
@@ -75,9 +76,14 @@ function generatePackagePages(packageInfo, generatorConfig) {
       const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
       const isolatedPath = path.join('/', `${rawPagesPath}`);
 
+      const exampleModulePath = bundlesInfo.find(
+        bundle => bundle.source === example.path,
+      ).dest;
+
       generateExamplePage(
         `${pagePath}.js`,
         `${rawPagesPath}.js`,
+        exampleModulePath,
         example.path,
         { ...pageData, isolatedPath },
         generatorConfig,
@@ -161,22 +167,28 @@ const cleanPages = pagesPath => {
  * @param docsPath directory path to the project docs
  * @param pagesPath path to the output pages directory
  * @param componentsPath path to helper components/wrappers
+ * @param bundlesPath path to where built external code is located
  * @param options configuration options
  *
- * @returns an object representing the sitemap of the pages created
+ * @returns a promise resolving to an object representing the
+ * sitemap of the pages created
  */
-module.exports = function generatePages(
+module.exports = async function generatePages(
   packagesPaths,
   docsPath,
   pagesPath,
   componentsPath,
+  bundlesPath,
   options = {},
 ) {
   cleanPages(pagesPath);
 
-  const packageInfo = getPackageInfo(packagesPaths, {
-    useManifests: options.useManifests,
-  });
+  const { packages: packageInfo, externalSources } = getPackageInfo(
+    packagesPaths,
+    {
+      useManifests: options.useManifests,
+    },
+  );
   const docsInfo = getDocsInfo(docsPath);
 
   const generatorConfig = {
@@ -184,7 +196,19 @@ module.exports = function generatePages(
     wrappersPath: componentsPath,
   };
 
-  const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
+  const { bundles, run: buildExternalModules } = getExternalModuleBuilder(
+    externalSources,
+    bundlesPath,
+    {},
+  );
+
+  await buildExternalModules();
+
+  const packageSitemap = generatePackagePages(
+    packageInfo,
+    bundles,
+    generatorConfig,
+  );
   const docsSitemap = generateProjectDocsPages(docsInfo, generatorConfig);
 
   return {

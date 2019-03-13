@@ -31,11 +31,12 @@ const basicPageTemplate = (
 const exampleTemplate = (
   componentPath,
   wrapperPath,
+  sourcePath,
   data = {},
   title = '',
 ) => outdent`
     import Component from '${componentPath}';
-    import fileContents from '!!raw-loader!${componentPath}';
+    import fileContents from '!!raw-loader!${sourcePath}';
 
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${PageTitlePath}'
@@ -170,12 +171,13 @@ const generatePackageDocPage = (
 const generateExamplePage = (
   pagePath,
   rawPagesPath,
-  filePath,
+  exampleModulePath,
+  sourceCodePath,
   data,
   config,
   title = '',
 ) => {
-  const componentPath = filePath;
+  const componentPath = exampleModulePath;
   const wrapperName = 'package-example';
   const { wrappersPath, pagesPath } = config;
 

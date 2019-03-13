@@ -1,10 +1,10 @@
 import webpack from 'webpack';
 import path from 'path';
-import builder from './index';
+import createBuilder from './index';
 
 jest.mock('webpack');
 
-describe('external code builder', () => {
+describe('External code builder', () => {
   let mockRunCompiler;
 
   const inputs = ['source/a.js', 'source/b.js', 'source/c.js'];
@@ -27,8 +27,8 @@ describe('external code builder', () => {
     );
   });
 
-  it('returns a promise that resolves to a list of bundle definitions', async () => {
-    const bundles = await builder(inputs, 'bundles').run();
+  it('returns a list of bundle definitions', () => {
+    const { bundles } = createBuilder(inputs, 'bundles');
 
     expect(bundles).toHaveLength(3);
 
@@ -45,8 +45,8 @@ describe('external code builder', () => {
     assertHasBundle('c');
   });
 
-  it('generates bundle destinations in the bundles directory', async () => {
-    const bundles = await builder(inputs, 'bundles', {}).run();
+  it('defines bundle destinations in the bundles directory', () => {
+    const { bundles } = createBuilder(inputs, 'bundles', {});
 
     const assertHasDest = sourceName => {
       const bundle = bundles.find(b => b.source === `source/${sourceName}.js`);
@@ -60,20 +60,20 @@ describe('external code builder', () => {
     assertHasDest('c');
   });
 
-  it('generates unique destination paths', async () => {
-    const result = builder(
+  it('generates unique destination paths', () => {
+    const { bundles } = createBuilder(
       ['source/a/index.js', 'source/b/index.js'],
       'bundles',
       {},
-    ).run();
-
-    const bundles = await result;
+    );
 
     expect(bundles[0].dest).not.toEqual(bundles[1].dest);
   });
 
   it('instantiates a webpack compiler with entries and outputs matching bundle definitions', async () => {
-    const bundles = await builder(inputs, 'bundles', {}).run();
+    const { bundles, run } = createBuilder(inputs, 'bundles', {});
+
+    await run();
 
     const webpackCall = webpack.mock.calls[0][0];
 
@@ -100,16 +100,22 @@ describe('external code builder', () => {
       callback(new Error(), mockRunStats),
     );
 
-    return expect(builder(inputs, 'bundles', {}).run()).rejects.toEqual(
+    return expect(createBuilder(inputs, 'bundles', {}).run()).rejects.toEqual(
       expect.any(Error),
     );
   });
 
   it('passes provided configuration to webpack', async () => {
-    await builder(inputs, 'bundles', { option1: true }).run();
+    await createBuilder(inputs, 'bundles', { option1: true }).run();
 
     expect(webpack).toHaveBeenCalledWith(
       expect.objectContaining({ option1: true }),
     );
+  });
+
+  it('does not start webpack if there are no files to build', async () => {
+    await createBuilder([], 'bundles', { option1: true }).run();
+
+    expect(webpack).not.toHaveBeenCalled();
   });
 });

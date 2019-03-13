@@ -11,7 +11,7 @@ const commandLineArgs = require('command-line-args');
 const processConfig = require('./process-config');
 const generatePages = require('./page-generator');
 
-module.exports = () => {
+module.exports = async () => {
   const cwd = process.cwd();
 
   const cliOptions = [{ name: 'config', type: String }];
@@ -43,7 +43,7 @@ module.exports = () => {
   const pagesPath = path.resolve(__dirname, './pages');
   const componentsPath = path.resolve(__dirname, './components/page-templates');
 
-  const pagesList = generatePages(
+  const pagesList = await generatePages(
     packagesPaths,
     docsPath,
     pagesPath,

@@ -3,6 +3,9 @@ const crypto = require('crypto');
 const webpack = require('webpack');
 
 const createBuilder = (inputs, destinationDir, config) => {
+  if (inputs.length === 0) {
+    return { bundles: [], run: () => Promise.resolve() };
+  }
   const bundles = inputs.map(input => {
     const basename = path.basename(input);
     const hash = crypto
@@ -28,6 +31,7 @@ const createBuilder = (inputs, destinationDir, config) => {
   const compiler = webpack({ ...config, entry, output });
 
   return {
+    bundles,
     run: () =>
       new Promise((resolve, reject) => {
         compiler.run((err, stats) => {
@@ -45,7 +49,7 @@ const createBuilder = (inputs, destinationDir, config) => {
             // eslint-disable-next-line no-console
             console.warn(info.warnings);
           } else {
-            resolve(bundles);
+            resolve();
           }
         });
       }),
