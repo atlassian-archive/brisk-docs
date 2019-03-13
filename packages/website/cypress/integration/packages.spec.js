@@ -1,4 +1,4 @@
-describe('Packages home page tests', () => {
+describe.skip('Packages home page tests', () => {
   beforeEach(() => {
     cy.visit('/packages');
   });
@@ -59,7 +59,7 @@ describe('Packages home page tests', () => {
   });
 });
 
-describe('Individual package home page tests', () => {
+describe.skip('Individual package home page tests', () => {
   it('should navigate from the package home page to the examples page', () => {
     cy.visit('/packages/mock-package2');
 
@@ -91,7 +91,7 @@ describe('Individual package home page tests', () => {
   });
 });
 
-describe('Examples page tests', () => {
+describe.skip('Examples page tests', () => {
   beforeEach(() => {
     cy.viewport(2880, 1800);
   });
