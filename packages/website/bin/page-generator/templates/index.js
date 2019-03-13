@@ -2,7 +2,7 @@ const fse = require('fs-extra');
 const path = require('path');
 const outdent = require('outdent');
 
-const PageTitlePath = path.resolve(__dirname, '../../components/page-title');
+const pageTitlePath = path.resolve(__dirname, '../../../components/page-title');
 const writeFile = (pagePath, content) => {
   fse.ensureFileSync(pagePath);
   fse.writeFileSync(pagePath, content);
@@ -16,7 +16,7 @@ const basicPageTemplate = (
 ) => outdent`
     import Component from '${componentPath}';
     import Wrapper from '${wrapperPath}';
-    import PageTitle from '${PageTitlePath}'
+    import PageTitle from '${pageTitlePath}'
     
     export default () => (
      <> 
@@ -39,7 +39,7 @@ const exampleTemplate = (
     import fileContents from '!!raw-loader!${sourcePath}';
 
     import Wrapper from '${wrapperPath}';
-    import PageTitle from '${PageTitlePath}'
+    import PageTitle from '${pageTitlePath}'
     
     export default () => (
         <> 
@@ -64,7 +64,7 @@ const basicNonComponentTemplate = (
   title = '',
 ) => outdent`
     import Wrapper from '${wrapperPath}';
-    import PageTitle from '${PageTitlePath}'
+    import PageTitle from '${pageTitlePath}'
     
     export default () => (
         <> 

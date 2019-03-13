@@ -74,7 +74,8 @@ const loadConfig = (cwd, providedConfigPath) => {
   return {};
 };
 
-const handleConfig = (cwd, config) => processConfig(loadConfig(cwd, config));
+const handleConfig = (cwd, config) =>
+  processConfig(cwd, loadConfig(cwd, config));
 
 module.exports = handleConfig;
 // We are exporting these for testing purposes
