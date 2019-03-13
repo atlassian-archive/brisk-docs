@@ -17,6 +17,10 @@ save-cache: &save-cache
     - ~/.cache
   key: v1-dependencies-{{ checksum "package.json" }}
 
+install-bolt: &install-bolt
+  name: Install Bolt
+  command: sudo yarn global add bolt && bolt
+
 jobs:
   install:
     <<: *job-setup
@@ -27,13 +31,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache: *restore-cache
 
-      - run:
-          name: Install Bolt
-          command: sudo yarn global add bolt
-
-      - run:
-          name: Install Dependencies
-          command: bolt
+      - run: *install-bolt
 
       - run:
           name: Install Cypress
@@ -48,6 +46,8 @@ jobs:
 
       - restore_cache: *restore-cache
 
+      - run: *install-bolt
+
       - save_cache: *save-cache
 
       - run:
@@ -61,6 +61,8 @@ jobs:
       - checkout
 
       - restore_cache: *restore-cache
+
+      - run: *install-bolt
 
       - run:
           name: Jest Suite
@@ -79,6 +81,8 @@ jobs:
       - checkout
 
       - restore_cache: *restore-cache
+
+      - run: *install-bolt
 
       - run:
           name: Start up website
