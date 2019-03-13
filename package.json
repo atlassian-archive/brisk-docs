@@ -1,7 +1,7 @@
 {
     "name": "brisk-docs",
     "version": "1.0.0",
-    "description": "The brisk-docs website generator (temp: adding to invalidate circleCI cache)",
+    "description": "The brisk-docs website generator",
     "main": "index.js",
     "license": "MIT",
     "private": true,
