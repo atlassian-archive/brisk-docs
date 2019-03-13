@@ -35,6 +35,8 @@ const defaultConfig = {
  */
 const processConfig = (cwd, providedCOnfig = {}) => {
   const config = { ...defaultConfig, ...providedCOnfig };
+  console.log(cwd, config, config.docs);
+
   const docsPath = path.resolve(cwd, config.docs);
 
   const packagesConfig = resolvePathsConfig(config.packages);
@@ -74,7 +76,8 @@ const loadConfig = (cwd, providedConfigPath) => {
   return {};
 };
 
-const handleConfig = (cwd, config) => processConfig(loadConfig(cwd, config));
+const handleConfig = (cwd, config) =>
+  processConfig(cwd, loadConfig(cwd, config));
 
 module.exports = handleConfig;
 // We are exporting these for testing purposes

@@ -12,7 +12,7 @@
         "clean": "yarn delete:modules && yarn delete:caches",
         "delete:caches": "rm -rf packages/website/.next && rm -rf packages/website/pages/packages && rm -rf packages/website/pages/docs",
         "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
-        "docs": "node packages/website/start.js",
+        "docs": "node packages/website/bin/index.js start",
         "build": "bolt w @brisk-docs/website run next build",
         "start": "next start -p 8080",
         "prettier": "prettier --write \"**/*.js\"",
