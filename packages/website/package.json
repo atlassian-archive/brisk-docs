@@ -11,7 +11,9 @@
         "build": "node bin/index.js build --config=website-dev-config.js",
         "start": "next start"
     },
-    "bin": "./start.js",
+    "bin": {
+        "brisk": "./bin/index.js"
+    },
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/button": "^8.2.4",
@@ -29,6 +31,8 @@
         "@atlaskit/theme": "^6.0.0",
         "@atlaskit/tree": "^4.1.11",
         "@babel/preset-flow": "^7.0.0",
+        "@babel/plugin-proposal-class-properties": "^7.3.4",
+        "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
         "@mdx-js/loader": "^0.17.5",
         "@mdx-js/mdx": "^0.17.5",
         "@mdx-js/tag": "^0.17.5",

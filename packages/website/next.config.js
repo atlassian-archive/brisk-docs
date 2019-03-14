@@ -7,7 +7,7 @@ const withCSS = require('@zeit/next-css');
 
 module.exports = withCSS(
   withMDX({
-    pageExtensions: ['js', 'jsx', 'mdx'],
+    pageExtensions: ['js', 'jsx', 'mdx', 'tsx', 'ts'],
     webpack(config) {
       // Need to apply next.js webpack to jira-frontend src modules
       config.module.rules.forEach(
@@ -15,6 +15,12 @@ module.exports = withCSS(
           rule.include &&
           rule.include.push(path.join(__dirname, `../packages`)),
       );
+
+      config.module.rules.push({
+        test: /.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      });
 
       // Adding items to globalScope in the website
       config.plugins.push(

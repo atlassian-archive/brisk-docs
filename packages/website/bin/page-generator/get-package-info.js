@@ -7,6 +7,7 @@ const fs = require('fs');
 const flatMap = require('lodash.flatmap');
 const glob = require('glob');
 
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const getFilesInDir = dirPath => {
   const files = [];
   if (fs.existsSync(dirPath)) {
@@ -27,7 +28,7 @@ const getFilesInDir = dirPath => {
  * @returns {boolean} whether this file can be rendered as an example
  */
 const isExample = examplePath =>
-  fs.statSync(examplePath).isFile() && path.extname(examplePath) === '.js';
+  fs.statSync(examplePath).isFile() && extensions.includes(path.extname(examplePath));
 
 /**
  * Determines whether a file is a valid doc file
