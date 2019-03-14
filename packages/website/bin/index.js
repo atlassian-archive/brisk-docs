@@ -34,20 +34,18 @@ const spawnNextProcess = command => {
   );
 };
 
-const preNextScripts = () => {
+const preNextScripts = async () => {
   const config = handleConfig(cwd, options.config);
-  generatePages(config);
+  await generatePages(config);
 };
 
 switch (mainOptions.command) {
   case 'start': {
-    preNextScripts();
-    spawnNextProcess('dev');
+    preNextScripts().then(() => spawnNextProcess('dev'));
     break;
   }
   case 'build': {
-    preNextScripts();
-    spawnNextProcess('build');
+    preNextScripts().then(() => spawnNextProcess('build'));
     break;
   }
   default:

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@atlaskit/button';
 
 import NavigationWrapper from '../components/navigation-wrapper';
-import data from '../data/pages-list.json';
+import data from '../pages-list';
 
 export default class Home extends Component {
   static propTypes = {

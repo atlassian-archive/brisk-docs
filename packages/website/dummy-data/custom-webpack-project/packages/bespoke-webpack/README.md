@@ -1,0 +1,1 @@
+This is a package that uses a custom webpack config to build its code

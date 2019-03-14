@@ -1,4 +1,4 @@
-describe.skip('Packages home page tests', () => {
+describe('Packages home page tests', () => {
   beforeEach(() => {
     cy.visit('/packages');
   });
@@ -18,7 +18,7 @@ describe.skip('Packages home page tests', () => {
       cy.contains('Examples');
       cy.contains('Documentation');
     });
-    cy.get('[data-testid=mock-package2-metadata]').within(() => {
+    cy.get('[data-testid=mock-package1-metadata]').within(() => {
       cy.contains('Latest version');
     });
     cy.go('back');
@@ -59,7 +59,7 @@ describe.skip('Packages home page tests', () => {
   });
 });
 
-describe.skip('Individual package home page tests', () => {
+describe('Individual package home page tests', () => {
   it('should navigate from the package home page to the examples page', () => {
     cy.visit('/packages/mock-package2');
 
@@ -91,7 +91,7 @@ describe.skip('Individual package home page tests', () => {
   });
 });
 
-describe.skip('Examples page tests', () => {
+describe('Examples page tests', () => {
   beforeEach(() => {
     cy.viewport(2880, 1800);
   });

@@ -10,7 +10,7 @@ import Link from 'next/link';
 import titleCase from 'title-case';
 
 import Page, { Section, Title } from '../components/page';
-import pageInfo from '../data/pages-list.json';
+import pageInfo from '../pages-list';
 import DocsNavContent from '../components/navigation/docs-nav-content';
 import NavigationWrapper from '../components/navigation-wrapper';
 import PageTitle from '../components/page-title';

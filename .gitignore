@@ -15,3 +15,4 @@ yarn-error.log
 
 /packages/website/data/**/*.json
 /packages/website/data/**/*.js
+/packages/website/bundles/**/*.js

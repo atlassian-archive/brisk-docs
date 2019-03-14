@@ -3,6 +3,7 @@ const path = require('path');
 const outdent = require('outdent');
 
 const pageTitlePath = path.resolve(__dirname, '../../../components/page-title');
+
 const writeFile = (pagePath, content) => {
   fse.ensureFileSync(pagePath);
   fse.writeFileSync(pagePath, content);
@@ -31,11 +32,12 @@ const basicPageTemplate = (
 const exampleTemplate = (
   componentPath,
   wrapperPath,
+  sourcePath,
   data = {},
   title = '',
 ) => outdent`
     import Component from '${componentPath}';
-    import fileContents from '!!raw-loader!${componentPath}';
+    import fileContents from '!!raw-loader!${sourcePath}';
 
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
@@ -170,12 +172,13 @@ const generatePackageDocPage = (
 const generateExamplePage = (
   pagePath,
   rawPagesPath,
-  filePath,
+  exampleModulePath,
+  sourceCodePath,
   data,
   config,
   title = '',
 ) => {
-  const componentPath = filePath;
+  const componentPath = exampleModulePath;
   const wrapperName = 'package-example';
   const { wrappersPath, pagesPath } = config;
 
@@ -187,9 +190,18 @@ const generateExamplePage = (
     wrapperName,
   );
 
+  const absolutePagePath = path.resolve(pagesPath, pagePath);
+  const relativeSourcePath = getImportPath(absolutePagePath, sourceCodePath);
+
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    exampleTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      relativeSourcePath,
+      data,
+      title,
+    ),
   );
 
   writeFile(

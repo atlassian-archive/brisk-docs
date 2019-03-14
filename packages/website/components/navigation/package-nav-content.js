@@ -9,7 +9,7 @@ import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 import LinkComponent from './link-component';
-import pageInfo from '../../data/pages-list.json';
+import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 
 const GetLink = ({ id, pagePath }) => (

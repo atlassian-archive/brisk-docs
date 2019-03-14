@@ -20,10 +20,29 @@ const resolvePathsConfig = entry => {
   throw new Error('entry must be an array or a string');
 };
 
+const defaultWebpackConfig = {
+  mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+    ],
+  },
+};
+
 const defaultConfig = {
   docs: './docs',
-  packages: ['./packages'],
+  packages: ['./packages/*'],
   useManifests: false,
+  webpackConfiguration: defaultWebpackConfig,
 };
 
 /**
@@ -33,8 +52,8 @@ const defaultConfig = {
  * @param config
  * @returns {{packagesPaths: *, docsPath: *}}
  */
-const processConfig = (cwd, providedCOnfig = {}) => {
-  const config = { ...defaultConfig, ...providedCOnfig };
+const processConfig = (cwd, providedConfig = {}) => {
+  const config = { ...defaultConfig, ...providedConfig };
   const docsPath = path.resolve(cwd, config.docs);
 
   const packagesConfig = resolvePathsConfig(config.packages);
@@ -42,12 +61,13 @@ const processConfig = (cwd, providedCOnfig = {}) => {
     path.resolve(cwd, packagesPath),
   );
 
-  const { useManifests } = config;
+  const { useManifests, webpackConfiguration } = config;
 
   return {
     docsPath,
     packagesPaths,
     useManifests,
+    webpackConfiguration,
   };
 };
 

@@ -71,7 +71,7 @@ describe('package metadata component', () => {
 
     expect(wrapperSshRepo.find(MetaDataEntry)).toHaveLength(3);
     expect(wrapperSshRepo.find('a').prop('href')).toEqual(
-      'fake-repo-fix-later',
+      'fake-repo-fix-later:7997',
     );
     expect(wrapperHttpsRepo.find('a').prop('href')).toEqual(
       'fake-repo-fix-later',

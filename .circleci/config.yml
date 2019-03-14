@@ -1,0 +1,110 @@
+version: 2
+
+job-setup: &job-setup
+  docker:
+    - image: circleci/node:8.11.3-browsers
+  working_directory: ~/repo
+
+restore-cache: &restore-cache
+  keys:
+    - v1-dependencies-{{ checksum "package.json" }}
+    # fallback to using the latest cache if no exact match is found
+    - v1-dependencies-
+
+save-cache: &save-cache
+  paths:
+    - node_modules
+    - ~/.cache
+  key: v1-dependencies-{{ checksum "package.json" }}
+
+install-bolt: &install-bolt
+  name: Install Bolt
+  command: sudo yarn global add bolt && bolt
+
+jobs:
+  install:
+    <<: *job-setup
+    steps:
+      # Fetch code
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache: *restore-cache
+
+      - run: *install-bolt
+
+      - run:
+          name: Install Cypress
+          command: node_modules/.bin/cypress install
+
+      - save_cache: *save-cache
+
+  lint:
+    <<: *job-setup
+    steps:
+      - checkout
+
+      - restore_cache: *restore-cache
+
+      - run: *install-bolt
+
+      - save_cache: *save-cache
+
+      - run:
+          name: Lint Files
+          command: bolt lint
+
+
+  unit_tests:
+    <<: *job-setup
+    steps:
+      - checkout
+
+      - restore_cache: *restore-cache
+
+      - run: *install-bolt
+
+      - run:
+          name: Jest Suite
+          command: bolt test
+          environment:
+            JEST_JUNIT_OUTPUT: 'test-reports/junit/js-test-results.xml'
+
+      - store_test_results:
+          path: test-reports/junit
+
+
+
+  integration_tests:
+    <<: *job-setup
+    steps:
+      - checkout
+
+      - restore_cache: *restore-cache
+
+      - run: *install-bolt
+
+      - run:
+          name: Start up website
+          command: bolt dev:website
+          background: true
+
+      - run:
+          name: Cypress Suite
+          command: node_modules/.bin/wait-on http://localhost:3000 && bolt cypress
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - install
+      - lint:
+          requires:
+            - install
+      - unit_tests:
+          requires:
+            - install
+      - integration_tests:
+          requires:
+            - install
