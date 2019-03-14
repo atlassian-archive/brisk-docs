@@ -91,7 +91,7 @@ jobs:
 
       - run:
           name: Cypress Suite
-          command: wait-on http://localhost:3000 && bolt cypress
+          command: node_modules/.bin/wait-on http://localhost:3000 && bolt cypress
 
 
 workflows:
