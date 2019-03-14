@@ -1,4 +1,4 @@
 module.exports = {
   setupFiles: ['./jest-setup.js'],
-  testPathIgnorePatterns: ['./cypress/']
+  testPathIgnorePatterns: ['./cypress/'],
 };

@@ -10,6 +10,7 @@ import NavigationWrapper from '../components/navigation-wrapper';
 import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
 import data from '../pages-list';
+// eslint-disable-next-line import/no-unresolved
 import meta from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
 

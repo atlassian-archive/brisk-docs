@@ -1,3 +1,6 @@
+/* eslint-disable react/no-danger */
+// Disable eslint warning for green build
+// TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
 import styled from 'styled-components';
 import Prism from 'prismjs';
