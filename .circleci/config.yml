@@ -86,12 +86,12 @@ jobs:
 
       - run:
           name: Start up website
-          command: bolt dev:website && wait-on http://localhost:3000
+          command: bolt dev:website
           background: true
 
       - run:
           name: Cypress Suite
-          command: bolt cypress
+          command: wait-on http://localhost:3000 && bolt cypress
 
 
 workflows:
