@@ -6,10 +6,13 @@ import getPackageInfo from './get-package-info';
 describe('Get package info utility', () => {
   let cwd;
   let packageInfo;
+  let externalSources;
 
   beforeAll(async () => {
     cwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-packages');
-    packageInfo = getPackageInfo([path.join(cwd, 'packages', '/*')]);
+    ({ packages: packageInfo, externalSources } = getPackageInfo([
+      path.join(cwd, 'packages', '/*'),
+    ]));
   });
 
   it('returns a list of packages', async () => {
@@ -103,7 +106,7 @@ describe('Get package info utility', () => {
   });
 
   it('can accept an array of paths', () => {
-    const packageInfoAlternate = getPackageInfo([
+    const { packages: packageInfoAlternate } = getPackageInfo([
       path.join(cwd, 'packages', 'mock-package1'),
       path.join(cwd, 'packages', 'mock-package2'),
       path.join(cwd, 'packages', 'mock-package3'),
@@ -120,7 +123,7 @@ describe('Get package info utility', () => {
       'mock-packages-manifests',
     );
 
-    const packageInfoAlternate = getPackageInfo(
+    const { packages: packageInfoAlternate } = getPackageInfo(
       [path.join(manifestAppFixturePath, 'packages', '*')],
       { useManifests: true },
     );
@@ -129,6 +132,27 @@ describe('Get package info utility', () => {
     expect(packageInfoAlternate[0].maintainers).toEqual([
       'cdebourgh',
       'wcollins',
+    ]);
+  });
+
+  it('returns a list of external sources that need to be bundled', () => {
+    const packagesPath = path.join(cwd, 'packages');
+    const mp1ExamplePath = path.join(packagesPath, 'mock-package1', 'examples');
+    const mp2ExamplePath = path.join(packagesPath, 'mock-package2', 'examples');
+    const mp3ExamplePath = path.join(packagesPath, 'mock-package3', 'examples');
+
+    expect(externalSources).toEqual([
+      path.join(mp1ExamplePath, 'example1.js'),
+      path.join(mp1ExamplePath, 'example2.js'),
+      path.join(mp1ExamplePath, 'example3.js'),
+
+      path.join(mp2ExamplePath, 'example1.js'),
+      path.join(mp2ExamplePath, 'example2.js'),
+      path.join(mp2ExamplePath, 'example3.js'),
+
+      path.join(mp3ExamplePath, 'example1.js'),
+      path.join(mp3ExamplePath, 'example2.js'),
+      path.join(mp3ExamplePath, 'example3.js'),
     ]);
   });
 });
