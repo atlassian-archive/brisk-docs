@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+// TODO: Disabling ESlint for this file to prevent error of window being undefined
+// TODO: Re-enable after AFP-176 is complete
 import * as React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';

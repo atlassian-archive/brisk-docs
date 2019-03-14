@@ -7,7 +7,7 @@ import {
 } from '@atlaskit/quick-search';
 import Drawer from '@atlaskit/drawer';
 import capitalize from 'lodash.capitalize';
-import data from '../../data/pages-list.json';
+import data from '../../pages-list';
 import Link from './link-component';
 
 const prettyTitle = id =>
