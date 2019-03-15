@@ -28,7 +28,8 @@ const getFilesInDir = dirPath => {
  * @returns {boolean} whether this file can be rendered as an example
  */
 const isExample = examplePath =>
-  fs.statSync(examplePath).isFile() && extensions.includes(path.extname(examplePath));
+  fs.statSync(examplePath).isFile() &&
+  extensions.includes(path.extname(examplePath));
 
 /**
  * Determines whether a file is a valid doc file
