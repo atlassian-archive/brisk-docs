@@ -179,7 +179,7 @@ module.exports = async function generatePages(
   pagesPath,
   componentsPath,
   bundlesPath,
-  options,
+  options = {},
 ) {
   cleanPages(pagesPath);
 

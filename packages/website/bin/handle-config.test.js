@@ -8,9 +8,10 @@ describe('website configuration processor', () => {
     const config = processConfig(mockCwd, {});
 
     expect(config).toEqual({
-      packagesPaths: ['/c/w/d/packages'],
+      packagesPaths: ['/c/w/d/packages/*'],
       docsPath: '/c/w/d/docs',
       useManifests: false,
+      webpackConfiguration: expect.anything(),
     });
   });
 
