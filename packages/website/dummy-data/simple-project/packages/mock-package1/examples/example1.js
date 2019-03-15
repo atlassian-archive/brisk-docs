@@ -14,8 +14,6 @@ const Example1 = () => (
         isFixedSize
         defaultSortKey="term"
         defaultSortOrder="ASC"
-        onSort={() => console.log('onSort')}
-        onSetPage={() => console.log('onSetPage')}
     />
 );
 

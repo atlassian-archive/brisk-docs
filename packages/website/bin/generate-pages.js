@@ -11,20 +11,28 @@ const generatePages = require('./page-generator');
 
 const packageRoot = path.resolve(__dirname, '..');
 
-module.exports = ({ packagesPaths, docsPath, useManifests }) => {
+module.exports = async ({
+  packagesPaths,
+  docsPath,
+  useManifests,
+  webpackConfiguration,
+}) => {
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
     packageRoot,
     './components/page-templates',
   );
+  const bundlesPath = path.resolve(packageRoot, './bundles');
 
-  const pagesList = generatePages(
+  const pagesList = await generatePages(
     packagesPaths,
     docsPath,
     pagesPath,
     componentsPath,
+    bundlesPath,
     {
       useManifests,
+      webpackConfiguration,
     },
   );
   const { packages, docs, metaData } = pagesList;
@@ -35,12 +43,14 @@ module.exports = ({ packagesPaths, docsPath, useManifests }) => {
   fse.ensureFileSync(pagesListPath);
   fse.writeFileSync(
     pagesListPath,
+
     JSON.stringify({ packages, docs }, undefined, 2),
   );
 
   fse.ensureFileSync(packagesDataPath);
   fse.writeFileSync(
     packagesDataPath,
+
     JSON.stringify({ metaData }, undefined, 2),
   );
 };

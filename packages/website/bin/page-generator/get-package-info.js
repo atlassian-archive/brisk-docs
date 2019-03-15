@@ -86,7 +86,8 @@ const getManifestDefinition = pkgPath => {
  * Scans all packages and gathers information that will be shown in the docs website
  * @param packagesPatterns array of glob patterns for directories to be included
  * @param options configuration options
- * @returns An array of objects representing info about each package
+ * @returns An array of objects representing info about each package, and an array
+ * of file paths of source files that should be built before being used.
  */
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
   const defaultOptions = {
@@ -95,7 +96,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
 
   const { useManifests } = { ...defaultOptions, ...options };
 
-  return getAllDirectories(packagesPatterns)
+  const packagesInfo = getAllDirectories(packagesPatterns)
     .map(pkgPath => {
       const pkgId = path.basename(pkgPath);
 
@@ -122,7 +123,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         isDoc(docPath),
       );
 
-      return {
+      const packageData = {
         id: pkgId,
         name: pkgInfo.name,
         description: pkgInfo.description,
@@ -134,6 +135,15 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         examplesPaths,
         docsPaths,
       };
+
+      const externalSources = examplesPaths.map(example => example.path);
+
+      return { packageData, externalSources };
     })
     .filter(_ => _);
+
+  const packages = packagesInfo.map(p => p.packageData);
+  const externalSources = flatMap(packagesInfo, p => p.externalSources);
+
+  return { packages, externalSources };
 };

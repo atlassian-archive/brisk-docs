@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import links from '../data/pages-list.json';
+import links from '../pages-list';
 
 export default () => (
   <ul>

@@ -8,7 +8,7 @@ import Tree from '@atlaskit/tree';
 import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
-import pageInfo from '../../data/pages-list.json';
+import pageInfo from '../../pages-list';
 import LinkComponent from './link-component';
 import NavHeader from './nav-header';
 
