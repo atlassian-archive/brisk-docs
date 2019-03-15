@@ -14,7 +14,22 @@ const basicPageTemplate = (
   wrapperPath,
   data = {},
   title = '',
-) => outdent`
+) => {
+  if (!componentPath) {
+    return outdent`
+      import Wrapper from '${wrapperPath}';
+      import PageTitle from '${pageTitlePath}'
+      
+      export default () => (
+       <> 
+          <PageTitle title='${title}' />
+          <Wrapper data={${JSON.stringify(data)}} />
+       </>
+      );
+    `;
+  }
+
+  return outdent`
     import Component from '${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
@@ -27,7 +42,8 @@ const basicPageTemplate = (
             </Wrapper>
      </>
     );
-`;
+  `;
+};
 
 const exampleTemplate = (
   componentPath,
@@ -82,7 +98,9 @@ const basicNonComponentTemplate = (
  */
 const getImportPath = (from, to) => {
   const fromDir = path.dirname(from);
-
+  if (to === '') {
+    return null;
+  }
   return path.relative(fromDir, to).replace('.js', '');
 };
 

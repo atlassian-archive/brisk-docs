@@ -4,6 +4,7 @@ import PackageMetaData, { MetaDataEntry } from './package-metadata';
 describe('package metadata component', () => {
   it('should render a metadata entry for each field', () => {
     const props = {
+      id: 'id',
       version: '1.0.0',
       maintainers: ['Peter Y, Dean P, Ben C'],
       repository: {
@@ -21,7 +22,11 @@ describe('package metadata component', () => {
 
   it('should not render maintainers if maintainers does not exist', () => {
     const wrapper = mount(
-      <PackageMetaData version="1.0.0" repository={{ url: 'git_url' }} />,
+      <PackageMetaData
+        id="id"
+        version="1.0.0"
+        repository={{ url: 'git_url' }}
+      />,
     );
 
     expect(wrapper.find(MetaDataEntry)).toHaveLength(2);
@@ -30,6 +35,7 @@ describe('package metadata component', () => {
   it('should not render maintainers if maintainers exists but is empty', () => {
     const wrapper = mount(
       <PackageMetaData
+        id="id"
         version="1.0.0"
         maintainers={[]}
         repository={{ url: 'git_url' }}
@@ -42,6 +48,7 @@ describe('package metadata component', () => {
   it('should handle repository field being a string', () => {
     const wrapper = mount(
       <PackageMetaData
+        id="id"
         version="1.0.0"
         maintainers={['Peter Y']}
         repository="git_url"
@@ -55,6 +62,7 @@ describe('package metadata component', () => {
   it('should handle repository field being a string and convert git suffixes', () => {
     const wrapperSshRepo = mount(
       <PackageMetaData
+        id="id"
         version="1.0.0"
         maintainers={['Peter Y']}
         repository="fake-repo-fix-later:7997"
@@ -63,6 +71,7 @@ describe('package metadata component', () => {
 
     const wrapperHttpsRepo = mount(
       <PackageMetaData
+        id="id"
         version="1.0.0"
         maintainers={['Peter Y']}
         repository="fake-repo-fix-later"
@@ -80,6 +89,7 @@ describe('package metadata component', () => {
 
   it('should include repository directory in link if it exists', () => {
     const props = {
+      id: 'id',
       version: '1.0.0',
       maintainers: ['Peter Y, Dean P, Ben C'],
       repository: {
