@@ -101,6 +101,8 @@
         "jest": "^24.1.0",
         "json-loader": "^0.5.7",
         "prettier": "^1.16.4",
-        "style-loader": "^0.23.0"
+        "style-loader": "^0.23.0",
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.3.3333"
     }
 }

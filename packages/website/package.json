@@ -1,14 +1,15 @@
 {
     "name": "@brisk-docs/website",
     "version": "1.0.0",
-    "description": "The Brisk website documenter", 
+    "description": "The Brisk website documenter",
     "main": "index.js",
     "license": "MIT",
     "private": true,
     "scripts": {
         "test": "jest",
         "dev": "node bin/index.js start --config=dummy-data/simple-project/docs.config.js",
-        "dev:webpack": "node bin/bin.js start --config=dummy-data/custom-webpack-project/docs.config.js",
+        "dev:webpack": "node bin/index.js start --config=dummy-data/custom-webpack-project/docs.config.js",
+        "dev:typescript": "node bin/index.js start --config=dummy-data/typescript-project/docs.config.js",
         "build": "node bin/bin.js build --config=dummy-data/simple-project/docs.config.js",
         "start": "next start"
     },
@@ -67,6 +68,7 @@
     },
     "devDependencies": {
         "enzyme": "^3.9.0",
-        "enzyme-adapter-react-16": "^1.9.1"
+        "enzyme-adapter-react-16": "^1.9.1",
+        "typescript": "^3.3.3333"
     }
 }
