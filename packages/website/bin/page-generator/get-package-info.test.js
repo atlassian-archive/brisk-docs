@@ -39,8 +39,7 @@ describe('Get package info utility', () => {
     );
   });
 
-  it('finds the path to the package README dir, and returns an empty path if the README does not exist',
-    async () => {
+  it('finds the path to the package README dir, and returns an empty path if the README does not exist', async () => {
     expect(packageInfo[0]).toHaveProperty(
       'readmePath',
       path.join(cwd, 'packages', 'mock-package1', 'README.md'),
@@ -49,10 +48,7 @@ describe('Get package info utility', () => {
       'readmePath',
       path.join(cwd, 'packages', 'mock-package2', 'README.md'),
     );
-    expect(packageInfo[2]).toHaveProperty(
-      'readmePath',
-      '',
-    );
+    expect(packageInfo[2]).toHaveProperty('readmePath', '');
   });
 
   it('finds the paths of all the docs', async () => {

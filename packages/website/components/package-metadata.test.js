@@ -22,7 +22,11 @@ describe('package metadata component', () => {
 
   it('should not render maintainers if maintainers does not exist', () => {
     const wrapper = mount(
-      <PackageMetaData id="id" version="1.0.0" repository={{ url: 'git_url' }} />,
+      <PackageMetaData
+        id="id"
+        version="1.0.0"
+        repository={{ url: 'git_url' }}
+      />,
     );
 
     expect(wrapper.find(MetaDataEntry)).toHaveLength(2);
