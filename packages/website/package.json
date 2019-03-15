@@ -30,6 +30,7 @@
         "@atlaskit/theme": "^6.0.0",
         "@atlaskit/tree": "^4.1.11",
         "@babel/preset-flow": "^7.0.0",
+        "@babel/preset-typescript": "^7.3.3",
         "@babel/plugin-proposal-class-properties": "^7.3.4",
         "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
         "@mdx-js/loader": "^0.17.5",
@@ -65,6 +66,7 @@
         "rimraf": "^2.6.3",
         "styled-components": "^3.2.6",
         "title-case": "^2.1.1",
+        "ts-loader": "^5.3.3",
         "webpack": "^4.29.6"
     },
     "devDependencies": {

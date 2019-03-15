@@ -8,10 +8,10 @@ const webpack = {
         extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
-        loaders: [
+        rules:  [
             {
                 test: /.tsx?$/,
-                loader: 'ts-loader',
+                loader: 'babel-loader!ts-loader',
                 exclude: /node_modules/,
             }, {
                 test: /.js$/,
