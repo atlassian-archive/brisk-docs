@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-// TODO: Disabling ESlint for this file to prevent error of window being undefined
-// TODO: Re-enable after AFP-176 is complete
 import * as React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
@@ -8,6 +5,7 @@ import debounce from 'lodash.debounce';
 import MediaDocIcon from '@atlaskit/icon/glyph/media-services/document';
 import PackagesIcon from '@atlaskit/icon/glyph/component';
 import { colors, math, gridSize } from '@atlaskit/theme';
+import WidthDetector from '@atlaskit/width-detector';
 
 import { Section } from '../components/page';
 import Panel, { PanelGrid } from '../components/panel';
@@ -46,21 +44,13 @@ class HomePage extends React.Component {
     displayAsColumn: false,
   };
 
-  componentDidMount() {
-    this.debouncedDetect = debounce(() => {
-      const width = window.innerWidth;
-      if (width <= WINDOW_BREAKPOINT) {
-        this.setState({ displayAsColumn: true });
-      } else {
-        this.setState({ displayAsColumn: false });
-      }
-    }, 500);
-    window.addEventListener('resize', this.debouncedDetect);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.debouncedDetect);
-  }
+  debouncedDetect = debounce((width) => {
+    if (width <= WINDOW_BREAKPOINT) {
+      this.setState({ displayAsColumn: true });
+    } else {
+      this.setState({ displayAsColumn: false });
+    }
+  }, 100);
 
   packagesPanelProps = {
     IconComponent: PackagesIcon,
@@ -83,19 +73,23 @@ class HomePage extends React.Component {
     const { displayAsColumn } = this.state;
 
     return (
-      <Page>
-        <Heading>Jira Frontend Documentation</Heading>
-        <SubHeading>
-          This is the home of documentation for Jira Frontend packages and
-          relevant usage guidelines.
-        </SubHeading>
-        <Section>
-          <PanelGrid displayAsColumn={displayAsColumn}>
-            <Panel href="/packages" {...this.packagesPanelProps} />
-            <Panel href="/docs" {...this.docsPanelProps} />
-          </PanelGrid>
-        </Section>
-      </Page>
+      <WidthDetector onResize={this.debouncedDetect}>
+        {() => (
+          <Page>
+            <Heading>Jira Frontend Documentation</Heading>
+            <SubHeading>
+              This is the home of documentation for Jira Frontend packages and
+              relevant usage guidelines.
+            </SubHeading>
+            <Section>
+              <PanelGrid displayAsColumn={displayAsColumn}>
+                <Panel href="/packages" {...this.packagesPanelProps} />
+                <Panel href="/docs" {...this.docsPanelProps} />
+              </PanelGrid>
+            </Section>
+          </Page>
+        )}
+      </WidthDetector>
     );
   }
 }

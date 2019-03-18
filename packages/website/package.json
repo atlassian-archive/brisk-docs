@@ -1,7 +1,7 @@
 {
     "name": "@brisk-docs/website",
     "version": "1.0.0",
-    "description": "The Brisk website documenter", 
+    "description": "The Brisk website documenter",
     "main": "index.js",
     "license": "MIT",
     "private": true,
@@ -29,6 +29,7 @@
         "@atlaskit/table-tree": "^5.0.7",
         "@atlaskit/theme": "^6.0.0",
         "@atlaskit/tree": "^4.1.11",
+        "@atlaskit/width-detector": "^0.3.1",
         "@babel/preset-flow": "^7.0.0",
         "@mdx-js/loader": "^0.17.5",
         "@mdx-js/mdx": "^0.17.5",
