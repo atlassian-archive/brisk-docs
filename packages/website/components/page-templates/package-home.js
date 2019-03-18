@@ -1,6 +1,8 @@
 import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
+import WarningIcon from '@atlaskit/icon/glyph/warning';
+import Banner from '@atlaskit/banner';
 import titleCase from 'title-case';
 
 import NavigationWrapper from '../navigation-wrapper';
@@ -48,25 +50,41 @@ Header.propTypes = {
   heading: PropTypes.string.isRequired,
 };
 
-const PackageHome = ({ data, children }) => (
-  <NavigationWrapper
-    navContent={() => (
-      <PackageNavContent packageId={data.id} packageName={data.packageName} />
-    )}
+const MissingReadmeBanner = () => (
+  <Banner
+    icon={<WarningIcon label="Warning icon" secondaryColor="inherit" />}
+    isOpen
   >
-    <Wrapper>
-      <Header id={data.id} heading={titleCase(data.packageName)} />
-      <Description>{data.description}</Description>
-      <PackageMetaData
-        id={data.id}
-        version={data.version}
-        maintainers={data.maintainers}
-        repository={data.repository}
-      />
-      {children}
-    </Wrapper>
-  </NavigationWrapper>
+    There is no README for this package. This warning is only visible in dev
+    mode.
+  </Banner>
 );
+
+const PackageHome = ({ data, children }) => {
+  return (
+    <NavigationWrapper
+      navContent={() => (
+        <PackageNavContent packageId={data.id} packageName={data.packageName} />
+      )}
+    >
+      <Wrapper>
+        <Header id={data.id} heading={titleCase(data.packageName)} />
+        <Description>{data.description}</Description>
+        <PackageMetaData
+          id={data.id}
+          version={data.version}
+          maintainers={data.maintainers}
+          repository={data.repository}
+        />
+        {children || process.env.NODE_ENV !== 'development' ? (
+          children
+        ) : (
+          <MissingReadmeBanner />
+        )}
+      </Wrapper>
+    </NavigationWrapper>
+  );
+};
 
 PackageHome.propTypes = {
   data: PropTypes.shape({
