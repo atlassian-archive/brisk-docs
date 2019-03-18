@@ -44,7 +44,7 @@ class HomePage extends React.Component {
     displayAsColumn: false,
   };
 
-  debouncedDetect = debounce((width) => {
+  debouncedDetect = debounce(width => {
     if (width <= WINDOW_BREAKPOINT) {
       this.setState({ displayAsColumn: true });
     } else {
