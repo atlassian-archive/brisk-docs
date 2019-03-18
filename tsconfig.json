@@ -2,5 +2,5 @@
   "compilerOptions": {
     "jsx": "preserve"
   },
-  "files": ["packages/changelog-extract/*"]
+  "files": ["packages/react-changelogs/*"]
 }

@@ -2,10 +2,8 @@ import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 import styled, {css} from "styled-components";
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
-// @ts-ignore
-import filterChangelog from "../utils/filter-changelog.ts";
-// @ts-ignore
-import divideChangelog from "../utils/divide-changelog.ts";
+import filterChangelog from "../utils/filter-changelog";
+import divideChangelog from "../utils/divide-changelog";
 
 const gutter = math.multiply(gridSize, 3);
 

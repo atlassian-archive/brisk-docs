@@ -16,12 +16,6 @@ module.exports = withCSS(
           rule.include.push(path.join(__dirname, `../packages`)),
       );
 
-      config.module.rules.push({
-        test: /.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-      });
-
       // Adding items to globalScope in the website
       config.plugins.push(
         new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),

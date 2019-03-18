@@ -19,7 +19,7 @@
         "lint:prettier": "prettier --list-different \"**/*.js\"",
         "lint:eslint": "yarn eslint .",
         "lint": "yarn lint:eslint && yarn lint:prettier",
-        "test:logs": "bolt w @brisk-docs/changelog-extract run jest"
+        "test:logs": "bolt w @brisk-docs/react-changelogs run jest"
     },
     "bolt": {
         "version": "^0.22.1",
@@ -43,9 +43,12 @@
         "@atlaskit/table-tree": "^5.0.7",
         "@atlaskit/theme": "^6.0.0",
         "@atlaskit/tree": "^4.1.11",
+        "@babel/core": "^7.3.4",
         "@babel/plugin-proposal-class-properties": "^7.3.4",
         "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
         "@babel/preset-flow": "^7.0.0",
+        "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
         "@mdx-js/loader": "^0.17.5",
         "@mdx-js/mdx": "^0.17.5",
@@ -96,7 +99,7 @@
         "styled-components": "^3.2.6",
         "title-case": "^2.1.1",
         "ts-loader": "^5.3.3",
-        "typescript": "^2.5.3",
+        "typescript": "^3.2.1",
         "uglify-js": "^3.1.7",
         "wait-on": "^3.2.0",
         "webpack": "^4.29.6"
@@ -105,6 +108,7 @@
         "@atlaskit/build-releases": "^3.0.3",
         "@types/enzyme": "^2.8.11",
         "@types/jest": "^21.1.2",
+        "@typescript-eslint/parser": "^1.4.2",
         "babel-eslint": "^10.0.1",
         "babel-plugin-emotion": "^10.0.6",
         "babel-plugin-styled-components": "^1.10.0",
@@ -117,6 +121,7 @@
         "eslint": "^5.15.1",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-config-prettier": "^4.1.0",
+        "eslint-import-resolver-typescript": "^1.1.1",
         "eslint-plugin-cypress": "^2.2.1",
         "eslint-plugin-import": "^2.16.0",
         "eslint-plugin-jest": "^22.3.0",

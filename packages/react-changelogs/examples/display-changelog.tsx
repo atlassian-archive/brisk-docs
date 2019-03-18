@@ -1,6 +1,5 @@
 import * as React from "react";
-// @ts-ignore
-import Changelog from '../src/components/changelog.tsx';
+import Changelog from '../src/components/changelog';
 
 const data = `# This package itself
 

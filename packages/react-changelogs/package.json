@@ -1,29 +1,13 @@
 {
-  "name": "@brisk-docs/changelog-extract",
+  "name": "@brisk-docs/react-changelogs",
   "version": "1.0.0",
-  "description": "This package is used for extracting changelogs from your projects",
+  "description": "This package is used for displaying changelogs from your projects",
   "main": "index.js",
-  "repository": " git@bitbucket.org:atlassian/changelog-extract.git",
+  "repository": "git@github.com:glad-docs/brisk-docs.git",
   "author": "Aparna Raj",
   "license": "MIT",
   "scripts": {
     "test": "jest"
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/test-setup.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/test-preprocessor.js"
-    },
-    "testMatch": [
-      "**/__tests__/*.(ts|tsx|js)"
-    ]
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.11",
@@ -37,6 +21,7 @@
   "dependencies": {
     "@atlaskit/css-reset": "^3.0.5",
     "@atlaskit/theme": "^6.0.0",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/react": "^16.4.18",
     "@types/semver": "^5.5.0",
     "awesome-typescript-loader": "^3.2.3",
@@ -64,7 +49,7 @@
     "source-map-loader": "^0.2.2",
     "styled-components": "^3.2.6",
     "tti-polyfill": "^0.2.2",
-    "typescript": "^2.5.3",
+    "typescript": "^3.2.1",
     "uglify-js": "^3.1.7",
     "webpack": "^4.29.6"
   }

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { gridSize, math } from '@atlaskit/theme';
-// @ts-ignore
-import Changelog from '../src/components/changelog.tsx';
+import Changelog from '../src/components/changelog';
 
 const data = `# This package itself
 
