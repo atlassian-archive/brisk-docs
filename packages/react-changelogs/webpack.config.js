@@ -10,8 +10,8 @@ const webpack = {
   module: {
     rules: [
       {
-        test: /.tsx?$/,
-        loader: 'babel-loader!ts-loader',
+        test: /\.(ts|tsx)$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
       },
       {
