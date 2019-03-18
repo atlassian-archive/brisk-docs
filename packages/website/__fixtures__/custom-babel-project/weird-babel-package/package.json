@@ -1,0 +1,18 @@
+{
+  "name": "typescript-package",
+  "version": "1.0.0",
+  "description": "This is a project bundled with webpack that uses experimental babel plugins",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "react": "^16.8.4"
+  }
+}

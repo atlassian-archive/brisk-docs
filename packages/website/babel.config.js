@@ -9,6 +9,5 @@ module.exports = {
         preprocess: false,
       },
     ],
-    'transform-flow-strip-types',
   ],
 };
