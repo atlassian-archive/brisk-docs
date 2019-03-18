@@ -85,8 +85,12 @@ jobs:
       - run: *install-bolt
 
       - run:
+          name: Build website
+          command: bolt build
+
+      - run:
           name: Start up website
-          command: bolt dev:website
+          command: bolt start
           background: true
 
       - run:
