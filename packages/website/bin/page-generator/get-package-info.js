@@ -113,7 +113,10 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         return false;
       }
 
-      const readmePath = path.resolve(pkgPath, 'README.md');
+      let readmePath = path.resolve(pkgPath, 'README.md');
+      if (!fs.existsSync(readmePath)) {
+        readmePath = '';
+      }
       const exampleDirPath = path.resolve(pkgPath, 'examples');
       const docsDirPath = path.resolve(pkgPath, 'docs');
 
