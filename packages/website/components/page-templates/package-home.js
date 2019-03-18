@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
