@@ -1,7 +1,7 @@
 import * as React from "react";
 import { mount } from "enzyme";
 
-import Changelog from "../components/changelog";
+import Changelog from "../src/components/changelog";
 
 const initialProps = `# This package itself
 

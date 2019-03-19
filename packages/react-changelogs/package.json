@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist --extensions '.ts,.js,.tsx'"
   },
   "files": [
     "dist"

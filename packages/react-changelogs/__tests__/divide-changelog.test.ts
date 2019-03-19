@@ -1,4 +1,4 @@
-import divideChangelog from '../utils/divide-changelog';
+import divideChangelog from '../src/utils/divide-changelog';
 
 const initialProps = `# This package itself
 

@@ -1,4 +1,4 @@
-import filterChangelog from '../utils/filter-changelog';
+import filterChangelog from '../src/utils/filter-changelog';
 
 const initialProps = [
     {
