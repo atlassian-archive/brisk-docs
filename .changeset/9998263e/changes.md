@@ -1,0 +1,1 @@
+- Fix build to work in commonjs

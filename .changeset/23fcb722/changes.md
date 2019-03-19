@@ -1,0 +1,2 @@
+- Fix binary
+- Add dev binary command and make start use next start

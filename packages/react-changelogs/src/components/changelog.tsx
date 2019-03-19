@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
-import styled, {css} from "styled-components";
+import ReactMarkdown from 'react-markdown';
+import styled, { css } from "styled-components";
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
 import filterChangelog from "../utils/filter-changelog";
 import divideChangelog from "../utils/divide-changelog";
@@ -85,9 +85,9 @@ export type Props = {
 
 export default class Changelog extends React.Component<Props> {
     props: Props; // eslint-disable-line react/sort-comp
-//      static defaultProps  = {
-//         getUrl: () => null
-// };
+     static defaultProps  = {
+        getUrl: () => null
+    };
 
     render() {
         const { changelog, getUrl, range, packageName } = this.props;
