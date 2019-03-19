@@ -98,7 +98,7 @@ PackageHome.propTypes = {
       directory: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default PackageHome;

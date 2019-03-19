@@ -1,7 +1,7 @@
 {
     "name": "@brisk-docs/website",
     "version": "1.0.0",
-    "description": "The Brisk website documenter", 
+    "description": "The Brisk website documenter",
     "main": "index.js",
     "license": "MIT",
     "private": true,
@@ -15,6 +15,7 @@
     "bin": "bin/index.js",
     "dependencies": {
         "@atlaskit/avatar": "^14.1.8",
+        "@atlaskit/banner": "^8.0.1",
         "@atlaskit/button": "^8.2.4",
         "@atlaskit/css-reset": "^3.0.5",
         "@atlaskit/docs": "^6.0.2",

@@ -4,9 +4,7 @@ import PackageHomeWrapper, { Description } from './package-home';
 
 jest.mock('../navigation/package-nav-content', () => () => <div />);
 /* eslint-disable react/prop-types */
-jest.mock('../navigation-wrapper', () => ({ children }) => (
-  <div>{children}</div>
-));
+jest.mock('../navigation-wrapper', () => ({children}) => <div>{children}</div>);
 /* eslint-disable react/prop-types */
 
 const data = {
