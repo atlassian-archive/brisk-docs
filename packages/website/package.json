@@ -8,8 +8,8 @@
     "scripts": {
         "test": "jest",
         "dev": "node bin/index.js start --config=dummy-data/simple-project/docs.config.js",
-        "dev:webpack": "node bin/bin.js start --config=dummy-data/custom-webpack-project/docs.config.js",
-        "build": "node bin/bin.js build --config=dummy-data/simple-project/docs.config.js",
+        "dev:webpack": "node bin/index.js start --config=dummy-data/custom-webpack-project/docs.config.js",
+        "build": "node bin/index.js build --config=dummy-data/simple-project/docs.config.js",
         "start": "next start"
     },
     "bin": "bin/index.js",
@@ -30,7 +30,11 @@
         "@atlaskit/table-tree": "^5.0.7",
         "@atlaskit/theme": "^6.0.0",
         "@atlaskit/tree": "^4.1.11",
+        "@atlaskit/width-detector": "^0.3.1",
         "@babel/preset-flow": "^7.0.0",
+        "@babel/preset-typescript": "^7.3.3",
+        "@babel/plugin-proposal-class-properties": "^7.3.4",
+        "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
         "@mdx-js/loader": "^0.17.5",
         "@mdx-js/mdx": "^0.17.5",
         "@mdx-js/tag": "^0.17.5",

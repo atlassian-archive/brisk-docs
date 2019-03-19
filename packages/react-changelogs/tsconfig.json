@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "./target/",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.symbol",
+      "es2015.iterable",
+      "es2015.promise",
+      "es2016.array.include"
+    ],
+    "typeRoots": ["./typings", "./node_modules/@types"]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "files": [
+    "./typings/atlaskit.d.ts"
+  ]
+}

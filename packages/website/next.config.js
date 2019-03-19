@@ -7,7 +7,7 @@ const withCSS = require('@zeit/next-css');
 
 module.exports = withCSS(
   withMDX({
-    pageExtensions: ['js', 'jsx', 'mdx'],
+    pageExtensions: ['js', 'jsx', 'mdx', 'tsx', 'ts'],
     webpack(config) {
       // eslint-disable-next-line no-param-reassign
       config.externals = [];

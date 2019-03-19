@@ -6,4 +6,6 @@ packages/website/pages/docs
 
 packages/website/data/**/*.json
 
+packages/website/bundles/**/*.js
+
 cypress/plugins
