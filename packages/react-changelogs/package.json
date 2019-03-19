@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/react-changelogs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This package is used for displaying changelogs from your projects",
   "main": "dist/index.js",
   "repository": "git@github.com:glad-docs/brisk-docs.git",
