@@ -86,7 +86,7 @@ jobs:
 
       - run:
           name: Build website
-          command: bolt build
+          command: bolt build:website
 
       - run:
           name: Start up website

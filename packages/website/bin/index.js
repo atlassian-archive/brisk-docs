@@ -40,12 +40,16 @@ const preNextScripts = async () => {
 };
 
 switch (mainOptions.command) {
-  case 'start': {
+  case 'dev': {
     preNextScripts().then(() => spawnNextProcess('dev'));
     break;
   }
   case 'build': {
     preNextScripts().then(() => spawnNextProcess('build'));
+    break;
+  }
+  case 'start': {
+    preNextScripts().then(() => spawnNextProcess('start'));
     break;
   }
   default:
