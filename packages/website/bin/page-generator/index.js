@@ -119,14 +119,30 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
 const generateProjectDocsPages = (docsInfo, generatorConfig) => {
   const scanAndGenerate = (docs, docsPath) =>
     docs.map(doc => {
+      const pagePath = path.join(docsPath, doc.id);
+
       if (doc.children) {
+        const docData = {
+          id: doc.id,
+          children: doc.children.map(child => ({
+            id: child.id,
+            pagePath: path.join(doc.id, child.id),
+          })),
+        };
+        generateDocsHomePage(
+          path.join(pagePath, 'index.js'),
+          docData,
+          generatorConfig,
+          'Documents',
+        );
+
         return {
           id: doc.id,
+          pagePath: path.join('/', pagePath),
           children: scanAndGenerate(doc.children, path.join(docsPath, doc.id)),
         };
       }
 
-      const pagePath = path.join(docsPath, doc.id);
       generateProjectDocPage(
         `${pagePath}.js`,
         doc.path,

@@ -7,6 +7,7 @@ import titleCase from 'title-case';
 
 import NavigationWrapper from '../navigation-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
+import DocsNavContent from '../navigation/docs-nav-content';
 import Page, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
 
@@ -64,32 +65,48 @@ const RowCell = styled.div`
 
 const ItemList = ({ data, type }) => {
   const getRows = () => {
+    if (data.children) {
+      return data.children.map(child => renderRow(child));
+    }
+
     const packagePages = pageInfo.packages.find(
       pkg => pkg.packageId === data.id,
     );
     return packagePages[type].map(item => renderRow(item));
   };
-  const getDocsList = () => (
-    <Page>
-      <Title>
-        {type === 'docs' ? 'Document Home Page' : 'Example Home Page'}
-      </Title>
-      <Section>
-        <Table
-          head={head}
-          rows={getRows()}
-          defaultSortKey="name"
-          defaultSortOrder="ASC"
-        />
-      </Section>
-    </Page>
-  );
+  const getDocsList = () => {
+    let title = titleCase(data.id);
+    if (data.packageName) {
+      title = type === 'docs' ? 'Document Home Page' : 'Example Home Page';
+    }
+
+    return (
+      <Page>
+        <Title>{title}</Title>
+        <Section>
+          <Table
+            head={head}
+            rows={getRows()}
+            defaultSortKey="name"
+            defaultSortOrder="ASC"
+          />
+        </Section>
+      </Page>
+    );
+  };
 
   return (
     <NavigationWrapper
-      navContent={() => (
-        <PackageNavContent packageId={data.id} packageName={data.packageName} />
-      )}
+      navContent={() =>
+        data.packageName ? (
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
+        ) : (
+          <DocsNavContent />
+        )
+      }
     >
       {getDocsList()}
     </NavigationWrapper>
@@ -99,7 +116,13 @@ const ItemList = ({ data, type }) => {
 ItemList.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    packageName: PropTypes.string.isRequired,
+    packageName: PropTypes.string,
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        pagePath: PropTypes.string.isRequired,
+      }),
+    ),
   }).isRequired,
   type: PropTypes.string.isRequired,
 };
