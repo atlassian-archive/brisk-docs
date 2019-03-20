@@ -1,14 +1,18 @@
 {
   "name": "@brisk-docs/react-changelogs",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "This package is used for displaying changelogs from your projects",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:glad-docs/brisk-docs.git",
   "author": "Aparna Raj",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "babel src --out-dir dist --extensions '.ts,.js,.tsx' --ignore **/__tests__/**/*"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/enzyme": "^2.8.11",
     "@types/jest": "^21.1.2",
@@ -23,12 +27,15 @@
   "dependencies": {
     "@atlaskit/css-reset": "^3.0.5",
     "@atlaskit/theme": "^6.0.0",
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "babel-plugin-transform-dynamic-import": "^2.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "prismjs": "^1.15.0",
@@ -46,4 +53,3 @@
     "webpack": "^4.29.6"
   }
 }
-
