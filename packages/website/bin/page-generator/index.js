@@ -124,7 +124,10 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
       if (doc.children) {
         const docData = {
           id: doc.id,
-          children: doc.children.map(child => ({ id: child.id, pagePath: path.join(doc.id, child.id) }))
+          children: doc.children.map(child => ({
+            id: child.id,
+            pagePath: path.join(doc.id, child.id),
+          })),
         };
         generateDocsHomePage(
           path.join(pagePath, 'index.js'),

@@ -77,14 +77,12 @@ const ItemList = ({ data, type }) => {
   const getDocsList = () => {
     let title = titleCase(data.id);
     if (data.packageName) {
-      title = type === 'docs' ? 'Document Home Page' : 'Example Home Page'
+      title = type === 'docs' ? 'Document Home Page' : 'Example Home Page';
     }
 
     return (
       <Page>
-        <Title>
-          {title}
-        </Title>
+        <Title>{title}</Title>
         <Section>
           <Table
             head={head}
@@ -99,13 +97,16 @@ const ItemList = ({ data, type }) => {
 
   return (
     <NavigationWrapper
-      navContent={() => (
+      navContent={() =>
         data.packageName ? (
-          <PackageNavContent packageId={data.id} packageName={data.packageName}/>
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
         ) : (
           <DocsNavContent />
         )
-      )}
+      }
     >
       {getDocsList()}
     </NavigationWrapper>
@@ -116,10 +117,12 @@ ItemList.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string.isRequired,
-    }))
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        pagePath: PropTypes.string.isRequired,
+      }),
+    ),
   }).isRequired,
   type: PropTypes.string.isRequired,
 };
