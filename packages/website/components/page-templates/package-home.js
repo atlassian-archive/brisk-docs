@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
 import WarningIcon from '@atlaskit/icon/glyph/warning';
-import Banner from '@atlaskit/banner';
+import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
 
 import NavigationWrapper from '../navigation-wrapper';
@@ -50,14 +50,11 @@ Header.propTypes = {
   heading: PropTypes.string.isRequired,
 };
 
-const MissingReadmeBanner = () => (
-  <Banner
-    icon={<WarningIcon label="Warning icon" secondaryColor="inherit" />}
-    isOpen
-  >
+const MissingReadmeWarning = () => (
+  <SectionMessage appearance="warning">
     There is no README for this package. This warning is only visible in dev
     mode.
-  </Banner>
+  </SectionMessage>
 );
 
 const PackageHome = ({ data, children }) => {
@@ -79,7 +76,7 @@ const PackageHome = ({ data, children }) => {
         {children || process.env.NODE_ENV !== 'development' ? (
           children
         ) : (
-          <MissingReadmeBanner />
+          <MissingReadmeWarning />
         )}
       </Wrapper>
     </NavigationWrapper>
