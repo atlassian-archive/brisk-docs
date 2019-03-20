@@ -52,8 +52,8 @@ Header.propTypes = {
 
 const MissingReadmeWarning = () => (
   <SectionMessage appearance="warning">
-    There is no README for this package. This warning is only visible in dev
-    mode.
+    This package doesn't have a README yet. Add one to include more detailed
+    documentation, or even consider using MDX for interactive, richer docs.
   </SectionMessage>
 );
 
