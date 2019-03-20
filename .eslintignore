@@ -8,4 +8,6 @@ packages/website/data/**/*.json
 
 packages/website/bundles/**/*.js
 
+packages/**/dist/**/*
+
 cypress/plugins
