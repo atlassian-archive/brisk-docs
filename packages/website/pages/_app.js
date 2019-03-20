@@ -3,6 +3,8 @@ import App, { Container } from 'next/app';
 import '@atlaskit/css-reset';
 import { MDXProvider } from '@mdx-js/tag';
 import components from '../components/mdx';
+import Meta from '../components/meta-context';
+import metadata from '../data/site-meta.json';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -19,12 +21,14 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <title>Brisk Document</title>
-        <MDXProvider components={components}>
-          <Component {...pageProps} />
-        </MDXProvider>
-      </Container>
+      <Meta.Provider value={metadata}>
+        <Container>
+          <title>{metadata.siteName}</title>
+          <MDXProvider components={components}>
+            <Component {...pageProps} />
+          </MDXProvider>
+        </Container>
+      </Meta.Provider>
     );
   }
 }
