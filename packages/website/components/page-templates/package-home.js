@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
 import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
 
@@ -52,7 +51,7 @@ Header.propTypes = {
 
 const MissingReadmeWarning = () => (
   <SectionMessage appearance="warning">
-    This package doesn't have a README yet. Add one to include more detailed
+    This package does not have a README yet. Add one to include more detailed
     documentation, or even consider using MDX for interactive, richer docs.
   </SectionMessage>
 );
