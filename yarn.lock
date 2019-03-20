@@ -439,6 +439,22 @@
   dependencies:
     react "^16.4.0"
 
+"@atlaskit/type-helpers@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@atlaskit/type-helpers/-/type-helpers-3.0.2.tgz#d6da9a3367c177fad05d159db330d2e388ede90e"
+  integrity sha512-7QHB0Uegq2PBtLiA1VTt3pxI+KQijXWLLvWKRM/4LxgQC/dWXYuiMm7HfIY88gGWarg3cpOVUZKMU4CvbfT/5g==
+  dependencies:
+    react "^16.4.0"
+
+"@atlaskit/width-detector@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/width-detector/-/width-detector-0.3.1.tgz#04a50853779e53cf47aaf65c4e85d9bf5eb315dc"
+  integrity sha512-b6ADC7+4QC8DAbO0g0sv/+cRTysoAURUS44kgj8ych2qLqmZzi+kmsISH34ZjUwH/d+LFbDHyn2eblic3iwEpA==
+  dependencies:
+    "@atlaskit/type-helpers" "^3.0.2"
+    raf-schd "^2.1.0"
+    tslib "^1.8.0"
+
 "@babel/code-frame@7.0.0-beta.56":
   version "7.0.0-beta.56"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@babel/code-frame/-/code-frame-7.0.0-beta.56.tgz#09f76300673ac085d3b90e02aafa0ffc2c96846a"
