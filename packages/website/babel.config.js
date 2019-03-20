@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['next/babel'],
+  presets: ['next/babel', '@babel/typescript'],
   plugins: [
     [
       'styled-components',
@@ -9,5 +9,8 @@ module.exports = {
         preprocess: false,
       },
     ],
+    'transform-flow-strip-types',
+    '@babel/proposal-class-properties',
+    '@babel/proposal-object-rest-spread',
   ],
 };

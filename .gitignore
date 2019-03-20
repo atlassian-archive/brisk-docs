@@ -17,4 +17,4 @@ cypress
 
 /packages/website/data/**/*.json
 /packages/website/data/**/*.js
-/packages/website/bundles/**/*.js
+/packages/**/bundles/**/*.js

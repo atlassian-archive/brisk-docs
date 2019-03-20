@@ -14,5 +14,16 @@
         "jsx-a11y/anchor-is-valid": "off",
         "import/extensions": ["error", "never", { "css": "ignorePackages", "json": "always" }],
         "react/sort-comp": "off"
+    },
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+            // use <root>/path/to/folder/tsconfig.json
+            "typescript": {
+                "directory": "./packages/react-changelogs/tsconfig.json"
+            }
+        }
     }
 }
