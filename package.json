@@ -102,6 +102,7 @@
     },
     "devDependencies": {
         "@atlaskit/build-releases": "^3.0.3",
+        "@babel/plugin-proposal-optional-chaining": "^7.2.0",
         "@types/enzyme": "^2.8.11",
         "@types/jest": "^21.1.2",
         "@types/react": "^16.4.18",
@@ -132,6 +133,7 @@
         "react-test-renderer": "^16.0.0",
         "style-loader": "^0.23.0",
         "ts-jest": "^24.0.0",
+        "ts-loader": "^5.3.3",
         "tti-polyfill": "^0.2.2"
     }
 }
