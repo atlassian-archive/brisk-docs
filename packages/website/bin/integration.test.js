@@ -1,3 +1,6 @@
+import { spawnSync } from 'child_process';
+import path from 'path';
+
 import generatePages from './generate-pages';
 import { processConfig } from './handle-config';
 
@@ -9,6 +12,22 @@ const buildWebsiteFromFixture = async config => {
   const fixtureConfig = processConfig(process.cwd(), config);
 
   await generatePages(fixtureConfig);
+
+  const nextRoot = path.resolve(__dirname, '..');
+
+  const { status, stderr } = spawnSync(
+    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next build`,
+    [],
+    {
+      shell: true,
+      env: { ...process.env, FORCE_EXTRACT_REACT_TYPES: true },
+      cwd: nextRoot,
+    },
+  );
+
+  if (status !== 0) {
+    throw new Error(stderr.toString());
+  }
 };
 
 describe('Website generation integration tests', () => {

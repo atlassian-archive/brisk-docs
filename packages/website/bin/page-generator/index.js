@@ -22,7 +22,7 @@ const packagesData = [];
  * @param generatorConfig info about the locations of important directories used for page generation
  * @returns a sitemap of all the pages created
  */
-function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
+function generatePackagePages(packageInfo, generatorConfig) {
   const packageSitemap = packageInfo.map(pkg => {
     const pageData = { id: pkg.id, packageName: pkg.name };
     const homePageData = {
@@ -76,14 +76,9 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
       const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
       const isolatedPath = path.join('/', `${rawPagesPath}`);
 
-      const exampleModulePath = bundlesInfo.find(
-        bundle => bundle.source === example.path,
-      ).dest;
-
       generateExamplePage(
         `${pagePath}.js`,
         `${rawPagesPath}.js`,
-        exampleModulePath,
         example.path,
         { ...pageData, isolatedPath },
         generatorConfig,
@@ -194,17 +189,13 @@ module.exports = async function generatePages(
   docsPath,
   pagesPath,
   componentsPath,
-  bundlesPath,
   options = {},
 ) {
   cleanPages(pagesPath);
 
-  const { packages: packageInfo, externalSources } = getPackageInfo(
-    packagesPaths,
-    {
-      useManifests: options.useManifests,
-    },
-  );
+  const packageInfo = getPackageInfo(packagesPaths, {
+    useManifests: options.useManifests,
+  });
   const docsInfo = getDocsInfo(docsPath);
 
   const generatorConfig = {
@@ -212,19 +203,7 @@ module.exports = async function generatePages(
     wrappersPath: componentsPath,
   };
 
-  const { bundles, run: buildExternalModules } = getExternalModuleBuilder(
-    externalSources,
-    bundlesPath,
-    options.webpackConfiguration,
-  );
-
-  await buildExternalModules();
-
-  const packageSitemap = generatePackagePages(
-    packageInfo,
-    bundles,
-    generatorConfig,
-  );
+  const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
   const docsSitemap = generateProjectDocsPages(docsInfo, generatorConfig);
 
   return {

@@ -97,7 +97,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
 
   const { useManifests } = { ...defaultOptions, ...options };
 
-  const packagesInfo = getAllDirectories(packagesPatterns)
+  return getAllDirectories(packagesPatterns)
     .map(pkgPath => {
       const pkgId = path.basename(pkgPath);
 
@@ -140,14 +140,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         docsPaths,
       };
 
-      const externalSources = examplesPaths.map(example => example.path);
-
-      return { packageData, externalSources };
+      return packageData;
     })
     .filter(_ => _);
-
-  const packages = packagesInfo.map(p => p.packageData);
-  const externalSources = flatMap(packagesInfo, p => p.externalSources);
-
-  return { packages, externalSources };
 };
