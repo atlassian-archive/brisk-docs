@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import GitUrlParse from 'git-url-parse';
 
 import { colors } from '@atlaskit/theme';

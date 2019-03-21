@@ -5,7 +5,7 @@ rm -rf ../deploy/website
 mkdir ../deploy/website
 
 # Build
-cd .. && yarn build
+cd .. && bolt build
 
 cp package.json deploy/website
 cp yarn.lock deploy/website
@@ -14,7 +14,7 @@ cp -r website/.next deploy/website
 cp -r website/static deploy/website
 
 cd deploy/website
-yarn
+bolt
 
 cd ..
 docker build -t docker.atl-paas.net/atlassian/jira-frontend-docs-test:0.0.1 .

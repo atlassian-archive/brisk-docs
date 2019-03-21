@@ -9,6 +9,9 @@ import {
 } from '@atlaskit/navigation-next';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+
 import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';

@@ -1,6 +1,7 @@
 module.exports = {
   presets: ['next/babel', '@babel/typescript'],
   plugins: [
+    'emotion',
     [
       'styled-components',
       {

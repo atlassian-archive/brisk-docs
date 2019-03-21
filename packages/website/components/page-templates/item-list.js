@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 import Table from '@atlaskit/dynamic-table';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Link from 'next/link';
 import { gridSize } from '@atlaskit/theme';
 import titleCase from 'title-case';
