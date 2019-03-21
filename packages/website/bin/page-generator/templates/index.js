@@ -52,7 +52,7 @@ const exampleTemplate = (
   title = '',
 ) => outdent`
     import Component from '${componentPath}';
-    import fileContents from '!!raw-loader!${wrapperPath}';
+    import fileContents from '!!raw-loader!${componentPath}';
 
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'

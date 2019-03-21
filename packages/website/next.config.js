@@ -2,8 +2,14 @@ const webpack = require('webpack');
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
 });
-const path = require('path');
 const withCSS = require('@zeit/next-css');
+
+const handleConfig = require('./bin/handle-config');
+
+const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
+const cwd = process.env.DOCS_WEBSITE_CWD;
+
+const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 
 module.exports = withCSS(
   withMDX({
@@ -11,21 +17,13 @@ module.exports = withCSS(
     webpack(config) {
       // eslint-disable-next-line no-param-reassign
       config.externals = [];
-      // Need to apply next.js webpack to jira-frontend src modules
-      config.module.rules.forEach(
-        rule =>
-          rule.include &&
-          rule.include.push(path.join(__dirname, `../packages`)),
-      );
 
       // Adding items to globalScope in the website
       config.plugins.push(
         new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),
       );
 
-      // Needed to make sure jira-frontend src alias are found by webpack
-      config.resolve.modules.push(path.join(__dirname, `../packages`));
-      return config;
+      return clientWebpack(config);
     },
   }),
 );
