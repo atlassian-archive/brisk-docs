@@ -49,7 +49,7 @@ switch (mainOptions.command) {
     break;
   }
   case 'start': {
-    preNextScripts().then(() => spawnNextProcess('start'));
+    spawnNextProcess('start');
     break;
   }
   default:
