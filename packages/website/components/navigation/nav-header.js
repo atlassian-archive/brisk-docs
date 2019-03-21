@@ -7,6 +7,9 @@ import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 import * as PropTypes from 'prop-types';
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+
 const gridSize = gridSizeFn();
 
 const NavHeader = ({ headerText }) => (
