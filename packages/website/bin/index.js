@@ -21,15 +21,15 @@ if (mainOptions.command === undefined) {
 
 switch (mainOptions.command) {
   case 'dev': {
-    dev(options.config);
+    dev(options.config).catch(process.exit(1));
     break;
   }
   case 'build': {
-    build(options.config);
+    build(options.config).catch(process.exit(1));
     break;
   }
   case 'start': {
-    start(options.config);
+    start(options.config).catch(process.exit(1));
     break;
   }
   default:
