@@ -17,7 +17,9 @@ const spawnNextProcess = (command, websiteConfigPath, args = '') => {
       env: {
         ...process.env,
         FORCE_EXTRACT_REACT_TYPES: true,
-        DOCS_WEBSITE_CONFIG_PATH: websiteConfigPath,
+        ...(websiteConfigPath
+          ? { DOCS_WEBSITE_CONFIG_PATH: websiteConfigPath }
+          : {}),
         DOCS_WEBSITE_CWD: cwd,
       },
       cwd: nextRoot,
