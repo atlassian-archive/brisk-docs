@@ -2,39 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { copyFixtureIntoTempDir, createTempDir } from 'jest-fixtures';
 
-import mockCreateBuilder from './build-externals';
 import generatePages from './index';
-
-jest.mock('./build-externals');
-
-// TODO: refactor this test suite so such a messy mock is no longer needed
-const mockModuleBuilder = packagesCwd => {
-  const createMockBundle = (packageName, exampleName) => ({
-    source: path.join(
-      packagesCwd,
-      'packages',
-      packageName,
-      'examples',
-      exampleName,
-    ),
-    dest: 'bundles/mp1-example1.js',
-  });
-
-  mockCreateBuilder.mockImplementation(() => ({
-    run: () => Promise.resolve(),
-    bundles: [
-      createMockBundle('mock-package1', 'example1.js'),
-      createMockBundle('mock-package1', 'example2.js'),
-      createMockBundle('mock-package1', 'example3.js'),
-      createMockBundle('mock-package2', 'example1.js'),
-      createMockBundle('mock-package2', 'example2.js'),
-      createMockBundle('mock-package2', 'example3.js'),
-      createMockBundle('mock-package3', 'example1.js'),
-      createMockBundle('mock-package3', 'example2.js'),
-      createMockBundle('mock-package3', 'example3.js'),
-    ],
-  }));
-};
 
 describe('Generate pages', () => {
   let packagesPaths;
@@ -53,16 +21,12 @@ describe('Generate pages', () => {
     const docsPath = path.join(docsCwd, 'docs');
     pagesPath = await createTempDir();
     const componentsPath = await createTempDir();
-    const bundlesPath = await createTempDir();
-
-    mockModuleBuilder(packagesCwd);
 
     sitemap = await generatePages(
       packagesPaths,
       docsPath,
       pagesPath,
       componentsPath,
-      bundlesPath,
     );
   });
 
@@ -305,7 +269,6 @@ describe('File modification tests', () => {
   let docsPath;
   let pagesPath;
   let componentsPath;
-  let bundlesPath;
 
   beforeEach(async () => {
     const packagesCwd = await copyFixtureIntoTempDir(
@@ -314,13 +277,10 @@ describe('File modification tests', () => {
     );
     const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
 
-    mockModuleBuilder(packagesCwd);
-
     packagesPath = path.join(packagesCwd, 'packages');
     docsPath = path.join(docsCwd, 'docs');
     pagesPath = await createTempDir();
     componentsPath = await createTempDir();
-    bundlesPath = await createTempDir();
   });
 
   it('should remove files from package docs pages that are removed from disc on rerun', async () => {
@@ -336,7 +296,6 @@ describe('File modification tests', () => {
       docsPath,
       pagesPath,
       componentsPath,
-      bundlesPath,
     );
 
     expect(fs.existsSync(firstDocsPage)).toEqual(true);
@@ -349,7 +308,6 @@ describe('File modification tests', () => {
       docsPath,
       pagesPath,
       componentsPath,
-      bundlesPath,
     );
 
     expect(fs.existsSync(firstDocsPage)).toEqual(false);
@@ -357,13 +315,7 @@ describe('File modification tests', () => {
 
   it('should remove files from docs pages that are removed from disc on rerun', async () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
-    await generatePages(
-      packagesPath,
-      docsPath,
-      pagesPath,
-      componentsPath,
-      bundlesPath,
-    );
+    await generatePages(packagesPath, docsPath, pagesPath, componentsPath);
     expect(fs.existsSync(firstDocsPage)).toEqual(true);
 
     fs.unlinkSync(path.join(docsPath, 'doc-1.md'));
@@ -371,7 +323,6 @@ describe('File modification tests', () => {
       [path.join(packagesPath, '/*')],
       docsPath,
       pagesPath,
-      bundlesPath,
       componentsPath,
     );
 

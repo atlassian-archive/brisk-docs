@@ -7,9 +7,9 @@ const generatePages = require('./generate-pages');
 const cwd = process.cwd();
 const nextRoot = path.resolve(__dirname, '..');
 
-const spawnNextProcess = (command, websiteConfigPath) => {
+const spawnNextProcess = (command, websiteConfigPath, args = '') => {
   const { status } = spawnSync(
-    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command}`,
+    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command} ${args}`,
     [],
     {
       stdio: 'inherit',
@@ -44,5 +44,10 @@ const build = async configPath => {
   spawnNextProcess('build', configPath);
 };
 
+const start = async configPath => {
+  spawnNextProcess('start', configPath, '-p 8080');
+};
+
 module.exports.dev = dev;
 module.exports.build = build;
+module.exports.start = start;

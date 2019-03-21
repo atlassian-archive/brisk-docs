@@ -17,7 +17,7 @@
         "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
         "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
         "docs": "node packages/website/bin/index.js dev",
-        "start": "bolt w @brisk-docs/website run start -p 8080",
+        "start": "bolt w @brisk-docs/website run start",
         "prettier": "prettier --write \"**/*.js\"",
         "lint:prettier": "prettier --list-different \"**/*.js\"",
         "lint:eslint": "yarn eslint .",

@@ -4,7 +4,6 @@ const rimraf = require('rimraf');
 const titleCase = require('title-case');
 const getPackageInfo = require('./get-package-info');
 const getDocsInfo = require('./get-docs-info');
-const getExternalModuleBuilder = require('./build-externals');
 const {
   generateHomePage,
   generatePackageDocPage,

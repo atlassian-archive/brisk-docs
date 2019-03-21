@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const commandLineArgs = require('command-line-args');
 
-const { dev, build } = require('./run-website');
+const { dev, build, start } = require('./run-website');
 
 const mainDefinitions = [{ name: 'command', defaultOption: true }];
 const mainOptions = commandLineArgs(mainDefinitions, {
@@ -26,6 +26,10 @@ switch (mainOptions.command) {
   }
   case 'build': {
     build(options.config);
+    break;
+  }
+  case 'start': {
+    start(options.config);
     break;
   }
   default:
