@@ -1,22 +1,19 @@
 #!/bin/sh
 
-# Clean website directory
-rm -rf ../deploy/website
-mkdir ../deploy/website
-
 # Build
-cd .. && bolt build
+(cd .. && bolt build:docs)
 
-cp package.json deploy/website
-cp yarn.lock deploy/website
+# Copy files
+cp ../packages/website/package.json ../deploy
+cp ../yarn.lock ../deploy
 
-cp -r website/.next deploy/website
-cp -r website/static deploy/website
+cp -r ../packages/website/.next ../deploy
+cp -r ../packages/website/static ../deploy
 
-cd deploy/website
-bolt
+# Install dependencies
+cd ../deploy && yarn
 
-cd ..
+# Deploy
 docker build -t docker.atl-paas.net/atlassian/jira-frontend-docs-test:0.0.1 .
 docker push docker.atl-paas.net/atlassian/jira-frontend-docs-test:0.0.1
 micros service:deploy jira-frontend-docs-test -f jira-frontend-docs-test.sd.yml

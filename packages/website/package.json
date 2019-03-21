@@ -10,7 +10,7 @@
     "dev:webpack": "node bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
     "build:site": "node bin/index.js build --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node bin/index.js start --config=dummy-data/simple-project/docs.config.js"
+    "start": "next start -p 8080"
   },
   "bin": {
     "brisk": "bin/index.js"
