@@ -46,6 +46,15 @@
     "@atlaskit/tooltip" "^12.1.15"
     "@babel/runtime" "^7.0.0"
 
+"@atlaskit/banner@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/banner/-/banner-8.0.1.tgz#448236637c850405382e20edbc6011a83bba0535"
+  integrity sha512-S5PGH7T4HEURb7+pCbF2/gqJVMB+iD01+VZkHk/lNnFdL+z+hyduQmz3AhaxOxvD05CM9lav7jdBL62zCU41Xg==
+  dependencies:
+    "@atlaskit/theme" "^8.0.1"
+    "@babel/runtime" "^7.0.0"
+    babel-runtime "^6.26.0"
+
 "@atlaskit/blanket@^7.0.12":
   version "7.0.12"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/blanket/-/blanket-7.0.12.tgz#1f48f74310463e785774dada9f8c8c07150e4b89"
@@ -406,6 +415,15 @@
 "@atlaskit/theme@^7.0.1":
   version "7.0.4"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/theme/-/theme-7.0.4.tgz#4f9a7568633a7e18bdcc121627e32916ee9ada66"
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+
+"@atlaskit/theme@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-8.0.1.tgz#aa474bed386963203d5e384806fe1a5cf732a533"
+  integrity sha512-3u4SmjP0+E5sRft264/DgHVxafmmDRvJ9JY6rAoCRLIB0i6DmFiQGW4dgZm1HRMlk3WX93aTY1WV0dGIWfxHIw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
