@@ -9,6 +9,8 @@ const handleConfig = require('./bin/handle-config');
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
 const cwd = process.env.DOCS_WEBSITE_CWD || process.cwd();
 
+console.log(process.env);
+
 const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 
 module.exports = withCSS(
