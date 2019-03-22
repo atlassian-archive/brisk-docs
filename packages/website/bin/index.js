@@ -19,17 +19,22 @@ if (mainOptions.command === undefined) {
   throw new Error(`No command supplied`);
 }
 
+const handleError = err => {
+  console.error(err);
+  process.exit(1);
+};
+
 switch (mainOptions.command) {
   case 'dev': {
-    dev(options.config);
+    dev(options.config).catch(handleError);
     break;
   }
   case 'build': {
-    build(options.config);
+    build(options.config).catch(handleError);
     break;
   }
   case 'start': {
-    start(options.config);
+    start(options.config).catch(handleError);
     break;
   }
   default:

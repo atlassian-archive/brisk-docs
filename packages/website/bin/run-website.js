@@ -8,6 +8,14 @@ const cwd = process.cwd();
 const nextRoot = path.resolve(__dirname, '..');
 
 const spawnNextProcess = (command, websiteConfigPath, args = '') => {
+  const envVariables = {
+    FORCE_EXTRACT_REACT_TYPES: true,
+    DOCS_WEBSITE_CWD: cwd,
+  };
+  if (websiteConfigPath) {
+    envVariables.DOCS_WEBSITE_CONFIG_PATH = websiteConfigPath;
+  }
+
   const { status } = spawnSync(
     `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command} ${args}`,
     [],
@@ -16,9 +24,7 @@ const spawnNextProcess = (command, websiteConfigPath, args = '') => {
       shell: true,
       env: {
         ...process.env,
-        FORCE_EXTRACT_REACT_TYPES: true,
-        DOCS_WEBSITE_CONFIG_PATH: websiteConfigPath,
-        DOCS_WEBSITE_CWD: cwd,
+        ...envVariables,
       },
       cwd: nextRoot,
     },
