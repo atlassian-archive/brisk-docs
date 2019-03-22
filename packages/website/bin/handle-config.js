@@ -1,6 +1,6 @@
 const path = require('path');
 const fse = require('fs-extra');
-const identity = require('lodash.identity');
+const identityFunc = require('lodash.identity');
 
 /**
  * Validates a config entry specifying a path or paths and normalises
@@ -25,7 +25,7 @@ const defaultConfig = {
   docs: './docs',
   packages: ['./packages/*'],
   useManifests: false,
-  webpack: identity,
+  webpack: identityFunc,
 };
 
 /**
