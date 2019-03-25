@@ -56,10 +56,6 @@ module.exports = async ({
   fse.writeFileSync(
     metaPath,
 
-    JSON.stringify(
-      { siteName, testString: 'pls remove this in the future' },
-      undefined,
-      2,
-    ),
+    JSON.stringify({ siteName }, undefined, 2),
   );
 };

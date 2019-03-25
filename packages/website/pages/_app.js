@@ -3,8 +3,7 @@ import App, { Container } from 'next/app';
 import '@atlaskit/css-reset';
 import { MDXProvider } from '@mdx-js/tag';
 import components from '../components/mdx';
-import Meta from '../components/meta-context';
-import metadata from '../data/site-meta.json';
+import Meta, { metadata } from '../components/meta-context';
 import Title from '../components/page-title';
 
 export default class MyApp extends App {
