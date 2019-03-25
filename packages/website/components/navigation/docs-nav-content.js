@@ -37,6 +37,7 @@ const docsToTreeItems = (docsPages, { parentId, parentTitle }) => ({
     }
 
     return {
+      ...acc,
       [id]: {
         id,
         children: [],
