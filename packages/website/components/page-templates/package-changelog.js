@@ -1,5 +1,6 @@
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import SectionMessage from '@atlaskit/section-message';
 
 import Wrapper from '../content-style-wrapper';
 import NavigationWrapper from '../navigation-wrapper';
@@ -10,6 +11,13 @@ const Heading = styled.h1`
   padding-bottom: 32px;
 `;
 
+export const MissingChangelog = () => (
+  <SectionMessage appearance="warning">
+    This package does not have a Changelog yet. Add one to easily keep track of
+    versions and changes made.
+  </SectionMessage>
+);
+
 const PackageChangelog = ({ data, children }) => {
   return (
     <NavigationWrapper
@@ -19,7 +27,7 @@ const PackageChangelog = ({ data, children }) => {
     >
       <Wrapper>
         <Heading>Changelog</Heading>
-        <Changelog changelog={children} />
+        {children ? <Changelog changelog={children} /> : <MissingChangelog />}
       </Wrapper>
     </NavigationWrapper>
   );
@@ -30,7 +38,7 @@ PackageChangelog.propTypes = {
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default PackageChangelog;
