@@ -79,7 +79,7 @@ describe('Get package info utility', () => {
     assertDocs(packageInfo[2], 'mock-package3');
   });
 
-  it('finds the paths of all the examples', async () => {
+  it('finds the paths of all files in the examples folder', async () => {
     const assertExamples = (pkgInfo, pkgName) => {
       expect(pkgInfo.examplesPaths).toEqual([
         {
@@ -138,10 +138,16 @@ describe('Get package info utility', () => {
     const mp2ExamplePath = path.join(packagesPath, 'mock-package2', 'examples');
     const mp3ExamplePath = path.join(packagesPath, 'mock-package3', 'examples');
 
+    const srcPackagePath = path.join(packagesPath, 'mock-package1', 'src');
     expect(externalSources).toEqual([
       path.join(mp1ExamplePath, 'example1.js'),
       path.join(mp1ExamplePath, 'example2.js'),
       path.join(mp1ExamplePath, 'example3.js'),
+
+      path.join(srcPackagePath, 'examples.js'),
+      path.join(srcPackagePath, 'test-examples', 'examples.js'),
+      path.join(srcPackagePath, 'view', 'examples.js'),
+      path.join(srcPackagePath, 'view', 'sub-dir', 'examples.js'),
 
       path.join(mp2ExamplePath, 'example1.js'),
       path.join(mp2ExamplePath, 'example2.js'),
@@ -151,5 +157,60 @@ describe('Get package info utility', () => {
       path.join(mp3ExamplePath, 'example2.js'),
       path.join(mp3ExamplePath, 'example3.js'),
     ]);
+  });
+
+  it('finds the paths of all the examples in a package', async () => {
+    const assertSubExamples = (pkgInfo, pkgName) => {
+      expect(pkgInfo.subExamplesPaths).toEqual([
+        {
+          id: '/src',
+          path: path.join(cwd, 'packages', pkgName, 'src', 'examples.js'),
+        },
+        {
+          id: '/src/test-examples',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'test-examples',
+            'examples.js',
+          ),
+        },
+        {
+          id: '/src/view',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'view',
+            'examples.js',
+          ),
+        },
+        {
+          id: '/src/view/sub-dir',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'view',
+            'sub-dir',
+            'examples.js',
+          ),
+        },
+      ]);
+    };
+
+    assertSubExamples(packageInfo[0], 'mock-package1');
+  });
+
+  it('hides the other examples according to the showExamples config', async () => {
+    const { packages: packageInfoNoSubExamples } = getPackageInfo(
+      [path.join(cwd, 'packages', 'mock-package1')],
+      { showExamples: false },
+    );
+    expect(packageInfoNoSubExamples[0].subExamplesPaths).toEqual([]);
   });
 });
