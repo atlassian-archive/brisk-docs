@@ -99,9 +99,17 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
     });
 
     const subExamples = pkg.subExamplesPaths.map(example => {
-      const pagePath = path.join(homePath, `subExamples/${example.id}`, 'examples');
+      const pagePath = path.join(
+        homePath,
+        `subExamples/${example.id}`,
+        'examples',
+      );
 
-      const rawPagesPath = path.join(homePath, `subExamples/${example.id}/isolated`, 'examples');
+      const rawPagesPath = path.join(
+        homePath,
+        `subExamples/${example.id}/isolated`,
+        'examples',
+      );
       const isolatedPath = path.join('/', `${rawPagesPath}`);
 
       const exampleModulePath = bundlesInfo.find(
@@ -134,21 +142,22 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
      * @param subExample each item in subExample
      */
     const processSubExamples = (folders, children, subExample) => {
-      const [folder, ...rest]= folders;
+      const [folder, ...rest] = folders;
       const requiresFurtherNesting = !!rest.length;
 
-      let addToFolder = children.find((child) => child.id === folder);
+      let addToFolder = children.find(child => child.id === folder);
       if (!addToFolder) {
         children.push({
           id: folder,
           children: [],
         });
-        addToFolder = children.find((child) => child.id === folder)
+        addToFolder = children.find(child => child.id === folder);
       }
 
       if (requiresFurtherNesting) {
-        processSubExamples(rest, addToFolder.children, subExample)
-      } else { // When it reach the last element add it as a plain object and delete the [] children array.
+        processSubExamples(rest, addToFolder.children, subExample);
+      } else {
+        // When it reach the last element add it as a plain object and delete the [] children array.
         addToFolder.pagePath = subExample.pagePath;
         addToFolder.isolatedPath = subExample.isolatedPath;
         delete addToFolder.children;
@@ -159,12 +168,12 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
      * Recursively scans through the top level sub examples and generate a tree structure
      * @returns array like sub examples structure
      */
-    const formatSubExamples = () =>{
+    const formatSubExamples = () => {
       const formatted = [];
-      for (const subExample of subExamples) {
+      subExamples.forEach(subExample => {
         const folders = subExample.id.split('/').filter(Boolean);
         processSubExamples(folders, formatted, subExample);
-      }
+      });
 
       return formatted;
     };
@@ -176,7 +185,7 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
       examplePath: path.join('/', examplePath),
       docs,
       examples,
-      subExamples: formatSubExamples()
+      subExamples: formatSubExamples(),
     };
   });
   return packageSitemap;
@@ -260,6 +269,7 @@ module.exports = async function generatePages(
     packagesPaths,
     {
       useManifests: options.useManifests,
+      showExamples: options.showExamples,
     },
   );
   const docsInfo = getDocsInfo(docsPath);

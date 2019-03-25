@@ -118,9 +118,10 @@ const getManifestDefinition = pkgPath => {
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
   const defaultOptions = {
     useManifests: false,
+    showExamples: true,
   };
 
-  const { useManifests } = { ...defaultOptions, ...options };
+  const { useManifests, showExamples } = { ...defaultOptions, ...options };
 
   const packagesInfo = getAllDirectories(packagesPatterns)
     .map(pkgPath => {
@@ -151,10 +152,15 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       const docsPaths = getFilesInDir(docsDirPath).filter(({ path: docPath }) =>
         isDoc(docPath),
       );
-      const subExamples = getSubExamplesPaths(`${pkgPath}/**/examples.js`);
 
-      // here we need only the examples not in main examples in examplesPaths
-      const subExamplesPaths = getFormattedExamples(subExamples, pkgPath).filter((example) => example.id !== '/examples');
+      let subExamplesPaths = [];
+      if (showExamples) {
+        const subExamples = getSubExamplesPaths(`${pkgPath}/**/examples.js`);
+        // here we need only the examples not in main examples in examplesPaths
+        subExamplesPaths = getFormattedExamples(subExamples, pkgPath).filter(
+          example => example.id !== '/examples',
+        );
+      }
 
       const packageData = {
         id: pkgId,
@@ -167,10 +173,12 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         readmePath,
         examplesPaths,
         docsPaths,
-        subExamplesPaths
+        subExamplesPaths,
       };
 
-      const externalSources = examplesPaths.map(example => example.path).concat(subExamplesPaths.map(sub => sub.path));
+      const externalSources = examplesPaths
+        .map(example => example.path)
+        .concat(subExamplesPaths.map(sub => sub.path));
 
       return { packageData, externalSources };
     })

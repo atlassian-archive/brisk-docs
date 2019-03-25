@@ -1,29 +1,27 @@
-import {
-  Item,
-} from '@atlaskit/navigation-next';
+import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
 import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 
 // Flatten the nested page structure into an object that ak/tree understands
-const docsToTreeItems = (subExamples, { parentId, parentTitle }) => ({
+const arrayToTreeItems = (arrayItems, { parentId, parentTitle }) => ({
   [parentId]: {
     id: parentId,
     hasChildren: true,
     isExpanded: true,
-    children: subExamples.map(sub => `${parentId}/${sub.id}`),
+    children: arrayItems.map(sub => `${parentId}/${sub.id}`),
     data: {
       title: parentTitle,
     },
   },
-  ...subExamples.reduce((acc, sub) => {
+  ...arrayItems.reduce((acc, sub) => {
     const id = `${parentId}/${sub.id}`;
 
     if (sub.children) {
       return {
         ...acc,
-        ...docsToTreeItems(sub.children, {
+        ...arrayToTreeItems(sub.children, {
           parentId: id,
           parentTitle: sub.id,
         }),
@@ -76,27 +74,16 @@ renderTreeItem.propTypes = {
   }).isRequired,
 };
 
-const SubExampleNavContent = ({ subExamples }) => {
-  const treeData = {
-    rootId: 'subExamples',
-    items: docsToTreeItems(subExamples, {
-      parentId: 'subExamples',
-      parentTitle: 'sub examples',
-    }),
-  };
+const TreeNavContent = ({ treeData }) => (
+  <Tree tree={treeData} renderItem={renderTreeItem} />
+);
 
-  return (
-    <Tree tree={treeData} renderItem={renderTreeItem} />
-  );
+TreeNavContent.propTypes = {
+  treeData: PropTypes.shape({
+    rootId: PropTypes.string.isRequired,
+    items: PropTypes.object.isRequired,
+  }),
 };
 
-SubExampleNavContent.propTypes = {
-  subExamples: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string,
-    }),
-  ).isRequired,
-};
-
-export default SubExampleNavContent;
+export { arrayToTreeItems };
+export default TreeNavContent;
