@@ -43,7 +43,6 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
     );
 
     const changelogPath = path.join(homePath, 'changelog');
-    console.log(changelogPath);
     generateChangelogPage(
       path.join(changelogPath, 'index.js'),
       pkg.changelogPath,

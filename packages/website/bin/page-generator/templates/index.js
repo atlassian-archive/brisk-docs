@@ -213,7 +213,6 @@ const generateChangelogPage = (
   config,
   title = '',
 ) => {
-  // generateBasicPage(pagePath, changelogPath, data, 'package-changelog', config, title);
   const componentPath = changelogPath;
   const wrapperName = 'package-changelog';
   const { wrappersPath, pagesPath } = config;
