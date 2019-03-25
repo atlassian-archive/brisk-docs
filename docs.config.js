@@ -18,7 +18,6 @@ const webpack = config => {
 };
 
 module.exports = () => ({
-  useManifests: false,
   webpack,
   siteName: 'Brisk Docs Docs',
 });
