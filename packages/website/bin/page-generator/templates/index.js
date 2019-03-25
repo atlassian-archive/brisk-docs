@@ -19,9 +19,9 @@ const basicPageTemplate = (
     return outdent`
       import Wrapper from '${wrapperPath}';
       import PageTitle from '${pageTitlePath}'
-      
+
       export default () => (
-       <> 
+       <>
           <PageTitle title='${title}' />
           <Wrapper data={${JSON.stringify(data)}} />
        </>
@@ -33,9 +33,9 @@ const basicPageTemplate = (
     import Component from '${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
-    
+
     export default () => (
-     <> 
+     <>
         <PageTitle title='${title}' />
             <Wrapper data={${JSON.stringify(data)}}>
                 <Component />
@@ -84,18 +84,17 @@ const changelogTemplate = (
 const exampleTemplate = (
   componentPath,
   wrapperPath,
-  sourcePath,
   data = {},
   title = '',
 ) => outdent`
     import Component from '${componentPath}';
-    import fileContents from '!!raw-loader!${sourcePath}';
+    import fileContents from '!!raw-loader!${componentPath}';
 
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
-    
+
     export default () => (
-        <> 
+        <>
             <PageTitle title='${title}' />
             <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
                 <Component />
@@ -118,9 +117,9 @@ const basicNonComponentTemplate = (
 ) => outdent`
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
-    
+
     export default () => (
-        <> 
+        <>
            <PageTitle title='${title}' />
            <Wrapper data={${JSON.stringify(data)}} type='${type}' />
         </>
@@ -252,7 +251,6 @@ const generateExamplePage = (
   pagePath,
   rawPagesPath,
   exampleModulePath,
-  sourceCodePath,
   data,
   config,
   title = '',
@@ -269,18 +267,9 @@ const generateExamplePage = (
     wrapperName,
   );
 
-  const absolutePagePath = path.resolve(pagesPath, pagePath);
-  const relativeSourcePath = getImportPath(absolutePagePath, sourceCodePath);
-
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(
-      componentImportPath,
-      packageHomeWrapperPath,
-      relativeSourcePath,
-      data,
-      title,
-    ),
+    exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
   );
 
   writeFile(

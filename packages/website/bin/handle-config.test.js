@@ -11,7 +11,7 @@ describe('website configuration processor', () => {
       packagesPaths: ['/c/w/d/packages/*'],
       docsPath: '/c/w/d/docs',
       useManifests: false,
-      webpackConfiguration: expect.anything(),
+      webpack: expect.any(Function),
     });
   });
 
@@ -42,6 +42,13 @@ describe('website configuration processor', () => {
     const config = processConfig(mockCwd, { useManifests: true });
 
     expect(config.useManifests).toEqual(true);
+  });
+
+  it('accepts a webpack function', () => {
+    const dummyWebpack = _ => _;
+
+    const config = processConfig(mockCwd, { webpack: dummyWebpack });
+    expect(config.webpack).toBe(dummyWebpack);
   });
 });
 

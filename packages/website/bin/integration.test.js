@@ -1,29 +1,35 @@
-import generatePages from './generate-pages';
-import { processConfig } from './handle-config';
+import path from 'path';
 
-import customWebpackConfig from '../__fixtures__/custom-webpack-project/docs.config';
-import typescriptConfig from '../__fixtures__/typescript-project/docs.config';
-import customBabelConfig from '../__fixtures__/custom-babel-project/docs.config';
+import { build } from './run-website';
 
-const buildWebsiteFromFixture = async config => {
-  const fixtureConfig = processConfig(process.cwd(), config);
+import { fixturesPath } from '../__fixtures__';
 
-  await generatePages(fixtureConfig);
-};
+const customWebpackConfig = path.join(
+  fixturesPath,
+  'custom-webpack-project/docs.config',
+);
+const typescriptConfig = path.join(
+  fixturesPath,
+  'typescript-project/docs.config',
+);
+const customBabelConfig = path.join(
+  fixturesPath,
+  'custom-babel-project/docs.config',
+);
 
 describe('Website generation integration tests', () => {
   it('can build a project with a custom Webpack configuration', () => {
     // assert that the website builds without error
-    return buildWebsiteFromFixture(customWebpackConfig());
+    return build(customWebpackConfig);
   });
 
   it('can build a project that uses TypeScript', () => {
     // assert that the website builds without error
-    return buildWebsiteFromFixture(typescriptConfig());
+    return build(typescriptConfig);
   });
 
   it('can build a project that uses a special Babel config', () => {
     // assert that the website builds without error
-    return buildWebsiteFromFixture(customBabelConfig());
+    return build(customBabelConfig);
   });
 });
