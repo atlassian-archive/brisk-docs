@@ -11,6 +11,7 @@ describe('website configuration processor', () => {
       packagesPaths: ['/c/w/d/packages/*'],
       docsPath: '/c/w/d/docs',
       useManifests: false,
+      siteName: 'Brisk Docs',
       webpack: expect.any(Function),
     });
   });
