@@ -2,7 +2,7 @@
 // Disable eslint warning for green build
 // TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/themes/prism-tomorrow.css';

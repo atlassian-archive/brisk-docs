@@ -29,6 +29,7 @@ const arrayToTreeItems = (arrayItems, { parentId, parentTitle }) => ({
     }
 
     return {
+      ...acc,
       [id]: {
         id,
         children: [],

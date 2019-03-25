@@ -10,7 +10,7 @@
     "dev:webpack": "node bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
     "build:site": "node bin/index.js build --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node bin/index.js start --config=dummy-data/simple-project/docs.config.js"
+    "start": "node bin/index.js start"
   },
   "bin": {
     "brisk": "bin/index.js"
@@ -32,10 +32,12 @@
     "@atlaskit/theme": "^6.0.0",
     "@atlaskit/tree": "^4.1.11",
     "@atlaskit/width-detector": "^0.3.1",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@emotion/core": "^10.0.9",
+    "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
     "@mdx-js/mdx": "^0.17.5",
     "@mdx-js/tag": "^0.17.5",
@@ -45,7 +47,6 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "bolt": "^0.22.6",
     "command-line-args": "^5.0.2",
-    "emotion": "^9.0.1",
     "emotion-server": "^9.2.12",
     "express": "^4.16.4",
     "extract-react-types-loader": "^0.3.0",
@@ -56,6 +57,7 @@
     "lodash.capitalize": "^4.2.1",
     "lodash.debounce": "^4.0.8",
     "lodash.flatmap": "^4.5.0",
+    "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
     "next": "^7.0.2",
     "outdent": "^0.7.0",
@@ -63,16 +65,18 @@
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
     "raw-loader": "^1.0.0",
-    "react": "^16.7.0",
+    "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.4",
     "rimraf": "^2.6.3",
     "styled-components": "^3.2.6",
     "title-case": "^2.1.1",
     "webpack": "^4.29.6"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme-adapter-react-16": "^1.9.1",
+    "ts-loader": "^5.3.3"
   }
 }

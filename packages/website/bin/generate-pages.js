@@ -23,14 +23,12 @@ module.exports = async ({
     packageRoot,
     './components/page-templates',
   );
-  const bundlesPath = path.resolve(packageRoot, './bundles');
 
   const pagesList = await generatePages(
     packagesPaths,
     docsPath,
     pagesPath,
     componentsPath,
-    bundlesPath,
     {
       useManifests,
       webpackConfiguration,

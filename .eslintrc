@@ -7,7 +7,9 @@
         "prettier/react",
         "plugin:jest/recommended"
     ],
+    "plugins": ["emotion"],
     "rules": {
+        "emotion/jsx-import": "error",
         "react/jsx-filename-extension": "off",
         "react/react-in-jsx-scope": "off",
         "react/require-default-props": "off",

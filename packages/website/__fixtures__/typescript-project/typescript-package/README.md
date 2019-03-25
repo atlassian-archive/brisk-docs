@@ -1,0 +1,1 @@
+This is a project written in typescript that is bundled with webpack

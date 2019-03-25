@@ -1,6 +1,7 @@
 import * as PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
+import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
 
 import NavigationWrapper from '../navigation-wrapper';
@@ -48,25 +49,38 @@ Header.propTypes = {
   heading: PropTypes.string.isRequired,
 };
 
-const PackageHome = ({ data, children }) => (
-  <NavigationWrapper
-    navContent={() => (
-      <PackageNavContent packageId={data.id} packageName={data.packageName} />
-    )}
-  >
-    <Wrapper>
-      <Header id={data.id} heading={titleCase(data.packageName)} />
-      <Description>{data.description}</Description>
-      <PackageMetaData
-        id={data.id}
-        version={data.version}
-        maintainers={data.maintainers}
-        repository={data.repository}
-      />
-      {children}
-    </Wrapper>
-  </NavigationWrapper>
+const MissingReadmeWarning = () => (
+  <SectionMessage appearance="warning">
+    This package does not have a README yet. Add one to include more detailed
+    documentation, or even consider using MDX for interactive, richer docs.
+  </SectionMessage>
 );
+
+const PackageHome = ({ data, children }) => {
+  return (
+    <NavigationWrapper
+      navContent={() => (
+        <PackageNavContent packageId={data.id} packageName={data.packageName} />
+      )}
+    >
+      <Wrapper>
+        <Header id={data.id} heading={titleCase(data.packageName)} />
+        <Description>{data.description}</Description>
+        <PackageMetaData
+          id={data.id}
+          version={data.version}
+          maintainers={data.maintainers}
+          repository={data.repository}
+        />
+        {children || process.env.NODE_ENV !== 'development' ? (
+          children
+        ) : (
+          <MissingReadmeWarning />
+        )}
+      </Wrapper>
+    </NavigationWrapper>
+  );
+};
 
 PackageHome.propTypes = {
   data: PropTypes.shape({
@@ -80,7 +94,7 @@ PackageHome.propTypes = {
       directory: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default PackageHome;

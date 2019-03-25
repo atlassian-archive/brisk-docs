@@ -1,5 +1,6 @@
 const path = require('path');
 const fse = require('fs-extra');
+const identityFunc = require('lodash.identity');
 
 /**
  * Validates a config entry specifying a path or paths and normalises
@@ -20,29 +21,11 @@ const resolvePathsConfig = entry => {
   throw new Error('entry must be an array or a string');
 };
 
-const defaultWebpackConfig = {
-  mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
-    ],
-  },
-};
-
 const defaultConfig = {
   docs: './docs',
   packages: ['./packages/*'],
   useManifests: false,
-  webpackConfiguration: defaultWebpackConfig,
+  webpack: identityFunc,
   showExamples: true,
 };
 
@@ -62,13 +45,13 @@ const processConfig = (cwd, providedConfig = {}) => {
     path.resolve(cwd, packagesPath),
   );
 
-  const { useManifests, webpackConfiguration, showExamples } = config;
+  const { useManifests, webpack, showExamples } = config;
 
   return {
     docsPath,
     packagesPaths,
     useManifests,
-    webpackConfiguration,
+    webpack,
     showExamples,
   };
 };
