@@ -49,7 +49,7 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
       pkg.changelogPath,
       pageData,
       generatorConfig,
-      'Changelog'
+      'Changelog',
     );
 
     const docPath = path.join(homePath, 'docs');

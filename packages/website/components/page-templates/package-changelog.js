@@ -25,7 +25,6 @@ const PackageChangelog = ({ data, children }) => {
   );
 };
 
-
 PackageChangelog.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,

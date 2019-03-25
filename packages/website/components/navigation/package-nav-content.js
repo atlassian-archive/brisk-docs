@@ -21,7 +21,13 @@ GetLink.propTypes = {
   pagePath: PropTypes.string.isRequired,
 };
 
-const NavContent = ({ packageName, homePath, changelogPath, docs, examples }) => (
+const NavContent = ({
+  packageName,
+  homePath,
+  changelogPath,
+  docs,
+  examples,
+}) => (
   <>
     <NavHeader headerText={packageName} />
     <MenuSection id="package-section" parentId="index-section">

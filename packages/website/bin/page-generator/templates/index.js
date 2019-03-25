@@ -206,7 +206,13 @@ const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
 };
 
-const generateChangelogPage = (pagePath, changelogPath, data, config, title = '') => {
+const generateChangelogPage = (
+  pagePath,
+  changelogPath,
+  data,
+  config,
+  title = '',
+) => {
   // generateBasicPage(pagePath, changelogPath, data, 'package-changelog', config, title);
   const componentPath = changelogPath;
   const wrapperName = 'package-changelog';
