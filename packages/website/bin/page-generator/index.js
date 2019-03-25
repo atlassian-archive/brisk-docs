@@ -7,6 +7,7 @@ const getDocsInfo = require('./get-docs-info');
 const getExternalModuleBuilder = require('./build-externals');
 const {
   generateHomePage,
+  generateChangelogPage,
   generatePackageDocPage,
   generateExamplePage,
   generateDocsHomePage,
@@ -39,6 +40,16 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
       { ...pageData, ...homePageData },
       generatorConfig,
       titleCase(pkg.id),
+    );
+
+    const changelogPath = path.join(homePath, 'changelog');
+    console.log(changelogPath);
+    generateChangelogPage(
+      path.join(changelogPath, 'index.js'),
+      pkg.changelogPath,
+      pageData,
+      generatorConfig,
+      'Changelog'
     );
 
     const docPath = path.join(homePath, 'docs');
@@ -100,6 +111,7 @@ function generatePackagePages(packageInfo, bundlesInfo, generatorConfig) {
     return {
       packageId: pkg.id,
       homePath: path.join('/', homePath),
+      changelogPath: path.join('/', changelogPath),
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),
       docs,

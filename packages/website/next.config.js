@@ -11,6 +11,15 @@ module.exports = withCSS(
     webpack(config) {
       // eslint-disable-next-line no-param-reassign
       config.externals = [];
+
+      config.module.rules.push({
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      });
+
       // Need to apply next.js webpack to jira-frontend src modules
       config.module.rules.forEach(
         rule =>
@@ -25,6 +34,8 @@ module.exports = withCSS(
 
       // Needed to make sure jira-frontend src alias are found by webpack
       config.resolve.modules.push(path.join(__dirname, `../packages`));
+
+      config.resolve.extensions.push('.tsx', '.ts');
       return config;
     },
   }),
