@@ -1,0 +1,1 @@
+- Remove bundling of external examples using a separate config. Instead consumers should modify the website webpack config using the webpack hook.
