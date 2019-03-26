@@ -104,7 +104,7 @@ function generatePackagePages(packageInfo, generatorConfig) {
     return {
       packageId: pkg.id,
       homePath: path.join('/', homePath),
-      changelogPath: path.join('/', changelogPath),
+      changelogPath: pkg.changelogPath ? path.join('/', changelogPath) : null,
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),
       docs,

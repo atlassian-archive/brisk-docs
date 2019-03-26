@@ -41,8 +41,13 @@ const NavContent = ({
           <Separator />
           <LinkWithRouter text="Home" href={homePath} />
           <Separator />
-          <LinkWithRouter text="Changelog" href={changelogPath} />
-          <Separator />
+          {changelogPath && (
+              <>
+                <LinkWithRouter text="Changelog" href={changelogPath} />
+                <Separator />
+              </>
+            )
+          }
           <Group heading="Docs" id="docs-group" hasSeparator>
             {docs.map(GetLink)}
           </Group>
@@ -58,7 +63,7 @@ const NavContent = ({
 NavContent.propTypes = {
   homePath: PropTypes.string.isRequired,
   packageName: PropTypes.string.isRequired,
-  changelogPath: PropTypes.string.isRequired,
+  changelogPath: PropTypes.string,
   docs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
