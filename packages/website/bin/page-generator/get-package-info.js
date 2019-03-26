@@ -118,10 +118,10 @@ const getManifestDefinition = pkgPath => {
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
   const defaultOptions = {
     useManifests: false,
-    showExamples: true,
+    showSubExamples: false,
   };
 
-  const { useManifests, showExamples } = { ...defaultOptions, ...options };
+  const { useManifests, showSubExamples } = { ...defaultOptions, ...options };
 
   return getAllDirectories(packagesPatterns)
     .map(pkgPath => {
@@ -154,7 +154,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       );
 
       let subExamplesPaths = [];
-      if (showExamples) {
+      if (showSubExamples) {
         const subExamples = getSubExamplesPaths(`${pkgPath}/**/examples.js`);
         // here we need only the examples not in main examples in examplesPaths
         subExamplesPaths = getFormattedExamples(subExamples, pkgPath).filter(

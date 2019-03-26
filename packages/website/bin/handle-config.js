@@ -26,7 +26,7 @@ const defaultConfig = {
   packages: ['./packages/*'],
   useManifests: false,
   webpack: identityFunc,
-  showExamples: true,
+  showSubExamples: false,
 };
 
 /**
@@ -45,14 +45,14 @@ const processConfig = (cwd, providedConfig = {}) => {
     path.resolve(cwd, packagesPath),
   );
 
-  const { useManifests, webpack, showExamples } = config;
+  const { useManifests, webpack, showSubExamples } = config;
 
   return {
     docsPath,
     packagesPaths,
     useManifests,
     webpack,
-    showExamples,
+    showSubExamples,
   };
 };
 

@@ -27,7 +27,7 @@ describe('Generate pages', () => {
       docsPath,
       pagesPath,
       componentsPath,
-      { showExamples: true },
+      { showSubExamples: true },
     );
   });
 

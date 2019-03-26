@@ -12,7 +12,7 @@ describe('website configuration processor', () => {
       docsPath: '/c/w/d/docs',
       useManifests: false,
       webpack: expect.any(Function),
-      showExamples: true,
+      showSubExamples: false,
     });
   });
 

@@ -270,7 +270,7 @@ module.exports = async function generatePages(
 
   const packageInfo = getPackageInfo(packagesPaths, {
     useManifests: options.useManifests,
-    showExamples: options.showExamples,
+    showSubExamples: options.showSubExamples,
   });
   const docsInfo = getDocsInfo(docsPath);
 

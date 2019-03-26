@@ -129,7 +129,11 @@ describe('Get package info utility', () => {
     ]);
   });
 
-  it('finds the paths of all the examples in a package', async () => {
+  it('finds the paths of all the sub examples in a package', async () => {
+    const packageInfoNoSubExamples = getPackageInfo(
+      [path.join(cwd, 'packages', 'mock-package1')],
+      { showSubExamples: true },
+    );
     const assertSubExamples = (pkgInfo, pkgName) => {
       expect(pkgInfo.subExamplesPaths).toEqual([
         {
@@ -173,15 +177,15 @@ describe('Get package info utility', () => {
       ]);
     };
 
-    assertSubExamples(packageInfo[0], 'mock-package1');
+    assertSubExamples(packageInfoNoSubExamples[0], 'mock-package1');
   });
 
-  it('hides the other examples according to the showExamples config', async () => {
-    const packageInfoNoSubExamples = getPackageInfo(
-      [path.join(cwd, 'packages', 'mock-package1')],
-      { showExamples: false },
-    );
+  it('hides the other examples according to the showSubExamples config', async () => {
+    // const packageInfoNoSubExamples = getPackageInfo(
+    //   [path.join(cwd, 'packages', 'mock-package1')],
+    //   { showSubExamples: false },
+    // );
 
-    expect(packageInfoNoSubExamples[0].subExamplesPaths).toEqual([]);
+    expect(packageInfo[0].subExamplesPaths).toEqual([]);
   });
 });

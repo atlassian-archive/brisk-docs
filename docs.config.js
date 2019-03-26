@@ -20,5 +20,5 @@ const webpack = config => {
 module.exports = () => ({
   webpack,
   siteName: 'Brisk Docs Docs',
-  showExamples: true,
+  showSubExamples: true,
 });
