@@ -1,3 +1,4 @@
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import Table from '@atlaskit/dynamic-table';
 import styled from '@emotion/styled';

@@ -1,3 +1,4 @@
+import React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
