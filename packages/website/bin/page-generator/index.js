@@ -101,10 +101,15 @@ function generatePackagePages(packageInfo, generatorConfig) {
       };
     });
 
+    const env = process.env.NODE_ENV || 'development';
+
     return {
       packageId: pkg.id,
       homePath: path.join('/', homePath),
-      changelogPath: pkg.changelogPath ? path.join('/', changelogPath) : null,
+      changelogPath:
+        pkg.changelogPath || env === 'development'
+          ? path.join('/', changelogPath)
+          : null,
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),
       docs,

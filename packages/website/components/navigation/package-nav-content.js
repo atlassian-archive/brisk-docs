@@ -42,12 +42,11 @@ const NavContent = ({
           <LinkWithRouter text="Home" href={homePath} />
           <Separator />
           {changelogPath && (
-              <>
-                <LinkWithRouter text="Changelog" href={changelogPath} />
-                <Separator />
-              </>
-            )
-          }
+            <>
+              <LinkWithRouter text="Changelog" href={changelogPath} />
+              <Separator />
+            </>
+          )}
           <Group heading="Docs" id="docs-group" hasSeparator>
             {docs.map(GetLink)}
           </Group>
