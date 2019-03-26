@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   BackItem,
   MenuSection,
@@ -37,6 +39,7 @@ const docsToTreeItems = (docsPages, { parentId, parentTitle }) => ({
     }
 
     return {
+      ...acc,
       [id]: {
         id,
         children: [],

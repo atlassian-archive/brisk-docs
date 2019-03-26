@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DocumentsIcon from '@atlaskit/icon/glyph/documents';
 import SearchIcon from '@atlaskit/icon/glyph/search';
