@@ -9,6 +9,7 @@ import WidthDetector from '@atlaskit/width-detector';
 
 import { Section } from '../components/page';
 import Panel, { PanelGrid } from '../components/panel';
+import Meta from '../components/meta-context';
 
 const WINDOW_BREAKPOINT = 800;
 
@@ -27,15 +28,6 @@ const Heading = styled.h1`
   color: white;
   font-size: 52px;
   margin-top: ${math.multiply(gridSize, 10)}px !important;
-  text-align: center;
-`;
-
-const SubHeading = styled.h3`
-  color: white;
-  max-width: 800px;
-  margin: 28px auto;
-  font-size: 24px;
-  font-weight: 400;
   text-align: center;
 `;
 
@@ -71,16 +63,14 @@ class HomePage extends React.Component {
 
   render() {
     const { displayAsColumn } = this.state;
-
     return (
       <WidthDetector onResize={this.debouncedDetect}>
         {() => (
           <Page>
-            <Heading>Jira Frontend Documentation</Heading>
-            <SubHeading>
-              This is the home of documentation for Jira Frontend packages and
-              relevant usage guidelines.
-            </SubHeading>
+            <Meta.Consumer>
+              {context => <Heading>{context.siteName}</Heading>}
+            </Meta.Consumer>
+
             <Section>
               <PanelGrid displayAsColumn={displayAsColumn}>
                 <Panel href="/packages" {...this.packagesPanelProps} />
