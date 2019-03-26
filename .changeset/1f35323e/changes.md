@@ -1,0 +1,1 @@
+- Complete examples page generation in the package filesystem structure
