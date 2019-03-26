@@ -20,5 +20,7 @@
     "strict": true,
     "strictFunctionTypes": true,
   },
-  "files": ["packages/react-changelogs/*"]
+  "include": [
+    "packages/react-changelogs/src/**/*"
+  ],
 }

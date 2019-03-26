@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactMarkdown from 'react-markdown';
+import * as ReactMarkdown from 'react-markdown';
 import styled, { css } from "styled-components";
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
 import filterChangelog from "../utils/filter-changelog";
@@ -83,52 +83,51 @@ export type Props = {
     packageName?: string;
 };
 
-export default class Changelog extends React.Component<Props> {
-    props: Props; // eslint-disable-line react/sort-comp
-     static defaultProps  = {
-        getUrl: (): null => null
-    };
+const Changelog = (props: Props) => {
+    const { changelog, getUrl, range, packageName } = props;
+    const logs = divideChangelog(changelog);
+    const filteredLogs = filterChangelog(logs, range);
 
-    render() {
-        const { changelog, getUrl, range, packageName } = this.props;
-        const logs = divideChangelog(changelog);
-        const filteredLogs = filterChangelog(logs, range);
+    let currentMajor = '0';
 
-        let currentMajor = '0';
+    return (
+        <div>
+            {!filteredLogs.length ? (
+                <NoMatch>No matching versions &mdash; please try again.</NoMatch>
+            ) : (
+                filteredLogs.map((v, i) => {
+                    const major = v.version.substr(0, 1);
+                    const majorHasChanged = currentMajor !== major;
+                    currentMajor = major;
+                    const href = getUrl(v.version);
 
-        return (
-            <div>
-                {!filteredLogs.length ? (
-                    <NoMatch>No matching versions &mdash; please try again.</NoMatch>
-                ) : (
-                    filteredLogs.map((v, i) => {
-                        const major = v.version.substr(0, 1);
-                        const majorHasChanged = currentMajor !== major;
-                        currentMajor = major;
-                        const href = getUrl(v.version);
+                    return (
+                        /* eslint-disable react/no-array-index-key */
+                        <LogItem key={`${v.version}-${i}`} major={majorHasChanged}>
+                            <ReactMarkdown
+                                escapeHtml
+                                source={v.md}
+                                renderers={{
+                                    Heading: headerProps => (
+                                        <Heading
+                                            packageName={packageName}
+                                            href={href}
+                                            {...headerProps}
+                                        />
+                                    ),
+                                }}
+                            />
+                        </LogItem>
 
-                        return (
-                            /* eslint-disable react/no-array-index-key */
-                            <LogItem key={`${v.version}-${i}`} major={majorHasChanged}>
-                                <ReactMarkdown
-                                    escapeHtml
-                                    source={v.md}
-                                    renderers={{
-                                        Heading: props => (
-                                            <Heading
-                                                packageName={packageName}
-                                                href={href}
-                                                {...props}
-                                            />
-                                        ),
-                                    }}
-                                />
-                            </LogItem>
-
-                        );
-                    })
-                )}
-            </div>
-        );
-    }
+                    );
+                })
+            )}
+        </div>
+    );
 }
+
+Changelog.defaultProps = {
+    getUrl: (): null => null
+};
+
+export default Changelog
