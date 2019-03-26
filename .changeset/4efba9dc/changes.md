@@ -1,0 +1,1 @@
+- Remove support for using JSX without importing React in the website.
