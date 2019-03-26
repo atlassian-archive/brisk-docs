@@ -1,6 +1,6 @@
 const path = require('path');
 const fse = require('fs-extra');
-const identityFunc = require('lodash.identity');
+const defaultConfig = require('./default-config');
 
 /**
  * Validates a config entry specifying a path or paths and normalises
@@ -21,13 +21,6 @@ const resolvePathsConfig = entry => {
   throw new Error('entry must be an array or a string');
 };
 
-const defaultConfig = {
-  docs: './docs',
-  packages: ['./packages/*'],
-  useManifests: false,
-  webpack: identityFunc,
-};
-
 /**
  * Reads a user supplied config file, validates the contents, and
  * reformats it in a normalised way
@@ -37,20 +30,18 @@ const defaultConfig = {
  */
 const processConfig = (cwd, providedConfig = {}) => {
   const config = { ...defaultConfig, ...providedConfig };
-  const docsPath = path.resolve(cwd, config.docs);
+  const { docs, packages, ...rest } = config;
+  const docsPath = path.resolve(cwd, docs);
 
-  const packagesConfig = resolvePathsConfig(config.packages);
+  const packagesConfig = resolvePathsConfig(packages);
   const packagesPaths = packagesConfig.map(packagesPath =>
     path.resolve(cwd, packagesPath),
   );
 
-  const { useManifests, webpack } = config;
-
   return {
     docsPath,
     packagesPaths,
-    useManifests,
-    webpack,
+    ...rest,
   };
 };
 

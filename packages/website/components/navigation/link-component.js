@@ -1,6 +1,6 @@
 // Component that can be used as the component prop in nav items
 
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import * as PropTypes from 'prop-types';
 

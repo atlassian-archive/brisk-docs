@@ -2,8 +2,16 @@ const path = require('path');
 
 const webpack = config => {
   config.module.rules.push({
-    test: new RegExp(`${__dirname}/.*\\.tsx$`),
-    loader: 'babel-loader!ts-loader',
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          root: __dirname,
+        },
+      },
+      'ts-loader',
+    ],
   });
 
   return config;
