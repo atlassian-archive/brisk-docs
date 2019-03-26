@@ -22,6 +22,9 @@ const AllPackagesNavContent = ({ data }) => (
     <HeaderSection>
       {({ css }) => (
         <div
+          // This works because navigation-next is importing
+          // an old version of emotion. It also prevents us from
+          // using the jsx import from @emotion/core
           // eslint-disable-next-line emotion/jsx-import
           css={{
             ...css,
