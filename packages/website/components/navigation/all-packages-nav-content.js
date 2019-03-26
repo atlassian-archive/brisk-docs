@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ContainerHeader,
   HeaderSection,
@@ -8,9 +9,6 @@ import {
   Group,
 } from '@atlaskit/navigation-next';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
-
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 
 import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
@@ -24,6 +22,7 @@ const AllPackagesNavContent = ({ data }) => (
     <HeaderSection>
       {({ css }) => (
         <div
+          // eslint-disable-next-line emotion/jsx-import
           css={{
             ...css,
             paddingTop: `${gridSize * 2.5}px`,

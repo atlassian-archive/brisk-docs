@@ -89,7 +89,6 @@ const PackageMetaData = ({ id, version, maintainers, repository }) => (
           <p style={{ margin: '0' }}>{maintainers.join(', ')}</p>
         </MetaDataEntry>
       )}
-
       <RepositoryLink repository={repository} />
     </MetaDataWrapper>
   </div>
