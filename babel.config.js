@@ -4,5 +4,20 @@ module.exports = {
     '@babel/preset-react',
     '@babel/preset-typescript',
   ],
-  plugins: [['@babel/plugin-proposal-class-properties']],
+  plugins: [
+    'emotion',
+    [
+      'styled-components',
+      {
+        ssr: true,
+        displayName: true,
+        preprocess: false,
+      },
+    ],
+    'transform-flow-strip-types',
+    '@babel/proposal-class-properties',
+    '@babel/proposal-object-rest-spread',
+    '@babel/transform-runtime',
+    'transform-dynamic-import',
+  ],
 };

@@ -17,6 +17,7 @@ const basicPageTemplate = (
 ) => {
   if (!componentPath) {
     return outdent`
+      import React from 'react';
       import Wrapper from '${wrapperPath}';
       import PageTitle from '${pageTitlePath}'
 
@@ -30,6 +31,7 @@ const basicPageTemplate = (
   }
 
   return outdent`
+    import React from 'react';
     import Component from '${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
@@ -87,6 +89,7 @@ const exampleTemplate = (
   data = {},
   title = '',
 ) => outdent`
+    import React from 'react';
     import Component from '${componentPath}';
     import fileContents from '!!raw-loader!${componentPath}';
 
@@ -104,6 +107,7 @@ const exampleTemplate = (
 `;
 
 const rawTemplate = componentPath => outdent`
+import React from 'react';
 import Component from '${componentPath}'
 
 export default () => <Component />
@@ -115,6 +119,7 @@ const basicNonComponentTemplate = (
   type,
   title = '',
 ) => outdent`
+    import React from 'react';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
 

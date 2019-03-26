@@ -1,3 +1,4 @@
+import React from 'react';
 import DynamicTable from '@atlaskit/dynamic-table';
 import { caption, head, rows } from './content/sample-data';
 

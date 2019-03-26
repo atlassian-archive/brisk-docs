@@ -1,3 +1,4 @@
+import React from 'react';
 import { shallow, mount } from 'enzyme';
 import titleCase from 'title-case';
 import PackageHomeWrapper, { Description } from './package-home';
