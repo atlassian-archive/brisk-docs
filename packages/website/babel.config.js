@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['next/babel', '@babel/typescript'],
+  presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript'],
   plugins: [
     'emotion',
     [
@@ -13,5 +13,6 @@ module.exports = {
     'transform-flow-strip-types',
     '@babel/proposal-class-properties',
     '@babel/proposal-object-rest-spread',
+    '@babel/transform-runtime',
   ],
 };

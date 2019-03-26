@@ -1,3 +1,4 @@
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import DocsNavContent from '../navigation/docs-nav-content';
