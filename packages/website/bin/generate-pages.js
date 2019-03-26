@@ -17,6 +17,7 @@ module.exports = async ({
   useManifests,
   webpackConfiguration,
   showSubExamples,
+  siteName,
 }) => {
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
@@ -39,6 +40,7 @@ module.exports = async ({
 
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
+  const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
 
   fse.ensureFileSync(pagesListPath);
   fse.writeFileSync(
@@ -52,5 +54,10 @@ module.exports = async ({
     packagesDataPath,
 
     JSON.stringify({ metaData }, undefined, 2),
+  );
+  fse.writeFileSync(
+    metaPath,
+
+    JSON.stringify({ siteName }, undefined, 2),
   );
 };

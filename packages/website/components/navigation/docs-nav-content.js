@@ -1,3 +1,4 @@
+import React from 'react';
 import { BackItem, MenuSection, Separator } from '@atlaskit/navigation-next';
 import pageInfo from '../../pages-list';
 import LinkComponent from './link-component';

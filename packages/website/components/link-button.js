@@ -6,6 +6,7 @@ Passes all props other than component directly into `@atlaskit/button`.
 See the [@atlaskit/button](https://atlaskit.atlassian.com/packages/core/button) docs for
 the options available to you.
 */
+import React from 'react';
 
 import Button from '@atlaskit/button';
 import Link from 'next/link';

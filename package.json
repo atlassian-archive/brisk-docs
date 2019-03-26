@@ -6,7 +6,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "bolt w @brisk-docs/website run jest",
+        "test": "jest",
         "cypress": "node_modules/.bin/cypress run",
         "build": "bolt ws run build",
         "dev:website": "bolt w @brisk-docs/website run dev",

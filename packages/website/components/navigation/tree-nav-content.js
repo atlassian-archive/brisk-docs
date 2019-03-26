@@ -1,3 +1,4 @@
+import React from 'react';
 import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
 import * as PropTypes from 'prop-types';

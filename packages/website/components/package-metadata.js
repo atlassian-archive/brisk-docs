@@ -1,3 +1,4 @@
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import GitUrlParse from 'git-url-parse';
@@ -88,7 +89,6 @@ const PackageMetaData = ({ id, version, maintainers, repository }) => (
           <p style={{ margin: '0' }}>{maintainers.join(', ')}</p>
         </MetaDataEntry>
       )}
-
       <RepositoryLink repository={repository} />
     </MetaDataWrapper>
   </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
 import { Item } from '@atlaskit/navigation-next';

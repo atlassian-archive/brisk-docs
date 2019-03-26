@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 
 type FriendsInfo = {
   /* Name of the person who is asking for a new friend */
