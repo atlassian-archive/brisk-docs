@@ -1,3 +1,4 @@
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SectionMessage from '@atlaskit/section-message';
