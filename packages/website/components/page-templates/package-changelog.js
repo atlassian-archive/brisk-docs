@@ -27,7 +27,7 @@ const PackageChangelog = ({ data, children }) => {
     >
       <Wrapper>
         <Heading>Changelog</Heading>
-        {children ? <Changelog changelog={children} /> : <MissingChangelog />}
+        {children ? <Changelog changelog={children} maxItems={20} /> : <MissingChangelog />}
       </Wrapper>
     </NavigationWrapper>
   );
