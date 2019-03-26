@@ -1,3 +1,4 @@
+import React from 'react';
 import { mount } from 'enzyme';
 import PackageChangelog, { MissingChangelog } from './package-changelog';
 import Changelog from '../../../react-changelogs/src/components/changelog';
