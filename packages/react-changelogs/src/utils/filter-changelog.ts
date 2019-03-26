@@ -1,5 +1,5 @@
 import * as semver from 'semver';
-import {Logs} from '../types/changeLog';
+import { Logs } from '../types/changeLog';
 
 const filterChangelog = (rawLogs: Logs, range?: string): Logs => {
     return range

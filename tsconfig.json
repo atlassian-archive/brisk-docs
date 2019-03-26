@@ -1,6 +1,24 @@
 {
   "compilerOptions": {
-    "jsx": "preserve"
+    "allowJs": false,
+    "alwaysStrict": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": true,
   },
   "files": ["packages/react-changelogs/*"]
 }

@@ -36,7 +36,7 @@ const Heading = ({
     const versionNumber = version[1];
     const versionDate = version[2];
     const anchorProps = {
-        href: href ? href : "" ,
+        href: href || "",
         rel: 'noopener noreferrer',
         style: { fontWeight: 500 },
         target: '_blank',
@@ -86,7 +86,7 @@ export type Props = {
 export default class Changelog extends React.Component<Props> {
     props: Props; // eslint-disable-line react/sort-comp
      static defaultProps  = {
-        getUrl: () => null
+        getUrl: (): null => null
     };
 
     render() {
