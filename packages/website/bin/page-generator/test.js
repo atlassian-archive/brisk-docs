@@ -27,7 +27,6 @@ describe('Generate pages', () => {
       docsPath,
       pagesPath,
       componentsPath,
-      { showSubExamples: true },
     );
   });
 
@@ -197,27 +196,6 @@ describe('Generate pages', () => {
           '/packages/mock-package3/examples',
         );
       });
-
-      it('gets all examples in the package structure other than in examples folder', () => {
-        expect(packagesSitemap[0].subExamples[0].id).toEqual('src');
-        expect(packagesSitemap[0].subExamples[0].children[0].id).toEqual(
-          'examples',
-        );
-
-        // nested examples
-        expect(packagesSitemap[0].subExamples[0].children[1].id).toEqual(
-          'test-examples',
-        );
-        expect(
-          packagesSitemap[0].subExamples[0].children[1].children[0].id,
-        ).toEqual('examples');
-        expect(packagesSitemap[0].subExamples[0].children[2].id).toEqual(
-          'view',
-        );
-        expect(
-          packagesSitemap[0].subExamples[0].children[2].children[1].id,
-        ).toEqual('sub-dir');
-      });
     });
   });
 
@@ -282,6 +260,55 @@ describe('Generate pages', () => {
       expect(metaDataInfo[0].id).toEqual('mock-package1');
       expect(metaDataInfo[1].id).toEqual('mock-package2');
       expect(metaDataInfo[2].id).toEqual('mock-package3');
+    });
+  });
+
+  describe('Sub examples page generation test', () => {
+    let subExampleSitemap;
+    beforeAll(async () => {
+      const packagesCwd = await copyFixtureIntoTempDir(
+        __dirname,
+        'mock-package-with-sub-examples',
+      );
+
+      const docsCwd = await copyFixtureIntoTempDir(
+        __dirname,
+        'simple-mock-docs',
+      );
+
+      packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
+      const docsPath = path.join(docsCwd, 'docs');
+      pagesPath = await createTempDir();
+      const componentsPath = await createTempDir();
+
+      subExampleSitemap = await generatePages(
+        packagesPaths,
+        docsPath,
+        pagesPath,
+        componentsPath,
+        { showSubExamples: true },
+      );
+    });
+
+    it('gets all examples in the package structure other than in examples folder', () => {
+      expect(subExampleSitemap.packages[0].subExamples[0].id).toEqual('src');
+      expect(
+        subExampleSitemap.packages[0].subExamples[0].children[0].id,
+      ).toEqual('examples');
+
+      // nested examples
+      expect(
+        subExampleSitemap.packages[0].subExamples[0].children[1].id,
+      ).toEqual('test-examples');
+      expect(
+        subExampleSitemap.packages[0].subExamples[0].children[1].children[0].id,
+      ).toEqual('examples');
+      expect(
+        subExampleSitemap.packages[0].subExamples[0].children[2].id,
+      ).toEqual('view');
+      expect(
+        subExampleSitemap.packages[0].subExamples[0].children[2].children[1].id,
+      ).toEqual('sub-dir');
     });
   });
 });
