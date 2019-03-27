@@ -55,10 +55,10 @@ export default class SetChangelogEntriesPerPage extends React.Component {
   state = { entriesPerPage: 20 };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({entriesPerPage: event.target.value});
+    this.setState({ entriesPerPage: event.target.value });
   };
 
-  render () {
+  render() {
     const { entriesPerPage } = this.state;
     return (
       <div>
@@ -70,8 +70,12 @@ export default class SetChangelogEntriesPerPage extends React.Component {
             value={entriesPerPage}
           />
         </FieldWrapper>
-        <Changelog changelog={data} getUrl={() => null} entriesPerPage={entriesPerPage}/>
+        <Changelog
+          changelog={data}
+          getUrl={() => null}
+          entriesPerPage={entriesPerPage}
+        />
       </div>
-    )
+    );
   }
 }
