@@ -13,6 +13,7 @@ import LinkWithRouter from './link-with-router';
 import LinkComponent from './link-component';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
+import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
 const GetLink = ({ id, pagePath }) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
@@ -23,12 +24,31 @@ GetLink.propTypes = {
   pagePath: PropTypes.string.isRequired,
 };
 
+const renderSubExamplesTree = subExamples => {
+  const treeData = {
+    rootId: 'subExamples',
+    items: arrayToTreeItems(subExamples, {
+      parentId: 'subExamples',
+      parentTitle: 'sub examples',
+    }),
+  };
+  return (
+    <>
+      <Separator />
+      <Group heading="Sub Examples" id="sub-group">
+        <TreeNavContent treeData={treeData} />
+      </Group>
+    </>
+  );
+};
+
 const NavContent = ({
   packageName,
   homePath,
   changelogPath,
   docs,
   examples,
+  subExamples,
 }) => (
   <>
     <NavHeader headerText={packageName} />
@@ -55,6 +75,9 @@ const NavContent = ({
           <Group heading="Examples" id="examples-group">
             {examples.map(GetLink)}
           </Group>
+          {subExamples && subExamples.length > 0
+            ? renderSubExamplesTree(subExamples)
+            : null}
         </div>
       )}
     </MenuSection>
@@ -77,6 +100,13 @@ NavContent.propTypes = {
       pagePath: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  subExamples: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      pagePath: PropTypes.string,
+      isolatedPath: PropTypes.string,
+    }),
+  ),
 };
 
 const PackageNavContent = ({ packageId, packageName }) => {
@@ -91,6 +121,7 @@ const PackageNavContent = ({ packageId, packageName }) => {
       changelogPath={packagePages.changelogPath}
       docs={packagePages.docs}
       examples={packagePages.examples}
+      subExamples={packagePages.subExamples}
     />
   );
 };

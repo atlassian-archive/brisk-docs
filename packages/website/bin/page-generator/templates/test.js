@@ -8,6 +8,15 @@ const assertImportsReact = source => {
   expect(source).toMatch(/^import React from 'react';$/m);
 };
 
+const assertNoAbsoluteImports = source => {
+  expect(source).not.toMatch(/^import .+ from '\/.+'/m);
+};
+
+const assertValidTemplate = source => {
+  assertImportsReact(source);
+  assertNoAbsoluteImports(source);
+};
+
 describe('Page generators', () => {
   let cwd;
   let pagesPath;
@@ -34,7 +43,7 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
   });
 
   it('creates js for a package doc page', () => {
@@ -47,7 +56,7 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
   });
 
   it('creates js for a package example pages', () => {
@@ -63,9 +72,9 @@ describe('Page generators', () => {
 
     const outputRaw = getOutput('output-raw.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
 
-    assertImportsReact(outputRaw);
+    assertValidTemplate(outputRaw);
   });
 
   it('creates js for a docs home page', () => {
@@ -77,7 +86,7 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
   });
 
   it('creates js for an examples home page', () => {
@@ -89,7 +98,7 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
   });
 
   it('creates js for project doc page', () => {
@@ -102,6 +111,19 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertImportsReact(output);
+    assertValidTemplate(output);
+  });
+
+  it('creates js for a changelog page', () => {
+    generators.generateChangelogPage(
+      'output.js',
+      path.join(cwd, 'changelog.md'),
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    const output = getOutput('output.js');
+
+    assertValidTemplate(output);
   });
 });

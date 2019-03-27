@@ -76,7 +76,7 @@ describe('Get package info utility', () => {
     assertDocs(packageInfo[2], 'mock-package3');
   });
 
-  it('finds the paths of all the examples', async () => {
+  it('finds the paths of all files in the examples folder', async () => {
     const assertExamples = (pkgInfo, pkgName) => {
       expect(pkgInfo.examplesPaths).toEqual([
         {
@@ -127,5 +127,72 @@ describe('Get package info utility', () => {
       'cdebourgh',
       'wcollins',
     ]);
+  });
+
+  it('hides the other examples according to the showSubExamples config', async () => {
+    expect(packageInfo[0].subExamplesPaths).toEqual([]);
+  });
+});
+
+describe('Test the sub examples package', () => {
+  let cwd;
+  let packageInfo;
+
+  beforeAll(async () => {
+    cwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-package-with-sub-examples',
+    );
+    packageInfo = getPackageInfo(
+      [path.join(cwd, 'packages', 'mock-package1')],
+      { showSubExamples: true },
+    );
+  });
+
+  it('finds the paths of all the sub examples in a package', async () => {
+    const assertSubExamples = (pkgInfo, pkgName) => {
+      expect(pkgInfo.subExamplesPaths).toEqual([
+        {
+          id: '/src',
+          path: path.join(cwd, 'packages', pkgName, 'src', 'examples.js'),
+        },
+        {
+          id: '/src/test-examples',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'test-examples',
+            'examples.js',
+          ),
+        },
+        {
+          id: '/src/view',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'view',
+            'examples.js',
+          ),
+        },
+        {
+          id: '/src/view/sub-dir',
+          path: path.join(
+            cwd,
+            'packages',
+            pkgName,
+            'src',
+            'view',
+            'sub-dir',
+            'examples.js',
+          ),
+        },
+      ]);
+    };
+
+    assertSubExamples(packageInfo[0], 'mock-package1');
   });
 });
