@@ -47,6 +47,7 @@
         "@atlaskit/icon": "^16.0.1",
         "@atlaskit/logo": "^9.1.0",
         "@atlaskit/navigation-next": "^4.1.2",
+        "@atlaskit/pagination": "^10.0.1",
         "@atlaskit/quick-search": "^5.2.5",
         "@atlaskit/section-message": "^1.0.17",
         "@atlaskit/table-tree": "^5.0.7",

@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled, { css } from "styled-components";
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
+import Pagination from '@atlaskit/pagination';
 import filterChangelog from "../utils/filter-changelog";
 import divideChangelog from "../utils/divide-changelog";
 
@@ -64,6 +65,11 @@ const LogItem = styled.div`
         : null};
 `;
 
+const PaginationContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
 export const NoMatch = styled.div`
   align-items: center;
   background-color: ${colors.N20};
@@ -81,18 +87,40 @@ export type Props = {
     range?: string;
     getUrl: (version: string) => string | null;
     packageName?: string;
+    entriesPerPage?: number;
 };
 
 export default class Changelog extends React.Component<Props> {
     props: Props; // eslint-disable-line react/sort-comp
-     static defaultProps  = {
+
+    state = {
+        currentPage: 1,
+    };
+
+    static defaultProps  = {
         getUrl: () => null
     };
 
+    handlePageChange = (e, newPage: any) => {
+        this.setState({ currentPage: newPage })
+    };
+
     render() {
-        const { changelog, getUrl, range, packageName } = this.props;
+        const { changelog, getUrl, range, packageName, entriesPerPage } = this.props;
         const logs = divideChangelog(changelog);
-        const filteredLogs = filterChangelog(logs, range);
+        let filteredLogs = filterChangelog(logs, range);
+        let pages: number[] = [];
+
+        if (entriesPerPage) {
+            const numPages = Math.ceil(filteredLogs.length / entriesPerPage);
+            pages = Array.from({ length: numPages }, (v, i) => i + 1);
+            const { currentPage } = this.state;
+
+            filteredLogs = filteredLogs.filter((v, i) => (
+                i >= ((currentPage - 1) * entriesPerPage) &&
+                i < (currentPage * entriesPerPage))
+            )
+        }
 
         let currentMajor = '0';
 
@@ -124,10 +152,15 @@ export default class Changelog extends React.Component<Props> {
                                     }}
                                 />
                             </LogItem>
-
                         );
                     })
                 )}
+                {entriesPerPage && (
+                      <PaginationContainer>
+                          <Pagination pages={pages} onChange={this.handlePageChange}/>
+                      </PaginationContainer>
+                    )
+                }
             </div>
         );
     }
