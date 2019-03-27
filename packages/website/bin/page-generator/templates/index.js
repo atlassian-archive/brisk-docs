@@ -55,6 +55,7 @@ const changelogTemplate = (
 ) => {
   if (!componentPath) {
     return outdent`
+      import React from 'react';
       import Wrapper from '${wrapperPath}';
       import PageTitle from '${pageTitlePath}'
       
@@ -68,6 +69,7 @@ const changelogTemplate = (
   }
 
   return outdent`
+    import React from 'react';
     import changelog from '!!raw-loader!${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
