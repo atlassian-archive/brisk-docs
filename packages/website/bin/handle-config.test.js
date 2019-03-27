@@ -13,6 +13,7 @@ describe('website configuration processor', () => {
       useManifests: false,
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
+      showSubExamples: false,
     });
   });
 

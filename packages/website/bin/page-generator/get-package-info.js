@@ -23,6 +23,24 @@ const getFilesInDir = dirPath => {
 };
 
 /**
+ * Returns an array of all the examples other than the main examples
+ * @returns {Array} whether this file can be rendered as an example
+ * @param examplesArray array of examples paths
+ * @param pkgPath
+ */
+const getFormattedExamples = (examplesArray, pkgPath) => {
+  const formattedFiles = [];
+  examplesArray.forEach(exampleFile => {
+    formattedFiles.push({
+      id: path.dirname(exampleFile).replace(pkgPath, ''), // may need a way to show the id as name of the parent folder
+      path: exampleFile,
+    });
+  });
+
+  return formattedFiles;
+};
+
+/**
  * Determines whether a file is a valid example file
  * @param examplePath full path to the file
  * @returns {boolean} whether this file can be rendered as an example
@@ -52,6 +70,13 @@ const getAllDirectories = searchPatterns =>
   flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(dirPath =>
     fs.statSync(dirPath).isDirectory(),
   );
+
+/**
+ * Resolves a list of glob patterns and returns all of the valid examples recursively within a package.
+ * @returns Array array of absolute paths
+ * @param pattern
+ */
+const getSubExamplesPaths = pattern => glob.sync(pattern);
 
 /**
  * Gets the contents of the package.json in a directory, if it exists
@@ -93,9 +118,10 @@ const getManifestDefinition = pkgPath => {
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
   const defaultOptions = {
     useManifests: false,
+    showSubExamples: false,
   };
 
-  const { useManifests } = { ...defaultOptions, ...options };
+  const { useManifests, showSubExamples } = { ...defaultOptions, ...options };
 
   return getAllDirectories(packagesPatterns)
     .map(pkgPath => {
@@ -133,6 +159,15 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         isDoc(docPath),
       );
 
+      let subExamplesPaths = [];
+      if (showSubExamples) {
+        const subExamples = getSubExamplesPaths(`${pkgPath}/**/examples.js`);
+        // here we need only the examples not in main examples in examplesPaths
+        subExamplesPaths = getFormattedExamples(subExamples, pkgPath).filter(
+          example => example.id !== '/examples',
+        );
+      }
+
       const packageData = {
         id: pkgId,
         name: pkgInfo.name,
@@ -145,6 +180,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         readmePath,
         examplesPaths,
         docsPaths,
+        subExamplesPaths,
       };
 
       return packageData;
