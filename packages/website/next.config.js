@@ -18,10 +18,20 @@ module.exports = withCSS(
       // eslint-disable-next-line no-param-reassign
       config.externals = [];
 
+      config.module.rules.push({
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      });
+
       // Adding items to globalScope in the website
       config.plugins.push(
         new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),
       );
+
+      config.resolve.extensions.push('.tsx', '.ts');
 
       return clientWebpack(config);
     },
