@@ -47,6 +47,44 @@ const basicPageTemplate = (
   `;
 };
 
+const changelogTemplate = (
+  componentPath,
+  wrapperPath,
+  data = {},
+  title = '',
+) => {
+  if (!componentPath) {
+    return outdent`
+      import React from 'react';
+      import Wrapper from '${wrapperPath}';
+      import PageTitle from '${pageTitlePath}'
+      
+      export default () => (
+       <> 
+          <PageTitle title='${title}' />
+          <Wrapper data={${JSON.stringify(data)}} />
+       </>
+      );
+    `;
+  }
+
+  return outdent`
+    import React from 'react';
+    import changelog from '!!raw-loader!${componentPath}';
+    import Wrapper from '${wrapperPath}';
+    import PageTitle from '${pageTitlePath}'
+    
+    export default () => (
+     <> 
+        <PageTitle title='${title}' />
+            <Wrapper data={${JSON.stringify(data)}}>
+                {changelog}
+            </Wrapper>
+     </>
+    );
+  `;
+};
+
 const exampleTemplate = (
   componentPath,
   wrapperPath,
@@ -174,6 +212,31 @@ const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
 };
 
+const generateChangelogPage = (
+  pagePath,
+  changelogPath,
+  data,
+  config,
+  title = '',
+) => {
+  const componentPath = changelogPath;
+  const wrapperName = 'package-changelog';
+  const { wrappersPath, pagesPath } = config;
+
+  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+    pagesPath,
+    pagePath,
+    componentPath,
+    wrappersPath,
+    wrapperName,
+  );
+
+  writeFile(
+    path.join(pagesPath, pagePath),
+    changelogTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+  );
+};
+
 const generatePackageDocPage = (
   pagePath,
   markdownPath,
@@ -256,6 +319,7 @@ const generateProjectDocPage = (
 
 module.exports = {
   generateHomePage,
+  generateChangelogPage,
   generatePackageDocPage,
   generateExamplePage,
   generateDocsHomePage,

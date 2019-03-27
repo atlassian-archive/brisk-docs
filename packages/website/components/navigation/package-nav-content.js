@@ -23,7 +23,13 @@ GetLink.propTypes = {
   pagePath: PropTypes.string.isRequired,
 };
 
-const NavContent = ({ packageName, homePath, docs, examples }) => (
+const NavContent = ({
+  packageName,
+  homePath,
+  changelogPath,
+  docs,
+  examples,
+}) => (
   <>
     <NavHeader headerText={packageName} />
     <MenuSection id="package-section" parentId="index-section">
@@ -37,6 +43,12 @@ const NavContent = ({ packageName, homePath, docs, examples }) => (
           <Separator />
           <LinkWithRouter text="Home" href={homePath} />
           <Separator />
+          {changelogPath && (
+            <>
+              <LinkWithRouter text="Changelog" href={changelogPath} />
+              <Separator />
+            </>
+          )}
           <Group heading="Docs" id="docs-group" hasSeparator>
             {docs.map(GetLink)}
           </Group>
@@ -52,6 +64,7 @@ const NavContent = ({ packageName, homePath, docs, examples }) => (
 NavContent.propTypes = {
   homePath: PropTypes.string.isRequired,
   packageName: PropTypes.string.isRequired,
+  changelogPath: PropTypes.string,
   docs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -75,6 +88,7 @@ const PackageNavContent = ({ packageId, packageName }) => {
     <NavContent
       packageName={packageName}
       homePath={packagePages.homePath}
+      changelogPath={packagePages.changelogPath}
       docs={packagePages.docs}
       examples={packagePages.examples}
     />
