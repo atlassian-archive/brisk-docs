@@ -22,7 +22,7 @@ const Heading = ({
 }: {
   children: React.ReactChild;
   level: number;
-  packageName: string;
+  packageName?: string;
   href: string | null;
 }) => {
   const childrenArray = React.Children.toArray(children);
@@ -109,7 +109,10 @@ const Changelog = (props: Props) => {
                 escapeHtml
                 source={v.md}
                 renderers={{
-                  Heading: headerProps => (
+                  Heading: (headerProps: {
+                    children: React.ReactChild;
+                    level: number;
+                  }) => (
                     <Heading
                       packageName={packageName}
                       href={href}
