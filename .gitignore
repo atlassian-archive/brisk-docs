@@ -19,3 +19,5 @@ cypress
 /packages/website/data/**/*.js
 /packages/**/bundles/**/*.js
 /packages/**/dist
+
+out
