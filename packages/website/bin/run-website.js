@@ -30,10 +30,6 @@ const spawnNextProcess = (command, websiteConfigPath, args = '') => {
     },
   );
 
-  console.log(
-    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command} ${args}`,
-  );
-
   if (status !== 0) {
     throw new Error(`Next ${command} failed with exit code ${status}`);
   }
