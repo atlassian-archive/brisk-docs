@@ -113,4 +113,17 @@ describe('Page generators', () => {
 
     assertValidTemplate(output);
   });
+
+  it('creates js for a changelog page', () => {
+    generators.generateChangelogPage(
+      'output.js',
+      path.join(cwd, 'changelog.md'),
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    const output = getOutput('output.js');
+
+    assertValidTemplate(output);
+  });
 });

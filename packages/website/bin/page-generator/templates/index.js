@@ -54,6 +54,7 @@ const basicPageTemplate = (
 const changelogTemplate = (
   componentPath,
   wrapperPath,
+  pageTitlePath,
   data = {},
   title = '',
 ) => {
@@ -62,9 +63,9 @@ const changelogTemplate = (
       import React from 'react';
       import Wrapper from '${wrapperPath}';
       import PageTitle from '${pageTitlePath}'
-      
+
       export default () => (
-       <> 
+       <>
           <PageTitle title='${title}' />
           <Wrapper data={${JSON.stringify(data)}} />
        </>
@@ -77,9 +78,9 @@ const changelogTemplate = (
     import changelog from '!!raw-loader!${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
-    
+
     export default () => (
-     <> 
+     <>
         <PageTitle title='${title}' />
             <Wrapper data={${JSON.stringify(data)}}>
                 {changelog}
@@ -256,7 +257,11 @@ const generateChangelogPage = (
   const wrapperName = 'package-changelog';
   const { wrappersPath, pagesPath } = config;
 
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    pageTitleComponentPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -266,7 +271,13 @@ const generateChangelogPage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    changelogTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    changelogTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      title,
+    ),
   );
 };
 
