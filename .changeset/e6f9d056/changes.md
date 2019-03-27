@@ -1,0 +1,1 @@
+- Add a page to display the changelog of a package

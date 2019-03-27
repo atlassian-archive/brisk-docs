@@ -6,3 +6,12 @@ declare module '@atlaskit/theme' {
   };
   export const colors: Record<string, string>;
 }
+
+declare module '@atlaskit/pagination' {
+  declare const adefault: React.ComponentClass<any, any>;
+  export default adefault;
+}
+
+interface ArrayConstructor {
+  from(arrayLike: any, mapFn?: (item: any, index: number) => any): Array<any>;
+}

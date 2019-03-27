@@ -6,4 +6,5 @@ module.exports = {
   useManifests: false,
   siteName: 'Brisk Docs',
   webpack: identityFunc,
+  showSubExamples: false,
 };

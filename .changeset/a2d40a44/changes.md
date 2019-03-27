@@ -1,0 +1,1 @@
+- Added pagination to package changelogs. The default number of logs per page is 20. If null is given to entriesPerPage prop then the changelog is not paginated.

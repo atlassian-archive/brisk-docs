@@ -1,8 +1,9 @@
 import * as React from 'react';
-// @ts-ignore - The types fro ReactMarkdown are wrong and do not think it has a default export
+// @ts-ignore - The types for ReactMarkdown are wrong and do not think it has a default export
 import ReactMarkdown from 'react-markdown';
 import styled, { css } from 'styled-components';
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
+import Pagination from '@atlaskit/pagination';
 import filterChangelog from '../utils/filter-changelog';
 import divideChangelog from '../utils/divide-changelog';
 
@@ -65,6 +66,11 @@ const LogItem = styled.div`
       : null};
 `;
 
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const NoMatch = styled.div`
   align-items: center;
   background-color: ${colors.N20};
@@ -82,55 +88,88 @@ export type Props = {
   range?: string;
   getUrl: (version: string) => string | null;
   packageName?: string;
+  entriesPerPage?: number | null;
 };
 
-const Changelog = (props: Props) => {
-  const { changelog, getUrl, range, packageName } = props;
-  const logs = divideChangelog(changelog);
-  const filteredLogs = filterChangelog(logs, range);
+export default class Changelog extends React.Component<Props> {
+  state = {
+    currentPage: 1,
+  };
 
-  let currentMajor = '0';
+  static defaultProps = {
+    getUrl: () => null,
+  };
 
-  return (
-    <div>
-      {!filteredLogs.length ? (
-        <NoMatch>No matching versions &mdash; please try again.</NoMatch>
-      ) : (
-        filteredLogs.map((v, i) => {
-          const major = v.version.substr(0, 1);
-          const majorHasChanged = currentMajor !== major;
-          currentMajor = major;
-          const href = getUrl(v.version);
+  handlePageChange = (_e: React.ChangeEvent, newPage: number) => {
+    this.setState({ currentPage: newPage });
+  };
 
-          return (
-            /* eslint-disable react/no-array-index-key */
-            <LogItem key={`${v.version}-${i}`} major={majorHasChanged}>
-              <ReactMarkdown
-                escapeHtml
-                source={v.md}
-                renderers={{
-                  Heading: (headerProps: {
-                    children: React.ReactChild;
-                    level: number;
-                  }) => (
-                    <Heading
-                      packageName={packageName}
-                      href={href}
-                      {...headerProps}
-                    />
-                  ),
-                }}
-              />
-            </LogItem>
-          );
-        })
-      )}
-    </div>
-  );
-};
+  render() {
+    const {
+      changelog,
+      getUrl,
+      range,
+      packageName,
+      entriesPerPage,
+    } = this.props;
+    const logs = divideChangelog(changelog);
+    let filteredLogs = filterChangelog(logs, range);
+    let pages: number[] = [];
 
-Changelog.defaultProps = {
-  getUrl: (): null => null,
-};
+    if (entriesPerPage) {
+      const numPages = Math.ceil(filteredLogs.length / entriesPerPage);
+      pages = Array.from({ length: numPages }, (_v, i) => i + 1);
+      const { currentPage } = this.state;
 
-export default Changelog;
+      filteredLogs = filteredLogs.filter(
+        (_v, i) =>
+          i >= (currentPage - 1) * entriesPerPage &&
+          i < currentPage * entriesPerPage,
+      );
+    }
+
+    let currentMajor = '0';
+
+    return (
+      <div>
+        {!filteredLogs.length ? (
+          <NoMatch>No matching versions &mdash; please try again.</NoMatch>
+        ) : (
+          filteredLogs.map((v, i) => {
+            const major = v.version.substr(0, 1);
+            const majorHasChanged = currentMajor !== major;
+            currentMajor = major;
+            const href = getUrl(v.version);
+
+            return (
+              /* eslint-disable react/no-array-index-key */
+              <LogItem key={`${v.version}-${i}`} major={majorHasChanged}>
+                <ReactMarkdown
+                  escapeHtml
+                  source={v.md}
+                  renderers={{
+                    Heading: (props: {
+                      children: React.ReactChild;
+                      level: number;
+                    }) => (
+                      <Heading
+                        packageName={packageName}
+                        href={href}
+                        {...props}
+                      />
+                    ),
+                  }}
+                />
+              </LogItem>
+            );
+          })
+        )}
+        {entriesPerPage && (
+          <PaginationContainer>
+            <Pagination pages={pages} onChange={this.handlePageChange} />
+          </PaginationContainer>
+        )}
+      </div>
+    );
+  }
+}
