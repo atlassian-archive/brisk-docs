@@ -54,6 +54,11 @@ const start = async configPath => {
   spawnNextProcess('start', configPath, '-p 8080');
 };
 
+const exportWebsite = async configPath => {
+  spawnNextProcess('export', configPath, `-o ${path.join(cwd, 'out')}`);
+};
+
 module.exports.dev = dev;
 module.exports.build = build;
 module.exports.start = start;
+module.exports.exportWebsite = exportWebsite;

@@ -12,6 +12,7 @@
         "dev:website": "bolt w @brisk-docs/website run dev",
         "build:website": "bolt w @brisk-docs/website run build:site",
         "build:docs": "NODE_ENV=production node packages/website/bin/index.js build",
+        "export": "node packages/website/bin/index.js export",
         "clean": "yarn delete:modules && yarn delete:caches && delete:dist",
         "delete:caches": "rm -rf packages/website/.next && rm -rf packages/website/pages/packages && rm -rf packages/website/pages/docs",
         "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
@@ -26,10 +27,11 @@
         "test:logs": "bolt w @brisk-docs/react-changelogs run jest",
         "changeset": "build-releases changeset",
         "version-packages": "build-releases version",
-        "publish-changed": "yarn build && build-releases publish --public"
+        "publish-changed": "yarn build && build-releases publish --public",
+        "prepare:docs": "bolt && yarn build:docs && yarn export"
     },
     "bolt": {
-        "version": "^0.22.1",
+        "version": "^0.22.6",
         "workspaces": [
             "packages/*"
         ]
@@ -72,7 +74,6 @@
         "babel-loader": "^8.0.5",
         "babel-plugin-transform-dynamic-import": "^2.1.0",
         "babel-plugin-transform-flow-strip-types": "^6.22.0",
-        "bolt": "^0.22.6",
         "command-line-args": "^5.0.2",
         "emotion-server": "^9.2.12",
         "eslint-plugin-emotion": "^10.0.7",
@@ -119,6 +120,7 @@
         "babel-eslint": "^10.0.1",
         "babel-plugin-emotion": "^10.0.9",
         "babel-plugin-styled-components": "^1.10.0",
+        "bolt": "^0.22.6",
         "css-loader": "^1.0.0",
         "cypress": "^3.1.5",
         "enzyme": "^3.9.0",
