@@ -6,6 +6,7 @@ const getPackageInfo = require('./get-package-info');
 const getDocsInfo = require('./get-docs-info');
 const {
   generateHomePage,
+  generateChangelogPage,
   generatePackageDocPage,
   generateExamplePage,
   generateDocsHomePage,
@@ -38,6 +39,15 @@ function generatePackagePages(packageInfo, generatorConfig) {
       { ...pageData, ...homePageData },
       generatorConfig,
       titleCase(pkg.id),
+    );
+
+    const changelogPath = path.join(homePath, 'changelog');
+    generateChangelogPage(
+      `${changelogPath}.js`,
+      pkg.changelogPath,
+      pageData,
+      generatorConfig,
+      'Changelog',
     );
 
     const docPath = path.join(homePath, 'docs');
@@ -166,9 +176,13 @@ function generatePackagePages(packageInfo, generatorConfig) {
       return formatted;
     };
 
+    const env = process.env.NODE_ENV || 'development';
+    const displayChangelog = pkg.changelogPath || env === 'development';
+
     return {
       packageId: pkg.id,
       homePath: path.join('/', homePath),
+      changelogPath: displayChangelog ? path.join('/', changelogPath) : null,
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),
       docs,

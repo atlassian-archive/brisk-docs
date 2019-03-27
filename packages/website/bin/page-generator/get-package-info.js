@@ -143,6 +143,12 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       if (!fs.existsSync(readmePath)) {
         readmePath = '';
       }
+
+      let changelogPath = path.resolve(pkgPath, 'CHANGELOG.md');
+      if (!fs.existsSync(changelogPath)) {
+        changelogPath = '';
+      }
+
       const exampleDirPath = path.resolve(pkgPath, 'examples');
       const docsDirPath = path.resolve(pkgPath, 'docs');
 
@@ -170,6 +176,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         maintainers: pkgInfo.maintainers,
         repository: pkgInfo.repository,
         pkgPath,
+        changelogPath,
         readmePath,
         examplesPaths,
         docsPaths,

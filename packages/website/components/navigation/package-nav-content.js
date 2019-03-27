@@ -42,7 +42,14 @@ const renderSubExamplesTree = subExamples => {
   );
 };
 
-const NavContent = ({ packageName, homePath, docs, examples, subExamples }) => (
+const NavContent = ({
+  packageName,
+  homePath,
+  changelogPath,
+  docs,
+  examples,
+  subExamples,
+}) => (
   <>
     <NavHeader headerText={packageName} />
     <MenuSection id="package-section" parentId="index-section">
@@ -56,6 +63,12 @@ const NavContent = ({ packageName, homePath, docs, examples, subExamples }) => (
           <Separator />
           <LinkWithRouter text="Home" href={homePath} />
           <Separator />
+          {changelogPath && (
+            <>
+              <LinkWithRouter text="Changelog" href={changelogPath} />
+              <Separator />
+            </>
+          )}
           <Group heading="Docs" id="docs-group" hasSeparator>
             {docs.map(GetLink)}
           </Group>
@@ -74,6 +87,7 @@ const NavContent = ({ packageName, homePath, docs, examples, subExamples }) => (
 NavContent.propTypes = {
   homePath: PropTypes.string.isRequired,
   packageName: PropTypes.string.isRequired,
+  changelogPath: PropTypes.string,
   docs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -104,6 +118,7 @@ const PackageNavContent = ({ packageId, packageName }) => {
     <NavContent
       packageName={packageName}
       homePath={packagePages.homePath}
+      changelogPath={packagePages.changelogPath}
       docs={packagePages.docs}
       examples={packagePages.examples}
       subExamples={packagePages.subExamples}
