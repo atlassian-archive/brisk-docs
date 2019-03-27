@@ -87,7 +87,7 @@ export type Props = {
     range?: string;
     getUrl: (version: string) => string | null;
     packageName?: string;
-    maxItems?: number;
+    entriesPerPage?: number;
 };
 
 export default class Changelog extends React.Component<Props> {
@@ -101,24 +101,24 @@ export default class Changelog extends React.Component<Props> {
         getUrl: () => null
     };
 
-    handleChangePage = (e, newPage: any) => {
+    handlePageChange = (e, newPage: any) => {
         this.setState({ currentPage: newPage })
     };
 
     render() {
-        const { changelog, getUrl, range, packageName, maxItems } = this.props;
+        const { changelog, getUrl, range, packageName, entriesPerPage } = this.props;
         const logs = divideChangelog(changelog);
         let filteredLogs = filterChangelog(logs, range);
         let pages: number[] = [];
 
-        if (maxItems) {
-            const numPages = Math.ceil(filteredLogs.length / maxItems);
+        if (entriesPerPage) {
+            const numPages = Math.ceil(filteredLogs.length / entriesPerPage);
             pages = Array.from({ length: numPages }, (v, i) => i + 1);
             const { currentPage } = this.state;
 
             filteredLogs = filteredLogs.filter((v, i) => (
-                i >= ((currentPage - 1) * maxItems) &&
-                i < (currentPage * maxItems))
+                i >= ((currentPage - 1) * entriesPerPage) &&
+                i < (currentPage * entriesPerPage))
             )
         }
 
@@ -155,9 +155,9 @@ export default class Changelog extends React.Component<Props> {
                         );
                     })
                 )}
-                {maxItems && (
+                {entriesPerPage && (
                       <PaginationContainer>
-                          <Pagination pages={pages} onChange={this.handleChangePage}/>
+                          <Pagination pages={pages} onChange={this.handlePageChange}/>
                       </PaginationContainer>
                     )
                 }

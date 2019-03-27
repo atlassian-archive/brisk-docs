@@ -79,14 +79,14 @@ describe("<Changelog />", () => {
     });
 
 
-    it('should paginate the changelog if maxItems is given', () => {
-        const maxItems = 3;
+    it('should paginate the changelog if entriesPerPage is given', () => {
+        const entriesPerPage = 3;
         const wrapper = mount(
-            <Changelog changelog={longChangeLog} maxItems={maxItems}/>
+            <Changelog changelog={longChangeLog} entriesPerPage={entriesPerPage}/>
         );
 
         expect(wrapper.find(Pagination)).toHaveLength(1);
-        expect(wrapper.find('h3')).toHaveLength(maxItems);
+        expect(wrapper.find('h3')).toHaveLength(entriesPerPage);
         expect(wrapper.find('h3').at(0).text()).toEqual('2.0.0');
         expect(wrapper.find('h3').at(1).text()).toEqual('1.1.0');
         expect(wrapper.find('h3').at(2).text()).toEqual('1.0.0');
@@ -95,9 +95,9 @@ describe("<Changelog />", () => {
         expect(wrapper.find(Pagination).find('button')).toHaveLength(8);
     });
 
-    it('should not paginate if maxItems is null', () => {
+    it('should not paginate if entriesPerPage is null', () => {
         const wrapper = mount(
-            <Changelog changelog={longChangeLog} maxItems={null}/>
+            <Changelog changelog={longChangeLog} entriesPerPage={null}/>
         );
 
         expect(wrapper.find('h3')).toHaveLength(18);

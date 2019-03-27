@@ -29,7 +29,7 @@ const PackageChangelog = ({ data, children }) => {
       <Wrapper>
         <Heading>Changelog</Heading>
         {children ? (
-          <Changelog changelog={children} maxItems={20} />
+          <Changelog changelog={children} entriesPerPage={20} />
         ) : (
           <MissingChangelog />
         )}
