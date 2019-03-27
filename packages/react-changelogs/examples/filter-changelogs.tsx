@@ -24,12 +24,12 @@ const FieldWrapper = styled.div`
 export default class FilterChangeLogs extends React.Component {
   state = { range: '' };
 
-   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-       this.setState({range: event.target.value});
-    };
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ range: event.target.value });
+  };
 
-  render () {
-   const { range } = this.state;
+  render() {
+    const { range } = this.state;
     return (
       <div>
         <FieldWrapper>
@@ -40,8 +40,8 @@ export default class FilterChangeLogs extends React.Component {
             value={range}
           />
         </FieldWrapper>
-        <Changelog changelog={data} getUrl={() => null} range={range}/>
+        <Changelog changelog={data} getUrl={() => null} range={range} />
       </div>
-    )
+    );
   }
 }

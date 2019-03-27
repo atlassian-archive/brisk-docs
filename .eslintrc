@@ -28,14 +28,27 @@
     "react/sort-comp": "off"
   },
   "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
     "import/resolver": {
-      // use <root>/path/to/folder/tsconfig.json
-      "typescript": {
-        "directory": "./packages/react-changelogs/tsconfig.json"
+        "node": {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
       }
-    }
-  }
+    
+  },
+  "overrides": [
+        {
+            "files": ["**/**/*.ts", "**/**/*.tsx"],
+            "parser": "@typescript-eslint/parser",
+            "plugins": ["emotion", "@typescript-eslint"],
+            "rules": {
+                "no-unused-vars": "off",
+                "@typescript-eslint/no-unused-vars": "error"
+            }
+        }
+    ]
 }

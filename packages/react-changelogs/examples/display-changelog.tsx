@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import Changelog from '../src/components/changelog';
 
 const data = `# This package itself
@@ -8,4 +8,8 @@ const data = `# This package itself
 ## 0.5.0
 - [minor] Who am I?`;
 
-export default () => <div><Changelog changelog={data} getUrl={() => null}/></div>
+export default () => (
+  <div>
+    <Changelog changelog={data} getUrl={() => null} />
+  </div>
+);
