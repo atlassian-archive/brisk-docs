@@ -2,7 +2,10 @@ const fse = require('fs-extra');
 const path = require('path');
 const outdent = require('outdent');
 
-const pageTitlePath = path.resolve(__dirname, '../../../components/page-title');
+const pageTitleAbsolutePath = path.resolve(
+  __dirname,
+  '../../../components/page-title',
+);
 
 const writeFile = (pagePath, content) => {
   fse.ensureFileSync(pagePath);
@@ -12,6 +15,46 @@ const writeFile = (pagePath, content) => {
 const basicPageTemplate = (
   componentPath,
   wrapperPath,
+  pageTitlePath,
+  data = {},
+  title = '',
+) => {
+  if (!componentPath) {
+    return outdent`
+      import React from 'react';
+      import Wrapper from '${wrapperPath}';
+      import PageTitle from '${pageTitlePath}';
+
+      export default () => (
+       <>
+          <PageTitle title='${title}' />
+          <Wrapper data={${JSON.stringify(data)}} />
+       </>
+      );
+    `;
+  }
+
+  return outdent`
+    import React from 'react';
+    import Component from '${componentPath}';
+    import Wrapper from '${wrapperPath}';
+    import PageTitle from '${pageTitlePath}';
+
+    export default () => (
+     <>
+        <PageTitle title='${title}' />
+            <Wrapper data={${JSON.stringify(data)}}>
+                <Component />
+            </Wrapper>
+     </>
+    );
+  `;
+};
+
+const changelogTemplate = (
+  componentPath,
+  wrapperPath,
+  pageTitlePath,
   data = {},
   title = '',
 ) => {
@@ -32,50 +75,12 @@ const basicPageTemplate = (
 
   return outdent`
     import React from 'react';
-    import Component from '${componentPath}';
+    import changelog from '!!raw-loader!${componentPath}';
     import Wrapper from '${wrapperPath}';
     import PageTitle from '${pageTitlePath}'
 
     export default () => (
      <>
-        <PageTitle title='${title}' />
-            <Wrapper data={${JSON.stringify(data)}}>
-                <Component />
-            </Wrapper>
-     </>
-    );
-  `;
-};
-
-const changelogTemplate = (
-  componentPath,
-  wrapperPath,
-  data = {},
-  title = '',
-) => {
-  if (!componentPath) {
-    return outdent`
-      import React from 'react';
-      import Wrapper from '${wrapperPath}';
-      import PageTitle from '${pageTitlePath}'
-      
-      export default () => (
-       <> 
-          <PageTitle title='${title}' />
-          <Wrapper data={${JSON.stringify(data)}} />
-       </>
-      );
-    `;
-  }
-
-  return outdent`
-    import React from 'react';
-    import changelog from '!!raw-loader!${componentPath}';
-    import Wrapper from '${wrapperPath}';
-    import PageTitle from '${pageTitlePath}'
-    
-    export default () => (
-     <> 
         <PageTitle title='${title}' />
             <Wrapper data={${JSON.stringify(data)}}>
                 {changelog}
@@ -88,6 +93,7 @@ const changelogTemplate = (
 const exampleTemplate = (
   componentPath,
   wrapperPath,
+  pageTitlePath,
   data = {},
   title = '',
 ) => outdent`
@@ -96,7 +102,7 @@ const exampleTemplate = (
     import fileContents from '!!raw-loader!${componentPath}';
 
     import Wrapper from '${wrapperPath}';
-    import PageTitle from '${pageTitlePath}'
+    import PageTitle from '${pageTitlePath}';
 
     export default () => (
         <>
@@ -117,13 +123,14 @@ export default () => <Component />
 
 const basicNonComponentTemplate = (
   wrapperPath,
+  pageTitlePath,
   data = {},
   type,
   title = '',
 ) => outdent`
     import React from 'react';
     import Wrapper from '${wrapperPath}';
-    import PageTitle from '${pageTitlePath}'
+    import PageTitle from '${pageTitlePath}';
 
     export default () => (
         <>
@@ -159,11 +166,16 @@ const getGenericPageInfo = (
     absolutePagePath,
     path.join(wrappersPath, `${wrapperName}.js`),
   );
+  const pageTitleComponentPath = getImportPath(
+    absolutePagePath,
+    pageTitleAbsolutePath,
+  );
 
   return {
     absolutePagePath,
     componentImportPath,
     packageHomeWrapperPath,
+    pageTitleComponentPath,
   };
 };
 
@@ -175,7 +187,11 @@ const generateBasicPage = (
   { wrappersPath, pagesPath },
   title = '',
 ) => {
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    pageTitleComponentPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -185,7 +201,13 @@ const generateBasicPage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    basicPageTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    basicPageTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      title,
+    ),
   );
 };
 
@@ -202,9 +224,21 @@ const generateNonComponentPage = (
     absolutePagePath,
     path.join(wrappersPath, `${wrapperName}.js`),
   );
+
+  const pageTitleComponentPath = getImportPath(
+    absolutePagePath,
+    pageTitleAbsolutePath,
+  );
+
   writeFile(
     path.join(pagesPath, pagePath),
-    basicNonComponentTemplate(packageHomeWrapperPath, data, type, title),
+    basicNonComponentTemplate(
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      type,
+      title,
+    ),
   );
 };
 
@@ -223,7 +257,11 @@ const generateChangelogPage = (
   const wrapperName = 'package-changelog';
   const { wrappersPath, pagesPath } = config;
 
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    pageTitleComponentPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -233,7 +271,13 @@ const generateChangelogPage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    changelogTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    changelogTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      title,
+    ),
   );
 };
 
@@ -266,7 +310,11 @@ const generateExamplePage = (
   const wrapperName = 'package-example';
   const { wrappersPath, pagesPath } = config;
 
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    pageTitleComponentPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -276,7 +324,13 @@ const generateExamplePage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(componentImportPath, packageHomeWrapperPath, data, title),
+    exampleTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      title,
+    ),
   );
 
   writeFile(
