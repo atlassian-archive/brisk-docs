@@ -1,5 +1,6 @@
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
+// @ts-ignore - The types fro ReactMarkdown are wrong and do not think it has a default export
+import ReactMarkdown from 'react-markdown';
 import styled, { css } from 'styled-components';
 import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
 import filterChangelog from '../utils/filter-changelog';

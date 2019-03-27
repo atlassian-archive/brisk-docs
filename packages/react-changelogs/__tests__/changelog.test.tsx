@@ -30,7 +30,7 @@ describe('<Changelog />', () => {
     expect(wrapper.find('a')).toHaveLength(2);
   });
 
-  it('renders changelog based on the specified range', () => {
+  it.only('renders changelog based on the specified range', () => {
     const wrapper = mount(
       <Changelog changelog={initialProps} getUrl={() => null} range=">0.5.0" />,
     );
