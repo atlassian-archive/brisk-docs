@@ -30,6 +30,10 @@ const spawnNextProcess = (command, websiteConfigPath, args = '') => {
     },
   );
 
+  console.log(
+    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command} ${args}`,
+  );
+
   if (status !== 0) {
     throw new Error(`Next ${command} failed with exit code ${status}`);
   }
@@ -54,6 +58,11 @@ const start = async configPath => {
   spawnNextProcess('start', configPath, '-p 8080');
 };
 
+const exportWebsite = async configPath => {
+  spawnNextProcess('export', configPath, `-o ${path.join(cwd, 'out')}`);
+};
+
 module.exports.dev = dev;
 module.exports.build = build;
 module.exports.start = start;
+module.exports.exportWebsite = exportWebsite;

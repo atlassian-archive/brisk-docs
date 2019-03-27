@@ -7,7 +7,7 @@ const withCSS = require('@zeit/next-css');
 const handleConfig = require('./bin/handle-config');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
-const cwd = process.env.DOCS_WEBSITE_CWD;
+const cwd = process.env.DOCS_WEBSITE_CWD || process.cwd();
 
 const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 

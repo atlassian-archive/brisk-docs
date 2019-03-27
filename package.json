@@ -12,6 +12,7 @@
         "dev:website": "bolt w @brisk-docs/website run dev",
         "build:website": "bolt w @brisk-docs/website run build:site",
         "build:docs": "node packages/website/bin/index.js build",
+        "export": "node packages/website/bin/index.js export",
         "clean": "yarn delete:modules && yarn delete:caches && delete:dist",
         "delete:caches": "rm -rf packages/website/.next && rm -rf packages/website/pages/packages && rm -rf packages/website/pages/docs",
         "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
