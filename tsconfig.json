@@ -21,6 +21,8 @@
     "strictFunctionTypes": true,
   },
   "include": [
-    "packages/react-changelogs/src/**/*"
+    "packages/react-changelogs/src/**/*",
+    "typings/**/*"
   ],
+  "typeRoots": ["./typings", "./node_modules/@types"],
 }
