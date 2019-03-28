@@ -86,13 +86,9 @@ const PackageExample = ({ data, fileContents, children }) => {
       <PageContent>
         <ExampleStyle>
           <Header>
-            <h1>Dynamic Table</h1>
+            <h1>{data.pageTitle}</h1>
             <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
           </Header>
-          <div style={{ padding: '24px 0px' }}>
-            The Dynamic Table component is a table component with pagination and
-            sorting functionality.
-          </div>
           <ExampleComponentContainer>
             <div className="inner-container">{children}</div>
           </ExampleComponentContainer>
@@ -109,6 +105,7 @@ PackageExample.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string.isRequired,
+    pageTitle: PropTypes.string.isRequired,
   }).isRequired,
   fileContents: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,

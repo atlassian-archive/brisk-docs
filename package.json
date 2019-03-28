@@ -40,6 +40,7 @@
         "@atlaskit/avatar": "^14.1.8",
         "@atlaskit/banner": "^8.0.1",
         "@atlaskit/button": "^8.2.4",
+        "@atlaskit/code": "^9.0.0",
         "@atlaskit/css-reset": "^3.0.5",
         "@atlaskit/docs": "^6.0.2",
         "@atlaskit/drawer": "^2.7.1",

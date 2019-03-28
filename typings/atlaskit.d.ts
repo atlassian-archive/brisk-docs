@@ -12,6 +12,13 @@ declare module '@atlaskit/pagination' {
   export default adefault;
 }
 
+declare module '@atlaskit/code' {
+  declare const AkCode: React.ComponentClass<any, any>;
+  declare const AkCodeBlock: React.ComponentClass<any, any>;
+
+  export { AkCode, AkCodeBlock };
+}
+
 interface ArrayConstructor {
   from(arrayLike: any, mapFn?: (item: any, index: number) => any): Array<any>;
 }

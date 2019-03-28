@@ -1,6 +1,7 @@
 import React from 'react';
 import Heading from './Heading';
 import Link from '../switch-link';
+import { CodeBlock, InlineCode } from './code';
 
 const components = {
   h1: props => <Heading {...props} tag="h1" />,
@@ -10,6 +11,8 @@ const components = {
   h5: props => <Heading {...props} tag="h5" />,
   h6: props => <Heading {...props} tag="h6" />,
   a: Link,
+  code: CodeBlock,
+  inlineCode: InlineCode,
 };
 
 export default components;
