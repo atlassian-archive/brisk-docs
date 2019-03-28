@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The Brisk website documenter",
   "main": "index.js",
   "license": "MIT",
