@@ -64,6 +64,13 @@ For an example you can check out [this codesandbox](totes-a-link)
 * `range`: the semver range within the changelog to be displayed.
 * `entriesPerPage`: Set the number of entries to be shown per page. 
 
+<div>
+    <Props
+        heading="Props"
+        props={require('!!extract-react-types-loader!./src/components/changelog')}
+    />
+</div>
+
 ## Functions
 We also export a couple of utility functions if you want to use these features but want to write your own renderer (or are not using react). We'll talk you through what they are doing so you can easily understand this package.
 

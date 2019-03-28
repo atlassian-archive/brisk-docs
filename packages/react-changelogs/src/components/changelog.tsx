@@ -83,12 +83,17 @@ export const NoMatch = styled.div`
   min-height: 120px;
 `;
 
-export type Props = {
+  export type Props = {
+  /** The contents of a changelog file to be displayed. For more information on
+  how we split and manage this, check out the `divide-changelogs` explanation below. */
   changelog: string;
+  /* The semver range within the changelog to be displayed */
   range?: string;
+  /* Function that returns a link to the commit containing the version */
   getUrl: (version: string) => string | null;
   packageName?: string;
-  entriesPerPage?: number | null;
+  /* Number of changelog entries to display on a page */
+  entriesPerPage?: number;
 };
 
 export default class Changelog extends React.Component<Props> {
