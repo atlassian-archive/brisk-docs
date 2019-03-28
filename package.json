@@ -27,7 +27,7 @@
         "test:logs": "bolt w @brisk-docs/react-changelogs run jest",
         "changeset": "build-releases changeset",
         "version-packages": "build-releases version",
-        "publish-changed": "yarn build && build-releases publish --public",
+        "publish-changed": "yarn build && build-releases publish",
         "prepare:docs": "bolt && yarn build:docs && yarn export"
     },
     "bolt": {
