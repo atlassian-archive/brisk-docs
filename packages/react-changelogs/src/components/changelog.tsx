@@ -93,7 +93,7 @@ export type Props = {
   getUrl: (version: string) => string | null;
   packageName?: string;
   /* Number of changelog entries to display on a page */
-  entriesPerPage?: number;
+  entriesPerPage?: number | null;
 };
 
 export default class Changelog extends React.Component<Props> {
