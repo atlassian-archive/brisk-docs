@@ -7,13 +7,13 @@ docs alongside your code.
 
 Start by installing Brisk Docs in your project
 
-```sh
+```shell
 npm install @brisk-docs/website
 ```
 
 To start your docs website locally, simply run:
 
-```sh
+```shell
 npm run brisk
 ```
 

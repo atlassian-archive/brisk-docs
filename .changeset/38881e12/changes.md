@@ -1,0 +1,1 @@
+- Display code blocks in markdown as syntax highlighted 
