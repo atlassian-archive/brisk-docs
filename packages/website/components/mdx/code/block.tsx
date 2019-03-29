@@ -14,5 +14,6 @@ export default ({ children, className }: Props) => (
   <AkCodeBlock
     text={children}
     language={className && getLanguageName(className)}
+    showLineNumbers={false}
   />
 );
