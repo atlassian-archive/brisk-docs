@@ -17,7 +17,7 @@ const assertValidTemplate = source => {
   assertNoAbsoluteImports(source);
 };
 
-describe('Page generators', () => {
+describe('Page templates', () => {
   let cwd;
   let pagesPath;
   let wrappersPath;
@@ -124,6 +124,16 @@ describe('Page generators', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import changelog from '!!raw-loader!../changelog.md';
+import Wrapper from '../wrappers/package-changelog';
+
+export default () => (
+  <Wrapper data={\\"../../../Users/dpisani/src/brisk-docs/packages/website/components/page-title\\"}>
+      {changelog}
+  </Wrapper>
+);"
+`);
   });
 });

@@ -2,9 +2,6 @@ const fse = require('fs-extra');
 const path = require('path');
 const outdent = require('outdent');
 
-const changelogTemplate = require('./changelog');
-const singleComponentTemplate = require('./single-component');
-
 const pageTitleAbsolutePath = path.resolve(
   __dirname,
   '../../../components/page-title',
@@ -54,6 +51,45 @@ const basicPageTemplate = (
   `;
 };
 
+const changelogTemplate = (
+  componentPath,
+  wrapperPath,
+  pageTitlePath,
+  data = {},
+  title = '',
+) => {
+  if (!componentPath) {
+    return outdent`
+      import React from 'react';
+      import Wrapper from '${wrapperPath}';
+      import PageTitle from '${pageTitlePath}'
+
+      export default () => (
+       <>
+          <PageTitle title='${title}' />
+          <Wrapper data={${JSON.stringify(data)}} />
+       </>
+      );
+    `;
+  }
+
+  return outdent`
+    import React from 'react';
+    import changelog from '!!raw-loader!${componentPath}';
+    import Wrapper from '${wrapperPath}';
+    import PageTitle from '${pageTitlePath}'
+
+    export default () => (
+     <>
+        <PageTitle title='${title}' />
+            <Wrapper data={${JSON.stringify(data)}}>
+                {changelog}
+            </Wrapper>
+     </>
+    );
+  `;
+};
+
 const exampleTemplate = (
   componentPath,
   wrapperPath,
@@ -83,6 +119,25 @@ import React from 'react';
 import Component from '${componentPath}'
 
 export default () => <Component />
+`;
+
+const basicNonComponentTemplate = (
+  wrapperPath,
+  pageTitlePath,
+  data = {},
+  type,
+  title = '',
+) => outdent`
+    import React from 'react';
+    import Wrapper from '${wrapperPath}';
+    import PageTitle from '${pageTitlePath}';
+
+    export default () => (
+        <>
+           <PageTitle title='${title}' />
+           <Wrapper data={${JSON.stringify(data)}} type='${type}' />
+        </>
+    );
 `;
 
 /**
@@ -162,7 +217,7 @@ const generateNonComponentPage = (
   wrapperName,
   { wrappersPath, pagesPath },
   type,
-  title,
+  title = '',
 ) => {
   const absolutePagePath = path.resolve(pagesPath, pagePath);
   const packageHomeWrapperPath = getImportPath(
@@ -177,10 +232,13 @@ const generateNonComponentPage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    singleComponentTemplate(packageHomeWrapperPath, {
-      ...data,
-      pageTitle: title,
-    }),
+    basicNonComponentTemplate(
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      type,
+      title,
+    ),
   );
 };
 
@@ -199,7 +257,11 @@ const generateChangelogPage = (
   const wrapperName = 'package-changelog';
   const { wrappersPath, pagesPath } = config;
 
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    pageTitleComponentPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -207,16 +269,16 @@ const generateChangelogPage = (
     wrapperName,
   );
 
-  const source = componentImportPath
-    ? changelogTemplate(
-        componentImportPath,
-        packageHomeWrapperPath,
-        data,
-        title,
-      )
-    : singleComponentTemplate(packageHomeWrapperPath, data, title);
-
-  writeFile(path.join(pagesPath, pagePath), source);
+  writeFile(
+    path.join(pagesPath, pagePath),
+    changelogTemplate(
+      componentImportPath,
+      packageHomeWrapperPath,
+      pageTitleComponentPath,
+      data,
+      title,
+    ),
+  );
 };
 
 const generatePackageDocPage = (

@@ -13,6 +13,7 @@ import * as PropTypes from 'prop-types';
 import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
+import PageTitle from '../page-title';
 
 const PageContent = styled.div`
   display: flex;
@@ -78,30 +79,36 @@ const PackageExample = ({ data, fileContents, children }) => {
   const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
 
   return (
-    <NavigationWrapper
-      navContent={() => (
-        <PackageNavContent packageId={data.id} packageName={data.packageName} />
-      )}
-    >
-      <PageContent>
-        <ExampleStyle>
-          <Header>
-            <h1>Dynamic Table</h1>
-            <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
-          </Header>
-          <div style={{ padding: '24px 0px' }}>
-            The Dynamic Table component is a table component with pagination and
-            sorting functionality.
-          </div>
-          <ExampleComponentContainer>
-            <div className="inner-container">{children}</div>
-          </ExampleComponentContainer>
-        </ExampleStyle>
-        <CodeStyle data-testid="example-source-code">
-          <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-        </CodeStyle>
-      </PageContent>
-    </NavigationWrapper>
+    <>
+      <PageTitle />
+      <NavigationWrapper
+        navContent={() => (
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
+        )}
+      >
+        <PageContent>
+          <ExampleStyle>
+            <Header>
+              <h1>Dynamic Table</h1>
+              <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
+            </Header>
+            <div style={{ padding: '24px 0px' }}>
+              The Dynamic Table component is a table component with pagination
+              and sorting functionality.
+            </div>
+            <ExampleComponentContainer>
+              <div className="inner-container">{children}</div>
+            </ExampleComponentContainer>
+          </ExampleStyle>
+          <CodeStyle data-testid="example-source-code">
+            <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+          </CodeStyle>
+        </PageContent>
+      </NavigationWrapper>
+    </>
   );
 };
 

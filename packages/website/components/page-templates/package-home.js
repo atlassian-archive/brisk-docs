@@ -10,6 +10,7 @@ import Wrapper from '../content-style-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
 import PackageMetaData from '../package-metadata';
 import LinkButton from '../link-button';
+import PageTitle from '../page-title';
 
 export const Description = styled.h3`
   color: ${colors.N900};
@@ -59,27 +60,33 @@ const MissingReadmeWarning = () => (
 
 const PackageHome = ({ data, children }) => {
   return (
-    <NavigationWrapper
-      navContent={() => (
-        <PackageNavContent packageId={data.id} packageName={data.packageName} />
-      )}
-    >
-      <Wrapper>
-        <Header id={data.id} heading={titleCase(data.packageName)} />
-        <Description>{data.description}</Description>
-        <PackageMetaData
-          id={data.id}
-          version={data.version}
-          maintainers={data.maintainers}
-          repository={data.repository}
-        />
-        {children || process.env.NODE_ENV !== 'development' ? (
-          children
-        ) : (
-          <MissingReadmeWarning />
+    <>
+      <PageTitle />
+      <NavigationWrapper
+        navContent={() => (
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
         )}
-      </Wrapper>
-    </NavigationWrapper>
+      >
+        <Wrapper>
+          <Header id={data.id} heading={titleCase(data.packageName)} />
+          <Description>{data.description}</Description>
+          <PackageMetaData
+            id={data.id}
+            version={data.version}
+            maintainers={data.maintainers}
+            repository={data.repository}
+          />
+          {children || process.env.NODE_ENV !== 'development' ? (
+            children
+          ) : (
+            <MissingReadmeWarning />
+          )}
+        </Wrapper>
+      </NavigationWrapper>
+    </>
   );
 };
 

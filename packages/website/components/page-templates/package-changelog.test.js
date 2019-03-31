@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PackageChangelog, { MissingChangelog } from './package-changelog';
+import PageTitle from '../page-title';
 import Changelog from '../../../react-changelogs/src/components/changelog';
 
 jest.mock('../navigation/package-nav-content', () => () => <div />);
@@ -104,5 +105,13 @@ describe('package changelog', () => {
     expect(wrapper.find(MissingChangelog).exists()).toEqual(true);
 
     wrapper.unmount();
+  });
+
+  it('should render a title component', () => {
+    const titles = mount(<PackageChangelog data={data} />).find(PageTitle);
+
+    expect(titles).toHaveLength(1);
+
+    expect(titles.first().props().title).toEqual('Changelog');
   });
 });

@@ -4,15 +4,19 @@ import * as PropTypes from 'prop-types';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import Wrapper from '../content-style-wrapper';
+import PageTitle from '../page-title';
 
 const PackageDocsWrapper = ({ data, children }) => (
-  <NavigationWrapper
-    navContent={() => (
-      <PackageNavContent packageId={data.id} packageName={data.packageName} />
-    )}
-  >
-    <Wrapper>{children}</Wrapper>
-  </NavigationWrapper>
+  <>
+    <PageTitle />
+    <NavigationWrapper
+      navContent={() => (
+        <PackageNavContent packageId={data.id} packageName={data.packageName} />
+      )}
+    >
+      <Wrapper>{children}</Wrapper>
+    </NavigationWrapper>
+  </>
 );
 
 PackageDocsWrapper.propTypes = {
