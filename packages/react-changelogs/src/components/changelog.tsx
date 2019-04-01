@@ -169,7 +169,7 @@ export default class Changelog extends React.Component<Props> {
             );
           })
         )}
-        {entriesPerPage && (
+        {entriesPerPage && pages.length > 1 && (
           <PaginationContainer>
             <Pagination pages={pages} onChange={this.handlePageChange} />
           </PaginationContainer>

@@ -100,6 +100,15 @@ describe('<Changelog />', () => {
     expect(wrapper.find(Pagination).find('button')).toHaveLength(8);
   });
 
+  it('should not paginate if there is only one page', () => {
+    const wrapper = mount(
+      <Changelog changelog={initialProps} entriesPerPage={20} />,
+    );
+
+    expect(wrapper.find('h3')).toHaveLength(2);
+    expect(wrapper.find(Pagination).exists()).toEqual(false);
+  });
+
   it('should not paginate if entriesPerPage is null', () => {
     const wrapper = mount(
       <Changelog changelog={longChangeLog} entriesPerPage={null} />,

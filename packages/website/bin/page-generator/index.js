@@ -84,14 +84,15 @@ function generatePackagePages(packageInfo, generatorConfig) {
 
       const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
       const isolatedPath = path.join('/', `${rawPagesPath}`);
+      const pageTitle = titleCase(example.id);
 
       generateExamplePage(
         `${pagePath}.js`,
         `${rawPagesPath}.js`,
         example.path,
-        { ...pageData, isolatedPath },
+        { ...pageData, isolatedPath, pageTitle },
         generatorConfig,
-        titleCase(example.id),
+        pageTitle,
       );
 
       return {

@@ -153,6 +153,16 @@
     memoize-one "^3.0.1"
     react-syntax-highlighter "^10.0.1"
 
+"@atlaskit/code@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/code/-/code-9.0.0.tgz#a5c3fcb1d490df43f25b47c928049a175f64fbcf"
+  integrity sha512-lYLV2S9TQxt4Lr+nA26QP0FNCrspw3GPwVqQx0PX7Coe+3nbXZc2HNQwqN+urs2WAc11B41jSy6NYXQ7+tTDIg==
+  dependencies:
+    "@atlaskit/theme" "^8.0.0"
+    "@babel/runtime" "^7.0.0"
+    memoize-one "^3.0.1"
+    react-syntax-highlighter "^10.0.1"
+
 "@atlaskit/css-reset@^3.0.5":
   version "3.0.5"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/css-reset/-/css-reset-3.0.5.tgz#c942746e2dc0b4b1c9aba58155383cdb92f50329"
@@ -476,6 +486,15 @@
 "@atlaskit/theme@^7.0.1":
   version "7.0.4"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/theme/-/theme-7.0.4.tgz#4f9a7568633a7e18bdcc121627e32916ee9ada66"
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+
+"@atlaskit/theme@^8.0.0":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-8.1.1.tgz#bb546eb80eeb88969cd77454000d634d14b8140a"
+  integrity sha512-4LRj7ClY6OPoT8f2/s/G9Vt0CxOrL0hNNaPLqOwo8X6cMsIVcy2nfTIOFOurvK3zY9aJvRj5OFnoMim+6tTVMQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
