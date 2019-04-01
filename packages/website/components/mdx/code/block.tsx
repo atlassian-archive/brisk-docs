@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { AkCodeBlock } from '@atlaskit/code';
 
-interface Props {
+export type Props = {
   children: string;
   className?: string;
-}
+};
 
 const getLanguageName = (className: string) => {
   return className.replace(/language-/, '');

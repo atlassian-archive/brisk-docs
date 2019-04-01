@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import TableTree, {
   Headers,
   Header,
@@ -15,7 +15,7 @@ import DocsNavContent from '../components/navigation/docs-nav-content';
 import NavigationWrapper from '../components/navigation-wrapper';
 import PageTitle from '../components/page-title';
 
-export default class Docs extends Component {
+export default class Docs extends React.Component {
   state = {
     expansionMap: {},
   };

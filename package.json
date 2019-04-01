@@ -70,6 +70,8 @@
         "@mdx-js/loader": "^0.17.5",
         "@mdx-js/mdx": "^0.15.0",
         "@mdx-js/tag": "^0.17.5",
+        "@types/lodash": "^4.14.123",
+        "@types/next": "^8.0.3",
         "@zeit/next-css": "^1.0.1",
         "@zeit/next-mdx": "^1.2.0",
         "babel-loader": "^8.0.5",

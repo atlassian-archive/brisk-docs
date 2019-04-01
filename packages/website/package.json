@@ -15,6 +15,7 @@
     "brisk": "bin/index.js"
   },
   "dependencies": {
+    "@brisk-docs/react-changelogs": "0.1.2",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/button": "^8.2.4",
     "@atlaskit/code": "^9.0.0",

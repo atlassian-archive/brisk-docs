@@ -1,12 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { extractCritical } from 'emotion-server';
 import { ServerStyleSheet } from 'styled-components';
 
-export default class MyDocument extends Document {
+export type Props = {
+  css: any;
+  styleTags: any;
+};
+
+export default class MyDocument extends Document<Props> {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
-    const page = renderPage(App => props =>
+    const page = renderPage(App => (props: Props) =>
       sheet.collectStyles(<App {...props} />),
     );
     const emotionStyles = extractCritical(page.html);
@@ -15,7 +20,7 @@ export default class MyDocument extends Document {
     return { ...page, ...emotionStyles, styleTags: styledComponentsTags };
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     const { __NEXT_DATA__, ids } = props;
     if (ids) {
@@ -24,13 +29,16 @@ export default class MyDocument extends Document {
   }
 
   render() {
+    // TODO TSFix - these both come back as undefined values at all times?
+    const { css, styleTags } = this.props;
+
     return (
       <html lang="en">
         <Head>
           <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" />
           {/* eslint-disable-next-line react/no-danger */}
-          <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
-          {this.props.styleTags}
+          <style dangerouslySetInnerHTML={{ __html: css }} />
+          {styleTags}
         </Head>
         <body>
           <Main />

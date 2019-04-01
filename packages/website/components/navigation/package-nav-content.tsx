@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {
   MenuSection,
@@ -14,17 +14,21 @@ import LinkComponent from './link-component';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
+import { Page } from '../../types';
 
-const GetLink = ({ id, pagePath }) => (
+type LinkProps = { id: string; pagePath; string };
+
+const GetLink = ({ id, pagePath }: LinkProps) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
 );
 
-GetLink.propTypes = {
-  id: PropTypes.string.isRequired,
-  pagePath: PropTypes.string.isRequired,
-};
+type SubExamples = Array<{
+  id: string;
+  pagePath: string;
+  isolatedPath: string;
+}>;
 
-const renderSubExamplesTree = subExamples => {
+const renderSubExamplesTree = (subExamples: SubExamples) => {
   const treeData = {
     rootId: 'subExamples',
     items: arrayToTreeItems(subExamples, {
@@ -42,6 +46,22 @@ const renderSubExamplesTree = subExamples => {
   );
 };
 
+export type SomeProps = {
+  homePath: string;
+  packageName: string;
+  changelogPath: string;
+  docs: Array<Page>;
+  examples: Array<Page>;
+  subExamples: SubExamples;
+};
+
+// subExamples: PropTypes.arrayOf(
+//   PropTypes.shape({
+//     id: PropTypes.string.isRequired,
+//     pagePath: PropTypes.string,
+//     isolatedPath: PropTypes.string,
+//   }),
+// ),
 const NavContent = ({
   packageName,
   homePath,
@@ -49,7 +69,7 @@ const NavContent = ({
   docs,
   examples,
   subExamples,
-}) => (
+}: SomeProps) => (
   <>
     <NavHeader headerText={packageName} />
     <MenuSection id="package-section" parentId="index-section">
@@ -83,31 +103,6 @@ const NavContent = ({
     </MenuSection>
   </>
 );
-
-NavContent.propTypes = {
-  homePath: PropTypes.string.isRequired,
-  packageName: PropTypes.string.isRequired,
-  changelogPath: PropTypes.string,
-  docs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  examples: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  subExamples: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string,
-      isolatedPath: PropTypes.string,
-    }),
-  ),
-};
 
 const PackageNavContent = ({ packageId, packageName }) => {
   const packagePages = pageInfo.packages.find(

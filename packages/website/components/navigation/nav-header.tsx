@@ -5,16 +5,19 @@ import {
 } from '@atlaskit/navigation-next';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
-import * as PropTypes from 'prop-types';
-
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
 const gridSize = gridSizeFn();
 
-const NavHeader = ({ headerText }) => (
+export type Props = {
+  headerText: string;
+};
+
+const NavHeader = ({ headerText }: Props) => (
   <HeaderSection>
-    {({ css }) => (
+    {/* TODO: TSFix - nav typings */}
+    {({ css }: { css: {} }) => (
       <div
         css={{
           ...css,
@@ -23,7 +26,8 @@ const NavHeader = ({ headerText }) => (
         }}
       >
         <ContainerHeader
-          before={itemState => (
+          // TODO: TSFix - nav typings
+          before={(itemState: any) => (
             <ItemAvatar
               itemState={itemState}
               appearance="square"
@@ -36,9 +40,5 @@ const NavHeader = ({ headerText }) => (
     )}
   </HeaderSection>
 );
-
-NavHeader.propTypes = {
-  headerText: PropTypes.string.isRequired,
-};
 
 export default NavHeader;

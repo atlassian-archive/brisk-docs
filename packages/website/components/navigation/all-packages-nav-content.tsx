@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   ContainerHeader,
   HeaderSection,
@@ -10,17 +10,21 @@ import {
 } from '@atlaskit/navigation-next';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
-import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 import LinkComponent from './link-component';
 
 const gridSize = gridSizeFn();
 
-const AllPackagesNavContent = ({ data }) => (
+export type Props = {
+  data: Array<{ packageId: string; homePath: string }>;
+};
+
+const AllPackagesNavContent = ({ data }: Props) => (
   <>
     <HeaderSection>
-      {({ css }) => (
+      {/* TODO: TSFix nav typing */}
+      {({ css }: { css: {} }) => (
         <div
           // This works because navigation-next is importing
           // an old version of emotion. It also prevents us from
@@ -33,7 +37,8 @@ const AllPackagesNavContent = ({ data }) => (
           }}
         >
           <ContainerHeader
-            before={itemState => (
+            // TODO: TSFix nav typing
+            before={(itemState: any) => (
               <ItemAvatar
                 itemState={itemState}
                 appearance="square"
@@ -46,7 +51,8 @@ const AllPackagesNavContent = ({ data }) => (
       )}
     </HeaderSection>
     <MenuSection id="package-section" parentId="index-section">
-      {({ className }) => (
+      {/* TODO: TSFix nav typing */}
+      {({ className }: { className: string }) => (
         <div className={className}>
           <BackItem text="Back to home" href="/" component={LinkComponent} />
           <Separator />
@@ -64,13 +70,5 @@ const AllPackagesNavContent = ({ data }) => (
     </MenuSection>
   </>
 );
-
-AllPackagesNavContent.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      packageId: PropTypes.string.isRequired, // TODO: May Need other data like owners, version etc from package.json
-    }),
-  ).isRequired,
-};
 
 export default AllPackagesNavContent;

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
@@ -14,6 +14,8 @@ import data from '../pages-list';
 // eslint-disable-next-line import/no-unresolved
 import meta from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
+
+import { PackageInfo } from '../types';
 
 const gridSize = gridSizeFn();
 
@@ -49,15 +51,22 @@ const head = {
   ],
 };
 
-const renderRow = ({ packageId, homePath }) => {
-  const metaData = meta.metaData.find(x => x.id === packageId);
+type Item = {
+  packageId: string;
+  homePath: string;
+};
+
+const renderRow = ({ packageId, homePath }: Item) => {
+  const metaData = meta.metaData.find((x: PackageInfo) => x.id === packageId);
   return {
     cells: [
       {
         key: packageId,
         content: (
           <RowCell>
-            <Link href={homePath}>{titleCase(packageId)}</Link>
+            <Link href={homePath}>
+              <a>{titleCase(packageId)}</a>
+            </Link>
           </RowCell>
         ),
       },
@@ -84,7 +93,8 @@ const renderRow = ({ packageId, homePath }) => {
   };
 };
 
-const GetRows = () => data.packages.map(item => renderRow(item));
+const GetRows = () => data.packages.map((item: Item) => renderRow(item));
+
 const PackagesList = () => (
   <Page>
     <Title>Brisk Documentation</Title>

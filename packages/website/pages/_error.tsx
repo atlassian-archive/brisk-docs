@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
 
@@ -34,7 +33,12 @@ const Message = styled.div`
 const packagesPath = /\/packages\/.*/g;
 const docsPath = /\/docs\/.*/g;
 
-class NotFound extends React.Component {
+export type Props = {
+  statusCode: number;
+  pageType: string;
+};
+
+class NotFound extends React.Component<Props> {
   static getInitialProps(res, err) {
     const error = err ? err.statuCode : null;
     const statusCode = res ? res.res.statusCode : error;
@@ -70,10 +74,5 @@ class NotFound extends React.Component {
     );
   }
 }
-
-NotFound.propTypes = {
-  statusCode: PropTypes.number.isRequired,
-  pageType: PropTypes.string.isRequired,
-};
 
 export default NotFound;
