@@ -80,7 +80,7 @@ const PackageExample = ({ data, fileContents, children }) => {
 
   return (
     <>
-      <PageTitle />
+      <PageTitle title={data.pageTitle} />
       <NavigationWrapper
         navContent={() => (
           <PackageNavContent
@@ -116,9 +116,10 @@ PackageExample.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string.isRequired,
+    pageTitle: PropTypes.string,
   }).isRequired,
-  fileContents: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  fileContents: PropTypes.string.isRequired,
 };
 
 export default PackageExample;

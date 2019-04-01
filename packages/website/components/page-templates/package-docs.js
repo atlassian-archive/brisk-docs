@@ -8,7 +8,7 @@ import PageTitle from '../page-title';
 
 const PackageDocsWrapper = ({ data, children }) => (
   <>
-    <PageTitle />
+    <PageTitle title={data.pageTitle} />
     <NavigationWrapper
       navContent={() => (
         <PackageNavContent packageId={data.id} packageName={data.packageName} />
@@ -23,6 +23,7 @@ PackageDocsWrapper.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string.isRequired,
+    pageTitle: PropTypes.string.isRequired,
   }).isRequired,
   children: PropTypes.node.isRequired,
 };

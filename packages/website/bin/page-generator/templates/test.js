@@ -113,27 +113,4 @@ describe('Page templates', () => {
 
     assertValidTemplate(output);
   });
-
-  it('creates js for a changelog page', () => {
-    generators.generateChangelogPage(
-      'output.js',
-      path.join(cwd, 'changelog.md'),
-      {},
-      { wrappersPath, pagesPath },
-    );
-
-    const output = getOutput('output.js');
-
-    expect(output).toMatchInlineSnapshot(`
-"import React from 'react';
-import changelog from '!!raw-loader!../changelog.md';
-import Wrapper from '../wrappers/package-changelog';
-
-export default () => (
-  <Wrapper data={\\"../../../Users/dpisani/src/brisk-docs/packages/website/components/page-title\\"}>
-      {changelog}
-  </Wrapper>
-);"
-`);
-  });
 });

@@ -61,7 +61,7 @@ const MissingReadmeWarning = () => (
 const PackageHome = ({ data, children }) => {
   return (
     <>
-      <PageTitle />
+      <PageTitle title={data.pageTitle} />
       <NavigationWrapper
         navContent={() => (
           <PackageNavContent
@@ -101,6 +101,7 @@ PackageHome.propTypes = {
       url: PropTypes.string.isRequired,
       directory: PropTypes.string,
     }).isRequired,
+    pageTitle: PropTypes.string,
   }).isRequired,
   children: PropTypes.node,
 };

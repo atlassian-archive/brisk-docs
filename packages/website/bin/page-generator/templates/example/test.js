@@ -1,9 +1,9 @@
 import { assertValidTemplate } from '../test-utils';
-import changelogTemplate from './index';
+import exampleTemplate from './index';
 
-describe('changelog page templates', () => {
+describe('example page template', () => {
   it('creates valid source code for a page', () => {
-    const source = changelogTemplate();
+    const source = exampleTemplate();
 
     assertValidTemplate(source);
   });

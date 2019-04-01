@@ -1,9 +1,10 @@
 const fse = require('fs-extra');
 const path = require('path');
-const outdent = require('outdent');
 
 const changelogTemplate = require('./changelog');
 const singleComponentTemplate = require('./single-component');
+const wrappedComponentTemplate = require('./wrapped-component');
+const exampleTemplate = require('./example');
 
 const pageTitleAbsolutePath = path.resolve(
   __dirname,
@@ -14,76 +15,6 @@ const writeFile = (pagePath, content) => {
   fse.ensureFileSync(pagePath);
   fse.writeFileSync(pagePath, content);
 };
-
-const basicPageTemplate = (
-  componentPath,
-  wrapperPath,
-  pageTitlePath,
-  data = {},
-  title = '',
-) => {
-  if (!componentPath) {
-    return outdent`
-      import React from 'react';
-      import Wrapper from '${wrapperPath}';
-      import PageTitle from '${pageTitlePath}';
-
-      export default () => (
-       <>
-          <PageTitle title='${title}' />
-          <Wrapper data={${JSON.stringify(data)}} />
-       </>
-      );
-    `;
-  }
-
-  return outdent`
-    import React from 'react';
-    import Component from '${componentPath}';
-    import Wrapper from '${wrapperPath}';
-    import PageTitle from '${pageTitlePath}';
-
-    export default () => (
-     <>
-        <PageTitle title='${title}' />
-            <Wrapper data={${JSON.stringify(data)}}>
-                <Component />
-            </Wrapper>
-     </>
-    );
-  `;
-};
-
-const exampleTemplate = (
-  componentPath,
-  wrapperPath,
-  pageTitlePath,
-  data = {},
-  title = '',
-) => outdent`
-    import React from 'react';
-    import Component from '${componentPath}';
-    import fileContents from '!!raw-loader!${componentPath}';
-
-    import Wrapper from '${wrapperPath}';
-    import PageTitle from '${pageTitlePath}';
-
-    export default () => (
-        <>
-            <PageTitle title='${title}' />
-            <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-                <Component />
-            </Wrapper>
-        </>
-    );
-`;
-
-const rawTemplate = componentPath => outdent`
-import React from 'react';
-import Component from '${componentPath}'
-
-export default () => <Component />
-`;
 
 /**
  * Generates an import path to a destination file relative from a given path
@@ -132,11 +63,7 @@ const generateBasicPage = (
   { wrappersPath, pagesPath },
   title = '',
 ) => {
-  const {
-    componentImportPath,
-    packageHomeWrapperPath,
-    pageTitleComponentPath,
-  } = getGenericPageInfo(
+  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -144,16 +71,17 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  writeFile(
-    path.join(pagesPath, pagePath),
-    basicPageTemplate(
-      componentImportPath,
-      packageHomeWrapperPath,
-      pageTitleComponentPath,
-      data,
-      title,
-    ),
-  );
+  const templateData = { ...data, pageTitle: title };
+
+  const source = componentImportPath
+    ? wrappedComponentTemplate(
+        componentImportPath,
+        packageHomeWrapperPath,
+        templateData,
+      )
+    : singleComponentTemplate(componentImportPath, templateData);
+
+  writeFile(path.join(pagesPath, pagePath), source);
 };
 
 const generateNonComponentPage = (
@@ -170,16 +98,12 @@ const generateNonComponentPage = (
     path.join(wrappersPath, `${wrapperName}.js`),
   );
 
-  const pageTitleComponentPath = getImportPath(
-    absolutePagePath,
-    pageTitleAbsolutePath,
-  );
-
   writeFile(
     path.join(pagesPath, pagePath),
     singleComponentTemplate(packageHomeWrapperPath, {
       ...data,
       pageTitle: title,
+      pageType: type,
     }),
   );
 };
@@ -248,11 +172,7 @@ const generateExamplePage = (
   const wrapperName = 'package-example';
   const { wrappersPath, pagesPath } = config;
 
-  const {
-    componentImportPath,
-    packageHomeWrapperPath,
-    pageTitleComponentPath,
-  } = getGenericPageInfo(
+  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
@@ -260,20 +180,16 @@ const generateExamplePage = (
     wrapperName,
   );
 
+  const pageData = { ...data, pageTitle: title };
+
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(
-      componentImportPath,
-      packageHomeWrapperPath,
-      pageTitleComponentPath,
-      data,
-      title,
-    ),
+    exampleTemplate(componentImportPath, packageHomeWrapperPath, pageData),
   );
 
   writeFile(
     path.join(pagesPath, rawPagesPath),
-    rawTemplate(path.join('..', componentImportPath)),
+    singleComponentTemplate(path.join('..', componentImportPath)),
   );
 };
 

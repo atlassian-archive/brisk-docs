@@ -11,6 +11,7 @@ package-lock.json
 yarn-error.log
 
 ./cypress
+**/cypress/screenshots
 
 /packages/website/pages/packages
 /packages/website/pages/docs

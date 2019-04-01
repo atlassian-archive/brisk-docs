@@ -100,7 +100,7 @@ const ItemList = ({ data }) => {
 
   return (
     <>
-      <PageTitle />
+      <PageTitle title={data.pageTitle} />
       <NavigationWrapper
         navContent={() =>
           data.packageName ? (
@@ -128,6 +128,7 @@ ItemList.propTypes = {
         id: PropTypes.string.isRequired,
         pagePath: PropTypes.string.isRequired,
         pageType: PropTypes.string.isRequired,
+        pageTitle: PropTypes.string,
       }),
     ),
   }).isRequired,
