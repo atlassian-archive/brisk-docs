@@ -2,19 +2,10 @@ import { createTempDir } from 'jest-fixtures';
 import path from 'path';
 import fse from 'fs-extra';
 
-import * as generators from './index';
-
-const assertImportsReact = source => {
-  expect(source).toMatch(/^import React from 'react';$/m);
-};
+import * as generators from './write-pages';
 
 const assertNoAbsoluteImports = source => {
   expect(source).not.toMatch(/^import .+ from '\/.+'/m);
-};
-
-const assertValidTemplate = source => {
-  assertImportsReact(source);
-  assertNoAbsoluteImports(source);
 };
 
 describe('Page templates', () => {
@@ -43,7 +34,7 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
   });
 
   it('creates js for a package doc page', () => {
@@ -56,7 +47,7 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
   });
 
   it('creates js for a package example pages', () => {
@@ -72,9 +63,9 @@ describe('Page templates', () => {
 
     const outputRaw = getOutput('output-raw.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
 
-    assertValidTemplate(outputRaw);
+    assertNoAbsoluteImports(outputRaw);
   });
 
   it('creates js for a docs home page', () => {
@@ -86,7 +77,7 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
   });
 
   it('creates js for an examples home page', () => {
@@ -98,7 +89,7 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
   });
 
   it('creates js for project doc page', () => {
@@ -111,6 +102,6 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
 
-    assertValidTemplate(output);
+    assertNoAbsoluteImports(output);
   });
 });

@@ -12,7 +12,7 @@ const {
   generateDocsHomePage,
   generateExamplesHomePage,
   generateProjectDocPage,
-} = require('./templates');
+} = require('./write-pages');
 
 const packagesData = [];
 

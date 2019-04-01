@@ -5,11 +5,11 @@ const outdent = require('outdent');
  * component wrapped is another, usually user content being wrapped
  * inside a page template component
  *
- * @param {string}   componentPath Description
- * @param {string}   wrapperPath   Description
- * @param {object} [data={}]     Description
+ * @param {string} componentPath absolute path to the inner component
+ * @param {string} wrapperPath   absolute path to the wrapper component
+ * @param {object} [data={}]     extra data needed by the page
  *
- * @returns {type} Description
+ * @returns {type} source code for the page
  */
 const wrappedComponentTemplate = (componentPath, wrapperPath, data = {}) => {
   return outdent`

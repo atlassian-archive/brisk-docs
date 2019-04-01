@@ -1,9 +1,9 @@
-import { assertValidTemplate } from '../test-utils';
+import assertValidTemplate from '../test-utils';
 import exampleTemplate from './index';
 
 describe('example page template', () => {
   it('creates valid source code for a page', () => {
-    const source = exampleTemplate();
+    const source = exampleTemplate('./component/path', './wrapper/path');
 
     assertValidTemplate(source);
   });
