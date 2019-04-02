@@ -11,18 +11,20 @@ const outdent = require('outdent');
  *
  * @returns {type} source code for the page
  */
-const wrappedComponentTemplate = (componentPath, wrapperPath, data = {}) => {
-  return outdent`
-    import React from 'react';
-    import Component from '${componentPath}';
-    import Wrapper from '${wrapperPath}';
+const wrappedComponentTemplate = (
+  componentPath,
+  wrapperPath,
+  data = {},
+) => outdent`
+  import React from 'react';
+  import Component from '${componentPath}';
+  import Wrapper from '${wrapperPath}';
 
-    export default () => (
-      <Wrapper data={${JSON.stringify(data)}}>
-          <Component />
-      </Wrapper>
-    );
-  `;
-};
+  export default () => (
+    <Wrapper data={${JSON.stringify(data)}}>
+        <Component />
+    </Wrapper>
+  );
+`;
 
 module.exports = wrappedComponentTemplate;

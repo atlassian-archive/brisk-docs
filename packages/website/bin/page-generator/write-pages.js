@@ -20,9 +20,6 @@ const writeFile = (pagePath, content) => {
  */
 const getImportPath = (from, to) => {
   const fromDir = path.dirname(from);
-  if (!to) {
-    throw new Error('To path cannot be empty');
-  }
   return path.relative(fromDir, to).replace('.js', '');
 };
 

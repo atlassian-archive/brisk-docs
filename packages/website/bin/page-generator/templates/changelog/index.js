@@ -9,18 +9,16 @@ const outdent = require('outdent');
  *
  * @returns {string} source code for the page
  */
-const changelogTemplate = (changelogPath, wrapperPath, data = {}) => {
-  return outdent`
-    import React from 'react';
-    import changelog from '!!raw-loader!${changelogPath}';
-    import Wrapper from '${wrapperPath}';
+const changelogTemplate = (changelogPath, wrapperPath, data = {}) => outdent`
+  import React from 'react';
+  import changelog from '!!raw-loader!${changelogPath}';
+  import Wrapper from '${wrapperPath}';
 
-    export default () => (
-      <Wrapper data={${JSON.stringify(data)}}>
-          {changelog}
-      </Wrapper>
-    );
-  `;
-};
+  export default () => (
+    <Wrapper data={${JSON.stringify(data)}}>
+        {changelog}
+    </Wrapper>
+  );
+`;
 
 module.exports = changelogTemplate;
