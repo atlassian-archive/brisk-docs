@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
+import { NextContext } from 'next';
 
 import LinkButton from '../components/link-button';
 
@@ -39,13 +40,14 @@ export type Props = {
 };
 
 class NotFound extends React.Component<Props> {
-  static getInitialProps(res, err) {
+  static getInitialProps({ res, asPath, err: errar }: NextContext, err) {
+    console.log(errar);
     const error = err ? err.statuCode : null;
-    const statusCode = res ? res.res.statusCode : error;
+    const statusCode = res ? res.statusCode : error;
 
     let pageType = '';
-    const isPackage = packagesPath.exec(res.asPath);
-    const isDoc = docsPath.exec(res.asPath);
+    const isPackage = packagesPath.exec(asPath);
+    const isDoc = docsPath.exec(asPath);
 
     if (isPackage) {
       pageType = 'packages';
@@ -68,7 +70,7 @@ class NotFound extends React.Component<Props> {
             : 'An error has occurred.'}
         </Message>
         <LinkButton href={`/${pageType}`} appearance="warning">
-          Back to {pageType || 'home'}
+          <div>Back to {pageType || 'home'}</div>
         </LinkButton>
       </Page>
     );

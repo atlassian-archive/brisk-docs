@@ -17,7 +17,7 @@ import LinkComponent from './link-component';
 const gridSize = gridSizeFn();
 
 export type Props = {
-  data: Array<{ packageId: string; homePath: string }>;
+  data: { packageId: string; homePath: string }[];
 };
 
 const AllPackagesNavContent = ({ data }: Props) => (

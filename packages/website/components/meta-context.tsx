@@ -1,8 +1,13 @@
 import * as React from 'react';
 
-const ContextMeta = React.createContext({});
+interface ContextInterface {
+  siteName: string;
+}
+
+const ContextMeta = React.createContext<ContextInterface>({ siteName: '' });
 
 export default ContextMeta;
 
-/* eslint-disable-next-line import/no-unresolved */
+/* eslint-disable import/no-unresolved */
+// @ts-ignore
 export { default as metadata } from '../data/site-meta.json';

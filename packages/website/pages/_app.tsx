@@ -1,5 +1,5 @@
 import * as React from 'react';
-import App, { Container } from 'next/app';
+import App, { Container, NextAppContext } from 'next/app';
 import '@atlaskit/css-reset';
 import { MDXProvider } from '@mdx-js/tag';
 import components from '../components/mdx';
@@ -12,7 +12,7 @@ export type Props = {
 };
 
 export default class MyApp extends App<Props> {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {};
 
     if (Component.getInitialProps) {

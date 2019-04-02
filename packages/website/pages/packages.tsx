@@ -12,10 +12,14 @@ import AllPackagesNavContent from '../components/navigation/all-packages-nav-con
 
 import data from '../pages-list';
 // eslint-disable-next-line import/no-unresolved
-import meta from '../data/packages-data.json';
+import meta2 from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
 
-import { PackageInfo } from '../types';
+import { PackageInfo, Metadata } from '../types';
+
+const meta: Metadata = meta2;
+
+// TODO: TSFix We are typing metadata here, but I'm sure there is a better way to do this
 
 const gridSize = gridSizeFn();
 
@@ -51,13 +55,16 @@ const head = {
   ],
 };
 
-type Item = {
-  packageId: string;
-  homePath: string;
+const MaintainersToString = (maintainers: PackageInfo['maintainers']) => {
+  if (Array.isArray(maintainers)) return maintainers.join(', ');
+  if (typeof maintainers === 'string') return maintainers;
+  return '';
 };
 
-const renderRow = ({ packageId, homePath }: Item) => {
-  const metaData = meta.metaData.find((x: PackageInfo) => x.id === packageId);
+const renderRow = ({ packageId, homePath }: PackageInfo) => {
+  const metaData = meta.metaData.find(x => x.id === packageId);
+
+  if (!metaData) return {};
   return {
     cells: [
       {
@@ -81,19 +88,13 @@ const renderRow = ({ packageId, homePath }: Item) => {
       },
       {
         key: 'maintainers',
-        content: (
-          <RowCell>
-            {metaData.maintainers && metaData.maintainers.length > 0
-              ? metaData.maintainers.join(', ')
-              : ''}
-          </RowCell>
-        ),
+        content: <RowCell>{MaintainersToString(metaData.maintainers)}</RowCell>,
       },
     ],
   };
 };
 
-const GetRows = () => data.packages.map((item: Item) => renderRow(item));
+const GetRows = () => data.packages.map(item => renderRow(item));
 
 const PackagesList = () => (
   <Page>

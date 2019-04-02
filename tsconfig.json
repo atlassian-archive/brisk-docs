@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
+    "outDir": "build",
     "allowJs": false,
     "alwaysStrict": true,
     "declaration": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -19,7 +22,10 @@
     "noUnusedParameters": true,
     "strict": true,
     "strictFunctionTypes": true,
-  },
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["es5", "es6", "es7", "es2017", "dom"]
+    },
   "include": [
     "packages/react-changelogs/src/**/*",
     "packages/website/**/*",

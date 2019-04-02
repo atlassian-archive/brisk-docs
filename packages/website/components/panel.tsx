@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { colors, gridSize, math } from '@atlaskit/theme';
 import Link from 'next/link';
@@ -88,7 +87,7 @@ export type Props = {
   color: string;
   description: string;
   imgSrc: string;
-  IconComponent: React.ComponentElement<any, any>;
+  IconComponent: React.ComponentType<any>;
 };
 
 const Panel = ({
@@ -117,14 +116,5 @@ const Panel = ({
     </PanelStyle>
   </Link>
 );
-
-Panel.propTypes = {
-  href: PropTypes.string.isRequired,
-  IconComponent: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-};
 
 export default Panel;

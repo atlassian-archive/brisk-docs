@@ -10,7 +10,8 @@ import LinkComponent from './navigation/link-component';
 import SearchDrawer from './navigation/search-drawer';
 
 export type Props = {
-  navContent: () => null;
+  // TODO TSFix: Type this
+  navContent: any;
 };
 
 type State = {

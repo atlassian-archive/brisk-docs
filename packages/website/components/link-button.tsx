@@ -11,7 +11,11 @@ import * as React from 'react';
 import Button from '@atlaskit/button';
 import Link from 'next/link';
 
-const LinkButton = (props: Object) => (
+const LinkButton = (props: {
+  children: React.ReactChild;
+  href: string;
+  appearance: string;
+}) => (
   <Button
     {...props}
     component={({
@@ -20,7 +24,7 @@ const LinkButton = (props: Object) => (
       ...rest
     }: {
       href: string;
-      children: React.ReactChild;
+      children: React.ReactNode;
     }) => (
       <Link href={href}>
         <a {...rest}>{children}</a>

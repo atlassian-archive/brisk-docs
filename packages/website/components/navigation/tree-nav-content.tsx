@@ -5,10 +5,10 @@ import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 
 type Item =
-  | { id: string; children: Array<Item> }
+  | { id: string; children: Item[] }
   | { id: string; pagePath: string; children: undefined };
 
-type ArrayItems = Array<Item>;
+type ArrayItems = Item[];
 
 // Flatten the nested page structure into an object that ak/tree understands
 const arrayToTreeItems = (

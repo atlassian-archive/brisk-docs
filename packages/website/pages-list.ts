@@ -4,7 +4,16 @@
    pages-list.json is used.
 */
 
+// @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import pageInfo from './data/pages-list.json';
+import { Page, PackageInfo } from './types';
 
-export default pageInfo;
+interface Info {
+  packages: PackageInfo[];
+  docs: Page[];
+}
+
+const data: Info = pageInfo;
+
+export default data;

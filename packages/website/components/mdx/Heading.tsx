@@ -13,6 +13,8 @@ export type Props = {
 };
 
 const Heading = ({ tag: Tag, children }: Props) => (
+  // @ts-ignore - tag is a string, but it's a valid element string.
+  // Typing is hard
   <Tag id={dashcase(children)}>{children}</Tag>
 );
 

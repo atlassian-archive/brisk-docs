@@ -70,6 +70,8 @@ class SearchDrawer extends React.Component<Props> {
                 text={pageTitle}
                 href={path}
                 resultId={path}
+                // TODO: Figure out what this prop does in resultBase
+                type=""
               />
             ))}
           </ResultItemGroup>

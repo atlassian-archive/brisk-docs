@@ -9,6 +9,7 @@ import LinkComponent from './link-component';
 export type Props = {
   text: string;
   href: string;
+  id?: string;
   router: {
     pathname: string;
   };

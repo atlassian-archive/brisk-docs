@@ -22,3 +22,9 @@ declare module 'lodash.capitalize' {
 
   export default capitalize;
 }
+
+declare module 'lodash.debounce' {
+  import { debounce } from 'lodash';
+
+  export default debounce;
+}
