@@ -23,12 +23,15 @@ module.exports = withCSS(
       config.externals = [];
 
       config.module.rules.push({
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
+        test: /\.(ts|tsx|js|jsx)$/,
+        exclude: /node_modules\/(?!@brisk-docs\/website)/, // exclude all node_modules except our website while using the loader within a consumer app.
         use: {
           loader: 'babel-loader',
         },
       });
+
+      // Website modules should take precedence over the node_modules of the consumer.
+      config.resolve.modules.push(__dirname, 'node_modules');
 
       // Adding items to globalScope in the website
       config.plugins.push(
