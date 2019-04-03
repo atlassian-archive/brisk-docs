@@ -21,6 +21,10 @@ install-bolt: &install-bolt
   name: Install Bolt
   command: sudo yarn global add bolt && bolt
 
+build: &build
+  name: Build Packages
+  command: yarn build
+
 jobs:
   install:
     <<: *job-setup
@@ -32,6 +36,8 @@ jobs:
       - restore_cache: *restore-cache
 
       - run: *install-bolt
+
+      - run: *build
 
       - run:
           name: Install Cypress
@@ -48,12 +54,13 @@ jobs:
 
       - run: *install-bolt
 
+      - run: *build
+
       - save_cache: *save-cache
 
       - run:
           name: Lint Files
           command: bolt lint
-
 
   unit_tests:
     <<: *job-setup
@@ -64,6 +71,8 @@ jobs:
 
       - run: *install-bolt
 
+      - run: *build
+
       - run:
           name: Jest Suite
           command: bolt test
@@ -73,8 +82,6 @@ jobs:
       - store_test_results:
           path: test-reports/junit
 
-
-
   integration_tests:
     <<: *job-setup
     steps:
@@ -83,6 +90,8 @@ jobs:
       - restore_cache: *restore-cache
 
       - run: *install-bolt
+
+      - run: *build
 
       - run:
           name: Build website
@@ -96,7 +105,6 @@ jobs:
       - run:
           name: Cypress Suite
           command: node_modules/.bin/wait-on http://localhost:8080 && bolt cypress
-
 
 workflows:
   version: 2

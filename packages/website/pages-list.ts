@@ -5,7 +5,6 @@
 */
 
 // @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import pageInfo from './data/pages-list.json';
 import { Page, PackageInfo } from './types';
 
