@@ -11,6 +11,7 @@ import NavigationWrapper from '../components/navigation-wrapper';
 import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
 import data from '../pages-list';
+// @ts-ignore - ts cannot resolve file when it doesn't exist, which it won't always
 // eslint-disable-next-line import/no-unresolved
 import meta2 from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
