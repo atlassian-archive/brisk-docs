@@ -2,7 +2,7 @@
   "name": "@brisk-docs/react-changelogs",
   "version": "0.1.2",
   "description": "This package is used for displaying changelogs from your projects",
-  "main": "dist/index.js",
+  "main": "dist/react-changelogs.cjs.js",
   "module": "dist/react-changelogs.esm.js",
   "repository": "git@github.com:glad-docs/brisk-docs.git",
   "author": "Aparna Raj",
@@ -13,9 +13,6 @@
   "files": [
     "dist"
   ],
-  "preconstruct": {
-    "source": "./src/index.ts"
-  },
   "devDependencies": {
     "@types/enzyme": "^2.8.11",
     "@types/jest": "^21.1.2",
@@ -36,6 +33,7 @@
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/runtime": "^7.4.3",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
