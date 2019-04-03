@@ -19,8 +19,6 @@ import { PackageInfo, Metadata } from '../types';
 
 const meta: Metadata = meta2;
 
-// TODO: TSFix We are typing metadata here, but I'm sure there is a better way to do this
-
 const gridSize = gridSizeFn();
 
 const head = {

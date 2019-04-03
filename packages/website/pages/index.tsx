@@ -13,6 +13,8 @@ import Meta from '../components/meta-context';
 
 const WINDOW_BREAKPOINT = 800;
 
+throw new Error('borked');
+
 const Page = styled.div`
   background-color: ${colors.B500};
   position: fixed;

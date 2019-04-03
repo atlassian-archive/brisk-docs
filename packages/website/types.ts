@@ -20,7 +20,7 @@ type Maintainers = string | string[];
 
 type Repository = string | { type: string; url: string; directory?: string };
 
-type packageInfo2 = {
+type Meta = {
   id: string;
   description: string;
   version: string;
@@ -29,7 +29,7 @@ type packageInfo2 = {
 };
 
 export declare type Metadata = {
-  metaData: packageInfo2[];
+  metaData: Meta[];
 };
 
 export declare type PackageInfo = {

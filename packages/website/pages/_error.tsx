@@ -39,10 +39,14 @@ export type Props = {
   pageType: string;
 };
 
+// Next sometimes adds a statusCode to its thrown errors, so we need to check for this
+interface InitialProps extends NextContext {
+  err: Error & { statusCode?: number };
+}
+
 class NotFound extends React.Component<Props> {
-  static getInitialProps({ res, asPath, err: errar }: NextContext, err) {
-    console.log(errar);
-    const error = err ? err.statuCode : null;
+  static getInitialProps({ res, asPath, err }: InitialProps) {
+    const error = err ? err.statusCode : null;
     const statusCode = res ? res.statusCode : error;
 
     let pageType = '';

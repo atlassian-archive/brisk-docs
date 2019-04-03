@@ -8,13 +8,11 @@ function dashcase(children?: React.ReactChild) {
 }
 
 export type Props = {
-  tag: string;
+  tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: React.ReactChild;
 };
 
 const Heading = ({ tag: Tag, children }: Props) => (
-  // @ts-ignore - tag is a string, but it's a valid element string.
-  // Typing is hard
   <Tag id={dashcase(children)}>{children}</Tag>
 );
 
