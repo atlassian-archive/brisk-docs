@@ -38,13 +38,7 @@
   "preconstruct": {
     "packages": [
       "packages/react-changelogs"
-    ],
-    "globals": {
-      "react": "asdffdsa",
-      "styled-components": "wat",
-      "@babel/core": "abcde",
-      "enzyme": "adsf"
-    }
+    ]
   },
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
@@ -75,6 +69,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime": "^7.4.3",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
@@ -153,7 +148,7 @@
     "jest": "^24.1.0",
     "json-loader": "^0.5.7",
     "nodemon": "^1.12.1",
-    "preconstruct": "^0.0.52",
+    "preconstruct": "^0.0.0-typescript.1",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.0.0",
     "style-loader": "^0.23.0",
