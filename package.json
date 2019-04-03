@@ -24,7 +24,6 @@
         "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
         "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
         "check:types": "yarn tsc --noEmit",
-        "test:logs": "bolt w @brisk-docs/react-changelogs run jest",
         "changeset": "build-releases changeset",
         "version-packages": "build-releases version",
         "publish-changed": "yarn build && build-releases publish",
