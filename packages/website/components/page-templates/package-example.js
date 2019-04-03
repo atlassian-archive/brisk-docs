@@ -13,6 +13,7 @@ import * as PropTypes from 'prop-types';
 import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
+import PageTitle from '../page-title';
 
 const PageContent = styled.div`
   display: flex;
@@ -78,26 +79,32 @@ const PackageExample = ({ data, fileContents, children }) => {
   const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
 
   return (
-    <NavigationWrapper
-      navContent={() => (
-        <PackageNavContent packageId={data.id} packageName={data.packageName} />
-      )}
-    >
-      <PageContent>
-        <ExampleStyle>
-          <Header>
-            <h1>{data.pageTitle}</h1>
-            <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
-          </Header>
-          <ExampleComponentContainer>
-            <div className="inner-container">{children}</div>
-          </ExampleComponentContainer>
-        </ExampleStyle>
-        <CodeStyle data-testid="example-source-code">
-          <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-        </CodeStyle>
-      </PageContent>
-    </NavigationWrapper>
+    <>
+      <PageTitle title={data.pageTitle} />
+      <NavigationWrapper
+        navContent={() => (
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
+        )}
+      >
+        <PageContent>
+          <ExampleStyle>
+            <Header>
+              <h1>{data.pageTitle}</h1>
+              <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
+            </Header>
+            <ExampleComponentContainer>
+              <div className="inner-container">{children}</div>
+            </ExampleComponentContainer>
+          </ExampleStyle>
+          <CodeStyle data-testid="example-source-code">
+            <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+          </CodeStyle>
+        </PageContent>
+      </NavigationWrapper>
+    </>
   );
 };
 
@@ -107,8 +114,8 @@ PackageExample.propTypes = {
     packageName: PropTypes.string.isRequired,
     pageTitle: PropTypes.string.isRequired,
   }).isRequired,
-  fileContents: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  fileContents: PropTypes.string.isRequired,
 };
 
 export default PackageExample;
