@@ -1,7 +1,6 @@
 const cwd = process.env.DOCS_WEBSITE_CWD;
 
-module.exports = {
-  extends: `${cwd}/babel.config.js`, // to merge the consumer level babel.config
+const babelConfig = {
   presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript'],
   plugins: [
     'emotion',
@@ -19,3 +18,11 @@ module.exports = {
     '@babel/transform-runtime',
   ],
 };
+
+// to merge the consumer level babel.config
+// condition required to support dev testing of our website which otherwise throws Configuration cycle detected loading error.
+if (cwd !== __dirname) {
+  babelConfig.extends = `${cwd}/babel.config.js`;
+}
+
+module.exports = babelConfig;
