@@ -1,5 +1,5 @@
 {
-  "name": "brisk-docsyyy",
+  "name": "brisk-docs",
   "version": "1.0.0",
   "description": "The brisk-docs website generator",
   "main": "index.js",
@@ -8,9 +8,10 @@
   "scripts": {
     "test": "jest",
     "cypress": "node_modules/.bin/cypress run",
-    "build": "bolt ws run build",
+    "build": "preconstruct build",
     "dev:website": "bolt w @brisk-docs/website run dev",
     "build:website": "bolt w @brisk-docs/website run build:site",
+    "start:website": "bolt w @brisk-docs/website run start",
     "build:docs": "NODE_ENV=production node packages/website/bin/index.js build",
     "export": "node packages/website/bin/index.js export",
     "clean": "yarn delete:modules && yarn delete:caches && yarn delete:dist",
@@ -18,7 +19,6 @@
     "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
     "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
     "docs": "node packages/website/bin/index.js dev",
-    "start": "bolt w @brisk-docs/website run start",
     "prettier": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn check:types",
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
@@ -79,6 +79,7 @@
     "@types/next": "^8.0.3",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
+    "@zeit/next-typescript": "^1.1.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-dynamic-import": "^2.1.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -97,8 +98,9 @@
     "lodash.flatmap": "^4.5.0",
     "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
-    "next": "^7.0.2",
+    "next": "^8.0.4",
     "outdent": "^0.7.0",
+    "preconstruct": "^0.0.53",
     "pretty-proptypes": "^0.6.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
@@ -115,8 +117,7 @@
     "typescript": "^3.2.1",
     "uglify-js": "^3.1.7",
     "wait-on": "^3.2.0",
-    "webpack": "^4.29.6",
-    "preconstruct": "^0.0.53"
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "@atlaskit/build-releases": "^3.0.3",
