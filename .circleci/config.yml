@@ -87,7 +87,7 @@ jobs:
 
       - run:
           name: Start up website
-          command: bolt start
+          command: bolt start:website
           background: true
 
       - run:
