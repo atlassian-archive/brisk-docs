@@ -6,7 +6,7 @@ const fs = require('fs-extra');
 
 const processDirectory = dirPath => {
   try {
-    fs
+    return fs
       .readdirSync(dirPath)
       .map(fname => ({
         id: path.parse(fname).name,
