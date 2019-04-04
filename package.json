@@ -115,7 +115,8 @@
     "typescript": "^3.2.1",
     "uglify-js": "^3.1.7",
     "wait-on": "^3.2.0",
-    "webpack": "^4.29.6"
+    "webpack": "^4.29.6",
+    "preconstruct": "^0.0.53"
   },
   "devDependencies": {
     "@atlaskit/build-releases": "^3.0.3",
@@ -148,7 +149,6 @@
     "jest": "^24.1.0",
     "json-loader": "^0.5.7",
     "nodemon": "^1.12.1",
-    "preconstruct": "^0.0.0-typescript.1",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.0.0",
     "style-loader": "^0.23.0",

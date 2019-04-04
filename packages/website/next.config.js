@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
 });
@@ -37,6 +38,20 @@ module.exports = withCSS(
       config.plugins.push(
         new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),
       );
+
+      // this is only necessary inside the monorepo
+      // outside the monorepo, it will throw, be caught and nothing will happen
+      try {
+        // eslint-disable-next-line no-param-reassign
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          // we're ignoring these linting rules since they _should_ fail
+          // outside the monorepo
+          // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+          ...require('preconstruct').aliases.webpack(path.join(__dirname)),
+        };
+        // eslint-disable-next-line no-empty
+      } catch (err) {}
 
       config.resolve.extensions.push('.tsx', '.ts');
 
