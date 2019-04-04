@@ -295,7 +295,7 @@ module.exports = async function generatePages(
   };
 
   const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
-  const docsSitemap = generateProjectDocsPages(docsInfo, generatorConfig);
+  const docsSitemap = docsInfo ? generateProjectDocsPages(docsInfo, generatorConfig) : undefined;
 
   return {
     packages: packageSitemap,

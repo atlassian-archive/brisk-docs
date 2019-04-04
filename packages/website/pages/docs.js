@@ -6,6 +6,7 @@ import TableTree, {
   Row,
   Cell,
 } from '@atlaskit/table-tree';
+import SectionMessage from '@atlaskit/section-message';
 import Link from 'next/link';
 import titleCase from 'title-case';
 
@@ -14,6 +15,12 @@ import pageInfo from '../pages-list';
 import DocsNavContent from '../components/navigation/docs-nav-content';
 import NavigationWrapper from '../components/navigation-wrapper';
 import PageTitle from '../components/page-title';
+
+const NoDocsMessage = () => (
+  <SectionMessage appearance="warning">
+    There do not currently exist any docs pages.
+  </SectionMessage>
+);
 
 export default class Docs extends Component {
   state = {
@@ -29,48 +36,52 @@ export default class Docs extends Component {
         <NavigationWrapper navContent={DocsNavContent}>
           <Page>
             <Title>Documents Overview</Title>
-            <Section>
-              <TableTree>
-                <Headers>
-                  <Header width={300}>Name</Header>
-                  <Header width={400}>Path</Header>
-                </Headers>
-                <Rows
-                  items={pageInfo.docs}
-                  render={({ id, pagePath, children }) => (
-                    <Row
-                      itemId={id}
-                      items={children}
-                      hasChildren={children && children.length > 0}
-                      isExpanded={Boolean(expansionMap[id])}
-                      onExpand={() =>
-                        this.setState({
-                          expansionMap: {
-                            ...expansionMap,
-                            [id]: true,
-                          },
-                        })
-                      }
-                      onCollapse={() =>
-                        this.setState({
-                          expansionMap: {
-                            ...expansionMap,
-                            [id]: false,
-                          },
-                        })
-                      }
-                    >
-                      <Cell singleLine>{titleCase(id)}</Cell>
-                      <Cell>
-                        <Link href={pagePath}>
-                          <a>{pagePath}</a>
-                        </Link>
-                      </Cell>
-                    </Row>
-                  )}
-                />
-              </TableTree>
-            </Section>
+            {pageInfo.docs ? (
+              <Section>
+                <TableTree>
+                  <Headers>
+                    <Header width={300}>Name</Header>
+                    <Header width={400}>Path</Header>
+                  </Headers>
+                  <Rows
+                    items={pageInfo.docs}
+                    render={({ id, pagePath, children }) => (
+                      <Row
+                        itemId={id}
+                        items={children}
+                        hasChildren={children && children.length > 0}
+                        isExpanded={Boolean(expansionMap[id])}
+                        onExpand={() =>
+                          this.setState({
+                            expansionMap: {
+                              ...expansionMap,
+                              [id]: true,
+                            },
+                          })
+                        }
+                        onCollapse={() =>
+                          this.setState({
+                            expansionMap: {
+                              ...expansionMap,
+                              [id]: false,
+                            },
+                          })
+                        }
+                      >
+                        <Cell singleLine>{titleCase(id)}</Cell>
+                        <Cell>
+                          <Link href={pagePath}>
+                            <a>{pagePath}</a>
+                          </Link>
+                        </Cell>
+                      </Row>
+                    )}
+                  />
+                </TableTree>
+              </Section>
+            ) : (
+              <NoDocsMessage />
+            )}
           </Page>
         </NavigationWrapper>
       </>

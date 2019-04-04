@@ -4,26 +4,35 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const processDirectory = dirPath =>
-  fs
-    .readdirSync(dirPath)
-    .map(fname => ({
-      id: path.parse(fname).name,
-      fullPath: path.resolve(dirPath, fname),
-    }))
-    .map(({ id, fullPath }) => {
-      if (fs.statSync(fullPath).isFile()) {
+const processDirectory = dirPath => {
+  try {
+    fs
+      .readdirSync(dirPath)
+      .map(fname => ({
+        id: path.parse(fname).name,
+        fullPath: path.resolve(dirPath, fname),
+      }))
+      .map(({ id, fullPath }) => {
+        if (fs.statSync(fullPath).isFile()) {
+          return {
+            id,
+            path: fullPath,
+          };
+        }
+
         return {
           id,
-          path: fullPath,
+          children: processDirectory(fullPath),
         };
-      }
+      });
 
-      return {
-        id,
-        children: processDirectory(fullPath),
-      };
-    });
+  } catch(err) {
+    if (err.code === 'ENOENT') {
+      return null;
+    }
+    throw err;
+  }
+};
 
 /**
  * @param docsPath absolute path to where the docs are located
