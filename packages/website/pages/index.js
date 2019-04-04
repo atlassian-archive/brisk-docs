@@ -10,6 +10,7 @@ import WidthDetector from '@atlaskit/width-detector';
 import { Section } from '../components/page';
 import Panel, { PanelGrid } from '../components/panel';
 import Meta from '../components/meta-context';
+import pageInfo from '../pages-list';
 
 const WINDOW_BREAKPOINT = 800;
 
@@ -74,7 +75,7 @@ class HomePage extends React.Component {
             <Section>
               <PanelGrid displayAsColumn={displayAsColumn}>
                 <Panel href="/packages" {...this.packagesPanelProps} />
-                <Panel href="/docs" {...this.docsPanelProps} />
+                {pageInfo.docs && <Panel href="/docs" {...this.docsPanelProps} />}
               </PanelGrid>
             </Section>
           </Page>
