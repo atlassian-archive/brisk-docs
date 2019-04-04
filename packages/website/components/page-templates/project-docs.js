@@ -4,15 +4,22 @@ import * as PropTypes from 'prop-types';
 import DocsNavContent from '../navigation/docs-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import Wrapper from '../content-style-wrapper';
+import PageTitle from '../page-title';
 
-const ProjectDocsWrapper = ({ children }) => (
-  <NavigationWrapper navContent={DocsNavContent}>
-    <Wrapper>{children}</Wrapper>
-  </NavigationWrapper>
+const ProjectDocsWrapper = ({ children, data }) => (
+  <>
+    <PageTitle title={data.pageTitle} />
+    <NavigationWrapper navContent={DocsNavContent}>
+      <Wrapper>{children}</Wrapper>
+    </NavigationWrapper>
+  </>
 );
 
 ProjectDocsWrapper.propTypes = {
   children: PropTypes.node.isRequired,
+  data: PropTypes.shape({
+    pageTitle: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ProjectDocsWrapper;

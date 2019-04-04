@@ -11,6 +11,7 @@ import PackageNavContent from '../navigation/package-nav-content';
 import DocsNavContent from '../navigation/docs-nav-content';
 import Page, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
+import PageTitle from '../page-title';
 
 const head = {
   cells: [
@@ -64,7 +65,7 @@ const RowCell = styled.div`
   padding-top: ${gridSize}px;
 `;
 
-const ItemList = ({ data, type }) => {
+const ItemList = ({ data }) => {
   const getRows = () => {
     if (data.children) {
       return data.children.map(child => renderRow(child));
@@ -73,12 +74,13 @@ const ItemList = ({ data, type }) => {
     const packagePages = pageInfo.packages.find(
       pkg => pkg.packageId === data.id,
     );
-    return packagePages[type].map(item => renderRow(item));
+    return packagePages[data.pageType].map(item => renderRow(item));
   };
   const getDocsList = () => {
     let title = titleCase(data.id);
     if (data.packageName) {
-      title = type === 'docs' ? 'Document Home Page' : 'Example Home Page';
+      title =
+        data.pageType === 'docs' ? 'Document Home Page' : 'Example Home Page';
     }
 
     return (
@@ -97,20 +99,23 @@ const ItemList = ({ data, type }) => {
   };
 
   return (
-    <NavigationWrapper
-      navContent={() =>
-        data.packageName ? (
-          <PackageNavContent
-            packageId={data.id}
-            packageName={data.packageName}
-          />
-        ) : (
-          <DocsNavContent />
-        )
-      }
-    >
-      {getDocsList()}
-    </NavigationWrapper>
+    <>
+      <PageTitle title={data.pageTitle} />
+      <NavigationWrapper
+        navContent={() =>
+          data.packageName ? (
+            <PackageNavContent
+              packageId={data.id}
+              packageName={data.packageName}
+            />
+          ) : (
+            <DocsNavContent />
+          )
+        }
+      >
+        {getDocsList()}
+      </NavigationWrapper>
+    </>
   );
 };
 
@@ -122,10 +127,11 @@ ItemList.propTypes = {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         pagePath: PropTypes.string.isRequired,
+        pageType: PropTypes.string.isRequired,
+        pageTitle: PropTypes.string,
       }),
     ),
   }).isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default ItemList;
