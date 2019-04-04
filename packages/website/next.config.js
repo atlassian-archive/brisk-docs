@@ -48,7 +48,9 @@ module.exports = withCSS(
           // we're ignoring these linting rules since they _should_ fail
           // outside the monorepo
           // eslint-disable-next-line global-require, import/no-extraneous-dependencies
-          ...require('preconstruct').aliases.webpack(path.join(__dirname)),
+          ...require('preconstruct').aliases.webpack(
+            path.join(__dirname, '..', '..'),
+          ),
         };
         // eslint-disable-next-line no-empty
       } catch (err) {}
