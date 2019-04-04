@@ -1,0 +1,14 @@
+{
+  "name": "package-with-changelog",
+  "version": "1.0.0",
+  "description": "This is a mock package that has a changelog",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Test4",
+  "license": "",
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "styled-components": "^4.1.3"
+  }
+}

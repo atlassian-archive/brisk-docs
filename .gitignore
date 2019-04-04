@@ -10,7 +10,8 @@ node_modules
 package-lock.json
 yarn-error.log
 
-cypress
+/cypress
+**/cypress/screenshots
 
 /packages/website/pages/packages
 /packages/website/pages/docs

@@ -6,6 +6,7 @@ import SectionMessage from '@atlaskit/section-message';
 import Wrapper from '../content-style-wrapper';
 import NavigationWrapper from '../navigation-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
+import PageTitle from '../page-title';
 import Changelog from '../../../react-changelogs/src/components/changelog';
 
 const Heading = styled.h1`
@@ -21,20 +22,26 @@ export const MissingChangelog = () => (
 
 const PackageChangelog = ({ data, children }) => {
   return (
-    <NavigationWrapper
-      navContent={() => (
-        <PackageNavContent packageId={data.id} packageName={data.packageName} />
-      )}
-    >
-      <Wrapper>
-        <Heading>Changelog</Heading>
-        {children ? (
-          <Changelog changelog={children} entriesPerPage={20} />
-        ) : (
-          <MissingChangelog />
+    <>
+      <PageTitle title="Changelog" />
+      <NavigationWrapper
+        navContent={() => (
+          <PackageNavContent
+            packageId={data.id}
+            packageName={data.packageName}
+          />
         )}
-      </Wrapper>
-    </NavigationWrapper>
+      >
+        <Wrapper>
+          <Heading>Changelog</Heading>
+          {children ? (
+            <Changelog changelog={children} entriesPerPage={20} />
+          ) : (
+            <MissingChangelog />
+          )}
+        </Wrapper>
+      </NavigationWrapper>
+    </>
   );
 };
 
