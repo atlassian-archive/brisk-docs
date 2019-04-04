@@ -8863,10 +8863,10 @@ postcss@^7.0.0:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-preconstruct@^0.0.0-typescript.1:
-  version "0.0.0-typescript.1"
-  resolved "https://registry.yarnpkg.com/preconstruct/-/preconstruct-0.0.0-typescript.1.tgz#ec16b83a14b39f3a5b38c409d11ba128ba675f36"
-  integrity sha512-hMe8nzaEfqVAohBeEOw0cmp5woIvQHhY3SLICIzINHR0iMS0ehrzI+S7hY9JY92bK76ym44jqDMv/6KQYOenOw==
+preconstruct@^0.0.53:
+  version "0.0.53"
+  resolved "https://registry.yarnpkg.com/preconstruct/-/preconstruct-0.0.53.tgz#9262ed46ba2ba9b70d4698f2a7e4a9a32d716777"
+  integrity sha512-+W/SNZxCrFh7a3iy1Mzfa5oHHrZfUPJ5MX0m71HrzxNzxcthUuNxPP4HtfzoSxMwt/odZBoFmgROla8Fo37j4Q==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.1.2"
