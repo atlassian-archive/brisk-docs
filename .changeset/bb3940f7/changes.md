@@ -1,1 +1,0 @@
-- Changed the babel/core version to match the packages in the monorepo
