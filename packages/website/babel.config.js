@@ -16,7 +16,7 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
 );
 
 let babelConfig = {
-  presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript'],
+  presets: ['next/babel', '@zeit/next-typescript/babel'],
   plugins: [
     'emotion',
     [
@@ -27,10 +27,10 @@ let babelConfig = {
         preprocess: false,
       },
     ],
-    'transform-flow-strip-types',
     '@babel/proposal-class-properties',
     '@babel/proposal-object-rest-spread',
     '@babel/transform-runtime',
+    'transform-dynamic-import',
   ],
 };
 

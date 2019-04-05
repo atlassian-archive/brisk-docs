@@ -7,15 +7,15 @@ job-setup: &job-setup
 
 restore-cache: &restore-cache
   keys:
-    - v1-dependencies-{{ checksum "package.json" }}
+    - v3-dependencies-{{ checksum "yarn.lock" }}
     # fallback to using the latest cache if no exact match is found
-    - v1-dependencies-
+    - v3-dependencies-
 
 save-cache: &save-cache
   paths:
     - node_modules
     - ~/.cache
-  key: v1-dependencies-{{ checksum "package.json" }}
+  key: v3-dependencies-{{ checksum "yarn.lock" }}
 
 install-bolt: &install-bolt
   name: Install Bolt
@@ -54,7 +54,6 @@ jobs:
           name: Lint Files
           command: bolt lint
 
-
   unit_tests:
     <<: *job-setup
     steps:
@@ -73,8 +72,6 @@ jobs:
       - store_test_results:
           path: test-reports/junit
 
-
-
   integration_tests:
     <<: *job-setup
     steps:
@@ -90,13 +87,12 @@ jobs:
 
       - run:
           name: Start up website
-          command: bolt start
+          command: bolt start:website
           background: true
 
       - run:
           name: Cypress Suite
           command: node_modules/.bin/wait-on http://localhost:8080 && bolt cypress
-
 
 workflows:
   version: 2
