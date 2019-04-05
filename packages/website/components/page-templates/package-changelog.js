@@ -2,12 +2,12 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SectionMessage from '@atlaskit/section-message';
+import Changelog from '@brisk-docs/react-changelogs';
 
 import Wrapper from '../content-style-wrapper';
 import NavigationWrapper from '../navigation-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
 import PageTitle from '../page-title';
-import Changelog from '../../../react-changelogs/src/components/changelog';
 
 const Heading = styled.h1`
   padding-bottom: 32px;

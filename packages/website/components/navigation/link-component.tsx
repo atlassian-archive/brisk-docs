@@ -1,13 +1,18 @@
 // Component that can be used as the component prop in nav items
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import Link from 'next/link';
-import * as PropTypes from 'prop-types';
+
+export type Props = {
+  className: string;
+  children: React.ReactChild;
+  href: string;
+};
 
 // @atlaskit/item requires a class to be passed to it (otherwise we get
 // ref errors from styled-components).
 /* eslint-disable-next-line  react/prefer-stateless-function */
-class LinkComponent extends Component {
+class LinkComponent extends React.Component<Props> {
   render() {
     const { className, children, href } = this.props;
 
@@ -18,11 +23,5 @@ class LinkComponent extends Component {
     );
   }
 }
-
-LinkComponent.propTypes = {
-  className: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string.isRequired,
-};
 
 export default LinkComponent;

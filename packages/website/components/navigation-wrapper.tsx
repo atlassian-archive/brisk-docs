@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import DocumentsIcon from '@atlaskit/icon/glyph/documents';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import {
@@ -10,7 +9,16 @@ import {
 import LinkComponent from './navigation/link-component';
 import SearchDrawer from './navigation/search-drawer';
 
-class NavigationWrapper extends Component {
+export type Props = {
+  // TODO TSFix: Type this
+  navContent: any;
+};
+
+type State = {
+  showSearchDrawer: boolean;
+};
+
+class NavigationWrapper extends React.Component<Props, State> {
   state = {
     showSearchDrawer: false,
   };
@@ -38,7 +46,7 @@ class NavigationWrapper extends Component {
                 {
                   // TODO this throws a scary large error in the console as the SSR doesn't match the run code.
                   // This is an AK problem...
-                  icon: () => <SearchIcon size="medium" />,
+                  icon: () => <SearchIcon label="Search Icon" size="medium" />,
                   id: 'search',
                   tooltip: 'Search for documentation',
                   onClick: () => this.setState({ showSearchDrawer: true }),
@@ -60,10 +68,5 @@ class NavigationWrapper extends Component {
     );
   }
 }
-
-NavigationWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  navContent: PropTypes.func.isRequired,
-};
 
 export default NavigationWrapper;

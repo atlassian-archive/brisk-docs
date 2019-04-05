@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Link from 'next/link';
 import * as PropTypes from 'prop-types';
 
@@ -10,7 +10,12 @@ This will, in general, be the better component to use over using a straight
 anchor, as it means you don't have to think about this problem space.
 */
 
-const SwitchLink = ({ href, children, ...rest }) => {
+export type Props = {
+  href: string;
+  children: React.ReactChild;
+};
+
+const SwitchLink = ({ href, children, ...rest }: Props) => {
   if (!href || href.indexOf('http') === 0 || href.indexOf('#') === 0) {
     return (
       <a href={href} {...rest}>

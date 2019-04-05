@@ -5,7 +5,6 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const processDirectory = dirPath => {
-  console.log(dirPath);
   if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
     return null;
   }

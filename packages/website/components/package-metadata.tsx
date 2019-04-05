@@ -1,5 +1,4 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import styled from '@emotion/styled';
 import GitUrlParse from 'git-url-parse';
 
@@ -27,7 +26,7 @@ const MetaDataEntryLabel = styled.div`
   flex-basis: 25%;
 `;
 
-function parseRepositoryUrl(repository) {
+function parseRepositoryUrl(repository: string) {
   let url;
   const parsed = GitUrlParse(repository);
   if (parsed.git_suffix) {
@@ -43,8 +42,9 @@ function parseRepositoryUrl(repository) {
   }
   return url;
 }
+type Repository = string | { url: string; directory: string };
 
-const RepositoryLink = ({ repository }) => {
+const RepositoryLink = ({ repository }: { repository: Repository }) => {
   if (!repository) return null;
 
   let repositoryUrl;
@@ -66,17 +66,14 @@ const RepositoryLink = ({ repository }) => {
   );
 };
 
-RepositoryLink.propTypes = {
-  repository: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      directory: PropTypes.string,
-    }),
-  ]),
+export type Props = {
+  id: string;
+  version: string;
+  maintainers: string[];
+  repository: Repository;
 };
 
-const PackageMetaData = ({ id, version, maintainers, repository }) => (
+const PackageMetaData = ({ id, version, maintainers, repository }: Props) => (
   <div>
     <MetaDataWrapper data-testid={`${id}-metadata`}>
       <MetaDataEntry>
@@ -93,18 +90,5 @@ const PackageMetaData = ({ id, version, maintainers, repository }) => (
     </MetaDataWrapper>
   </div>
 );
-
-PackageMetaData.propTypes = {
-  id: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
-  maintainers: PropTypes.arrayOf(PropTypes.string),
-  repository: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      directory: PropTypes.string,
-    }),
-  ]).isRequired,
-};
 
 export default PackageMetaData;

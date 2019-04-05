@@ -1,12 +1,12 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { colors, gridSize, math } from '@atlaskit/theme';
 import Link from 'next/link';
 
 export const PanelGrid = styled.div`
   display: flex;
-  flex-direction: ${props => (props.displayAsColumn ? 'column' : 'row')};
+  flex-direction: ${(props: { displayAsColumn: boolean }) =>
+    props.displayAsColumn ? 'column' : 'row'};
   align-items: center;
   justify-content: center;
   margin-top: ${math.multiply(gridSize, 10)}px;
@@ -81,7 +81,23 @@ const PanelImage = styled.img`
   bottom: 0;
 `;
 
-const Panel = ({ href, IconComponent, label, color, description, imgSrc }) => (
+export type Props = {
+  href: string;
+  label: string;
+  color: string;
+  description: string;
+  imgSrc: string;
+  IconComponent: React.ComponentType<any>;
+};
+
+const Panel = ({
+  href,
+  IconComponent,
+  label,
+  color,
+  description,
+  imgSrc,
+}: Props) => (
   <Link href={href} passHref>
     <PanelStyle>
       <PanelHeader>
@@ -100,14 +116,5 @@ const Panel = ({ href, IconComponent, label, color, description, imgSrc }) => (
     </PanelStyle>
   </Link>
 );
-
-Panel.propTypes = {
-  href: PropTypes.string.isRequired,
-  IconComponent: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-};
 
 export default Panel;

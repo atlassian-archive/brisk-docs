@@ -1,8 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import Changelog from '@brisk-docs/react-changelogs';
+
 import PackageChangelog, { MissingChangelog } from './package-changelog';
 import PageTitle from '../page-title';
-import Changelog from '../../../react-changelogs/src/components/changelog';
 
 jest.mock('../navigation/package-nav-content', () => () => <div />);
 /* eslint-disable react/prop-types */

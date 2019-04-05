@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import TableTree, {
   Headers,
   Header,
@@ -22,10 +22,10 @@ const NoDocsMessage = () => (
   </SectionMessage>
 );
 
-class DocsTable extends Component {
-  state = {
-    expansionMap: {},
-  };
+type State = { expansionMap: { [s: string]: boolean } };
+
+class DocsTable extends React.Component<{}, State> {
+  state: State = { expansionMap: {} };
 
   render() {
     const { expansionMap } = this.state;
