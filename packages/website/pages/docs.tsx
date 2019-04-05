@@ -39,7 +39,15 @@ class DocsTable extends React.Component<{}, State> {
           </Headers>
           <Rows
             items={pageInfo.docs}
-            render={({ id, pagePath, children }) => (
+            render={({
+              id,
+              pagePath,
+              children,
+            }: {
+              id: string;
+              pagePath: string;
+              children: React.ReactChild[];
+            }) => (
               <Row
                 itemId={id}
                 items={children}
