@@ -18,11 +18,11 @@ import PageTitle from '../components/page-title';
 
 const NoDocsMessage = () => (
   <SectionMessage appearance="warning">
-    There do not currently exist any docs pages.
+    We couldn&apos;t find any docs pages in your provided docs directory
   </SectionMessage>
 );
 
-export default class Docs extends Component {
+class DocsTable extends Component {
   state = {
     expansionMap: {},
   };
@@ -31,60 +31,62 @@ export default class Docs extends Component {
     const { expansionMap } = this.state;
 
     return (
-      <>
-        <PageTitle title="Documents" />
-        <NavigationWrapper navContent={DocsNavContent}>
-          <Page>
-            <Title>Documents Overview</Title>
-            {pageInfo.docs ? (
-              <Section>
-                <TableTree>
-                  <Headers>
-                    <Header width={300}>Name</Header>
-                    <Header width={400}>Path</Header>
-                  </Headers>
-                  <Rows
-                    items={pageInfo.docs}
-                    render={({ id, pagePath, children }) => (
-                      <Row
-                        itemId={id}
-                        items={children}
-                        hasChildren={children && children.length > 0}
-                        isExpanded={Boolean(expansionMap[id])}
-                        onExpand={() =>
-                          this.setState({
-                            expansionMap: {
-                              ...expansionMap,
-                              [id]: true,
-                            },
-                          })
-                        }
-                        onCollapse={() =>
-                          this.setState({
-                            expansionMap: {
-                              ...expansionMap,
-                              [id]: false,
-                            },
-                          })
-                        }
-                      >
-                        <Cell singleLine>{titleCase(id)}</Cell>
-                        <Cell>
-                          <Link href={pagePath}>
-                            <a>{pagePath}</a>
-                          </Link>
-                        </Cell>
-                      </Row>
-                    )}
-                  />
-                </TableTree>
-              </Section>
-            ) : (
-              <NoDocsMessage />
+      <Section>
+        <TableTree>
+          <Headers>
+            <Header width={300}>Name</Header>
+            <Header width={400}>Path</Header>
+          </Headers>
+          <Rows
+            items={pageInfo.docs}
+            render={({ id, pagePath, children }) => (
+              <Row
+                itemId={id}
+                items={children}
+                hasChildren={children && children.length > 0}
+                isExpanded={Boolean(expansionMap[id])}
+                onExpand={() =>
+                  this.setState({
+                    expansionMap: {
+                      ...expansionMap,
+                      [id]: true,
+                    },
+                  })
+                }
+                onCollapse={() =>
+                  this.setState({
+                    expansionMap: {
+                      ...expansionMap,
+                      [id]: false,
+                    },
+                  })
+                }
+              >
+                <Cell singleLine>{titleCase(id)}</Cell>
+                <Cell>
+                  <Link href={pagePath}>
+                    <a>{pagePath}</a>
+                  </Link>
+                </Cell>
+              </Row>
             )}
-          </Page>
-        </NavigationWrapper>
-      </>
+          />
+        </TableTree>
+      </Section>
     );
   }
 }
+
+const Docs = () => (
+  <>
+    <PageTitle title="Documents" />
+    <NavigationWrapper navContent={DocsNavContent}>
+      <Page>
+        <Title>Documents Overview</Title>
+        {pageInfo.docs ? <DocsTable /> : <NoDocsMessage />}
+      </Page>
+    </NavigationWrapper>
+  </>
+);
+
+export default Docs;

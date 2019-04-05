@@ -5,32 +5,30 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const processDirectory = dirPath => {
-  try {
-    return fs
-      .readdirSync(dirPath)
-      .map(fname => ({
-        id: path.parse(fname).name,
-        fullPath: path.resolve(dirPath, fname),
-      }))
-      .map(({ id, fullPath }) => {
-        if (fs.statSync(fullPath).isFile()) {
-          return {
-            id,
-            path: fullPath,
-          };
-        }
+  console.log(dirPath);
+  if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
+    return null;
+  }
 
+  return fs
+    .readdirSync(dirPath)
+    .map(fname => ({
+      id: path.parse(fname).name,
+      fullPath: path.resolve(dirPath, fname),
+    }))
+    .map(({ id, fullPath }) => {
+      if (fs.statSync(fullPath).isFile()) {
         return {
           id,
-          children: processDirectory(fullPath),
+          path: fullPath,
         };
-      });
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      return null;
-    }
-    throw err;
-  }
+      }
+
+      return {
+        id,
+        children: processDirectory(fullPath),
+      };
+    });
 };
 
 /**
