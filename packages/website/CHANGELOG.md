@@ -1,5 +1,25 @@
 # @brisk-docs/website
 
+## 0.3.1
+
+- [patch] 9c1e298:
+
+  - Convert website code to use typescript
+  - Updated to use the newest version of next
+  - Use next babel plugins instead of our own custom loader setup
+
+- [patch] ea61c4b:
+
+  - Display code blocks in markdown as syntax highlighted
+
+- [patch] 1ce8baa:
+
+  - 1. Added missing dependencies into the package.json 2. Fixed the config.js to solve the babel loader issues while installing the package in a consumer app.
+
+- [patch] 08bd365:
+
+  - Refactor of how pages are generated. This should have no visible side effects.
+
 ## 0.3.0
 
 - [minor] 14b9ce9:
