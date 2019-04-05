@@ -8,10 +8,12 @@ import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 const NavContent = () => {
   const treeData = {
     rootId: 'docs',
-    items: pageInfo.docs ? arrayToTreeItems(pageInfo.docs, {
-      parentId: 'docs',
-      parentTitle: 'Docs',
-    }) : {},
+    items: pageInfo.docs
+      ? arrayToTreeItems(pageInfo.docs, {
+          parentId: 'docs',
+          parentTitle: 'Docs',
+        })
+      : {},
   };
 
   return (

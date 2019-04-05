@@ -75,7 +75,9 @@ class HomePage extends React.Component {
             <Section>
               <PanelGrid displayAsColumn={displayAsColumn}>
                 <Panel href="/packages" {...this.packagesPanelProps} />
-                {pageInfo.docs && <Panel href="/docs" {...this.docsPanelProps} />}
+                {pageInfo.docs && (
+                  <Panel href="/docs" {...this.docsPanelProps} />
+                )}
               </PanelGrid>
             </Section>
           </Page>

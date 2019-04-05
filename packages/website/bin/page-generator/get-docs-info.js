@@ -25,8 +25,7 @@ const processDirectory = dirPath => {
           children: processDirectory(fullPath),
         };
       });
-
-  } catch(err) {
+  } catch (err) {
     if (err.code === 'ENOENT') {
       return null;
     }
