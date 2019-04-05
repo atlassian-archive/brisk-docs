@@ -7,14 +7,15 @@ job-setup: &job-setup
 
 restore-cache: &restore-cache
   keys:
-    - v2-dependencies-{{ checksum "yarn.lock" }}
+    - v3-dependencies-{{ checksum "yarn.lock" }}
     # fallback to using the latest cache if no exact match is found
-    - v2-dependencies-
+    - v3-dependencies-
 
 save-cache: &save-cache
   paths:
     - node_modules
-  key: v2-dependencies-{{ checksum "yarn.lock" }}
+    - ~/.cache
+  key: v3-dependencies-{{ checksum "yarn.lock" }}
 
 install-bolt: &install-bolt
   name: Install Bolt
