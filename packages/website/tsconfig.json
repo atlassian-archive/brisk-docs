@@ -31,9 +31,7 @@
     "lib": ["dom", "es2017"],
     },
   "include": [
-    "packages/react-changelogs/src/**/*",
-    "packages/website/**/*",
-    "typings/**/*"
+    "**/*"
   ],
   "typeRoots": ["./typings", "./node_modules/@types"],
 }

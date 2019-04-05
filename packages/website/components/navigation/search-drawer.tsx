@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {
   QuickSearch,
   ResultBase,
@@ -9,14 +8,15 @@ import Drawer from '@atlaskit/drawer';
 import capitalize from 'lodash.capitalize';
 import data from '../../pages-list';
 import Link from './link-component';
+import { Pages } from '../../types';
 
-const prettyTitle = id =>
+const prettyTitle = (id: string) =>
   id
     .split('-')
     .map(capitalize)
     .join(' ');
 
-const remapPages = (pages, packageId, type) =>
+const remapPages = (pages: Pages, packageId: string, type: string) =>
   pages.map(({ id, pagePath: path }) => ({
     id,
     title: prettyTitle(id),
@@ -37,12 +37,17 @@ const newData = data.packages.map(
   }),
 );
 
-class SearchDrawer extends Component {
+export type Props = {
+  isOpen: boolean;
+  closeDrawer: () => any;
+};
+
+class SearchDrawer extends React.Component<Props> {
   state = {
     query: '',
   };
 
-  filterPage = (packageId, { title: pageTitle }) => {
+  filterPage = (packageId: string, { title: pageTitle }: { title: string }) => {
     const { query } = this.state;
     return (
       packageId.toLowerCase().includes(query.toLowerCase()) ||
@@ -65,6 +70,8 @@ class SearchDrawer extends Component {
                 text={pageTitle}
                 href={path}
                 resultId={path}
+                // TODO: Figure out what this prop does in resultBase
+                type=""
               />
             ))}
           </ResultItemGroup>
@@ -106,10 +113,5 @@ class SearchDrawer extends Component {
     );
   }
 }
-
-SearchDrawer.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  closeDrawer: PropTypes.func.isRequired,
-};
 
 export default SearchDrawer;

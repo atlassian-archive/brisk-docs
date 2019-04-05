@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
+import { NextContext } from 'next';
 
 import LinkButton from '../components/link-button';
 
@@ -34,14 +34,24 @@ const Message = styled.div`
 const packagesPath = /\/packages\/.*/g;
 const docsPath = /\/docs\/.*/g;
 
-class NotFound extends React.Component {
-  static getInitialProps(res, err) {
-    const error = err ? err.statuCode : null;
-    const statusCode = res ? res.res.statusCode : error;
+export type Props = {
+  statusCode: number;
+  pageType: string;
+};
+
+// Next sometimes adds a statusCode to its thrown errors, so we need to check for this
+interface InitialProps extends NextContext {
+  err: Error & { statusCode?: number };
+}
+
+class NotFound extends React.Component<Props> {
+  static getInitialProps({ res, asPath, err }: InitialProps) {
+    const error = err ? err.statusCode : null;
+    const statusCode = res ? res.statusCode : error;
 
     let pageType = '';
-    const isPackage = packagesPath.exec(res.asPath);
-    const isDoc = docsPath.exec(res.asPath);
+    const isPackage = packagesPath.exec(asPath);
+    const isDoc = docsPath.exec(asPath);
 
     if (isPackage) {
       pageType = 'packages';
@@ -64,16 +74,11 @@ class NotFound extends React.Component {
             : 'An error has occurred.'}
         </Message>
         <LinkButton href={`/${pageType}`} appearance="warning">
-          Back to {pageType || 'home'}
+          <div>Back to {pageType || 'home'}</div>
         </LinkButton>
       </Page>
     );
   }
 }
-
-NotFound.propTypes = {
-  statusCode: PropTypes.number.isRequired,
-  pageType: PropTypes.string.isRequired,
-};
 
 export default NotFound;

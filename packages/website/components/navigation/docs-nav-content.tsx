@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BackItem, MenuSection, Separator } from '@atlaskit/navigation-next';
 import pageInfo from '../../pages-list';
 import LinkComponent from './link-component';
@@ -18,7 +18,8 @@ const NavContent = () => {
     <>
       <NavHeader headerText="Docs" />
       <MenuSection id="docs-section" parentId="index-section">
-        {({ className }) => (
+        {/* TODO: TSFix nav typing */}
+        {({ className }: { className: string }) => (
           <div className={className}>
             <BackItem text="Back to home" href="/" component={LinkComponent} />
             <Separator />

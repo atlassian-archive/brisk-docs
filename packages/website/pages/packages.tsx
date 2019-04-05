@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
@@ -11,9 +11,13 @@ import NavigationWrapper from '../components/navigation-wrapper';
 import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
 import data from '../pages-list';
-// eslint-disable-next-line import/no-unresolved
-import meta from '../data/packages-data.json';
+// @ts-ignore - ts cannot resolve file when it doesn't exist, which it won't always
+import meta2 from '../data/packages-data.json';
 import PageTitle from '../components/page-title';
+
+import { PackageInfo, Metadata } from '../types';
+
+const meta: Metadata = meta2;
 
 const gridSize = gridSizeFn();
 
@@ -49,15 +53,25 @@ const head = {
   ],
 };
 
-const renderRow = ({ packageId, homePath }) => {
+const MaintainersToString = (maintainers: PackageInfo['maintainers']) => {
+  if (Array.isArray(maintainers)) return maintainers.join(', ');
+  if (typeof maintainers === 'string') return maintainers;
+  return '';
+};
+
+const renderRow = ({ packageId, homePath }: PackageInfo) => {
   const metaData = meta.metaData.find(x => x.id === packageId);
+
+  if (!metaData) return {};
   return {
     cells: [
       {
         key: packageId,
         content: (
           <RowCell>
-            <Link href={homePath}>{titleCase(packageId)}</Link>
+            <Link href={homePath}>
+              <a>{titleCase(packageId)}</a>
+            </Link>
           </RowCell>
         ),
       },
@@ -72,19 +86,14 @@ const renderRow = ({ packageId, homePath }) => {
       },
       {
         key: 'maintainers',
-        content: (
-          <RowCell>
-            {metaData.maintainers && metaData.maintainers.length > 0
-              ? metaData.maintainers.join(', ')
-              : ''}
-          </RowCell>
-        ),
+        content: <RowCell>{MaintainersToString(metaData.maintainers)}</RowCell>,
       },
     ],
   };
 };
 
 const GetRows = () => data.packages.map(item => renderRow(item));
+
 const PackagesList = () => (
   <Page>
     <Title>Brisk Documentation</Title>

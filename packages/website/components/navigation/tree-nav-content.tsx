@@ -1,12 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
-import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 
+type Item =
+  | { id: string; children: Item[] }
+  | { id: string; pagePath: string; children: undefined };
+
+type ArrayItems = Item[];
+
 // Flatten the nested page structure into an object that ak/tree understands
-const arrayToTreeItems = (arrayItems, { parentId, parentTitle }) => ({
+const arrayToTreeItems = (
+  arrayItems: ArrayItems,
+  { parentId, parentTitle }: { parentId: string; parentTitle: string },
+): any => ({
+  // TODO: TSFix - this is return type to be specific
   [parentId]: {
     id: parentId,
     hasChildren: true,
@@ -44,7 +53,22 @@ const arrayToTreeItems = (arrayItems, { parentId, parentTitle }) => ({
   }, {}),
 });
 
-const renderTreeItem = ({ item, provided }) => {
+type TreeItemProps = {
+  item: {
+    id: string;
+    hasChildren: boolean;
+    data: {
+      href: string;
+      title: string;
+    };
+  };
+  provided: {
+    draggableProps: Object;
+    innerRef: () => any;
+  };
+};
+
+const TreeItem = ({ item, provided }: TreeItemProps) => {
   const { id, hasChildren, data } = item;
 
   if (!hasChildren) {
@@ -62,30 +86,16 @@ const renderTreeItem = ({ item, provided }) => {
   );
 };
 
-renderTreeItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    hasChildren: PropTypes.bool.isRequired,
-    data: PropTypes.shape({
-      href: PropTypes.string,
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  provided: PropTypes.shape({
-    draggableProps: PropTypes.object.isRequired,
-  }).isRequired,
+export type Props = {
+  treeData: {
+    rootId: string;
+    items: Object;
+  };
 };
 
-const TreeNavContent = ({ treeData }) => (
-  <Tree tree={treeData} renderItem={renderTreeItem} />
+const TreeNavContent = ({ treeData }: Props) => (
+  <Tree tree={treeData} renderItem={TreeItem} />
 );
-
-TreeNavContent.propTypes = {
-  treeData: PropTypes.shape({
-    rootId: PropTypes.string.isRequired,
-    items: PropTypes.object.isRequired,
-  }),
-};
 
 export { arrayToTreeItems };
 export default TreeNavContent;

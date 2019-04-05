@@ -1,20 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
 import Meta from './meta-context';
 
-const PageTitle = ({ title }) => (
+export type Props = {
+  title?: string;
+};
+
+const PageTitle = ({ title }: Props) => (
   <Meta.Consumer>
-    {({ siteName }) => (
+    {({ siteName }: { siteName: string }) => (
       <Head>
         <title>{title ? `${siteName} - ${title}` : siteName}</title>
       </Head>
     )}
   </Meta.Consumer>
 );
-
-PageTitle.propTypes = {
-  title: PropTypes.string,
-};
 
 export default PageTitle;

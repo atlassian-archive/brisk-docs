@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {
   MenuSection,
@@ -6,25 +6,19 @@ import {
   Separator,
   Group,
 } from '@atlaskit/navigation-next';
-
-import * as PropTypes from 'prop-types';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 import LinkComponent from './link-component';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
+import { Pages, NestedExamples, ExamplePage, Page } from '../../types';
 
-const GetLink = ({ id, pagePath }) => (
+const GetLink = ({ id, pagePath }: Page | ExamplePage) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
 );
 
-GetLink.propTypes = {
-  id: PropTypes.string.isRequired,
-  pagePath: PropTypes.string.isRequired,
-};
-
-const renderSubExamplesTree = subExamples => {
+const renderSubExamplesTree = (subExamples: NestedExamples[]) => {
   const treeData = {
     rootId: 'subExamples',
     items: arrayToTreeItems(subExamples, {
@@ -42,6 +36,15 @@ const renderSubExamplesTree = subExamples => {
   );
 };
 
+export type SomeProps = {
+  homePath: string;
+  packageName: string;
+  changelogPath: string;
+  docs: Pages;
+  examples: ExamplePage[];
+  subExamples: NestedExamples[];
+};
+
 const NavContent = ({
   packageName,
   homePath,
@@ -49,11 +52,11 @@ const NavContent = ({
   docs,
   examples,
   subExamples,
-}) => (
+}: SomeProps) => (
   <>
     <NavHeader headerText={packageName} />
     <MenuSection id="package-section" parentId="index-section">
-      {({ className }) => (
+      {({ className }: { className: string }) => (
         <div className={className}>
           <BackItem
             text="Back to packages"
@@ -84,35 +87,25 @@ const NavContent = ({
   </>
 );
 
-NavContent.propTypes = {
-  homePath: PropTypes.string.isRequired,
-  packageName: PropTypes.string.isRequired,
-  changelogPath: PropTypes.string,
-  docs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  examples: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  subExamples: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      pagePath: PropTypes.string,
-      isolatedPath: PropTypes.string,
-    }),
-  ),
-};
-
-const PackageNavContent = ({ packageId, packageName }) => {
+const PackageNavContent = ({
+  packageId,
+  packageName,
+}: {
+  packageId: string;
+  packageName: string;
+}) => {
   const packagePages = pageInfo.packages.find(
     pkg => pkg.packageId === packageId,
   );
+
+  if (!packagePages) {
+    console.error(
+      'the nav is about to render due to being unable to find',
+      packageId,
+      packageName,
+    );
+    return null;
+  }
 
   return (
     <NavContent
@@ -124,11 +117,6 @@ const PackageNavContent = ({ packageId, packageName }) => {
       subExamples={packagePages.subExamples}
     />
   );
-};
-
-PackageNavContent.propTypes = {
-  packageId: PropTypes.string.isRequired,
-  packageName: PropTypes.string.isRequired,
 };
 
 export default PackageNavContent;

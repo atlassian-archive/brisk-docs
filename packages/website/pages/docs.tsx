@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import TableTree, {
   Headers,
   Header,
@@ -15,10 +15,10 @@ import DocsNavContent from '../components/navigation/docs-nav-content';
 import NavigationWrapper from '../components/navigation-wrapper';
 import PageTitle from '../components/page-title';
 
-export default class Docs extends Component {
-  state = {
-    expansionMap: {},
-  };
+type State = { expansionMap: { [s: string]: boolean } };
+
+export default class Docs extends React.Component<{}, State> {
+  state: State = { expansionMap: {} };
 
   render() {
     const { expansionMap } = this.state;
@@ -37,7 +37,15 @@ export default class Docs extends Component {
                 </Headers>
                 <Rows
                   items={pageInfo.docs}
-                  render={({ id, pagePath, children }) => (
+                  render={({
+                    id,
+                    pagePath,
+                    children,
+                  }: {
+                    id: string;
+                    pagePath: string;
+                    children: React.ReactChild[];
+                  }) => (
                     <Row
                       itemId={id}
                       items={children}
