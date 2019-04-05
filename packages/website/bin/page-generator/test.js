@@ -378,3 +378,30 @@ describe('File modification tests', () => {
     expect(fs.existsSync(firstDocsPage)).toEqual(false);
   });
 });
+
+describe('Missing docs folder', () => {
+  let sitemap;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'simple-mock-packages',
+    );
+
+    const packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
+    const docsPath = 'path/that/does/not/exist';
+    const pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+
+    sitemap = await generatePages(
+      packagesPaths,
+      docsPath,
+      pagesPath,
+      componentsPath,
+    );
+  });
+
+  it('should return the docs sitemap as undefined', () => {
+    expect(sitemap.docs).toBeUndefined();
+  });
+});
