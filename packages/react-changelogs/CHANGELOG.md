@@ -1,5 +1,10 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.3
+- [patch] 1ce8baa:
+
+  - Changed the babel/core version to match the packages in the monorepo
+
 ## 0.1.2
 
 - [patch] 23d71c7:
