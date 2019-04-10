@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@noviny/react-changelogs", "type": "patch" }],
+  "dependents": []
+}
