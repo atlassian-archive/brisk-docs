@@ -1,0 +1,15 @@
+{
+  "action": "opened",
+  "number": 1,
+  "pull_request": {
+    "user": {
+      "login": "pyu"
+    }
+  },
+  "repository": {
+    "name": "testing-things",
+    "owner": {
+      "login": "pyu"
+    }
+  }
+}
