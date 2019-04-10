@@ -1,0 +1,17 @@
+name: Changeset Bot
+description: Changeset Bot
+links:
+  binary:
+    name: docker.atl-paas.net/atlassian/changeset-bot
+    tag: 0.0.1
+    type: docker
+  healthcheck:
+    uri: /healthcheck
+  source:
+    url: 'https://github.com/glad-docs/brisk-docs.git'
+notifications:
+  email: pyu@atlassian.com
+organization: Product Fabric
+network:
+  ingress: external
+  egress:  internet-only
