@@ -1,13 +1,25 @@
 module.exports = app => {
   app.log('Yay, the app was loaded!');
 
-  app.on('pull_request.reopened', async context => {
+  // Get an express router to expose new HTTP endpoints
+  // Healthcheck
+  const router = app.route('/');
+  router.get('/healthcheck', (req, res) => {
+    res.send('OK')
+  });
+
+
+  app.on('issues.opened', async context => {
+    const issueComment = context.issue({ body: 'Thanks for opening this issue!' });
+    return context.github.issues.createComment(issueComment);
+  });
+
+  app.on('pull_request.opened', async context => {
     const params = context.issue();
 
     const getFiles = context.github.pullRequests.listFiles(params)
       .then((files) => {
         const changesetFiles = files.data.filter((file) => file.filename.startsWith('.changeset'));
-
         return changesetFiles.length > 0;
       });
 
@@ -23,12 +35,12 @@ module.exports = app => {
         if (!hasChangeset) {
           prComment = context.issue(
             {
-              body: `This PR does not have a changeset.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
+              body: `❌ NO CHANGESET PRESENT ❌.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
             });
         } else {
           prComment = context.issue(
             {
-              body: `This PR has a changeset.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
+              body: `✅ This PR has a changeset ✅.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
             });
         }
 
@@ -52,7 +64,6 @@ module.exports = app => {
     const getFiles = context.github.pullRequests.listFiles(params)
       .then((files) => {
         const changesetFiles = files.data.filter((file) => file.filename.startsWith('.changeset'));
-
         return changesetFiles.length > 0;
       });
 
@@ -69,13 +80,13 @@ module.exports = app => {
           prComment = context.issue(
             {
               comment_id: commentId,
-              body: `This PR does not have a changeset.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
+              body: `❌ NO CHANGESET PRESENT ❌.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
             });
         } else {
           prComment = context.issue(
             {
               comment_id: commentId,
-              body: `This PR has a changeset.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
+              body: `✅ This PR has a changeset ✅.\nLatest commit: \`${user}\` committed \`${latestCommit.commit.message}\``
             });
         }
 
