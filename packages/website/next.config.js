@@ -7,7 +7,7 @@ const withTypescript = require('@zeit/next-typescript');
 
 const withCSS = require('@zeit/next-css');
 
-const handleConfig = require('./bin/handle-config');
+const handleConfig = require('./src/bin/handle-config');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
 const cwd = process.env.DOCS_WEBSITE_CWD;

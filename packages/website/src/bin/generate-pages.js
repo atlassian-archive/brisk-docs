@@ -9,7 +9,7 @@ const fse = require('fs-extra');
 
 const generatePages = require('./page-generator');
 
-const packageRoot = path.resolve(__dirname, '..');
+const packageRoot = path.resolve(__dirname, '..', '..');
 
 module.exports = async ({
   packagesPaths,

@@ -5,7 +5,7 @@ const handleConfig = require('./handle-config');
 const generatePages = require('./generate-pages');
 
 const cwd = process.cwd();
-const nextRoot = path.resolve(__dirname, '..');
+const nextRoot = path.resolve(__dirname, '..', '..');
 
 const spawnNextProcess = (command, websiteConfigPath, args = '') => {
   const envVariables = {
