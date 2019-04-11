@@ -103,6 +103,7 @@ export default class Changelog extends React.Component<Props> {
 
   static defaultProps = {
     getUrl: () => null,
+    changelog: '',
   };
 
   handlePageChange = (_e: React.ChangeEvent, newPage: number) => {

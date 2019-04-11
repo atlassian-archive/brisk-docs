@@ -4,8 +4,12 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const processDirectory = dirPath =>
-  fs
+const processDirectory = dirPath => {
+  if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
+    return null;
+  }
+
+  return fs
     .readdirSync(dirPath)
     .map(fname => ({
       id: path.parse(fname).name,
@@ -24,6 +28,7 @@ const processDirectory = dirPath =>
         children: processDirectory(fullPath),
       };
     });
+};
 
 /**
  * @param docsPath absolute path to where the docs are located
