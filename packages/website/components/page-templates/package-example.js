@@ -25,25 +25,20 @@ const PageContent = styled.div`
 const ExampleStyle = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: ${math.multiply(gridSize, 60)}px;
   max-width: ${math.multiply(gridSize, 80)}px;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
-  background-color: ${colors.N30};
   height: 100%;
 `;
 
 const ExampleComponentContainer = styled.div`
   background-color: white;
+  border: 1px solid black;
   border-radius: ${gridSize}px;
-  padding: ${gridSize}px;
-  padding-top: ${math.multiply(gridSize, 6)}px;
-  margin-top: ${math.multiply(gridSize, 2)}px;
-
-  .inner-container {
-    background-color: 'white';
-    border-radius: '4px';
-    padding: '16px';
-  }
+  padding: ${math.multiply(gridSize, 2)}px;
+  padding-top: ${math.multiply(gridSize, 4)}px;
+  margin: ${math.multiply(gridSize, 4)}px 0px;
 `;
 
 const Header = styled.div`
@@ -53,6 +48,10 @@ const Header = styled.div`
   border-bottom-color: rgb(235, 236, 240);
   border-bottom-style: solid;
   border-bottom-width: ${math.multiply(gridSize, 0.25)}px;
+`;
+
+const Heading = styled.h1`
+  margin-right: ${math.multiply(gridSize, 4)}px;
 `;
 
 const CodeStyle = styled.pre`
@@ -92,12 +91,10 @@ const PackageExample = ({ data, fileContents, children }) => {
         <PageContent>
           <ExampleStyle>
             <Header>
-              <h1>{data.pageTitle}</h1>
+              <Heading>{data.pageTitle}</Heading>
               <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
             </Header>
-            <ExampleComponentContainer>
-              <div className="inner-container">{children}</div>
-            </ExampleComponentContainer>
+            <ExampleComponentContainer>{children}</ExampleComponentContainer>
           </ExampleStyle>
           <CodeStyle data-testid="example-source-code">
             <code dangerouslySetInnerHTML={{ __html: highlighted }} />
