@@ -38,6 +38,10 @@ declare module '@atlaskit/drawer' {
   declare const Drawer: React.ComponentType<any, any>;
   export default Drawer;
 }
+declare module '@atlaskit/section-message' {
+  declare const SectionMessage: React.ComponentType<any, any>;
+  export default SectionMessage;
+}
 
 declare module '@atlaskit/table-tree' {
   declare const aDefault: React.ComponentType<any, any>;

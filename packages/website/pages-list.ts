@@ -10,7 +10,7 @@ import { Page, PackageInfo } from './types';
 
 interface Info {
   packages: PackageInfo[];
-  docs: Page[];
+  docs?: Page[];
 }
 
 const data: Info = pageInfo;

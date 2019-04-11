@@ -44,3 +44,17 @@ describe('Get docs info utility', () => {
     });
   });
 });
+
+describe('Missing docs directory', () => {
+  let cwd;
+  let docsInfo;
+
+  beforeAll(async () => {
+    cwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-packages');
+    docsInfo = getDocsInfo(path.join(cwd, 'docs'));
+  });
+
+  it('should return null if the docs folder does not exist', () => {
+    expect(docsInfo).toBeNull();
+  });
+});
