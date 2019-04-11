@@ -7,9 +7,6 @@
   "repository": "git@github.com:glad-docs/brisk-docs.git",
   "author": "Aparna Raj",
   "license": "MIT",
-  "scripts": {
-    "build": "babel src --out-dir dist --extensions '.ts,.js,.tsx' --ignore **/__tests__/**/* --config-file ../../babel.config.js"
-  },
   "files": [
     "dist"
   ],
