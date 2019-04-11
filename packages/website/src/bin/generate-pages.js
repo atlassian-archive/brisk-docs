@@ -22,7 +22,7 @@ module.exports = async ({
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
     packageRoot,
-    './components/page-templates',
+    './src/components/page-templates',
   );
 
   const pagesList = await generatePages(
