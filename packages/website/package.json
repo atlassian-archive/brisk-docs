@@ -5,15 +5,25 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
-    "dev:webpack": "node bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
-    "build:site": "node bin/index.js build --config=dummy-data/simple-project/docs.config.js",
+    "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
+    "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
+    "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node bin/index.js start"
+    "start": "node src/bin/index.js start"
   },
   "bin": {
-    "brisk": "bin/index.js"
+    "brisk": "src/bin/index.js"
   },
+  "files": [
+    "src",
+    "pages",
+    "static",
+    "babel.config.js",
+    "generate-pages.js",
+    "next.config.js",
+    "types.ts",
+    "tsconfig.json"
+  ],
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/button": "^8.2.4",

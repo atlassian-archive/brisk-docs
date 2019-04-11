@@ -7,10 +7,10 @@ import PackagesIcon from '@atlaskit/icon/glyph/component';
 import { colors, math, gridSize } from '@atlaskit/theme';
 import WidthDetector from '@atlaskit/width-detector';
 
-import { Section } from '../components/page';
-import Panel, { PanelGrid } from '../components/panel';
-import Meta from '../components/meta-context';
-import pageInfo from '../pages-list';
+import { Section } from '../src/components/page';
+import Panel, { PanelGrid } from '../src/components/panel';
+import Meta from '../src/components/meta-context';
+import pageInfo from '../src/pages-list';
 
 const WINDOW_BREAKPOINT = 800;
 

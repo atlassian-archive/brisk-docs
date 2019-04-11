@@ -10,11 +10,11 @@ import SectionMessage from '@atlaskit/section-message';
 import Link from 'next/link';
 import titleCase from 'title-case';
 
-import Page, { Section, Title } from '../components/page';
-import pageInfo from '../pages-list';
-import DocsNavContent from '../components/navigation/docs-nav-content';
-import NavigationWrapper from '../components/navigation-wrapper';
-import PageTitle from '../components/page-title';
+import Page, { Section, Title } from '../src/components/page';
+import pageInfo from '../src/pages-list';
+import DocsNavContent from '../src/components/navigation/docs-nav-content';
+import NavigationWrapper from '../src/components/navigation-wrapper';
+import PageTitle from '../src/components/page-title';
 
 const NoDocsMessage = () => (
   <SectionMessage appearance="warning">
