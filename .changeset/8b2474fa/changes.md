@@ -1,0 +1,1 @@
+- Gracefully handle top-level docs directory being missing
