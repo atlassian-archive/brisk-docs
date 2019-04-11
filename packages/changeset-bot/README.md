@@ -12,12 +12,20 @@ npm install
 npm start
 ```
 
-## Contributing
+## Installing in your repository
 
-If you have suggestions for how changeset-bot could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+Install the bot from https://github.com/apps/changeset-bot and select the desired repository.
 
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
+In your repository settings, add a new webhook with the following values.
 
-## License
+- Payload URL - `https://smee.io/TNpTJ36TKInIWlgB`
+- Content type - `application/json`
+- Secret - `changesetbot`
+- Trigger events - `Pull requests`
 
-[ISC](LICENSE) © 2019 Peter Yu <pyu@atlassian.com>
+## Behaviour
+
+The changeset bot will listen for pull requests being opened and pull requests that have been updated, upon which it will 
+then scan through the files for a changeset that has been added. The bot will make a comment on the PR stating 
+whether it found a changeset or not, as well as the message of the latest commit. If the PR is being updated 
+then the bot will update the existing comment.

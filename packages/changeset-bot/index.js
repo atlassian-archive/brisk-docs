@@ -14,8 +14,9 @@ module.exports = app => {
     const getFiles = context.github.pullRequests
       .listFiles(params)
       .then(files => {
-        const changesetFiles = files.data.filter(file =>
-          file.filename.startsWith('.changeset'),
+        const changesetFiles = files.data.filter(
+          file =>
+            file.filename.startsWith('.changeset') && file.status === 'added',
         );
         return changesetFiles.length > 0;
       });
@@ -65,8 +66,9 @@ module.exports = app => {
     const getFiles = context.github.pullRequests
       .listFiles(params)
       .then(files => {
-        const changesetFiles = files.data.filter(file =>
-          file.filename.startsWith('.changeset'),
+        const changesetFiles = files.data.filter(
+          file =>
+            file.filename.startsWith('.changeset') && file.status === 'added',
         );
         return changesetFiles.length > 0;
       });
