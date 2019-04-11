@@ -94,9 +94,7 @@ const PackageExample = ({ data, fileContents, children }) => {
               <Heading>{data.pageTitle}</Heading>
               <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
             </Header>
-            <ExampleComponentContainer>
-              {children}
-            </ExampleComponentContainer>
+            <ExampleComponentContainer>{children}</ExampleComponentContainer>
           </ExampleStyle>
           <CodeStyle data-testid="example-source-code">
             <code dangerouslySetInnerHTML={{ __html: highlighted }} />
