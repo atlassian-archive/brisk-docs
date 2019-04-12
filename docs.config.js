@@ -7,7 +7,7 @@ const test = file => {
 const webpack = config => {
   config.module.rules.push({
     test,
-    exclude: /node_modules/,
+
     loader: 'babel-loader',
     options: {
       root: __dirname,
