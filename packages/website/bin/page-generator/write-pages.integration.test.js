@@ -37,7 +37,7 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
   });
 
-  it('creates js for a package home page when there is no README file', () => {
+  it('creates js for a package home page even when there is no README file', () => {
     generators.generateHomePage(
       'output.js',
       '',
