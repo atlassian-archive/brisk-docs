@@ -22,3 +22,7 @@ yarn-error.log
 /packages/**/dist
 
 out
+
+deploy
+!deploy/changeset-bot/changeset-bot.sd.yml
+!deploy/changeset-bot/Dockerfile
