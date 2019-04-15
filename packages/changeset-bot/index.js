@@ -32,11 +32,15 @@ module.exports = app => {
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${latestCommit.sha}`,
+            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
+              latestCommit.sha
+            }`,
           });
         } else {
           prComment = context.issue({
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${latestCommit.sha}`,
+            body: `✅ This PR has a changeset ✅\nLatest commit: ${
+              latestCommit.sha
+            }`,
           });
         }
 
@@ -80,12 +84,16 @@ module.exports = app => {
         if (!hasChangeset) {
           prComment = context.issue({
             comment_id: commentId,
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${latestCommit.sha}`,
+            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
+              latestCommit.sha
+            }`,
           });
         } else {
           prComment = context.issue({
             comment_id: commentId,
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${latestCommit.sha}`,
+            body: `✅ This PR has a changeset ✅\nLatest commit: ${
+              latestCommit.sha
+            }`,
           });
         }
 
