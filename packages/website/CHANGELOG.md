@@ -1,5 +1,23 @@
 # @brisk-docs/website
 
+## 0.3.9
+
+- [patch] 6296ba2:
+
+  - Changed examples render box to be a bordered box without a background
+
+- [patch] c93b5e0:
+
+  - Gracefully handle top-level docs directory being missing
+
+- [patch] f97b57b:
+
+  - Lower webpack version - a transitive problem from acorn in newer webpack was blocking building
+    - See [this issue in next](https://github.com/zeit/next.js/issues/6240) for more details
+
+- Updated dependencies [f97b57b]:
+  - @brisk-docs/react-changelogs@0.1.4
+
 ## 0.3.1
 
 - [patch] 9c1e298:
