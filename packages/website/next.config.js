@@ -4,10 +4,7 @@ const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
 });
 const withTypescript = require('@zeit/next-typescript');
-
 const withCSS = require('@zeit/next-css');
-
-const fs = require('fs-extra');
 
 const handleConfig = require('./src/bin/handle-config');
 
@@ -61,9 +58,6 @@ module.exports = withTypescript(
         } catch (err) {}
 
         config.resolve.extensions.push('.tsx', '.ts');
-
-        fs.writeFileSync('nonsense.json', JSON.stringify(config, undefined, 2));
-
         return clientWebpack(config);
       },
     }),
