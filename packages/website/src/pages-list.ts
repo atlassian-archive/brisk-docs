@@ -5,8 +5,8 @@
 */
 
 // @ts-ignore
-import pageInfo from './data/pages-list.json';
-import { Page, PackageInfo } from './types';
+import pageInfo from '../data/pages-list.json';
+import { Page, PackageInfo } from '../types';
 
 interface Info {
   packages: PackageInfo[];

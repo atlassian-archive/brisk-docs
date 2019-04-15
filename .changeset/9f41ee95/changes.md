@@ -1,0 +1,1 @@
+- Lower webpack version - a transitive problem from acorn in newer webpack was blocking building

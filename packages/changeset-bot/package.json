@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Bot to detect changesets in PRs",
   "author": "Peter Yu <pyu@atlassian.com>",
+  "maintainers": ["Peter Yu", "Ben Conolly"],
   "license": "MIT",
+  "private": true,
   "repository": "https://github.com/apps/changeset-bot.git",
   "homepage": "https://github.com/apps/changeset-bot",
   "keywords": [

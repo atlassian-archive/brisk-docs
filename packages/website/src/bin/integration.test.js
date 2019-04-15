@@ -2,7 +2,7 @@ import path from 'path';
 
 import { build } from './run-website';
 
-import { fixturesPath } from '../__fixtures__';
+import { fixturesPath } from '../../__fixtures__';
 
 const customWebpackConfig = path.join(
   fixturesPath,

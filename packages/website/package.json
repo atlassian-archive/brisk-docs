@@ -1,19 +1,30 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.3.1",
+  "version": "0.3.8",
   "description": "The Brisk website documenter",
-  "main": "index.js",
+  "main": "src/bin/index.js",
+  "maintainers": ["Dean Pisani", "Aparna Raj", "Peter Yu", "Ben Conolly"],
   "license": "MIT",
   "scripts": {
-    "dev": "node bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
-    "dev:webpack": "node bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
-    "build:site": "node bin/index.js build --config=dummy-data/simple-project/docs.config.js",
+    "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
+    "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
+    "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node bin/index.js start"
+    "start": "node src/bin/index.js start"
   },
   "bin": {
-    "brisk": "bin/index.js"
+    "brisk": "src/bin/index.js"
   },
+  "files": [
+    "src",
+    "pages",
+    "static",
+    "babel.config.js",
+    "generate-pages.js",
+    "next.config.js",
+    "types.ts",
+    "tsconfig.json"
+  ],
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/button": "^8.2.4",
@@ -32,7 +43,7 @@
     "@atlaskit/theme": "^6.0.0",
     "@atlaskit/tree": "^4.1.11",
     "@atlaskit/width-detector": "^0.3.1",
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.3.4",
@@ -80,7 +91,7 @@
     "rimraf": "^2.6.3",
     "styled-components": "^3.2.6",
     "title-case": "^2.1.1",
-    "webpack": "^4.29.6"
+    "webpack": "4.28.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",

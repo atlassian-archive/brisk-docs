@@ -5,11 +5,16 @@
   "main": "dist/react-changelogs.cjs.js",
   "module": "dist/react-changelogs.esm.js",
   "repository": "git@github.com:glad-docs/brisk-docs.git",
+  "maintainers": ["Aparna Raj", "Ben Conolly"],
   "author": "Aparna Raj",
   "license": "MIT",
   "files": [
     "dist"
   ],
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
   "devDependencies": {
     "@types/enzyme": "^2.8.11",
     "@types/jest": "^21.1.2",
@@ -17,38 +22,19 @@
     "@types/semver": "^5.5.0",
     "extract-react-types-loader": "^0.3.0",
     "jest": "^24.1.0",
-    "nodemon": "^1.12.1",
     "react-test-renderer": "^16.0.0",
-    "ts-jest": "^24.0.0"
+    "ts-jest": "^24.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.9.1"
   },
   "dependencies": {
     "@atlaskit/css-reset": "^3.0.5",
     "@atlaskit/pagination": "^10.0.1",
     "@atlaskit/theme": "^6.0.0",
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
-    "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/runtime": "^7.4.3",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
-    "babel-plugin-transform-dynamic-import": "^2.1.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.9.1",
     "prismjs": "^1.15.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
-    "react-dom": "^16.8.4",
     "react-markdown": "^2.5.0",
     "semver": "^5.4.1",
-    "source-map-loader": "^0.2.2",
-    "styled-components": "^3.2.6",
-    "tti-polyfill": "^0.2.2",
-    "typescript": "^3.2.1",
-    "uglify-js": "^3.1.7",
-    "webpack": "^4.29.6"
+    "styled-components": "^3.2.6"
   }
 }
