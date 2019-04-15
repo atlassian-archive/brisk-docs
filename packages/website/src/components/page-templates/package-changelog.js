@@ -2,7 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SectionMessage from '@atlaskit/section-message';
-import Changelog from '@noviny/react-changelogs';
+import Changelog from '@brisk-docs/react-changelogs';
 
 import Wrapper from '../content-style-wrapper';
 import NavigationWrapper from '../navigation-wrapper';
