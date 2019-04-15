@@ -1,0 +1,1 @@
+- Handle case where committer field in webhook event is null
