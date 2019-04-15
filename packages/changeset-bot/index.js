@@ -29,21 +29,14 @@ module.exports = app => {
 
     Promise.all([getFiles, getLatestCommit]).then(
       ([hasChangeset, latestCommit]) => {
-        const user = latestCommit.committer
-          ? latestCommit.committer.login
-          : latestCommit.commit.author.name;
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: \`${user}\` committed \`${
-              latestCommit.commit.message
-            }\``,
+            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${latestCommit.sha}`,
           });
         } else {
           prComment = context.issue({
-            body: `✅ This PR has a changeset ✅\nLatest commit: \`${user}\` committed \`${
-              latestCommit.commit.message
-            }\``,
+            body: `✅ This PR has a changeset ✅\nLatest commit: ${latestCommit.sha}`,
           });
         }
 
@@ -83,23 +76,16 @@ module.exports = app => {
 
     Promise.all([getBotComment, getFiles, getLatestCommit]).then(
       ([commentId, hasChangeset, latestCommit]) => {
-        const user = latestCommit.committer
-          ? latestCommit.committer.login
-          : latestCommit.commit.author.name;
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
             comment_id: commentId,
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: \`${user}\` committed \`${
-              latestCommit.commit.message
-            }\``,
+            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${latestCommit.sha}`,
           });
         } else {
           prComment = context.issue({
             comment_id: commentId,
-            body: `✅ This PR has a changeset ✅\nLatest commit: \`${user}\` committed \`${
-              latestCommit.commit.message
-            }\``,
+            body: `✅ This PR has a changeset ✅\nLatest commit: ${latestCommit.sha}`,
           });
         }
 
