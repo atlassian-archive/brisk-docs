@@ -1,6 +1,13 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.4
+
+- [patch] f97b57b:
+
+  - Remove unused dependencies - moved some dependencies into dev dependencies
+
 ## 0.1.3
+
 - [patch] 1ce8baa:
 
   - Changed the babel/core version to match the packages in the monorepo
