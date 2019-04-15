@@ -29,7 +29,7 @@ module.exports = app => {
 
     Promise.all([getFiles, getLatestCommit]).then(
       ([hasChangeset, latestCommit]) => {
-        const user = latestCommit.committer.login;
+        const user = latestCommit.committer ? latestCommit.committer.login : latestCommit.commit.author.name;
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
@@ -81,7 +81,7 @@ module.exports = app => {
 
     Promise.all([getBotComment, getFiles, getLatestCommit]).then(
       ([commentId, hasChangeset, latestCommit]) => {
-        const user = latestCommit.committer.login;
+        const user = latestCommit.committer ? latestCommit.committer.login : latestCommit.commit.author.name;
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
