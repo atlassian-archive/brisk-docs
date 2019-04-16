@@ -1,0 +1,1 @@
+- Support non-default exports in examples pages
