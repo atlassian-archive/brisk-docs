@@ -70,7 +70,7 @@ const generateBasicPage = (
         packageHomeWrapperPath,
         templateData,
       )
-    : singleComponentTemplate(componentImportPath, templateData);
+    : singleComponentTemplate(packageHomeWrapperPath, templateData);
 
   writeFile(path.join(pagesPath, pagePath), source);
 };
