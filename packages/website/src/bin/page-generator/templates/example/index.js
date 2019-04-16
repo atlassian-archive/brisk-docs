@@ -12,14 +12,28 @@ const outdent = require('outdent');
  */
 const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     import React from 'react';
-    import Component from '${componentPath}';
+    import * as Components from '${componentPath}';
     import fileContents from '!!raw-loader!${componentPath}';
 
     import Wrapper from '${wrapperPath}';
 
     export default () => (
       <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          <Component />
+          {
+            [{ 
+                key: 'default', 
+                component: <Components.default /> 
+              }, 
+              ...Object.keys(Components).filter(componentName => componentName !== 'default')
+              .map(componentName => {
+                const Component = Components[componentName];
+                return {
+                  key: componentName,
+                  component: <Component />
+                }
+              })
+            ]
+          }
       </Wrapper>
     );
 `;

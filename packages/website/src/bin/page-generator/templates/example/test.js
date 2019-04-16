@@ -7,4 +7,10 @@ describe('example page template', () => {
 
     assertValidTemplate(source);
   });
+
+  it('creates an array of each export to render', () => {
+    const source = exampleTemplate('./component/path', './wrapper/path');
+
+    console.log(source);
+  });
 });
