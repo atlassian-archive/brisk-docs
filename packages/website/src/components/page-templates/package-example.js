@@ -100,7 +100,7 @@ const PackageExample = ({ data, fileContents, children }) => {
             </Header>
             {children.map(child => (
               <ExampleComponentContainer key={child.name}>
-                {child.key !== 'default' && (
+                {child.name !== 'default' && (
                   <ExampleHeading>{child.name}</ExampleHeading>
                 )}
                 {child.component}

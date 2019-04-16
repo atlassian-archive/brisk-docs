@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import SectionMessage from '@atlaskit/section-message';
