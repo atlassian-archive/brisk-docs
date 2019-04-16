@@ -1,16 +1,24 @@
-import assertValidTemplate from '../test-utils';
+import assertValidTemplate, { assertHasDefaultExport } from '../test-utils';
 import exampleTemplate from './index';
 
 describe('example page template', () => {
-  it('creates valid source code for a page', () => {
-    const source = exampleTemplate('./component/path', './wrapper/path');
+  const source = exampleTemplate('./component/path', './wrapper/path');
 
+  it('creates valid source code for a page', () => {
     assertValidTemplate(source);
   });
 
-  it('creates an array of each export to render', () => {
-    const source = exampleTemplate('./component/path', './wrapper/path');
+  it('should create an array of children that includes the default export', () => {
+    assertHasDefaultExport(source);
+  });
 
-    console.log(source);
+  it('create an array of children that includes non-default exports', () => {
+    expect(source).toMatch(
+      /\.{3}Object\.keys.*componentName => componentName !== 'default'/,
+    );
+
+    expect(source).toMatch(
+      /map\(([a-zA-Z]*) => .*return .*name: ([a-zA-Z]*).*component: <[a-zA-Z]* \/>/s,
+    );
   });
 });
