@@ -1,4 +1,4 @@
-import assertValidTemplate, { assertHasDefaultExport } from '../test-utils';
+import assertValidTemplate  from '../test-utils';
 import exampleTemplate from './index';
 
 describe('example page template', () => {
@@ -9,7 +9,9 @@ describe('example page template', () => {
   });
 
   it('should create an array of children that includes the default export', () => {
-    assertHasDefaultExport(source);
+    expect(source).toMatch(
+      /\[{\s*name: 'default',\s*component: <Components.default \/>\s*}/,
+    );
   });
 
   it('create an array of children that includes non-default exports', () => {
