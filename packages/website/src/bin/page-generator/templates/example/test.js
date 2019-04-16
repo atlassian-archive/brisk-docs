@@ -1,4 +1,4 @@
-import assertValidTemplate  from '../test-utils';
+import assertValidTemplate from '../test-utils';
 import exampleTemplate from './index';
 
 describe('example page template', () => {
