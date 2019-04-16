@@ -37,6 +37,18 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
   });
 
+  it('creates js for a package home page even when there is no README file', () => {
+    generators.generateHomePage(
+      'output.js',
+      '',
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    const output = getOutput('output.js');
+    expect(output).not.toMatch(/^import .+ from '\undefined'/m);
+  });
+
   it('creates js for a package doc page', () => {
     generators.generatePackageDocPage(
       'output.js',
