@@ -68,6 +68,21 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(outputRaw);
   });
 
+  it('creates decorators for example pages when there is a decorator path provided', () => {
+    const decoratorPath = path.join(cwd, 'decorators');
+    generators.generateExamplePage(
+      'output.js',
+      'output-raw.js',
+      path.join(cwd, 'example.js'),
+      {},
+      { wrappersPath, pagesPath, decoratorPath },
+    );
+
+    const output = getOutput('output.js');
+
+    expect(output).toMatch(/^import Decorator from /m);
+  });
+
   it('creates js for a docs home page', () => {
     generators.generateDocsHomePage(
       'output.js',

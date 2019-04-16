@@ -292,6 +292,7 @@ module.exports = async function generatePages(
   const generatorConfig = {
     pagesPath,
     wrappersPath: componentsPath,
+    decoratorPath: options.useDecorator,
   };
 
   const packageSitemap = generatePackagePages(packageInfo, generatorConfig);

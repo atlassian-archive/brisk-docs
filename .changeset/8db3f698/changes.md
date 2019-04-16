@@ -1,0 +1,1 @@
+- Adding the support for decorators for rendering the example pages
