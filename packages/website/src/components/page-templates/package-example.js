@@ -98,12 +98,14 @@ const PackageExample = ({ data, fileContents, children }) => {
               <Heading>{data.pageTitle}</Heading>
               <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
             </Header>
-            {children.map(child =>
-              <ExampleComponentContainer>
-                {child.key !== 'default' && <ExampleHeading>{child.key}</ExampleHeading>}
+            {children.map(child => (
+              <ExampleComponentContainer key={child.name}>
+                {child.key !== 'default' && (
+                  <ExampleHeading>{child.name}</ExampleHeading>
+                )}
                 {child.component}
               </ExampleComponentContainer>
-            )}
+            ))}
           </ExampleStyle>
           <CodeStyle data-testid="example-source-code">
             <code dangerouslySetInnerHTML={{ __html: highlighted }} />
@@ -120,10 +122,12 @@ PackageExample.propTypes = {
     packageName: PropTypes.string.isRequired,
     pageTitle: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.arrayOf(PropTypes.shape({
+  children: PropTypes.arrayOf(
+    PropTypes.shape({
       key: PropTypes.string.isRequired,
       component: PropTypes.node.isRequired,
-  })).isRequired,
+    }),
+  ).isRequired,
   fileContents: PropTypes.string.isRequired,
 };
 

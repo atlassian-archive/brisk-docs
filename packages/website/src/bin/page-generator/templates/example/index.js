@@ -21,14 +21,14 @@ const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
       <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
           {
             [{ 
-                key: 'default', 
+                name: 'default', 
                 component: <Components.default /> 
               }, 
               ...Object.keys(Components).filter(componentName => componentName !== 'default')
               .map(componentName => {
                 const Component = Components[componentName];
                 return {
-                  key: componentName,
+                  name: componentName,
                   component: <Component />
                 }
               })

@@ -58,7 +58,4 @@ const SectionMessages = () => (
   </>
 );
 
-
 export { SectionMessages };
-
-
