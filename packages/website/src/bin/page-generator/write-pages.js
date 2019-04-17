@@ -199,7 +199,7 @@ const generateExamplePage = (
 
   writeFile(
     path.join(pagesPath, rawPagesPath),
-    singleComponentTemplate(path.join('..', componentImportPath)),
+    singleComponentTemplate(path.join('..', componentImportPath), pageData),
   );
 };
 

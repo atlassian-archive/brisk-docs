@@ -37,7 +37,7 @@ const ExampleComponentContainer = styled.div`
   border: 1px solid black;
   border-radius: ${gridSize}px;
   padding: ${math.multiply(gridSize, 2)}px;
-  padding-top: ${math.multiply(gridSize, 4)}px;
+  padding-top: ${math.multiply(gridSize, 3)}px;
   margin: ${math.multiply(gridSize, 4)}px 0px;
 `;
 
@@ -52,6 +52,10 @@ const Header = styled.div`
 
 const Heading = styled.h1`
   margin-right: ${math.multiply(gridSize, 4)}px;
+`;
+
+const ExampleHeading = styled.h2`
+  margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
 
 const CodeStyle = styled.pre`
@@ -94,7 +98,14 @@ const PackageExample = ({ data, fileContents, children }) => {
               <Heading>{data.pageTitle}</Heading>
               <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
             </Header>
-            <ExampleComponentContainer>{children}</ExampleComponentContainer>
+            {children.map(child => (
+              <ExampleComponentContainer key={child.name}>
+                {child.name !== 'default' && (
+                  <ExampleHeading>{child.name}</ExampleHeading>
+                )}
+                {child.component}
+              </ExampleComponentContainer>
+            ))}
           </ExampleStyle>
           <CodeStyle data-testid="example-source-code">
             <code dangerouslySetInnerHTML={{ __html: highlighted }} />
@@ -111,7 +122,12 @@ PackageExample.propTypes = {
     packageName: PropTypes.string.isRequired,
     pageTitle: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      component: PropTypes.node.isRequired,
+    }),
+  ).isRequired,
   fileContents: PropTypes.string.isRequired,
 };
 

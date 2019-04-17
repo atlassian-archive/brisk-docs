@@ -12,16 +12,33 @@ const outdent = require('outdent');
  */
 const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     import React from 'react';
-    import Component from '${componentPath}';
+    import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
-
     import Wrapper from '${wrapperPath}';
-
-    export default () => (
-      <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          <Component />
+    
+    const DynamicComponent = dynamic(import('${componentPath}')
+    .then(Components => {
+    return () => ( 
+    <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
+          {
+            [{ 
+                name: 'default', 
+                component: <Components.default /> 
+              }, 
+              ...Object.keys(Components).filter(componentName => componentName !== 'default')
+              .map(componentName => {
+                const Component = Components[componentName];
+                return {
+                  name: componentName,
+                  component: <Component />
+                }
+              })
+            ]
+          }
       </Wrapper>
-    );
+      )
+    }));
+    export default () => <DynamicComponent/>
 `;
 
 /**
@@ -42,19 +59,34 @@ const exampleWithDecoratorTemplate = (
   decoratorPath,
 ) => outdent`
     import React from 'react';
-    import Component from '${componentPath}';
+    import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
-
     import Wrapper from '${wrapperPath}';
     import Decorator from '${decoratorPath}';
     
-     export default () => (
-      <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          <Decorator>
-              <Component />
-           </Decorator>   
+    const DynamicComponent = dynamic(import('${componentPath}')
+    .then(Components => {
+    return () => ( 
+    <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
+          {
+            [{ 
+                name: 'default', 
+                component: <Components.default /> 
+              }, 
+              ...Object.keys(Components).filter(componentName => componentName !== 'default')
+              .map(componentName => {
+                const Component = Components[componentName];
+                return {
+                  name: componentName,
+                  component: <Component />
+                }
+              })
+            ]
+          }
       </Wrapper>
-    );
+      )
+    }));
+    export default () => <Decorator> <DynamicComponent/> </Decorator>
 `;
 
 module.exports = {
