@@ -64,29 +64,15 @@ const exampleWithDecoratorTemplate = (
     import Wrapper from '${wrapperPath}';
     import Decorator from '${decoratorPath}';
     
-    const DynamicComponent = dynamic(import('${componentPath}')
-    .then(Components => {
-    return () => ( 
-    <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          {
-            [{ 
-                name: 'default', 
-                component: <Components.default /> 
-              }, 
-              ...Object.keys(Components).filter(componentName => componentName !== 'default')
-              .map(componentName => {
-                const Component = Components[componentName];
-                return {
-                  name: componentName,
-                  component: <Component />
-                }
-              })
-            ]
-          }
+    const Component = dynamic(import('${componentPath}'));
+    
+    export default () => (
+      <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
+          <Decorator>
+              <Component />
+           </Decorator>   
       </Wrapper>
-      )
-    }));
-    export default () => <Decorator> <DynamicComponent/> </Decorator>
+    );
 `;
 
 module.exports = {
