@@ -12,13 +12,14 @@ const outdent = require('outdent');
  */
 const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     import React from 'react';
-    import * as Components from '${componentPath}';
+    import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
-
     import Wrapper from '${wrapperPath}';
-
-    export default () => (
-      <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
+    
+    const DynamicComponent = dynamic(import('${componentPath}')
+    .then(Components => {
+    return () => ( 
+    <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
           {
             [{ 
                 name: 'default', 
@@ -35,7 +36,9 @@ const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
             ]
           }
       </Wrapper>
-    );
+      )
+    }));
+    export default () => <DynamicComponent/>
 `;
 
 module.exports = exampleTemplate;
