@@ -9,4 +9,4 @@ const ContextMeta = React.createContext<ContextInterface>({ siteName: '' });
 export default ContextMeta;
 
 // @ts-ignore
-export { default as metadata } from '../data/site-meta.json';
+export { default as metadata } from '../../data/site-meta.json';

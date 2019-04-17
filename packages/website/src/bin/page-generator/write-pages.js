@@ -70,7 +70,7 @@ const generateBasicPage = (
         packageHomeWrapperPath,
         templateData,
       )
-    : singleComponentTemplate(componentImportPath, templateData);
+    : singleComponentTemplate(packageHomeWrapperPath, templateData);
 
   writeFile(path.join(pagesPath, pagePath), source);
 };
@@ -180,7 +180,7 @@ const generateExamplePage = (
 
   writeFile(
     path.join(pagesPath, rawPagesPath),
-    singleComponentTemplate(path.join('..', componentImportPath)),
+    singleComponentTemplate(path.join('..', componentImportPath), pageData),
   );
 };
 

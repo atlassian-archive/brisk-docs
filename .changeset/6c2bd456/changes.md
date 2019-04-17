@@ -1,1 +1,0 @@
-- Changed examples render box to be a bordered box without a background

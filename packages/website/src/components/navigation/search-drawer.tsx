@@ -8,7 +8,7 @@ import Drawer from '@atlaskit/drawer';
 import capitalize from 'lodash.capitalize';
 import data from '../../pages-list';
 import Link from './link-component';
-import { Pages } from '../../types';
+import { Pages } from '../../../types';
 
 const prettyTitle = (id: string) =>
   id
