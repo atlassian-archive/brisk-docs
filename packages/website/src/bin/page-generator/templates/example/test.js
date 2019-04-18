@@ -22,7 +22,7 @@ describe('example page template', () => {
       './decorator/path',
     );
 
-    expect(output).toMatch(/<Decorator>.*<Component \/>.*<\/Decorator>/s);
+    expect(output).toMatch(/<Decorator>.*<\/Decorator>/s);
   });
 
   it('create an array of children that includes non-default exports', () => {

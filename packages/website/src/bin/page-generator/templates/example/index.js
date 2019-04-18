@@ -61,32 +61,29 @@ const exampleWithDecoratorTemplate = (
     import React from 'react';
     import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
-    import Wrapper from '${wrapperPath}';
+    import Wrapper, { ExampleComponentContainer, ExampleHeading } from '${wrapperPath}';
     import Decorator from '${decoratorPath}';
     
     const DynamicComponent = dynamic(import('${componentPath}')
     .then(Components => {
     return () => ( 
     <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          {
-            [{ 
-                name: 'default', 
-                component: <Components.default /> 
-              }, 
-              ...Object.keys(Components).filter(componentName => componentName !== 'default')
+        {
+          [<ExampleComponentContainer key="default"><Components.default/></ExampleComponentContainer>,
+            ...Object.keys(Components).filter(componentName => componentName !== 'default')
               .map(componentName => {
                 const Component = Components[componentName];
-                return {
-                  name: componentName,
-                  component: <Component />
-                }
+                return <>
+                  <ExampleHeading>{componentName}</ExampleHeading>
+                  <ExampleComponentContainer key={componentName}><Component/></ExampleComponentContainer>
+                </>
               })
-            ]
-          }
+          ]
+        }
       </Wrapper>
       )
     }));
-    export default () => <Decorator> <DynamicComponent/> </Decorator>
+    export default () => <Decorator><DynamicComponent/></Decorator>
 `;
 
 module.exports = {
