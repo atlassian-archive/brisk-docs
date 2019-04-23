@@ -1,3 +1,13 @@
+const getAbsentMessage = commitSha => `❌ NO CHANGESET PRESENT ❌
+Latest commit: ${commitSha}
+
+[Click here](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md) to learn what changesets are, and how to add one.`;
+
+const getApproveMessage = commitSha => `✅ This PR has a changeset ✅
+Latest commit: ${commitSha}
+
+[Click here](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md) to learn what changesets are.`;
+
 module.exports = app => {
   app.log('Yay, the app was loaded!');
 
@@ -32,15 +42,11 @@ module.exports = app => {
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getAbsentMessage(latestCommit.sha),
           });
         } else {
           prComment = context.issue({
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getApproveMessage(latestCommit.sha),
           });
         }
 
@@ -84,16 +90,12 @@ module.exports = app => {
         if (!hasChangeset) {
           prComment = context.issue({
             comment_id: commentId,
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getAbsentMessage(latestCommit.sha),
           });
         } else {
           prComment = context.issue({
             comment_id: commentId,
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getApproveMessage(latestCommit.sha),
           });
         }
 

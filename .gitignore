@@ -20,6 +20,7 @@ yarn-error.log
 /packages/website/data/**/*.js
 /packages/**/bundles/**/*.js
 /packages/**/dist
+/packages/**/**/yarn.lock
 
 out
 
