@@ -4,9 +4,6 @@ node_modules
 .DS_Store
 .idea
 
-# dependencies
-node_modules
-
 package-lock.json
 yarn-error.log
 
@@ -16,12 +13,11 @@ yarn-error.log
 /packages/website/pages/packages
 /packages/website/pages/docs
 
-/packages/website/data/**/*.json
-/packages/website/data/**/*.js
-/packages/**/bundles/**/*.js
-/packages/**/dist
+/packages/website/data
+/packages/**/bundles
 /packages/**/**/yarn.lock
 
+dist
 out
 
 deploy
