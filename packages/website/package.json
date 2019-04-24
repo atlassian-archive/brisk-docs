@@ -94,6 +94,7 @@
     "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
     "react-dom": "^16.8.4",
+    "resolve": "^1.10.0",
     "rimraf": "^2.6.3",
     "styled-components": "^3.2.6",
     "title-case": "^2.1.1",
