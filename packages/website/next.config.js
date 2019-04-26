@@ -4,6 +4,8 @@ const withMDX = require('@zeit/next-mdx')({
 });
 const withTypescript = require('@zeit/next-typescript');
 const withCSS = require('@zeit/next-css');
+const path = require('path');
+
 const getExternals = require('./next-externals');
 const handleConfig = require('./src/bin/handle-config');
 
@@ -16,11 +18,11 @@ if (!cwd) {
 
 const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 
-const babelExlude = path => {
-  if (/next-server[\\/]dist[\\/]lib/.test(path)) {
+const babelExlude = filePath => {
+  if (/next-server[\\/]dist[\\/]lib/.test(filePath)) {
     return false;
   }
-  return /node_modules\/(?!@brisk-docs\/website)/.test(path);
+  return /node_modules\/(?!@brisk-docs\/)/.test(filePath);
 };
 
 module.exports = withTypescript(
@@ -34,8 +36,15 @@ module.exports = withTypescript(
         // eslint-disable-next-line no-param-reassign
         delete config.devtool;
 
+        // Some loaders have multiple loaders in 'use' - currently this is missing the mdx loader
         config.module.rules.forEach(loader => {
           if (loader.use.loader === 'next-babel-loader') {
+            // TODO: Remove this line in prod builds
+            // explanation: With preconstruct's new alias model, webpack doesn't know about it,
+            // but this meant loaders weren't processing it properly when run in places other
+            // than the project root (in tests and such)
+            // This solves that, but is very much a hack, and can't be relied upon going forwards.
+            loader.include.push(path.join(__dirname, '..'));
             // eslint-disable-next-line no-param-reassign
             loader.exclude = babelExlude;
           }

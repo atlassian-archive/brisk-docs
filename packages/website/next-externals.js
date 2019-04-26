@@ -8,6 +8,7 @@ const resolve = require('resolve');
 module.exports = (cwd, name, target) =>
   name === 'server' && target !== 'serverless'
     ? [
+        // eslint-disable-next-line consistent-return
         (context, request, callback) => {
           const notExternalModules = [
             'next/app',
@@ -31,6 +32,7 @@ module.exports = (cwd, name, target) =>
           resolve(
             request,
             { basedir: cwd, preserveSymlinks: true },
+            // eslint-disable-next-line consistent-return
             (err, res) => {
               if (err) {
                 return callback();
