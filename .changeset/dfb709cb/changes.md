@@ -1,1 +1,0 @@
-- Display commit sha instead of commit message in bot comment

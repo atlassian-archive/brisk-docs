@@ -1,1 +1,0 @@
-- Fix error in package home page  when no package README
