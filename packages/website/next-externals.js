@@ -45,6 +45,9 @@ module.exports = (cwd, name, target) =>
               if (res.match(/@atlaskit/)) {
                 return callback();
               }
+              if (res.match(/@brisk-docs/)) {
+                return callback();
+              }
 
               // Default pages have to be transpiled
               if (
