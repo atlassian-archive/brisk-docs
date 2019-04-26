@@ -57,8 +57,6 @@ module.exports = withTypescript(
         config.plugins.push(
           new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),
         );
-
-        config.resolve.extensions.push('.tsx', '.ts');
         return clientWebpack(config);
       },
     }),
