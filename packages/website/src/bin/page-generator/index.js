@@ -133,49 +133,16 @@ function generatePackagePages(packageInfo, generatorConfig) {
       };
     });
 
-    /**
-     * Recursively scans through the folder structure from folder path and generate children
-     * for each sub example
-     * @param folders the folder array
-     * @param children
-     * @param subExample each item in subExample
-     */
-    const processSubExamples = (folders, children, subExample) => {
-      const [folder, ...rest] = folders;
-      const requiresFurtherNesting = !!rest.length;
-
-      let addToFolder = children.find(child => child.id === folder);
-      if (!addToFolder) {
-        children.push({
-          id: folder,
-          children: [],
-        });
-        addToFolder = children.find(child => child.id === folder);
+    const formattedSubExamples = subExamples.map(example => {
+      return {
+        id: example.folderPath,
+        children: [{
+          id: example.id.replace(example.folderPath, ''),
+          pagePath: example.pagePath,
+          isolatedPath: example.isolatedPath
+        }]
       }
-
-      if (requiresFurtherNesting) {
-        processSubExamples(rest, addToFolder.children, subExample);
-      } else {
-        // When it reach the last element add it as a plain object and delete the [] children array.
-        addToFolder.pagePath = subExample.pagePath;
-        addToFolder.isolatedPath = subExample.isolatedPath;
-        delete addToFolder.children;
-      }
-    };
-
-    /**
-     * Recursively scans through the top level sub examples and generate a tree structure
-     * @returns array like sub examples structure
-     */
-    const formatSubExamples = () => {
-      const formatted = [];
-      subExamples.forEach(subExample => {
-        const folders = subExample.id.split('/').filter(Boolean);
-        processSubExamples(folders, formatted, subExample);
-      });
-
-      return formatted;
-    };
+    });
 
     const env = process.env.NODE_ENV || 'development';
     const displayChangelog = pkg.changelogPath || env === 'development';
@@ -188,7 +155,7 @@ function generatePackagePages(packageInfo, generatorConfig) {
       examplePath: path.join('/', examplePath),
       docs,
       examples,
-      subExamples: formatSubExamples(),
+      subExamples: formattedSubExamples,
     };
   });
   return packageSitemap;

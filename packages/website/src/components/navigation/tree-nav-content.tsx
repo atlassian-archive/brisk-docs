@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Item } from '@atlaskit/navigation-next';
+import { Item, GroupHeading } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
+import Tooltip from '@atlaskit/tooltip';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
 
@@ -70,6 +71,7 @@ type TreeItemProps = {
 
 const TreeItem = ({ item, provided }: TreeItemProps) => {
   const { id, hasChildren, data } = item;
+  const folderPath = data.title.slice(1);
 
   if (!hasChildren) {
     return (
@@ -81,7 +83,13 @@ const TreeItem = ({ item, provided }: TreeItemProps) => {
 
   return (
     <div ref={provided.innerRef} {...provided.draggableProps}>
-      <Item id={id} text={titleCase(data.title)} />
+      {folderPath.length > 25 ? (
+        <Tooltip content={folderPath}>
+          <GroupHeading>{folderPath}</GroupHeading>
+        </Tooltip>
+      ) : (
+        <GroupHeading>{folderPath}</GroupHeading>
+      )}
     </div>
   );
 };
