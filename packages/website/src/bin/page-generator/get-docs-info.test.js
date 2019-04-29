@@ -43,6 +43,12 @@ describe('Get docs info utility', () => {
       ],
     });
   });
+
+  it('reads only .md and .mdx files', () => {
+    expect(docsInfo).not.toContainEqual(
+      expect.objectContaining({ id: 'derpo' }),
+    );
+  });
 });
 
 describe('Missing docs directory', () => {

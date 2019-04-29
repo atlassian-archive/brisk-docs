@@ -14,7 +14,13 @@ npm install @brisk-docs/website
 To start your docs website locally, simply run:
 
 ```shell
-npm run brisk
+npm run brisk dev
+```
+
+To produce a static build of the website that can be hosted:
+
+```shell
+npm run brisk export:
 ```
 
 ## Organising your documentation
