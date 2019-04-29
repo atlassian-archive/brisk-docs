@@ -27,6 +27,7 @@
     "babel.config.js",
     "generate-pages.js",
     "next.config.js",
+    "next-externals.js",
     "types.ts",
     "tsconfig.json"
   ],

@@ -17,17 +17,25 @@ const processDirectory = dirPath => {
     }))
     .map(({ id, fullPath }) => {
       if (fs.statSync(fullPath).isFile()) {
-        return {
-          id,
-          path: fullPath,
-        };
+        if (
+          path.extname(fullPath) === '.md' ||
+          path.extname(fullPath) === '.mdx'
+        ) {
+          return {
+            id,
+            path: fullPath,
+          };
+        }
+
+        return null;
       }
 
       return {
         id,
         children: processDirectory(fullPath),
       };
-    });
+    })
+    .filter(x => x);
 };
 
 /**
