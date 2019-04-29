@@ -1,0 +1,1 @@
+- Change nav to display sub-examples without many levels of nesting so that they don't exceed the nav's width
