@@ -71,7 +71,7 @@ type TreeItemProps = {
 
 const TreeItem = ({ item, provided }: TreeItemProps) => {
   const { id, hasChildren, data } = item;
-  const folderPath = data.title.slice(1);
+  const folderPath = data.title;
 
   if (!hasChildren) {
     return (

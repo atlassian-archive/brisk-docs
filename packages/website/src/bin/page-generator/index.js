@@ -135,13 +135,15 @@ function generatePackagePages(packageInfo, generatorConfig) {
 
     const formattedSubExamples = subExamples.map(example => {
       return {
-        id: example.folderPath,
-        children: [{
-          id: example.id.replace(example.folderPath, ''),
-          pagePath: example.pagePath,
-          isolatedPath: example.isolatedPath
-        }]
-      }
+        id: example.folderPath.slice(1),
+        children: [
+          {
+            id: example.id.replace(`${example.folderPath}/`, ''),
+            pagePath: example.pagePath,
+            isolatedPath: example.isolatedPath,
+          },
+        ],
+      };
     });
 
     const env = process.env.NODE_ENV || 'development';
