@@ -1,5 +1,19 @@
 # @brisk-docs/website
 
+## 0.3.10
+- [patch] 25f8239:
+
+  - Resolve the SSR issues while loading the SSR non-compatible examples
+- [patch] e8e6604:
+
+  - Fix error in package home page  when no package README
+- [patch] 158dfbd:
+
+  - Support non-default exports in examples pages
+- [patch] bb26805:
+
+  - Add missing babel plugin
+
 ## 0.3.9
 
 - [patch] 6296ba2:

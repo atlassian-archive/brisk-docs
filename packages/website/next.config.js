@@ -1,11 +1,12 @@
 const webpack = require('webpack');
-const path = require('path');
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
 });
 const withTypescript = require('@zeit/next-typescript');
 const withCSS = require('@zeit/next-css');
+const path = require('path');
 
+const getExternals = require('./next-externals');
 const handleConfig = require('./src/bin/handle-config');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
@@ -17,20 +18,36 @@ if (!cwd) {
 
 const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 
+const babelExlude = filePath => {
+  if (/next-server[\\/]dist[\\/]lib/.test(filePath)) {
+    return false;
+  }
+  return /node_modules\/(?!@brisk-docs\/)/.test(filePath);
+};
+
 module.exports = withTypescript(
   withCSS(
     withMDX({
       pageExtensions: ['js', 'jsx', 'mdx', 'tsx', 'ts'],
       webpack(config) {
         // eslint-disable-next-line no-param-reassign
-        config.externals = [];
+        config.externals = getExternals(cwd, config.name, config.target);
 
-        config.module.rules.push({
-          test: /\.(ts|tsx|js|jsx)$/,
-          exclude: /node_modules\/(?!@brisk-docs\/website)/, // exclude all node_modules except our website while using the loader within a consumer app.
-          use: {
-            loader: 'babel-loader',
-          },
+        // eslint-disable-next-line no-param-reassign
+        delete config.devtool;
+
+        // Some loaders have multiple loaders in 'use' - currently this is missing the mdx loader
+        config.module.rules.forEach(loader => {
+          if (loader.use.loader === 'next-babel-loader') {
+            // TODO: Remove this line in prod builds
+            // explanation: With preconstruct's new alias model, webpack doesn't know about it,
+            // but this meant loaders weren't processing it properly when run in places other
+            // than the project root (in tests and such)
+            // This solves that, but is very much a hack, and can't be relied upon going forwards.
+            loader.include.push(path.join(__dirname, '..'));
+            // eslint-disable-next-line no-param-reassign
+            loader.exclude = babelExlude;
+          }
         });
 
         // Website modules should take precedence over the node_modules of the consumer.
@@ -40,24 +57,6 @@ module.exports = withTypescript(
         config.plugins.push(
           new webpack.ProvidePlugin({ Props: ['pretty-proptypes', 'default'] }),
         );
-
-        // this is only necessary inside the monorepo
-        // outside the monorepo, it will throw, be caught and nothing will happen
-        try {
-          // eslint-disable-next-line no-param-reassign
-          config.resolve.alias = {
-            ...config.resolve.alias,
-            // we're ignoring these linting rules since they _should_ fail
-            // outside the monorepo
-            // eslint-disable-next-line global-require, import/no-extraneous-dependencies
-            ...require('preconstruct').aliases.webpack(
-              path.join(__dirname, '..', '..'),
-            ),
-          };
-          // eslint-disable-next-line no-empty
-        } catch (err) {}
-
-        config.resolve.extensions.push('.tsx', '.ts');
         return clientWebpack(config);
       },
     }),
