@@ -18,16 +18,16 @@ const processDirectory = dirPath => {
     .map(({ id, fullPath }) => {
       if (fs.statSync(fullPath).isFile()) {
         if (
-          path.extname(fullPath) === '.md' ||
-          path.extname(fullPath) === '.mdx'
+          path.extname(fullPath) !== '.md' &&
+          path.extname(fullPath) !== '.mdx'
         ) {
-          return {
-            id,
-            path: fullPath,
-          };
+          return null;
         }
 
-        return null;
+        return {
+          id,
+          path: fullPath,
+        };
       }
 
       return {
