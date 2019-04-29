@@ -56,6 +56,11 @@ declare module '@atlaskit/table-tree' {
   export default aDefault;
 }
 
+declare module '@atlaskit/tooltip' {
+  declare const Tooltip: React.ComponentType<any, any>;
+  export default Tooltip;
+}
+
 declare module '@atlaskit/navigation-next' {
   declare const ContainerHeader: React.ComponentType<any, any>;
   declare const HeaderSection: React.ComponentType<any, any>;
@@ -64,6 +69,7 @@ declare module '@atlaskit/navigation-next' {
   declare const BackItem: React.ComponentType<any, any>;
   declare const Separator: React.ComponentType<any, any>;
   declare const Group: React.ComponentType<any, any>;
+  declare const GroupHeading: React.ComponentType<any, any>;
   declare const Item: React.ComponentType<any, any>;
   declare const GlobalNav: React.ComponentType<any, any>;
   declare const LayoutManager: React.ComponentType<any, any>;
@@ -76,6 +82,7 @@ declare module '@atlaskit/navigation-next' {
     BackItem,
     Separator,
     Group,
+    GroupHeading,
     Item,
     GlobalNav,
     LayoutManager,

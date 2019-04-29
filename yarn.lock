@@ -44,6 +44,14 @@
     babel-runtime "^6.26.0"
     prop-types "^15.5.10"
 
+"@atlaskit/analytics-next@^4.0.3":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-4.0.5.tgz#ec92c74a1f283ecf334dc2ea568e73dd29346939"
+  integrity sha512-IqbKUQugMArrHZcCbm3MM9udbYGOzwE2D4vmiE1E/3waMDP+WybUi/5dwGcGY3FcVkW5/x2Mitt357K4ZOL8Dw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.5.10"
+
 "@atlaskit/analytics@^4.0.7":
   version "4.0.7"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/analytics/-/analytics-4.0.7.tgz#eb60bf2aa03e5370e0c269a368fe1992810c38f5"
@@ -375,12 +383,30 @@
     memoize-one "^3.0.1"
     react-popper "1.0.2"
 
+"@atlaskit/popper@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/popper/-/popper-1.0.0.tgz#ce787d99ffcc14d7ed7d02d5f2dc625d3f889831"
+  integrity sha512-2AZCpHR50po3+akSbJIIpUQ5k1TCqqkeDg5Ocjn1OI0iF3JY+q5yKiD0X2WwMndD+lJYvvtGruat4oqPNkzjEg==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    memoize-one "^3.0.1"
+    react-popper "1.0.2"
+
 "@atlaskit/portal@^0.0.18":
   version "0.0.18"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/portal/-/portal-0.0.18.tgz#a984d47c12cd765b8deb185a385db0df0deba779"
   dependencies:
     "@babel/runtime" "^7.0.0"
     babel-runtime "^6.26.0"
+    exenv "^1.2.2"
+    tiny-invariant "^0.0.3"
+
+"@atlaskit/portal@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/portal/-/portal-1.0.0.tgz#887c785c9bf3a996f481562bb691657f14e900cb"
+  integrity sha512-ZZkpkfv7p6VtesEP+sosgtcy+Q66DWchGrCb1+5g67d/7/GhSM/los8d4KJxUFUpzGWo5fK3S5LJhYvyBiz0XQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
     tiny-invariant "^0.0.3"
 
@@ -500,6 +526,15 @@
     exenv "^1.2.2"
     prop-types "^15.5.10"
 
+"@atlaskit/theme@^8.1.7":
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-8.1.7.tgz#dadeef5a8afccb8b5ac2ddc1d9e304d064c797ac"
+  integrity sha512-G7LUwdUW9dYMC3Fijpopxh+UeVIUjIB44NJB3MaqzneBmPnSP394Ys1m/pQUaCOMaZYXrwT3oct/jjnp7/nHWQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+
 "@atlaskit/tooltip@^12.1.15":
   version "12.1.15"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/tooltip/-/tooltip-12.1.15.tgz#3ce4f6b426d817e28e47d74ebb32834c588871e4"
@@ -508,6 +543,20 @@
     "@atlaskit/popper" "^0.3.6"
     "@atlaskit/portal" "^0.0.18"
     "@atlaskit/theme" "^7.0.1"
+    "@babel/runtime" "^7.0.0"
+    flushable "^1.0.0"
+    react-node-resolver "^1.0.1"
+    react-transition-group "^2.2.1"
+
+"@atlaskit/tooltip@^13.0.5":
+  version "13.0.5"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tooltip/-/tooltip-13.0.5.tgz#cb0b314f533721e09e2bc4402fd1176ac6f260c9"
+  integrity sha512-rwNqO/SYb7Ih/OCaBAyxf5gzjQK74OnDFJxfsxCaJndqq8we0qvhnCos6HkYIJDueHbnTw+efOevWFYZWoFDgA==
+  dependencies:
+    "@atlaskit/analytics-next" "^4.0.3"
+    "@atlaskit/popper" "^1.0.0"
+    "@atlaskit/portal" "^1.0.0"
+    "@atlaskit/theme" "^8.1.7"
     "@babel/runtime" "^7.0.0"
     flushable "^1.0.0"
     react-node-resolver "^1.0.1"
