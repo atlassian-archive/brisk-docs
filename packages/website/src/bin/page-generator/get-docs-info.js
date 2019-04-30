@@ -17,6 +17,13 @@ const processDirectory = dirPath => {
     }))
     .map(({ id, fullPath }) => {
       if (fs.statSync(fullPath).isFile()) {
+        if (
+          path.extname(fullPath) !== '.md' &&
+          path.extname(fullPath) !== '.mdx'
+        ) {
+          return null;
+        }
+
         return {
           id,
           path: fullPath,
@@ -27,7 +34,8 @@ const processDirectory = dirPath => {
         id,
         children: processDirectory(fullPath),
       };
-    });
+    })
+    .filter(x => x);
 };
 
 /**

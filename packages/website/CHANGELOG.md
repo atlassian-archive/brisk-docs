@@ -1,5 +1,10 @@
 # @brisk-docs/website
 
+## 0.3.11
+- [patch] 88c05da:
+
+  - Bundle critical file in package that was missing. Fix bug where non md files were treated as docs.
+
 ## 0.3.10
 - [patch] 25f8239:
 
