@@ -3290,7 +3290,7 @@ body-parser@1.18.3:
     raw-body "2.3.3"
     type-is "~1.6.16"
 
-bolt@^0.22.1, bolt@^0.22.6:
+bolt@^0.22.1:
   version "0.22.6"
   resolved "https://registry.yarnpkg.com/bolt/-/bolt-0.22.6.tgz#3bdafdb98679828b6153ac175c946c2cf740b736"
   dependencies:
@@ -3303,6 +3303,45 @@ bolt@^0.22.1, bolt@^0.22.6:
     cmd-shim "^2.0.2"
     cross-spawn "^5.1.0"
     detect-indent "^5.0.0"
+    find-up "^2.1.0"
+    globby "^6.1.0"
+    inquirer "3.3.0"
+    is-glob "^4.0.0"
+    make-dir "^1.0.0"
+    meow "^4.0.0"
+    minimatch "^3.0.4"
+    multimatch "^2.1.0"
+    p-limit "^1.1.0"
+    parse-json "^2.2.0"
+    path-is-inside "^1.0.2"
+    pkg-up "^2.0.0"
+    project-bin-path "^1.1.0"
+    read-cmd-shim "^1.0.1"
+    read-pkg "^2.0.0"
+    rimraf "^2.6.1"
+    semver "^5.4.1"
+    slash "^1.0.0"
+    sort-object "^3.0.2"
+    task-graph-runner "^1.0.1"
+    temp-write "^3.4.0"
+    typeable-promisify "^2.0.1"
+    yarn "^1.9.4"
+
+bolt@^0.23.2:
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/bolt/-/bolt-0.23.2.tgz#36a6f824c2dd1be744aa06505910550c8eefe573"
+  integrity sha512-PMzJP1K5dkO5YWaePgJCGxIIPVwYUEOGkJ+33lbXeeOmOnAir0YTnd2F5/ZLxLhd2Mzh9CWtxxhOx9Pev1MiGQ==
+  dependencies:
+    array-includes "^3.0.3"
+    babel-runtime "^6.25.0"
+    chalk "^2.0.1"
+    chunkd "^1.0.0"
+    ci-parallel-vars "^1.0.0"
+    clean-stack "^1.3.0"
+    cmd-shim "^2.0.2"
+    cross-spawn "^5.1.0"
+    detect-indent "^5.0.0"
+    detect-newline "2.1.0"
     find-up "^2.1.0"
     globby "^6.1.0"
     inquirer "3.3.0"
@@ -4769,9 +4808,10 @@ detect-libc@^1.0.2:
   version "1.0.3"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
 
-detect-newline@^2.1.0:
+detect-newline@2.1.0, detect-newline@^2.1.0:
   version "2.1.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
+  resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
+  integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
 
 diff-sequences@^24.0.0:
   version "24.0.0"

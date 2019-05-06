@@ -135,7 +135,7 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-styled-components": "^1.10.0",
-    "bolt": "^0.22.6",
+    "bolt": "^0.23.2",
     "css-loader": "^1.0.0",
     "cypress": "^3.1.5",
     "enzyme": "^3.9.0",
