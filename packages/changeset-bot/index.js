@@ -1,12 +1,20 @@
-const getAbsentMessage = commitSha => `❌ NO CHANGESET PRESENT ❌
+const getAbsentMessage = commitSha => `###  💥 No Changeset
+
 Latest commit: ${commitSha}
 
-[Click here](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md) to learn what changesets are, and how to add one.`;
+Merging this PR will not cause any packages to be released. If these changes should not cause updates to packages in this repo, this is fine 🙂
 
-const getApproveMessage = commitSha => `✅ This PR has a changeset ✅
+**If these changes should be published to npm, you need to add a changeset.**
+
+[Click here to learn what changesets are, and how to add one](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
+
+const getApproveMessage = commitSha => `###  🦋  Changeset is good to go
+
 Latest commit: ${commitSha}
 
-[Click here](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md) to learn what changesets are.`;
+**We got this.**
+
+Not sure waht this means? [Click here  to learn what changesets are](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
 
 module.exports = app => {
   app.log('Yay, the app was loaded!');

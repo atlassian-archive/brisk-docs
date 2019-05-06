@@ -24,9 +24,8 @@
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
-    "changeset": "build-releases changeset",
-    "version-packages": "build-releases version",
-    "publish-changed": "yarn build && build-releases publish",
+    "bump": "changeset bump",
+    "release": "yarn build && changeset release",
     "prepare:docs": "bolt && yarn build:docs && yarn export",
     "postinstall": "preconstruct dev"
   },
@@ -72,6 +71,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@changesets/cli": "^1.0.1",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
@@ -125,7 +125,6 @@
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@atlaskit/build-releases": "^3.0.3",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@types/enzyme": "^2.8.11",
     "@types/jest": "^21.1.2",
