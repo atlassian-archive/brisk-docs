@@ -1,4 +1,4 @@
-const getAbsentMessage = commitSha => `###  💥 No Changeset
+const getAbsentMessage = commitSha => `###  💥  No Changeset
 
 Latest commit: ${commitSha}
 
