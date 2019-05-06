@@ -32,7 +32,7 @@ const LinkButtonContainer = styled.div`
 
 const Header = ({ id, heading }) => {
   const packages = pageInfo.packages.find(pkg => pkg.packageId === id);
-  console.log('hhhhhhhhhhhhhhhhhhhh', pageInfo.packages);
+
   return (
     <div
       style={{ display: 'flex', justifyContent: 'space-between' }}

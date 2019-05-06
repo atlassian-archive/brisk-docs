@@ -25,13 +25,15 @@ const changesetOptions = {
   A summary message you wrote, indented
 */
 
-const getReleaseLine = async (changeset, versionType) => {
-  const indentedSummary = changeset.summary
+// eslint-disable-next-line no-unused-vars
+const getReleaseLine = async (changeset, type) => {
+  const [firstLine, ...futureLines] = changeset.summary
     .split('\n')
-    .map(l => `  ${l}`.trimRight())
-    .join('\n');
+    .map(l => l.trimRight());
 
-  return `- [${versionType}] ${changeset.commit}:\n\n${indentedSummary}`;
+  return `- ${changeset.commit}: ${firstLine}\n${futureLines
+    .map(l => `  ${l}`)
+    .join('\n')}`;
 };
 
 // This function takes information about what dependencies we are updating in the package.
@@ -63,7 +65,7 @@ const versionOptions = {
   // Adds a skipCI flag to the commit - only valid if `commit` is also true.
   skipCI: false,
   // Do not modify the `changelog.md` files for packages that are updated
-  noChangelog: false,
+  updateChangelog: true,
   // A function that returns a string. It takes in options about a change. This allows you to customise your changelog entries
   getReleaseLine,
   // A function that returns a string. It takes in options about when a pacakge is updated because

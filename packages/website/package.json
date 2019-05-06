@@ -71,7 +71,6 @@
     "babel-plugin-styled-components": "^1.10.0",
     "babel-plugin-transform-dynamic-import": "^2.1.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "bolt": "^0.22.6",
     "command-line-args": "^5.0.2",
     "emotion": "^9.1.3",
     "emotion-server": "^9.2.12",
