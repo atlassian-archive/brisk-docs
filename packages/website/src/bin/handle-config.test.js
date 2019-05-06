@@ -9,18 +9,29 @@ describe('website configuration processor', () => {
 
     expect(config).toEqual({
       packagesPaths: ['/c/w/d/packages/*'],
-      docsPath: '/c/w/d/docs',
+      docsList: {
+        description: 'This is a sample documentation for the website.',
+        docsPath: '/c/w/d/docs',
+        name: 'Docs',
+      },
       useManifests: false,
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
       showSubExamples: false,
+      packagesDescription:
+        'This is a sample package for the documentation website',
     });
   });
 
   it('accepts a docs path as a string', () => {
-    const config = processConfig(mockCwd, { docs: 'some/other/docs' });
-
-    expect(config.docsPath).toEqual('/c/w/d/some/other/docs');
+    const { docsList } = processConfig(mockCwd, {
+      docs: {
+        path: 'some/other/docs',
+        name: 'Docs',
+        description: 'This is a sample documentation for the website.',
+      },
+    });
+    expect(docsList.docsPath).toEqual('/c/w/d/some/other/docs');
   });
 
   it('accepts an packages path as a string', () => {
@@ -69,7 +80,7 @@ describe('loadConfig', () => {
   });
   it('should load the default config if no path is given', () => {
     expect(loadConfig(defaultConfigPath)).toEqual({
-      docs: 'a/b/c',
+      docs: { path: 'a/b/c' },
       packages: ['x/y/z'],
     });
   });

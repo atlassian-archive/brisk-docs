@@ -13,11 +13,12 @@ const packageRoot = path.resolve(__dirname, '..', '..');
 
 module.exports = async ({
   packagesPaths,
-  docsPath,
+  docsList,
   useManifests,
   webpackConfiguration,
   showSubExamples,
   siteName,
+  packagesDescription,
 }) => {
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
@@ -25,6 +26,7 @@ module.exports = async ({
     './src/components/page-templates',
   );
 
+  const { docsPath, ...rest } = docsList;
   const pagesList = await generatePages(
     packagesPaths,
     docsPath,
@@ -58,6 +60,6 @@ module.exports = async ({
   fse.writeFileSync(
     metaPath,
 
-    JSON.stringify({ siteName }, undefined, 2),
+    JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
   );
 };

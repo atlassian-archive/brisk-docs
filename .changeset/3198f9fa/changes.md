@@ -1,0 +1,1 @@
+- Added the provision to add packages and docs description for the website by the consumers

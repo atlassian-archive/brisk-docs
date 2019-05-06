@@ -2,9 +2,14 @@ import * as React from 'react';
 
 interface ContextInterface {
   siteName: string;
+  packagesDescription: string;
+  description?: string;
 }
 
-const ContextMeta = React.createContext<ContextInterface>({ siteName: '' });
+const ContextMeta = React.createContext<ContextInterface>({
+  siteName: '',
+  packagesDescription: '',
+});
 
 export default ContextMeta;
 
