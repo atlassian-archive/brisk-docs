@@ -291,24 +291,31 @@ describe('Generate pages', () => {
     });
 
     it('gets all examples in the package structure other than in examples folder', () => {
+      console.log(subExampleSitemap.packages[0].subExamples);
       expect(subExampleSitemap.packages[0].subExamples[0].id).toEqual('src');
       expect(
         subExampleSitemap.packages[0].subExamples[0].children[0].id,
       ).toEqual('examples');
 
       // nested examples
+      expect(subExampleSitemap.packages[0].subExamples[1].id).toEqual(
+        'src/test-examples',
+      );
       expect(
-        subExampleSitemap.packages[0].subExamples[0].children[1].id,
-      ).toEqual('test-examples');
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[1].children[0].id,
+        subExampleSitemap.packages[0].subExamples[1].children[0].id,
       ).toEqual('examples');
+      expect(subExampleSitemap.packages[0].subExamples[2].id).toEqual(
+        'src/view',
+      );
       expect(
-        subExampleSitemap.packages[0].subExamples[0].children[2].id,
-      ).toEqual('view');
+        subExampleSitemap.packages[0].subExamples[2].children[0].id,
+      ).toEqual('examples');
+      expect(subExampleSitemap.packages[0].subExamples[3].id).toEqual(
+        'src/view/sub-dir',
+      );
       expect(
-        subExampleSitemap.packages[0].subExamples[0].children[2].children[1].id,
-      ).toEqual('sub-dir');
+        subExampleSitemap.packages[0].subExamples[3].children[0].id,
+      ).toEqual('examples');
     });
   });
 });
