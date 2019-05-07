@@ -2,34 +2,42 @@
 // Disable eslint warning for green build
 // TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
-import styled from '@emotion/styled';
+import styled  from '@emotion/styled';
+import { keyframes } from '@emotion/core';
+import prettier from 'prettier-standalone';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/themes/prism-tomorrow.css';
 
+
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import Button from '@atlaskit/button';
+import WidthDetector from '@atlaskit/width-detector';
+import ChevronRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import * as PropTypes from 'prop-types';
 
 import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
+import ExampleSource from '../code-example/code-view';
 
 const PageContent = styled.div`
   display: flex;
-  height: 100%;
-  justify-content: space-around;
-  padding-right: ${math.multiply(gridSize, 80)}px;
+  top: 0;
+  bottom: 0;
 `;
 
 const ExampleStyle = styled.div`
+  flex-basis: 100px;
   display: flex;
   flex-direction: column;
-  min-width: ${math.multiply(gridSize, 60)}px;
-  max-width: ${math.multiply(gridSize, 80)}px;
+  align-items: center;
+  box-sizing: border-box;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
   height: 100%;
+  left: 0;
 `;
 
 const ExampleComponentContainer = styled.div`
@@ -39,6 +47,8 @@ const ExampleComponentContainer = styled.div`
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: ${math.multiply(gridSize, 3)}px;
   margin: ${math.multiply(gridSize, 4)}px 0px;
+  min-width: ${math.multiply(gridSize, 60)}px;
+  max-width: ${math.multiply(gridSize, 80)}px;
 `;
 
 const Header = styled.div`
@@ -58,63 +68,91 @@ const ExampleHeading = styled.h2`
   margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
 
-const CodeStyle = styled.pre`
-  background-color: rgb(23, 43, 77);
+
+const CodeView = styled.div`
   box-sizing: border-box;
-  color: ${themed({ light: colors.N60, dark: colors.N60 })};
   display: block;
   top: 0;
   bottom: 0;
   right: 0;
   position: fixed;
-  padding: ${gridSize}px;
+  padding: 0;
   margin: 0;
   width: ${math.multiply(gridSize, 80)}px;
-  overflow-x: auto;
-  overflow-y: scroll;
-
-  & code {
-    font-family: Monaco, Menlo, monospace;
-  }
 `;
 
-const PackageExample = ({ data, fileContents, children }) => {
-  const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
+// type Props = {
+//   data: string,
+//   fileContents: string,
+//   children: React.ReactChild,
+// };
 
-  return (
-    <>
-      <PageTitle title={data.pageTitle} />
-      <NavigationWrapper
-        navContent={() => (
-          <PackageNavContent
-            packageId={data.id}
-            packageName={data.packageName}
-          />
-        )}
-      >
-        <PageContent>
-          <ExampleStyle>
-            <Header>
-              <Heading>{data.pageTitle}</Heading>
-              <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
-            </Header>
-            {children.map(child => (
-              <ExampleComponentContainer key={child.name}>
-                {child.name !== 'default' && (
-                  <ExampleHeading>{child.name}</ExampleHeading>
-                )}
-                {child.component}
-              </ExampleComponentContainer>
-            ))}
-          </ExampleStyle>
-          <CodeStyle data-testid="example-source-code">
-            <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-          </CodeStyle>
-        </PageContent>
-      </NavigationWrapper>
-    </>
-  );
+
+class PackageExample extends React.Component {
+
+  state = {
+    isCodeViewExpanded: true,
+  };
+
+  handleClick = () => {
+    this.setState(state => ({
+      isCodeViewExpanded: !state.isCodeViewExpanded
+    }), () => {
+      console.log(this.state.isCodeViewExpanded)
+    });
+  };
+
+  render() {
+    const { isCodeViewExpanded } = this.state;
+    const { data, fileContents, children } = this.props;
+
+    return (
+      <>
+        <PageTitle title={data.pageTitle} />
+        <NavigationWrapper
+          navContent={() => (
+            <PackageNavContent
+              packageId={data.id}
+              packageName={data.packageName}
+            />
+          )}
+        >
+          <PageContent>
+            <WidthDetector>
+              {() => (
+                <ExampleStyle>
+                  <Header>
+                    <Heading>{data.pageTitle}</Heading>
+                    <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
+                  </Header>
+                  {children.map(child => (
+                    <ExampleComponentContainer key={child.name}>
+                      {child.name !== 'default' && (
+                        <ExampleHeading>{child.name}</ExampleHeading>
+                      )}
+                      {child.component}
+                    </ExampleComponentContainer>
+                  ))}
+                <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
+                  <Button hitAreaSize="small" isVisible={false} hasHighlight={false} onClick={this.handleClick}>
+                  <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
+                  </Button>
+                </div>
+                </ExampleStyle>
+              )}
+            </WidthDetector>
+            <ExampleSource isExpanded={isCodeViewExpanded} fileContents={fileContents} />
+          </PageContent>
+        </NavigationWrapper>
+      </>
+    );
+  }
 };
+
+// console.log(fileContents);
+// const prettified = prettier.format(fileContents, { printWidth: 10 });
+// console.log(prettified);
+
 
 PackageExample.propTypes = {
   data: PropTypes.shape({
