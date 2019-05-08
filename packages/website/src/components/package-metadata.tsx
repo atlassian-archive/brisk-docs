@@ -26,7 +26,7 @@ const MetaDataEntryLabel = styled.div`
   flex-basis: 25%;
 `;
 
-function parseRepositoryUrl(repository: string) {
+function parseRepositoryUrl(repository: string, directory?: string) {
   let url;
   const parsed = GitUrlParse(repository);
   if (parsed.git_suffix) {
@@ -37,8 +37,14 @@ function parseRepositoryUrl(repository: string) {
         .replace('scm/', '')
         .toUpperCase()}/repos/${parsed.name}`;
     }
+    if (directory) {
+      url = `${url}/tree/master/${directory}`;
+    }
   } else {
     url = repository.replace(/\/$/, ''); // Remove trailing slash if there is one
+    if (directory) {
+      url = `${url}/${directory}`;
+    }
   }
   return url;
 }
@@ -51,9 +57,7 @@ const RepositoryLink = ({ repository }: { repository: Repository }) => {
   if (typeof repository === 'string') {
     repositoryUrl = parseRepositoryUrl(repository);
   } else if (repository.directory) {
-    repositoryUrl = `${parseRepositoryUrl(repository.url)}/${
-      repository.directory
-    }`;
+    repositoryUrl = parseRepositoryUrl(repository.url, repository.directory);
   } else {
     repositoryUrl = parseRepositoryUrl(repository.url);
   }
