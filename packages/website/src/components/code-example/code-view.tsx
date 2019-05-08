@@ -3,24 +3,25 @@ import { colors, gridSize, math, themed } from '@atlaskit/theme';
 import styled from '@emotion/styled';
 import Prism from 'prismjs';
 
+const Collapsible = styled.div`
+  height: 100vh;
+  width: ${math.multiply(gridSize, 100)}px;
+  transition: width 0.3s;
+  overflow-x: auto;
+  overflow-y: scroll;
+  
+  &.collapsed {
+    width: 0;
+    overflow: hidden;
+  }
+`;
+
 const CodeStyle = styled.pre`
   background-color: rgb(23, 43, 77);
   box-sizing: border-box;
   color: ${themed({ light: colors.N60, dark: colors.N60 })};
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: ${math.multiply(gridSize, 80)}px;
   padding: ${gridSize}px;
   margin: 0;
-  overflow-x: auto;
-  overflow-y: scroll;
-  transition: width 0.3s;
-
-  &.collapsed {
-    width: 0px;
-  }
 
   & code {
     font-family: Monaco, Menlo, monospace;
@@ -32,14 +33,16 @@ type Props = {
   fileContents: string
 };
 
-const ExampleSource = ({ isExpanded, fileContents }: Props) => {
+const CodeView = ({ isExpanded, fileContents }: Props) => {
   const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
 
   return (
-    <CodeStyle className={isExpanded ? 'expanded' : 'collapsed'} data-testid="example-source-code">
-      <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-    </CodeStyle>
+    <Collapsible className={isExpanded ? 'expanded' : 'collapsed'}>
+      <CodeStyle data-testid="example-source-code">
+        <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+      </CodeStyle>
+    </Collapsible>
   );
 };
 
-export default ExampleSource;
+export default CodeView;

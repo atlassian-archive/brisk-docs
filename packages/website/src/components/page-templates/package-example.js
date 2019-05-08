@@ -13,6 +13,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
 import Button from '@atlaskit/button';
 import WidthDetector from '@atlaskit/width-detector';
+import ChevronLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ChevronRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import * as PropTypes from 'prop-types';
 
@@ -20,24 +21,24 @@ import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
-import ExampleSource from '../code-example/code-view';
+import CodeView from '../code-example/code-view';
 
 const PageContent = styled.div`
   display: flex;
-  top: 0;
-  bottom: 0;
+  margin: 0;
 `;
 
 const ExampleStyle = styled.div`
-  flex-basis: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
-  height: 100%;
+  height: 100vh;
   left: 0;
+  overflow-x: auto;
+  overflow-y: scroll;
 `;
 
 const ExampleComponentContainer = styled.div`
@@ -67,26 +68,6 @@ const Heading = styled.h1`
 const ExampleHeading = styled.h2`
   margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
-
-
-const CodeView = styled.div`
-  box-sizing: border-box;
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  padding: 0;
-  margin: 0;
-  width: ${math.multiply(gridSize, 80)}px;
-`;
-
-// type Props = {
-//   data: string,
-//   fileContents: string,
-//   children: React.ReactChild,
-// };
-
 
 class PackageExample extends React.Component {
 
@@ -133,15 +114,21 @@ class PackageExample extends React.Component {
                       {child.component}
                     </ExampleComponentContainer>
                   ))}
-                <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
-                  <Button hitAreaSize="small" isVisible={false} hasHighlight={false} onClick={this.handleClick}>
-                  <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
-                  </Button>
-                </div>
+                  <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
+                    <Button hitAreaSize="small" isVisible={false} hasHighlight={false} onClick={this.handleClick}>
+                      {
+                        isCodeViewExpanded ? (
+                          <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
+                        ) : (
+                          <ChevronLeftCircleIcon label="expand" primaryColor={colors.B200} size="large"/>
+                        )
+                      }
+                    </Button>
+                  </div>
                 </ExampleStyle>
               )}
             </WidthDetector>
-            <ExampleSource isExpanded={isCodeViewExpanded} fileContents={fileContents} />
+            <CodeView isExpanded={isCodeViewExpanded} fileContents={fileContents} />
           </PageContent>
         </NavigationWrapper>
       </>
