@@ -11,6 +11,7 @@ import PackageNavContent from '../navigation/package-nav-content';
 import PackageMetaData from '../package-metadata';
 import LinkButton from '../link-button';
 import PageTitle from '../page-title';
+import pageInfo from '../../pages-list';
 
 export const Description = styled.h3`
   color: ${colors.N900};
@@ -29,22 +30,30 @@ const LinkButtonContainer = styled.div`
   }
 `;
 
-const Header = ({ id, heading }) => (
-  <div
-    style={{ display: 'flex', justifyContent: 'space-between' }}
-    data-testid={`${id}-header`}
-  >
-    <h1>{heading}</h1>
-    <div style={{ display: 'inline-flex' }}>
-      <LinkButtonContainer>
-        <LinkButton href={`/packages/${id}/examples`}>Examples</LinkButton>
-      </LinkButtonContainer>
-      <LinkButtonContainer>
-        <LinkButton href={`/packages/${id}/docs`}>Documentation</LinkButton>
-      </LinkButtonContainer>
+const Header = ({ id, heading }) => {
+  const packages = pageInfo.packages.find(pkg => pkg.packageId === id);
+
+  return (
+    <div
+      style={{ display: 'flex', justifyContent: 'space-between' }}
+      data-testid={`${id}-header`}
+    >
+      <h1>{heading}</h1>
+      <div style={{ display: 'inline-flex' }}>
+        {packages && packages.examples.length > 0 && (
+          <LinkButtonContainer>
+            <LinkButton href={`/packages/${id}/examples`}>Examples</LinkButton>
+          </LinkButtonContainer>
+        )}
+        {packages && packages.docs.length > 0 && (
+          <LinkButtonContainer>
+            <LinkButton href={`/packages/${id}/docs`}>Documentation</LinkButton>
+          </LinkButtonContainer>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Header.propTypes = {
   id: PropTypes.string.isRequired,
