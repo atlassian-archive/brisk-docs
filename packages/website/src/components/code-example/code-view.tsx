@@ -11,7 +11,7 @@ const Collapsible = styled.div`
   transition: width 0.2s;
   overflow-x: auto;
   overflow-y: scroll;
-  
+
   &.collapsed {
     width: 0;
     overflow: hidden;
@@ -31,8 +31,8 @@ const CodeStyle = styled.pre`
 `;
 
 type Props = {
-  isExpanded: boolean,
-  fileContents: string
+  isExpanded: boolean;
+  fileContents: string;
 };
 
 const CodeView = ({ isExpanded, fileContents }: Props) => {

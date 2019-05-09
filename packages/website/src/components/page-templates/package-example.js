@@ -2,7 +2,7 @@
 // Disable eslint warning for green build
 // TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
-import styled  from '@emotion/styled';
+import styled from '@emotion/styled';
 import debounce from 'lodash.debounce';
 
 import { colors, gridSize, math } from '@atlaskit/theme';
@@ -67,13 +67,19 @@ const ExampleHeading = styled.h2`
 const CodeViewButton = ({ isCodeViewExpanded, handleClick }) => (
   <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
     <Button hitAreaSize="small" onClick={handleClick}>
-      {
-        isCodeViewExpanded ? (
-          <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
-        ) : (
-          <ChevronLeftCircleIcon label="expand" primaryColor={colors.B200} size="large"/>
-        )
-      }
+      {isCodeViewExpanded ? (
+        <ChevronRightCircleIcon
+          label="collapse"
+          primaryColor={colors.B200}
+          size="large"
+        />
+      ) : (
+        <ChevronLeftCircleIcon
+          label="expand"
+          primaryColor={colors.B200}
+          size="large"
+        />
+      )}
     </Button>
   </div>
 );
@@ -83,23 +89,22 @@ CodeViewButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
 };
 
-
 class PackageExample extends React.Component {
   state = {
     showCodeViewButton: true,
     isCodeViewExpanded: true,
-    savedExpandedState: true
+    shouldExpandCodeWithWideWindow: true,
   };
 
   handleClick = () => {
     this.setState(state => ({
       isCodeViewExpanded: !state.isCodeViewExpanded,
-      savedExpandedState: !state.savedExpandedState
+      shouldExpandCodeWithWideWindow: !state.shouldExpandCodeWithWideWindow,
     }));
   };
 
   handleResize = debounce(
-    (width) => {
+    width => {
       const { isCodeViewExpanded } = this.state;
 
       if (width < 600) {
@@ -107,16 +112,14 @@ class PackageExample extends React.Component {
           showCodeViewButton: false,
           isCodeViewExpanded: false,
         });
-
       } else if (width < 1200 && !isCodeViewExpanded) {
         this.setState({
           showCodeViewButton: false,
         });
-
       } else if (width >= 1200) {
         this.setState(state => ({
           showCodeViewButton: true,
-          isCodeViewExpanded: state.savedExpandedState,
+          isCodeViewExpanded: state.shouldExpandCodeWithWideWindow,
         }));
       }
     },
@@ -145,7 +148,9 @@ class PackageExample extends React.Component {
                 <ExampleStyle>
                   <Header>
                     <Heading>{data.pageTitle}</Heading>
-                    <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
+                    <LinkButton href={data.isolatedPath}>
+                      Full page view
+                    </LinkButton>
                   </Header>
                   {children.map(child => (
                     <ExampleComponentContainer key={child.name}>
@@ -156,20 +161,26 @@ class PackageExample extends React.Component {
                     </ExampleComponentContainer>
                   ))}
                   {showCodeViewButton && (
-                    <CodeViewButton isCodeViewExpanded={isCodeViewExpanded} handleClick={this.handleClick}/>
+                    <CodeViewButton
+                      isCodeViewExpanded={isCodeViewExpanded}
+                      handleClick={this.handleClick}
+                    />
                   )}
                 </ExampleStyle>
               )}
             </WidthDetector>
             {showCodeViewButton && (
-              <CodeView isExpanded={isCodeViewExpanded} fileContents={fileContents} />
+              <CodeView
+                isExpanded={isCodeViewExpanded}
+                fileContents={fileContents}
+              />
             )}
           </PageContent>
         </NavigationWrapper>
       </>
     );
   }
-};
+}
 
 PackageExample.propTypes = {
   data: PropTypes.shape({
