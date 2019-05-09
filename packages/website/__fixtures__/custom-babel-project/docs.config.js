@@ -16,7 +16,8 @@ const webpack = config => {
 
 module.exports = () => ({
   packages: path.join(__dirname, 'weird-babel-package'),
-  docs: path.join(__dirname, 'docs'),
+  docs: { path: path.join(__dirname, 'docs') },
   siteName: 'Babel/webpack Test Docs',
   webpack,
+  packagesDescription: 'View sample documentation for packages',
 });

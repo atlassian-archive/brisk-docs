@@ -1,8 +1,16 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
 import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
+
+const ParentWrapper = styled.div`
+  font-size: 14px;
+  margin: 0 0 8px;
+  padding: 0 12px;
+  color: #6b778c;
+`;
 
 type Item =
   | { id: string; children: Item[] }
@@ -81,7 +89,7 @@ const TreeItem = ({ item, provided }: TreeItemProps) => {
 
   return (
     <div ref={provided.innerRef} {...provided.draggableProps}>
-      <Item id={id} text={titleCase(data.title)} />
+      <ParentWrapper id={id}>{titleCase(data.title)}</ParentWrapper>
     </div>
   );
 };
