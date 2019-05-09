@@ -7,9 +7,11 @@ import { colors } from '@atlaskit/theme';
 import LinkWithRouter from './link-with-router';
 
 const ParentWrapper = styled.div`
-  font-size: 14px;
-  margin: 0 0 4px;
+  font-size: 10px;
+  margin: 4px 0;
+  padding: 0;
   color: ${colors.N200};
+  text-transform: uppercase;
 `;
 
 type Item =
@@ -35,6 +37,32 @@ const arrayToTreeItems = (
   },
   ...arrayItems.reduce((acc, sub) => {
     const id = `${parentId}/${sub.id}`;
+
+    if (
+      sub.children &&
+      sub.children.length === 1 &&
+      !sub.children[0].children
+    ) {
+      const child = sub.children[0];
+      // @ts-ignore
+      const title = /README$/.test(child.pagePath)
+        ? `${sub.id} - ${child.id}`
+        : sub.id;
+
+      return {
+        ...acc,
+        [id]: {
+          id,
+          children: [],
+          hasChildren: false,
+          data: {
+            title,
+            // @ts-ignore
+            href: sub.children[0].pagePath,
+          },
+        },
+      };
+    }
 
     if (sub.children) {
       return {
@@ -102,7 +130,7 @@ export type Props = {
 };
 
 const TreeNavContent = ({ treeData }: Props) => (
-  <Tree tree={treeData} renderItem={TreeItem} />
+  <Tree offsetPerLevel={4} tree={treeData} renderItem={TreeItem} />
 );
 
 export { arrayToTreeItems };
