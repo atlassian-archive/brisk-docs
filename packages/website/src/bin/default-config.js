@@ -4,12 +4,12 @@ module.exports = {
   docs: {
     path: './docs',
     name: 'Docs',
-    description: 'This is a sample documentation for the website.',
+    description: 'View the documentation for this project',
   },
   packages: ['./packages/*'],
   useManifests: false,
   siteName: 'Brisk Docs',
   webpack: identityFunc,
   showSubExamples: false,
-  packagesDescription: 'This is a sample package for the documentation website',
+  packagesDescription: 'View documentation about individual packages',
 };

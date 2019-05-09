@@ -10,7 +10,7 @@ describe('website configuration processor', () => {
     expect(config).toEqual({
       packagesPaths: ['/c/w/d/packages/*'],
       docsList: {
-        description: 'This is a sample documentation for the website.',
+        description: 'View the documentation for this project',
         docsPath: '/c/w/d/docs',
         name: 'Docs',
       },
@@ -18,8 +18,7 @@ describe('website configuration processor', () => {
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
       showSubExamples: false,
-      packagesDescription:
-        'This is a sample package for the documentation website',
+      packagesDescription: 'View documentation about individual packages',
     });
   });
 
@@ -28,7 +27,7 @@ describe('website configuration processor', () => {
       docs: {
         path: 'some/other/docs',
         name: 'Docs',
-        description: 'This is a sample documentation for the website.',
+        description: 'View the documentation for this project',
       },
     });
     expect(docsList.docsPath).toEqual('/c/w/d/some/other/docs');
@@ -74,8 +73,13 @@ describe('loadConfig', () => {
 
   it('should load a config given a valid config path', () => {
     expect(loadConfig(defaultConfigPath, 'custom-config-file.js')).toEqual({
-      docs: 'now/is/the/winter',
+      docs: {
+        path: 'now/is/the/winter',
+        description: 'View custom documentation',
+      },
       packages: ['of/our/disco/tents'],
+      packagesDescription:
+        'View custom documentation about individual packages',
     });
   });
   it('should load the default config if no path is given', () => {

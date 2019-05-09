@@ -19,4 +19,5 @@ module.exports = () => ({
   docs: { path: path.join(__dirname, 'docs') },
   siteName: 'Babel/webpack Test Docs',
   webpack,
+  packagesDescription: 'View sample documentation for packages',
 });
