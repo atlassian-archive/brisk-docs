@@ -17,6 +17,11 @@ export type Props = {
 
 const LinkWithRouter = ({ text, href, router }: Props) => (
   <Item
+    styles={styles => ({
+      ...styles,
+      // itemBase: {},
+      itemBase: { ...styles.itemBase, paddingLeft: '4px', height: '32px' },
+    })}
     text={text}
     href={href}
     isSelected={router.pathname === href}
