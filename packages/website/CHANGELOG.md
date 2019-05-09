@@ -1,34 +1,47 @@
 # @brisk-docs/website
 
 ## 0.4.0
+
 ### Minor Changes
 
 - c5332ef: - Added the provision to add packages and docs description for the website by the consumers
+
   - Now there is an option to provide a package description string whicj will be displayed on the main page.
   - The docs is an object which can accept a name, path and description string.
-  
+
 ### Patch Changes
 
 - 143fa39: Fix the view source link
 - d824f64: Added the docs also in the search drawer
 - a922f2a: Hide the buttons on the package home page for examples/docs if the data is empty
 - f50fee5: Remove Link from non-clickable nav items
+- cd30e6a: Fix links that reference other internal markdown files
+- c72e366: Improve the experience of nav:
+
+  - Removed a lot of the padding on each nesting, making the content much more legible
+  - Moved title to be in-line with how nav titles are meant to be, leading to reduction of space-usage
+  - For folders with only one child, merge the folder and child, removing a thousand levels of nesting
 
 ## 0.3.11
+
 - [patch] 88c05da:
 
   - Bundle critical file in package that was missing. Fix bug where non md files were treated as docs.
 
 ## 0.3.10
+
 - [patch] 25f8239:
 
   - Resolve the SSR issues while loading the SSR non-compatible examples
+
 - [patch] e8e6604:
 
-  - Fix error in package home page  when no package README
+  - Fix error in package home page when no package README
+
 - [patch] 158dfbd:
 
   - Support non-default exports in examples pages
+
 - [patch] bb26805:
 
   - Add missing babel plugin
