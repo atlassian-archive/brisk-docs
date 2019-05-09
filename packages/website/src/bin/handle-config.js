@@ -31,7 +31,8 @@ const resolvePathsConfig = entry => {
 const processConfig = (cwd, providedConfig = {}) => {
   const config = { ...defaultConfig, ...providedConfig };
   const { docs, packages, ...rest } = config;
-  const docsPath = path.resolve(cwd, docs);
+  const { name, description } = docs;
+  const docsPath = path.resolve(cwd, docs.path);
 
   const packagesConfig = resolvePathsConfig(packages);
   const packagesPaths = packagesConfig.map(packagesPath =>
@@ -39,7 +40,11 @@ const processConfig = (cwd, providedConfig = {}) => {
   );
 
   return {
-    docsPath,
+    docsList: {
+      docsPath,
+      name,
+      description,
+    },
     packagesPaths,
     ...rest,
   };

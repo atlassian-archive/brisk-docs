@@ -19,7 +19,7 @@ const webpack = config => {
 
 module.exports = () => ({
   packages: path.join(__dirname, 'typescript-package'),
-  docs: path.join(__dirname, 'docs'),
+  docs: { path: path.join(__dirname, 'docs') },
   siteName: 'Typescript/webpack Test Docs',
   webpack,
 });
