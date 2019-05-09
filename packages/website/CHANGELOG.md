@@ -1,5 +1,19 @@
 # @brisk-docs/website
 
+## 0.4.0
+### Minor Changes
+
+- c5332ef: - Added the provision to add packages and docs description for the website by the consumers
+  - Now there is an option to provide a package description string whicj will be displayed on the main page.
+  - The docs is an object which can accept a name, path and description string.
+  
+### Patch Changes
+
+- 143fa39: Fix the view source link
+- d824f64: Added the docs also in the search drawer
+- a922f2a: Hide the buttons on the package home page for examples/docs if the data is empty
+- f50fee5: Remove Link from non-clickable nav items
+
 ## 0.3.11
 - [patch] 88c05da:
 
