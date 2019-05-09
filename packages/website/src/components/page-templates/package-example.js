@@ -3,14 +3,9 @@
 // TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
 import styled  from '@emotion/styled';
-import { keyframes } from '@emotion/core';
-import prettier from 'prettier-standalone';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/themes/prism-tomorrow.css';
+import debounce from 'lodash.debounce';
 
-
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@atlaskit/theme';
 import Button from '@atlaskit/button';
 import WidthDetector from '@atlaskit/width-detector';
 import ChevronLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
@@ -69,22 +64,68 @@ const ExampleHeading = styled.h2`
   margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
 
-class PackageExample extends React.Component {
+const CodeViewButton = ({ isCodeViewExpanded, handleClick }) => (
+  <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
+    <Button hitAreaSize="small" onClick={handleClick}>
+      {
+        isCodeViewExpanded ? (
+          <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
+        ) : (
+          <ChevronLeftCircleIcon label="expand" primaryColor={colors.B200} size="large"/>
+        )
+      }
+    </Button>
+  </div>
+);
 
+CodeViewButton.propTypes = {
+  isCodeViewExpanded: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+
+
+class PackageExample extends React.Component {
   state = {
+    showCodeViewButton: true,
     isCodeViewExpanded: true,
+    savedExpandedState: true
   };
 
   handleClick = () => {
     this.setState(state => ({
-      isCodeViewExpanded: !state.isCodeViewExpanded
-    }), () => {
-      console.log(this.state.isCodeViewExpanded)
-    });
+      isCodeViewExpanded: !state.isCodeViewExpanded,
+      savedExpandedState: !state.savedExpandedState
+    }));
   };
 
+  handleResize = debounce(
+    (width) => {
+      const { isCodeViewExpanded } = this.state;
+
+      if (width < 600) {
+        this.setState({
+          showCodeViewButton: false,
+          isCodeViewExpanded: false,
+        });
+
+      } else if (width < 1200 && !isCodeViewExpanded) {
+        this.setState({
+          showCodeViewButton: false,
+        });
+
+      } else if (width >= 1200) {
+        this.setState(state => ({
+          showCodeViewButton: true,
+          isCodeViewExpanded: state.savedExpandedState,
+        }));
+      }
+    },
+    100,
+    { leading: false },
+  );
+
   render() {
-    const { isCodeViewExpanded } = this.state;
+    const { showCodeViewButton, isCodeViewExpanded } = this.state;
     const { data, fileContents, children } = this.props;
 
     return (
@@ -99,7 +140,7 @@ class PackageExample extends React.Component {
           )}
         >
           <PageContent>
-            <WidthDetector>
+            <WidthDetector onResize={this.handleResize}>
               {() => (
                 <ExampleStyle>
                   <Header>
@@ -114,32 +155,21 @@ class PackageExample extends React.Component {
                       {child.component}
                     </ExampleComponentContainer>
                   ))}
-                  <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
-                    <Button hitAreaSize="small" isVisible={false} hasHighlight={false} onClick={this.handleClick}>
-                      {
-                        isCodeViewExpanded ? (
-                          <ChevronRightCircleIcon label="collapse" primaryColor={colors.B200} size="large"/>
-                        ) : (
-                          <ChevronLeftCircleIcon label="expand" primaryColor={colors.B200} size="large"/>
-                        )
-                      }
-                    </Button>
-                  </div>
+                  {showCodeViewButton && (
+                    <CodeViewButton isCodeViewExpanded={isCodeViewExpanded} handleClick={this.handleClick}/>
+                  )}
                 </ExampleStyle>
               )}
             </WidthDetector>
-            <CodeView isExpanded={isCodeViewExpanded} fileContents={fileContents} />
+            {showCodeViewButton && (
+              <CodeView isExpanded={isCodeViewExpanded} fileContents={fileContents} />
+            )}
           </PageContent>
         </NavigationWrapper>
       </>
     );
   }
 };
-
-// console.log(fileContents);
-// const prettified = prettier.format(fileContents, { printWidth: 10 });
-// console.log(prettified);
-
 
 PackageExample.propTypes = {
   data: PropTypes.shape({

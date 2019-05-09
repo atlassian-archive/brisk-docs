@@ -2,11 +2,13 @@ import * as React from 'react';
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
 import styled from '@emotion/styled';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/themes/prism-tomorrow.css';
 
 const Collapsible = styled.div`
   height: 100vh;
   width: ${math.multiply(gridSize, 100)}px;
-  transition: width 0.3s;
+  transition: width 0.2s;
   overflow-x: auto;
   overflow-y: scroll;
   
@@ -34,7 +36,11 @@ type Props = {
 };
 
 const CodeView = ({ isExpanded, fileContents }: Props) => {
-  const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
+  // TODO format code with prettier based on width of code view
+  // const printWidth = width / 10;
+  // const prettified = prettier.format(fileContents, { printWidth });
+
+  const highlighted = Prism.highlight(fileContents, Prism.languages.jsx, 'jsx');
 
   return (
     <Collapsible className={isExpanded ? 'expanded' : 'collapsed'}>
