@@ -1,3 +1,0 @@
-# All about GraphQL
-
-// TODO

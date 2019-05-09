@@ -1,3 +1,0 @@
-# Hooks Guide
-
-// TODO

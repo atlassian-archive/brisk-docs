@@ -1,1 +1,0 @@
-# All about monorepo and packages
