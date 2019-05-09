@@ -23,8 +23,11 @@ const SwitchLink = ({ href, children, ...rest }: Props) => {
       </a>
     );
   }
+
+  const newHref = href.replace(/\.md$/, '');
+
   return (
-    <Link href={href}>
+    <Link href={newHref}>
       <a {...rest}>{children}</a>
     </Link>
   );
