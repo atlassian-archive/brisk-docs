@@ -44,6 +44,7 @@ const arrayToTreeItems = (
       !sub.children[0].children
     ) {
       const child = sub.children[0];
+      // @ts-ignore
       const title = /README$/.test(child.pagePath)
         ? `${sub.id} - ${child.id}`
         : sub.id;
@@ -56,6 +57,7 @@ const arrayToTreeItems = (
           hasChildren: false,
           data: {
             title,
+            // @ts-ignore
             href: sub.children[0].pagePath,
           },
         },

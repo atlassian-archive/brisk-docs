@@ -17,6 +17,7 @@ export type Props = {
 
 const LinkWithRouter = ({ text, href, router }: Props) => (
   <Item
+    // @ts-ignore
     styles={styles => ({
       ...styles,
       // itemBase: {},
