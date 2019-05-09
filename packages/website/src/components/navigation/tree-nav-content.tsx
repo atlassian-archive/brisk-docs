@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
 import titleCase from 'title-case';
+import { colors } from '@atlaskit/theme';
 import LinkWithRouter from './link-with-router';
 
 const ParentWrapper = styled.div`
   font-size: 14px;
-  margin: 0 0 8px;
-  padding: 0 12px;
-  color: #6b778c;
+  margin: 0 0 4px;
+  color: ${colors.N200};
 `;
 
 type Item =
@@ -88,9 +88,9 @@ const TreeItem = ({ item, provided }: TreeItemProps) => {
   }
 
   return (
-    <div ref={provided.innerRef} {...provided.draggableProps}>
-      <ParentWrapper id={id}>{titleCase(data.title)}</ParentWrapper>
-    </div>
+    <ParentWrapper ref={provided.innerRef} {...provided.draggableProps} id={id}>
+      {titleCase(data.title)}
+    </ParentWrapper>
   );
 };
 
