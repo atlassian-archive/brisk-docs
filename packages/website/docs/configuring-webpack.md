@@ -21,3 +21,5 @@ module.exports = () => ({
 ```
 
 The first argument provided to your function is a [webpack configuration](https://webpack.js.org/configuration) object that you can extend. The returned configuration is then used to build the website.
+
+Hi, this sentence should not have been merged in to master. Go tsk at Ben Conolly if you see this: [zelda](../Something/README.md)
