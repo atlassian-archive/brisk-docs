@@ -1,5 +1,17 @@
 # @brisk-docs/website
 
+## 0.4.1
+
+### Patch Changes
+
+- 5df3e7d: Fix relative links in export builds of next.
+
+  NOTE: This may actually break `brisk start` - I'm not sure. We are still doing this
+  because we need this feature right now. Fixing brisk start will occur in the future.
+  Nobody is using `brisk start` at the moment so this was deemed okay.
+
+- Page content now takes up more of the page by default
+
 ## 0.4.0
 
 ### Minor Changes
