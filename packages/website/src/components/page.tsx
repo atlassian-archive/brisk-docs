@@ -9,7 +9,7 @@ const containerWidth = {
 
 const PageContainer = styled.main`
   max-width: ${(p: { width?: 'small' | 'medium' | 'large' }) =>
-    p.width ? containerWidth[p.width] : containerWidth.medium};
+    p.width ? containerWidth[p.width] : containerWidth.large};
   margin: 2rem auto;
   padding: 0 2rem;
 `;
