@@ -1,1 +1,0 @@
-Added the docs also in the search drawer
