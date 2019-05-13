@@ -86,6 +86,7 @@
     "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
     "next": "^8.0.4",
+    "next-images": "^1.1.1",
     "outdent": "^0.7.0",
     "pretty-proptypes": "^0.6.0",
     "prismjs": "^1.15.0",
@@ -98,6 +99,7 @@
     "rimraf": "^2.6.3",
     "styled-components": "^3.2.6",
     "title-case": "^2.1.1",
+    "unist-util-visit": "^1.3.0",
     "webpack": "4.28.4"
   },
   "devDependencies": {
