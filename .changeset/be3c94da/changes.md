@@ -1,0 +1,1 @@
+Fix broken images while loading the mdx pages in website
