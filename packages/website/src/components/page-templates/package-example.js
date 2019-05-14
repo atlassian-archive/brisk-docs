@@ -24,9 +24,24 @@ const PageContent = styled.div`
 `;
 
 const ExampleStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 
+    [left-pad-start] 32px
+    [left-pad-end example-start] 1fr
+    [example-end right-pad-start] 32px
+    [right-pad-end];
+  
+  grid-template-rows:
+    [header-top] auto
+    [header-bottom example-top] 1fr
+    [example-bottom];
+  
+  grid-template-areas:
+    ". header ."
+    ". example .";
+    
+  // flex-direction: column;
+  // align-items: center;
   box-sizing: border-box;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
@@ -37,6 +52,7 @@ const ExampleStyle = styled.div`
 `;
 
 const ExampleComponentContainer = styled.div`
+  // grid-area: example;
   background-color: white;
   border: 1px solid black;
   border-radius: ${gridSize}px;
@@ -44,13 +60,14 @@ const ExampleComponentContainer = styled.div`
   padding-top: ${math.multiply(gridSize, 3)}px;
   margin: ${math.multiply(gridSize, 4)}px 0px;
   min-width: ${math.multiply(gridSize, 60)}px;
-  max-width: ${math.multiply(gridSize, 80)}px;
 `;
 
 const Header = styled.div`
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   padding: ${math.multiply(gridSize, 3)}px 0;
+  margin-top: ${gridSize}px;
   border-bottom-color: rgb(235, 236, 240);
   border-bottom-style: solid;
   border-bottom-width: ${math.multiply(gridSize, 0.25)}px;
@@ -152,6 +169,7 @@ class PackageExample extends React.Component {
                       Full page view
                     </LinkButton>
                   </Header>
+                  <div style={{ display: 'flex', justifyContent: 'center', gridArea: 'example'}}>
                   {children.map(child => (
                     <ExampleComponentContainer key={child.name}>
                       {child.name !== 'default' && (
@@ -166,6 +184,7 @@ class PackageExample extends React.Component {
                       handleClick={this.handleClick}
                     />
                   )}
+                  </div>
                 </ExampleStyle>
               )}
             </WidthDetector>
