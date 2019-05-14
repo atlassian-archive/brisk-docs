@@ -7,9 +7,9 @@ import TableTree, {
   Cell,
 } from '@atlaskit/table-tree';
 import SectionMessage from '@atlaskit/section-message';
-import Link from 'next/link';
 import titleCase from 'title-case';
 
+import Link from '../src/components/switch-link';
 import Page, { Section, Title } from '../src/components/page';
 import pageInfo from '../src/pages-list';
 import DocsNavContent from '../src/components/navigation/docs-nav-content';
