@@ -1,0 +1,1 @@
+Make margins of hoirzontal rules and headings uniform
