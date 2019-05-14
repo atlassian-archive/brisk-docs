@@ -65,7 +65,7 @@ const ExampleHeading = styled.h2`
 `;
 
 const CodeViewButton = ({ isCodeViewExpanded, handleClick }) => (
-  <div style={{ position: 'absolute', right: 0, top: '100px', zIndex: '500' }}>
+  <div style={{ position: 'absolute', right: '0', top: '100px', zIndex: '500' }}>
     <Button hitAreaSize="small" onClick={handleClick}>
       {isCodeViewExpanded ? (
         <ChevronRightCircleIcon

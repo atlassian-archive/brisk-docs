@@ -24,7 +24,9 @@ const CodeStyle = styled.pre`
   color: ${themed({ light: colors.N60, dark: colors.N60 })};
   padding: ${gridSize}px;
   margin: 0;
-
+  height: inherit;
+  width: inherit;
+  
   & code {
     font-family: Monaco, Menlo, monospace;
   }
