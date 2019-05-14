@@ -84,15 +84,6 @@ type TreeItemProps = {
   };
 };
 
-/*
-font weight
-font color
-background color
-line height (spacing)
-before
-underline
-*/
-
 const TreeItem = ({ item, provided }: TreeItemProps) => {
   const { id, data, isHeading } = item;
   const text = titleCase(data.title);
