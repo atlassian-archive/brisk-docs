@@ -27,12 +27,12 @@ const arrayToTreeItems = (
     parentId,
     parentTitle,
     parentPath,
-  }: { parentId: string; parentTitle: string; parentPath: string },
+  }: { parentId: string; parentTitle: string; parentPath?: string },
 ): any => ({
   // TODO: TSFix - this is return type to be specific
   [parentId]: {
     id: parentId,
-    isHeading: true,
+    isHeading: !!arrayItems.length,
     isExpanded: true,
     children: arrayItems.map(sub => `${parentId}/${sub.id}`),
     data: {
