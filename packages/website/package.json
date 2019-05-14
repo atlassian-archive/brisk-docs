@@ -24,6 +24,7 @@
     "src",
     "pages",
     "static",
+    "custom-plugins",
     "babel.config.js",
     "generate-pages.js",
     "next.config.js",
