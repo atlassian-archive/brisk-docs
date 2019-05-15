@@ -109,7 +109,7 @@ const ItemList = ({ data }) => {
               packageName={data.packageName}
             />
           ) : (
-            <DocsNavContent />
+            <DocsNavContent docId={data.key} />
           )
         }
       >
@@ -121,6 +121,7 @@ const ItemList = ({ data }) => {
 
 ItemList.propTypes = {
   data: PropTypes.shape({
+    key: PropTypes.string,
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string,
     children: PropTypes.arrayOf(
