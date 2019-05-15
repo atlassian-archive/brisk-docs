@@ -445,7 +445,7 @@ describe('readmes in the docs', () => {
             pagePath: '/docs/doc-3/doc-3-2/README',
           },
         ],
-        id: 'doc-d',
+        id: 'doc-3',
         pagePath: '/docs/doc-3/readme',
       },
     ]);
