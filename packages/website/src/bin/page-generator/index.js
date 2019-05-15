@@ -207,7 +207,9 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
       const pagePath = path.join(docsPath, doc.id);
 
       if (doc.children) {
-        const readme = doc.children.find(c => c.id.toLowerCase() === 'readme');
+        const readme = doc.children.find(
+          c => c.path && c.path.toLowerCase().match(/readme\.md$/),
+        );
 
         const docData = {
           id: doc.id,
