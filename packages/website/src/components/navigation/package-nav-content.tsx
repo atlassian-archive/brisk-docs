@@ -1,14 +1,8 @@
 import * as React from 'react';
 
-import {
-  MenuSection,
-  BackItem,
-  Separator,
-  Group,
-} from '@atlaskit/navigation-next';
+import { MenuSection, Separator, Group } from '@atlaskit/navigation-next';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
-import LinkComponent from './link-component';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
