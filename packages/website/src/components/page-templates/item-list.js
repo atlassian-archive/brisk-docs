@@ -47,7 +47,13 @@ const renderRow = item => ({
             Here we are making it an actual relative path, but ideally this would be absolute like the root
             ones. This intermediate neither state is right out.
           */}
-          <Link href={`./${item.pagePath}`}>{item.id}</Link>
+          <Link
+            href={
+              item.pagePath.match(/^\//) ? item.pagePath : `./${item.pagePath}`
+            }
+          >
+            {item.id}
+          </Link>
         </RowCell>
       ),
     },
