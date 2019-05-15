@@ -431,7 +431,7 @@ describe('readmes in the docs', () => {
 
     sitemap = await generatePages(
       packagesPaths,
-      [{docsPath, name:"docs"}],
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -483,6 +483,3 @@ describe('Additional items in the docs tests', () => {
     ).toEqual(true);
   });
 });
-
-
-
