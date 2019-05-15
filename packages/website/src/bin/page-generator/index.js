@@ -219,6 +219,13 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
           })),
         };
         if (readme) {
+          generateDocsHomePage(
+            path.join(pagePath, 'index.js'),
+            docData,
+            generatorConfig,
+            'Documents',
+          );
+
           generateProjectDocPage(
             path.join(pagePath, readme.id, 'index.js'),
             readme.path,
