@@ -11,6 +11,7 @@ const processDirectory = dirPath => {
 
   return fs
     .readdirSync(dirPath)
+    .filter(file => !file.startsWith('_'))
     .map(fname => ({
       id: path.parse(fname).name,
       fullPath: path.resolve(dirPath, fname),
