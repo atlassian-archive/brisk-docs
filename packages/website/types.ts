@@ -9,7 +9,7 @@ export interface ExamplePage extends Page {
 }
 
 export type NestedExamples =
-  | { id: string; children: NestedExamples[] }
+  | { id: string; children: NestedExamples[]; pagePath: string }
   | ExamplePage;
 
 export type NestedPages = { id: string; children: NestedPages[] } | Page;
