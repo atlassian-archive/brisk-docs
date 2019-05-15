@@ -1,1 +1,0 @@
-Use switch-links everywhere for correct export builds
