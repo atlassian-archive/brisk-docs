@@ -12,28 +12,25 @@ const Header = styled.div`
 `;
 
 type BreadcrumbsNavProps = {
-  pagePath: string
+  pagePath: string;
 };
 
 const BreadcrumbsNav = ({ pagePath }: BreadcrumbsNavProps) => {
-  const path = pagePath.replace('/index.js', '').replace('.js', '');
-  const pages = path.split('/');
+  const pgPath = pagePath.replace('/index.js', '').replace('.js', '');
+  const pages = pgPath.split('/');
   pages.pop(); // Don't display the current (i.e. last) page in the breadcrumbs
 
   const pagePaths: string[] = [];
   pages.reduce((acc: string, page: string, idx: number) => {
     pagePaths[idx] = `${acc}/${page}`;
     return pagePaths[idx];
-  } , '');
+  }, '');
 
   return (
     <Header>
       <Breadcrumbs>
         {pagePaths.map((path, idx) => (
-          <BreadcrumbsItem
-            href={path}
-            text={titleCase(pages[idx])}
-          />
+          <BreadcrumbsItem href={path} text={titleCase(pages[idx])} />
         ))}
       </Breadcrumbs>
     </Header>

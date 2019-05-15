@@ -12,18 +12,14 @@ const Padding = styled.div`
 `;
 
 type ContentWrapperProps = {
-  pagePath: string,
-  children: React.ReactNode
-}
+  pagePath: string;
+  children: React.ReactNode;
+};
 
 const ContentWrapper = ({ pagePath, children }: ContentWrapperProps) => (
   <>
-    {!isPathRoot(pagePath) && (
-      <Breadcrumbs pagePath={pagePath} />
-    )}
-    <Padding>
-      {children}
-    </Padding>
+    {!isPathRoot(pagePath) && <Breadcrumbs pagePath={pagePath} />}
+    <Padding>{children}</Padding>
   </>
 );
 
