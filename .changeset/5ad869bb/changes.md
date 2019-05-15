@@ -1,1 +1,0 @@
-The previous version flattened out readmes, but broke all relative links from within readme.md files. Making urls less happy to make this work
