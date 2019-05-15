@@ -17,7 +17,7 @@ const NavContent = () => {
 
   return (
     <>
-      <NavHeader headerText="Docs" />
+      <NavHeader headerText="Docs" url="/docs" />
       <MenuSection id="docs-section" parentId="index-section">
         {/* TODO: TSFix nav typing */}
         {({ className }: { className: string }) => (

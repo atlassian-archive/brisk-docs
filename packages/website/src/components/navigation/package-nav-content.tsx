@@ -54,16 +54,10 @@ const NavContent = ({
   subExamples,
 }: SomeProps) => (
   <>
-    <NavHeader headerText={packageName} />
+    <NavHeader headerText={packageName} url="/packages" />
     <MenuSection id="package-section" parentId="index-section">
       {({ className }: { className: string }) => (
         <div className={className}>
-          <BackItem
-            text="Back to packages"
-            href="/packages"
-            component={LinkComponent}
-          />
-          <Separator />
           <LinkWithRouter text="Home" href={homePath} />
           <Separator />
           {changelogPath && (
