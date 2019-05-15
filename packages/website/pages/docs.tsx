@@ -72,9 +72,7 @@ class DocsTable extends React.Component<{}, State> {
               >
                 <Cell singleLine>{titleCase(id)}</Cell>
                 <Cell>
-                  <Link href={pagePath}>
-                    <a>{pagePath}</a>
-                  </Link>
+                  <Link href={pagePath}>{pagePath}</Link>
                 </Cell>
               </Row>
             )}

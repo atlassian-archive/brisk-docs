@@ -50,6 +50,14 @@ export default class MyDocument extends Document<Props> {
           {/* eslint-disable-next-line react/no-danger */}
           <style dangerouslySetInnerHTML={{ __html: css }} />
           {styleTags}
+          <style
+            /* eslint-disable-next-line react/no-danger */
+            dangerouslySetInnerHTML={{
+              __html: `img {
+            max-width: 100%
+          }`,
+            }}
+          />
         </Head>
         <body>
           <Main />
