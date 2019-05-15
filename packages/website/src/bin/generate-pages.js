@@ -5,7 +5,7 @@
 // This script needs to be run before devving starts.
 
 const path = require('path');
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 
 const generatePages = require('./page-generator');
 
@@ -45,22 +45,21 @@ module.exports = async ({
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
   const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
 
-  fse.ensureFileSync(pagesListPath);
-  fse.writeFileSync(
+  fs.ensureFileSync(pagesListPath);
+  fs.writeFileSync(
     pagesListPath,
 
     JSON.stringify({ packages, ...rests }, undefined, 2),
   );
 
-  fse.ensureFileSync(packagesDataPath);
-  fse.writeFileSync(
+  fs.ensureFileSync(packagesDataPath);
+  fs.writeFileSync(
     packagesDataPath,
 
     JSON.stringify({ metaData }, undefined, 2),
   );
-  fse.writeFileSync(
+  fs.writeFileSync(
     metaPath,
-
     JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
   );
 };

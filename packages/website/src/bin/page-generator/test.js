@@ -411,6 +411,40 @@ describe('Missing docs folder', () => {
   });
 });
 
+describe('readmes in the docs', () => {
+  let packagesPaths;
+  let pagesPath;
+  let sitemap;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'simple-mock-packages',
+    );
+
+    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'docs-with-readme');
+
+    packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
+    const docsPath = path.join(docsCwd, 'docs');
+    pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+
+    sitemap = await generatePages(
+      packagesPaths,
+      [{docsPath, name:"docs"}],
+      pagesPath,
+      componentsPath,
+    );
+  });
+  it('should have collapsed the readmes into indexes', () => {
+    const readmePages = sitemap.docs.filter(({ pagePath }) =>
+      pagePath.toLowerCase().includes('readme'),
+    );
+
+    expect(readmePages).toEqual([]);
+  });
+});
+
 describe('Additional items in the docs tests', () => {
   let packagesPath;
   let pagesPath;
@@ -449,3 +483,6 @@ describe('Additional items in the docs tests', () => {
     ).toEqual(true);
   });
 });
+
+
+

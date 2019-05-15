@@ -28,13 +28,6 @@ const head = {
       isSortable: false,
       width: 45,
     },
-    // { // ToDo: Nesting
-    //     key: 'nesting',
-    //     content: 'Nesting?',
-    //     shouldTruncate: true,
-    //     isSortable: false,
-    //     width: 45,
-    // },
   ],
 };
 
@@ -52,10 +45,6 @@ const renderRow = item => ({
         </RowCell>
       ),
     },
-    // { // ToDo: Nesting
-    //     key: item.id,
-    //     content: <div />,
-    // },
   ],
 });
 

@@ -1,0 +1,1 @@
+Remove the word 'readme' from docs pages - readme now counts as the root page

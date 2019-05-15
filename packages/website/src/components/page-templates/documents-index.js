@@ -8,14 +8,13 @@ import TableTree, {
   Cell,
 } from '@atlaskit/table-tree';
 import SectionMessage from '@atlaskit/section-message';
-import Link from 'next/link';
 import titleCase from 'title-case';
-
 import Page, { Section, Title } from '../page';
 import pageInfo from '../../pages-list';
 import DocsNavContent from '../navigation/docs-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
+import Link from '../switch-link';
 
 const NoDocsMessage = () => (
   <SectionMessage appearance="warning">

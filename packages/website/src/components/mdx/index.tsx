@@ -2,6 +2,7 @@ import * as React from 'react';
 import Heading from './Heading';
 import Link from '../switch-link';
 import Image from './Image';
+import HorizontalRule from './HorizontalRule';
 import { CodeBlock, InlineCode } from './code';
 
 const components = {
@@ -15,6 +16,7 @@ const components = {
   code: CodeBlock,
   inlineCode: InlineCode,
   img: Image,
+  hr: HorizontalRule,
 };
 
 export default components;
