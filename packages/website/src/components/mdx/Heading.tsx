@@ -13,7 +13,9 @@ export type Props = {
 };
 
 const Heading = ({ tag: Tag, children }: Props) => (
-  <Tag id={dashcase(children)}>{children}</Tag>
+  <Tag id={dashcase(children)} style={{ marginTop: '32px' }}>
+    {children}
+  </Tag>
 );
 
 export default Heading;

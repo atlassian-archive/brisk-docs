@@ -1,0 +1,1 @@
+Fix the broken image links on the mdx pages
