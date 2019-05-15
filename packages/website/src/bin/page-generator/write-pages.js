@@ -62,7 +62,7 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  const templateData = { ...data, pageTitle: title };
+  const templateData = { ...data, pagePath, pageTitle: title };
 
   const source = componentImportPath
     ? wrappedComponentTemplate(
@@ -93,6 +93,7 @@ const generateNonComponentPage = (
     path.join(pagesPath, pagePath),
     singleComponentTemplate(packageHomeWrapperPath, {
       ...data,
+      pagePath,
       pageTitle: title,
       pageType: type,
     }),

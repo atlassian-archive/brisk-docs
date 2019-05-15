@@ -12,6 +12,7 @@ import DocsNavContent from '../navigation/docs-nav-content';
 import Page, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
 import PageTitle from '../page-title';
+import Breadcrumbs, { isPathRoot } from '../breadcrumbs';
 
 const head = {
   cells: [
@@ -102,6 +103,11 @@ const ItemList = ({ data }) => {
           )
         }
       >
+        {!isPathRoot(data.pagePath) && (
+          <div style={{ marginBottom: '-2rem' }}>
+            <Breadcrumbs pagePath={data.pagePath} />
+          </div>
+        )}
         {getDocsList()}
       </NavigationWrapper>
     </>
