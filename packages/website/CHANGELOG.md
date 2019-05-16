@@ -1,5 +1,19 @@
 # @brisk-docs/website
 
+## 0.4.3
+### Patch Changes
+
+- 20f7686: The previous version flattened out readmes, but broke all relative links from within readme.md files. Making urls less happy to make this work
+
+## 0.4.2
+
+### Patch Changes
+
+- c049aa9: Remove the word 'readme' from docs pages - readme now counts as the root page
+- 0f01538: Fix the broken image links on the mdx pages - images now use a custom remark loader
+- b8c67f9: Make margins of horizontal rules and headings uniform
+- 5744ae9: Use switch-links everywhere for correct export builds - next does not handle relative paths in export
+
 ## 0.4.1
 
 ### Patch Changes

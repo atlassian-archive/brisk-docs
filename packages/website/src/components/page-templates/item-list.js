@@ -2,7 +2,6 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Table from '@atlaskit/dynamic-table';
 import styled from '@emotion/styled';
-import Link from 'next/link';
 import { gridSize } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
@@ -12,6 +11,7 @@ import DocsNavContent from '../navigation/docs-nav-content';
 import Page, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
 import PageTitle from '../page-title';
+import Link from '../switch-link';
 
 const head = {
   cells: [
@@ -41,7 +41,19 @@ const renderRow = item => ({
       key: item.id,
       content: (
         <RowCell>
-          <Link href={item.pagePath}>{item.id}</Link>
+          {/*
+            TODO: Fix this nonsense - 
+            Currently pagePath is neither an absolute nor a proper relative path, meaning things get wacky
+            Here we are making it an actual relative path, but ideally this would be absolute like the root
+            ones. This intermediate neither state is right out.
+          */}
+          <Link
+            href={
+              item.pagePath.match(/^\//) ? item.pagePath : `./${item.pagePath}`
+            }
+          >
+            {item.id}
+          </Link>
         </RowCell>
       ),
     },

@@ -1,4 +1,4 @@
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 const path = require('path');
 
 const {
@@ -9,8 +9,8 @@ const {
 } = require('./templates');
 
 const writeFile = (pagePath, content) => {
-  fse.ensureFileSync(pagePath);
-  fse.writeFileSync(pagePath, content);
+  fs.ensureFileSync(pagePath);
+  fs.writeFileSync(pagePath, content);
 };
 
 /**
