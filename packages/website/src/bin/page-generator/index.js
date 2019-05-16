@@ -219,8 +219,15 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
           })),
         };
         if (readme) {
-          generateProjectDocPage(
+          generateDocsHomePage(
             path.join(pagePath, 'index.js'),
+            docData,
+            generatorConfig,
+            'Documents',
+          );
+
+          generateProjectDocPage(
+            path.join(pagePath, readme.id, 'index.js'),
             readme.path,
             {},
             generatorConfig,
@@ -229,7 +236,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
 
           return {
             id: doc.id,
-            pagePath: path.join('/', pagePath),
+            pagePath: path.join('/', pagePath, readme.id),
             children: scanAndGenerate(
               doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
               path.join(docsPath, doc.id),
