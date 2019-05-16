@@ -17,8 +17,7 @@ type BreadcrumbsNavProps = {
 
 const BreadcrumbsNav = ({ pagePath }: BreadcrumbsNavProps) => {
   const pgPath = pagePath.replace('/index.js', '').replace('.js', '');
-  const pages = pgPath.split('/');
-  pages.pop(); // Don't display the current (i.e. last) page in the breadcrumbs
+  const pages = pgPath.split('/').filter(a => a);
 
   const pagePaths: string[] = [];
   pages.reduce((acc: string, page: string, idx: number) => {
@@ -29,9 +28,24 @@ const BreadcrumbsNav = ({ pagePath }: BreadcrumbsNavProps) => {
   return (
     <Header>
       <Breadcrumbs>
-        {pagePaths.map((path, idx) => (
-          <BreadcrumbsItem href={path} text={titleCase(pages[idx])} />
-        ))}
+        {pagePaths.map((path, idx) =>
+          idx === pagePaths.length - 1 ? (
+            <BreadcrumbsItem
+              key={pages[idx]}
+              href={path}
+              text={titleCase(pages[idx])}
+              component={() => (
+                <p style={{ fontWeight: 'bold' }}>{titleCase(pages[idx])}</p>
+              )}
+            />
+          ) : (
+            <BreadcrumbsItem
+              key={pages[idx]}
+              href={path}
+              text={titleCase(pages[idx])}
+            />
+          ),
+        )}
       </Breadcrumbs>
     </Header>
   );
