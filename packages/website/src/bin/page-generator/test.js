@@ -436,6 +436,18 @@ describe('readmes in the docs', () => {
       pagePath.toLowerCase().includes('readme'),
     );
 
-    expect(readmePages).toEqual([]);
+    expect(readmePages).toEqual([
+      {
+        children: [
+          {
+            children: [],
+            id: 'doc-3-2',
+            pagePath: '/docs/doc-3/doc-3-2/README',
+          },
+        ],
+        id: 'doc-3',
+        pagePath: '/docs/doc-3/readme',
+      },
+    ]);
   });
 });

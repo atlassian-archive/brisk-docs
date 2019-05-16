@@ -1,5 +1,10 @@
 # @brisk-docs/website
 
+## 0.4.3
+### Patch Changes
+
+- 20f7686: The previous version flattened out readmes, but broke all relative links from within readme.md files. Making urls less happy to make this work
+
 ## 0.4.2
 
 ### Patch Changes
