@@ -21,7 +21,6 @@
     "skipLibCheck": true,
     "noImplicitReturns": true,
     "noUnusedParameters": true,
-    "strict": true,
     "removeComments": false,
     "preserveConstEnums": true,
     "strictFunctionTypes": true,

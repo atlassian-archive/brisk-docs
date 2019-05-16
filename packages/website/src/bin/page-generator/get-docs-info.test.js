@@ -43,6 +43,12 @@ describe('Get docs info utility', () => {
       ],
     });
   });
+
+  it('reads only .md and .mdx files', () => {
+    expect(docsInfo).not.toContainEqual(
+      expect.objectContaining({ id: 'derpo' }),
+    );
+  });
 });
 
 describe('Missing docs directory', () => {
@@ -56,5 +62,36 @@ describe('Missing docs directory', () => {
 
   it('should return null if the docs folder does not exist', () => {
     expect(docsInfo).toBeNull();
+  });
+});
+
+describe('docs-with-readmes', () => {
+  let cwd;
+  let docsInfo;
+
+  beforeAll(async () => {
+    cwd = await copyFixtureIntoTempDir(__dirname, 'docs-with-readme');
+    docsInfo = getDocsInfo(path.join(cwd, 'docs'));
+  });
+
+  it('should replace the base index page with the readme page', () => {
+    expect(docsInfo[2]).toEqual({
+      id: 'doc-3',
+      children: [
+        {
+          id: 'doc-3-2',
+          children: [
+            {
+              id: 'README',
+              path: path.join(cwd, 'docs', 'doc-3', 'doc-3-2', 'README.md'),
+            },
+          ],
+        },
+        {
+          id: 'readme',
+          path: path.join(cwd, 'docs', 'doc-3', 'readme.md'),
+        },
+      ],
+    });
   });
 });

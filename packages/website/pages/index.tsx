@@ -13,7 +13,11 @@ import Meta from '../src/components/meta-context';
 import pageInfo from '../src/pages-list';
 
 const WINDOW_BREAKPOINT = 800;
-
+interface DocumentObject {
+  docsPath: string;
+  name: string;
+  description?: string;
+}
 const Page = styled.div`
   background-color: ${colors.B500};
   position: fixed;
@@ -45,21 +49,24 @@ class HomePage extends React.Component {
     }
   }, 100);
 
-  packagesPanelProps = {
-    IconComponent: PackagesIcon,
-    label: 'Packages',
-    color: colors.R400,
-    description: 'Check out Jira Frontend packages and example usage guides.',
-    imgSrc: '/static/code.png',
+  getPackagesPanelProps = (desc: string) => {
+    return {
+      IconComponent: PackagesIcon,
+      label: 'Packages',
+      color: colors.R400,
+      description: desc,
+      imgSrc: '/static/code.png',
+    };
   };
 
-  docsPanelProps = {
-    IconComponent: MediaDocIcon,
-    label: 'Documentation',
-    color: colors.Y400,
-    description:
-      'Explore documentation about patterns, rules, and how to get started in Jira Frontend.',
-    imgSrc: '/static/file_cabinet.png',
+  getDocsPanelProps = (doc: DocumentObject) => {
+    return {
+      IconComponent: MediaDocIcon,
+      label: doc.name,
+      color: colors.Y400,
+      description: doc.description || '',
+      imgSrc: '/static/file_cabinet.png',
+    };
   };
 
   render() {
@@ -69,17 +76,30 @@ class HomePage extends React.Component {
         {() => (
           <Page>
             <Meta.Consumer>
-              {context => <Heading>{context.siteName}</Heading>}
+              {context => (
+                <>
+                  <Heading>{context.siteName}</Heading>
+                  <Section>
+                    <PanelGrid displayAsColumn={displayAsColumn}>
+                      <Panel
+                        href="/packages"
+                        {...this.getPackagesPanelProps(
+                          context.packagesDescription,
+                        )}
+                      />
+                      {Object.keys(pageInfo)
+                        .slice(1)
+                        .map((key, i) => (
+                          <Panel
+                            href={`/${key}`}
+                            {...this.getDocsPanelProps(context[i])}
+                          />
+                        ))}
+                    </PanelGrid>
+                  </Section>
+                </>
+              )}
             </Meta.Consumer>
-
-            <Section>
-              <PanelGrid displayAsColumn={displayAsColumn}>
-                <Panel href="/packages" {...this.packagesPanelProps} />
-                {pageInfo.docs && (
-                  <Panel href="/docs" {...this.docsPanelProps} />
-                )}
-              </PanelGrid>
-            </Section>
           </Page>
         )}
       </WidthDetector>

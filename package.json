@@ -24,13 +24,13 @@
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
-    "changeset": "build-releases changeset",
-    "version-packages": "build-releases version",
-    "publish-changed": "yarn build && build-releases publish",
-    "prepare:docs": "bolt && yarn build:docs && yarn export"
+    "bump": "changeset bump",
+    "release": "yarn build && changeset release",
+    "prepare:docs": "bolt && yarn build:docs && yarn export",
+    "postinstall": "preconstruct dev"
   },
   "bolt": {
-    "version": "^0.22.6",
+    "version": "^0.23.2",
     "workspaces": [
       "packages/*"
     ]
@@ -71,6 +71,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@changesets/cli": "^1.0.1",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
@@ -78,6 +79,7 @@
     "@mdx-js/tag": "^0.17.5",
     "@types/lodash": "^4.14.123",
     "@types/next": "^8.0.3",
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
     "@zeit/next-typescript": "^1.1.1",
@@ -100,8 +102,9 @@
     "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
     "next": "^8.0.4",
+    "next-images": "^1.1.1",
     "outdent": "^0.7.0",
-    "preconstruct": "^0.0.53",
+    "preconstruct": "^0.0.62",
     "pretty-proptypes": "^0.6.0",
     "prismjs": "^1.15.0",
     "probot": "^7.2.0",
@@ -111,6 +114,7 @@
     "react-addons-text-content": "^0.0.4",
     "react-dom": "^16.8.4",
     "react-markdown": "^2.5.0",
+    "resolve": "^1.10.0",
     "rimraf": "^2.6.3",
     "semver": "^5.4.1",
     "source-map-loader": "^0.2.2",
@@ -118,11 +122,11 @@
     "title-case": "^2.1.1",
     "typescript": "^3.2.1",
     "uglify-js": "^3.1.7",
+    "unist-util-visit": "^1.3.0",
     "wait-on": "^3.2.0",
     "webpack": "4.28.4"
   },
   "devDependencies": {
-    "@atlaskit/build-releases": "^3.0.3",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@types/enzyme": "^2.8.11",
     "@types/jest": "^21.1.2",
@@ -133,7 +137,7 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-styled-components": "^1.10.0",
-    "bolt": "^0.22.6",
+    "bolt": "^0.23.2",
     "css-loader": "^1.0.0",
     "cypress": "^3.1.5",
     "enzyme": "^3.9.0",

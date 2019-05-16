@@ -20,7 +20,6 @@ In your repository settings, add a new webhook with the following values.
 
 - Payload URL - `https://smee.io/TNpTJ36TKInIWlgB`
 - Content type - `application/json`
-- Secret - `changesetbot`
 - Trigger events - `Pull requests`
 
 ## Behaviour

@@ -5,7 +5,7 @@
 // This script needs to be run before devving starts.
 
 const path = require('path');
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 
 const generatePages = require('./page-generator');
 
@@ -13,12 +13,13 @@ const packageRoot = path.resolve(__dirname, '..', '..');
 
 module.exports = async ({
   packagesPaths,
-  docsPath,
+  docsList,
   useManifests,
   webpackConfiguration,
   showSubExamples,
   siteName,
   decorator,
+  packagesDescription,
 }) => {
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
@@ -26,9 +27,10 @@ module.exports = async ({
     './src/components/page-templates',
   );
 
+  const { ...rest } = docsList;
   const pagesList = await generatePages(
     packagesPaths,
-    docsPath,
+    docsList,
     pagesPath,
     componentsPath,
     {
@@ -38,28 +40,28 @@ module.exports = async ({
       decorator,
     },
   );
-  const { packages, docs, metaData } = pagesList;
+
+  const { packages, metaData, ...rests } = pagesList;
 
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
   const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
 
-  fse.ensureFileSync(pagesListPath);
-  fse.writeFileSync(
+  fs.ensureFileSync(pagesListPath);
+  fs.writeFileSync(
     pagesListPath,
 
-    JSON.stringify({ packages, docs }, undefined, 2),
+    JSON.stringify({ packages, ...rests }, undefined, 2),
   );
 
-  fse.ensureFileSync(packagesDataPath);
-  fse.writeFileSync(
+  fs.ensureFileSync(packagesDataPath);
+  fs.writeFileSync(
     packagesDataPath,
 
     JSON.stringify({ metaData }, undefined, 2),
   );
-  fse.writeFileSync(
+  fs.writeFileSync(
     metaPath,
-
-    JSON.stringify({ siteName }, undefined, 2),
+    JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
   );
 };

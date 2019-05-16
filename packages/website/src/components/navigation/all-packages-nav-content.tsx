@@ -4,15 +4,12 @@ import {
   HeaderSection,
   ItemAvatar,
   MenuSection,
-  BackItem,
-  Separator,
   Group,
 } from '@atlaskit/navigation-next';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';
-import LinkComponent from './link-component';
 
 const gridSize = gridSizeFn();
 
@@ -54,8 +51,9 @@ const AllPackagesNavContent = ({ data }: Props) => (
       {/* TODO: TSFix nav typing */}
       {({ className }: { className: string }) => (
         <div className={className}>
-          <BackItem text="Back to home" href="/" component={LinkComponent} />
-          <Separator />
+          {/* TODO: Hiding for the time being */}
+          {/* <BackItem text="Back to home" href="/" component={LinkComponent} /> */}
+          {/* <Separator /> */}
           <Group heading="" id="pkg-group" hasSeparator>
             {data.map(pkg => (
               <LinkWithRouter

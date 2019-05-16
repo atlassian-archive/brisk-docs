@@ -1,3 +1,21 @@
+const getAbsentMessage = commitSha => `###  💥  No Changeset
+
+Latest commit: ${commitSha}
+
+Merging this PR will not cause any packages to be released. If these changes should not cause updates to packages in this repo, this is fine 🙂
+
+**If these changes should be published to npm, you need to add a changeset.**
+
+[Click here to learn what changesets are, and how to add one](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
+
+const getApproveMessage = commitSha => `###  🦋  Changeset is good to go
+
+Latest commit: ${commitSha}
+
+**We got this.**
+
+Not sure waht this means? [Click here  to learn what changesets are](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
+
 module.exports = app => {
   app.log('Yay, the app was loaded!');
 
@@ -32,15 +50,11 @@ module.exports = app => {
         let prComment;
         if (!hasChangeset) {
           prComment = context.issue({
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getAbsentMessage(latestCommit.sha),
           });
         } else {
           prComment = context.issue({
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getApproveMessage(latestCommit.sha),
           });
         }
 
@@ -84,16 +98,12 @@ module.exports = app => {
         if (!hasChangeset) {
           prComment = context.issue({
             comment_id: commentId,
-            body: `❌ NO CHANGESET PRESENT ❌\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getAbsentMessage(latestCommit.sha),
           });
         } else {
           prComment = context.issue({
             comment_id: commentId,
-            body: `✅ This PR has a changeset ✅\nLatest commit: ${
-              latestCommit.sha
-            }`,
+            body: getApproveMessage(latestCommit.sha),
           });
         }
 

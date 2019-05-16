@@ -37,6 +37,31 @@ const newData = data.packages.map(
   }),
 );
 
+const remapChild = (pages: Pages, docId: string, type: string) =>
+  pages.map(({ id, pagePath: path }) => ({
+    id,
+    title: prettyTitle(id),
+    path,
+    type,
+    parent: docId,
+  }));
+
+const getDocuments = () =>
+  Object.keys(data)
+    .slice(1)
+    .map(docs =>
+      // @ts-ignore
+      data[docs].map(({ id, pagePath, children }) => ({
+        title: id,
+        pages: children
+          ? [...remapChild(children || [], id, 'nested-docs')]
+          : [{ id: 'readme', title: id, path: pagePath, type: 'readme' }],
+      })),
+    );
+
+const newDocs: any[] = [];
+getDocuments().forEach(x => newDocs.push(...x));
+
 export type Props = {
   isOpen: boolean;
   closeDrawer: () => any;
@@ -55,8 +80,9 @@ class SearchDrawer extends React.Component<Props> {
     );
   };
 
-  filterPackages = () => {
-    const stuff = newData.map(({ title, pages }) => {
+  filterPackagesAndDocs = () => {
+    const parsedData = newDocs.length > 0 ? newData.concat(newDocs) : newData;
+    const stuff = parsedData.map(({ title, pages }) => {
       const newNewPages = pages.filter(page => this.filterPage(title, page));
       if (newNewPages.length < 1) return null;
       return (
@@ -107,7 +133,7 @@ class SearchDrawer extends React.Component<Props> {
           }
           placeholder="Filter documents by name or package"
         >
-          {this.filterPackages()}
+          {this.filterPackagesAndDocs()}
         </QuickSearch>
       </Drawer>
     );
