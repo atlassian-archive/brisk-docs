@@ -96,7 +96,7 @@ describe('docs-with-readmes', () => {
   });
 });
 
-describe('Test Exclude everything in docs which starts with an _', () => {
+describe('Test exclude everything that are non md files', () => {
   let cwd;
   let docsInfo;
 
@@ -105,7 +105,7 @@ describe('Test Exclude everything in docs which starts with an _', () => {
     docsInfo = getDocsInfo(path.join(cwd, 'docs'));
   });
 
-  it('returns an array of all the pages in the docs folder excluding _assets', () => {
+  it('returns an array of all the pages in the docs folder excluding non md files', () => {
     expect(docsInfo[0]).toEqual({
       id: 'doc-2',
       path: path.join(cwd, 'docs', 'doc-2.md'),

@@ -12,15 +12,12 @@ const getFilesInDir = dirPath => {
   const files = [];
   if (fs.existsSync(dirPath)) {
     // We only care about top level examples right now. This logic will need to become circular
-    // We exclude everything that starts with an _
-    fs.readdirSync(dirPath)
-      .filter(f => !f.startsWith('_'))
-      .forEach(exampleFile => {
-        files.push({
-          id: exampleFile.replace(path.extname(exampleFile), ''),
-          path: path.resolve(dirPath, exampleFile),
-        });
+    fs.readdirSync(dirPath).forEach(exampleFile => {
+      files.push({
+        id: exampleFile.replace(path.extname(exampleFile), ''),
+        path: path.resolve(dirPath, exampleFile),
       });
+    });
   }
   return files;
 };

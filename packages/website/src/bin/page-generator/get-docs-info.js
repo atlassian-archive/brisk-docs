@@ -42,7 +42,11 @@ const processDirectory = dirPath => {
 /**
  * @param docsPath absolute path to where the docs are located
  * @returns Nested structure representing the docs in the project
+ * Filter the nested structure with empty children
  */
 module.exports = function getDocsInfo(docsPath) {
-  return processDirectory(docsPath);
+  const processDocs = processDirectory(docsPath);
+  return (
+    processDocs && processDocs.filter(x => !x.children || x.children.length > 0)
+  );
 };
