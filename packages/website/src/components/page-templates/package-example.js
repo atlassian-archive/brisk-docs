@@ -32,7 +32,7 @@ const ExampleStyle = styled.div`
   height: 100%;
 `;
 
-const ExampleComponentContainer = styled.div`
+export const ExampleComponentContainer = styled.div`
   background-color: white;
   border: 1px solid black;
   border-radius: ${gridSize}px;
@@ -54,7 +54,7 @@ const Heading = styled.h1`
   margin-right: ${math.multiply(gridSize, 4)}px;
 `;
 
-const ExampleHeading = styled.h2`
+export const ExampleHeading = styled.h2`
   margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
 
@@ -98,14 +98,7 @@ const PackageExample = ({ data, fileContents, children }) => {
               <Heading>{data.pageTitle}</Heading>
               <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
             </Header>
-            {children.map(child => (
-              <ExampleComponentContainer key={child.name}>
-                {child.name !== 'default' && (
-                  <ExampleHeading>{child.name}</ExampleHeading>
-                )}
-                {child.component}
-              </ExampleComponentContainer>
-            ))}
+            {children}
           </ExampleStyle>
           <CodeStyle data-testid="example-source-code">
             <code dangerouslySetInnerHTML={{ __html: highlighted }} />

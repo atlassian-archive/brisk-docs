@@ -18,6 +18,7 @@ module.exports = async ({
   webpackConfiguration,
   showSubExamples,
   siteName,
+  decorator,
   packagesDescription,
 }) => {
   const pagesPath = path.resolve(packageRoot, './pages');
@@ -36,6 +37,7 @@ module.exports = async ({
       useManifests,
       webpackConfiguration,
       showSubExamples,
+      decorator,
     },
   );
 

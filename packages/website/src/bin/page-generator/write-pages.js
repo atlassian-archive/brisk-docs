@@ -6,6 +6,7 @@ const {
   exampleTemplate,
   singleComponentTemplate,
   wrappedComponentTemplate,
+  exampleWithDecoratorTemplate,
 } = require('./templates');
 
 const writeFile = (pagePath, content) => {
@@ -29,6 +30,7 @@ const getGenericPageInfo = (
   componentPath,
   wrappersPath,
   wrapperName,
+  decoratorPath,
 ) => {
   const absolutePagePath = path.resolve(pagesPath, pagePath);
   const componentImportPath = componentPath
@@ -38,11 +40,16 @@ const getGenericPageInfo = (
     absolutePagePath,
     path.join(wrappersPath, `${wrapperName}.js`),
   );
+  const decoratorImportPath =
+    decoratorPath && decoratorPath.length > 0
+      ? getImportPath(absolutePagePath, decoratorPath)
+      : undefined;
 
   return {
     absolutePagePath,
     componentImportPath,
     packageHomeWrapperPath,
+    decoratorImportPath,
   };
 };
 
@@ -161,21 +168,33 @@ const generateExamplePage = (
 ) => {
   const componentPath = exampleModulePath;
   const wrapperName = 'package-example';
-  const { wrappersPath, pagesPath } = config;
+  const { wrappersPath, pagesPath, decoratorPath } = config;
 
-  const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
+  const {
+    componentImportPath,
+    packageHomeWrapperPath,
+    decoratorImportPath,
+  } = getGenericPageInfo(
     pagesPath,
     pagePath,
     componentPath,
     wrappersPath,
     wrapperName,
+    decoratorPath,
   );
 
   const pageData = { ...data, pageTitle: title };
 
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(componentImportPath, packageHomeWrapperPath, pageData),
+    decoratorImportPath
+      ? exampleWithDecoratorTemplate(
+          componentImportPath,
+          packageHomeWrapperPath,
+          pageData,
+          decoratorImportPath,
+        )
+      : exampleTemplate(componentImportPath, packageHomeWrapperPath, pageData),
   );
 
   writeFile(

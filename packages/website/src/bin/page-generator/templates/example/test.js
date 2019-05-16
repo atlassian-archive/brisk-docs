@@ -1,5 +1,5 @@
 import assertValidTemplate from '../test-utils';
-import exampleTemplate from './index';
+import { exampleTemplate, exampleWithDecoratorTemplate } from './index';
 
 describe('example page template', () => {
   const source = exampleTemplate('./component/path', './wrapper/path');
@@ -12,6 +12,17 @@ describe('example page template', () => {
     expect(source).toMatch(
       /\[{\s*name: 'default',\s*component: <Components.default \/>\s*}/,
     );
+  });
+
+  it('creates valid source code for an example with decorator page', () => {
+    const output = exampleWithDecoratorTemplate(
+      './component/path',
+      './wrapper/path',
+      {},
+      './decorator/path',
+    );
+
+    expect(output).toMatch(/<Decorator>.*<\/Decorator>/s);
   });
 
   it('create an array of children that includes non-default exports', () => {
