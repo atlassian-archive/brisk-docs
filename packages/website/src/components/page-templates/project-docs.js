@@ -9,7 +9,7 @@ import PageTitle from '../page-title';
 const ProjectDocsWrapper = ({ children, data }) => (
   <>
     <PageTitle title={data.pageTitle} />
-    <NavigationWrapper navContent={DocsNavContent}>
+    <NavigationWrapper navContent={() => <DocsNavContent docId={data.key} />}>
       <Wrapper pagePath={data.pagePath}>{children}</Wrapper>
     </NavigationWrapper>
   </>
@@ -18,6 +18,7 @@ const ProjectDocsWrapper = ({ children, data }) => (
 ProjectDocsWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   data: PropTypes.shape({
+    key: PropTypes.string,
     pageTitle: PropTypes.string.isRequired,
   }).isRequired,
 };

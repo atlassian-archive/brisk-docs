@@ -46,13 +46,21 @@ const remapChild = (pages: Pages, docId: string, type: string) =>
     parent: docId,
   }));
 
-// @ts-ignore
-const newDocs = data.docs.map(({ id, pagePath, children }) => ({
-  title: id,
-  pages: children
-    ? [...remapChild(children || [], id, 'nested-docs')]
-    : [{ id: 'readme', title: id, path: pagePath, type: 'readme' }],
-}));
+const getDocuments = () =>
+  Object.keys(data)
+    .slice(1)
+    .map(docs =>
+      // @ts-ignore
+      data[docs].map(({ id, pagePath, children }) => ({
+        title: id,
+        pages: children
+          ? [...remapChild(children || [], id, 'nested-docs')]
+          : [{ id: 'readme', title: id, path: pagePath, type: 'readme' }],
+      })),
+    );
+
+const newDocs: any[] = [];
+getDocuments().forEach(x => newDocs.push(...x));
 
 export type Props = {
   isOpen: boolean;
@@ -73,8 +81,7 @@ class SearchDrawer extends React.Component<Props> {
   };
 
   filterPackagesAndDocs = () => {
-    const parsedData =
-      data.docs && data.docs.length > 0 ? newData.concat(newDocs) : newData;
+    const parsedData = newDocs.length > 0 ? newData.concat(newDocs) : newData;
     const stuff = parsedData.map(({ title, pages }) => {
       const newNewPages = pages.filter(page => this.filterPage(title, page));
       if (newNewPages.length < 1) return null;

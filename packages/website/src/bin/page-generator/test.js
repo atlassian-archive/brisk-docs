@@ -24,7 +24,7 @@ describe('Generate pages', () => {
 
     sitemap = await generatePages(
       packagesPaths,
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -283,7 +283,7 @@ describe('Generate pages', () => {
 
       subExampleSitemap = await generatePages(
         packagesPaths,
-        docsPath,
+        [{ docsPath, name: 'docs' }],
         pagesPath,
         componentsPath,
         { showSubExamples: true },
@@ -342,7 +342,7 @@ describe('File modification tests', () => {
     );
     await generatePages(
       [path.join(packagesPath, '/*')],
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -354,7 +354,7 @@ describe('File modification tests', () => {
     );
     await generatePages(
       [path.join(packagesPath, '/*')],
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -364,13 +364,18 @@ describe('File modification tests', () => {
 
   it('should remove files from docs pages that are removed from disc on rerun', async () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
-    await generatePages(packagesPath, docsPath, pagesPath, componentsPath);
+    await generatePages(
+      packagesPath,
+      [{ docsPath, name: 'docs' }],
+      pagesPath,
+      componentsPath,
+    );
     expect(fs.existsSync(firstDocsPage)).toEqual(true);
 
     fs.unlinkSync(path.join(docsPath, 'doc-1.md'));
     await generatePages(
       [path.join(packagesPath, '/*')],
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -395,7 +400,7 @@ describe('Missing docs folder', () => {
 
     sitemap = await generatePages(
       packagesPaths,
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -426,7 +431,7 @@ describe('readmes in the docs', () => {
 
     sitemap = await generatePages(
       packagesPaths,
-      docsPath,
+      [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -436,6 +441,57 @@ describe('readmes in the docs', () => {
       pagePath.toLowerCase().includes('readme'),
     );
 
-    expect(readmePages).toEqual([]);
+    expect(readmePages).toEqual([
+      {
+        children: [
+          {
+            children: [],
+            id: 'doc-3-2',
+            pagePath: '/docs/doc-3/doc-3-2/README',
+          },
+        ],
+        id: 'doc-3',
+        pagePath: '/docs/doc-3/readme',
+      },
+    ]);
+  });
+});
+
+describe('Additional items in the docs tests', () => {
+  let packagesPath;
+  let pagesPath;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'simple-mock-packages',
+    );
+    const docsCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-docs-with-guides',
+    );
+
+    packagesPath = path.join(packagesCwd, 'packages');
+
+    pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+    await generatePages(
+      packagesPath,
+      [
+        { docsPath: path.join(docsCwd, 'docs'), name: 'docs' },
+        { docsPath: path.join(docsCwd, 'guides'), name: 'guides' },
+      ],
+      pagesPath,
+      componentsPath,
+    );
+  });
+
+  it('creates pages for each markdown file in docs and guides folder', () => {
+    expect(fs.existsSync(path.join(pagesPath, 'docs', 'testdoc.js'))).toEqual(
+      true,
+    );
+    expect(
+      fs.existsSync(path.join(pagesPath, 'guides', 'testguide.js')),
+    ).toEqual(true);
   });
 });
