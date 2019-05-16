@@ -4,20 +4,20 @@ import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
-const NavContent = () => {
+const NavContent = ({ docId }: { docId: string }) => {
   const treeData = {
-    rootId: 'docs',
-    items: pageInfo.docs
-      ? arrayToTreeItems(pageInfo.docs, {
-          parentId: 'docs',
-          parentTitle: 'Docs',
+    rootId: docId,
+    items: pageInfo[docId]
+      ? arrayToTreeItems(pageInfo[docId], {
+          parentId: docId,
+          parentTitle: docId,
         })
       : {},
   };
 
   return (
     <>
-      <NavHeader headerText="Docs" url="/docs" />
+      <NavHeader headerText={docId} url={`/${docId.toLowerCase()}`} />
       <MenuSection id="docs-section" parentId="index-section">
         {/* TODO: TSFix nav typing */}
         {({ className }: { className: string }) => (
