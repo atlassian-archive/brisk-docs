@@ -52,7 +52,7 @@ const ExampleStyle = styled.div`
 `;
 
 const ExampleComponentContainer = styled.div`
-  // grid-area: example;
+  grid-area: example;
   background-color: white;
   border: 1px solid black;
   border-radius: ${gridSize}px;
@@ -169,7 +169,6 @@ class PackageExample extends React.Component {
                       Full page view
                     </LinkButton>
                   </Header>
-                  <div style={{ display: 'flex', justifyContent: 'center', gridArea: 'example'}}>
                   {children.map(child => (
                     <ExampleComponentContainer key={child.name}>
                       {child.name !== 'default' && (
@@ -184,7 +183,6 @@ class PackageExample extends React.Component {
                       handleClick={this.handleClick}
                     />
                   )}
-                  </div>
                 </ExampleStyle>
               )}
             </WidthDetector>
