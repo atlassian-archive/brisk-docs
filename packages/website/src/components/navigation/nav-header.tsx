@@ -17,9 +17,10 @@ const gridSize = gridSizeFn();
 
 export type Props = {
   headerText: string;
+  url: string;
 };
 
-const NavHeader = ({ headerText }: Props) => (
+const NavHeader = ({ headerText, url }: Props) => (
   <HeaderSection>
     {/* TODO: TSFix - nav typings */}
     {({ css }: { css: {} }) => (
@@ -40,6 +41,7 @@ const NavHeader = ({ headerText }: Props) => (
             />
           )}
           text={titleCase(headerText)}
+          href={url}
         />
       </div>
     )}
