@@ -188,6 +188,17 @@ const generateDocsHomePage = (pagePath, data, config, title = '') => {
   generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
 };
 
+const generateDocumentsMainPage = (pagePath, data, config, title = '') => {
+  generateNonComponentPage(
+    pagePath,
+    data,
+    'documents-index',
+    config,
+    'docs',
+    title,
+  );
+};
+
 const generateExamplesHomePage = (pagePath, data, config, title = '') => {
   generateNonComponentPage(
     pagePath,
@@ -224,4 +235,5 @@ module.exports = {
   generateDocsHomePage,
   generateExamplesHomePage,
   generateProjectDocPage,
+  generateDocumentsMainPage,
 };

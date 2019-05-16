@@ -13,7 +13,11 @@ import Meta from '../src/components/meta-context';
 import pageInfo from '../src/pages-list';
 
 const WINDOW_BREAKPOINT = 800;
-
+interface DocumentObject {
+  docsPath: string;
+  name: string;
+  description?: string;
+}
 const Page = styled.div`
   background-color: ${colors.B500};
   position: fixed;
@@ -55,12 +59,12 @@ class HomePage extends React.Component {
     };
   };
 
-  getDocsPanelProps = (desc?: string) => {
+  getDocsPanelProps = (doc: DocumentObject) => {
     return {
       IconComponent: MediaDocIcon,
-      label: 'Documentation',
+      label: doc.name,
       color: colors.Y400,
-      description: desc || '',
+      description: doc.description || '',
       imgSrc: '/static/file_cabinet.png',
     };
   };
@@ -83,12 +87,14 @@ class HomePage extends React.Component {
                           context.packagesDescription,
                         )}
                       />
-                      {pageInfo.docs && (
-                        <Panel
-                          href="/docs"
-                          {...this.getDocsPanelProps(context.description)}
-                        />
-                      )}
+                      {Object.keys(pageInfo)
+                        .slice(1)
+                        .map((key, i) => (
+                          <Panel
+                            href={`/${key}`}
+                            {...this.getDocsPanelProps(context[i])}
+                          />
+                        ))}
                     </PanelGrid>
                   </Section>
                 </>

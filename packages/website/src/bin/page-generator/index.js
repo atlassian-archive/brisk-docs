@@ -12,6 +12,7 @@ const {
   generateDocsHomePage,
   generateExamplesHomePage,
   generateProjectDocPage,
+  generateDocumentsMainPage,
 } = require('./write-pages');
 
 const packagesData = [];
@@ -199,9 +200,17 @@ function generatePackagePages(packageInfo, generatorConfig) {
  * for each markdown file
  * @param docsInfo info about the docs markdown that exist in the project
  * @param generatorConfig info about the locations of important directories used for page generation
+ * @param name name of the parent path
  * @returns sitemap for the generated docs pages
  */
-const generateProjectDocsPages = (docsInfo, generatorConfig) => {
+const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
+  generateDocumentsMainPage(
+    path.join(name, 'index.js'),
+    { key: name },
+    generatorConfig,
+    name,
+  );
+
   const scanAndGenerate = (docs, docsPath) =>
     docs.map(doc => {
       const pagePath = path.join(docsPath, doc.id);
@@ -212,6 +221,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
         );
 
         const docData = {
+          key: name,
           id: doc.id,
           children: doc.children.map(child => ({
             id: child.id,
@@ -259,7 +269,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
       generateProjectDocPage(
         `${pagePath}.js`,
         doc.path,
-        {},
+        { key: name },
         generatorConfig,
         titleCase(doc.id),
       );
@@ -270,7 +280,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig) => {
       };
     });
 
-  return scanAndGenerate(docsInfo, 'docs');
+  return scanAndGenerate(docsInfo, name);
 };
 
 /**
@@ -293,18 +303,17 @@ const cleanPages = pagesPath => {
 /**
  * generates all the pages needed for the docs website
  * @param packagesPaths a list of directory path patterns to be scanned
- * @param docsPath directory path to the project docs
+ * @param docsList
  * @param pagesPath path to the output pages directory
  * @param componentsPath path to helper components/wrappers
- * @param bundlesPath path to where built external code is located
  * @param options configuration options
  *
  * @returns a promise resolving to an object representing the
- * sitemap of the pages created
+ * schema of the pages created
  */
 module.exports = async function generatePages(
   packagesPaths,
-  docsPath,
+  docsList,
   pagesPath,
   componentsPath,
   options = {},
@@ -315,7 +324,6 @@ module.exports = async function generatePages(
     useManifests: options.useManifests,
     showSubExamples: options.showSubExamples,
   });
-  const docsInfo = getDocsInfo(docsPath);
 
   const generatorConfig = {
     pagesPath,
@@ -323,13 +331,23 @@ module.exports = async function generatePages(
   };
 
   const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
-  const docsSitemap = docsInfo
-    ? generateProjectDocsPages(docsInfo, generatorConfig)
-    : undefined;
+  const docsSitemap = {};
+
+  docsList.forEach(item => {
+    const docsInfo = getDocsInfo(item.docsPath);
+    const pathName = item.name.toLowerCase();
+    if (docsInfo) {
+      docsSitemap[pathName] = generateProjectDocsPages(
+        docsInfo,
+        generatorConfig,
+        pathName,
+      );
+    }
+  });
 
   return {
     packages: packageSitemap,
-    docs: docsSitemap,
+    ...docsSitemap,
     metaData: packagesData,
   };
 };

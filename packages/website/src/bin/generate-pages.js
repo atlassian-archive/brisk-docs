@@ -26,10 +26,10 @@ module.exports = async ({
     './src/components/page-templates',
   );
 
-  const { docsPath, ...rest } = docsList;
+  const { ...rest } = docsList;
   const pagesList = await generatePages(
     packagesPaths,
-    docsPath,
+    docsList,
     pagesPath,
     componentsPath,
     {
@@ -38,7 +38,8 @@ module.exports = async ({
       showSubExamples,
     },
   );
-  const { packages, docs, metaData } = pagesList;
+
+  const { packages, metaData, ...rests } = pagesList;
 
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
@@ -48,7 +49,7 @@ module.exports = async ({
   fs.writeFileSync(
     pagesListPath,
 
-    JSON.stringify({ packages, docs }, undefined, 2),
+    JSON.stringify({ packages, ...rests }, undefined, 2),
   );
 
   fs.ensureFileSync(packagesDataPath);
