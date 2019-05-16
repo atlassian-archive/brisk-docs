@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import TableTree, {
   Headers,
   Header,
@@ -8,28 +9,25 @@ import TableTree, {
 } from '@atlaskit/table-tree';
 import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
-
-import Link from '../src/components/switch-link';
-import Page, { Section, Title } from '../src/components/page';
-import pageInfo from '../src/pages-list';
-import DocsNavContent from '../src/components/navigation/docs-nav-content';
-import NavigationWrapper from '../src/components/navigation-wrapper';
-import PageTitle from '../src/components/page-title';
+import Page, { Section, Title } from '../page';
+import pageInfo from '../../pages-list';
+import DocsNavContent from '../navigation/docs-nav-content';
+import NavigationWrapper from '../navigation-wrapper';
+import PageTitle from '../page-title';
+import Link from '../switch-link';
 
 const NoDocsMessage = () => (
   <SectionMessage appearance="warning">
-    We couldn&apos;t find any docs pages in your provided docs directory
+    We couldn&apos;t find any document pages in your provided docs directory
   </SectionMessage>
 );
 
-type State = { expansionMap: { [s: string]: boolean } };
-
-class DocsTable extends React.Component<{}, State> {
-  state: State = { expansionMap: {} };
+class DocsTable extends React.Component {
+  state = { expansionMap: {} };
 
   render() {
     const { expansionMap } = this.state;
-
+    const { docKey } = this.props;
     return (
       <Section>
         <TableTree>
@@ -38,16 +36,8 @@ class DocsTable extends React.Component<{}, State> {
             <Header width={400}>Path</Header>
           </Headers>
           <Rows
-            items={pageInfo.docs}
-            render={({
-              id,
-              pagePath,
-              children,
-            }: {
-              id: string;
-              pagePath: string;
-              children: React.ReactChild[];
-            }) => (
+            items={pageInfo[docKey]}
+            render={({ id, pagePath, children }) => (
               <Row
                 itemId={id}
                 items={children}
@@ -83,16 +73,25 @@ class DocsTable extends React.Component<{}, State> {
   }
 }
 
-const Docs = () => (
+DocsTable.propTypes = {
+  docKey: PropTypes.string,
+};
+
+const Docs = ({ data }) => (
   <>
-    <PageTitle title="Documents" />
-    <NavigationWrapper navContent={DocsNavContent}>
+    <PageTitle title={titleCase(data.key)} />
+    <NavigationWrapper navContent={() => <DocsNavContent docId={data.key} />}>
       <Page>
-        <Title>Documents Overview</Title>
-        {pageInfo.docs ? <DocsTable /> : <NoDocsMessage />}
+        <Title>{`${titleCase(data.key)} Overview`}</Title>
+        {Object.keys(pageInfo).slice(1).length > 0 ? (
+          <DocsTable docKey={data.key} />
+        ) : (
+          <NoDocsMessage />
+        )}
       </Page>
     </NavigationWrapper>
   </>
 );
 
+Docs.propTypes = { data: { key: PropTypes.string } };
 export default Docs;

@@ -9,11 +9,13 @@ describe('website configuration processor', () => {
 
     expect(config).toEqual({
       packagesPaths: ['/c/w/d/packages/*'],
-      docsList: {
-        description: 'View the documentation for this project',
-        docsPath: '/c/w/d/docs',
-        name: 'Docs',
-      },
+      docsList: [
+        {
+          description: 'View the documentation for this project',
+          docsPath: '/c/w/d/docs',
+          name: 'Docs',
+        },
+      ],
       useManifests: false,
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
@@ -30,7 +32,7 @@ describe('website configuration processor', () => {
         description: 'View the documentation for this project',
       },
     });
-    expect(docsList.docsPath).toEqual('/c/w/d/some/other/docs');
+    expect(docsList[0].docsPath).toEqual('/c/w/d/some/other/docs');
   });
 
   it('accepts an packages path as a string', () => {
@@ -84,11 +86,27 @@ describe('loadConfig', () => {
   });
   it('should load the default config if no path is given', () => {
     expect(loadConfig(defaultConfigPath)).toEqual({
-      docs: { path: 'a/b/c' },
+      docs: { path: 'a/b/c', name: 'docs' },
       packages: ['x/y/z'],
     });
   });
-  it('should return an empty object if there is no default', () => {
-    expect(loadConfig(__dirname)).toEqual({});
+  it('should load all the items in the docs as array in a config', () => {
+    expect(loadConfig(defaultConfigPath, 'docs-with-array-config.js')).toEqual({
+      docs: [
+        {
+          path: 'now/is/the/winter',
+          name: 'docs',
+          description: 'View custom documentation',
+        },
+        {
+          path: 'now/is/the/summer',
+          name: 'guides',
+          description: 'View custom guides',
+        },
+      ],
+      packages: ['of/our/disco/tents'],
+      packagesDescription:
+        'View custom documentation about individual packages',
+    });
   });
 });
