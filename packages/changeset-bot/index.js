@@ -14,7 +14,7 @@ Latest commit: ${commitSha}
 
 **We got this.**
 
-Not sure waht this means? [Click here  to learn what changesets are](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
+Not sure what this means? [Click here  to learn what changesets are](https://github.com/Noviny/changesets/blob/master/docs/adding-a-changeset.md).`;
 
 module.exports = app => {
   app.log('Yay, the app was loaded!');
