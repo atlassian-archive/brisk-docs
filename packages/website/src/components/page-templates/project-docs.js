@@ -10,7 +10,7 @@ const ProjectDocsWrapper = ({ children, data }) => (
   <>
     <PageTitle title={data.pageTitle} />
     <NavigationWrapper navContent={() => <DocsNavContent docId={data.key} />}>
-      <Wrapper>{children}</Wrapper>
+      <Wrapper pagePath={data.pagePath}>{children}</Wrapper>
     </NavigationWrapper>
   </>
 );
