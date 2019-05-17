@@ -79,7 +79,7 @@ const PackageHome = ({ data, children }) => {
           />
         )}
       >
-        <Wrapper>
+        <Wrapper pagePath={data.pagePath}>
           <Header id={data.id} heading={titleCase(data.packageName)} />
           <Description>{data.description}</Description>
           <PackageMetaData

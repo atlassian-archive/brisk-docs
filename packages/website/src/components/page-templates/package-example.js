@@ -3,33 +3,50 @@
 // TODO: Investigate alternatives to dangerouslySetInnerHTML property
 import React from 'react';
 import styled from '@emotion/styled';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/themes/prism-tomorrow.css';
+import debounce from 'lodash.debounce';
 
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@atlaskit/theme';
+import Button from '@atlaskit/button';
+import WidthDetector from '@atlaskit/width-detector';
+import ChevronLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
+import ChevronRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import * as PropTypes from 'prop-types';
 
 import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
+import CodeView from '../code-example/code-view';
 
 const PageContent = styled.div`
   display: flex;
-  height: 100%;
-  justify-content: space-around;
-  padding-right: ${math.multiply(gridSize, 80)}px;
+  margin: 0;
 `;
 
 const ExampleStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: ${math.multiply(gridSize, 60)}px;
-  max-width: ${math.multiply(gridSize, 80)}px;
+  display: grid;
+  grid-template-columns:
+    [left-pad-start] 32px
+    [left-pad-end example-start] 1fr
+    [example-end right-pad-start] 32px
+    [right-pad-end];
+
+  grid-template-rows:
+    [header-top] auto
+    [header-bottom example-top] 1fr
+    [example-bottom];
+
+  grid-template-areas:
+    '. header .'
+    '. example .';
+
+  box-sizing: border-box;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
-  height: 100%;
+  height: 100vh;
+  left: 0;
+  overflow-x: auto;
+  overflow-y: scroll;
 `;
 
 const ExampleComponentContainer = styled.div`
@@ -39,12 +56,15 @@ const ExampleComponentContainer = styled.div`
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: ${math.multiply(gridSize, 3)}px;
   margin: ${math.multiply(gridSize, 4)}px 0px;
+  min-width: ${math.multiply(gridSize, 60)}px;
 `;
 
 const Header = styled.div`
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   padding: ${math.multiply(gridSize, 3)}px 0;
+  margin-top: ${gridSize}px;
   border-bottom-color: rgb(235, 236, 240);
   border-bottom-style: solid;
   border-bottom-width: ${math.multiply(gridSize, 0.25)}px;
@@ -58,63 +78,127 @@ const ExampleHeading = styled.h2`
   margin-bottom: ${math.multiply(gridSize, 4)}px;
 `;
 
-const CodeStyle = styled.pre`
-  background-color: rgb(23, 43, 77);
-  box-sizing: border-box;
-  color: ${themed({ light: colors.N60, dark: colors.N60 })};
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  padding: ${gridSize}px;
-  margin: 0;
-  width: ${math.multiply(gridSize, 80)}px;
-  overflow-x: auto;
-  overflow-y: scroll;
+const CodeViewButton = ({ isCodeViewExpanded, handleClick }) => (
+  <div
+    style={{ position: 'absolute', right: '0', top: '100px', zIndex: '500' }}
+  >
+    <Button hitAreaSize="small" onClick={handleClick}>
+      {isCodeViewExpanded ? (
+        <ChevronRightCircleIcon
+          label="collapse"
+          primaryColor={colors.B200}
+          size="large"
+        />
+      ) : (
+        <ChevronLeftCircleIcon
+          label="expand"
+          primaryColor={colors.B200}
+          size="large"
+        />
+      )}
+    </Button>
+  </div>
+);
 
-  & code {
-    font-family: Monaco, Menlo, monospace;
-  }
-`;
-
-const PackageExample = ({ data, fileContents, children }) => {
-  const highlighted = Prism.highlight(fileContents, Prism.languages.jsx);
-
-  return (
-    <>
-      <PageTitle title={data.pageTitle} />
-      <NavigationWrapper
-        navContent={() => (
-          <PackageNavContent
-            packageId={data.id}
-            packageName={data.packageName}
-          />
-        )}
-      >
-        <PageContent>
-          <ExampleStyle>
-            <Header>
-              <Heading>{data.pageTitle}</Heading>
-              <LinkButton href={data.isolatedPath}>Full page view</LinkButton>
-            </Header>
-            {children.map(child => (
-              <ExampleComponentContainer key={child.name}>
-                {child.name !== 'default' && (
-                  <ExampleHeading>{child.name}</ExampleHeading>
-                )}
-                {child.component}
-              </ExampleComponentContainer>
-            ))}
-          </ExampleStyle>
-          <CodeStyle data-testid="example-source-code">
-            <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-          </CodeStyle>
-        </PageContent>
-      </NavigationWrapper>
-    </>
-  );
+CodeViewButton.propTypes = {
+  isCodeViewExpanded: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
+
+class PackageExample extends React.Component {
+  state = {
+    showCodeViewButton: true,
+    isCodeViewExpanded: true,
+    shouldExpandCodeWithWideWindow: true,
+  };
+
+  handleClick = () => {
+    this.setState(state => ({
+      isCodeViewExpanded: !state.isCodeViewExpanded,
+      shouldExpandCodeWithWideWindow: !state.shouldExpandCodeWithWideWindow,
+    }));
+  };
+
+  handleResize = debounce(
+    width => {
+      const { isCodeViewExpanded } = this.state;
+
+      if (width < 630) {
+        this.setState({
+          showCodeViewButton: false,
+          isCodeViewExpanded: false,
+        });
+      } else if (width < 1100 && !isCodeViewExpanded) {
+        this.setState({
+          showCodeViewButton: false,
+        });
+      } else if (width >= 1100) {
+        this.setState(state => ({
+          showCodeViewButton: true,
+          isCodeViewExpanded: state.shouldExpandCodeWithWideWindow,
+        }));
+      }
+    },
+    100,
+    { leading: false },
+  );
+
+  render() {
+    const { showCodeViewButton, isCodeViewExpanded } = this.state;
+    const { data, fileContents, children } = this.props;
+
+    return (
+      <>
+        <PageTitle title={data.pageTitle} />
+        <NavigationWrapper
+          navContent={() => (
+            <PackageNavContent
+              packageId={data.id}
+              packageName={data.packageName}
+            />
+          )}
+        >
+          <PageContent>
+            <WidthDetector onResize={this.handleResize}>
+              {() => (
+                <ExampleStyle>
+                  <Header>
+                    <Heading>{data.pageTitle}</Heading>
+                    <LinkButton href={data.isolatedPath}>
+                      Full page view
+                    </LinkButton>
+                  </Header>
+                  <div style={{ gridArea: 'example' }}>
+                    {children.map(child => (
+                      <ExampleComponentContainer key={child.name}>
+                        {child.name !== 'default' && (
+                          <ExampleHeading>{child.name}</ExampleHeading>
+                        )}
+                        {child.component}
+                      </ExampleComponentContainer>
+                    ))}
+                  </div>
+                  {showCodeViewButton && (
+                    <CodeViewButton
+                      isCodeViewExpanded={isCodeViewExpanded}
+                      handleClick={this.handleClick}
+                    />
+                  )}
+                </ExampleStyle>
+              )}
+            </WidthDetector>
+            {showCodeViewButton && (
+              <CodeView
+                isExpanded={isCodeViewExpanded}
+                fileContents={fileContents}
+              />
+            )}
+          </PageContent>
+        </NavigationWrapper>
+      </>
+    );
+  }
+}
 
 PackageExample.propTypes = {
   data: PropTypes.shape({

@@ -1,0 +1,1 @@
+- Code view in examples page is expandable/collapsible

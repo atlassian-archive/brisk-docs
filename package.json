@@ -43,6 +43,7 @@
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/banner": "^8.0.1",
+    "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
     "@atlaskit/code": "^9.0.0",
     "@atlaskit/css-reset": "^3.0.5",
@@ -79,6 +80,7 @@
     "@mdx-js/tag": "^0.17.5",
     "@types/lodash": "^4.14.123",
     "@types/next": "^8.0.3",
+    "@types/prismjs": "^1.16.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",

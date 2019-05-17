@@ -1,6 +1,7 @@
 declare module '@atlaskit/theme' {
   export function gridSize(): 8;
   export function borderRadius(): 3;
+  export function themed(theme: any): any;
   export const math: {
     multiply: (f: () => number, n: number) => number;
   };
@@ -24,6 +25,15 @@ declare module '@atlaskit/code' {
 declare module '@atlaskit/tree' {
   declare const Tree: React.ComponentType<any, any>;
   export default Tree;
+}
+
+declare module '@atlaskit/breadcrumbs' {
+  declare const Breadcrumbs: React.ComponentType<any, any>;
+  declare const BreadcrumbsItem: React.ComponentType<any, any>;
+
+  export { BreadcrumbsItem };
+
+  export default Breadcrumbs;
 }
 
 declare module '@atlaskit/button' {
