@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs-extra');
 
 const rimraf = require('rimraf');
 const titleCase = require('title-case');
@@ -300,6 +301,23 @@ const cleanPages = pagesPath => {
   rimraf.sync(oldDocsPages);
 };
 
+const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
+  if (fs.existsSync(pagePath)) {
+    generateProjectDocPage(
+      'readme.js',
+      pagePath,
+      { key: 'readme' },
+      generatorConfig,
+      'readme',
+    );
+    const result = [{ id: 'packages', pagePath: '/packages' }];
+
+    return [...result, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
+  }
+
+  return null;
+};
+
 /**
  * generates all the pages needed for the docs website
  * @param packagesPaths a list of directory path patterns to be scanned
@@ -317,6 +335,7 @@ module.exports = async function generatePages(
   pagesPath,
   componentsPath,
   options = {},
+  readMePath,
 ) {
   cleanPages(pagesPath);
 
@@ -345,9 +364,16 @@ module.exports = async function generatePages(
     }
   });
 
+  const readme = generateRootReadMePage(
+    readMePath,
+    generatorConfig,
+    Object.keys(docsSitemap),
+  );
+
   return {
-    packages: packageSitemap,
+    packages: packageSitemap.length > 0 ? packageSitemap : null,
     ...docsSitemap,
     metaData: packagesData,
+    readme,
   };
 };

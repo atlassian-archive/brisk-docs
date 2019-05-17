@@ -39,6 +39,7 @@ const processConfig = (cwd, providedConfig = {}) => {
     return { docsPath, name, description };
   });
 
+  const readMePath = path.resolve(cwd, 'README.md');
   const packagesConfig = resolvePathsConfig(packages);
   const packagesPaths = packagesConfig.map(packagesPath =>
     path.resolve(cwd, packagesPath),
@@ -47,6 +48,7 @@ const processConfig = (cwd, providedConfig = {}) => {
   return {
     docsList,
     packagesPaths,
+    readMePath,
     ...rest,
   };
 };
