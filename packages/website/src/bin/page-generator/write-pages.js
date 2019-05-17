@@ -1,4 +1,4 @@
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 const path = require('path');
 
 const {
@@ -9,8 +9,8 @@ const {
 } = require('./templates');
 
 const writeFile = (pagePath, content) => {
-  fse.ensureFileSync(pagePath);
-  fse.writeFileSync(pagePath, content);
+  fs.ensureFileSync(pagePath);
+  fs.writeFileSync(pagePath, content);
 };
 
 /**
@@ -62,7 +62,7 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  const templateData = { ...data, pageTitle: title };
+  const templateData = { ...data, pagePath, pageTitle: title };
 
   const source = componentImportPath
     ? wrappedComponentTemplate(
@@ -93,6 +93,7 @@ const generateNonComponentPage = (
     path.join(pagesPath, pagePath),
     singleComponentTemplate(packageHomeWrapperPath, {
       ...data,
+      pagePath,
       pageTitle: title,
       pageType: type,
     }),
@@ -188,6 +189,17 @@ const generateDocsHomePage = (pagePath, data, config, title = '') => {
   generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
 };
 
+const generateDocumentsMainPage = (pagePath, data, config, title = '') => {
+  generateNonComponentPage(
+    pagePath,
+    data,
+    'documents-index',
+    config,
+    'docs',
+    title,
+  );
+};
+
 const generateExamplesHomePage = (pagePath, data, config, title = '') => {
   generateNonComponentPage(
     pagePath,
@@ -224,4 +236,5 @@ module.exports = {
   generateDocsHomePage,
   generateExamplesHomePage,
   generateProjectDocPage,
+  generateDocumentsMainPage,
 };

@@ -27,6 +27,15 @@ declare module '@atlaskit/tree' {
   export default Tree;
 }
 
+declare module '@atlaskit/breadcrumbs' {
+  declare const Breadcrumbs: React.ComponentType<any, any>;
+  declare const BreadcrumbsItem: React.ComponentType<any, any>;
+
+  export { BreadcrumbsItem };
+
+  export default Breadcrumbs;
+}
+
 declare module '@atlaskit/button' {
   declare const Button: React.ComponentType<any, any>;
   export default Button;

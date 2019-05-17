@@ -3,7 +3,7 @@ import * as React from 'react';
 interface ContextInterface {
   siteName: string;
   packagesDescription: string;
-  description?: string;
+  [key: string]: any;
 }
 
 const ContextMeta = React.createContext<ContextInterface>({

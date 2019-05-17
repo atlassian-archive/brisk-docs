@@ -2,7 +2,6 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Table from '@atlaskit/dynamic-table';
 import styled from '@emotion/styled';
-import Link from 'next/link';
 import { gridSize } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
@@ -12,6 +11,8 @@ import DocsNavContent from '../navigation/docs-nav-content';
 import Page, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
 import PageTitle from '../page-title';
+import Breadcrumbs, { isPathRoot } from '../breadcrumbs';
+import Link from '../switch-link';
 
 const head = {
   cells: [
@@ -28,13 +29,6 @@ const head = {
       isSortable: false,
       width: 45,
     },
-    // { // ToDo: Nesting
-    //     key: 'nesting',
-    //     content: 'Nesting?',
-    //     shouldTruncate: true,
-    //     isSortable: false,
-    //     width: 45,
-    // },
   ],
 };
 
@@ -48,14 +42,22 @@ const renderRow = item => ({
       key: item.id,
       content: (
         <RowCell>
-          <Link href={item.pagePath}>{item.id}</Link>
+          {/*
+            TODO: Fix this nonsense - 
+            Currently pagePath is neither an absolute nor a proper relative path, meaning things get wacky
+            Here we are making it an actual relative path, but ideally this would be absolute like the root
+            ones. This intermediate neither state is right out.
+          */}
+          <Link
+            href={
+              item.pagePath.match(/^\//) ? item.pagePath : `./${item.pagePath}`
+            }
+          >
+            {item.id}
+          </Link>
         </RowCell>
       ),
     },
-    // { // ToDo: Nesting
-    //     key: item.id,
-    //     content: <div />,
-    // },
   ],
 });
 
@@ -109,10 +111,15 @@ const ItemList = ({ data }) => {
               packageName={data.packageName}
             />
           ) : (
-            <DocsNavContent />
+            <DocsNavContent docId={data.key} />
           )
         }
       >
+        {!isPathRoot(data.pagePath) && (
+          <div style={{ marginBottom: '-2rem' }}>
+            <Breadcrumbs pagePath={data.pagePath} />
+          </div>
+        )}
         {getDocsList()}
       </NavigationWrapper>
     </>
@@ -121,6 +128,7 @@ const ItemList = ({ data }) => {
 
 ItemList.propTypes = {
   data: PropTypes.shape({
+    key: PropTypes.string,
     id: PropTypes.string.isRequired,
     packageName: PropTypes.string,
     children: PropTypes.arrayOf(
