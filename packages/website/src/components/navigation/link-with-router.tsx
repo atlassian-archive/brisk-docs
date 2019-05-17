@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'next/router';
 import { Item } from '@atlaskit/navigation-next';
+import { colors } from '@atlaskit/theme';
 
 import LinkComponent from './link-component';
 
@@ -13,10 +14,24 @@ export type Props = {
   router: {
     pathname: string;
   };
+  isHeading?: boolean;
 };
 
-const LinkWithRouter = ({ text, href, router }: Props) => (
+const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
   <Item
+    // @ts-ignore
+    styles={styles => ({
+      ...styles,
+      itemBase: {
+        ...styles.itemBase,
+        paddingLeft: '4px',
+        height: '32px',
+      },
+      textWrapper: {
+        ...styles.textWrapper,
+        color: isHeading ? colors.N800 : colors.N200,
+      },
+    })}
     text={text}
     href={href}
     isSelected={router.pathname === href}

@@ -14,7 +14,7 @@ const PackageDocsWrapper = ({ data, children }) => (
         <PackageNavContent packageId={data.id} packageName={data.packageName} />
       )}
     >
-      <Wrapper>{children}</Wrapper>
+      <Wrapper pagePath={data.pagePath}>{children}</Wrapper>
     </NavigationWrapper>
   </>
 );

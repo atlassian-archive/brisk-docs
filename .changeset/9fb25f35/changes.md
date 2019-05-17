@@ -1,1 +1,0 @@
-Hide the buttons on the package home page for examples/docs if the data is empty

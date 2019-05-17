@@ -23,8 +23,27 @@ const SwitchLink = ({ href, children, ...rest }: Props) => {
       </a>
     );
   }
+
+  let newHref = href.replace(/\.md$/, '');
+
+  /*
+  Fun Fact: Next does not (and won't) handle relative links in exports.
+
+  Because of this, we are doing link-surgery to fix it here.
+
+  In the future, I would like to move this to the build step to convert
+  relative links.
+  */
+  if (process.env.NODE_ENV === 'production') {
+    if (newHref.startsWith('./')) {
+      newHref = newHref.replace('./', '../');
+    } else if (newHref.startsWith('../')) {
+      newHref = newHref.replace('../', '../../');
+    }
+  }
+
   return (
-    <Link href={href}>
+    <Link href={newHref}>
       <a {...rest}>{children}</a>
     </Link>
   );

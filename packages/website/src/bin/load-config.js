@@ -1,5 +1,5 @@
 const path = require('path');
-const fse = require('fs-extra');
+const fs = require('fs-extra');
 
 const loadConfig = (cwd, config) => {
   const defaultConfigPath = path.join(cwd, 'docs.config.js');
@@ -7,7 +7,7 @@ const loadConfig = (cwd, config) => {
   let configPath;
   if (config) {
     configPath = path.resolve(cwd, config);
-  } else if (fse.existsSync(defaultConfigPath)) {
+  } else if (fs.existsSync(defaultConfigPath)) {
     configPath = defaultConfigPath;
   }
 
