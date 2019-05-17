@@ -40,8 +40,6 @@ const ExampleStyle = styled.div`
     '. header .'
     '. example .';
 
-  // flex-direction: column;
-  // align-items: center;
   box-sizing: border-box;
   padding: ${math.multiply(gridSize, 2)}px;
   padding-top: 0;
@@ -52,7 +50,6 @@ const ExampleStyle = styled.div`
 `;
 
 const ExampleComponentContainer = styled.div`
-  grid-area: example;
   background-color: white;
   border: 1px solid black;
   border-radius: ${gridSize}px;
@@ -126,16 +123,16 @@ class PackageExample extends React.Component {
     width => {
       const { isCodeViewExpanded } = this.state;
 
-      if (width < 600) {
+      if (width < 630) {
         this.setState({
           showCodeViewButton: false,
           isCodeViewExpanded: false,
         });
-      } else if (width < 1200 && !isCodeViewExpanded) {
+      } else if (width < 1100 && !isCodeViewExpanded) {
         this.setState({
           showCodeViewButton: false,
         });
-      } else if (width >= 1200) {
+      } else if (width >= 1100) {
         this.setState(state => ({
           showCodeViewButton: true,
           isCodeViewExpanded: state.shouldExpandCodeWithWideWindow,
@@ -171,14 +168,16 @@ class PackageExample extends React.Component {
                       Full page view
                     </LinkButton>
                   </Header>
-                  {children.map(child => (
-                    <ExampleComponentContainer key={child.name}>
-                      {child.name !== 'default' && (
-                        <ExampleHeading>{child.name}</ExampleHeading>
-                      )}
-                      {child.component}
-                    </ExampleComponentContainer>
-                  ))}
+                  <div style={{ gridArea: 'example' }}>
+                    {children.map(child => (
+                      <ExampleComponentContainer key={child.name}>
+                        {child.name !== 'default' && (
+                          <ExampleHeading>{child.name}</ExampleHeading>
+                        )}
+                        {child.component}
+                      </ExampleComponentContainer>
+                    ))}
+                  </div>
                   {showCodeViewButton && (
                     <CodeViewButton
                       isCodeViewExpanded={isCodeViewExpanded}
