@@ -25,21 +25,21 @@ const PageContent = styled.div`
 
 const ExampleStyle = styled.div`
   display: grid;
-  grid-template-columns: 
+  grid-template-columns:
     [left-pad-start] 32px
     [left-pad-end example-start] 1fr
     [example-end right-pad-start] 32px
     [right-pad-end];
-  
+
   grid-template-rows:
     [header-top] auto
     [header-bottom example-top] 1fr
     [example-bottom];
-  
+
   grid-template-areas:
-    ". header ."
-    ". example .";
-    
+    '. header .'
+    '. example .';
+
   // flex-direction: column;
   // align-items: center;
   box-sizing: border-box;
@@ -82,7 +82,9 @@ const ExampleHeading = styled.h2`
 `;
 
 const CodeViewButton = ({ isCodeViewExpanded, handleClick }) => (
-  <div style={{ position: 'absolute', right: '0', top: '100px', zIndex: '500' }}>
+  <div
+    style={{ position: 'absolute', right: '0', top: '100px', zIndex: '500' }}
+  >
     <Button hitAreaSize="small" onClick={handleClick}>
       {isCodeViewExpanded ? (
         <ChevronRightCircleIcon

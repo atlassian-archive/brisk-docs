@@ -27,7 +27,7 @@ const CodeStyle = styled.pre`
   height: inherit;
   width: inherit;
   overflow: inherit;
-  
+
   & code {
     font-family: Monaco, Menlo, monospace;
   }
