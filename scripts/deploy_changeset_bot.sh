@@ -10,7 +10,7 @@ cd ../deploy/changeset-bot
 # Deploy
 docker build -t docker.atl-paas.net/atlassian/changeset-bot:0.0.1 .
 docker push docker.atl-paas.net/atlassian/changeset-bot:0.0.1
-micros service:deploy changeset-bot -f changeset-bot.sd.yml
+micros service:deploy changeset-bot -f changeset-bot.sd.yml -e stg-east
 
 echo "You did it hooray"
 
