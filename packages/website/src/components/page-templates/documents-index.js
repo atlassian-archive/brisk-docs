@@ -63,7 +63,7 @@ class DocsTable extends React.Component {
                 <Cell singleLine>{titleCase(id)}</Cell>
                 <Cell>
                   <Link href={pagePath}>
-                    {pagePath.replace(new RegExp(`^?/${docKey}/`), '')}
+                    {pagePath.replace(new RegExp(`^/?${docKey}/`), '')}
                   </Link>
                 </Cell>
               </Row>
