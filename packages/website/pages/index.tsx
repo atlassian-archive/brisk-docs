@@ -54,7 +54,7 @@ class HomePage extends React.Component {
       IconComponent: MediaDocIcon,
       label: 'Get Started',
       color: colors.R400,
-      description: 'View the documentation on how to setup the website',
+      description: 'Everything you need to get up and running',
       imgSrc: '/static/code.png',
     };
   };
