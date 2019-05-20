@@ -287,8 +287,9 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
 /**
  * Clean up packages and docs so we don't have ghost pages
  * @param pagesPath the absolute path to the `/pages` directory in next
+ * @param docsList list of documents
  */
-const cleanPages = pagesPath => {
+const cleanPages = (pagesPath, docsList) => {
   // This error handling should likely be lifted to when we start executing the whole thing
   if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
     throw new Error(
@@ -296,9 +297,14 @@ const cleanPages = pagesPath => {
     );
   }
   const oldPackagePages = path.join(pagesPath, 'packages');
-  const oldDocsPages = path.join(pagesPath, 'docs');
+  const oldRootPage = path.join(pagesPath, 'readme.js');
   rimraf.sync(oldPackagePages);
-  rimraf.sync(oldDocsPages);
+  rimraf.sync(oldRootPage);
+
+  docsList.forEach(oldDoc => {
+    const oldDocsPaths = path.join(pagesPath, oldDoc.name.toLowerCase());
+    rimraf.sync(oldDocsPaths);
+  });
 };
 
 const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
@@ -315,7 +321,7 @@ const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
     return [...result, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
   }
 
-  return null;
+  return undefined;
 };
 
 /**
@@ -326,6 +332,7 @@ const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
  * @param componentsPath path to helper components/wrappers
  * @param options configuration options
  *
+ * @param readMePath
  * @returns a promise resolving to an object representing the
  * schema of the pages created
  */
@@ -337,7 +344,7 @@ module.exports = async function generatePages(
   options = {},
   readMePath,
 ) {
-  cleanPages(pagesPath);
+  cleanPages(pagesPath, docsList);
 
   const packageInfo = getPackageInfo(packagesPaths, {
     useManifests: options.useManifests,
@@ -371,7 +378,7 @@ module.exports = async function generatePages(
   );
 
   return {
-    packages: packageSitemap.length > 0 ? packageSitemap : null,
+    packages: packageSitemap,
     ...docsSitemap,
     metaData: packagesData,
     readme,

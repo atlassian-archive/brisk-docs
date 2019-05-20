@@ -52,9 +52,9 @@ class HomePage extends React.Component {
   getReadmePanelProps = () => {
     return {
       IconComponent: MediaDocIcon,
-      label: 'README',
+      label: 'Get Started',
       color: colors.R400,
-      description: 'View the documentation of our website',
+      description: 'View the documentation on how to setup the website',
       imgSrc: '/static/code.png',
     };
   };
@@ -91,6 +91,9 @@ class HomePage extends React.Component {
                   <Heading>{context.siteName}</Heading>
                   <Section>
                     <PanelGrid displayAsColumn={displayAsColumn}>
+                      {Object.keys(pageInfo).find(x => x === 'readme') && (
+                        <Panel href="/readme" {...this.getReadmePanelProps()} />
+                      )}
                       <Panel
                         href="/packages"
                         {...this.getPackagesPanelProps(
@@ -106,9 +109,6 @@ class HomePage extends React.Component {
                             {...this.getDocsPanelProps(context[i])}
                           />
                         ))}
-                      {Object.keys(pageInfo).find(x => x === 'readme') && (
-                        <Panel href="/readme" {...this.getReadmePanelProps()} />
-                      )}
                     </PanelGrid>
                   </Section>
                 </>
