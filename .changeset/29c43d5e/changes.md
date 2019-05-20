@@ -1,0 +1,1 @@
+Added breadcrumbs to changelog page

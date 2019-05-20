@@ -32,7 +32,7 @@ const PackageChangelog = ({ data, children }) => {
           />
         )}
       >
-        <Wrapper>
+        <Wrapper pagePath={data.pagePath}>
           <Heading>Changelog</Heading>
           {children ? (
             <Changelog changelog={children} entriesPerPage={20} />
