@@ -1,6 +1,7 @@
 declare module '@atlaskit/theme' {
   export function gridSize(): 8;
   export function borderRadius(): 3;
+  export function themed(theme: any): any;
   export const math: {
     multiply: (f: () => number, n: number) => number;
   };

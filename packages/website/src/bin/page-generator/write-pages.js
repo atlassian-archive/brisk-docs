@@ -123,14 +123,16 @@ const generateChangelogPage = (
     wrapperName,
   );
 
+  const templateData = { ...data, pagePath };
+
   const source = componentImportPath
     ? changelogTemplate(
         componentImportPath,
         packageHomeWrapperPath,
-        data,
+        templateData,
         title,
       )
-    : singleComponentTemplate(packageHomeWrapperPath, data, title);
+    : singleComponentTemplate(packageHomeWrapperPath, templateData, title);
 
   writeFile(path.join(pagesPath, pagePath), source);
 };
