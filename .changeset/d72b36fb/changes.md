@@ -1,1 +1,0 @@
-Added breadcrumbs for easier navigation

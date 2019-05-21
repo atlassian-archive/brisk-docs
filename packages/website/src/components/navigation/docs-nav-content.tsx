@@ -14,7 +14,6 @@ const NavContent = ({ docId }: { docId: string }) => {
         })
       : {},
   };
-
   return (
     <>
       <NavHeader headerText={docId} url={`/${docId.toLowerCase()}`} />
