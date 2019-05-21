@@ -365,7 +365,7 @@ describe('File modification tests', () => {
   it('should remove files from docs pages that are removed from disc on rerun', async () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
     await generatePages(
-      packagesPath,
+      [packagesPath],
       [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
@@ -476,7 +476,7 @@ describe('Additional items in the docs tests', () => {
     pagesPath = await createTempDir();
     const componentsPath = await createTempDir();
     await generatePages(
-      packagesPath,
+      [packagesPath],
       [
         { docsPath: path.join(docsCwd, 'docs'), name: 'docs' },
         { docsPath: path.join(docsCwd, 'guides'), name: 'guides' },
