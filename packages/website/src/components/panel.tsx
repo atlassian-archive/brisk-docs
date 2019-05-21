@@ -10,6 +10,7 @@ export const PanelGrid = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: ${math.multiply(gridSize, 10)}px;
+  flex-wrap: wrap;
 `;
 
 const cardVerticalAnimationDistance = math.multiply(gridSize, 7.5);
