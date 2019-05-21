@@ -29,7 +29,7 @@ describe('breadcrumbs component', () => {
         .find(BreadcrumbsItem)
         .at(0)
         .prop('component'),
-    ).toBeUndefined();
+    ).toBeDefined();
 
     expect(
       wrapper
@@ -48,7 +48,7 @@ describe('breadcrumbs component', () => {
         .find(BreadcrumbsItem)
         .at(1)
         .prop('component'),
-    ).toBeUndefined();
+    ).toBeDefined();
 
     expect(
       wrapper

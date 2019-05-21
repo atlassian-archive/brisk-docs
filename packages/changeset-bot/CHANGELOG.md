@@ -1,5 +1,11 @@
 # changeset-bot
 
+## 1.1.3
+### Patch Changes
+
+- 5e9ecdc: Fix spelling error
+- 2ca59c0: Change deployment environment to staging
+
 ## 1.1.2
 ### Patch Changes
 

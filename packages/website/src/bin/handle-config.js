@@ -35,10 +35,14 @@ const processConfig = (cwd, providedConfig = {}) => {
   let docsList = Array.isArray(docs) ? docs : [docs];
   docsList = docsList.map(doc => {
     const { name, description } = doc;
+
+    if (!name) throw new Error('name must be provided for all the docs items');
+
     const docsPath = path.resolve(cwd, doc.path);
     return { docsPath, name, description };
   });
 
+  const readMePath = path.resolve(cwd, 'README.md');
   const packagesConfig = resolvePathsConfig(packages);
   const packagesPaths = packagesConfig.map(packagesPath =>
     path.resolve(cwd, packagesPath),
@@ -47,6 +51,7 @@ const processConfig = (cwd, providedConfig = {}) => {
   return {
     docsList,
     packagesPaths,
+    readMePath,
     ...rest,
   };
 };
