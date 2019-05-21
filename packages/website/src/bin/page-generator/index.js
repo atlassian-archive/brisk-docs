@@ -316,9 +316,9 @@ const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
       generatorConfig,
       'readme',
     );
-    const result = [{ id: 'packages', pagePath: '/packages' }];
+    const navItems = [{ id: 'packages', pagePath: '/packages' }];
 
-    return [...result, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
+    return [...navItems, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
   }
 
   return undefined;
