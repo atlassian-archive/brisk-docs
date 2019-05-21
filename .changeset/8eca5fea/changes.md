@@ -1,0 +1,1 @@
+Remove doc key prefix from table paths
