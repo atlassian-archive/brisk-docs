@@ -2,6 +2,7 @@
   "action": "opened",
   "number": 1,
   "pull_request": {
+    "number": 1,
     "user": {
       "login": "pyu"
     }
