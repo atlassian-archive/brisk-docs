@@ -19,6 +19,7 @@ describe('website configuration processor', () => {
       useManifests: false,
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
+      readMePath: '/c/w/d/README.md',
       showSubExamples: false,
       packagesDescription: 'View documentation about individual packages',
     });

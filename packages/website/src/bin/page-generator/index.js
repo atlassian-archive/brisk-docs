@@ -1,7 +1,10 @@
 const path = require('path');
+const fs = require('fs-extra');
 
 const rimraf = require('rimraf');
 const titleCase = require('title-case');
+const filenamify = require('filenamify');
+
 const getPackageInfo = require('./get-package-info');
 const getDocsInfo = require('./get-docs-info');
 const {
@@ -286,8 +289,9 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
 /**
  * Clean up packages and docs so we don't have ghost pages
  * @param pagesPath the absolute path to the `/pages` directory in next
+ * @param docsList list of documents
  */
-const cleanPages = pagesPath => {
+const cleanPages = (pagesPath, docsList) => {
   // This error handling should likely be lifted to when we start executing the whole thing
   if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
     throw new Error(
@@ -295,9 +299,31 @@ const cleanPages = pagesPath => {
     );
   }
   const oldPackagePages = path.join(pagesPath, 'packages');
-  const oldDocsPages = path.join(pagesPath, 'docs');
+  const oldRootPage = path.join(pagesPath, 'readme.js');
   rimraf.sync(oldPackagePages);
-  rimraf.sync(oldDocsPages);
+  rimraf.sync(oldRootPage);
+
+  docsList.forEach(oldDoc => {
+    const oldDocsPaths = path.join(pagesPath, oldDoc.name.toLowerCase());
+    rimraf.sync(oldDocsPaths);
+  });
+};
+
+const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
+  if (fs.existsSync(pagePath)) {
+    generateProjectDocPage(
+      'readme.js',
+      pagePath,
+      { key: 'readme' },
+      generatorConfig,
+      'readme',
+    );
+    const navItems = [{ id: 'packages', pagePath: '/packages' }];
+
+    return [...navItems, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
+  }
+
+  return undefined;
 };
 
 /**
@@ -308,6 +334,7 @@ const cleanPages = pagesPath => {
  * @param componentsPath path to helper components/wrappers
  * @param options configuration options
  *
+ * @param readMePath
  * @returns a promise resolving to an object representing the
  * schema of the pages created
  */
@@ -317,8 +344,9 @@ module.exports = async function generatePages(
   pagesPath,
   componentsPath,
   options = {},
+  readMePath,
 ) {
-  cleanPages(pagesPath);
+  cleanPages(pagesPath, docsList);
 
   const packageInfo = getPackageInfo(packagesPaths, {
     useManifests: options.useManifests,
@@ -335,7 +363,13 @@ module.exports = async function generatePages(
 
   docsList.forEach(item => {
     const docsInfo = getDocsInfo(item.docsPath);
-    const pathName = item.name.toLowerCase();
+    const pathName = filenamify(
+      item.name
+        .toLowerCase()
+        .split(' ')
+        .join('-'),
+    );
+
     if (docsInfo) {
       docsSitemap[pathName] = generateProjectDocsPages(
         docsInfo,
@@ -345,9 +379,16 @@ module.exports = async function generatePages(
     }
   });
 
+  const readme = generateRootReadMePage(
+    readMePath,
+    generatorConfig,
+    Object.keys(docsSitemap),
+  );
+
   return {
     packages: packageSitemap,
     ...docsSitemap,
     metaData: packagesData,
+    readme,
   };
 };
