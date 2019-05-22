@@ -1,5 +1,10 @@
 # changeset-bot
 
+## 1.1.4
+### Patch Changes
+
+- 88dd1b5: Refactored bot to combine endpoints and added unit tests
+
 ## 1.1.3
 ### Patch Changes
 

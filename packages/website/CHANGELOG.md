@@ -1,5 +1,10 @@
 # @brisk-docs/website
 
+## 0.5.2
+### Patch Changes
+
+- 06e0757: Fix bug where nav would error and throw in readme pages
+
 ## 0.5.1
 ### Patch Changes
 

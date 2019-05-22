@@ -242,7 +242,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
           generateProjectDocPage(
             path.join(pagePath, readme.id, 'index.js'),
             readme.path,
-            {},
+            { key: name },
             generatorConfig,
             titleCase(doc.id),
           );
