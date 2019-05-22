@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "The Brisk website documenter",
   "main": "src/bin/index.js",
   "maintainers": [
@@ -59,7 +59,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@brisk-docs/react-changelogs": "^0.1.4",
+    "@brisk-docs/react-changelogs": "^0.1.5",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
