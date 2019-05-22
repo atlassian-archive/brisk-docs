@@ -495,3 +495,33 @@ describe('Additional items in the docs tests', () => {
     ).toEqual(true);
   });
 });
+
+describe('Generate readme page at the root level', () => {
+  let packagesPaths;
+  let pagesPath;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-package-with-root-readme',
+    );
+
+    packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
+    const readmePath = path.join(packagesCwd, 'README.md');
+    pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+
+    await generatePages(
+      packagesPaths,
+      [],
+      pagesPath,
+      componentsPath,
+      {},
+      readmePath,
+    );
+  });
+
+  it('creates a readme page for the root level file', () => {
+    expect(fs.existsSync(path.join(pagesPath, 'readme.js'))).toEqual(true);
+  });
+});

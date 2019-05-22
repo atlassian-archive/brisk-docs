@@ -1,6 +1,24 @@
 # @brisk-docs/website
 
+## 0.5.0
+
+### Minor Changes
+
+- 0d0d3bd: Impelmented changes to support multiple documentations folders in our website
+
+### Patch Changes
+
+- f49a1e5: Code view in examples page is expandable/collapsible
+- 2dc8740: Added breadcrumbs to changelog page
+- 9b2744e: Added support for the root level README file
+- ccf1a90: Exclude files starting with \_ from page creation in the website
+- c3ec79f: Remove doc key prefix from table paths
+- 013cd06: Change breadcrumbs to use Next Links as custom components
+- ebf8467: Added breadcrumbs for easier navigation
+- 69cf699: Added navigation to Nav header and removed the back to home item
+
 ## 0.4.3
+
 ### Patch Changes
 
 - 20f7686: The previous version flattened out readmes, but broke all relative links from within readme.md files. Making urls less happy to make this work

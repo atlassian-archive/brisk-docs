@@ -19,6 +19,7 @@ module.exports = async ({
   showSubExamples,
   siteName,
   packagesDescription,
+  readMePath,
 }) => {
   const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
@@ -37,6 +38,7 @@ module.exports = async ({
       webpackConfiguration,
       showSubExamples,
     },
+    readMePath,
   );
 
   const { packages, metaData, ...rests } = pagesList;
