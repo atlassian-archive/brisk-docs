@@ -21,27 +21,26 @@ const FieldWrapper = styled.div`
   padding-right: ${math.multiply(gridSize, 2)}px;
 `;
 
-export default class FilterChangeLogs extends React.Component {
-  state = { range: '' };
+const FilterChangeLogs = () => {
+  const [range, updateRange] = React.useState('');
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ range: event.target.value });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateRange(event.target.value);
   };
 
-  render() {
-    const { range } = this.state;
-    return (
-      <div>
-        <FieldWrapper>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            placeholder={'Semver Range: e.g. "> 1.0.6 <= 3.0.2"'}
-            value={range}
-          />
-        </FieldWrapper>
-        <Changelog changelog={data} getUrl={() => null} range={range} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <FieldWrapper>
+        <input
+          type="text"
+          onChange={handleChange}
+          placeholder={'Semver Range: e.g. "> 1.0.6 <= 3.0.2"'}
+          value={range}
+        />
+      </FieldWrapper>
+      <Changelog changelog={data} getUrl={() => null} range={range} />
+    </div>
+  );
+};
+
+export default FilterChangeLogs;
