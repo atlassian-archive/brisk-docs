@@ -27,8 +27,10 @@ const remapPages = (pages: Pages, packageId: string, type: string) =>
 
 // We will likely change this because this is very suboptimal. Relies on some down-the-line display decisions
 const newData = data.packages.map(
-  ({ packageId, homePath, docs, examples }) => ({
-    title: packageId,
+  ({ packageId, homePath, docs, examples, parentId }) => ({
+    title: parentId
+      ? `${parentId.split('/').join('-')}-${packageId}`
+      : packageId,
     pages: [
       { id: 'readme', title: 'Readme', path: homePath, type: 'readme' },
       ...remapPages(docs, packageId, 'package-docs'),

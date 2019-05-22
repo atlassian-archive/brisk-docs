@@ -18,15 +18,25 @@ export type Data = { packageId: string; homePath: string; parentId?: string }[];
 export type Props = {
   data: Data;
 };
-export type Page = {
-  id: string;
-  pagePath: string;
-  children: any;
-}[];
+
+// gets all the packages with parentId as the param id passed
 const getChildrenArray = (array: Data, id?: string) =>
   array
     .filter(y => y.parentId === id)
     .map(x => ({ id: x.packageId, pagePath: x.homePath }));
+
+// @ts-ignore
+// transforms the nested folders into the format of {id , children} required for nav to build data
+const transformToNestedData = (arr, data, parentId) => {
+  const [first, ...rest] = arr;
+  return {
+    id: first,
+    parent: parentId,
+    children: first
+      ? [transformToNestedData(rest, data, parentId)]
+      : getChildrenArray(data, parentId),
+  };
+};
 
 const AllPackagesNavContent = ({ data }: Props) => {
   const dataToConvert = data.filter(y => y.parentId);
@@ -34,14 +44,24 @@ const AllPackagesNavContent = ({ data }: Props) => {
   dataToConvert.forEach(parent => {
     if (
       packagesWithParentIds.findIndex(
-        (p: { id: string | undefined }) => p.id === parent.parentId,
+        (p: { parent: string }) => p.parent === parent.parentId,
       ) < 0
     ) {
-      packagesWithParentIds.push({
-        id: parent.parentId,
-        pagePath: parent.parentId,
-        children: getChildrenArray(dataToConvert, parent.parentId),
-      });
+      const nestedFolders = parent.parentId && parent.parentId.split('/');
+      if (nestedFolders && nestedFolders.length > 1) {
+        const nestedData = transformToNestedData(
+          nestedFolders,
+          dataToConvert,
+          parent.parentId,
+        );
+        packagesWithParentIds.push(nestedData);
+      } else {
+        packagesWithParentIds.push({
+          id: parent.parentId,
+          parent: parent.parentId,
+          children: getChildrenArray(dataToConvert, parent.parentId),
+        });
+      }
     }
   });
 
