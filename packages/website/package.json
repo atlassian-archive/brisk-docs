@@ -78,6 +78,7 @@
     "emotion-server": "^9.2.12",
     "express": "^4.16.4",
     "extract-react-types-loader": "^0.3.0",
+    "filenamify": "^4.0.0",
     "fs-extra": "^7.0.1",
     "git-url-parse": "^11.1.2",
     "glob": "^7.1.3",
