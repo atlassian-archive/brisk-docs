@@ -1,7 +1,8 @@
 const nock = require('nock');
 const { Probot } = require('probot');
-const changesetBot = require('.');
 const outdent = require('outdent');
+
+const changesetBot = require('.');
 
 const pullRequestOpen = require('./test/fixtures/pull_request.opened');
 const pullRequestSynchronize = require('./test/fixtures/pull_request.synchronize');
@@ -98,8 +99,8 @@ describe('changeset-bot', () => {
       .reply(200, [{ sha: 'ABCDE' }]);
 
     nock('https://api.github.com')
-      .post('/repos/pyu/testing-things/issues/1/comments', body => {
-        expect(body.body).toEqual(outdent`
+      .post('/repos/pyu/testing-things/issues/1/comments', ({ body }) => {
+        expect(body).toEqual(outdent`
           ###  🦋  Changeset is good to go
       
           Latest commit: ABCDE
@@ -131,8 +132,8 @@ describe('changeset-bot', () => {
       .reply(200, [{ sha: 'ABCDE' }]);
 
     nock('https://api.github.com')
-      .post('/repos/pyu/testing-things/issues/1/comments', body => {
-        expect(body.body).toEqual(outdent`
+      .post('/repos/pyu/testing-things/issues/1/comments', ({ body }) => {
+        expect(body).toEqual(outdent`
           ###  💥  No Changeset
 
           Latest commit: ABCDE
