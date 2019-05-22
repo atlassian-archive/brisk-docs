@@ -1,1 +1,0 @@
-When given a space in a docs section name, convert it to a dash, be a little bit safer with these names
