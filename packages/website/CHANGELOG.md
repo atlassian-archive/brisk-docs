@@ -1,5 +1,11 @@
 # @brisk-docs/website
 
+## 0.5.1
+### Patch Changes
+
+- 1037572: The npm:include option for files meant we could accidentally publish our own `docs` and `guides` and `packages` folders - this would cause errors when someone else ran them. The ignore now only includes ts files, which solves this for us.
+- 1037572: When given a space in a docs section name, convert it to a dash, be a little bit safer with these names
+
 ## 0.5.0
 
 ### Minor Changes

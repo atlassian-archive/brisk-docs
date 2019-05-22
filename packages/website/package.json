@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "The Brisk website documenter",
   "main": "src/bin/index.js",
   "maintainers": [
