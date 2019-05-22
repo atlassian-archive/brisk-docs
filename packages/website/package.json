@@ -22,7 +22,7 @@
   },
   "files": [
     "src",
-    "pages",
+    "pages/*.tsx",
     "static",
     "custom-plugins",
     "babel.config.js",
