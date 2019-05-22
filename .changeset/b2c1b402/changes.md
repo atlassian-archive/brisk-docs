@@ -1,0 +1,1 @@
+Refactored bot to combine endpoints and added unit tests
