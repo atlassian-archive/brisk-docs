@@ -11,6 +11,7 @@
 - f49a1e5: Code view in examples page is expandable/collapsible
 - 2dc8740: Added breadcrumbs to changelog page
 - 9b2744e: Added support for the root level README file
+- ccf1a90: Do not show folders in nav if they are empty
 - ccf1a90: Exclude files starting with \_ from page creation in the website
 - c3ec79f: Remove doc key prefix from table paths
 - 013cd06: Change breadcrumbs to use Next Links as custom components

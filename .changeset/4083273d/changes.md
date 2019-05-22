@@ -1,0 +1,1 @@
+The npm:include option for files meant we could accidentally publish our own `docs` and `guides` and `packages` folders - this would cause errors when someone else ran them. The ignore now only includes ts files, which solves this for us.
