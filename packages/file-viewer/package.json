@@ -1,15 +1,14 @@
 {
-  "name": "@brisk-docs/react-changelogs",
-  "version": "0.1.4",
-  "description": "This package is used for displaying changelogs from your projects",
-  "main": "dist/react-changelogs.cjs.js",
-  "module": "dist/react-changelogs.esm.js",
+  "name": "@brisk-docs/file-viewer",
+  "version": "0.0.1",
+  "description": "This package is used for rendering examples and their source code",
+  "main": "dist/file-viewer.cjs.js",
+  "module": "dist/file-viewer.esm.js",
   "repository": "git@github.com:brisk-docs/brisk-docs.git",
   "maintainers": [
-    "Aparna Raj",
-    "Ben Conolly"
+    "Peter Yu"
   ],
-  "author": "Aparna Raj",
+  "author": "Peter Yu",
   "license": "MIT",
   "files": [
     "dist"
@@ -35,7 +34,9 @@
     "@atlaskit/pagination": "^10.0.1",
     "@atlaskit/theme": "^6.0.0",
     "@babel/runtime-corejs2": "^7.4.3",
+    "fs-extra": "^7.0.1",
     "prismjs": "^1.15.0",
+    "raw-loader": "^1.0.0",
     "react-addons-text-content": "^0.0.4",
     "react-markdown": "^2.5.0",
     "semver": "^5.4.1",
