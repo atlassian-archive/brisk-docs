@@ -29,7 +29,7 @@ const remapPages = (pages: Pages, packageId: string, type: string) =>
 const newData = data.packages.map(
   ({ packageId, homePath, docs, examples, parentId }) => ({
     title: parentId
-      ? `${parentId.split('/').join('-')}-${packageId}`
+      ? `${parentId.split('/').join(' -> ')} -> ${packageId}`
       : packageId,
     pages: [
       { id: 'readme', title: 'Readme', path: homePath, type: 'readme' },

@@ -8,7 +8,7 @@ describe('website configuration processor', () => {
     const config = processConfig(mockCwd, {});
 
     expect(config).toEqual({
-      packagesPaths: ['/c/w/d/packages/*'],
+      packagesPaths: ['/c/w/d/packages/**/*'],
       docsList: [
         {
           description: 'View the documentation for this project',

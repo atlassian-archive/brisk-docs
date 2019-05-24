@@ -525,3 +525,35 @@ describe('Generate readme page at the root level', () => {
     expect(fs.existsSync(path.join(pagesPath, 'readme.js'))).toEqual(true);
   });
 });
+
+describe('Generate pages for nested packages', () => {
+  let packagesPaths;
+  let pagesPath;
+  let sitemap;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-nested-group-packages',
+    );
+
+    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
+
+    packagesPaths = [path.join(packagesCwd, 'packages', '/**/*')];
+    const docsPath = path.join(docsCwd, 'docs');
+    pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+
+    sitemap = await generatePages(
+      packagesPaths,
+      [{ docsPath, name: 'docs' }],
+      pagesPath,
+      componentsPath,
+    );
+  });
+
+  it('adds parentIds for all the nested packages', () => {
+    expect(sitemap.packages[0].parentId).toBeUndefined();
+    expect(sitemap.packages[1].parentId).toEqual('sub-folder');
+  });
+});

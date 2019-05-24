@@ -67,8 +67,9 @@ const isDoc = docPath => {
  * @returns An array of absolute paths
  */
 const getAllDirectories = searchPatterns =>
-  flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(dirPath =>
-    fs.statSync(dirPath).isDirectory(),
+  flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(
+    dirPath =>
+      fs.statSync(dirPath).isDirectory() && !dirPath.includes('node_modules'),
   );
 
 /**

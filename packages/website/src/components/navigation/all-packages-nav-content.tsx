@@ -31,11 +31,35 @@ const transformToNestedData = (arr, data, parentId) => {
   const [first, ...rest] = arr;
   return {
     id: first,
-    parent: parentId,
+    parent: [parentId],
     children: first
       ? [transformToNestedData(rest, data, parentId)]
       : getChildrenArray(data, parentId),
   };
+};
+
+// @ts-ignore
+// loop through each child of the existingParent until you get a matching child for every nested folder in package
+const getExistingPackages = (nested, originalChildren) => {
+  let nestedChild;
+  let originalChild;
+
+  for (let i = 0; i < originalChildren.length; i += 1) {
+    const a =
+      nested.children &&
+      nested.children.find((y: { id: any }) => y.id === originalChildren[i].id);
+    if (a) {
+      nestedChild = a;
+      originalChild = originalChildren[i];
+      break;
+    }
+  }
+
+  if (nestedChild) {
+    getExistingPackages(nestedChild, originalChild.children);
+  } else {
+    originalChildren.push(...nested.children);
+  }
 };
 
 const AllPackagesNavContent = ({ data }: Props) => {
@@ -43,8 +67,8 @@ const AllPackagesNavContent = ({ data }: Props) => {
   const packagesWithParentIds: any = [];
   dataToConvert.forEach(parent => {
     if (
-      packagesWithParentIds.findIndex(
-        (p: { parent: string }) => p.parent === parent.parentId,
+      packagesWithParentIds.findIndex((p: { parent: string[] }) =>
+        p.parent.some(x => x === parent.parentId),
       ) < 0
     ) {
       const nestedFolders = parent.parentId && parent.parentId.split('/');
@@ -54,11 +78,19 @@ const AllPackagesNavContent = ({ data }: Props) => {
           dataToConvert,
           parent.parentId,
         );
-        packagesWithParentIds.push(nestedData);
+        const existingParent = packagesWithParentIds.find(
+          (p: { id: string }) => p.id === nestedData.id,
+        );
+        if (existingParent) {
+          existingParent.parent.push(...nestedData.parent);
+          getExistingPackages(nestedData, existingParent.children);
+        } else {
+          packagesWithParentIds.push(nestedData);
+        }
       } else {
         packagesWithParentIds.push({
           id: parent.parentId,
-          parent: parent.parentId,
+          parent: [parent.parentId],
           children: getChildrenArray(dataToConvert, parent.parentId),
         });
       }
