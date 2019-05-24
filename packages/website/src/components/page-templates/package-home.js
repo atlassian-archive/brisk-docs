@@ -12,8 +12,6 @@ import PackageMetaData from '../package-metadata';
 import LinkButton from '../link-button';
 import PageTitle from '../page-title';
 import pageInfo from '../../pages-list';
-import FileViewer from '../../../../file-viewer/src/components/file-viewer';
-import Breadcrumbs from '../breadcrumbs';
 
 export const Description = styled.h3`
   color: ${colors.N900};
@@ -90,7 +88,6 @@ const PackageHome = ({ data, children }) => {
             maintainers={data.maintainers}
             repository={data.repository}
           />
-          <FileViewer Component={} title="Breadcrumbs" source={require('!!raw-loader!../breadcrumbs')} />
           {children || process.env.NODE_ENV !== 'development' ? (
             children
           ) : (
