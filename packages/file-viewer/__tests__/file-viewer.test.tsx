@@ -7,10 +7,13 @@ describe('file viewer component', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
-      <FileViewer Component={ButtonExample} source="button source" title="Button" />,
+      <FileViewer
+        Component={ButtonExample}
+        source="button source"
+        title="Button"
+      />,
     );
   });
-
 
   it('should render file viewer component', () => {
     expect(wrapper.find('Button')).toBeDefined();
@@ -32,5 +35,4 @@ describe('file viewer component', () => {
     expect(wrapper.find('Wrapper').prop('mode')).toBe('open');
     expect(wrapper.find('CodeStyle').exists()).toBe(true);
   });
-
 });

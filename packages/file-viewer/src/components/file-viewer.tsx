@@ -13,15 +13,14 @@ import 'prismjs/themes/prism-tomorrow.css';
 
 type Props = {
   /* The example component to be rendered */
-  Component: React.ComponentType,
+  Component: React.ComponentType;
   /* The source code of the example component */
-  source: string,
+  source: string;
   /* The name of the example component */
-  title: string | undefined,
+  title: string | undefined;
 };
 
 const FileViewer = ({ Component, source, title }: Props) => {
-
   const [isSourceVisible, setIsSourceVisible] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
@@ -78,9 +77,9 @@ const toggleColor = themed('mode', {
 });
 
 type WrapperProps = {
-  state: string,
-  mode: string,
-}
+  state: string;
+  mode: string;
+};
 
 const Wrapper = styled.div`
   background-color: ${(p: WrapperProps) => exampleBackgroundColor[p.mode]};

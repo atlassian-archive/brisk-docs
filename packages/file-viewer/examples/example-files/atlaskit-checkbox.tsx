@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Checkbox } from '@atlaskit/checkbox';
 
 type State = {
-  onChangeResult: string,
+  onChangeResult: string;
 };
 
 const BasicUsageExample = class extends PureComponent<void, State> {
@@ -14,7 +14,7 @@ const BasicUsageExample = class extends PureComponent<void, State> {
     this.setState({
       onChangeResult: `onChange called with value: ${
         event.target.value
-        } isChecked: ${event.target.checked}`,
+      } isChecked: ${event.target.checked}`,
     });
   };
 
