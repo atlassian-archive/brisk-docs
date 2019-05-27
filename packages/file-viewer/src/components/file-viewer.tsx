@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 import * as React from 'react';
 import { useState } from 'react';
 import styled from '@emotion/styled';
@@ -37,7 +38,9 @@ const FileViewer = ({ Component, source, title }: Props) => {
       <Toggle
         onClick={() => setIsSourceVisible(!isSourceVisible)}
         onMouseOver={() => setIsHover(true)}
+        onFocus={() => setIsHover(true)}
         onMouseOut={() => setIsHover(false)}
+        onBlur={() => setIsHover(false)}
         title={toggleLabel}
         mode={mode}
       >
@@ -90,7 +93,17 @@ const Wrapper = styled.div`
   transition: background-color ${TRANSITION_DURATION};
 `;
 
-const Toggle = styled.div`
+type ToggleProps = {
+  onClick: () => any;
+  onMouseOver: () => any;
+  onFocus: () => any;
+  onMouseOut: () => any;
+  onBlur: () => any;
+  title: string;
+  mode: string;
+};
+
+const Toggle = styled.div<ToggleProps>`
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -117,7 +130,11 @@ const CodeStyle = styled.pre`
   overflow: auto;
 `;
 
-export const ToggleTitle = styled.h4`
+type ToggleTitleProps = {
+  mode: string;
+};
+
+export const ToggleTitle = styled.h4<ToggleTitleProps>`
   color: ${toggleColor} !important;
   margin: 0;
 `;
