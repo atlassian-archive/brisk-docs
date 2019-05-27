@@ -3,6 +3,8 @@ const fs = require('fs-extra');
 
 const rimraf = require('rimraf');
 const titleCase = require('title-case');
+const filenamify = require('filenamify');
+
 const getPackageInfo = require('./get-package-info');
 const getDocsInfo = require('./get-docs-info');
 const {
@@ -240,7 +242,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
           generateProjectDocPage(
             path.join(pagePath, readme.id, 'index.js'),
             readme.path,
-            {},
+            { key: name },
             generatorConfig,
             titleCase(doc.id),
           );
@@ -361,7 +363,13 @@ module.exports = async function generatePages(
 
   docsList.forEach(item => {
     const docsInfo = getDocsInfo(item.docsPath);
-    const pathName = item.name.toLowerCase();
+    const pathName = filenamify(
+      item.name
+        .toLowerCase()
+        .split(' ')
+        .join('-'),
+    );
+
     if (docsInfo) {
       docsSitemap[pathName] = generateProjectDocsPages(
         docsInfo,
