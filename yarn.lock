@@ -145,6 +145,31 @@
     "@atlaskit/theme" "^4.0.4"
     babel-runtime "^6.26.0"
 
+"@atlaskit/calendar@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/calendar/-/calendar-8.0.0.tgz#3a6da94663ea15c37ac5ed629b77e9e959e3f62e"
+  integrity sha512-r+rm0AYgP5fgWqTPQmN4L++v16c4UzcN/u9KyQrTcdZWXh44sA75SR3qbd8Lg+3xcJI53OQzHr4VXn4H4PGo1Q==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.0.0"
+    "@atlaskit/button" "^13.0.0"
+    "@atlaskit/icon" "^17.0.0"
+    "@atlaskit/theme" "^9.0.0"
+    "@babel/runtime" "^7.0.0"
+    calendar-base "^0.3.0"
+    lodash.pick "^4.4.0"
+    react-uid "^2.2.0"
+
+"@atlaskit/checkbox@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/checkbox/-/checkbox-7.0.0.tgz#d163f7c287b4e79bcdf8d3fa05b7330ae7cf868c"
+  integrity sha512-iTJXkA/wHqiP/6uE61Al6LvhLdnp80LbVpEYYXMbO4KpJHtGe4ePsJb168EOtfZGPWW8kuBBL7qZyGqEgVZ3cw==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.0.0"
+    "@atlaskit/icon" "^17.0.0"
+    "@atlaskit/theme" "^9.0.0"
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.5.10"
+
 "@atlaskit/code@^8.2.2":
   version "8.2.2"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/code/-/code-8.2.2.tgz#1d722a72b6a9046accfc10dd61d2d6a855d75702"
@@ -285,6 +310,15 @@
     "@atlaskit/theme" "^8.0.1"
     "@babel/runtime" "^7.0.0"
     babel-runtime "^6.26.0"
+    uuid "^3.1.0"
+
+"@atlaskit/icon@^17.0.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-17.1.0.tgz#95ce37e0509f25773c947a14ac5d76bc37fead7c"
+  integrity sha512-CtzyahBrENRG60buvBi29Zemtg080o51mqEJXNb9sVzslMbDfWB397U1ebUfHH9FJR4mmdJxJMR5y7Y20kCN7g==
+  dependencies:
+    "@atlaskit/theme" "^9.0.0"
+    "@babel/runtime" "^7.0.0"
     uuid "^3.1.0"
 
 "@atlaskit/inline-dialog@^9.0.14":
@@ -539,6 +573,17 @@
     "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
     prop-types "^15.5.10"
+
+"@atlaskit/toggle@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/toggle/-/toggle-7.0.0.tgz#8b13160b048fb77c2e3ee457f24571af42671180"
+  integrity sha512-Z/tqrcIYg4nEfXZUN665PFOYH7uaNqoYUMTlpa7u09BRYGA5cTgefziYX12GU+ufaMNJwXQgwiUkhU6LtLa/bw==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.0.0"
+    "@atlaskit/icon" "^17.0.0"
+    "@atlaskit/theme" "^9.0.0"
+    "@babel/runtime" "^7.0.0"
+    react-uid "^2.2.0"
 
 "@atlaskit/tooltip@^12.1.15":
   version "12.1.15"
@@ -1973,6 +2018,16 @@
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-0.9.2.tgz#74e5c6b5e489a1ba30ab246ab5eedd96916487c4"
 
+"@emotion/styled-base@^10.0.10":
+  version "10.0.10"
+  resolved "https://registry.yarnpkg.com/@emotion/styled-base/-/styled-base-10.0.10.tgz#ffb811295c9dcd9b3c12bf93301d7d8bcb02e6f4"
+  integrity sha512-uZwKrBfcH7jCRAQi5ZxsEGIZ+1Zr9/lof4TMsIolC0LSwpnWkQ+JRJLy+p4ZyATee9SdmyCV0sG/VTngVSnrpA==
+  dependencies:
+    "@emotion/is-prop-valid" "0.7.3"
+    "@emotion/serialize" "^0.11.6"
+    "@emotion/utils" "0.11.1"
+    object-assign "^4.1.1"
+
 "@emotion/styled-base@^10.0.9":
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/@emotion/styled-base/-/styled-base-10.0.9.tgz#634b43d1f0309c35c5b342c775b01610517d2529"
@@ -3302,6 +3357,11 @@ babel-types@6.26.0, babel-types@^6.24.1, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
+babel@^6.23.0:
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/babel/-/babel-6.23.0.tgz#d0d1e7d803e974765beea3232d4e153c0efb90f4"
+  integrity sha1-0NHn2APpdHZb7qMjLU4VPA77kPQ=
+
 babylon-options@^2.0.1:
   version "2.0.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/babylon-options/-/babylon-options-2.0.1.tgz#cc797a8ff65f8a98ae3f1d57a4626f987fc50620"
@@ -3761,6 +3821,11 @@ cachedir@1.3.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/cachedir/-/cachedir-1.3.0.tgz#5e01928bf2d95b5edd94b0942188246740e0dbc4"
   dependencies:
     os-homedir "^1.0.1"
+
+calendar-base@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/calendar-base/-/calendar-base-0.3.0.tgz#483d3d07c5befedf9969a9a81a6a845794a6e251"
+  integrity sha1-SD09B8W+/t+ZaamoGmqEV5Sm4lE=
 
 call-me-maybe@^1.0.1:
   version "1.0.1"
@@ -6179,11 +6244,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-fs@^0.0.1-security:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
-  integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
-
 fsevents@^1.2.3, fsevents@^1.2.7:
   version "1.2.7"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/fsevents/-/fsevents-1.2.7.tgz#4851b664a3783e52003b3c66eb0eee1074933aa4"
@@ -8070,6 +8130,11 @@ lodash.omitby@^4.6.0:
 lodash.once@^4.0.0, lodash.once@^4.1.1:
   version "4.1.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
 
 lodash.set@^4.3.2:
   version "4.3.2"
@@ -10101,6 +10166,11 @@ react-transition-group@^2.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react-uid@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-uid/-/react-uid-2.2.0.tgz#0f77e1e0594fbf29fc4fe528cc9aa415c5bf9159"
+  integrity sha512-z+g5+hFOQ08hCfrGcJ1PNs+cmvH8Uq2CVzCmPeWBsUi5A4W4NWXR5jouledzy3oSKGMU9HOzf8zFuGi15TXJoQ==
 
 react@^16.4.0:
   version "16.8.1"

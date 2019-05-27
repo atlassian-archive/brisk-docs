@@ -1,7 +1,7 @@
 import Button from '@atlaskit/button'
 import FileViewer from './src/components/file-viewer'
 
-# File Viewer Component
+## File Viewer Component
 This library is designed to help you display inline examples and their corresponding source code.
 
 ### Usage

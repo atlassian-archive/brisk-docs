@@ -27,12 +27,13 @@
     "target": "esnext",
     "noEmit": true,
     "module": "esnext",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "es2017"]
     },
   "include": [
+    "packages/file-viewer/src/**/*",
     "packages/react-changelogs/src/**/*",
     "packages/website/**/*",
     "typings/**/*"
   ],
-  "typeRoots": ["./typings", "./node_modules/@types"],
+  "typeRoots": ["./typings", "./node_modules/@types"]
 }

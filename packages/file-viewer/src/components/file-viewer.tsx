@@ -1,26 +1,28 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { colors, gridSize, themed } from '@atlaskit/theme';
+import { colors, gridSize, themed, math } from '@atlaskit/theme';
 import CodeIcon from '@atlaskit/icon/glyph/code';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/themes/prism-tomorrow.css';
-import LinkComponent from '../../../website/src/components/navigation/link-component';
 
 // TODO Can't copy ErrorBoundary (parent of Component to handle errors gracefully) from Atlaskit
 // because componentDidCatch has no hook equivalent yet. Implement once support is added.
 
 type Props = {
-  Component: React.Component,
+  /* The example component to be rendered */
+  Component: React.ComponentType,
+  /* The source code of the example component */
   source: string,
-  title: string,
+  /* The name of the example component */
+  title: string | undefined,
 };
 
 const FileViewer = ({ Component, source, title }: Props) => {
 
-  const [isSourceVisible, setIsSourceVisibile] = useState(false);
+  const [isSourceVisible, setIsSourceVisible] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
   const highlighted = Prism.highlight(source, Prism.languages.jsx, 'jsx');
@@ -34,7 +36,7 @@ const FileViewer = ({ Component, source, title }: Props) => {
   return (
     <Wrapper state={state} mode={mode}>
       <Toggle
-        onClick={() => setIsSourceVisibile(!isSourceVisible)}
+        onClick={() => setIsSourceVisible(!isSourceVisible)}
         onMouseOver={() => setIsHover(true)}
         onMouseOut={() => setIsHover(false)}
         title={toggleLabel}
@@ -75,8 +77,13 @@ const toggleColor = themed('mode', {
   open: { light: colors.N600, dark: colors.DN100 },
 });
 
+type WrapperProps = {
+  state: string,
+  mode: string,
+}
+
 const Wrapper = styled.div`
-  background-color: ${p => exampleBackgroundColor[p.mode]};
+  background-color: ${(p: WrapperProps) => exampleBackgroundColor[p.mode]};
   border-radius: 5px;
   color: ${toggleColor};
   margin-top: 20px;
@@ -105,7 +112,7 @@ const CodeStyle = styled.pre`
   border-radius: 3px;
   box-sizing: border-box;
   color: ${themed({ light: colors.N60, dark: colors.N60 })};
-  height: 800px;
+  max-height: ${math.multiply(gridSize, 100)}px;
   padding: ${gridSize}px;
   margin: 0 0 ${gridSize}px;
   overflow: auto;
