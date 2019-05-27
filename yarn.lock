@@ -3357,11 +3357,6 @@ babel-types@6.26.0, babel-types@^6.24.1, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
-babel@^6.23.0:
-  version "6.23.0"
-  resolved "https://registry.yarnpkg.com/babel/-/babel-6.23.0.tgz#d0d1e7d803e974765beea3232d4e153c0efb90f4"
-  integrity sha1-0NHn2APpdHZb7qMjLU4VPA77kPQ=
-
 babylon-options@^2.0.1:
   version "2.0.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/babylon-options/-/babylon-options-2.0.1.tgz#cc797a8ff65f8a98ae3f1d57a4626f987fc50620"

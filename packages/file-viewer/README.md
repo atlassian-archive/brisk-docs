@@ -1,5 +1,4 @@
-import Button from '@atlaskit/button'
-import FileViewer from './src/components/file-viewer'
+import ButtonExample from './examples/view-button'
 
 ## File Viewer Component
 This library is designed to help you display inline examples and their corresponding source code.
@@ -10,10 +9,10 @@ import FileViewer from '@brisk-docs/file-viewer'
 ```
 
 ```jsx
-<FileViewer Component={Button} title="Button" source={require('!!raw-loader!./src/components/file-viewer')} />
+<FileViewer Component={ButtonExample} title="Button" source={require('!!raw-loader!./examples/view-button')} />
 ```
 
-<FileViewer Component={Button} title="Button" source={require('!!raw-loader!./src/components/file-viewer')} />
+<FileViewer Component={ButtonExample} title="File Viewer" source={require('!!raw-loader!./examples/view-button')} />
 
 <div>
     <Props
