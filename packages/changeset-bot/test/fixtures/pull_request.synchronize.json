@@ -1,5 +1,5 @@
 {
-  "action": "opened",
+  "action": "synchronize",
   "number": 1,
   "pull_request": {
     "number": 1,
