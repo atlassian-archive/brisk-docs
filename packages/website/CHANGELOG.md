@@ -1,5 +1,16 @@
 # @brisk-docs/website
 
+## 0.5.2
+### Patch Changes
+
+- 06e0757: Fix bug where nav would error and throw in readme pages
+
+## 0.5.1
+### Patch Changes
+
+- 1037572: The npm:include option for files meant we could accidentally publish our own `docs` and `guides` and `packages` folders - this would cause errors when someone else ran them. The ignore now only includes ts files, which solves this for us.
+- 1037572: When given a space in a docs section name, convert it to a dash, be a little bit safer with these names
+
 ## 0.5.0
 
 ### Minor Changes
@@ -11,6 +22,7 @@
 - f49a1e5: Code view in examples page is expandable/collapsible
 - 2dc8740: Added breadcrumbs to changelog page
 - 9b2744e: Added support for the root level README file
+- ccf1a90: Do not show folders in nav if they are empty
 - ccf1a90: Exclude files starting with \_ from page creation in the website
 - c3ec79f: Remove doc key prefix from table paths
 - 013cd06: Change breadcrumbs to use Next Links as custom components
