@@ -58,7 +58,7 @@ module.exports = withTypescript(
           });
 
           // Website modules should take precedence over the node_modules of the consumer.
-          config.resolve.modules = [__dirname, 'node_modules'];
+          config.resolve.modules.push(__dirname, 'node_modules');
 
           // Adding items to globalScope in the website
           config.plugins.push(

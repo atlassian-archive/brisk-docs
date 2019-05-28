@@ -1,3 +1,4 @@
+import FileViewer from './src/components/file-viewer'
 import ButtonExample from './examples/view-button'
 
 ## File Viewer Component
@@ -11,6 +12,8 @@ import FileViewer from '@brisk-docs/file-viewer'
 ```jsx
 <FileViewer Component={ButtonExample} title="Button" source={require('!!raw-loader!./examples/view-button')} />
 ```
+
+<FileViewer Component={ButtonExample} title="Button" source={require('!!raw-loader!./examples/view-button')} />
 
 <div>
     <Props
