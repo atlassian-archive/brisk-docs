@@ -1,6 +1,6 @@
 {
   "name": "changeset-bot",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Bot to detect changesets in PRs",
   "author": "Peter Yu <pyu@atlassian.com>",
   "maintainers": [
@@ -30,6 +30,7 @@
     "jest": "^24.1.0",
     "nock": "^10.0.0",
     "nodemon": "^1.12.1",
+    "outdent": "^0.7.0",
     "smee-client": "^1.0.2",
     "standard": "^12.0.1"
   },

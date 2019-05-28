@@ -1,5 +1,10 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.5
+### Patch Changes
+
+- fc6c572: Convert classes to hooks against advisement from react team
+
 ## 0.1.4
 
 - [patch] f97b57b:
