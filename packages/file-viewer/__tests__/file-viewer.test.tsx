@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import ButtonExample from '../examples/example-files/atlaskit-button';
 import FileViewer from '../src/components/file-viewer';
 
 describe('file viewer component', () => {
-  let wrapper;
+  let wrapper: ReactWrapper;
   beforeEach(() => {
     wrapper = mount(
       <FileViewer
