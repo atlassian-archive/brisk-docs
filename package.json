@@ -93,7 +93,7 @@
     "emotion-server": "^9.2.12",
     "eslint-plugin-emotion": "^10.0.7",
     "express": "^4.16.4",
-    "extract-react-types-loader": "^0.3.0",
+    "extract-react-types-loader": "^0.3.3",
     "filenamify": "^4.0.0",
     "fs-extra": "^7.0.1",
     "git-url-parse": "^11.1.2",

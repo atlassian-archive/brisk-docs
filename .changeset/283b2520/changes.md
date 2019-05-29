@@ -1,0 +1,1 @@
+Updated the extract react loader version

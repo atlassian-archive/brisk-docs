@@ -3,4 +3,4 @@
 - For the multi level packages to show up in the website, consumers need to specify packages: ['./packages/**/*'] in the docs.config.js
 - This is being set as the default configuration of the website. If need to override consumers can specify packages: ['./packages/*']
   or any other location according to their requirements.
-  
+- Updated the version of extract react loader  

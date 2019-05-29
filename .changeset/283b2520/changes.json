@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@brisk-docs/react-changelogs", "type": "patch" }],
+  "dependents": []
+}
