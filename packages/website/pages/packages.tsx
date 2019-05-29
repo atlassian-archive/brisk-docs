@@ -59,7 +59,10 @@ const MaintainersToString = (maintainers: PackageInfo['maintainers']) => {
   return '';
 };
 
-const renderRow = ({ packageId, homePath }: PackageInfo) => {
+const getDisplayName = (packageId: string, parentId: string) =>
+  `${titleCase(parentId.split('/').join(' '))} - ${titleCase(packageId)}`;
+
+const renderRow = ({ packageId, homePath, parentId }: PackageInfo) => {
   const metaData = meta.metaData.find(x => x.id === packageId);
 
   if (!metaData) return {};
@@ -70,7 +73,11 @@ const renderRow = ({ packageId, homePath }: PackageInfo) => {
         content: (
           <RowCell>
             <Link href={homePath}>
-              <a>{titleCase(packageId)}</a>
+              <a>
+                {parentId
+                  ? getDisplayName(packageId, parentId)
+                  : titleCase(packageId)}
+              </a>
             </Link>
           </RowCell>
         ),

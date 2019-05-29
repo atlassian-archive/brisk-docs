@@ -1,5 +1,6 @@
 module.exports = () => ({
   siteName: 'Brisk Docs Docs',
+  packages: ['./packages/*'],
   showSubExamples: true,
   docs: [
     {

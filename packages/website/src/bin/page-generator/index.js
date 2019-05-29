@@ -24,11 +24,28 @@ const packagesData = [];
  * Maps over all packages and creates website pages for each
  * @param packageInfo data representing the packages that exist
  * @param generatorConfig info about the locations of important directories used for page generation
+ * @param patterns the base directories
  * @returns a sitemap of all the pages created
  */
-function generatePackagePages(packageInfo, generatorConfig) {
+function generatePackagePages(packageInfo, generatorConfig, patterns) {
   const packageSitemap = packageInfo.map(pkg => {
     const pageData = { id: pkg.id, packageName: pkg.name };
+
+    // this is to find the sub-folders of packages.
+    // const parentDir = patterns.find(d => pkg.pkgPath.indexOf(d) === 0);
+    // const parentDir = patterns.find(d => pkg.pkgPath.match(`^${d}`));
+
+    // const parent =
+    //   parentDir &&
+    //   pkg.pkgPath.substring(parentDir.length + 1, pkg.pkgPath.lastIndexOf('/'));
+    // const parent = parentDir && pkg.pkgPath.match(`^${parentDir}/(.*)/.*`)[1];
+
+    const parentDir = patterns
+      .map(dir => pkg.pkgPath.match(`^${dir}/(.*)/.*`))
+      .find(a => a);
+
+    const parent = parentDir && parentDir[1];
+
     const homePageData = {
       description: pkg.description,
       version: pkg.version,
@@ -185,6 +202,7 @@ function generatePackagePages(packageInfo, generatorConfig) {
     const displayChangelog = pkg.changelogPath || env === 'development';
 
     return {
+      parentId: parent && parent !== '/' ? parent : undefined,
       packageId: pkg.id,
       homePath: path.join('/', homePath),
       changelogPath: displayChangelog ? path.join('/', changelogPath) : null,
@@ -358,7 +376,15 @@ module.exports = async function generatePages(
     wrappersPath: componentsPath,
   };
 
-  const packageSitemap = generatePackagePages(packageInfo, generatorConfig);
+  const baseDirectories = packagesPaths
+    ? packagesPaths.map(dir => dir.substring(0, dir.indexOf('/*')))
+    : [];
+
+  const packageSitemap = generatePackagePages(
+    packageInfo,
+    generatorConfig,
+    baseDirectories,
+  );
   const docsSitemap = {};
 
   docsList.forEach(item => {

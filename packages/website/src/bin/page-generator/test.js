@@ -365,7 +365,7 @@ describe('File modification tests', () => {
   it('should remove files from docs pages that are removed from disc on rerun', async () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
     await generatePages(
-      packagesPath,
+      [packagesPath],
       [{ docsPath, name: 'docs' }],
       pagesPath,
       componentsPath,
@@ -476,7 +476,7 @@ describe('Additional items in the docs tests', () => {
     pagesPath = await createTempDir();
     const componentsPath = await createTempDir();
     await generatePages(
-      packagesPath,
+      [packagesPath],
       [
         { docsPath: path.join(docsCwd, 'docs'), name: 'docs' },
         { docsPath: path.join(docsCwd, 'guides'), name: 'guides' },
@@ -523,5 +523,37 @@ describe('Generate readme page at the root level', () => {
 
   it('creates a readme page for the root level file', () => {
     expect(fs.existsSync(path.join(pagesPath, 'readme.js'))).toEqual(true);
+  });
+});
+
+describe('Generate pages for nested packages', () => {
+  let packagesPaths;
+  let pagesPath;
+  let sitemap;
+
+  beforeAll(async () => {
+    const packagesCwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-nested-group-packages',
+    );
+
+    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
+
+    packagesPaths = [path.join(packagesCwd, 'packages', '/**/*')];
+    const docsPath = path.join(docsCwd, 'docs');
+    pagesPath = await createTempDir();
+    const componentsPath = await createTempDir();
+
+    sitemap = await generatePages(
+      packagesPaths,
+      [{ docsPath, name: 'docs' }],
+      pagesPath,
+      componentsPath,
+    );
+  });
+
+  it('adds parentIds for all the nested packages', () => {
+    expect(sitemap.packages[0].parentId).toBeUndefined();
+    expect(sitemap.packages[1].parentId).toEqual('sub-folder');
   });
 });
