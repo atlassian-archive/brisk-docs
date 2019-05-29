@@ -25,7 +25,7 @@
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
     "bump": "changeset bump",
-    "release": "yarn build && changeset release",
+    "release": "yarn build && changeset release --public",
     "prepare:docs": "bolt && yarn build:docs && yarn export",
     "postinstall": "preconstruct dev"
   },
