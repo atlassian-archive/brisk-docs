@@ -1,5 +1,10 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.6
+### Patch Changes
+
+- 76dc8dc: Updated the extract react loader version
+
 ## 0.1.5
 ### Patch Changes
 
