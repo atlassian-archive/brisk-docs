@@ -10,4 +10,6 @@ packages/website/bundles/**/*.js
 
 packages/**/dist/**/*
 
+packages/file-viewer/examples/example-files
+
 cypress/plugins
