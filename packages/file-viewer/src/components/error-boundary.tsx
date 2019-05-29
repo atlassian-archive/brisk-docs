@@ -1,7 +1,8 @@
+/* eslint-disable import/no-duplicates */
 import * as React from 'react';
 
 type Props = {
-  children: React.ComponentType;
+  children: React.ComponentType | React.ReactNode;
   onError?: (error: Error, info: any) => void;
 };
 
