@@ -9,8 +9,7 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/themes/prism-tomorrow.css';
 
-// TODO Can't copy ErrorBoundary (parent of Component to handle errors gracefully) from Atlaskit
-// because componentDidCatch has no hook equivalent yet. Implement once support is added.
+import ErrorBoundary from './error-boundary';
 
 type Props = {
   /* The example component to be rendered */
@@ -23,24 +22,29 @@ type Props = {
 
 const FileViewer = ({ Component, source, title }: Props) => {
   const [isSourceVisible, setIsSourceVisible] = useState(false);
-  const [isHover, setIsHover] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const onError = (error: Error, info: any) => {
+    console.error(error);
+    console.error(info);
+  };
 
   const highlighted = Prism.highlight(source, Prism.languages.jsx, 'jsx');
 
   const toggleLabel = isSourceVisible
     ? 'Hide Code Snippet'
     : 'Show Code Snippet';
-  const state = isHover ? 'hover' : 'normal';
+  const state = isHovered ? 'hover' : 'normal';
   const mode = isSourceVisible ? 'open' : 'closed';
 
   return (
     <Wrapper state={state} mode={mode}>
       <Toggle
         onClick={() => setIsSourceVisible(!isSourceVisible)}
-        onMouseOver={() => setIsHover(true)}
-        onFocus={() => setIsHover(true)}
-        onMouseOut={() => setIsHover(false)}
-        onBlur={() => setIsHover(false)}
+        onMouseOver={() => setIsHovered(true)}
+        onFocus={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+        onBlur={() => setIsHovered(false)}
         title={toggleLabel}
         mode={mode}
       >
@@ -54,7 +58,9 @@ const FileViewer = ({ Component, source, title }: Props) => {
         </CodeStyle>
       ) : null}
       <ExampleShowcase>
-        <Component />
+        <ErrorBoundary onError={onError}>
+          <Component />
+        </ErrorBoundary>
       </ExampleShowcase>
     </Wrapper>
   );
