@@ -64,6 +64,7 @@ module.exports = withTypescript(
           config.plugins.push(
             new webpack.ProvidePlugin({
               Props: ['pretty-proptypes', 'default'],
+              FileViewer: ['@brisk-docs/file-viewer', 'default'],
             }),
           );
           return clientWebpack(config);
