@@ -42,7 +42,7 @@ const checkRemovedChangesets = (context, params) =>
   context.github.pullRequests.listFiles(params).then(files => {
     const changesetFiles = files.data.filter(
       file =>
-        file.filename.startsWith('.changeset') && file.status === 'removed',
+        file.filename.startsWith('.changeset') && file.status === 'deleted',
     );
     return changesetFiles.length > 0;
   });
