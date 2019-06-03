@@ -24,7 +24,9 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "probot": "^7.2.0"
+    "now": "^15.3.0",
+    "probot": "^9.2.0",
+    "probot-serverless-now": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^24.1.0",
