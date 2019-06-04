@@ -14,11 +14,11 @@ const argv = mainOptions._unknown || [];
 
 const cliOptions = [
   { name: 'config', type: String },
-  { name: 'port', alias: 'p', type: Number }
+  { name: 'port', alias: 'p', type: Number },
 ];
 const options = commandLineArgs(cliOptions, { argv, camelCase: true });
 
-const nextOptions =[];
+const nextOptions = [];
 
 if (options.port) nextOptions.push(`--port ${options.port}`);
 

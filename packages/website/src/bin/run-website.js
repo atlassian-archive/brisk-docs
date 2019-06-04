@@ -55,7 +55,12 @@ const start = async (configPath, nextOptions = []) => {
 };
 
 const exportWebsite = async (configPath, nextOptions = []) => {
-  spawnNextProcess('export', configPath, `-o ${path.join(cwd, 'out')}`, ...nextOptions);
+  spawnNextProcess(
+    'export',
+    configPath,
+    `-o ${path.join(cwd, 'out')}`,
+    ...nextOptions,
+  );
 };
 
 module.exports.dev = dev;
