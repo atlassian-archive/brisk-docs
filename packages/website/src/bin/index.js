@@ -12,7 +12,10 @@ const mainOptions = commandLineArgs(mainDefinitions, {
 // eslint-disable-next-line no-underscore-dangle
 const argv = mainOptions._unknown || [];
 
-const cliOptions = [{ name: 'config', type: String }];
+const cliOptions = [
+  { name: 'config', type: String },
+  { name: 'port', alias: 'p', type: Number }
+];
 const options = commandLineArgs(cliOptions, { argv, camelCase: true });
 
 if (mainOptions.command === undefined) {
@@ -34,7 +37,7 @@ switch (mainOptions.command) {
     break;
   }
   case 'start': {
-    start(options.config).catch(handleError);
+    start(options.config, options.port).catch(handleError);
     break;
   }
   case 'export': {

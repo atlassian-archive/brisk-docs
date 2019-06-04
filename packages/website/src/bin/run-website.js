@@ -50,8 +50,8 @@ const build = async configPath => {
   spawnNextProcess('build', configPath);
 };
 
-const start = async configPath => {
-  spawnNextProcess('start', configPath, '-p 8080');
+const start = async (configPath, port=3000) => {
+  spawnNextProcess('start', configPath, `-p ${port}`);
 };
 
 const exportWebsite = async configPath => {
