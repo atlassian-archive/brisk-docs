@@ -18,6 +18,10 @@ const cliOptions = [
 ];
 const options = commandLineArgs(cliOptions, { argv, camelCase: true });
 
+const nextOptions =[];
+
+if (options.port) nextOptions.push(`--port ${options.port}`);
+
 if (mainOptions.command === undefined) {
   throw new Error(`No command supplied`);
 }
@@ -29,7 +33,7 @@ const handleError = err => {
 
 switch (mainOptions.command) {
   case 'dev': {
-    dev(options.config).catch(handleError);
+    dev(options.config, nextOptions).catch(handleError);
     break;
   }
   case 'build': {
@@ -37,7 +41,7 @@ switch (mainOptions.command) {
     break;
   }
   case 'start': {
-    start(options.config, options.port).catch(handleError);
+    start(options.config, nextOptions).catch(handleError);
     break;
   }
   case 'export': {
