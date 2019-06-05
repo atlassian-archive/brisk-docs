@@ -105,6 +105,7 @@ class HomePage extends React.Component {
                         .filter(x => x !== 'readme')
                         .map((key, i) => (
                           <Panel
+                            key={key}
                             href={`/${key}`}
                             {...this.getDocsPanelProps(context[i])}
                           />

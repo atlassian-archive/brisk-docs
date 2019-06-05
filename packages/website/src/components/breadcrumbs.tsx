@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/no-multi-comp */
+import * as React from 'react';
 import titleCase from 'title-case';
 import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import styled from '@emotion/styled';
@@ -20,16 +21,17 @@ type NextLinkProps = {
   onMouseLeave: React.MouseEventHandler;
 };
 
-const NextLink = ({
+const NextLink = React.forwardRef(({
   href,
   className,
   onMouseEnter,
   onMouseLeave,
   children,
-}: NextLinkProps) => {
+}: NextLinkProps, ref: React.Ref<HTMLAnchorElement>) => {
   return (
     <Link href={href}>
       <a
+        ref={ref}
         className={className}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -38,7 +40,7 @@ const NextLink = ({
       </a>
     </Link>
   );
-};
+});
 
 type BreadcrumbsNavProps = {
   pagePath: string;
@@ -63,9 +65,9 @@ const BreadcrumbsNav = ({ pagePath }: BreadcrumbsNavProps) => {
               key={pages[idx]}
               href={path}
               text={titleCase(pages[idx])}
-              component={() => (
+              component={React.forwardRef(() => (
                 <p style={{ fontWeight: 'bold' }}>{titleCase(pages[idx])}</p>
-              )}
+              ))}
             />
           ) : (
             <BreadcrumbsItem

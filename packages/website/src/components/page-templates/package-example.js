@@ -208,7 +208,7 @@ PackageExample.propTypes = {
   }).isRequired,
   children: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       component: PropTypes.node.isRequired,
     }),
   ).isRequired,
