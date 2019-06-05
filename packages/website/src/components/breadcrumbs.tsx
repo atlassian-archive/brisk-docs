@@ -21,26 +21,25 @@ type NextLinkProps = {
   onMouseLeave: React.MouseEventHandler;
 };
 
-const NextLink = React.forwardRef(({
-  href,
-  className,
-  onMouseEnter,
-  onMouseLeave,
-  children,
-}: NextLinkProps, ref: React.Ref<HTMLAnchorElement>) => {
-  return (
-    <Link href={href}>
-      <a
-        ref={ref}
-        className={className}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        {children}
-      </a>
-    </Link>
-  );
-});
+const NextLink = React.forwardRef(
+  (
+    { href, className, onMouseEnter, onMouseLeave, children }: NextLinkProps,
+    ref: React.Ref<HTMLAnchorElement>,
+  ) => {
+    return (
+      <Link href={href}>
+        <a
+          ref={ref}
+          className={className}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          {children}
+        </a>
+      </Link>
+    );
+  },
+);
 
 type BreadcrumbsNavProps = {
   pagePath: string;

@@ -5,4 +5,6 @@ export type Props = {
   children: string;
 };
 
-export default ({ children }: Props) => <AkCode text={children} language="text" />;
+export default ({ children }: Props) => (
+  <AkCode text={children} language="text" />
+);

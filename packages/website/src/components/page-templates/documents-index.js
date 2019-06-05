@@ -97,7 +97,7 @@ const Docs = ({ data }) => (
 
 Docs.propTypes = {
   data: PropTypes.shape({
-    key: PropTypes.string
+    key: PropTypes.string,
   }),
 };
 export default Docs;

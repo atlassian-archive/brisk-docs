@@ -109,9 +109,10 @@ PackageHome.propTypes = {
     repository: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      directory: PropTypes.string,
-    })]),
+        url: PropTypes.string.isRequired,
+        directory: PropTypes.string,
+      }),
+    ]),
     pageTitle: PropTypes.string,
   }).isRequired,
   children: PropTypes.node,
