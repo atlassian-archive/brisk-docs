@@ -403,7 +403,7 @@ module.exports = async function generatePages(
         docsInfo,
         generatorConfig,
         pathName,
-        urlPath,
+        urlPath || pathName,
       );
     }
   });
