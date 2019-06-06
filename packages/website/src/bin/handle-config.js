@@ -35,8 +35,6 @@ const processConfig = (cwd, providedConfig = {}) => {
   let docsList = Array.isArray(docs) ? docs : [docs];
   docsList = docsList.map(doc => {
     const { name, description, path: docPath, urlPath } = doc;
-    console.log(cwd, docPath, urlPath);
-
     const certainUrlPath = urlPath || `./${path.relative(cwd, docPath)}`;
 
     if (!name) throw new Error('name must be provided for all the docs items');
