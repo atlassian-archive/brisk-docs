@@ -1,0 +1,1 @@
+Added config to deploy to Now
