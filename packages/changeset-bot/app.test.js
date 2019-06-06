@@ -2,7 +2,7 @@ const nock = require('nock');
 const { Probot } = require('probot');
 const outdent = require('outdent');
 
-const changesetBot = require('.');
+const changesetBot = require('./app');
 
 const pullRequestOpen = require('./test/fixtures/pull_request.opened');
 const pullRequestSynchronize = require('./test/fixtures/pull_request.synchronize');
