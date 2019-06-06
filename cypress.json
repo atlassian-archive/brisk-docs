@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:8080",
+  "baseUrl": "http://localhost:3000",
   "integrationFolder": "packages/website/cypress/integration",
   "fixturesFolder": "packages/website/cypress/fixtures",
   "screenshotsFolder": "packages/website/cypress/screenshots",

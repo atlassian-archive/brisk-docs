@@ -40,22 +40,27 @@ const preNextScripts = async configPath => {
   await generatePages(config);
 };
 
-const dev = async configPath => {
+const dev = async (configPath, nextOptions = []) => {
   await preNextScripts(configPath);
-  spawnNextProcess('dev', configPath);
+  spawnNextProcess('dev', configPath, ...nextOptions);
 };
 
-const build = async configPath => {
+const build = async (configPath, nextOptions = []) => {
   await preNextScripts(configPath);
-  spawnNextProcess('build', configPath);
+  spawnNextProcess('build', configPath, ...nextOptions);
 };
 
-const start = async configPath => {
-  spawnNextProcess('start', configPath, '-p 8080');
+const start = async (configPath, nextOptions = []) => {
+  spawnNextProcess('start', configPath, ...nextOptions);
 };
 
-const exportWebsite = async configPath => {
-  spawnNextProcess('export', configPath, `-o ${path.join(cwd, 'out')}`);
+const exportWebsite = async (configPath, nextOptions = []) => {
+  spawnNextProcess(
+    'export',
+    configPath,
+    `-o ${path.join(cwd, 'out')}`,
+    ...nextOptions,
+  );
 };
 
 module.exports.dev = dev;

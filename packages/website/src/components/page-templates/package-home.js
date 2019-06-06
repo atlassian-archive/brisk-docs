@@ -106,10 +106,13 @@ PackageHome.propTypes = {
     description: PropTypes.string,
     version: PropTypes.string.isRequired,
     maintainers: PropTypes.arrayOf(PropTypes.string),
-    repository: PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      directory: PropTypes.string,
-    }).isRequired,
+    repository: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        directory: PropTypes.string,
+      }),
+    ]),
     pageTitle: PropTypes.string,
   }).isRequired,
   children: PropTypes.node,

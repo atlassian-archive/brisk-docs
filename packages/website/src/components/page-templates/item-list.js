@@ -135,7 +135,7 @@ ItemList.propTypes = {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         pagePath: PropTypes.string.isRequired,
-        pageType: PropTypes.string.isRequired,
+        pageType: PropTypes.string,
         pageTitle: PropTypes.string,
       }),
     ),
