@@ -1,0 +1,1 @@
+Fixed a number of console errors
