@@ -46,34 +46,46 @@ const NavContent = ({
   docs,
   examples,
   subExamples,
-}: SomeProps) => (
-  <>
-    <NavHeader headerText={packageName} url="/packages" />
-    <MenuSection id="package-section" parentId="index-section">
-      {({ className }: { className: string }) => (
-        <div className={className}>
-          <LinkWithRouter text="Home" href={homePath} />
-          <Separator />
-          {changelogPath && (
-            <>
-              <LinkWithRouter text="Changelog" href={changelogPath} />
-              <Separator />
-            </>
-          )}
-          <Group heading="Docs" id="docs-group" hasSeparator>
-            {docs.map(GetLink)}
-          </Group>
-          <Group heading="Examples" id="examples-group">
-            {examples.map(GetLink)}
-          </Group>
-          {subExamples && subExamples.length > 0
-            ? renderSubExamplesTree(subExamples)
-            : null}
-        </div>
-      )}
-    </MenuSection>
-  </>
-);
+}: SomeProps) => {
+  const treeData = {
+    rootId: packageName,
+    items: docs
+      ? arrayToTreeItems(docs, {
+          parentId: packageName,
+          parentTitle: packageName,
+        })
+      : {},
+  };
+
+  return (
+    <>
+      <NavHeader headerText={packageName} url="/packages" />
+      <MenuSection id="package-section" parentId="index-section">
+        {({ className }: { className: string }) => (
+          <div className={className}>
+            <LinkWithRouter text="Home" href={homePath} />
+            <Separator />
+            {changelogPath && (
+              <>
+                <LinkWithRouter text="Changelog" href={changelogPath} />
+                <Separator />
+              </>
+            )}
+            <Group heading="Docs" id="docs-group" hasSeparator>
+              <TreeNavContent treeData={treeData} />
+            </Group>
+            <Group heading="Examples" id="examples-group">
+              {examples.map(GetLink)}
+            </Group>
+            {subExamples && subExamples.length > 0
+              ? renderSubExamplesTree(subExamples)
+              : null}
+          </div>
+        )}
+      </MenuSection>
+    </>
+  );
+};
 
 const PackageNavContent = ({
   packageId,

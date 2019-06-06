@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const flatMap = require('lodash.flatmap');
 const glob = require('glob');
+const getDocsInfo = require('./get-docs-info');
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const getFilesInDir = dirPath => {
@@ -48,18 +49,6 @@ const getFormattedExamples = (examplesArray, pkgPath) => {
 const isExample = examplePath =>
   fs.statSync(examplePath).isFile() &&
   extensions.includes(path.extname(examplePath));
-
-/**
- * Determines whether a file is a valid doc file
- * @param docPath full path to the file
- * @returns {boolean} whether this file can be rendered as a doc page
- */
-const isDoc = docPath => {
-  const extname = path.extname(docPath);
-  return (
-    fs.statSync(docPath).isFile() && (extname === '.md' || extname === '.mdx')
-  );
-};
 
 /**
  * Resolves a list of glob patterns and returns all of the valid directories matching the patterns.
@@ -156,9 +145,8 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       const examplesPaths = getFilesInDir(exampleDirPath).filter(
         ({ path: examplePath }) => isExample(examplePath),
       );
-      const docsPaths = getFilesInDir(docsDirPath).filter(({ path: docPath }) =>
-        isDoc(docPath),
-      );
+
+      const docsPaths = getDocsInfo(docsDirPath) || [];
 
       let subExamplesPaths = [];
       if (showSubExamples) {

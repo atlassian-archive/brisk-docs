@@ -68,6 +68,8 @@ const RowCell = styled.div`
 `;
 
 const ItemList = ({ data }) => {
+  console.log(data);
+  // return null;
   const getRows = () => {
     if (data.children) {
       return data.children.map(child => renderRow(child));
