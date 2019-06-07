@@ -172,6 +172,7 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
     const docs = scanAndGenerate(pkg.docsPaths, path.join(homePath, 'docs'), {
       ...generatorConfig,
       pageData,
+      type: 'pkg-doc',
     });
 
     const examples = pkg.examplesPaths.map(example => {
