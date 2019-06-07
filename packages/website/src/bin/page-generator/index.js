@@ -224,9 +224,9 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
  * @param name name of the parent path
  * @returns sitemap for the generated docs pages
  */
-const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
+const generateProjectDocsPages = (docsInfo, generatorConfig, name, urlPath) => {
   generateDocumentsMainPage(
-    path.join(name, 'index.js'),
+    path.join(urlPath, 'index.js'),
     { key: name },
     generatorConfig,
     name,
@@ -301,7 +301,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
       };
     });
 
-  return scanAndGenerate(docsInfo, name);
+  return scanAndGenerate(docsInfo, urlPath);
 };
 
 /**
@@ -389,6 +389,8 @@ module.exports = async function generatePages(
 
   docsList.forEach(item => {
     const docsInfo = getDocsInfo(item.docsPath);
+    const { urlPath } = item;
+
     const pathName = filenamify(
       item.name
         .toLowerCase()
@@ -401,6 +403,7 @@ module.exports = async function generatePages(
         docsInfo,
         generatorConfig,
         pathName,
+        urlPath || pathName,
       );
     }
   });

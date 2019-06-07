@@ -14,6 +14,8 @@ describe('website configuration processor', () => {
           description: 'View the documentation for this project',
           docsPath: '/c/w/d/docs',
           name: 'Docs',
+          // This is not ideal
+          urlPath: expect.any(String),
         },
       ],
       useManifests: false,

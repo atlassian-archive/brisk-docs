@@ -34,12 +34,13 @@ const processConfig = (cwd, providedConfig = {}) => {
 
   let docsList = Array.isArray(docs) ? docs : [docs];
   docsList = docsList.map(doc => {
-    const { name, description } = doc;
+    const { name, description, path: docPath, urlPath } = doc;
+    const certainUrlPath = urlPath || `./${path.relative(cwd, docPath)}`;
 
     if (!name) throw new Error('name must be provided for all the docs items');
 
-    const docsPath = path.resolve(cwd, doc.path);
-    return { docsPath, name, description };
+    const docsPath = path.resolve(cwd, docPath);
+    return { docsPath, name, description, urlPath: certainUrlPath };
   });
 
   const readMePath = path.resolve(cwd, 'README.md');

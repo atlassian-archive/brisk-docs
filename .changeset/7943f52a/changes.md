@@ -1,0 +1,1 @@
+When custom names are chosen, still use the path to generate urls, so that relative links still "just work"
