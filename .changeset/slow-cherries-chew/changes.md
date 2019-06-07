@@ -1,0 +1,1 @@
+When the docs folder nests, display all nested items
