@@ -307,7 +307,7 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name, urlPath) => {
     name,
   );
 
-  return scanAndGenerate(docsInfo, name, generatorConfig, name);
+  return scanAndGenerate(docsInfo, urlPath, generatorConfig, name);
 };
 
 /**
