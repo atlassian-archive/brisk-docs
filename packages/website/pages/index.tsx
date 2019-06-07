@@ -17,6 +17,7 @@ interface DocumentObject {
   docsPath: string;
   name: string;
   description?: string;
+  urlPath: string;
 }
 const Page = styled.div`
   background-color: ${colors.B500};
