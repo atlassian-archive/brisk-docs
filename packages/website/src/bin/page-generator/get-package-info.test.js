@@ -53,11 +53,33 @@ describe('Get package info utility', () => {
 
   it('finds the paths of all the docs', async () => {
     const assertDocs = (pkgInfo, pkgName) => {
+      const nonsense =
+        pkgName === 'mock-package1'
+          ? [
+              {
+                id: 'some-subdirectory',
+                children: [
+                  {
+                    id: 'nesting-now-supported',
+                    path: path.join(
+                      cwd,
+                      'packages',
+                      pkgName,
+                      'docs',
+                      'some-subdirectory/nesting-now-supported.md',
+                    ),
+                  },
+                ],
+              },
+            ]
+          : [];
+
       expect(pkgInfo).toHaveProperty('docsPaths', [
         {
           id: 'extended-info',
           path: path.join(cwd, 'packages', pkgName, 'docs', 'extended-info.md'),
         },
+        ...nonsense,
         {
           id: 'special-usecase',
           path: path.join(

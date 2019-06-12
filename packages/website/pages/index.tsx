@@ -17,6 +17,7 @@ interface DocumentObject {
   docsPath: string;
   name: string;
   description?: string;
+  urlPath: string;
 }
 const Page = styled.div`
   background-color: ${colors.B500};
@@ -71,6 +72,7 @@ class HomePage extends React.Component {
 
   getDocsPanelProps = (doc: DocumentObject) => {
     return {
+      href: doc.urlPath,
       IconComponent: MediaDocIcon,
       label: doc.name,
       color: colors.Y400,
@@ -106,7 +108,6 @@ class HomePage extends React.Component {
                         .map((key, i) => (
                           <Panel
                             key={key}
-                            href={`/${key}`}
                             {...this.getDocsPanelProps(context[i])}
                           />
                         ))}

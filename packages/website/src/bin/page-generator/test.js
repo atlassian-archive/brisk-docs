@@ -123,11 +123,31 @@ describe('Generate pages', () => {
         const assertDocs = (docs, packageId) => {
           const packageDocsPath = path.join('/', 'packages', packageId, 'docs');
 
+          const nonsense =
+            packageId === 'mock-package1'
+              ? [
+                  {
+                    children: [
+                      {
+                        id: 'nesting-now-supported',
+                        pagePath: path.join(
+                          packageDocsPath,
+                          'some-subdirectory/nesting-now-supported',
+                        ),
+                      },
+                    ],
+                    id: 'some-subdirectory',
+                    pagePath: path.join(packageDocsPath, 'some-subdirectory'),
+                  },
+                ]
+              : [];
+
           expect(docs).toEqual([
             {
               id: 'extended-info',
               pagePath: path.join(packageDocsPath, 'extended-info'),
             },
+            ...nonsense,
             {
               id: 'special-usecase',
               pagePath: path.join(packageDocsPath, 'special-usecase'),

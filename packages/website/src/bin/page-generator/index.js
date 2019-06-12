@@ -20,6 +20,88 @@ const {
 
 const packagesData = [];
 
+const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
+  const pageData = generatorConfig.pageData || {};
+  const generateDocFunc =
+    generatorConfig.type === 'pkg-doc'
+      ? generatePackageDocPage
+      : generateProjectDocPage;
+
+  return docs.map(doc => {
+    const pagePath = path.join(docsPath, doc.id);
+
+    if (doc.children) {
+      const readme = doc.children.find(
+        c => c.path && c.path.toLowerCase().match(/readme\.md$/),
+      );
+
+      const docData = {
+        key: name,
+        id: doc.id,
+        children: doc.children.map(child => ({
+          id: child.id,
+          pagePath: path.join(doc.id, child.id),
+        })),
+      };
+      if (readme) {
+        generateDocsHomePage(
+          path.join(pagePath, 'index.js'),
+          { ...docData, ...pageData },
+          generatorConfig,
+          'Documents',
+        );
+
+        generateDocFunc(
+          path.join(pagePath, readme.id, 'index.js'),
+          readme.path,
+          { key: name, ...pageData },
+          generatorConfig,
+          titleCase(doc.id),
+        );
+
+        return {
+          id: doc.id,
+          pagePath: path.join('/', pagePath, readme.id),
+          children: scanAndGenerate(
+            doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
+            path.join(docsPath, doc.id),
+            generatorConfig,
+            name,
+          ),
+        };
+      }
+      generateDocsHomePage(
+        path.join(pagePath, 'index.js'),
+        { ...docData, ...pageData },
+        generatorConfig,
+        'Documents',
+      );
+      return {
+        id: doc.id,
+        pagePath: path.join('/', pagePath),
+        children: scanAndGenerate(
+          doc.children,
+          path.join(docsPath, doc.id),
+          generatorConfig,
+          name,
+        ),
+      };
+    }
+
+    generateDocFunc(
+      `${pagePath}.js`,
+      doc.path,
+      { key: name, ...pageData },
+      generatorConfig,
+      titleCase(doc.id),
+    );
+
+    return {
+      id: doc.id,
+      pagePath: path.join('/', pagePath),
+    };
+  });
+};
 /**
  * Maps over all packages and creates website pages for each
  * @param packageInfo data representing the packages that exist
@@ -87,17 +169,10 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
       'Examples',
     );
 
-    const docs = pkg.docsPaths.map(doc => {
-      const pagePath = path.join(homePath, 'docs', doc.id);
-      generatePackageDocPage(
-        `${pagePath}.js`,
-        doc.path,
-        pageData,
-        generatorConfig,
-        titleCase(doc.id),
-      );
-
-      return { id: doc.id, pagePath: path.join('/', pagePath) };
+    const docs = scanAndGenerate(pkg.docsPaths, path.join(homePath, 'docs'), {
+      ...generatorConfig,
+      pageData,
+      type: 'pkg-doc',
     });
 
     const examples = pkg.examplesPaths.map(example => {
@@ -224,84 +299,15 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
  * @param name name of the parent path
  * @returns sitemap for the generated docs pages
  */
-const generateProjectDocsPages = (docsInfo, generatorConfig, name) => {
+const generateProjectDocsPages = (docsInfo, generatorConfig, name, urlPath) => {
   generateDocumentsMainPage(
-    path.join(name, 'index.js'),
+    path.join(urlPath, 'index.js'),
     { key: name },
     generatorConfig,
     name,
   );
 
-  const scanAndGenerate = (docs, docsPath) =>
-    docs.map(doc => {
-      const pagePath = path.join(docsPath, doc.id);
-
-      if (doc.children) {
-        const readme = doc.children.find(
-          c => c.path && c.path.toLowerCase().match(/readme\.md$/),
-        );
-
-        const docData = {
-          key: name,
-          id: doc.id,
-          children: doc.children.map(child => ({
-            id: child.id,
-            pagePath: path.join(doc.id, child.id),
-          })),
-        };
-        if (readme) {
-          generateDocsHomePage(
-            path.join(pagePath, 'index.js'),
-            docData,
-            generatorConfig,
-            'Documents',
-          );
-
-          generateProjectDocPage(
-            path.join(pagePath, readme.id, 'index.js'),
-            readme.path,
-            { key: name },
-            generatorConfig,
-            titleCase(doc.id),
-          );
-
-          return {
-            id: doc.id,
-            pagePath: path.join('/', pagePath, readme.id),
-            children: scanAndGenerate(
-              doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
-              path.join(docsPath, doc.id),
-            ),
-          };
-        }
-        generateDocsHomePage(
-          path.join(pagePath, 'index.js'),
-          docData,
-          generatorConfig,
-          'Documents',
-        );
-        return {
-          id: doc.id,
-          pagePath: path.join('/', pagePath),
-          children: scanAndGenerate(doc.children, path.join(docsPath, doc.id)),
-        };
-      }
-
-      generateProjectDocPage(
-        `${pagePath}.js`,
-        doc.path,
-        { key: name },
-        generatorConfig,
-        titleCase(doc.id),
-      );
-
-      return {
-        id: doc.id,
-        pagePath: path.join('/', pagePath),
-      };
-    });
-
-  return scanAndGenerate(docsInfo, name);
+  return scanAndGenerate(docsInfo, urlPath, generatorConfig, name);
 };
 
 /**
@@ -389,6 +395,8 @@ module.exports = async function generatePages(
 
   docsList.forEach(item => {
     const docsInfo = getDocsInfo(item.docsPath);
+    const { urlPath } = item;
+
     const pathName = filenamify(
       item.name
         .toLowerCase()
@@ -401,6 +409,7 @@ module.exports = async function generatePages(
         docsInfo,
         generatorConfig,
         pathName,
+        urlPath || pathName,
       );
     }
   });

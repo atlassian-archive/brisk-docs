@@ -8,6 +8,16 @@ jest.mock('../navigation/package-nav-content', () => () => <div />);
 jest.mock('../navigation-wrapper', () => ({ children }) => (
   <div>{children}</div>
 ));
+jest.mock('../../pages-list', () => ({
+  packages: [
+    {
+      packageId: 'bespoke-webpack',
+      examples: ['not-empty'],
+      docs: ['not-empty'],
+    },
+  ],
+}));
+
 /* eslint-disable react/prop-types */
 
 const data = {
@@ -52,9 +62,12 @@ describe('package home wrapper component', () => {
     );
 
     const linkButtons = wrapper.find('LinkButton');
-    expect(linkButtons).toHaveLength(1);
+    expect(linkButtons).toHaveLength(2);
     expect(linkButtons.at(0).prop('href')).toEqual(
       `/packages/${pkgData.id}/examples`,
+    );
+    expect(linkButtons.at(1).prop('href')).toEqual(
+      `/packages/${pkgData.id}/docs`,
     );
 
     wrapper.unmount();

@@ -10,6 +10,8 @@ yarn-error.log
 /cypress
 **/cypress/screenshots
 
+scratchings.js
+
 /packages/website/pages/packages
 /packages/website/pages/docs
 /packages/website/pages/guides

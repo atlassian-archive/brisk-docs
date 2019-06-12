@@ -25,7 +25,7 @@ describe('Home page tests', () => {
   });
 
   it('should navigate to the docs page from the docs panel', () => {
-    cy.get('[href="/docs"]').click();
+    cy.get('[href="docs"]').click();
 
     cy.url().should('include', '/docs');
     // cy.screenshot('docs-page);

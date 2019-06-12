@@ -1,25 +1,41 @@
 # @brisk-docs/website
 
+## 0.7.0
+
+### Minor Changes
+
+- 445bf8a: When the docs folder nests, display all nested items
+
+### Patch Changes
+
+- 62ae6ef: When custom names are chosen, still use the path to generate urls, so that relative links still "just work"
+- 06d3aeb: Fixed a number of console errors
+- 6f5746d: Use custom port for website if provided
+
 ## 0.6.0
+
 ### Minor Changes
 
 - 76dc8dc: - Added the support for multi level packages and their nav items grouping.
+
   - This is necessary because without grouping the nested packages also falls in the root level flat structure in nav which makes package discoverability difficult.
   - For the multi level packages to show up in the website, consumers need to specify packages: ['./packages/**/*'] in the docs.config.js
   - This is being set as the default configuration of the website. If need to override consumers can specify packages: ['./packages/*']
     or any other location according to their requirements.
   - Updated the version of extract react loader
-  
+
 ### Patch Changes
 
 - f49737e: Added new file viewer package
 
 ## 0.5.2
+
 ### Patch Changes
 
 - 06e0757: Fix bug where nav would error and throw in readme pages
 
 ## 0.5.1
+
 ### Patch Changes
 
 - 1037572: The npm:include option for files meant we could accidentally publish our own `docs` and `guides` and `packages` folders - this would cause errors when someone else ran them. The ignore now only includes ts files, which solves this for us.

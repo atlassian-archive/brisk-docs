@@ -1878,13 +1878,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@changesets/cli@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-1.1.5.tgz#506d1af4ce16198f85b47fd2c84ee7439b839b9f"
-  integrity sha512-4UlGEXtggU0vhliIpm7zuBR1gIO5Im335fkmwAsnLTzQmvwhFOVcTgIdOg4RB6rCLmz9/rhi8BPXJ+e33jD6zw==
+"@changesets/cli@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-1.2.0.tgz#dbe304a8ae2f284730049f8fdea8b0060b09709c"
+  integrity sha512-JxmKE1Uaif/gPEKyh4gm2L5lncUb5MFMNw0WaippXloK64wDI5P82Fyv7nnj/Sv0kbR4g9bVWeBJFbtnyoenNg==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@types/inquirer" "^6.0.3"
     "@types/semver" "^6.0.0"
     "@types/uuid" "^3.4.4"
     bolt "^0.22.1"
@@ -1892,13 +1891,12 @@
     chalk "^2.1.0"
     cli-table "^0.3.1"
     detect-indent "^6.0.0"
+    enquirer "^2.3.0"
     fs-extra "^7.0.1"
     fuzzy "^0.1.3"
-    get-workspaces "^0.3.0"
+    get-workspaces "^0.3.1"
     globby "^9.2.0"
     human-id "^1.0.2"
-    inquirer "^3.3.0"
-    inquirer-checkbox-plus-prompt "^1.0.1"
     lodash.startcase "^4.4.0"
     meow "^5.0.0"
     outdent "^0.5.0"
@@ -1906,6 +1904,7 @@
     prettier "^1.14.3"
     projector-spawn "^1.0.1"
     semver "^5.4.1"
+    term-size "^2.1.0"
     tty-table "^2.7.0"
     uuid "^3.3.2"
 
@@ -2214,14 +2213,6 @@
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
   integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
 
-"@types/inquirer@^6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-6.0.3.tgz#597b3c1aa4a575899841ab99bb4f1774d0b8c090"
-  integrity sha512-lBsdZScFMaFYYIE3Y6CWX22B9VeY2NerT1kyU2heTc3u/W6a+Om6Au2q0rMzBrzynN0l4QoABhI0cbNdyz6fDg==
-  dependencies:
-    "@types/through" "*"
-    rxjs "^6.4.0"
-
 "@types/jest@^21.1.2":
   version "21.1.10"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.10.tgz#dcacb5217ddf997a090cc822bba219b4b2fd7984"
@@ -2362,13 +2353,6 @@
 "@types/tapable@*":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.4.tgz#b4ffc7dc97b498c969b360a41eee247f82616370"
-
-"@types/through@*":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@types/through/-/through-0.0.29.tgz#72943aac922e179339c651fa34a4428a4d722f93"
-  integrity sha512-9a7C5VHh+1BKblaYiq+7Tfc+EOmjMdZaD1MYtkQjSoxgB69tBjW98ry6SKsi4zEIWztLOMRuL87A3bdT/Fc/4w==
-  dependencies:
-    "@types/node" "*"
 
 "@types/uglify-js@*":
   version "3.0.4"
@@ -2737,6 +2721,11 @@ ansi-colors@^3.0.0:
   version "3.2.3"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/ansi-colors/-/ansi-colors-3.2.3.tgz#57d35b8686e851e2cc04c403f1c00203976a1813"
 
+ansi-colors@^3.2.1:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
+  integrity sha512-hHUXGagefjN2iRrID63xckIvotOXOojhQKWIPUZ4mNUZ9nLZW+7FMNoE1lOkEhNWYsx/7ysGIuJYCiMAA9FnrA==
+
 ansi-escapes@^1.0.0:
   version "1.4.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -2813,7 +2802,8 @@ are-we-there-yet@~1.1.2:
 
 argparse@^1.0.7:
   version "1.0.10"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
+  integrity sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
   dependencies:
     sprintf-js "~1.0.2"
 
@@ -5260,6 +5250,13 @@ enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0:
     memory-fs "^0.4.0"
     tapable "^1.0.0"
 
+enquirer@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/enquirer/-/enquirer-2.3.0.tgz#c362c9d84984ebe854def63caaf12983a16af552"
+  integrity sha512-RNGUbRVlfnjmpxV+Ed+7CGu0rg3MK7MmlW+DW0v7V2zdAUBC1s4BxCRiIAozbYB2UJ+q4D+8tW9UFb11kF72/g==
+  dependencies:
+    ansi-colors "^3.2.1"
+
 entities@^1.1.1, "entities@~ 1.1.1", entities@~1.1.1:
   version "1.1.2"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
@@ -5668,7 +5665,8 @@ esprima@^3.1.3:
 
 esprima@^4.0.0:
   version "4.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+  integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
 
 esquery@^1.0.1:
   version "1.0.1"
@@ -6355,6 +6353,14 @@ get-workspaces@^0.3.0:
     fs-extra "^7.0.1"
     globby "^9.2.0"
 
+get-workspaces@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/get-workspaces/-/get-workspaces-0.3.1.tgz#8e0dc3ea8077725a84d2194be37410c011538536"
+  integrity sha512-TBP1EQTBfEfxn0irOdTYf9nvYefi4hrEJb9Cp7p81xFrKUEq16Mypa8C5459B5IjADujRYnCwWu59zhSobw1fg==
+  dependencies:
+    fs-extra "^7.0.1"
+    globby "^9.2.0"
+
 getos@3.1.0:
   version "3.1.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/getos/-/getos-3.1.0.tgz#db3aa4df15a3295557ce5e81aa9e3e5cdfaa6567"
@@ -6915,17 +6921,7 @@ ini@^1.3.4, ini@~1.3.0:
   version "1.3.5"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
 
-inquirer-checkbox-plus-prompt@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/inquirer-checkbox-plus-prompt/-/inquirer-checkbox-plus-prompt-1.0.1.tgz#54ff1ed09777a103538562276b5cf4521a31d16d"
-  integrity sha1-VP8e0Jd3oQNThWIna1z0Uhox0W0=
-  dependencies:
-    cli-cursor "^2.1.0"
-    figures "^2.0.0"
-    inquirer "^5.1.0"
-    lodash "^4.17.5"
-
-inquirer@3.3.0, inquirer@^3.3.0:
+inquirer@3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-3.3.0.tgz#9dd2f2ad765dcab1ff0443b491442a20ba227dc9"
   dependencies:
@@ -6944,7 +6940,7 @@ inquirer@3.3.0, inquirer@^3.3.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-inquirer@^5.1.0, inquirer@^5.2.0:
+inquirer@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-5.2.0.tgz#db350c2b73daca77ff1243962e9f22f099685726"
   dependencies:
@@ -7745,16 +7741,9 @@ js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.11.0, js-yaml@^3.9.1:
+js-yaml@^3.11.0, js-yaml@^3.12.0, js-yaml@^3.9.0, js-yaml@^3.9.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
-js-yaml@^3.12.0, js-yaml@^3.9.0:
-  version "3.12.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/js-yaml/-/js-yaml-3.12.1.tgz#295c8632a18a23e054cf5c9d3cecafe678167600"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -11248,7 +11237,8 @@ split-string@^3.0.1, split-string@^3.0.2:
 
 sprintf-js@~1.0.2:
   version "1.0.3"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+  integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
 sshpk@^1.7.0:
   version "1.16.1"
@@ -11648,6 +11638,11 @@ term-size@^1.2.0:
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
   dependencies:
     execa "^0.7.0"
+
+term-size@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/term-size/-/term-size-2.1.0.tgz#3aec444c07a7cf936e157c1dc224b590c3c7eef2"
+  integrity sha512-I42EWhJ+2aeNQawGx1VtpO0DFI9YcfuvAMNIdKyf/6sRbHJ4P+ZQ/zIT87tE+ln1ymAGcCJds4dolfSAS0AcNg==
 
 terser-webpack-plugin@^1.1.0:
   version "1.2.3"
