@@ -9,6 +9,10 @@ module.exports = () => tree =>
   visit(tree, 'root', rNode => {
     visit(tree, 'image', node => {
       const text = node.url ? node.url.trim() : '';
+      if (/^(?:[a-z]+:)?\/\//i.test(text)) {
+        // exclude absolute url paths
+        return;
+      }
 
       // To avoid duplicate imports of same image used multiple times in an mdx file
       const existingImport = rNode.children
