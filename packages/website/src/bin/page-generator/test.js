@@ -22,7 +22,13 @@ async function runGeneratePages({
 
   const actualDocsList = docsList
     ? docsList.map(d => ({ ...d, docsPath: path.join(docsCwd, d.docsPath) }))
-    : [{ docsPath: path.join(docsCwd, 'docs'), name: 'docs' }];
+    : [
+        {
+          docsPath: path.join(docsCwd, 'docs'),
+          name: 'docs',
+          urlPath: 'docs',
+        },
+      ];
 
   const readmePath = packageReadme
     ? path.join(packagesCwd, packageReadme)
@@ -291,6 +297,47 @@ describe('Generate pages', () => {
     });
   });
 
+  describe('docs pages generation with differing name and path', () => {
+    let customPagesPath;
+    let customSitemap;
+    beforeAll(async () => {
+      customPagesPath = await createTempDir();
+      customSitemap = await runGeneratePages({
+        docsFixture: 'mock-docs-with-guides',
+        docsList: [
+          { docsPath: 'guides', name: 'Cool doc stuff', urlPath: 'guides' },
+        ],
+        packagesFixture: 'simple-mock-packages',
+        pagesPath: customPagesPath,
+      });
+    });
+
+    it('creates pages for each markdown file based on docsPath rather than name', () => {
+      expect(
+        fs.existsSync(path.join(customPagesPath, 'guides', 'testguide.js')),
+      ).toEqual(true);
+      expect(
+        fs.existsSync(path.join(customPagesPath, 'docs', 'testdoc.js')),
+      ).toEqual(false);
+      expect(
+        fs.existsSync(path.join(customPagesPath, 'cool-doc-stuff')),
+      ).toEqual(false);
+    });
+
+    describe('sitemap generation', () => {
+      it('generates the docs key based on name', () => {
+        expect(customSitemap['cool-doc-stuff']).toBeDefined();
+        expect(customSitemap.guides).not.toBeDefined();
+      });
+
+      it('generates page paths based on docs path rather than name', () => {
+        expect(customSitemap['cool-doc-stuff'][0].pagePath).toEqual(
+          '/guides/testguide',
+        );
+      });
+    });
+  });
+
   describe('meta data generation', () => {
     let metaDataInfo;
     beforeAll(() => {
@@ -462,8 +509,8 @@ describe('Additional items in the docs tests', () => {
     await runGeneratePages({
       docsFixture: 'mock-docs-with-guides',
       docsList: [
-        { docsPath: 'docs', name: 'docs' },
-        { docsPath: 'guides', name: 'guides' },
+        { docsPath: 'docs', name: 'docs', urlPath: 'docs' },
+        { docsPath: 'guides', name: 'guides', urlPath: 'guides' },
       ],
       packagesFixture: 'simple-mock-packages',
       pagesPath,
@@ -482,12 +529,15 @@ describe('Additional items in the docs tests', () => {
 
 describe('Generate readme page at the root level', () => {
   let pagesPath;
+  let sitemap;
 
   beforeAll(async () => {
     pagesPath = await createTempDir();
-    await runGeneratePages({
-      docsList: [],
-      docsFixture: '',
+    sitemap = await runGeneratePages({
+      docsList: [
+        { docsPath: 'guides', name: 'playbooks', urlPath: 'guides' },
+      ],
+      docsFixture: 'mock-docs-with-guides',
       packagesFixture: 'mock-package-with-root-readme',
       packageReadme: 'README.md',
       pagesPath,
@@ -496,6 +546,26 @@ describe('Generate readme page at the root level', () => {
 
   it('creates a readme page for the root level file', () => {
     expect(fs.existsSync(path.join(pagesPath, 'readme.js'))).toEqual(true);
+  });
+
+  it('adds top-level readme entry to sitemap', () => {
+    expect(sitemap.readme).toBeDefined();
+    expect(sitemap.readme).toEqual(expect.any(Array));
+    expect(sitemap.readme).toHaveLength(2);
+  });
+
+  it('adds packages to readme nav', () => {
+    expect(sitemap.readme[0]).toEqual({
+      id: 'packages',
+      pagePath: '/packages',
+    });
+  });
+
+  it('adds root docs page to readme nav with correct id and page path', () => {
+    expect(sitemap.readme[1]).toEqual({
+      id: 'playbooks',
+      pagePath: '/guides',
+    });
   });
 });
 
