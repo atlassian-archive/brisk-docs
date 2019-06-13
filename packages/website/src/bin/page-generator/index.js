@@ -417,7 +417,7 @@ module.exports = async function generatePages(
         docsInfo,
         generatorConfig,
         pathName,
-        urlPath || pathName,
+        urlPath,
       );
     }
   });

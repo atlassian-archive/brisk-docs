@@ -413,7 +413,7 @@ describe('File modification tests', () => {
     );
     await generatePages(
       [path.join(packagesPath, '/*')],
-      [{ docsPath, name: 'docs' }],
+      [{ docsPath, name: 'docs', urlPath: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -425,7 +425,7 @@ describe('File modification tests', () => {
     );
     await generatePages(
       [path.join(packagesPath, '/*')],
-      [{ docsPath, name: 'docs' }],
+      [{ docsPath, name: 'docs', urlPath: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -437,7 +437,7 @@ describe('File modification tests', () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
     await generatePages(
       [packagesPath],
-      [{ docsPath, name: 'docs' }],
+      [{ docsPath, name: 'docs', urlPath: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -446,7 +446,7 @@ describe('File modification tests', () => {
     fs.unlinkSync(path.join(docsPath, 'doc-1.md'));
     await generatePages(
       [path.join(packagesPath, '/*')],
-      [{ docsPath, name: 'docs' }],
+      [{ docsPath, name: 'docs', urlPath: 'docs' }],
       pagesPath,
       componentsPath,
     );
@@ -534,9 +534,7 @@ describe('Generate readme page at the root level', () => {
   beforeAll(async () => {
     pagesPath = await createTempDir();
     sitemap = await runGeneratePages({
-      docsList: [
-        { docsPath: 'guides', name: 'playbooks', urlPath: 'guides' },
-      ],
+      docsList: [{ docsPath: 'guides', name: 'playbooks', urlPath: 'guides' }],
       docsFixture: 'mock-docs-with-guides',
       packagesFixture: 'mock-package-with-root-readme',
       packageReadme: 'README.md',
