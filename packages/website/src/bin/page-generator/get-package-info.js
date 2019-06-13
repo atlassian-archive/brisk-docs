@@ -142,9 +142,10 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       const exampleDirPath = path.resolve(pkgPath, 'examples');
       const docsDirPath = path.resolve(pkgPath, 'docs');
 
-      const examplesPaths = getFilesInDir(exampleDirPath).filter(
-        ({ path: examplePath }) => isExample(examplePath),
-      );
+      const examplesPaths = [];
+      //   getFilesInDir(exampleDirPath).filter(
+      //   ({ path: examplePath }) => isExample(examplePath),
+      // );
 
       const docsPaths = getDocsInfo(docsDirPath) || [];
 

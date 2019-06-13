@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const happyPack = require('happypack');
+
 // eslint-disable-next-line
 const images = require('./custom-plugins/mdx-image-loader');
 const withMDX = require('@zeit/next-mdx')({
@@ -42,10 +44,19 @@ module.exports = withTypescript(
 
           // eslint-disable-next-line no-param-reassign
           delete config.devtool;
-
+          // config.module.rules.push()
           // Some loaders have multiple loaders in 'use' - currently this is missing the mdx loader
           config.module.rules.forEach(loader => {
-            if (loader.use.loader === 'next-babel-loader') {
+            // const threadLoader = { loader: 'thread-loader', options: { workerNodeArgs: ['--max-old-space-size=4096'] }};
+
+            if (loader.use.loader === 'next-babel-loader' || (Array.isArray(loader.use) && loader.use.find(x=> x.loader === '@mdx-js/loader'))) {
+              if (Array.isArray(loader.use)) {
+                loader.use = ['thread-loader', ...loader.use];
+              } else {
+                loader.use = ['thread-loader', loader.use];
+              }
+            }
+            if(loader.use.loader === 'next-babel-loader') {
               // TODO: Remove this line in prod builds
               // explanation: With preconstruct's new alias model, webpack doesn't know about it,
               // but this meant loaders weren't processing it properly when run in places other
@@ -55,6 +66,7 @@ module.exports = withTypescript(
               // eslint-disable-next-line no-param-reassign
               loader.exclude = babelExlude;
             }
+            console.log('configggggg', loader);
           });
 
           // Website modules should take precedence over the node_modules of the consumer.
@@ -67,6 +79,13 @@ module.exports = withTypescript(
               FileViewer: ['@brisk-docs/file-viewer', 'default'],
             }),
           );
+
+          ['thread-loader', { loader: 'next-babel-loader',
+            options:
+            { isServer: false,
+              cwd: '/Users/araj/Documents/brisk-docs/packages/website' } }]
+
+
           return clientWebpack(config);
         },
       }),

@@ -1,0 +1,10 @@
+node_modules
+.next
+
+pages/packages
+pages/docs
+
+data/**/*.json
+
+bundles/**/*.js
+
