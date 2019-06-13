@@ -4,30 +4,51 @@ import { copyFixtureIntoTempDir, createTempDir } from 'jest-fixtures';
 
 import generatePages from './index';
 
+async function runGeneratePages({
+  docsFixture,
+  docsList,
+  options,
+  packagesFixture,
+  packageGlob = '/*',
+  pagesPath,
+  packageReadme,
+} = {}) {
+  const packagesCwd = await copyFixtureIntoTempDir(__dirname, packagesFixture);
+
+  const docsCwd = await copyFixtureIntoTempDir(__dirname, docsFixture);
+
+  const packagesPaths = [path.join(packagesCwd, 'packages', packageGlob)];
+  const componentsPath = await createTempDir();
+
+  const actualDocsList = docsList
+    ? docsList.map(d => ({ ...d, docsPath: path.join(docsCwd, d.docsPath) }))
+    : [{ docsPath: path.join(docsCwd, 'docs'), name: 'docs' }];
+
+  const readmePath = packageReadme
+    ? path.join(packagesCwd, packageReadme)
+    : undefined;
+
+  return generatePages(
+    packagesPaths,
+    actualDocsList,
+    pagesPath || (await createTempDir()),
+    componentsPath,
+    options,
+    readmePath,
+  );
+}
+
 describe('Generate pages', () => {
-  let packagesPaths;
   let pagesPath;
   let sitemap;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'simple-mock-packages',
-    );
-
-    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
-
-    packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
-    const docsPath = path.join(docsCwd, 'docs');
     pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-
-    sitemap = await generatePages(
-      packagesPaths,
-      [{ docsPath, name: 'docs' }],
+    sitemap = await runGeneratePages({
+      docsFixture: 'simple-mock-docs',
+      packagesFixture: 'simple-mock-packages',
       pagesPath,
-      componentsPath,
-    );
+    });
   });
 
   describe('package pages generation', () => {
@@ -286,28 +307,11 @@ describe('Generate pages', () => {
   describe('Sub examples page generation test', () => {
     let subExampleSitemap;
     beforeAll(async () => {
-      const packagesCwd = await copyFixtureIntoTempDir(
-        __dirname,
-        'mock-package-with-sub-examples',
-      );
-
-      const docsCwd = await copyFixtureIntoTempDir(
-        __dirname,
-        'simple-mock-docs',
-      );
-
-      packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
-      const docsPath = path.join(docsCwd, 'docs');
-      pagesPath = await createTempDir();
-      const componentsPath = await createTempDir();
-
-      subExampleSitemap = await generatePages(
-        packagesPaths,
-        [{ docsPath, name: 'docs' }],
-        pagesPath,
-        componentsPath,
-        { showSubExamples: true },
-      );
+      subExampleSitemap = await runGeneratePages({
+        docsFixture: 'simple-mock-docs',
+        options: { showSubExamples: true },
+        packagesFixture: 'mock-package-with-sub-examples',
+      });
     });
 
     it('gets all examples in the package structure other than in examples folder', () => {
@@ -408,22 +412,11 @@ describe('Missing docs folder', () => {
   let sitemap;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'simple-mock-packages',
-    );
-
-    const packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
-    const docsPath = 'path/that/does/not/exist';
-    const pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-
-    sitemap = await generatePages(
-      packagesPaths,
-      [{ docsPath, name: 'docs' }],
-      pagesPath,
-      componentsPath,
-    );
+    sitemap = await runGeneratePages({
+      docsFixture: '',
+      docsList: [{ docsPath: 'path/that/does/not/exist', name: 'docs' }],
+      packagesFixture: 'simple-mock-packages',
+    });
   });
 
   it('should return the docs sitemap as undefined', () => {
@@ -432,29 +425,13 @@ describe('Missing docs folder', () => {
 });
 
 describe('readmes in the docs', () => {
-  let packagesPaths;
-  let pagesPath;
   let sitemap;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'simple-mock-packages',
-    );
-
-    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'docs-with-readme');
-
-    packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
-    const docsPath = path.join(docsCwd, 'docs');
-    pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-
-    sitemap = await generatePages(
-      packagesPaths,
-      [{ docsPath, name: 'docs' }],
-      pagesPath,
-      componentsPath,
-    );
+    sitemap = await runGeneratePages({
+      docsFixture: 'docs-with-readme',
+      packagesFixture: 'simple-mock-packages',
+    });
   });
   it('should have collapsed the readmes into indexes', () => {
     const readmePages = sitemap.docs.filter(({ pagePath }) =>
@@ -478,32 +455,19 @@ describe('readmes in the docs', () => {
 });
 
 describe('Additional items in the docs tests', () => {
-  let packagesPath;
   let pagesPath;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'simple-mock-packages',
-    );
-    const docsCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'mock-docs-with-guides',
-    );
-
-    packagesPath = path.join(packagesCwd, 'packages');
-
     pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-    await generatePages(
-      [packagesPath],
-      [
-        { docsPath: path.join(docsCwd, 'docs'), name: 'docs' },
-        { docsPath: path.join(docsCwd, 'guides'), name: 'guides' },
+    await runGeneratePages({
+      docsFixture: 'mock-docs-with-guides',
+      docsList: [
+        { docsPath: 'docs', name: 'docs' },
+        { docsPath: 'guides', name: 'guides' },
       ],
+      packagesFixture: 'simple-mock-packages',
       pagesPath,
-      componentsPath,
-    );
+    });
   });
 
   it('creates pages for each markdown file in docs and guides folder', () => {
@@ -517,28 +481,17 @@ describe('Additional items in the docs tests', () => {
 });
 
 describe('Generate readme page at the root level', () => {
-  let packagesPaths;
   let pagesPath;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'mock-package-with-root-readme',
-    );
-
-    packagesPaths = [path.join(packagesCwd, 'packages', '/*')];
-    const readmePath = path.join(packagesCwd, 'README.md');
     pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-
-    await generatePages(
-      packagesPaths,
-      [],
+    await runGeneratePages({
+      docsList: [],
+      docsFixture: '',
+      packagesFixture: 'mock-package-with-root-readme',
+      packageReadme: 'README.md',
       pagesPath,
-      componentsPath,
-      {},
-      readmePath,
-    );
+    });
   });
 
   it('creates a readme page for the root level file', () => {
@@ -547,29 +500,15 @@ describe('Generate readme page at the root level', () => {
 });
 
 describe('Generate pages for nested packages', () => {
-  let packagesPaths;
-  let pagesPath;
   let sitemap;
 
   beforeAll(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
-      __dirname,
-      'mock-nested-group-packages',
-    );
-
-    const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
-
-    packagesPaths = [path.join(packagesCwd, 'packages', '/**/*')];
-    const docsPath = path.join(docsCwd, 'docs');
-    pagesPath = await createTempDir();
-    const componentsPath = await createTempDir();
-
-    sitemap = await generatePages(
-      packagesPaths,
-      [{ docsPath, name: 'docs' }],
-      pagesPath,
-      componentsPath,
-    );
+    sitemap = await runGeneratePages({
+      docsList: [],
+      docsFixture: 'simple-mock-docs',
+      packagesFixture: 'mock-nested-group-packages',
+      packageGlob: '/**/*',
+    });
   });
 
   it('adds parentIds for all the nested packages', () => {
