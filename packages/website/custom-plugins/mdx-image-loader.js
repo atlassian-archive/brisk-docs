@@ -9,43 +9,44 @@ module.exports = () => tree =>
   visit(tree, 'root', rNode => {
     visit(tree, 'image', node => {
       const text = node.url ? node.url.trim() : '';
+      if (text.startsWith('./') || text.startsWith('../')) {
+        // To avoid duplicate imports of same image used multiple times in an mdx file
+        const existingImport = rNode.children
+          .filter(x => x.type === 'import')
+          .find(y => y.value.includes(text));
+        const existingImg =
+          existingImport &&
+          existingImport.value.match(/(?<=import\s).*(?=\sfrom)/g);
 
-      // To avoid duplicate imports of same image used multiple times in an mdx file
-      const existingImport = rNode.children
-        .filter(x => x.type === 'import')
-        .find(y => y.value.includes(text));
-      const existingImg =
-        existingImport &&
-        existingImport.value.match(/(?<=import\s).*(?=\sfrom)/g);
+        // To give a unique variable names for each import statements
+        const img = existingImg ? existingImg[0] : `img${val}`;
+        const statement = `import ${img} from '${text}';`;
 
-      // To give a unique variable names for each import statements
-      const img = existingImg ? existingImg[0] : `img${val}`;
-      const statement = `import ${img} from '${text}';`;
+        /* eslint-disable no-param-reassign */
+        node.type = 'html';
+        node.value = `<img src={${img}} alt='${node.alt}' />`;
 
-      /* eslint-disable no-param-reassign */
-      node.type = 'html';
-      node.value = `<img src={${img}} alt='${node.alt}' />`;
+        delete node.url;
+        delete node.alt;
+        /* eslint-enable */
 
-      delete node.url;
-      delete node.alt;
-      /* eslint-enable */
-
-      if (!existingImport) {
-        const item = {
-          type: 'import',
-          value: statement,
-          position: {
-            start: { line: 2, column: 1, offset: 1 },
-            end: {
-              line: 2,
-              column: statement.length,
-              offset: statement.length,
+        if (!existingImport) {
+          const item = {
+            type: 'import',
+            value: statement,
+            position: {
+              start: { line: 2, column: 1, offset: 1 },
+              end: {
+                line: 2,
+                column: statement.length,
+                offset: statement.length,
+              },
+              indent: [],
             },
-            indent: [],
-          },
-        };
-        rNode.children.splice(0, 0, item);
-        val += 1;
+          };
+          rNode.children.splice(0, 0, item);
+          val += 1;
+        }
       }
     });
   });
