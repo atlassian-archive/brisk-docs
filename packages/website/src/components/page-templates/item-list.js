@@ -89,12 +89,7 @@ const ItemList = ({ data }) => {
       <Page>
         <Title>{title}</Title>
         <Section>
-          <Table
-            head={head}
-            rows={getRows()}
-            defaultSortKey="name"
-            defaultSortOrder="ASC"
-          />
+          <Table head={head} rows={getRows()} />
         </Section>
       </Page>
     );

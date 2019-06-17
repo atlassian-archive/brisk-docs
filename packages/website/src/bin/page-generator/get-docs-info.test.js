@@ -121,3 +121,35 @@ describe('Test exclude everything that are non md files', () => {
     });
   });
 });
+
+describe('Custom doc sorting', () => {
+  let cwd;
+  let docsInfo;
+
+  beforeAll(async () => {
+    cwd = await copyFixtureIntoTempDir(__dirname, 'mock-docs-with-sorting');
+    docsInfo = getDocsInfo(path.join(cwd, 'docs'));
+  });
+
+  it('sorts doc-2 before doc-1 in top-level docs folder', () => {
+    expect(docsInfo[0]).toMatchObject({
+      id: 'doc-2',
+    });
+    expect(docsInfo[1]).toMatchObject({
+      id: 'doc-1',
+    });
+    expect(docsInfo[2]).toMatchObject({
+      id: 'doc-3',
+    });
+  });
+
+  it('sorts nested doc-3-2 before doc-3-1', () => {
+    const docs3Children = docsInfo[2].children;
+    expect(docs3Children[0]).toMatchObject({
+      id: 'doc-3-2',
+    });
+    expect(docs3Children[1]).toMatchObject({
+      id: 'doc-3-1',
+    });
+  });
+});

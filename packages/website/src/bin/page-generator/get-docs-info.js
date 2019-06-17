@@ -3,13 +3,40 @@
 
 const path = require('path');
 const fs = require('fs-extra');
+const handleConfig = require('../handle-config');
+
+const sortDirectory = (processedDir, dirPath) => {
+  const dirConfig = handleConfig(dirPath);
+
+  if (dirConfig && dirConfig.sortOrder) {
+    processedDir.sort((a, b) => {
+      const aIndex = dirConfig.sortOrder.indexOf(a.id);
+      const bIndex = dirConfig.sortOrder.indexOf(b.id);
+      const wildcardIndex = dirConfig.sortOrder.indexOf('*');
+
+      const defaultSortOrder =
+        wildcardIndex === -1 ? dirConfig.sortOrder.length : wildcardIndex;
+      const aSortOrder = aIndex === -1 ? defaultSortOrder : aIndex;
+      const bSortOrder = bIndex === -1 ? defaultSortOrder : bIndex;
+
+      if (aSortOrder < bSortOrder) {
+        return -1;
+      }
+      if (bSortOrder < aSortOrder) {
+        return 1;
+      }
+
+      return a.id.localeCompare(b.id);
+    });
+  }
+};
 
 const processDirectory = dirPath => {
   if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
     return null;
   }
 
-  return fs
+  const processedDir = fs
     .readdirSync(dirPath)
     .filter(file => !file.startsWith('_'))
     .map(fname => ({
@@ -37,6 +64,10 @@ const processDirectory = dirPath => {
       };
     })
     .filter(x => x);
+
+  sortDirectory(processedDir, dirPath);
+
+  return processedDir;
 };
 
 /**
