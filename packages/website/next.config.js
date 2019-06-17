@@ -47,6 +47,15 @@ module.exports = withTypescript(
           delete config.devtool;
           // Some loaders have multiple loaders in 'use' - currently this is missing the mdx loader
           config.module.rules.forEach(loader => {
+            if (loader.use.loader === 'next-babel-loader') {
+              // TODO: Remove this line in prod builds
+              // explanation: With preconstruct's new alias model, webpack doesn't know about it,
+              // but this meant loaders weren't processing it properly when run in places other
+              // than the project root (in tests and such)
+              // This solves that, but is very much a hack, and can't be relied upon going forwards.
+              loader.include.push(path.join(__dirname, '..'));
+              loader.exclude = babelExlude;
+            }
             if (
               loader.use.loader === 'next-babel-loader' ||
               (Array.isArray(loader.use) &&
@@ -57,15 +66,6 @@ module.exports = withTypescript(
               } else {
                 loader.use = ['thread-loader', loader.use];
               }
-            }
-            if (loader.use.loader === 'next-babel-loader') {
-              // TODO: Remove this line in prod builds
-              // explanation: With preconstruct's new alias model, webpack doesn't know about it,
-              // but this meant loaders weren't processing it properly when run in places other
-              // than the project root (in tests and such)
-              // This solves that, but is very much a hack, and can't be relied upon going forwards.
-              loader.include.push(path.join(__dirname, '..'));
-              loader.exclude = babelExlude;
             }
           });
 
