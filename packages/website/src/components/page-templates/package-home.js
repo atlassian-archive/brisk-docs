@@ -5,6 +5,7 @@ import { colors } from '@atlaskit/theme';
 import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
 
+import { PageStatusContext } from '../common/page-status-context';
 import NavigationWrapper from '../navigation-wrapper';
 import Wrapper from '../content-style-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
@@ -67,6 +68,10 @@ const MissingReadmeWarning = () => (
   </SectionMessage>
 );
 
+const pageStatusValue = {
+  convertedToDir: true,
+};
+
 const PackageHome = ({ data, children }) => {
   return (
     <>
@@ -79,21 +84,24 @@ const PackageHome = ({ data, children }) => {
           />
         )}
       >
-        <Wrapper pagePath={data.pagePath}>
-          <Header id={data.id} heading={titleCase(data.packageName)} />
-          <Description>{data.description}</Description>
-          <PackageMetaData
-            id={data.id}
-            version={data.version}
-            maintainers={data.maintainers}
-            repository={data.repository}
-          />
-          {children || process.env.NODE_ENV !== 'development' ? (
-            children
-          ) : (
-            <MissingReadmeWarning />
-          )}
-        </Wrapper>
+        <PageStatusContext.Provider value={pageStatusValue}>
+          <Wrapper pagePath={data.pagePath}>
+            <Header id={data.id} heading={titleCase(data.packageName)} />
+            <Description>{data.description}</Description>
+            <PackageMetaData
+              id={data.id}
+              version={data.version}
+              maintainers={data.maintainers}
+              repository={data.repository}
+            />
+
+            {children || process.env.NODE_ENV !== 'development' ? (
+              children
+            ) : (
+              <MissingReadmeWarning />
+            )}
+          </Wrapper>
+        </PageStatusContext.Provider>
       </NavigationWrapper>
     </>
   );

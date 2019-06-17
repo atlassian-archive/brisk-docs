@@ -1,5 +1,6 @@
 node_modules
 .next
+out
 
 packages/website/pages/packages
 packages/website/pages/docs
