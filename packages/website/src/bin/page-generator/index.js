@@ -333,7 +333,12 @@ const cleanPages = (pagesPath, docsList) => {
   });
 };
 
-const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
+const generateRootReadMePage = (
+  pagePath,
+  generatorConfig,
+  docKeys,
+  docUrlPaths,
+) => {
   if (fs.existsSync(pagePath)) {
     generateProjectDocPage(
       'readme.js',
@@ -344,7 +349,10 @@ const generateRootReadMePage = (pagePath, generatorConfig, docKeys) => {
     );
     const navItems = [{ id: 'packages', pagePath: '/packages' }];
 
-    return [...navItems, ...docKeys.map(x => ({ id: x, pagePath: `/${x}` }))];
+    return [
+      ...navItems,
+      ...docKeys.map((x, i) => ({ id: x, pagePath: `/${docUrlPaths[i]}` })),
+    ];
   }
 
   return undefined;
@@ -372,10 +380,19 @@ module.exports = async function generatePages(
 ) {
   cleanPages(pagesPath, docsList);
 
-  const packageInfo = getPackageInfo(packagesPaths, {
-    useManifests: options.useManifests,
-    showSubExamples: options.showSubExamples,
-  });
+  const pkgOpts = {};
+
+  if (typeof options.useManifests !== 'undefined') {
+    pkgOpts.useManifests = options.useManifests;
+  }
+  if (typeof options.showSubExamples !== 'undefined') {
+    pkgOpts.showSubExamples = options.showSubExamples;
+  }
+  if (typeof options.showExamples !== 'undefined') {
+    pkgOpts.showExamples = options.showExamples;
+  }
+
+  const packageInfo = getPackageInfo(packagesPaths, pkgOpts);
 
   const generatorConfig = {
     pagesPath,
@@ -409,7 +426,7 @@ module.exports = async function generatePages(
         docsInfo,
         generatorConfig,
         pathName,
-        urlPath || pathName,
+        urlPath,
       );
     }
   });
@@ -418,6 +435,7 @@ module.exports = async function generatePages(
     readMePath,
     generatorConfig,
     Object.keys(docsSitemap),
+    docsList.map(d => d.urlPath),
   );
 
   return {
