@@ -1,1 +1,0 @@
-Add option `showExamples`, which defaults to true, that turns off all examples in brisk
