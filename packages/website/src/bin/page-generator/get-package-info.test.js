@@ -218,3 +218,30 @@ describe('Test the sub examples package', () => {
     assertSubExamples(packageInfo[0], 'mock-package1');
   });
 });
+
+describe('hiding examples', () => {
+  it('hides all examples', async () => {
+    const cwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-package-with-sub-examples',
+    );
+    const packageInfo = getPackageInfo(
+      [path.join(cwd, 'packages', 'mock-package1')],
+      { showExamples: false },
+    );
+
+    expect(packageInfo[0].examplesPaths).toEqual([]);
+  });
+  it('hides subExamples when examples are disabled', async () => {
+    const cwd = await copyFixtureIntoTempDir(
+      __dirname,
+      'mock-package-with-sub-examples',
+    );
+    const packageInfo = getPackageInfo(
+      [path.join(cwd, 'packages', 'mock-package1')],
+      { showSubExamples: true, showExamples: false },
+    );
+
+    expect(packageInfo[0].subExamplesPaths).toEqual([]);
+  });
+});

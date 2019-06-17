@@ -16,6 +16,7 @@ module.exports = async ({
   docsList,
   useManifests,
   webpackConfiguration,
+  showExamples,
   showSubExamples,
   siteName,
   packagesDescription,
@@ -37,6 +38,7 @@ module.exports = async ({
       useManifests,
       webpackConfiguration,
       showSubExamples,
+      showExamples,
     },
     readMePath,
   );
