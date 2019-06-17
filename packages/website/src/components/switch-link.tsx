@@ -93,7 +93,10 @@ const SwitchLink = ({ href, children, router, ...rest }: Props) => {
 SwitchLink.propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  router: PropTypes.any,
+  router: PropTypes.shape({
+    asPath: PropTypes.string,
+    pathname: PropTypes.string,
+  }),
 };
 
 export default withRouter(SwitchLink as any) as SwitchLink;
