@@ -380,10 +380,19 @@ module.exports = async function generatePages(
 ) {
   cleanPages(pagesPath, docsList);
 
-  const packageInfo = getPackageInfo(packagesPaths, {
-    useManifests: options.useManifests,
-    showSubExamples: options.showSubExamples,
-  });
+  const pkgOpts = {};
+
+  if (typeof options.useManifests !== 'undefined') {
+    pkgOpts.useManifests = options.useManifests;
+  }
+  if (typeof options.showSubExamples !== 'undefined') {
+    pkgOpts.showSubExamples = options.showSubExamples;
+  }
+  if (typeof options.showExamples !== 'undefined') {
+    pkgOpts.showExamples = options.showExamples;
+  }
+
+  const packageInfo = getPackageInfo(packagesPaths, pkgOpts);
 
   const generatorConfig = {
     pagesPath,
