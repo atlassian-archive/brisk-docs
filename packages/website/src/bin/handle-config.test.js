@@ -14,8 +14,7 @@ describe('website configuration processor', () => {
           description: 'View the documentation for this project',
           docsPath: '/c/w/d/docs',
           name: 'Docs',
-          // This is not ideal
-          urlPath: expect.any(String),
+          urlPath: 'docs',
         },
       ],
       useManifests: false,
@@ -66,6 +65,29 @@ describe('website configuration processor', () => {
 
     const config = processConfig(mockCwd, { webpack: dummyWebpack });
     expect(config.webpack).toBe(dummyWebpack);
+  });
+
+  it('accepts a custom docs urlPath argument', () => {
+    const { docsList } = processConfig(mockCwd, {
+      docs: {
+        path: 'some/other/docs',
+        name: 'Docs',
+        description: 'View the documentation for this project',
+        urlPath: 'custom-docs',
+      },
+    });
+    expect(docsList[0].urlPath).toEqual('custom-docs');
+  });
+
+  it('sets urlPath to the docs path by default', () => {
+    const { docsList } = processConfig(mockCwd, {
+      docs: {
+        path: 'some/other/docs',
+        name: 'Docs',
+        description: 'View the documentation for this project',
+      },
+    });
+    expect(docsList[0].urlPath).toEqual('some/other/docs');
   });
 });
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import titleCase from 'title-case';
 import PackageHomeWrapper, { Description } from './package-home';
+import { PageStatusContext } from '../common/page-status-context';
 
 jest.mock('../navigation/package-nav-content', () => () => <div />);
 /* eslint-disable react/prop-types */
@@ -87,5 +88,18 @@ describe('package home wrapper component', () => {
         .children()
         .text(),
     ).toEqual(data.description);
+  });
+
+  it('should render a page status provider with convertedToDir set to true', () => {
+    const wrapper = shallow(
+      <PackageHomeWrapper data={data}>
+        <div>Hello</div>
+      </PackageHomeWrapper>,
+    );
+
+    const PageStatusProvider = wrapper.find(PageStatusContext.Provider);
+
+    expect(PageStatusProvider).toHaveLength(1);
+    expect(PageStatusProvider.prop('value')).toEqual({ convertedToDir: true });
   });
 });
