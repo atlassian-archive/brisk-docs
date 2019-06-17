@@ -1,1 +1,0 @@
-Add ability to specify custom sort order of docs within a directory via nested docs.config.js. See the [configuration](./docs/configuration.md) docs for more details.

@@ -1,1 +1,0 @@
-Add thread-loader to babel processes - this significantly improves build times in large projects.

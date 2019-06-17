@@ -1,5 +1,16 @@
 # @brisk-docs/website
 
+## 0.7.1
+
+### Patch Changes
+
+- ce3b711: Add ability to specify custom sort order of docs within a directory via nested docs.config.js. See the [configuration](./docs/configuration.md) docs for more details.
+- 0595810: Add thread-loader to babel processes - this significantly improves build times in large projects.
+- 2b2da97: Added fix in the custom mdx image loader to exclude absolute URLs while trying to add Import and Image component
+- e8a62b6: Fix broken relative links on package home pages
+- 7ae804d: Add option `showExamples`, which defaults to true, that turns off all examples in brisk
+- 2ec2ea9: Fix broken project doc links in root readme nav when project doc name and path don't match
+
 ## 0.7.0
 
 ### Minor Changes
