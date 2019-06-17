@@ -1,4 +1,9 @@
 const webpack = require('webpack');
+// This is just how you deal with these configs
+// having this lint rule turned on leads to so many
+// errors further down
+/* eslint-disable no-param-reassign */
+
 // eslint-disable-next-line
 const images = require('./custom-plugins/mdx-image-loader');
 const withMDX = require('@zeit/next-mdx')({
@@ -37,12 +42,9 @@ module.exports = withTypescript(
       withMDX({
         pageExtensions: ['js', 'jsx', 'mdx', 'tsx', 'ts'],
         webpack(config) {
-          // eslint-disable-next-line no-param-reassign
           config.externals = getExternals(cwd, config.name, config.target);
 
-          // eslint-disable-next-line no-param-reassign
           delete config.devtool;
-
           // Some loaders have multiple loaders in 'use' - currently this is missing the mdx loader
           config.module.rules.forEach(loader => {
             if (loader.use.loader === 'next-babel-loader') {
@@ -52,8 +54,18 @@ module.exports = withTypescript(
               // than the project root (in tests and such)
               // This solves that, but is very much a hack, and can't be relied upon going forwards.
               loader.include.push(path.join(__dirname, '..'));
-              // eslint-disable-next-line no-param-reassign
               loader.exclude = babelExlude;
+            }
+            if (
+              loader.use.loader === 'next-babel-loader' ||
+              (Array.isArray(loader.use) &&
+                loader.use.find(x => x.loader === '@mdx-js/loader'))
+            ) {
+              if (Array.isArray(loader.use)) {
+                loader.use = ['thread-loader', ...loader.use];
+              } else {
+                loader.use = ['thread-loader', loader.use];
+              }
             }
           });
 
@@ -67,6 +79,7 @@ module.exports = withTypescript(
               FileViewer: ['@brisk-docs/file-viewer', 'default'],
             }),
           );
+
           return clientWebpack(config);
         },
       }),

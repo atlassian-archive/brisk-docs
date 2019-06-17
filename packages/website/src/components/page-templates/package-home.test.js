@@ -4,6 +4,7 @@ import titleCase from 'title-case';
 import PackageHomeWrapper, { Description } from './package-home';
 import { PageStatusContext } from '../common/page-status-context';
 
+jest.mock('../../../data/site-meta.json', () => ({}), { virtual: true });
 jest.mock('../navigation/package-nav-content', () => () => <div />);
 /* eslint-disable react/prop-types */
 jest.mock('../navigation-wrapper', () => ({ children }) => (

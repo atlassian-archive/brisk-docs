@@ -65,12 +65,13 @@ jobs:
 
       - run:
           name: Jest Suite
-          command: bolt test
+          command: yarn jest --ci --runInBand --coverage --reporters=default --reporters=jest-junit
           environment:
-            JEST_JUNIT_OUTPUT: 'test-reports/junit/js-test-results.xml'
-
+            JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
       - store_test_results:
-          path: test-reports/junit
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
 
   integration_tests:
     <<: *job-setup
