@@ -5,7 +5,7 @@ import Changelog from '@brisk-docs/react-changelogs';
 import PackageChangelog, { MissingChangelog } from './package-changelog';
 import PageTitle from '../page-title';
 
-jest.mock('../meta-context');
+jest.mock('../../../data/site-meta.json', () => ({}), { virtual: true });
 jest.mock('../navigation/package-nav-content', () => () => <div />);
 /* eslint-disable react/prop-types */
 jest.mock('../navigation-wrapper', () => ({ children }) => (
