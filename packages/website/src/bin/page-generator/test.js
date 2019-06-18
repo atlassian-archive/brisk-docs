@@ -1,8 +1,10 @@
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { copyFixtureIntoTempDir, createTempDir } from 'jest-fixtures';
 
 import generatePages from './index';
+
+const defaultPagesPath = path.resolve(__dirname, '../../../default-pages');
 
 async function runGeneratePages({
   docsFixture,
@@ -10,7 +12,7 @@ async function runGeneratePages({
   options,
   packagesFixture,
   packageGlob = '/*',
-  pagesPath,
+  packageRoot,
   packageReadme,
 } = {}) {
   const packagesCwd = await copyFixtureIntoTempDir(__dirname, packagesFixture);
@@ -30,6 +32,11 @@ async function runGeneratePages({
         },
       ];
 
+  const resolvedPackageRoot = packageRoot || (await createTempDir());
+
+  const tempDefaultPagesPath = path.join(resolvedPackageRoot, 'default-pages');
+  await fs.copy(defaultPagesPath, tempDefaultPagesPath);
+
   const readmePath = packageReadme
     ? path.join(packagesCwd, packageReadme)
     : undefined;
@@ -37,7 +44,7 @@ async function runGeneratePages({
   return generatePages(
     packagesPaths,
     actualDocsList,
-    pagesPath || (await createTempDir()),
+    resolvedPackageRoot,
     componentsPath,
     options,
     readmePath,
@@ -45,20 +52,22 @@ async function runGeneratePages({
 }
 
 describe('Generate pages', () => {
+  let packageRoot;
   let pagesPath;
   let sitemap;
 
   beforeAll(async () => {
-    pagesPath = await createTempDir();
+    packageRoot = await createTempDir();
+    pagesPath = path.join(packageRoot, 'pages');
     sitemap = await runGeneratePages({
       docsFixture: 'simple-mock-docs',
       packagesFixture: 'simple-mock-packages',
-      pagesPath,
+      packageRoot,
     });
   });
 
   describe('package pages generation', () => {
-    it('creates a home page per package', () => {
+    it('creates a home page per package', async () => {
       expect(
         fs.existsSync(
           path.join(pagesPath, 'packages', 'mock-package1', 'index.js'),
@@ -298,17 +307,19 @@ describe('Generate pages', () => {
   });
 
   describe('docs pages generation with differing name and path', () => {
+    let customPackagePath;
     let customPagesPath;
     let customSitemap;
     beforeAll(async () => {
-      customPagesPath = await createTempDir();
+      customPackagePath = await createTempDir();
+      customPagesPath = path.join(customPackagePath, 'pages');
       customSitemap = await runGeneratePages({
         docsFixture: 'mock-docs-with-guides',
         docsList: [
           { docsPath: 'guides', name: 'Cool doc stuff', urlPath: 'guides' },
         ],
         packagesFixture: 'simple-mock-packages',
-        pagesPath: customPagesPath,
+        packageRoot: customPackagePath,
       });
     });
 
@@ -388,6 +399,7 @@ describe('File modification tests', () => {
   let packagesPath;
   let docsPath;
   let pagesPath;
+  let packageRoot;
   let componentsPath;
 
   beforeEach(async () => {
@@ -399,8 +411,12 @@ describe('File modification tests', () => {
 
     packagesPath = path.join(packagesCwd, 'packages');
     docsPath = path.join(docsCwd, 'docs');
-    pagesPath = await createTempDir();
+    packageRoot = await createTempDir();
+    pagesPath = path.join(packageRoot, 'pages');
     componentsPath = await createTempDir();
+
+    const tempDefaultPagesPath = path.join(packageRoot, 'default-pages');
+    await fs.copy(defaultPagesPath, tempDefaultPagesPath);
   });
 
   it('should remove files from package docs pages that are removed from disc on rerun', async () => {
@@ -414,7 +430,7 @@ describe('File modification tests', () => {
     await generatePages(
       [path.join(packagesPath, '/*')],
       [{ docsPath, name: 'docs', urlPath: 'docs' }],
-      pagesPath,
+      packageRoot,
       componentsPath,
     );
 
@@ -426,7 +442,7 @@ describe('File modification tests', () => {
     await generatePages(
       [path.join(packagesPath, '/*')],
       [{ docsPath, name: 'docs', urlPath: 'docs' }],
-      pagesPath,
+      packageRoot,
       componentsPath,
     );
 
@@ -438,7 +454,7 @@ describe('File modification tests', () => {
     await generatePages(
       [packagesPath],
       [{ docsPath, name: 'docs', urlPath: 'docs' }],
-      pagesPath,
+      packageRoot,
       componentsPath,
     );
     expect(fs.existsSync(firstDocsPage)).toEqual(true);
@@ -447,7 +463,7 @@ describe('File modification tests', () => {
     await generatePages(
       [path.join(packagesPath, '/*')],
       [{ docsPath, name: 'docs', urlPath: 'docs' }],
-      pagesPath,
+      packageRoot,
       componentsPath,
     );
 
@@ -503,9 +519,11 @@ describe('readmes in the docs', () => {
 
 describe('Additional items in the docs tests', () => {
   let pagesPath;
+  let packageRoot;
 
   beforeAll(async () => {
-    pagesPath = await createTempDir();
+    packageRoot = await createTempDir();
+    pagesPath = path.join(packageRoot, 'pages');
     await runGeneratePages({
       docsFixture: 'mock-docs-with-guides',
       docsList: [
@@ -513,7 +531,7 @@ describe('Additional items in the docs tests', () => {
         { docsPath: 'guides', name: 'guides', urlPath: 'guides' },
       ],
       packagesFixture: 'simple-mock-packages',
-      pagesPath,
+      packageRoot,
     });
   });
 
@@ -529,16 +547,18 @@ describe('Additional items in the docs tests', () => {
 
 describe('Generate readme page at the root level', () => {
   let pagesPath;
+  let packageRoot;
   let sitemap;
 
   beforeAll(async () => {
-    pagesPath = await createTempDir();
+    packageRoot = await createTempDir();
+    pagesPath = path.join(packageRoot, 'pages');
     sitemap = await runGeneratePages({
       docsList: [{ docsPath: 'guides', name: 'playbooks', urlPath: 'guides' }],
       docsFixture: 'mock-docs-with-guides',
       packagesFixture: 'mock-package-with-root-readme',
       packageReadme: 'README.md',
-      pagesPath,
+      packageRoot,
     });
   });
 

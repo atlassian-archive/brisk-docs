@@ -22,7 +22,6 @@ module.exports = async ({
   packagesDescription,
   readMePath,
 }) => {
-  const pagesPath = path.resolve(packageRoot, './pages');
   const componentsPath = path.resolve(
     packageRoot,
     './src/components/page-templates',
@@ -32,7 +31,6 @@ module.exports = async ({
   const pagesList = await generatePages(
     packagesPaths,
     docsList,
-    pagesPath,
     componentsPath,
     {
       useManifests,

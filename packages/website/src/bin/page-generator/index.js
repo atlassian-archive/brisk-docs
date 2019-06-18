@@ -325,8 +325,8 @@ const cleanPages = async pagesPath => {
   await fs.remove(pagesPath);
 };
 
-const addBasePages = async pagesPath => {
-  const defaultPagesPath = path.resolve(pagesPath, '..', 'default-pages');
+const addBasePages = async (packageRoot, pagesPath) => {
+  const defaultPagesPath = path.join(packageRoot, 'default-pages');
   await fs.copy(defaultPagesPath, pagesPath);
 };
 
@@ -370,13 +370,14 @@ const generateRootReadMePage = (
 module.exports = async function generatePages(
   packagesPaths,
   docsList,
-  pagesPath,
+  packageRoot,
   componentsPath,
   options = {},
   readMePath,
 ) {
+  const pagesPath = path.join(packageRoot, 'pages');
   await cleanPages(pagesPath);
-  await addBasePages(pagesPath);
+  await addBasePages(packageRoot, pagesPath);
 
   const pkgOpts = {};
 
