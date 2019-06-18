@@ -28,9 +28,11 @@ module.exports = async ({
   );
 
   const { ...rest } = docsList;
+
   const pagesList = await generatePages(
     packagesPaths,
     docsList,
+    packageRoot,
     componentsPath,
     {
       useManifests,
