@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const rimraf = require('rimraf');
 const titleCase = require('title-case');
 const filenamify = require('filenamify');
 
@@ -315,22 +314,20 @@ const generateProjectDocsPages = (docsInfo, generatorConfig, name, urlPath) => {
  * @param pagesPath the absolute path to the `/pages` directory in next
  * @param docsList list of documents
  */
-const cleanPages = (pagesPath, docsList) => {
+const cleanPages = async pagesPath => {
   // This error handling should likely be lifted to when we start executing the whole thing
   if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
     throw new Error(
       "We were worried we were going to erase files from the wrong place so we're stopping",
     );
   }
-  const oldPackagePages = path.join(pagesPath, 'packages');
-  const oldRootPage = path.join(pagesPath, 'readme.js');
-  rimraf.sync(oldPackagePages);
-  rimraf.sync(oldRootPage);
 
-  docsList.forEach(oldDoc => {
-    const oldDocsPaths = path.join(pagesPath, oldDoc.name.toLowerCase());
-    rimraf.sync(oldDocsPaths);
-  });
+  await fs.remove(pagesPath);
+};
+
+const addBasePages = async pagesPath => {
+  const defaultPagesPath = path.resolve(pagesPath, '..', 'default-pages');
+  await fs.copy(defaultPagesPath, pagesPath);
 };
 
 const generateRootReadMePage = (
@@ -378,7 +375,8 @@ module.exports = async function generatePages(
   options = {},
   readMePath,
 ) {
-  cleanPages(pagesPath, docsList);
+  await cleanPages(pagesPath);
+  await addBasePages(pagesPath);
 
   const pkgOpts = {};
 

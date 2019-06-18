@@ -12,10 +12,7 @@ yarn-error.log
 
 scratchings.js
 
-/packages/website/pages/packages
-/packages/website/pages/docs
-/packages/website/pages/guides
-/packages/website/pages/readme.js
+/packages/website/pages
 
 /packages/website/data
 /packages/**/bundles
