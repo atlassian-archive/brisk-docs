@@ -44,7 +44,7 @@ const getExistingPackages = (nested, originalChildren) => {
   let nestedChild;
   let originalChild;
 
-  for (let i = 0; i < originalChildren.length; i += 1) {
+  for (let i = 0; i < originalChildren && originalChildren.length; i += 1) {
     const a =
       nested.children &&
       nested.children.find((y: { id: any }) => y.id === originalChildren[i].id);
