@@ -523,14 +523,16 @@ describe('Missing docs folder', () => {
 
 describe('readmes in the docs', () => {
   let sitemap;
+  let packageRoot;
   let pagesPath;
 
   beforeAll(async () => {
-    pagesPath = await createTempDir();
+    packageRoot = await createTempDir();
+    pagesPath = path.join(packageRoot, 'pages');
     sitemap = await runGeneratePages({
       docsFixture: 'docs-with-readme',
       packagesFixture: 'simple-mock-packages',
-      pagesPath,
+      packageRoot,
     });
   });
   it('should have collapsed the readmes into indexes', () => {
