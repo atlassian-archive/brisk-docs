@@ -393,6 +393,14 @@ describe('Generate pages', () => {
       ).toEqual('sub-dir');
     });
   });
+
+  it('should include the default pages', () => {
+    expect(fs.existsSync(path.join(pagesPath, '_app.tsx'))).toEqual(true);
+    expect(fs.existsSync(path.join(pagesPath, '_document.tsx'))).toEqual(true);
+    expect(fs.existsSync(path.join(pagesPath, '_error.tsx'))).toEqual(true);
+    expect(fs.existsSync(path.join(pagesPath, 'index.tsx'))).toEqual(true);
+    expect(fs.existsSync(path.join(pagesPath, 'packages.tsx'))).toEqual(true);
+  });
 });
 
 describe('File modification tests', () => {
