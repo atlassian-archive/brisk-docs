@@ -30,10 +30,6 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
     const pagePath = path.join(docsPath, doc.id);
 
     if (doc.children) {
-      const readme = doc.children.find(
-        c => c.path && c.path.toLowerCase().match(/readme\.md$/),
-      );
-
       const docData = {
         key: name,
         id: doc.id,
@@ -42,14 +38,18 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
           pagePath: path.join(doc.id, child.id),
         })),
       };
-      if (readme) {
-        generateDocsHomePage(
-          path.join(pagePath, 'index.js'),
-          { ...docData, ...pageData },
-          generatorConfig,
-          'Documents',
-        );
 
+      generateDocsHomePage(
+        path.join(pagePath, 'index.js'),
+        { ...docData, ...pageData },
+        generatorConfig,
+        'Documents',
+      );
+
+      const readme = doc.children.find(
+        c => c.path && c.path.toLowerCase().match(/readme\.md$/),
+      );
+      if (readme) {
         generateDocFunc(
           path.join(pagePath, readme.id, 'index.js'),
           readme.path,
@@ -57,29 +57,13 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
           generatorConfig,
           titleCase(doc.id),
         );
-
-        return {
-          id: doc.id,
-          pagePath: path.join('/', pagePath, readme.id),
-          children: scanAndGenerate(
-            doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
-            path.join(docsPath, doc.id),
-            generatorConfig,
-            name,
-          ),
-        };
       }
-      generateDocsHomePage(
-        path.join(pagePath, 'index.js'),
-        { ...docData, ...pageData },
-        generatorConfig,
-        'Documents',
-      );
+
       return {
         id: doc.id,
-        pagePath: path.join('/', pagePath),
+        pagePath: path.join('/', pagePath, readme ? readme.id : ''),
         children: scanAndGenerate(
-          doc.children,
+          doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
           path.join(docsPath, doc.id),
           generatorConfig,
           name,

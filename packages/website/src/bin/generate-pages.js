@@ -52,14 +52,12 @@ module.exports = async ({
   fs.ensureFileSync(pagesListPath);
   fs.writeFileSync(
     pagesListPath,
-
     JSON.stringify({ packages, ...rests }, undefined, 2),
   );
 
   fs.ensureFileSync(packagesDataPath);
   fs.writeFileSync(
     packagesDataPath,
-
     JSON.stringify({ metaData }, undefined, 2),
   );
   fs.writeFileSync(

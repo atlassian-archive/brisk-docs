@@ -3,6 +3,7 @@ node_modules
 .next
 .DS_Store
 .idea
+.vscode
 
 package-lock.json
 yarn-error.log
