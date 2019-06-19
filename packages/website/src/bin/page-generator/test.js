@@ -278,6 +278,18 @@ describe('Generate pages', () => {
       ).toMatchSnapshot();
     });
 
+    it('creates an index/home page for each level of nesting', () => {
+      expect(
+        getOutput(path.join(pagesPath, 'docs', 'index.js')),
+      ).toMatchSnapshot();
+      expect(
+        getOutput(path.join(pagesPath, 'docs', 'doc-3', 'index.js')),
+      ).toMatchSnapshot();
+      expect(
+        getOutput(path.join(pagesPath, 'docs', 'doc-3', 'doc-3-2', 'index.js')),
+      ).toMatchSnapshot();
+    });
+
     describe('sitemap generation', () => {
       let docsSitemap;
 
@@ -515,6 +527,25 @@ describe('readmes in the docs', () => {
         pagePath: '/docs/doc-3/readme',
       },
     ]);
+
+    expect(
+      fs.existsSync(path.join(pagesPath, 'docs', 'doc-3', 'readme.js')),
+    ).toBe(false);
+    expect(
+      fs.existsSync(
+        path.join(pagesPath, 'docs', 'doc-3', 'doc-3-2', 'README.js'),
+      ),
+    ).toBe(false);
+  });
+  it('should generate a page for each child readme', () => {
+    expect(
+      getOutput(path.join(pagesPath, 'docs', 'doc-3', 'readme', 'index.js')),
+    ).toMatchSnapshot();
+    expect(
+      getOutput(
+        path.join(pagesPath, 'docs', 'doc-3', 'doc-3-2', 'README', 'index.js'),
+      ),
+    ).toMatchSnapshot();
   });
 });
 

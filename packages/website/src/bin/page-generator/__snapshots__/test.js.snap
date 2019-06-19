@@ -24,6 +24,33 @@ export default () => (
 );
 `;
 
+exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 1`] = `
+import React from 'react';
+import Wrapper from '../../jest-fixture/documents-index';
+
+export default () => (
+  <Wrapper data={{"key":"docs","pagePath":"docs/index.js","pageTitle":"docs","pageType":"docs"}} />
+);
+`;
+
+exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 2`] = `
+import React from 'react';
+import Wrapper from '../../../jest-fixture/item-list';
+
+export default () => (
+  <Wrapper data={{"key":"docs","id":"doc-3","children":[{"id":"doc-3-1","pagePath":"doc-3/doc-3-1"},{"id":"doc-3-2","pagePath":"doc-3/doc-3-2"}],"pagePath":"docs/doc-3/index.js","pageTitle":"Documents","pageType":"docs"}} />
+);
+`;
+
+exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 3`] = `
+import React from 'react';
+import Wrapper from '../../../../jest-fixture/item-list';
+
+export default () => (
+  <Wrapper data={{"key":"docs","id":"doc-3-2","children":[{"id":"doc-3-2-1","pagePath":"doc-3-2/doc-3-2-1"}],"pagePath":"docs/doc-3/doc-3-2/index.js","pageTitle":"Documents","pageType":"docs"}} />
+);
+`;
+
 exports[`Generate pages docs pages generation creates pages for each markdown file 1`] = `
 import React from 'react';
 import Component from '../../jest-fixture/docs/doc-1.md';
