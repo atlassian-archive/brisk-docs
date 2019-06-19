@@ -2,6 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { withRouter, SingletonRouter } from 'next/router';
 import * as PropTypes from 'prop-types';
+import OpenIcon from '@atlaskit/icon/glyph/open';
 import { PageStatusContext } from './common/page-status-context';
 
 const urlHasTrailingSlash = (router: SingletonRouter) => {
@@ -33,10 +34,12 @@ export type Props = {
 };
 
 const SwitchLink = ({ href, children, router, ...rest }: Props) => {
-  if (!href || href.indexOf('http') === 0 || href.indexOf('#') === 0) {
+  const isExternal = href && href.indexOf('http') === 0;
+  if (!href || isExternal || href.indexOf('#') === 0) {
     return (
       <a href={href} {...rest}>
         {children}
+        {isExternal && <OpenIcon label={href} size="small" />}
       </a>
     );
   }
