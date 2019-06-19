@@ -15,6 +15,7 @@ describe('<SwitchLink />', () => {
     const wrapper = mount(<SwitchLink {...initialProps} href="" />);
     const component = wrapper.find('a');
 
+    expect(component.exists()).toBeTruthy();
     expect(component.text()).toEqual(children);
     expect(component.prop('href')).toEqual('');
   });
@@ -23,6 +24,7 @@ describe('<SwitchLink />', () => {
     const wrapper = mount(<SwitchLink {...initialProps} href="#Hello" />);
     const component = wrapper.find('a');
 
+    expect(component.exists()).toBeTruthy();
     expect(component.text()).toEqual(children);
     expect(component.prop('href')).toEqual('#Hello');
   });
@@ -33,15 +35,17 @@ describe('<SwitchLink />', () => {
     );
     const component = wrapper.find('a');
 
-    expect(component.text()).toEqual(children);
+    expect(component.exists()).toBeTruthy();
+    expect(component.text()).toContain(children);
     expect(component.prop('href')).toEqual('https://atlassian.com');
-    expect(wrapper.find('OpenIcon')).toHaveLength(1);
+    expect(wrapper.find('ShortcutIcon')).toHaveLength(1);
   });
 
   it('renders a Link component for relative links', () => {
     const wrapper = mount(<SwitchLink {...initialProps} />);
     const component = wrapper.find('Link');
 
+    expect(component.exists()).toBeTruthy();
     expect(component.text()).toEqual(children);
     expect(component.prop('href')).toEqual(initialProps.href);
   });
