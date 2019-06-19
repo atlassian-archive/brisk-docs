@@ -4,12 +4,13 @@ const webpack = require('webpack');
 // errors further down
 /* eslint-disable no-param-reassign */
 
+const frontmatter = require('remark-frontmatter');
 // eslint-disable-next-line
 const images = require('./custom-plugins/mdx-image-loader');
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
-    mdPlugins: [images],
+    mdPlugins: [images, [frontmatter, 'yaml']],
   },
 });
 const withTypescript = require('@zeit/next-typescript');
