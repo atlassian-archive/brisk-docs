@@ -44,6 +44,20 @@ async function runGeneratePages({
   );
 }
 
+function getOutput(thePath) {
+  return fs.readFileSync(thePath, 'utf-8');
+}
+
+// Remove the custom hash from jest-fixture so snapshots are consistent across test runs
+expect.addSnapshotSerializer({
+  print(val) {
+    return val.replace(/jest-fixture-[A-z0-9]*/g, 'jest-fixture');
+  },
+  test(val) {
+    return typeof val === 'string';
+  },
+});
+
 describe('Generate pages', () => {
   let pagesPath;
   let sitemap;
@@ -60,20 +74,20 @@ describe('Generate pages', () => {
   describe('package pages generation', () => {
     it('creates a home page per package', () => {
       expect(
-        fs.existsSync(
+        getOutput(
           path.join(pagesPath, 'packages', 'mock-package1', 'index.js'),
         ),
-      ).toEqual(true);
+      ).toMatchSnapshot();
       expect(
-        fs.existsSync(
+        getOutput(
           path.join(pagesPath, 'packages', 'mock-package2', 'index.js'),
         ),
-      ).toEqual(true);
+      ).toMatchSnapshot();
       expect(
-        fs.existsSync(
+        getOutput(
           path.join(pagesPath, 'packages', 'mock-package2', 'index.js'),
         ),
-      ).toEqual(true);
+      ).toMatchSnapshot();
     });
 
     it('creates docs pages for each package', () => {
@@ -84,15 +98,15 @@ describe('Generate pages', () => {
           packageId,
           'docs',
         );
-        expect(fs.existsSync(path.join(packageDocsPath, 'index.js'))).toEqual(
-          true,
-        );
         expect(
-          fs.existsSync(path.join(packageDocsPath, 'extended-info.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageDocsPath, 'index.js')),
+        ).toMatchSnapshot(packageId);
         expect(
-          fs.existsSync(path.join(packageDocsPath, 'special-usecase.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageDocsPath, 'extended-info.js')),
+        ).toMatchSnapshot(packageId);
+        expect(
+          getOutput(path.join(packageDocsPath, 'special-usecase.js')),
+        ).toMatchSnapshot(packageId);
       };
 
       assertDocs('mock-package1');
@@ -109,17 +123,17 @@ describe('Generate pages', () => {
           'examples',
         );
         expect(
-          fs.existsSync(path.join(packageExamplesPath, 'index.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageExamplesPath, 'index.js')),
+        ).toMatchSnapshot();
         expect(
-          fs.existsSync(path.join(packageExamplesPath, 'example1.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageExamplesPath, 'example1.js')),
+        ).toMatchSnapshot();
         expect(
-          fs.existsSync(path.join(packageExamplesPath, 'example2.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageExamplesPath, 'example2.js')),
+        ).toMatchSnapshot();
         expect(
-          fs.existsSync(path.join(packageExamplesPath, 'example3.js')),
-        ).toEqual(true);
+          getOutput(path.join(packageExamplesPath, 'example3.js')),
+        ).toMatchSnapshot();
       };
 
       assertDocs('mock-package1');
@@ -248,20 +262,20 @@ describe('Generate pages', () => {
 
   describe('docs pages generation', () => {
     it('creates pages for each markdown file', () => {
-      expect(fs.existsSync(path.join(pagesPath, 'docs', 'doc-1.js'))).toEqual(
-        true,
-      );
-      expect(fs.existsSync(path.join(pagesPath, 'docs', 'doc-2.js'))).toEqual(
-        true,
-      );
       expect(
-        fs.existsSync(path.join(pagesPath, 'docs', 'doc-3', 'doc-3-1.js')),
-      ).toEqual(true);
+        getOutput(path.join(pagesPath, 'docs', 'doc-1.js')),
+      ).toMatchSnapshot();
       expect(
-        fs.existsSync(
+        getOutput(path.join(pagesPath, 'docs', 'doc-2.js')),
+      ).toMatchSnapshot();
+      expect(
+        getOutput(path.join(pagesPath, 'docs', 'doc-3', 'doc-3-1.js')),
+      ).toMatchSnapshot();
+      expect(
+        getOutput(
           path.join(pagesPath, 'docs', 'doc-3', 'doc-3-2', 'doc-3-2-1.js'),
         ),
-      ).toEqual(true);
+      ).toMatchSnapshot();
     });
 
     describe('sitemap generation', () => {
@@ -314,8 +328,8 @@ describe('Generate pages', () => {
 
     it('creates pages for each markdown file based on docsPath rather than name', () => {
       expect(
-        fs.existsSync(path.join(customPagesPath, 'guides', 'testguide.js')),
-      ).toEqual(true);
+        getOutput(path.join(customPagesPath, 'guides', 'testguide.js')),
+      ).toMatchSnapshot();
       expect(
         fs.existsSync(path.join(customPagesPath, 'docs', 'testdoc.js')),
       ).toEqual(false);
@@ -403,7 +417,7 @@ describe('File modification tests', () => {
     componentsPath = await createTempDir();
   });
 
-  it('should remove files from package docs pages that are removed from disc on rerun', async () => {
+  it('should remove files from package docs pages that are removed from disk on rerun', async () => {
     const firstDocsPage = path.join(
       pagesPath,
       'packages',
@@ -433,7 +447,7 @@ describe('File modification tests', () => {
     expect(fs.existsSync(firstDocsPage)).toEqual(false);
   });
 
-  it('should remove files from docs pages that are removed from disc on rerun', async () => {
+  it('should remove files from docs pages that are removed from disk on rerun', async () => {
     const firstDocsPage = path.join(pagesPath, 'docs', 'doc-1.js');
     await generatePages(
       [packagesPath],
@@ -473,11 +487,14 @@ describe('Missing docs folder', () => {
 
 describe('readmes in the docs', () => {
   let sitemap;
+  let pagesPath;
 
   beforeAll(async () => {
+    pagesPath = await createTempDir();
     sitemap = await runGeneratePages({
       docsFixture: 'docs-with-readme',
       packagesFixture: 'simple-mock-packages',
+      pagesPath,
     });
   });
   it('should have collapsed the readmes into indexes', () => {
@@ -518,12 +535,12 @@ describe('Additional items in the docs tests', () => {
   });
 
   it('creates pages for each markdown file in docs and guides folder', () => {
-    expect(fs.existsSync(path.join(pagesPath, 'docs', 'testdoc.js'))).toEqual(
-      true,
-    );
     expect(
-      fs.existsSync(path.join(pagesPath, 'guides', 'testguide.js')),
-    ).toEqual(true);
+      getOutput(path.join(pagesPath, 'docs', 'testdoc.js')),
+    ).toMatchSnapshot();
+    expect(
+      getOutput(path.join(pagesPath, 'guides', 'testguide.js')),
+    ).toMatchSnapshot();
   });
 });
 
@@ -543,7 +560,7 @@ describe('Generate readme page at the root level', () => {
   });
 
   it('creates a readme page for the root level file', () => {
-    expect(fs.existsSync(path.join(pagesPath, 'readme.js'))).toEqual(true);
+    expect(getOutput(path.join(pagesPath, 'readme.js'))).toMatchSnapshot();
   });
 
   it('adds top-level readme entry to sitemap', () => {
