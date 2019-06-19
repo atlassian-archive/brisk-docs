@@ -37,6 +37,7 @@
     "@atlaskit/pagination": "^10.0.1",
     "@atlaskit/theme": "^6.0.0",
     "@babel/runtime-corejs2": "^7.4.3",
+    "next": "^8.0.4",
     "prismjs": "^1.15.0",
     "react-addons-text-content": "^0.0.4",
     "react-intl": "^2.9.0",

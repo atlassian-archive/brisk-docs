@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Editor } from '@atlaskit/editor-core';
+import dynamic from 'next/dynamic';
+// import { Editor } from '@atlaskit/editor-core';
+
+const Editor = dynamic(import('../editor-import'), {
+  ssr: false
+});
 
 export default function Example() {
   return (
