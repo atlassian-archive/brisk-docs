@@ -67,7 +67,7 @@ describe('Generate pages', () => {
   });
 
   describe('package pages generation', () => {
-    it('creates a home page per package', async () => {
+    it('creates a home page per package', () => {
       expect(
         fs.existsSync(
           path.join(pagesPath, 'packages', 'mock-package1', 'index.js'),
