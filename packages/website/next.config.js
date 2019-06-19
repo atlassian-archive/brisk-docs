@@ -56,16 +56,8 @@ module.exports = withTypescript(
               loader.include.push(path.join(__dirname, '..'));
               loader.exclude = babelExlude;
             }
-            if (
-              loader.use.loader === 'next-babel-loader' ||
-              (Array.isArray(loader.use) &&
-                loader.use.find(x => x.loader === '@mdx-js/loader'))
-            ) {
-              if (Array.isArray(loader.use)) {
-                loader.use = ['thread-loader', ...loader.use];
-              } else {
-                loader.use = ['thread-loader', loader.use];
-              }
+            if (loader.use.loader === 'next-babel-loader') {
+              loader.use = ['thread-loader', loader.use];
             }
           });
 
