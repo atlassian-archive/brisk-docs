@@ -1,5 +1,7 @@
 # Getting started
 
+> This document is for deving on this mono-repo. For information on using brisk in your own project see the [@brisk-docs/website documentation](../packages/website)
+
 This project is a monorepo of several packages which can be managed using bolt.
 Before starting your work on any of the packages make sure you run:
 
@@ -20,14 +22,6 @@ bolt docs
 
 We use Jest for unit testing and Cypress for integration tests.
 
-To run unit tests across the entire project:
-
 ```sh
 bolt test
-```
-
-or for a single package:
-
-```sh
-bolt w <package name> test
 ```

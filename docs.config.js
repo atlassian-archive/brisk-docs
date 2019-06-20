@@ -6,12 +6,14 @@ module.exports = () => ({
     {
       path: './docs',
       name: 'Docs',
-      description: 'View the documents for this project',
+      description:
+        'Information about brisk as a whole, and contributing to brisk',
     },
     {
-      path: './guides',
-      name: 'Guides',
-      description: 'View the guides for this project',
+      path: './test-pages',
+      name: 'Test Pages',
+      description:
+        "This is a collection of test pages used by brisk devs - you probably won't find anything useful in here",
     },
   ],
 });
