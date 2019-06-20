@@ -1,1 +1,0 @@
-Add icon to external links
