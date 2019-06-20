@@ -49,14 +49,16 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
       const readme = doc.children.find(
         c => c.path && c.path.toLowerCase().match(/readme\.md$/),
       );
+      let meta = {};
       if (readme) {
-        generateDocFunc(
+        const { meta: readmeMeta } = generateDocFunc(
           path.join(pagePath, readme.id, 'index.js'),
           readme.path,
           { key: name, ...pageData },
           generatorConfig,
           titleCase(doc.id),
         );
+        meta = readmeMeta;
       }
 
       return {
@@ -68,10 +70,11 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
           generatorConfig,
           name,
         ),
+        meta,
       };
     }
 
-    generateDocFunc(
+    const { meta } = generateDocFunc(
       `${pagePath}.js`,
       doc.path,
       { key: name, ...pageData },
@@ -82,6 +85,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
     return {
       id: doc.id,
       pagePath: path.join('/', pagePath),
+      meta,
     };
   });
 };
@@ -119,7 +123,7 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
     };
     packagesData.push({ id: pkg.id, ...homePageData });
     const homePath = path.join('packages', pkg.id);
-    generateHomePage(
+    const { meta: homeMeta } = generateHomePage(
       path.join(homePath, 'index.js'),
       pkg.readmePath,
       { ...pageData, ...homePageData },
@@ -263,6 +267,8 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
       parentId: parent && parent !== '/' ? parent : undefined,
       packageId: pkg.id,
       homePath: path.join('/', homePath),
+      // TODO: Is this the best place for home meta?
+      homeMeta,
       changelogPath: displayChangelog ? path.join('/', changelogPath) : null,
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),
