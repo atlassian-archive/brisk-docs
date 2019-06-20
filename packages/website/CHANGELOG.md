@@ -1,5 +1,19 @@
 # @brisk-docs/website
 
+## 0.7.2
+
+### Patch Changes
+
+- ba3f641: Add icon to external links
+- 5e94b59: Move default pages into their own folder, then copy the folder contents into pages on each build
+
+  This fixes an internal problem where changing what docs are generated could cause unneeded pages
+  to persist, slowing brisk down, or erroring the build. This should not change the user experience.
+
+- 75f4881: Fix images not loading after a build/export
+
+- eba9344: Add check to ensure navigation renders
+
 ## 0.7.1
 
 ### Patch Changes
