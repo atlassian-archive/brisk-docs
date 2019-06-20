@@ -7,7 +7,7 @@ const generatePages = require('./generate-pages');
 const cwd = process.cwd();
 const nextRoot = path.resolve(__dirname, '..', '..');
 
-const spawnNextProcess = (command, websiteConfigPath, args = '') => {
+const spawnNextProcess = (command, websiteConfigPath, ...args) => {
   const envVariables = {
     FORCE_EXTRACT_REACT_TYPES: true,
     DOCS_WEBSITE_CWD: cwd,
@@ -16,8 +16,15 @@ const spawnNextProcess = (command, websiteConfigPath, args = '') => {
     envVariables.DOCS_WEBSITE_CONFIG_PATH = websiteConfigPath;
   }
 
+  let nodeEnv = 'PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src';
+
+  const filteredArgs = args.filter(arg => arg !== 'debug');
+  if (args.length !== filteredArgs.length) {
+    nodeEnv += ' NODE_OPTIONS="--inspect-brk"';
+  }
+
   const { status } = spawnSync(
-    `PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src next ${command} ${args}`,
+    `${nodeEnv} next ${command} ${filteredArgs.join(' ')}`,
     [],
     {
       stdio: 'inherit',
