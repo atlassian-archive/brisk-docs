@@ -4,9 +4,13 @@ import fse from 'fs-extra';
 
 import * as generators from './write-pages';
 
+import getMarkdownMeta from './get-markdown-meta';
+
 const assertNoAbsoluteImports = source => {
   expect(source).not.toMatch(/^import .+ from '\/.+'/m);
 };
+
+jest.mock('./get-markdown-meta', () => jest.fn(() => ({ mocked: 'meta' })));
 
 describe('Page templates', () => {
   let cwd;
@@ -50,9 +54,10 @@ describe('Page templates', () => {
   });
 
   it('creates js for a package doc page', () => {
-    generators.generatePackageDocPage(
+    const readmePath = path.join(cwd, 'README.md');
+    const returnVal = generators.generatePackageDocPage(
       'output.js',
-      path.join(cwd, 'README.md'),
+      readmePath,
       {},
       { wrappersPath, pagesPath },
     );
@@ -60,6 +65,8 @@ describe('Page templates', () => {
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
+    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
+    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
   });
 
   it('creates js for a package example pages', () => {
@@ -105,9 +112,10 @@ describe('Page templates', () => {
   });
 
   it('creates js for project doc page', () => {
-    generators.generateProjectDocPage(
+    const readmePath = path.join(cwd, 'README.md');
+    const returnVal = generators.generateProjectDocPage(
       'output.js',
-      path.join(cwd, 'README.md'),
+      readmePath,
       {},
       { wrappersPath, pagesPath },
     );
@@ -115,5 +123,7 @@ describe('Page templates', () => {
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
+    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
+    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
   });
 });

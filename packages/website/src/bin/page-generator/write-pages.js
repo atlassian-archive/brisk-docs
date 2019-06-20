@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
+const getMarkdownMeta = require('./get-markdown-meta');
 const {
   changelogTemplate,
   exampleTemplate,
@@ -53,6 +54,8 @@ const generateBasicPage = (
   wrapperName,
   { wrappersPath, pagesPath },
   title = '',
+  // TODO: Combine this with an existing param
+  meta,
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
@@ -62,7 +65,7 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  const templateData = { ...data, pagePath, pageTitle: title };
+  const templateData = { ...data, pagePath, pageTitle: title, meta };
 
   const source = componentImportPath
     ? wrappedComponentTemplate(
@@ -144,6 +147,7 @@ const generatePackageDocPage = (
   config,
   title = '',
 ) => {
+  const meta = getMarkdownMeta(markdownPath);
   generateBasicPage(
     pagePath,
     markdownPath,
@@ -152,6 +156,7 @@ const generatePackageDocPage = (
     config,
     title,
   );
+  return { meta };
 };
 
 const generateExamplePage = (
@@ -220,6 +225,7 @@ const generateProjectDocPage = (
   config,
   title = '',
 ) => {
+  const meta = getMarkdownMeta(markdownPath);
   generateBasicPage(
     pagePath,
     markdownPath,
@@ -228,6 +234,8 @@ const generateProjectDocPage = (
     config,
     title,
   );
+
+  return { meta };
 };
 
 module.exports = {
