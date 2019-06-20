@@ -14,6 +14,7 @@
     "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
     "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
     "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
+    "export:site": "node src/bin/index.js export --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
     "start": "node src/bin/index.js start"
   },
