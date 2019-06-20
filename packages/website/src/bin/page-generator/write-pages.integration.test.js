@@ -26,6 +26,7 @@ describe('Page templates', () => {
     cwd = await createTempDir();
     pagesPath = path.join(cwd, 'pages');
     wrappersPath = path.join(cwd, 'wrappers');
+    jest.clearAllMocks();
   });
 
   it('creates js for a package home page', () => {
@@ -56,6 +57,7 @@ export default () => (
 
   it('parses and returns meta from package home page readme', () => {
     const readmePath = path.join(cwd, 'README.md');
+    fse.writeFileSync(readmePath, '');
     const returnVal = generators.generateHomePage(
       'output.js',
       readmePath,
