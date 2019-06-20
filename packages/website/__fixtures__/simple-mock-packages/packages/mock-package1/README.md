@@ -1,3 +1,7 @@
+---
+keywords: ['project', 'react']
+---
+
 # Project Title
 
 One Paragraph of project description goes here. This is ReadMe for the package 1.
