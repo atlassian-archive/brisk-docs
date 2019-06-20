@@ -4,7 +4,7 @@
 
 - run `bolt changeset` - select all packages affected by your change
 - Fill out a description of the change - this will end up in the changelog
-- If it was too hard to write everything in one line, go to the `.changeset/**/changes.md` file and flesh out the change. The entire markdown chunk here will be written to your changeset, so feel free to include code snippets or suggestions on how to upgrade if they are needed
+- If it was too hard to write everything in one line, go to the `.changeset/{CHANGESET_ID}/changes.md` file and flesh out the change. The entire markdown chunk here will be written to your changeset, so feel free to include code snippets or suggestions on how to upgrade if they are needed
   - IF IT WAS **A BREAKING CHANGE**, you should definitely do this
 - It’s better to make multiple changesets, even for the same packages, to get good changelog entries, rather than trying to condense them and end up with useless changelogs
 
@@ -27,7 +27,7 @@ We need to add safeguards to cover this out, so, when releasing also do:
 - `cd packages/website && yarn pack`
 - Pull down the AF repository, and install brisk from the yarn pack generated tar. `yarn add file:/path/to/generated/tarball.tgz`
 - In AF, run `yarn brisk build && yarn brisk export && yarn start`
-- Visit the following pages and very that: Images load, internal links work as expected, nav links work as expected
+- Visit the following pages and verify that: Images load, internal links work as expected, nav links work as expected
   - [http://localhost:8080/guides/architecture/general/components/state-management/README/](http://localhost:8080/guides/architecture/general/components/state-management/README/)
   - [http://localhost:8080/readme/](http://localhost:8080/readme/)
   - [http://localhost:8080/packages/eslint-plugin-tangerine/](http://localhost:8080/packages/eslint-plugin-tangerine/)
