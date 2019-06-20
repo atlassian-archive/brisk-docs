@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "The Brisk website documenter",
   "main": "src/bin/index.js",
   "maintainers": [
@@ -25,7 +25,7 @@
   },
   "files": [
     "src",
-    "pages/*.tsx",
+    "default-pages",
     "static",
     "custom-plugins",
     "babel.config.js",
