@@ -11,6 +11,8 @@
   ],
   "license": "MIT",
   "scripts": {
+    "debug:generate": "node --inspect-brk src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
+    "debug:next": "yarn dev --debug-next",
     "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
     "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
     "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",

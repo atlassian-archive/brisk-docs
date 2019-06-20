@@ -15,7 +15,7 @@ const argv = mainOptions._unknown || [];
 const cliOptions = [
   { name: 'config', type: String },
   { name: 'port', alias: 'p', type: Number },
-  { name: 'debug', alias: 'd', type: Boolean },
+  { name: 'debug-next', alias: 'd', type: Boolean },
 ];
 const options = commandLineArgs(cliOptions, { argv, camelCase: true });
 
@@ -23,7 +23,7 @@ const nextOptions = [];
 
 if (options.port) nextOptions.push(`--port ${options.port}`);
 
-if (options.debug) nextOptions.push('debug');
+if (options.debugNext) nextOptions.push('debug-next');
 
 if (mainOptions.command === undefined) {
   throw new Error(`No command supplied`);

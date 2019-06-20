@@ -16,15 +16,16 @@ const spawnNextProcess = (command, websiteConfigPath, ...args) => {
     envVariables.DOCS_WEBSITE_CONFIG_PATH = websiteConfigPath;
   }
 
-  let nodeEnv = 'PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src';
+  const nodeEnv = 'PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src';
+  let nextBin = 'next';
 
-  const filteredArgs = args.filter(arg => arg !== 'debug');
+  const filteredArgs = args.filter(arg => arg !== 'debug-next');
   if (args.length !== filteredArgs.length) {
-    nodeEnv += ' NODE_OPTIONS="--inspect-brk"';
+    nextBin = `node --inspect-brk $(${nodeEnv} which next)`;
   }
 
   const { status } = spawnSync(
-    `${nodeEnv} next ${command} ${filteredArgs.join(' ')}`,
+    `${nodeEnv} ${nextBin} ${command} ${filteredArgs.join(' ')}`,
     [],
     {
       stdio: 'inherit',
