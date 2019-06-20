@@ -54,8 +54,6 @@ const generateBasicPage = (
   wrapperName,
   { wrappersPath, pagesPath },
   title = '',
-  // TODO: Combine this with an existing param
-  meta,
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
@@ -65,7 +63,7 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  const templateData = { ...data, pagePath, pageTitle: title, meta };
+  const templateData = { ...data, pagePath, pageTitle: title };
 
   const source = componentImportPath
     ? wrappedComponentTemplate(
@@ -104,7 +102,9 @@ const generateNonComponentPage = (
 };
 
 const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
+  const meta = fs.existsSync(readmePath) ? getMarkdownMeta(readmePath) : {};
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
+  return { meta };
 };
 
 const generateChangelogPage = (

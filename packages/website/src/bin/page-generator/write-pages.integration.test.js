@@ -29,9 +29,11 @@ describe('Page templates', () => {
   });
 
   it('creates js for a package home page', () => {
+    const readmePath = path.join(cwd, 'README.md');
+    fse.writeFileSync(readmePath, '');
     generators.generateHomePage(
       'output.js',
-      path.join(cwd, 'README.md'),
+      readmePath,
       {},
       { wrappersPath, pagesPath },
     );
@@ -50,6 +52,19 @@ export default () => (
   </Wrapper>
 );"
 `);
+  });
+
+  it('parses and returns meta from package home page readme', () => {
+    const readmePath = path.join(cwd, 'README.md');
+    const returnVal = generators.generateHomePage(
+      'output.js',
+      readmePath,
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
+    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
   });
 
   it('creates js for a package home page even when there is no README file', () => {
@@ -72,9 +87,21 @@ export default () => (
 `);
   });
 
+  it('should not attempt to retrieve meta if README file does not exist', () => {
+    const returnVal = generators.generateHomePage(
+      'output.js',
+      '',
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    expect(getMarkdownMeta).not.toHaveBeenCalled();
+    expect(returnVal).toEqual({ meta: {} });
+  });
+
   it('creates js for a package doc page', () => {
     const readmePath = path.join(cwd, 'README.md');
-    const returnVal = generators.generatePackageDocPage(
+    generators.generatePackageDocPage(
       'output.js',
       readmePath,
       {},
@@ -84,8 +111,6 @@ export default () => (
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
-    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
-    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
     expect(output).toMatchInlineSnapshot(`
 "import React from 'react';
 import Component from '../README.md';
@@ -97,6 +122,19 @@ export default () => (
   </Wrapper>
 );"
 `);
+  });
+
+  it('parses and returns meta from package doc pages', () => {
+    const readmePath = path.join(cwd, 'README.md');
+    const returnVal = generators.generatePackageDocPage(
+      'output.js',
+      readmePath,
+      {},
+      { wrappersPath, pagesPath },
+    );
+
+    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
+    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
   });
 
   it('creates js for a package example pages', () => {
@@ -170,7 +208,7 @@ export default () => (
 
   it('creates js for project doc page', () => {
     const readmePath = path.join(cwd, 'README.md');
-    const returnVal = generators.generateProjectDocPage(
+    generators.generateProjectDocPage(
       'output.js',
       readmePath,
       {},
@@ -180,8 +218,6 @@ export default () => (
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
-    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
-    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
     expect(output).toMatchInlineSnapshot(`
 "import React from 'react';
 import Component from '../README.md';
@@ -193,5 +229,17 @@ export default () => (
   </Wrapper>
 );"
 `);
+  });
+
+  it('parses and returns meta from project doc pages', () => {
+    const readmePath = path.join(cwd, 'README.md');
+    const returnVal = generators.generateProjectDocPage(
+      'output.js',
+      readmePath,
+      {},
+      { wrappersPath, pagesPath },
+    );
+    expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
+    expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
   });
 });
