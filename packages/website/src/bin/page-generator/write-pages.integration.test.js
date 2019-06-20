@@ -39,6 +39,17 @@ describe('Page templates', () => {
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Component from '../README.md';
+import Wrapper from '../wrappers/package-home';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+      <Component />
+  </Wrapper>
+);"
+`);
   });
 
   it('creates js for a package home page even when there is no README file', () => {
@@ -51,6 +62,14 @@ describe('Page templates', () => {
 
     const output = getOutput('output.js');
     expect(output).not.toMatch(/^import .+ from '\undefined'/m);
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Wrapper from '../wrappers/package-home';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}} />
+);"
+`);
   });
 
   it('creates js for a package doc page', () => {
@@ -67,6 +86,17 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
     expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
     expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Component from '../README.md';
+import Wrapper from '../wrappers/package-docs';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+      <Component />
+  </Wrapper>
+);"
+`);
   });
 
   it('creates js for a package example pages', () => {
@@ -85,6 +115,15 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
 
     assertNoAbsoluteImports(outputRaw);
+    expect(output).toMatchSnapshot();
+    expect(outputRaw).toMatchInlineSnapshot(`
+"import React from 'react';
+import Wrapper from '../../example';
+
+export default () => (
+  <Wrapper data={{\\"pageTitle\\":\\"\\"}} />
+);"
+`);
   });
 
   it('creates js for a docs home page', () => {
@@ -97,6 +136,15 @@ describe('Page templates', () => {
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
+
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Wrapper from '../wrappers/item-list';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\",\\"pageType\\":\\"docs\\"}} />
+);"
+`);
   });
 
   it('creates js for an examples home page', () => {
@@ -109,6 +157,15 @@ describe('Page templates', () => {
     const output = getOutput('output.js');
 
     assertNoAbsoluteImports(output);
+
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Wrapper from '../wrappers/item-list';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\",\\"pageType\\":\\"examples\\"}} />
+);"
+`);
   });
 
   it('creates js for project doc page', () => {
@@ -125,5 +182,16 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
     expect(getMarkdownMeta).toHaveBeenCalledWith(readmePath);
     expect(returnVal).toEqual({ meta: { mocked: 'meta' } });
+    expect(output).toMatchInlineSnapshot(`
+"import React from 'react';
+import Component from '../README.md';
+import Wrapper from '../wrappers/project-docs';
+
+export default () => (
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+      <Component />
+  </Wrapper>
+);"
+`);
   });
 });
