@@ -6,7 +6,7 @@ import LinkWithRouter from './link-with-router';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
-import { Pages, NestedExamples, ExamplePage, Page } from '../../../types';
+import { NestedExamples, ExamplePage, Page } from '../../../types';
 
 const GetLink = ({ id, pagePath }: Page | ExamplePage) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
@@ -34,7 +34,7 @@ export type SomeProps = {
   homePath: string;
   packageName: string;
   changelogPath: string;
-  docs: Pages;
+  docs: Page[];
   examples: ExamplePage[];
   subExamples: NestedExamples[];
 };

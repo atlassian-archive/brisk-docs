@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { Item } from '@atlaskit/navigation-next';
 import Tree from '@atlaskit/tree';
 import titleCase from 'title-case';
 import { colors } from '@atlaskit/theme';
 import LinkWithRouter from './link-with-router';
+import { Page } from '../../../types';
 
 const ParentWrapper = styled.div`
   font-size: 10px;
@@ -14,15 +14,11 @@ const ParentWrapper = styled.div`
   text-transform: uppercase;
 `;
 
-type Item =
-  | { id: string; pagePath: string; children: Item[] }
-  | { id: string; pagePath: string; children: undefined };
-
-type ArrayItems = Item[];
+const getTitle = (item: Page) => (item.meta && item.meta.title) || item.id;
 
 // Flatten the nested page structure into an object that ak/tree understands
 const arrayToTreeItems = (
-  arrayItems: ArrayItems,
+  arrayItems: Page[],
   {
     parentId,
     parentTitle,
@@ -48,7 +44,7 @@ const arrayToTreeItems = (
         ...acc,
         ...arrayToTreeItems(sub.children, {
           parentId: id,
-          parentTitle: sub.id,
+          parentTitle: getTitle(sub),
           parentPath: sub.pagePath,
         }),
       };
@@ -60,7 +56,7 @@ const arrayToTreeItems = (
         id,
         children: [],
         data: {
-          title: sub.id,
+          title: getTitle(sub),
           href: sub.pagePath,
         },
       },

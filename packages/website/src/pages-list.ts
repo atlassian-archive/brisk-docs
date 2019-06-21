@@ -6,12 +6,14 @@
 
 // @ts-ignore
 import pageInfo from '../data/pages-list.json';
-import { PackageInfo } from '../types';
+import { PackageInfo, Page } from '../types';
 
-interface Info {
+type Info = {
   packages: PackageInfo[];
-  [key: string]: any;
-}
+  readme?: Page[];
+} & {
+  [key: string]: Page[];
+};
 
 const data: Info = pageInfo;
 

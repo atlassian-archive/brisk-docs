@@ -1,7 +1,13 @@
+/** This is metadata specified in the frontmatter of markdown pages */
+export type PageMeta = {
+  title?: string;
+};
+
 export interface Page {
   id: string;
   pagePath: string;
-  children: undefined;
+  children?: Page[];
+  meta?: PageMeta | undefined;
 }
 
 export interface ExamplePage extends Page {
@@ -14,13 +20,11 @@ export type NestedExamples =
 
 export type NestedPages = { id: string; children: NestedPages[] } | Page;
 
-export type Pages = Page[];
-
 type Maintainers = string | string[];
 
 type Repository = string | { type: string; url: string; directory?: string };
 
-type Meta = {
+type PackageMeta = {
   id: string;
   description: string;
   version: string;
@@ -28,8 +32,8 @@ type Meta = {
   repository?: Repository;
 };
 
-export declare type Metadata = {
-  metaData: Meta[];
+export declare type PackageMetadata = {
+  metaData: PackageMeta[];
 };
 
 export declare type PackageInfo = {
@@ -39,8 +43,9 @@ export declare type PackageInfo = {
   maintainers?: Maintainers;
   packageId: string;
   homePath: string;
+  homeMeta: PageMeta | undefined;
   changelogPath: string;
-  docs: Pages;
+  docs: Page[];
   examples: ExamplePage[];
   subExamples: NestedExamples[];
   repository: Repository;

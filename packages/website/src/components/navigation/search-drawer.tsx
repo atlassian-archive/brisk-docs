@@ -8,7 +8,7 @@ import Drawer from '@atlaskit/drawer';
 import capitalize from 'lodash.capitalize';
 import data from '../../pages-list';
 import Link from './link-component';
-import { Pages } from '../../../types';
+import { Page } from '../../../types';
 
 const prettyTitle = (id: string) =>
   id
@@ -16,7 +16,7 @@ const prettyTitle = (id: string) =>
     .map(capitalize)
     .join(' ');
 
-const remapPages = (pages: Pages, packageId: string, type: string) =>
+const remapPages = (pages: Page[], packageId: string, type: string) =>
   pages.map(({ id, pagePath: path }) => ({
     id,
     title: prettyTitle(id),
@@ -39,7 +39,7 @@ const newData = data.packages.map(
   }),
 );
 
-const remapChild = (pages: Pages, docId: string, type: string) =>
+const remapChild = (pages: Page[], docId: string, type: string) =>
   pages.map(({ id, pagePath: path }) => ({
     id,
     title: prettyTitle(id),
