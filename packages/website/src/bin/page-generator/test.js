@@ -286,8 +286,8 @@ describe('Generate pages', () => {
           });
         });
 
-        it('that is an empty object for markdown files that do not have frontmatter', () => {
-          expect(packagesSitemap[0].docs[1].meta).toEqual({});
+        it('that is undefined for markdown files that do not have frontmatter', () => {
+          expect(packagesSitemap[0].docs[1].meta).toBeUndefined();
         });
       });
     });
@@ -356,14 +356,14 @@ describe('Generate pages', () => {
 
       it('gets meta for all docs pages in the filesystem structure', () => {
         expect(docsSitemap[0].meta).toEqual({ title: 'Document One' });
-        expect(docsSitemap[1].meta).toEqual({ title: 'Document Two' });
-        expect(docsSitemap[2].meta).toEqual({});
+        expect(docsSitemap[1].meta).toEqual({});
+        expect(docsSitemap[2].meta).toBeUndefined();
 
         // nested docs
         expect(docsSitemap[2].children[0].meta).toEqual({
           readingTime: '1 second',
         });
-        expect(docsSitemap[2].children[1].meta).toEqual({});
+        expect(docsSitemap[2].children[1].meta).toBeUndefined();
         expect(docsSitemap[2].children[1].children[0].meta).toEqual({
           usefulness: 'yes',
         });

@@ -7,6 +7,7 @@ const fs = require('fs');
 const flatMap = require('lodash.flatmap');
 const glob = require('glob');
 const getDocsInfo = require('./get-docs-info');
+const getMarkdownMeta = require('./get-markdown-meta');
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const getFilesInDir = dirPath => {
@@ -134,8 +135,11 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
       }
 
       let readmePath = path.resolve(pkgPath, 'README.md');
+      let readmeMeta;
       if (!fs.existsSync(readmePath)) {
         readmePath = '';
+      } else {
+        readmeMeta = getMarkdownMeta(readmePath);
       }
 
       let changelogPath = path.resolve(pkgPath, 'CHANGELOG.md');
@@ -174,6 +178,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         pkgPath,
         changelogPath,
         readmePath,
+        readmeMeta,
         examplesPaths,
         docsPaths,
         subExamplesPaths,

@@ -74,23 +74,31 @@ describe('Get package info utility', () => {
             ]
           : [];
 
-      expect(pkgInfo).toHaveProperty('docsPaths', [
-        {
-          id: 'extended-info',
-          path: path.join(cwd, 'packages', pkgName, 'docs', 'extended-info.md'),
-        },
-        ...nonsense,
-        {
-          id: 'special-usecase',
-          path: path.join(
-            cwd,
-            'packages',
-            pkgName,
-            'docs',
-            'special-usecase.mdx',
-          ),
-        },
-      ]);
+      expect(pkgInfo).toMatchObject({
+        docsPaths: [
+          {
+            id: 'extended-info',
+            path: path.join(
+              cwd,
+              'packages',
+              pkgName,
+              'docs',
+              'extended-info.md',
+            ),
+          },
+          ...nonsense,
+          {
+            id: 'special-usecase',
+            path: path.join(
+              cwd,
+              'packages',
+              pkgName,
+              'docs',
+              'special-usecase.mdx',
+            ),
+          },
+        ],
+      });
     };
 
     assertDocs(packageInfo[0], 'mock-package1');
@@ -153,6 +161,14 @@ describe('Get package info utility', () => {
 
   it('hides the other examples according to the showSubExamples config', async () => {
     expect(packageInfo[0].subExamplesPaths).toEqual([]);
+  });
+
+  it('returns meta for the package readme', () => {
+    expect(packageInfo[0].readmeMeta).toEqual({
+      keywords: ['project', 'react'],
+    });
+    expect(packageInfo[1].readmeMeta).toEqual({});
+    expect(packageInfo[2].readmeMeta).toBeUndefined();
   });
 });
 

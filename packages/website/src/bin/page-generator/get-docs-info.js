@@ -4,6 +4,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const handleConfig = require('../handle-config');
+const getMarkdownMeta = require('./get-markdown-meta');
 
 const sortDirectory = (processedDir, dirPath) => {
   const dirConfig = handleConfig(dirPath);
@@ -55,6 +56,7 @@ const processDirectory = dirPath => {
         return {
           id,
           path: fullPath,
+          meta: getMarkdownMeta(fullPath),
         };
       }
 

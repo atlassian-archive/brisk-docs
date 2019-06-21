@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const getMarkdownMeta = require('./get-markdown-meta');
 const {
   changelogTemplate,
   exampleTemplate,
@@ -102,9 +101,7 @@ const generateNonComponentPage = (
 };
 
 const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
-  const meta = fs.existsSync(readmePath) ? getMarkdownMeta(readmePath) : {};
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
-  return { meta };
 };
 
 const generateChangelogPage = (
@@ -147,7 +144,6 @@ const generatePackageDocPage = (
   config,
   title = '',
 ) => {
-  const meta = getMarkdownMeta(markdownPath);
   generateBasicPage(
     pagePath,
     markdownPath,
@@ -156,7 +152,6 @@ const generatePackageDocPage = (
     config,
     title,
   );
-  return { meta };
 };
 
 const generateExamplePage = (
@@ -225,7 +220,6 @@ const generateProjectDocPage = (
   config,
   title = '',
 ) => {
-  const meta = getMarkdownMeta(markdownPath);
   generateBasicPage(
     pagePath,
     markdownPath,
@@ -234,8 +228,6 @@ const generateProjectDocPage = (
     config,
     title,
   );
-
-  return { meta };
 };
 
 module.exports = {
