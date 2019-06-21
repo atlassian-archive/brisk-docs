@@ -61,6 +61,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
 
       return {
         id: doc.id,
+        meta: doc.meta,
         pagePath: path.join('/', pagePath, readme ? readme.id : ''),
         children: scanAndGenerate(
           doc.children.filter(c => !(c.id.toLowerCase() === 'readme')),
@@ -81,6 +82,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
 
     return {
       id: doc.id,
+      meta: doc.meta,
       pagePath: path.join('/', pagePath),
     };
   });
@@ -263,6 +265,7 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
       parentId: parent && parent !== '/' ? parent : undefined,
       packageId: pkg.id,
       homePath: path.join('/', homePath),
+      homeMeta: pkg.readmeMeta,
       changelogPath: displayChangelog ? path.join('/', changelogPath) : null,
       docPath: path.join('/', docPath),
       examplePath: path.join('/', examplePath),

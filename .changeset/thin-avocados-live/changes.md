@@ -1,0 +1,1 @@
+Add ability to add yaml frontmatter to markdown pages that will be stripped and parsed as metadata. Currently the metadata is not used but there will be support for specific attributes in the future.

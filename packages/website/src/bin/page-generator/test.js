@@ -192,7 +192,7 @@ describe('Generate pages', () => {
                 ]
               : [];
 
-          expect(docs).toEqual([
+          expect(docs).toMatchObject([
             {
               id: 'extended-info',
               pagePath: path.join(packageDocsPath, 'extended-info'),
@@ -266,6 +266,30 @@ describe('Generate pages', () => {
           '/packages/mock-package3/examples',
         );
       });
+
+      describe('has meta', () => {
+        it('for the package readme', () => {
+          expect(packagesSitemap[0].homeMeta).toEqual({
+            keywords: ['project', 'react'],
+          });
+          expect(packagesSitemap[1].homeMeta).toEqual({});
+        });
+        it('for top-level package docs containing frontmatter', () => {
+          expect(packagesSitemap[0].docs[0].meta).toEqual({
+            title: 'Extended Information',
+          });
+        });
+
+        it('in nested package docs containing frontmatter', () => {
+          expect(packagesSitemap[0].docs[1].children[0].meta).toEqual({
+            status: 'WIP',
+          });
+        });
+
+        it('that is undefined for markdown files that do not have frontmatter', () => {
+          expect(packagesSitemap[0].docs[1].meta).toBeUndefined();
+        });
+      });
     });
   });
 
@@ -328,6 +352,21 @@ describe('Generate pages', () => {
         expect(docsSitemap[2].children[1].children[0].pagePath).toEqual(
           '/docs/doc-3/doc-3-2/doc-3-2-1',
         );
+      });
+
+      it('gets meta for all docs pages in the filesystem structure', () => {
+        expect(docsSitemap[0].meta).toEqual({ title: 'Document One' });
+        expect(docsSitemap[1].meta).toEqual({});
+        expect(docsSitemap[2].meta).toBeUndefined();
+
+        // nested docs
+        expect(docsSitemap[2].children[0].meta).toEqual({
+          readingTime: '1 second',
+        });
+        expect(docsSitemap[2].children[1].meta).toBeUndefined();
+        expect(docsSitemap[2].children[1].children[0].meta).toEqual({
+          usefulness: 'yes',
+        });
       });
     });
   });
@@ -535,12 +574,12 @@ describe('readmes in the docs', () => {
       packageRoot,
     });
   });
-  it('should have collapsed the readmes into indexes', () => {
+  it('should collapse the readmes into indexes', () => {
     const readmePages = sitemap.docs.filter(({ pagePath }) =>
       pagePath.toLowerCase().includes('readme'),
     );
 
-    expect(readmePages).toEqual([
+    expect(readmePages).toMatchObject([
       {
         children: [
           {
