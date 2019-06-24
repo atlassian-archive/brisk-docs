@@ -6,13 +6,13 @@
 
 // @ts-ignore
 import pageInfo from '../data/pages-list.json';
-import { PackageInfo, Page } from '../types';
+import { PackageInfo, DocsPage } from '../types';
 
 type Info = {
   packages: PackageInfo[];
-  readme?: Page[];
+  readme?: DocsPage[];
 } & {
-  [key: string]: Page[];
+  [key: string]: DocsPage[];
 };
 
 const data: Info = pageInfo;

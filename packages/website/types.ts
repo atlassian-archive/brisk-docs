@@ -4,22 +4,25 @@ export type PageMeta = {
   title: string;
 };
 
-export interface Page {
+export interface BasePage<T> {
   id: string;
   pagePath: string;
-  children?: Page[];
+  children?: Array<T>;
+}
+
+export interface DocsPage extends BasePage<DocsPage> {
   meta: PageMeta;
 }
 
-export interface ExamplePage extends Page {
+export interface ExamplePage extends BasePage<ExamplePage> {
   isolatedPath: string;
 }
 
-export type NestedExamples =
-  | { id: string; children: NestedExamples[]; pagePath: string }
-  | ExamplePage;
+export interface NestedExamplePage extends ExamplePage {
+  children: ExamplePage[];
+}
 
-export type NestedPages = { id: string; children: NestedPages[] } | Page;
+export type Page = DocsPage | ExamplePage | NestedExamplePage;
 
 type Maintainers = string | string[];
 
@@ -46,9 +49,9 @@ export declare type PackageInfo = {
   homePath: string;
   homeMeta: PageMeta | undefined;
   changelogPath: string;
-  docs: Page[];
+  docs: DocsPage[];
   examples: ExamplePage[];
-  subExamples: NestedExamples[];
+  subExamples: NestedExamplePage[];
   repository: Repository;
   parentId?: string;
 };

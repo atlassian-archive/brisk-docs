@@ -4,7 +4,7 @@ import Tree from '@atlaskit/tree';
 import titleCase from 'title-case';
 import { colors } from '@atlaskit/theme';
 import LinkWithRouter from './link-with-router';
-import { Page } from '../../../types';
+import { DocsPage, Page } from '../../../types';
 
 const ParentWrapper = styled.div`
   font-size: 10px;
@@ -14,11 +14,17 @@ const ParentWrapper = styled.div`
   text-transform: uppercase;
 `;
 
-const getTitle = (item: Page) => (item.meta && item.meta.title) || item.id;
+const isDocsPage = (item: any): item is DocsPage => {
+  return item.meta != null;
+};
+
+const getTitle = (item: Page) => {
+  return (isDocsPage(item) && item.meta.title) || item.id;
+};
 
 // Flatten the nested page structure into an object that ak/tree understands
 const arrayToTreeItems = (
-  arrayItems: Page[],
+  arrayItems: Array<Page>,
   {
     parentId,
     parentTitle,

@@ -6,13 +6,13 @@ import LinkWithRouter from './link-with-router';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
-import { NestedExamples, ExamplePage, Page } from '../../../types';
+import { NestedExamplePage, ExamplePage, DocsPage } from '../../../types';
 
-const GetLink = ({ id, pagePath }: Page | ExamplePage) => (
+const GetLink = ({ id, pagePath }: ExamplePage) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
 );
 
-const renderSubExamplesTree = (subExamples: NestedExamples[]) => {
+const renderSubExamplesTree = (subExamples: NestedExamplePage[]) => {
   const treeData = {
     rootId: 'subExamples',
     items: arrayToTreeItems(subExamples, {
@@ -34,9 +34,9 @@ export type SomeProps = {
   homePath: string;
   packageName: string;
   changelogPath: string;
-  docs: Page[];
+  docs: DocsPage[];
   examples: ExamplePage[];
-  subExamples: NestedExamples[];
+  subExamples: NestedExamplePage[];
 };
 
 const NavContent = ({
