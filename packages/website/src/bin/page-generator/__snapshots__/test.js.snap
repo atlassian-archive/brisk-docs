@@ -57,7 +57,7 @@ import Component from '../../../jest-fixture/docs/doc-1.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
 export default () => (
-  <Wrapper data={{"key":"docs","pagePath":"docs/doc-1.js","pageTitle":"Doc 1"}}>
+  <Wrapper data={{"key":"docs","pagePath":"docs/doc-1.js","pageTitle":"Document One"}}>
       <Component />
   </Wrapper>
 );
@@ -162,7 +162,7 @@ import Component from '../../../../../jest-fixture/packages/mock-package1/docs/e
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/extended-info.js","pageTitle":"Extended Info"}}>
+  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/extended-info.js","pageTitle":"Extended Information"}}>
       <Component />
   </Wrapper>
 );

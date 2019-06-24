@@ -8,10 +8,16 @@ describe('Tree nav content', () => {
           {
             id: 'page-1',
             pagePath: '/packages/mock-package1/docs/page-1',
+            meta: {
+              title: 'Page 1',
+            },
           },
           {
             id: 'page-2',
             pagePath: '/packages/mock-package1/docs/page-2',
+            meta: {
+              title: 'Page 2',
+            },
           },
         ],
         {
@@ -83,6 +89,9 @@ describe('Tree nav content', () => {
           {
             id: 'page-2',
             pagePath: '/packages/mock-package1/docs/page-2',
+            meta: {
+              title: 'Page 2',
+            },
           },
         ],
         {

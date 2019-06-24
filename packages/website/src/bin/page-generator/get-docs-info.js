@@ -3,6 +3,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
+const titleCase = require('title-case');
 const handleConfig = require('../handle-config');
 const getMarkdownMeta = require('./get-markdown-meta');
 
@@ -56,13 +57,16 @@ const processDirectory = dirPath => {
         return {
           id,
           path: fullPath,
-          meta: getMarkdownMeta(fullPath),
+          meta: { title: titleCase(id), ...getMarkdownMeta(fullPath) },
         };
       }
 
       return {
         id,
         children: processDirectory(fullPath),
+        meta: {
+          title: titleCase(id),
+        },
       };
     })
     .filter(x => x);

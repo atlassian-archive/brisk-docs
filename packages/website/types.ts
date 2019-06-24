@@ -1,13 +1,14 @@
 /** This is metadata specified in the frontmatter of markdown pages */
 export type PageMeta = {
-  title?: string;
+  /** Title of the page, defaults to titlecased version of doc.id (filename) */
+  title: string;
 };
 
 export interface Page {
   id: string;
   pagePath: string;
   children?: Page[];
-  meta?: PageMeta | undefined;
+  meta: PageMeta;
 }
 
 export interface ExamplePage extends Page {
