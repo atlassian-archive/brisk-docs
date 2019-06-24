@@ -17,7 +17,7 @@ const renderSubExamplesTree = (subExamples: NestedExamplePage[]) => {
     rootId: 'subExamples',
     items: arrayToTreeItems(subExamples, {
       parentId: 'subExamples',
-      parentTitle: 'sub examples',
+      parentTitle: 'Sub Examples',
     }),
   };
   return (

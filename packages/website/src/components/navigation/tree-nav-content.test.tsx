@@ -40,7 +40,7 @@ describe('Tree nav content', () => {
           children: [],
           data: {
             href: '/packages/mock-package1/docs/page-1',
-            title: 'page-1',
+            title: 'Page 1',
           },
           id: 'mock-package-1/page-1',
         },
@@ -48,7 +48,7 @@ describe('Tree nav content', () => {
           children: [],
           data: {
             href: '/packages/mock-package1/docs/page-2',
-            title: 'page-2',
+            title: 'Page 2',
           },
           id: 'mock-package-1/page-2',
         },
@@ -102,7 +102,7 @@ describe('Tree nav content', () => {
       expect(treeItems['mock-package-1/page-1'].data.title).toEqual(
         'First page',
       );
-      expect(treeItems['mock-package-1/page-2'].data.title).toEqual('page-2');
+      expect(treeItems['mock-package-1/page-2'].data.title).toEqual('Page 2');
     });
   });
 });
