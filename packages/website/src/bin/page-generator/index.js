@@ -35,6 +35,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
         id: doc.id,
         children: doc.children.map(child => ({
           id: child.id,
+          meta: child.meta,
           pagePath: path.join(doc.id, child.id),
         })),
       };
