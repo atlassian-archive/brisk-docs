@@ -1,5 +1,4 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import Table from '@atlaskit/dynamic-table';
 import styled from '@emotion/styled';
 import { gridSize } from '@atlaskit/theme';
@@ -8,11 +7,13 @@ import titleCase from 'title-case';
 import NavigationWrapper from '../navigation-wrapper';
 import PackageNavContent from '../navigation/package-nav-content';
 import DocsNavContent from '../navigation/docs-nav-content';
-import Page, { Title, Section } from '../page';
+import PageComponent, { Title, Section } from '../page';
 import pageInfo from '../../pages-list';
 import PageTitle from '../page-title';
 import Breadcrumbs, { isPathRoot } from '../breadcrumbs';
 import Link from '../switch-link';
+import { getTitle } from '../../model/page';
+import { DocsPage, Page } from '../../../types';
 
 const head = {
   cells: [
@@ -32,11 +33,11 @@ const head = {
   ],
 };
 
-const renderRow = item => ({
+const renderRow = (item: Page) => ({
   cells: [
     {
       key: item.id,
-      content: <RowCell>{titleCase(item.id)}</RowCell>,
+      content: <RowCell>{getTitle(item)}</RowCell>,
     },
     {
       key: item.id,
@@ -67,8 +68,31 @@ const RowCell = styled.div`
   padding-top: ${gridSize}px;
 `;
 
-const ItemList = ({ data }) => {
-  const getRows = () => {
+type Row = {
+  cells: Array<{
+    key: string;
+    content: ReactNode;
+  }>;
+};
+
+// TODO: There's actually two possible shapes here but they can't be typed correctly without refactoring.
+// Either an id + packageName are passed in, or an id + key + children. Items-list is doing too many things
+// here and should be refactored to only have one method of data retrieval. Either always retrieving from
+// page-list (packageName) or being provided the data up front (children). The latter seems preferable.
+type Props = {
+  data: {
+    id: string;
+    key?: string;
+    packageName?: string;
+    pagePath: string;
+    pageType: 'docs' | 'examples';
+    pageTitle?: string;
+    children?: DocsPage[];
+  };
+};
+
+const ItemList = ({ data }: Props) => {
+  const getRows = (): Row[] => {
     if (data.children) {
       return data.children.map(child => renderRow(child));
     }
@@ -76,7 +100,16 @@ const ItemList = ({ data }) => {
     const packagePages = pageInfo.packages.find(
       pkg => pkg.packageId === data.id,
     );
-    return packagePages[data.pageType].map(item => renderRow(item));
+    if (!packagePages) {
+      console.error(`Could not find package'${data.id}`);
+      return [];
+    }
+
+    // Assert as any since union array types aren't callable
+    // https://github.com/Microsoft/TypeScript/pull/29011#issuecomment-451212987
+    return (packagePages[data.pageType] as any).map((item: Page) =>
+      renderRow(item),
+    );
   };
   const getDocsList = () => {
     let title = titleCase(data.id);
@@ -86,12 +119,12 @@ const ItemList = ({ data }) => {
     }
 
     return (
-      <Page>
+      <PageComponent>
         <Title>{title}</Title>
         <Section>
           <Table head={head} rows={getRows()} />
         </Section>
-      </Page>
+      </PageComponent>
     );
   };
 
@@ -106,7 +139,8 @@ const ItemList = ({ data }) => {
               packageName={data.packageName}
             />
           ) : (
-            <DocsNavContent docId={data.key} />
+            // FIXME: See props for explanation of this implicit behaviour
+            <DocsNavContent docId={data.key as string} />
           )
         }
       >
@@ -119,22 +153,6 @@ const ItemList = ({ data }) => {
       </NavigationWrapper>
     </>
   );
-};
-
-ItemList.propTypes = {
-  data: PropTypes.shape({
-    key: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    packageName: PropTypes.string,
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        pagePath: PropTypes.string.isRequired,
-        pageType: PropTypes.string,
-        pageTitle: PropTypes.string,
-      }),
-    ),
-  }).isRequired,
 };
 
 export default ItemList;

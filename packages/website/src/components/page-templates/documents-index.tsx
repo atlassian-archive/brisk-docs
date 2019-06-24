@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import TableTree, {
   Headers,
   Header,
@@ -15,6 +14,8 @@ import DocsNavContent from '../navigation/docs-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
 import Link from '../switch-link';
+import { getTitle } from '../../model/page';
+import { DocsPage } from '../../../types';
 
 const NoDocsMessage = () => (
   <SectionMessage appearance="warning">
@@ -22,8 +23,18 @@ const NoDocsMessage = () => (
   </SectionMessage>
 );
 
-class DocsTable extends React.Component {
-  state = { expansionMap: {} };
+type DocsTableProps = {
+  docKey: string;
+};
+
+type DocsTableState = {
+  expansionMap: {
+    [pageId: string]: boolean;
+  };
+};
+
+class DocsTable extends React.Component<DocsTableProps, DocsTableState> {
+  state: DocsTableState = { expansionMap: {} };
 
   render() {
     const { expansionMap } = this.state;
@@ -37,17 +48,17 @@ class DocsTable extends React.Component {
           </Headers>
           <Rows
             items={pageInfo[docKey]}
-            render={({ id, pagePath, children }) => (
+            render={(page: DocsPage) => (
               <Row
-                itemId={id}
-                items={children}
-                hasChildren={children && children.length > 0}
-                isExpanded={Boolean(expansionMap[id])}
+                itemId={page.id}
+                items={page.children}
+                hasChildren={page.children && page.children.length > 0}
+                isExpanded={Boolean(expansionMap[page.id])}
                 onExpand={() =>
                   this.setState({
                     expansionMap: {
                       ...expansionMap,
-                      [id]: true,
+                      [page.id]: true,
                     },
                   })
                 }
@@ -55,15 +66,15 @@ class DocsTable extends React.Component {
                   this.setState({
                     expansionMap: {
                       ...expansionMap,
-                      [id]: false,
+                      [page.id]: false,
                     },
                   })
                 }
               >
-                <Cell singleLine>{titleCase(id)}</Cell>
+                <Cell singleLine>{getTitle(page)}</Cell>
                 <Cell>
-                  <Link href={pagePath}>
-                    {pagePath.replace(new RegExp(`^/?${docKey}/`), '')}
+                  <Link href={page.pagePath}>
+                    {page.pagePath.replace(new RegExp(`^/?${docKey}/`), '')}
                   </Link>
                 </Cell>
               </Row>
@@ -75,11 +86,13 @@ class DocsTable extends React.Component {
   }
 }
 
-DocsTable.propTypes = {
-  docKey: PropTypes.string,
+type DocsProps = {
+  data: {
+    key: string;
+  };
 };
 
-const Docs = ({ data }) => (
+const Docs = ({ data }: DocsProps) => (
   <>
     <PageTitle title={titleCase(data.key)} />
     <NavigationWrapper navContent={() => <DocsNavContent docId={data.key} />}>
@@ -95,9 +108,4 @@ const Docs = ({ data }) => (
   </>
 );
 
-Docs.propTypes = {
-  data: PropTypes.shape({
-    key: PropTypes.string,
-  }),
-};
 export default Docs;
