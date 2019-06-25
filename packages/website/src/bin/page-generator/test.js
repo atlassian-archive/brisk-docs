@@ -283,11 +283,14 @@ describe('Generate pages', () => {
         it('in nested package docs containing frontmatter', () => {
           expect(packagesSitemap[0].docs[1].children[0].meta).toEqual({
             status: 'WIP',
+            title: 'Nesting Now Supported',
           });
         });
 
-        it('that is undefined for markdown files that do not have frontmatter', () => {
-          expect(packagesSitemap[0].docs[1].meta).toBeUndefined();
+        it('with proper defaults for files that do not have frontmatter', () => {
+          expect(packagesSitemap[0].docs[1].meta).toEqual({
+            title: 'Some Subdirectory',
+          });
         });
       });
     });
@@ -356,15 +359,17 @@ describe('Generate pages', () => {
 
       it('gets meta for all docs pages in the filesystem structure', () => {
         expect(docsSitemap[0].meta).toEqual({ title: 'Document One' });
-        expect(docsSitemap[1].meta).toEqual({});
-        expect(docsSitemap[2].meta).toBeUndefined();
+        expect(docsSitemap[1].meta).toEqual({ title: 'Doc 2' });
+        expect(docsSitemap[2].meta).toEqual({ title: 'Doc 3' });
 
         // nested docs
         expect(docsSitemap[2].children[0].meta).toEqual({
           readingTime: '1 second',
+          title: 'Doc 3 1',
         });
-        expect(docsSitemap[2].children[1].meta).toBeUndefined();
+        expect(docsSitemap[2].children[1].meta).toEqual({ title: 'Doc 3 2' });
         expect(docsSitemap[2].children[1].children[0].meta).toEqual({
+          title: 'Doc 3 2 1',
           usefulness: 'yes',
         });
       });

@@ -17,6 +17,7 @@ scratchings.js
 
 /packages/website/data
 /packages/website/static/favicon.ico
+/packages/website/typings
 /packages/**/bundles
 /packages/**/**/yarn.lock
 

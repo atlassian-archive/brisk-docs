@@ -52,7 +52,7 @@ const generateBasicPage = (
   data,
   wrapperName,
   { wrappersPath, pagesPath },
-  title = '',
+  meta,
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
@@ -62,7 +62,7 @@ const generateBasicPage = (
     wrapperName,
   );
 
-  const templateData = { ...data, pagePath, pageTitle: title };
+  const templateData = { ...data, pagePath, pageTitle: meta.title };
 
   const source = componentImportPath
     ? wrappedComponentTemplate(
@@ -100,8 +100,8 @@ const generateNonComponentPage = (
   );
 };
 
-const generateHomePage = (pagePath, readmePath, data, config, title = '') => {
-  generateBasicPage(pagePath, readmePath, data, 'package-home', config, title);
+const generateHomePage = (pagePath, readmePath, data, config, meta) => {
+  generateBasicPage(pagePath, readmePath, data, 'package-home', config, meta);
 };
 
 const generateChangelogPage = (
@@ -137,21 +137,8 @@ const generateChangelogPage = (
   writeFile(path.join(pagesPath, pagePath), source);
 };
 
-const generatePackageDocPage = (
-  pagePath,
-  markdownPath,
-  data,
-  config,
-  title = '',
-) => {
-  generateBasicPage(
-    pagePath,
-    markdownPath,
-    data,
-    'package-docs',
-    config,
-    title,
-  );
+const generatePackageDocPage = (pagePath, markdownPath, data, config, meta) => {
+  generateBasicPage(pagePath, markdownPath, data, 'package-docs', config, meta);
 };
 
 const generateExamplePage = (
@@ -213,21 +200,8 @@ const generateExamplesHomePage = (pagePath, data, config, title = '') => {
   );
 };
 
-const generateProjectDocPage = (
-  pagePath,
-  markdownPath,
-  data,
-  config,
-  title = '',
-) => {
-  generateBasicPage(
-    pagePath,
-    markdownPath,
-    data,
-    'project-docs',
-    config,
-    title,
-  );
+const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
+  generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
 
 module.exports = {
