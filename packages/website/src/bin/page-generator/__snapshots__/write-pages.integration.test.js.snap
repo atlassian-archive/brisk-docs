@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page templates creates js for a package example pages 1`] = `
+"import React from 'react';
+import dynamic from 'next/dynamic';
+import fileContents from '!!raw-loader!../example';
+import Wrapper from '../wrappers/package-example';
+
+const DynamicComponent = dynamic(import('../example')
+.then(Components => {
+return () => ( 
+<Wrapper data={{\\"pageTitle\\":\\"\\"}} fileContents={fileContents}>
+      {
+        [{ 
+            name: 'default', 
+            component: <Components.default /> 
+          }, 
+          ...Object.keys(Components).filter(componentName => componentName !== 'default')
+          .map(componentName => {
+            const Component = Components[componentName];
+            return {
+              name: componentName,
+              component: <Component />
+            }
+          })
+        ]
+      }
+  </Wrapper>
+  )
+}));
+export default () => <DynamicComponent/>"
+`;

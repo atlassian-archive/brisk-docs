@@ -47,6 +47,7 @@ export default class MyDocument extends Document<Props> {
       <html lang="en">
         <Head>
           <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" />
+          <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
           {/* eslint-disable-next-line react/no-danger */}
           <style dangerouslySetInnerHTML={{ __html: css }} />
           {styleTags}

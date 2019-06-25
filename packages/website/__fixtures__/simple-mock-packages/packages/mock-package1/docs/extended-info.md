@@ -1,3 +1,7 @@
+---
+title: 'Extended Information'
+---
+
 ```
 Give examples
 ```

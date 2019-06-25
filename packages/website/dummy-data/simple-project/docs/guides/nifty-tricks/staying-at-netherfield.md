@@ -1,3 +1,7 @@
+---
+worthIt: yes
+---
+
 # Mrs Bennet's guide to securing a stay at Netherfield Park
 
 One sure fire technique for turning a short visit into a long stay is to begin your journey to

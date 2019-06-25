@@ -1,3 +1,8 @@
+---
+status: VFD
+keywords: ['friends']
+---
+
 import SectionMessage from '@atlaskit/section-message';
 
 <div style={{height: '16px'}} />

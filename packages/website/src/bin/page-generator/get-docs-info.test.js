@@ -13,18 +13,18 @@ describe('Get docs info utility', () => {
   });
 
   it('returns an array of all the pages in the docs folder', () => {
-    expect(docsInfo[0]).toEqual({
+    expect(docsInfo[0]).toMatchObject({
       id: 'doc-1',
       path: path.join(cwd, 'docs', 'doc-1.md'),
     });
-    expect(docsInfo[1]).toEqual({
+    expect(docsInfo[1]).toMatchObject({
       id: 'doc-2',
       path: path.join(cwd, 'docs', 'doc-2.md'),
     });
   });
 
   it('reads nested files within the docs', () => {
-    expect(docsInfo[2]).toEqual({
+    expect(docsInfo[2]).toMatchObject({
       id: 'doc-3',
       children: [
         {
@@ -44,10 +44,19 @@ describe('Get docs info utility', () => {
     });
   });
 
-  it('reads only .md and .mdx files', () => {
-    expect(docsInfo).not.toContainEqual(
-      expect.objectContaining({ id: 'derpo' }),
-    );
+  it('gets meta for all docs pages', () => {
+    expect(docsInfo[0].meta).toEqual({ title: 'Document One' });
+    expect(docsInfo[1].meta).toEqual({});
+    expect(docsInfo[2].meta).toBeUndefined();
+
+    // nested docs
+    expect(docsInfo[2].children[0].meta).toEqual({
+      readingTime: '1 second',
+    });
+    expect(docsInfo[2].children[1].meta).toBeUndefined();
+    expect(docsInfo[2].children[1].children[0].meta).toEqual({
+      usefulness: 'yes',
+    });
   });
 });
 
@@ -75,7 +84,7 @@ describe('docs-with-readmes', () => {
   });
 
   it('should replace the base index page with the readme page', () => {
-    expect(docsInfo[2]).toEqual({
+    expect(docsInfo[2]).toMatchObject({
       id: 'doc-3',
       children: [
         {
@@ -106,11 +115,11 @@ describe('Test exclude everything that are non md files', () => {
   });
 
   it('returns an array of all the pages in the docs folder excluding non md files', () => {
-    expect(docsInfo[0]).toEqual({
+    expect(docsInfo[0]).toMatchObject({
       id: 'doc-2',
       path: path.join(cwd, 'docs', 'doc-2.md'),
     });
-    expect(docsInfo[1]).toEqual({
+    expect(docsInfo[1]).toMatchObject({
       id: 'sub-docs',
       children: [
         {
