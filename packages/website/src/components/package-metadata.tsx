@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import GitUrlParse from 'git-url-parse';
+import titleCase from 'title-case';
 
 import { colors } from '@atlaskit/theme';
 
@@ -39,18 +40,6 @@ const MetaDataDependency = styled.code`
 const MetaDataArray = styled.p`
   margin: 0;
 `;
-
-export function toTitleCase(str: string): string {
-  const matches = str.match(
-    /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
-  );
-
-  if (!matches) {
-    return '';
-  }
-
-  return matches.map(x => x.charAt(0).toUpperCase() + x.slice(1)).join(' ');
-}
 
 function parseRepositoryUrl(repository: string, directory?: string): string {
   let url;
@@ -191,7 +180,7 @@ const MetaDataRow = ({ label, value }: MetaDataRowProps) => {
 
   return (
     <MetaDataEntry>
-      <MetaDataEntryLabel>{toTitleCase(label)}</MetaDataEntryLabel>
+      <MetaDataEntryLabel>{titleCase(label)}</MetaDataEntryLabel>
       <MetaDataEntryValue>{rowValue}</MetaDataEntryValue>
     </MetaDataEntry>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import titleCase from 'title-case';
 import PackageMetaData, {
   MetaDataEntry,
-  toTitleCase,
 } from './package-metadata';
 
 const baseProps = {
@@ -153,7 +153,7 @@ describe('package metadata component', () => {
 
     const metaDataProperties = Object.keys(props.metaData);
     labels.forEach((component, index) => {
-      expect(component.text()).toEqual(toTitleCase(metaDataProperties[index]));
+      expect(component.text()).toEqual(titleCase(metaDataProperties[index]));
     });
   });
 
