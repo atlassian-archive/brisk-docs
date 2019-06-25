@@ -97,6 +97,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
  */
 function generatePackagePages(packageInfo, generatorConfig, patterns) {
   const packageSitemap = packageInfo.map(pkg => {
+    // TODO update reference to this?
     const pageData = { id: pkg.id, packageName: pkg.name };
 
     // this is to find the sub-folders of packages.
@@ -114,18 +115,27 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
 
     const parent = parentDir && parentDir[1];
 
-    const homePageData = {
-      description: pkg.description,
-      version: pkg.version,
-      maintainers: pkg.maintainers,
-      repository: pkg.repository,
-    };
-    packagesData.push({ id: pkg.id, ...homePageData });
+    const homePageData = {};
+
+    // TODO can we remove the need for second iteration here?
+    pkg.customPackageFields.forEach(field => {
+      homePageData[field] = pkg[field];
+    });
+
+    packagesData.push({
+      id: pkg.id,
+      customPackageFields: pkg.customPackageFields,
+      ...homePageData,
+    });
     const homePath = path.join('packages', pkg.id);
     generateHomePage(
       path.join(homePath, 'index.js'),
       pkg.readmePath,
-      { ...pageData, ...homePageData },
+      {
+        ...pageData,
+        ...homePageData,
+        customPackageFields: pkg.customPackageFields,
+      },
       generatorConfig,
       { title: titleCase(pkg.id) },
     );
@@ -377,6 +387,9 @@ module.exports = async function generatePages(
   }
   if (typeof options.showExamples !== 'undefined') {
     pkgOpts.showExamples = options.showExamples;
+  }
+  if (typeof options.customPackageFields !== 'undefined') {
+    pkgOpts.customPackageFields = options.customPackageFields;
   }
 
   const packageInfo = getPackageInfo(packagesPaths, pkgOpts);

@@ -17,7 +17,7 @@ export const MetaDataEntry = styled.div`
   display: flex;
   flex-direction: row;
   flex-basis: 100%;
-  padding: 0.4em 0;
+  padding: 0 0 0.8em;
   margin: 0;
 `;
 
@@ -26,7 +26,33 @@ const MetaDataEntryLabel = styled.div`
   flex-basis: 25%;
 `;
 
-function parseRepositoryUrl(repository: string, directory?: string) {
+const MetaDataEntryValue = styled.div`
+  flex-basis: 75%;
+  flex-wrap: wrap;
+`;
+
+const MetaDataDependency = styled.code`
+  display: inline-flex;
+  margin: 0 5px;
+`;
+
+const MetaDataArray = styled.p`
+  margin: 0;
+`;
+
+export function toTitleCase(str: string): string {
+  const matches = str.match(
+    /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
+  );
+
+  if (!matches) {
+    return '';
+  }
+
+  return matches.map(x => x.charAt(0).toUpperCase() + x.slice(1)).join(' ');
+}
+
+function parseRepositoryUrl(repository: string, directory?: string): string {
   let url;
   const parsed = GitUrlParse(repository);
   if (parsed.git_suffix) {
@@ -48,6 +74,7 @@ function parseRepositoryUrl(repository: string, directory?: string) {
   }
   return url;
 }
+
 type Repository = string | { url: string; directory: string };
 
 const RepositoryLink = ({ repository }: { repository: Repository }) => {
@@ -62,37 +89,134 @@ const RepositoryLink = ({ repository }: { repository: Repository }) => {
     repositoryUrl = parseRepositoryUrl(repository.url);
   }
 
+  return <a href={repositoryUrl}>View Source</a>;
+};
+
+function formatArrayValue(value: string[]): JSX.Element | null {
+  if (!value || value.length < 1) {
+    return null;
+  }
+
+  return <MetaDataArray>{value.join(', ')}</MetaDataArray>;
+}
+
+type DependencyList = {
+  [e: string]: string;
+};
+
+const DependencyList = ({ dependencies }: { dependencies: DependencyList }) => {
+  const result: JSX.Element[] = [];
+
+  Object.keys(dependencies).forEach(key => {
+    const nestedValue = (dependencies as any)[key];
+
+    if (typeof nestedValue === 'string') {
+      result.push(
+        <MetaDataDependency key={key}>
+          {key}
+          {'@'}
+          {nestedValue}
+        </MetaDataDependency>,
+      );
+    }
+  });
+
+  return <>{result}</>;
+};
+
+function renderUnknownMetaDataObject(value?: any): JSX.Element | null {
+  const keys = Object.keys(value);
+
+  if (!keys || keys.length < 1) {
+    return null;
+  }
+
+  return (
+    <>
+      {keys.map(key => {
+        return <MetaDataRow key={key} label={key} value={value[key]} />;
+      })}
+    </>
+  );
+}
+
+type MetaDataField = string | string[] | DependencyList | Repository;
+
+function renderMetaDataValue(
+  label: string,
+  rawValue?: MetaDataField,
+): JSX.Element | null {
+  if (!rawValue) {
+    return null;
+  }
+
+  if (Array.isArray(rawValue)) {
+    return formatArrayValue(rawValue);
+  }
+
+  if (
+    [
+      'bundledDependencies',
+      'dependencies',
+      'devDependencies',
+      'optionalDependencies',
+      'peerDependencies',
+    ].includes(label)
+  ) {
+    return <DependencyList dependencies={rawValue as DependencyList} />;
+  }
+
+  if (label === 'repository') {
+    return <RepositoryLink repository={rawValue as Repository} />;
+  }
+
+  if (typeof rawValue === 'object') {
+    return renderUnknownMetaDataObject(rawValue);
+  }
+
+  return <code>{rawValue}</code>;
+}
+
+type MetaDataRowProps = {
+  label: string;
+  value?: MetaDataField;
+};
+
+const MetaDataRow = ({ label, value }: MetaDataRowProps) => {
+  const rowValue = renderMetaDataValue(label, value);
+
+  if (!rowValue) {
+    return null;
+  }
+
   return (
     <MetaDataEntry>
-      <MetaDataEntryLabel>Source</MetaDataEntryLabel>
-      <a href={repositoryUrl}>View Source</a>
+      <MetaDataEntryLabel>{toTitleCase(label)}</MetaDataEntryLabel>
+      <MetaDataEntryValue>{rowValue}</MetaDataEntryValue>
     </MetaDataEntry>
   );
 };
 
+interface MetaData {
+  [e: string]: MetaDataField;
+}
+
 export type Props = {
   id: string;
-  version: string;
-  maintainers: string[];
-  repository: Repository;
+  metaData: MetaData;
+  fields: string[];
 };
 
-const PackageMetaData = ({ id, version, maintainers, repository }: Props) => (
-  <div>
-    <MetaDataWrapper data-testid={`${id}-metadata`}>
-      <MetaDataEntry>
-        <MetaDataEntryLabel>Latest version</MetaDataEntryLabel>
-        <code>{version}</code>
-      </MetaDataEntry>
-      {maintainers && maintainers.length > 0 && (
-        <MetaDataEntry>
-          <MetaDataEntryLabel>Maintainers</MetaDataEntryLabel>
-          <p style={{ margin: '0' }}>{maintainers.join(', ')}</p>
-        </MetaDataEntry>
-      )}
-      <RepositoryLink repository={repository} />
-    </MetaDataWrapper>
-  </div>
+const PackageMetaData = ({ id, metaData, fields }: Props) => (
+  <MetaDataWrapper data-testid={`${id}-metadata`}>
+    {fields.map(field => (
+      <MetaDataRow key={field} label={field} value={metaData[field]} />
+    ))}
+  </MetaDataWrapper>
 );
+
+PackageMetaData.defaultProps = {
+  fields: [],
+};
 
 export default PackageMetaData;

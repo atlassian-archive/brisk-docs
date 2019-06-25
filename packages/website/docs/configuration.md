@@ -19,6 +19,7 @@ the returned object may have the following properties:
 | siteName | Display name for the project as displayed in the website                                                                            |
 | webpack  | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
 | favicon  | Absolute path to an .ico file to use as the site's favicon                                                                          |
+| customPackageFields  | Array of fields from the relevant package.json to display on the package home page |
 
 ## Nested configuration
 

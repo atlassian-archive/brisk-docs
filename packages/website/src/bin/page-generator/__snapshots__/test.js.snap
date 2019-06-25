@@ -117,7 +117,7 @@ import Component from '../../../../jest-fixture/packages/mock-package1/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","description":"This is a mock package to be used for doc website","version":"1.0.0","pagePath":"packages/mock-package1/index.js","pageTitle":"Mock Package1"}}>
+  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","description":"This is a mock package to be used for doc website","name":"mock-package-1","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package1/index.js","pageTitle":"Mock Package1"}}>
       <Component />
   </Wrapper>
 );
@@ -129,7 +129,7 @@ import Component from '../../../../jest-fixture/packages/mock-package2/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","version":"1.0.0","pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
+  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
       <Component />
   </Wrapper>
 );
@@ -141,7 +141,7 @@ import Component from '../../../../jest-fixture/packages/mock-package2/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","version":"1.0.0","pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
+  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
       <Component />
   </Wrapper>
 );

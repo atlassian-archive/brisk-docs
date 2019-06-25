@@ -23,6 +23,13 @@ describe('website configuration processor', () => {
       readMePath: '/c/w/d/README.md',
       showSubExamples: false,
       packagesDescription: 'View documentation about individual packages',
+      customPackageFields: [
+        'dependencies',
+        'license',
+        'maintainers',
+        'name',
+        'version',
+      ],
     });
   });
 
