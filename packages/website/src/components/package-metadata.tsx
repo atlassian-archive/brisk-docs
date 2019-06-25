@@ -2,8 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import GitUrlParse from 'git-url-parse';
 import titleCase from 'title-case';
-
-import { colors } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@atlaskit/theme';
 
 const MetaDataWrapper = styled.section`
   display: flex;
@@ -34,7 +33,7 @@ const MetaDataEntryValue = styled.div`
 
 const MetaDataDependency = styled.code`
   display: inline-flex;
-  margin: 0 5px;
+  margin: 0 ${math.multiply(gridSize, 0.5)}px;
 `;
 
 const MetaDataArray = styled.p`

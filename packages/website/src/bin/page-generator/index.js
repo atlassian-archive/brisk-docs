@@ -377,16 +377,16 @@ module.exports = async function generatePages(
 
   const pkgOpts = {};
 
-  if (typeof options.useManifests !== 'undefined') {
+  if (options.useManifests) {
     pkgOpts.useManifests = options.useManifests;
   }
-  if (typeof options.showSubExamples !== 'undefined') {
+  if (options.showSubExamples) {
     pkgOpts.showSubExamples = options.showSubExamples;
   }
-  if (typeof options.showExamples !== 'undefined') {
+  if (options.showExamples) {
     pkgOpts.showExamples = options.showExamples;
   }
-  if (typeof options.customPackageFields !== 'undefined') {
+  if (options.customPackageFields) {
     pkgOpts.customPackageFields = options.customPackageFields;
   }
 
