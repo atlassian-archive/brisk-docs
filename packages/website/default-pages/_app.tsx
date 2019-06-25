@@ -22,6 +22,17 @@ export default class MyApp extends App<Props> {
     return { pageProps };
   }
 
+  componentDidMount() {
+    /**
+     * Set a marker on body indicating that we've rendered on the client side (componentDidMount does not execute on the server).
+     * This is required for our cypress tests to wait before trying to fetch elements otherwise they may become stale if they are
+     * fetched before React renders over the server-side DOM.
+     * See https://github.com/cypress-io/cypress/issues/695#issuecomment-333158645
+     */
+    // eslint-disable-next-line no-undef
+    document.body.dataset.clientLoaded = 'true';
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 
