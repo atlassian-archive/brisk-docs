@@ -19,7 +19,7 @@ describe('Packages home page tests', () => {
       cy.contains('Documentation');
     });
     cy.get('[data-testid=mock-package1-metadata]').within(() => {
-      cy.contains('Latest version');
+      cy.contains('Version');
     });
     cy.go('back');
 
@@ -35,7 +35,7 @@ describe('Packages home page tests', () => {
       cy.contains('Documentation');
     });
     cy.get('[data-testid=mock-package2-metadata]').within(() => {
-      cy.contains('Latest version');
+      cy.contains('Version');
     });
     cy.go('back');
 
@@ -51,7 +51,7 @@ describe('Packages home page tests', () => {
       cy.contains('Documentation');
     });
     cy.get('[data-testid=mock-package3-metadata]').within(() => {
-      cy.contains('Latest version');
+      cy.contains('Version');
     });
     cy.go('back');
   });
