@@ -1,26 +1,34 @@
-export interface Page {
+/** This is metadata specified in the frontmatter of markdown pages */
+export type PageMeta = {
+  /** Title of the page, defaults to titlecased version of doc.id (filename) */
+  title: string;
+};
+
+export interface BasePage<T> {
   id: string;
   pagePath: string;
-  children: undefined;
+  children?: Array<T>;
 }
 
-export interface ExamplePage extends Page {
+export interface DocsPage extends BasePage<DocsPage> {
+  meta: PageMeta;
+}
+
+export interface ExamplePage extends BasePage<ExamplePage> {
   isolatedPath: string;
 }
 
-export type NestedExamples =
-  | { id: string; children: NestedExamples[]; pagePath: string }
-  | ExamplePage;
+export interface NestedExamplePage extends ExamplePage {
+  children: ExamplePage[];
+}
 
-export type NestedPages = { id: string; children: NestedPages[] } | Page;
-
-export type Pages = Page[];
+export type Page = DocsPage | ExamplePage | NestedExamplePage;
 
 type Maintainers = string | string[];
 
 type Repository = string | { type: string; url: string; directory?: string };
 
-type Meta = {
+type PackageMeta = {
   id: string;
   description: string;
   version: string;
@@ -28,8 +36,8 @@ type Meta = {
   repository?: Repository;
 };
 
-export declare type Metadata = {
-  metaData: Meta[];
+export declare type PackageMetadata = {
+  metaData: PackageMeta[];
 };
 
 export declare type PackageInfo = {
@@ -39,10 +47,11 @@ export declare type PackageInfo = {
   maintainers?: Maintainers;
   packageId: string;
   homePath: string;
+  homeMeta: PageMeta | undefined;
   changelogPath: string;
-  docs: Pages;
+  docs: DocsPage[];
   examples: ExamplePage[];
-  subExamples: NestedExamples[];
+  subExamples: NestedExamplePage[];
   repository: Repository;
   parentId?: string;
 };

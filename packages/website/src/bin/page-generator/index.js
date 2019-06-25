@@ -35,6 +35,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
         id: doc.id,
         children: doc.children.map(child => ({
           id: child.id,
+          meta: child.meta,
           pagePath: path.join(doc.id, child.id),
         })),
       };
@@ -55,7 +56,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
           readme.path,
           { key: name, ...pageData },
           generatorConfig,
-          titleCase(doc.id),
+          doc.meta,
         );
       }
 
@@ -77,7 +78,7 @@ const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
       doc.path,
       { key: name, ...pageData },
       generatorConfig,
-      titleCase(doc.id),
+      doc.meta,
     );
 
     return {
@@ -126,7 +127,7 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
       pkg.readmePath,
       { ...pageData, ...homePageData },
       generatorConfig,
-      titleCase(pkg.id),
+      { title: titleCase(pkg.id) },
     );
 
     const changelogPath = path.join(homePath, 'changelog');
@@ -329,7 +330,7 @@ const generateRootReadMePage = (
       pagePath,
       { key: 'readme' },
       generatorConfig,
-      'readme',
+      { title: 'readme' },
     );
     const navItems = [{ id: 'packages', pagePath: '/packages' }];
 

@@ -4,7 +4,7 @@ import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
-const NavContent = ({ docId }: { docId: string }) => {
+const DocsNavContent = ({ docId }: { docId: string }) => {
   const treeData = {
     rootId: docId,
     items: pageInfo[docId]
@@ -42,4 +42,4 @@ const NavContent = ({ docId }: { docId: string }) => {
   );
 };
 
-export default NavContent;
+export default DocsNavContent;

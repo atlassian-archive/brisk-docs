@@ -102,7 +102,7 @@ const AllPackagesNavContent = ({ data }: Props) => {
     items: packagesWithParentIds
       ? arrayToTreeItems(packagesWithParentIds, {
           parentId: 'packages',
-          parentTitle: 'packages',
+          parentTitle: 'Packages',
         })
       : {},
   };
