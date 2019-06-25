@@ -5,7 +5,7 @@ describe('Package changelog page tests', () => {
     });
 
     it('has the correct page title', () => {
-      cy.title().should('eq', 'Dummy Data Docs - Changelog');
+      cy.title().should('eq', 'Changelog - Dummy Data Docs');
     });
   });
 
@@ -15,7 +15,7 @@ describe('Package changelog page tests', () => {
     });
 
     it('has the correct page title', () => {
-      cy.title().should('eq', 'Dummy Data Docs - Changelog');
+      cy.title().should('eq', 'Changelog - Dummy Data Docs');
     });
   });
 });

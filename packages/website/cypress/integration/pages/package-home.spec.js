@@ -4,6 +4,6 @@ describe('Package home page tests', () => {
   });
 
   it('has the correct page title', () => {
-    cy.title().should('eq', 'Dummy Data Docs - Mock Package1');
+    cy.title().should('eq', 'Mock Package1 - Dummy Data Docs');
   });
 });

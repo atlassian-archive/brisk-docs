@@ -10,7 +10,7 @@ const PageTitle = ({ title }: Props) => (
   <Meta.Consumer>
     {({ siteName }: { siteName: string }) => (
       <Head>
-        <title>{title ? `${siteName} - ${title}` : siteName}</title>
+        <title>{title ? `${title} - ${siteName}` : siteName}</title>
       </Head>
     )}
   </Meta.Consumer>
