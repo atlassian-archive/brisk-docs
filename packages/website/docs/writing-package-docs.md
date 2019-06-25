@@ -24,11 +24,11 @@ title: My awesome title
 # Markdown content here
 ```
 
-Supported metadata keys are:
+##### Supported metadata keys
 
 - title - Change the default title of your document in the sidebar nav and breadcrumbs
 
-**Note**: Changes to metafiles will not take effect on the website without a restart.
+<sub><sup>**Note**: Changes to metafiles will not take effect on the website without a restart.</sup></sub>
 
 ### Examples
 
