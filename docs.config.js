@@ -7,6 +7,8 @@ const docs = [
   },
 ];
 
+throw process.env;
+
 if (process.env && process.env.BRANCH === 'noviny/better-docs') {
   docs.push({
     path: './example-pages',
