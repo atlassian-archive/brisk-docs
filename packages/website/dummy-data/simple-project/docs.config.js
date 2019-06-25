@@ -11,4 +11,5 @@ module.exports = () => ({
     },
   ],
   siteName: 'Dummy Data Docs',
+  favicon: path.join(__dirname, 'favicon.ico'),
 });
