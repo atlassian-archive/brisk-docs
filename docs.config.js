@@ -7,7 +7,7 @@ const docs = [
   },
 ];
 
-if (process.env && process.env.HEAD === 'production') {
+if (process.env && process.env.HEAD !== 'production') {
   docs.push({
     path: './example-pages',
     name: 'Example Pages',
