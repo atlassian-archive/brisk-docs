@@ -1,9 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import titleCase from 'title-case';
-import PackageMetaData, {
-  MetaDataEntry,
-} from './package-metadata';
+import PackageMetaData, { MetaDataEntry } from './package-metadata';
 
 const baseProps = {
   id: 'id',
