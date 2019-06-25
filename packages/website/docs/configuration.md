@@ -18,6 +18,7 @@ the returned object may have the following properties:
 | docs     | Path to the directory where project docs live                                                                                       |
 | siteName | Display name for the project as displayed in the website                                                                            |
 | webpack  | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
+| favicon  | Absolute path to an .ico file to use as the site's favicon                                                                          |
 
 ## Nested configuration
 

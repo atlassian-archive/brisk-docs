@@ -1,4 +1,5 @@
 const { spawnSync } = require('child_process');
+const fs = require('fs-extra');
 const path = require('path');
 
 const handleConfig = require('./handle-config');
@@ -43,8 +44,15 @@ const spawnNextProcess = (command, websiteConfigPath, ...args) => {
   }
 };
 
+const loadFavicon = async config => {
+  const faviconPath =
+    config.favicon || path.resolve(nextRoot, 'static/favicon.ico.default');
+  fs.copy(faviconPath, path.resolve(nextRoot, 'static/favicon.ico'));
+};
+
 const preNextScripts = async configPath => {
   const config = handleConfig(cwd, configPath);
+  await loadFavicon(config);
   await generatePages(config);
 };
 
