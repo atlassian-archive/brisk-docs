@@ -38,7 +38,7 @@ import React from 'react';
 import Wrapper from '../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"key":"docs","id":"doc-3","children":[{"id":"doc-3-1","pagePath":"doc-3/doc-3-1"},{"id":"doc-3-2","pagePath":"doc-3/doc-3-2"}],"pagePath":"docs/doc-3/index.js","pageTitle":"Documents","pageType":"docs"}} />
+  <Wrapper data={{"key":"docs","id":"doc-3","children":[{"id":"doc-3-1","meta":{"title":"Doc 3 1","readingTime":"1 second"},"pagePath":"doc-3/doc-3-1"},{"id":"doc-3-2","meta":{"title":"Doc 3 2"},"pagePath":"doc-3/doc-3-2"}],"pagePath":"docs/doc-3/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
 `;
 
@@ -47,7 +47,7 @@ import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"key":"docs","id":"doc-3-2","children":[{"id":"doc-3-2-1","pagePath":"doc-3-2/doc-3-2-1"}],"pagePath":"docs/doc-3/doc-3-2/index.js","pageTitle":"Documents","pageType":"docs"}} />
+  <Wrapper data={{"key":"docs","id":"doc-3-2","children":[{"id":"doc-3-2-1","meta":{"title":"Doc 3 2 1","usefulness":"yes"},"pagePath":"doc-3-2/doc-3-2-1"}],"pagePath":"docs/doc-3/doc-3-2/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
 `;
 
@@ -57,7 +57,7 @@ import Component from '../../../jest-fixture/docs/doc-1.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
 export default () => (
-  <Wrapper data={{"key":"docs","pagePath":"docs/doc-1.js","pageTitle":"Doc 1"}}>
+  <Wrapper data={{"key":"docs","pagePath":"docs/doc-1.js","pageTitle":"Document One"}}>
       <Component />
   </Wrapper>
 );
@@ -162,7 +162,7 @@ import Component from '../../../../../jest-fixture/packages/mock-package1/docs/e
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/extended-info.js","pageTitle":"Extended Info"}}>
+  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/extended-info.js","pageTitle":"Extended Information"}}>
       <Component />
   </Wrapper>
 );

@@ -33,6 +33,7 @@ describe('Page templates', () => {
       readmePath,
       {},
       { wrappersPath, pagesPath },
+      { title: 'My Package' },
     );
 
     const output = getOutput('output.js');
@@ -44,7 +45,7 @@ import Component from '../README.md';
 import Wrapper from '../wrappers/package-home';
 
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}}>
       <Component />
   </Wrapper>
 );"
@@ -57,6 +58,7 @@ export default () => (
       '',
       {},
       { wrappersPath, pagesPath },
+      { title: 'My Package' },
     );
 
     const output = getOutput('output.js');
@@ -66,7 +68,7 @@ export default () => (
 import Wrapper from '../wrappers/package-home';
 
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}} />
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}} />
 );"
 `);
   });
@@ -78,6 +80,7 @@ export default () => (
       readmePath,
       {},
       { wrappersPath, pagesPath },
+      { title: 'My Doc' },
     );
 
     const output = getOutput('output.js');
@@ -89,7 +92,7 @@ import Component from '../README.md';
 import Wrapper from '../wrappers/package-docs';
 
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
       <Component />
   </Wrapper>
 );"
@@ -172,6 +175,7 @@ export default () => (
       readmePath,
       {},
       { wrappersPath, pagesPath },
+      { title: 'My Doc' },
     );
 
     const output = getOutput('output.js');
@@ -183,7 +187,7 @@ import Component from '../README.md';
 import Wrapper from '../wrappers/project-docs';
 
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\"}}>
+  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
       <Component />
   </Wrapper>
 );"

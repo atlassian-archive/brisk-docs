@@ -15,9 +15,9 @@ import data from '../src/pages-list';
 import meta2 from '../data/packages-data.json';
 import PageTitle from '../src/components/page-title';
 
-import { PackageInfo, Metadata } from '../types';
+import { PackageInfo, PackageMetadata } from '../types';
 
-const meta: Metadata = meta2;
+const meta: PackageMetadata = meta2;
 
 const gridSize = gridSizeFn();
 

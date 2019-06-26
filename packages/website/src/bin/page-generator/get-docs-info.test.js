@@ -46,15 +46,19 @@ describe('Get docs info utility', () => {
 
   it('gets meta for all docs pages', () => {
     expect(docsInfo[0].meta).toEqual({ title: 'Document One' });
-    expect(docsInfo[1].meta).toEqual({});
-    expect(docsInfo[2].meta).toBeUndefined();
+
+    // Should default to titlecased id
+    expect(docsInfo[1].meta).toEqual({ title: 'Doc 2' });
+    expect(docsInfo[2].meta).toEqual({ title: 'Doc 3' });
 
     // nested docs
     expect(docsInfo[2].children[0].meta).toEqual({
+      title: 'Doc 3 1',
       readingTime: '1 second',
     });
-    expect(docsInfo[2].children[1].meta).toBeUndefined();
+    expect(docsInfo[2].children[1].meta).toEqual({ title: 'Doc 3 2' });
     expect(docsInfo[2].children[1].children[0].meta).toEqual({
+      title: 'Doc 3 2 1',
       usefulness: 'yes',
     });
   });

@@ -82,6 +82,8 @@ const BreadcrumbsNav = ({ pagePath }: BreadcrumbsNavProps) => {
   );
 };
 
+// TODO: Don't expose this here as it creates a circular dependency
+// Either, internalise this, expose as a prop or extract into separate module
 export const isPathRoot = (pagePath: string) => {
   const pages = pagePath.split('/').filter(a => a);
   return pages.length === 1;

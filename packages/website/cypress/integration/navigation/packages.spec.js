@@ -4,12 +4,12 @@ describe('Packages home page tests', () => {
   });
 
   // TODO
-  it('should navigate to to each package from the nav bar', () => {});
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('should navigate to to each package from the nav bar');
 
   it('should navigate to to each package from the packages table', () => {
     // Mock package 1
-    cy.get('table')
-      .get('a')
+    cy.get('table a')
       .contains('Mock Package1')
       .click();
     cy.url().should('include', '/packages/mock-package1');
@@ -24,8 +24,7 @@ describe('Packages home page tests', () => {
     cy.go('back');
 
     // Mock package 2
-    cy.get('table')
-      .get('a')
+    cy.get('table a')
       .contains('Mock Package2')
       .click();
 
@@ -41,8 +40,7 @@ describe('Packages home page tests', () => {
     cy.go('back');
 
     // Mock package 3
-    cy.get('table')
-      .get('a')
+    cy.get('table a')
       .contains('Mock Package3')
       .click();
 
