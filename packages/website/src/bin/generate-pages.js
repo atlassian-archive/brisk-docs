@@ -21,6 +21,7 @@ module.exports = async ({
   siteName,
   packagesDescription,
   readMePath,
+  customPackageFields,
 }) => {
   const componentsPath = path.resolve(
     packageRoot,
@@ -39,6 +40,7 @@ module.exports = async ({
       webpackConfiguration,
       showSubExamples,
       showExamples,
+      customPackageFields,
     },
     readMePath,
   );

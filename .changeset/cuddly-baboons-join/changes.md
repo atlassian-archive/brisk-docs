@@ -1,0 +1,1 @@
+allow configuration of package home page fields from docs.config.js

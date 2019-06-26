@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "This is a mock package that has a changelog",
   "main": "index.js",
-  "keywords": [],
+  "keywords": ["react", "changelog", "simple"],
   "author": "Test4",
-  "license": "",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/brisk-docs/brisk-docs/",
+    "type": "git"
+  },
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

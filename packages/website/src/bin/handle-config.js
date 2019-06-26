@@ -30,7 +30,7 @@ const resolvePathsConfig = entry => {
  */
 const processConfig = (cwd, providedConfig = {}) => {
   const config = { ...defaultConfig, ...providedConfig };
-  const { docs, packages, ...rest } = config;
+  const { docs, packages, customPackageFields, ...rest } = config;
 
   let docsList = Array.isArray(docs) ? docs : [docs];
   docsList = docsList.map(doc => {
@@ -53,6 +53,7 @@ const processConfig = (cwd, providedConfig = {}) => {
     docsList,
     packagesPaths,
     readMePath,
+    customPackageFields,
     ...rest,
   };
 };

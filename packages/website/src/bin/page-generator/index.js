@@ -114,18 +114,26 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
 
     const parent = parentDir && parentDir[1];
 
-    const homePageData = {
-      description: pkg.description,
-      version: pkg.version,
-      maintainers: pkg.maintainers,
-      repository: pkg.repository,
-    };
-    packagesData.push({ id: pkg.id, ...homePageData });
+    const homePageData = {};
+
+    pkg.customPackageFields.forEach(field => {
+      homePageData[field] = pkg[field];
+    });
+
+    packagesData.push({
+      id: pkg.id,
+      customPackageFields: pkg.customPackageFields,
+      ...homePageData,
+    });
     const homePath = path.join('packages', pkg.id);
     generateHomePage(
       path.join(homePath, 'index.js'),
       pkg.readmePath,
-      { ...pageData, ...homePageData },
+      {
+        ...pageData,
+        ...homePageData,
+        customPackageFields: pkg.customPackageFields,
+      },
       generatorConfig,
       { title: titleCase(pkg.id) },
     );
@@ -369,14 +377,18 @@ module.exports = async function generatePages(
 
   const pkgOpts = {};
 
-  if (typeof options.useManifests !== 'undefined') {
+  // loose check to pass through `false` values
+  if (options.useManifests != null) {
     pkgOpts.useManifests = options.useManifests;
   }
-  if (typeof options.showSubExamples !== 'undefined') {
+  if (options.showSubExamples != null) {
     pkgOpts.showSubExamples = options.showSubExamples;
   }
-  if (typeof options.showExamples !== 'undefined') {
+  if (options.showExamples != null) {
     pkgOpts.showExamples = options.showExamples;
+  }
+  if (options.customPackageFields) {
+    pkgOpts.customPackageFields = options.customPackageFields;
   }
 
   const packageInfo = getPackageInfo(packagesPaths, pkgOpts);
