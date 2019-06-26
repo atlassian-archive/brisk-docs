@@ -494,7 +494,7 @@ describe('Generate pages', () => {
         });
       });
 
-      it('does not add any subExamples to the packages', () => {
+      it('does not add any examples to the packages', () => {
         exampleSitemap.packages.forEach(pkg => {
           expect(pkg.examples).toHaveLength(0);
         });
