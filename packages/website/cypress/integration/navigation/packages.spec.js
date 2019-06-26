@@ -110,7 +110,9 @@ describe('Examples page tests', () => {
   it('should navigate to the full page view for the package', () => {
     cy.visit('/packages/mock-package2/examples/example1');
 
-    cy.contains('Full page view').click();
+    cy.get('a')
+      .contains('Full page view')
+      .click();
 
     cy.url().should(
       'eq',
