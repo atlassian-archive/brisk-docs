@@ -89,10 +89,9 @@ const PackageHome = ({ data, children }) => {
             <Header id={data.id} heading={titleCase(data.packageName)} />
             <Description>{data.description}</Description>
             <PackageMetaData
+              fields={data.customPackageFields}
               id={data.id}
-              version={data.version}
-              maintainers={data.maintainers}
-              repository={data.repository}
+              metaData={data}
             />
 
             {children || process.env.NODE_ENV !== 'development' ? (

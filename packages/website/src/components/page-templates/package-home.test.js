@@ -103,4 +103,24 @@ describe('package home wrapper component', () => {
     expect(PageStatusProvider).toHaveLength(1);
     expect(PageStatusProvider.prop('value')).toEqual({ convertedToDir: true });
   });
+
+  it('should render the PackageMetaData component', () => {
+    const customFields = ['keywords', 'version'];
+    const pkgData = {
+      ...data,
+      customPackageFields: customFields,
+    };
+    const wrapper = shallow(
+      <PackageHomeWrapper data={pkgData}>
+        <div>Hello</div>
+      </PackageHomeWrapper>,
+    );
+
+    const component = wrapper.find('PackageMetaData');
+
+    expect(component.exists()).toBeTruthy();
+    expect(component.prop('id')).toEqual(data.id);
+    expect(component.prop('metaData')).toEqual(pkgData);
+    expect(component.prop('fields')).toEqual(customFields);
+  });
 });

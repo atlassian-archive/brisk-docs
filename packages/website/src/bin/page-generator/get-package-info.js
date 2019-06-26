@@ -111,9 +111,10 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
     useManifests: false,
     showSubExamples: false,
     showExamples: true,
+    customPackageFields: [],
   };
 
-  const { useManifests, showSubExamples, showExamples } = {
+  const { useManifests, showSubExamples, showExamples, customPackageFields } = {
     ...defaultOptions,
     ...options,
   };
@@ -168,13 +169,25 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         );
       }
 
+      const basePackageFields = [
+        'name',
+        'description',
+        'version',
+        'maintainers',
+        'repository',
+      ];
+
+      const packageFields = basePackageFields
+        .concat(
+          customPackageFields.filter(
+            field => basePackageFields.indexOf(field) < 0,
+          ),
+        )
+        .sort();
+
       const packageData = {
         id: pkgId,
-        name: pkgInfo.name,
-        description: pkgInfo.description,
-        version: pkgInfo.version,
-        maintainers: pkgInfo.maintainers,
-        repository: pkgInfo.repository,
+        customPackageFields: packageFields,
         pkgPath,
         changelogPath,
         readmePath,
@@ -183,6 +196,10 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         docsPaths,
         subExamplesPaths,
       };
+
+      packageFields.forEach(field => {
+        packageData[field] = pkgInfo[field];
+      });
 
       return packageData;
     })
