@@ -377,13 +377,14 @@ module.exports = async function generatePages(
 
   const pkgOpts = {};
 
-  if (options.useManifests) {
+  // loose check to pass through `false` values
+  if (options.useManifests != null) {
     pkgOpts.useManifests = options.useManifests;
   }
-  if (options.showSubExamples) {
+  if (options.showSubExamples != null) {
     pkgOpts.showSubExamples = options.showSubExamples;
   }
-  if (options.showExamples) {
+  if (options.showExamples != null) {
     pkgOpts.showExamples = options.showExamples;
   }
   if (options.customPackageFields) {

@@ -432,35 +432,73 @@ describe('Generate pages', () => {
     });
   });
 
-  describe('Sub examples page generation test', () => {
-    let subExampleSitemap;
-    beforeAll(async () => {
-      subExampleSitemap = await runGeneratePages({
-        docsFixture: 'simple-mock-docs',
-        options: { showSubExamples: true },
-        packagesFixture: 'mock-package-with-sub-examples',
+  describe('with options', () => {
+    describe('when showSubExamples is true', () => {
+      let subExampleSitemap;
+      beforeAll(async () => {
+        subExampleSitemap = await runGeneratePages({
+          docsFixture: 'simple-mock-docs',
+          options: { showSubExamples: true },
+          packagesFixture: 'mock-package-with-sub-examples',
+        });
+      });
+
+      it('gets all examples in the package structure other than in examples folder', () => {
+        expect(subExampleSitemap.packages[0].subExamples[0].id).toEqual('src');
+        expect(
+          subExampleSitemap.packages[0].subExamples[0].children[0].id,
+        ).toEqual('examples');
+
+        // nested examples
+        expect(
+          subExampleSitemap.packages[0].subExamples[0].children[1].id,
+        ).toEqual('test-examples');
+        expect(
+          subExampleSitemap.packages[0].subExamples[0].children[1].children[0]
+            .id,
+        ).toEqual('examples');
+        expect(
+          subExampleSitemap.packages[0].subExamples[0].children[2].id,
+        ).toEqual('view');
+        expect(
+          subExampleSitemap.packages[0].subExamples[0].children[2].children[1]
+            .id,
+        ).toEqual('sub-dir');
       });
     });
 
-    it('gets all examples in the package structure other than in examples folder', () => {
-      expect(subExampleSitemap.packages[0].subExamples[0].id).toEqual('src');
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[0].id,
-      ).toEqual('examples');
+    describe('when showSubExamples is false', () => {
+      let subExampleSitemap;
+      beforeAll(async () => {
+        subExampleSitemap = await runGeneratePages({
+          docsFixture: 'simple-mock-docs',
+          options: { showSubExamples: false },
+          packagesFixture: 'mock-package-with-sub-examples',
+        });
+      });
 
-      // nested examples
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[1].id,
-      ).toEqual('test-examples');
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[1].children[0].id,
-      ).toEqual('examples');
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[2].id,
-      ).toEqual('view');
-      expect(
-        subExampleSitemap.packages[0].subExamples[0].children[2].children[1].id,
-      ).toEqual('sub-dir');
+      it('does not add any subExamples to the packages', () => {
+        subExampleSitemap.packages.forEach(pkg => {
+          expect(pkg.subExamples).toHaveLength(0);
+        });
+      });
+    });
+
+    describe('when showExamples is false', () => {
+      let exampleSitemap;
+      beforeAll(async () => {
+        exampleSitemap = await runGeneratePages({
+          docsFixture: 'simple-mock-docs',
+          options: { showExamples: false },
+          packagesFixture: 'mock-package-with-sub-examples',
+        });
+      });
+
+      it('does not add any subExamples to the packages', () => {
+        exampleSitemap.packages.forEach(pkg => {
+          expect(pkg.examples).toHaveLength(0);
+        });
+      });
     });
   });
 
