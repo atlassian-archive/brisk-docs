@@ -1,0 +1,1 @@
+Fix button links from remounting on component re-renders such as on hover
