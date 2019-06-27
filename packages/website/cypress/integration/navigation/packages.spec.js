@@ -107,8 +107,7 @@ describe('Examples page tests', () => {
     cy.get('[data-testid=example-source-code');
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('should navigate to the full page view for the package', () => {
+  it('should navigate to the full page view for the package', () => {
     cy.visit('/packages/mock-package2/examples/example1');
 
     cy.get('a')
