@@ -12,11 +12,5 @@ module.exports = {
   webpack: identityFunc,
   showSubExamples: false,
   packagesDescription: 'View documentation about individual packages',
-  customPackageFields: [
-    'dependencies',
-    'license',
-    'maintainers',
-    'name',
-    'version',
-  ],
+  customPackageFields: ['license', 'maintainers', 'name', 'version'],
 };
