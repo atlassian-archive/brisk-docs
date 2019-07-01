@@ -1,5 +1,17 @@
 # @brisk-docs/website
 
+## 0.7.3
+
+### Patch Changes
+
+- bc7cc0e: allow configuration of package home page fields from docs.config.js
+- f780aab: Add support for customising page title via markdown frontmatter
+- 8e2abcb: Fix button links from remounting on component re-renders such as on hover
+- a09d513: Update document title to have trailing site name suffix rather than prefix
+- f6c2d2d: Add --debug flag to brisk commands
+- 0cf7b35: Add default site favicon and ability to configure your own
+- b4931b7: Add ability to add yaml frontmatter to markdown pages that will be stripped and parsed as metadata. Currently the metadata is not used but there will be support for specific attributes in the future.
+
 ## 0.7.2
 
 ### Patch Changes
