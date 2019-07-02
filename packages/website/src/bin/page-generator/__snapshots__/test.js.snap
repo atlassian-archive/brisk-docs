@@ -117,7 +117,7 @@ import Component from '../../../../jest-fixture/packages/mock-package1/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","description":"This is a mock package to be used for doc website","name":"mock-package-1","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package1/index.js","pageTitle":"Mock Package1"}}>
+  <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","description":"This is a mock package to be used for doc website","name":"mock-package-1","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-1/index.js","pageTitle":"Mock Package 1"}}>
       <Component />
   </Wrapper>
 );
@@ -129,7 +129,7 @@ import Component from '../../../../jest-fixture/packages/mock-package2/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-2/index.js","pageTitle":"Mock Package 2"}}>
       <Component />
   </Wrapper>
 );
@@ -141,106 +141,106 @@ import Component from '../../../../jest-fixture/packages/mock-package2/README.md
 import Wrapper from '../../../../jest-fixture/package-home';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package2/index.js","pageTitle":"Mock Package2"}}>
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-2/index.js","pageTitle":"Mock Package 2"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package1 1`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
+  <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package1 2`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 2`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package1/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/extended-info.js","pageTitle":"Extended Information"}}>
+  <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/extended-info.js","pageTitle":"Extended Information"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package1 3`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 3`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package1/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
+  <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package2 1`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","pagePath":"packages/mock-package2/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package2 2`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 2`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package2/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","pagePath":"packages/mock-package2/docs/extended-info.js","pageTitle":"Extended Info"}}>
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/extended-info.js","pageTitle":"Extended Info"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package2 3`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 3`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package2/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","pagePath":"packages/mock-package2/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package3 1`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","pagePath":"packages/mock-package3/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
+  <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package3 2`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 2`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package3/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","pagePath":"packages/mock-package3/docs/extended-info.js","pageTitle":"Extended Info"}}>
+  <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/extended-info.js","pageTitle":"Extended Info"}}>
       <Component />
   </Wrapper>
 );
 `;
 
-exports[`Generate pages package pages generation creates docs pages for each package: mock-package3 3`] = `
+exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 3`] = `
 import React from 'react';
 import Component from '../../../../../jest-fixture/packages/mock-package3/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","pagePath":"packages/mock-package3/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
+  <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
@@ -251,7 +251,7 @@ import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","pagePath":"packages/mock-package1/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
+  <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
 `;
 
@@ -264,7 +264,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example1')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package1/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -295,7 +295,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example2')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package1/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -326,7 +326,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example3')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package1/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -353,7 +353,7 @@ import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","pagePath":"packages/mock-package2/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
+  <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
 `;
 
@@ -366,7 +366,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example1')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package2/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -397,7 +397,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example2')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package2/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -428,7 +428,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example3')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package2/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -455,7 +455,7 @@ import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
 export default () => (
-  <Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","pagePath":"packages/mock-package3/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
+  <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
 `;
 
@@ -468,7 +468,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example1')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package3/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -499,7 +499,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example2')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package3/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 
@@ -530,7 +530,7 @@ import Wrapper from '../../../../../jest-fixture/package-example';
 const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example3')
 .then(Components => {
 return () => ( 
-<Wrapper data={{"id":"mock-package3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package3/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
+<Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
             name: 'default', 

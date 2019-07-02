@@ -13,9 +13,9 @@ describe('Get package info utility', () => {
   });
 
   it('returns a list of packages', async () => {
-    expect(packageInfo[0]).toHaveProperty('id', 'mock-package1');
-    expect(packageInfo[1]).toHaveProperty('id', 'mock-package2');
-    expect(packageInfo[2]).toHaveProperty('id', 'mock-package3');
+    expect(packageInfo[0]).toHaveProperty('id', 'mock-package-1');
+    expect(packageInfo[1]).toHaveProperty('id', 'mock-package-2');
+    expect(packageInfo[2]).toHaveProperty('id', 'mock-package-3');
   });
 
   it('extracts name from package.json', async () => {
@@ -136,9 +136,9 @@ describe('Get package info utility', () => {
       path.join(cwd, 'packages', 'mock-package3'),
     ]);
 
-    expect(packageInfoAlternate[0].id).toEqual('mock-package1');
-    expect(packageInfoAlternate[1].id).toEqual('mock-package2');
-    expect(packageInfoAlternate[2].id).toEqual('mock-package3');
+    expect(packageInfoAlternate[0].id).toEqual('mock-package-1');
+    expect(packageInfoAlternate[1].id).toEqual('mock-package-2');
+    expect(packageInfoAlternate[2].id).toEqual('mock-package-3');
   });
 
   it('reads manifest.json instead of package.json when use manifest option is enabled', async () => {

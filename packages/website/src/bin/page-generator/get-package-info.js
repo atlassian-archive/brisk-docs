@@ -184,9 +184,10 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
           ),
         )
         .sort();
-
+      const id = pkgInfo.name ? pkgInfo.name.replace(/(@\w*\/)/g, '') : pkgId;
+      const pkgFile = pkgInfo.name ? pkgId : undefined;
       const packageData = {
-        id: pkgId,
+        id,
         customPackageFields: packageFields,
         pkgPath,
         changelogPath,
@@ -195,6 +196,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         examplesPaths,
         docsPaths,
         subExamplesPaths,
+        pkgFile,
       };
 
       packageFields.forEach(field => {
