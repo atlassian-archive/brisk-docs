@@ -1,0 +1,1 @@
+The package Id is being set as the name from the package.json while generating pages. The display name in the all packages home page and nav content has been set as the file name.

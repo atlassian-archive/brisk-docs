@@ -84,17 +84,17 @@ describe('Generate pages', () => {
     it('creates a home page per package', () => {
       expect(
         getOutput(
-          path.join(pagesPath, 'packages', 'mock-package1', 'index.js'),
+          path.join(pagesPath, 'packages', 'mock-package-1', 'index.js'),
         ),
       ).toMatchSnapshot();
       expect(
         getOutput(
-          path.join(pagesPath, 'packages', 'mock-package2', 'index.js'),
+          path.join(pagesPath, 'packages', 'mock-package-2', 'index.js'),
         ),
       ).toMatchSnapshot();
       expect(
         getOutput(
-          path.join(pagesPath, 'packages', 'mock-package2', 'index.js'),
+          path.join(pagesPath, 'packages', 'mock-package-2', 'index.js'),
         ),
       ).toMatchSnapshot();
     });
@@ -118,9 +118,9 @@ describe('Generate pages', () => {
         ).toMatchSnapshot(packageId);
       };
 
-      assertDocs('mock-package1');
-      assertDocs('mock-package2');
-      assertDocs('mock-package3');
+      assertDocs('mock-package-1');
+      assertDocs('mock-package-2');
+      assertDocs('mock-package-3');
     });
 
     it('creates examples pages for each package', () => {
@@ -145,9 +145,9 @@ describe('Generate pages', () => {
         ).toMatchSnapshot();
       };
 
-      assertDocs('mock-package1');
-      assertDocs('mock-package2');
-      assertDocs('mock-package3');
+      assertDocs('mock-package-1');
+      assertDocs('mock-package-2');
+      assertDocs('mock-package-3');
     });
 
     describe('sitemap generation', () => {
@@ -158,15 +158,15 @@ describe('Generate pages', () => {
       });
 
       it('gets the id for each package', () => {
-        expect(packagesSitemap[0].packageId).toEqual('mock-package1');
-        expect(packagesSitemap[1].packageId).toEqual('mock-package2');
-        expect(packagesSitemap[2].packageId).toEqual('mock-package3');
+        expect(packagesSitemap[0].packageId).toEqual('mock-package-1');
+        expect(packagesSitemap[1].packageId).toEqual('mock-package-2');
+        expect(packagesSitemap[2].packageId).toEqual('mock-package-3');
       });
 
       it('gets the home page path for each package', () => {
-        expect(packagesSitemap[0].homePath).toEqual('/packages/mock-package1');
-        expect(packagesSitemap[1].homePath).toEqual('/packages/mock-package2');
-        expect(packagesSitemap[2].homePath).toEqual('/packages/mock-package3');
+        expect(packagesSitemap[0].homePath).toEqual('/packages/mock-package-1');
+        expect(packagesSitemap[1].homePath).toEqual('/packages/mock-package-2');
+        expect(packagesSitemap[2].homePath).toEqual('/packages/mock-package-3');
       });
 
       it('gets the docs pages for each package', () => {
@@ -174,7 +174,7 @@ describe('Generate pages', () => {
           const packageDocsPath = path.join('/', 'packages', packageId, 'docs');
 
           const nonsense =
-            packageId === 'mock-package1'
+            packageId === 'mock-package-1'
               ? [
                   {
                     children: [
@@ -205,9 +205,9 @@ describe('Generate pages', () => {
           ]);
         };
 
-        assertDocs(packagesSitemap[0].docs, 'mock-package1');
-        assertDocs(packagesSitemap[1].docs, 'mock-package2');
-        assertDocs(packagesSitemap[2].docs, 'mock-package3');
+        assertDocs(packagesSitemap[0].docs, 'mock-package-1');
+        assertDocs(packagesSitemap[1].docs, 'mock-package-2');
+        assertDocs(packagesSitemap[2].docs, 'mock-package-3');
       });
 
       it('gets the examples pages for each package', () => {
@@ -238,32 +238,32 @@ describe('Generate pages', () => {
           ]);
         };
 
-        assertDocs(packagesSitemap[0].examples, 'mock-package1');
-        assertDocs(packagesSitemap[1].examples, 'mock-package2');
-        assertDocs(packagesSitemap[2].examples, 'mock-package3');
+        assertDocs(packagesSitemap[0].examples, 'mock-package-1');
+        assertDocs(packagesSitemap[1].examples, 'mock-package-2');
+        assertDocs(packagesSitemap[2].examples, 'mock-package-3');
       });
 
       it('gets the docs folder path for each package', () => {
         expect(packagesSitemap[0].docPath).toEqual(
-          '/packages/mock-package1/docs',
+          '/packages/mock-package-1/docs',
         );
         expect(packagesSitemap[1].docPath).toEqual(
-          '/packages/mock-package2/docs',
+          '/packages/mock-package-2/docs',
         );
         expect(packagesSitemap[2].docPath).toEqual(
-          '/packages/mock-package3/docs',
+          '/packages/mock-package-3/docs',
         );
       });
 
       it('gets the examples folder path for each package', () => {
         expect(packagesSitemap[0].examplePath).toEqual(
-          '/packages/mock-package1/examples',
+          '/packages/mock-package-1/examples',
         );
         expect(packagesSitemap[1].examplePath).toEqual(
-          '/packages/mock-package2/examples',
+          '/packages/mock-package-2/examples',
         );
         expect(packagesSitemap[2].examplePath).toEqual(
-          '/packages/mock-package3/examples',
+          '/packages/mock-package-3/examples',
         );
       });
 
@@ -426,9 +426,9 @@ describe('Generate pages', () => {
     });
 
     it('gets specified metadata values for each of the packages', () => {
-      expect(metaDataInfo[0].id).toEqual('mock-package1');
-      expect(metaDataInfo[1].id).toEqual('mock-package2');
-      expect(metaDataInfo[2].id).toEqual('mock-package3');
+      expect(metaDataInfo[0].id).toEqual('mock-package-1');
+      expect(metaDataInfo[1].id).toEqual('mock-package-2');
+      expect(metaDataInfo[2].id).toEqual('mock-package-3');
     });
   });
 
@@ -539,7 +539,7 @@ describe('File modification tests', () => {
     const firstDocsPage = path.join(
       pagesPath,
       'packages',
-      'mock-package1',
+      'mock-package-1',
       'docs',
       'extended-info.js',
     );

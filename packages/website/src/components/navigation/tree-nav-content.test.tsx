@@ -7,14 +7,14 @@ describe('Tree nav content', () => {
         [
           {
             id: 'page-1',
-            pagePath: '/packages/mock-package1/docs/page-1',
+            pagePath: '/packages/mock-package-1/docs/page-1',
             meta: {
               title: 'Page 1',
             },
           },
           {
             id: 'page-2',
-            pagePath: '/packages/mock-package1/docs/page-2',
+            pagePath: '/packages/mock-package-1/docs/page-2',
             meta: {
               title: 'Page 2',
             },
@@ -39,7 +39,7 @@ describe('Tree nav content', () => {
         'mock-package-1/page-1': {
           children: [],
           data: {
-            href: '/packages/mock-package1/docs/page-1',
+            href: '/packages/mock-package-1/docs/page-1',
             title: 'Page 1',
           },
           id: 'mock-package-1/page-1',
@@ -47,7 +47,7 @@ describe('Tree nav content', () => {
         'mock-package-1/page-2': {
           children: [],
           data: {
-            href: '/packages/mock-package1/docs/page-2',
+            href: '/packages/mock-package-1/docs/page-2',
             title: 'Page 2',
           },
           id: 'mock-package-1/page-2',
@@ -81,14 +81,14 @@ describe('Tree nav content', () => {
         [
           {
             id: 'page-1',
-            pagePath: '/packages/mock-package1/docs/page-1',
+            pagePath: '/packages/mock-package-1/docs/page-1',
             meta: {
               title: 'First page',
             },
           },
           {
             id: 'page-2',
-            pagePath: '/packages/mock-package1/docs/page-2',
+            pagePath: '/packages/mock-package-1/docs/page-2',
             meta: {
               title: 'Page 2',
             },

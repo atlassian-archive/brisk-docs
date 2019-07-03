@@ -281,6 +281,7 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
       docs,
       examples,
       subExamples: formatSubExamples(),
+      packageTitle: pkg.pkgFile, // this can be removed during Links refactor.
     };
   });
   return packageSitemap;

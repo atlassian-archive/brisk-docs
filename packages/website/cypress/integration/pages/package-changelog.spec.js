@@ -11,7 +11,7 @@ describe('Package changelog page tests', () => {
 
   describe('Package missing a changelog', () => {
     beforeEach(() => {
-      cy.visit('/packages/mock-package1/changelog');
+      cy.visit('/packages/mock-package-1/changelog');
     });
 
     it('has the correct page title', () => {

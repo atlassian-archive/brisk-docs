@@ -14,7 +14,12 @@ import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
 const gridSize = gridSizeFn();
 
-export type Data = { packageId: string; homePath: string; parentId?: string }[];
+export type Data = {
+  packageTitle?: string;
+  packageId: string;
+  homePath: string;
+  parentId?: string;
+}[];
 export type Props = {
   data: Data;
 };
@@ -23,7 +28,7 @@ export type Props = {
 const getChildrenArray = (array: Data, id?: string) =>
   array
     .filter(y => y.parentId === id)
-    .map(x => ({ id: x.packageId, pagePath: x.homePath }));
+    .map(x => ({ id: x.packageTitle || x.packageId, pagePath: x.homePath }));
 
 // @ts-ignore
 // transforms the nested folders into the format of {id , children} required for nav to build data
@@ -149,7 +154,11 @@ const AllPackagesNavContent = ({ data }: Props) => {
                 .map(pkg => (
                   <LinkWithRouter
                     key={pkg.packageId}
-                    text={titleCase(pkg.packageId)}
+                    text={
+                      pkg.packageTitle
+                        ? titleCase(pkg.packageTitle)
+                        : titleCase(pkg.packageId)
+                    }
                     href={pkg.homePath}
                   />
                 ))}

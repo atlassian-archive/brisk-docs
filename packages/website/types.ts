@@ -54,4 +54,5 @@ export declare type PackageInfo = {
   subExamples: NestedExamplePage[];
   repository: Repository;
   parentId?: string;
+  packageTitle?: string;
 };
