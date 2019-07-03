@@ -1,6 +1,6 @@
 describe('Package docs home page tests', () => {
   beforeEach(() => {
-    cy.visit('/packages/mock-package1/docs');
+    cy.visit('/packages/mock-package-1/docs');
   });
 
   it('has the correct page title', () => {

@@ -11,15 +11,15 @@ describe('Home page tests', () => {
     cy.get('table').within(() => {
       cy.get('a')
         .contains('Mock Package1')
-        .should('have.attr', 'href', '/packages/mock-package1');
+        .should('have.attr', 'href', '/packages/mock-package-1');
 
       cy.get('a')
         .contains('Mock Package2')
-        .should('have.attr', 'href', '/packages/mock-package2');
+        .should('have.attr', 'href', '/packages/mock-package-2');
 
       cy.get('a')
         .contains('Mock Package3')
-        .should('have.attr', 'href', '/packages/mock-package3');
+        .should('have.attr', 'href', '/packages/mock-package-3');
     });
     // cy.screenshot('packages-page');
   });
