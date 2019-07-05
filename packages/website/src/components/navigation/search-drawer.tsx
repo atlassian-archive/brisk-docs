@@ -25,12 +25,26 @@ const remapPages = (pages: Page[], packageId: string, type: string) =>
     package: packageId,
   }));
 
+const getTitle = (
+  packageId: string,
+  parentId?: string,
+  packageTitle?: string,
+) => {
+  let defaultTitle = packageId;
+  if (parentId) {
+    const id = packageTitle || packageId;
+    defaultTitle = `${parentId.split('/').join(' -> ')} -> ${id}`;
+  } else if (packageTitle) {
+    defaultTitle = packageTitle;
+  }
+
+  return defaultTitle;
+};
+
 // We will likely change this because this is very suboptimal. Relies on some down-the-line display decisions
 const newData = data.packages.map(
-  ({ packageId, homePath, docs, examples, parentId }) => ({
-    title: parentId
-      ? `${parentId.split('/').join(' -> ')} -> ${packageId}`
-      : packageId,
+  ({ packageId, homePath, docs, examples, parentId, packageTitle }) => ({
+    title: getTitle(packageId, parentId, packageTitle),
     pages: [
       { id: 'readme', title: 'Readme', path: homePath, type: 'readme' },
       ...remapPages(docs, packageId, 'package-docs'),
