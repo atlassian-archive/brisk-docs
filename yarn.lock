@@ -6560,17 +6560,17 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-react-types-loader@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/extract-react-types-loader/-/extract-react-types-loader-0.3.6.tgz#98e210b60c432dc6cea865a94f51a8d3a0a6f32f"
-  integrity sha512-Q57NLTZSzVsoXeSEbJ7OiaCYcuvoIlk8Ej5UtfsNfLWwAF6E/2uqEyhYu1HgKv4xA66I8dW579m0IlDSDlQBLw==
+extract-react-types-loader@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/extract-react-types-loader/-/extract-react-types-loader-0.3.7.tgz#ec7013d6f449069ab1e139b42217ef0ea0b73f33"
+  integrity sha512-/gUi5lS87ZZOP1jSZH0fJzmXAfzPibbyZan+MyUE1TMWBTfX43cIkpa7PhhUWlDNFywIN+O123/it732/xYUrw==
   dependencies:
-    extract-react-types "^0.20.0"
+    extract-react-types "^0.20.1"
 
-extract-react-types@^0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.20.0.tgz#bee91973decb07039153ea530dd5bffe9d89109e"
-  integrity sha512-BnmgoGeeAJzdcghC5Q86T+OGbg9n3W33Y9k7IN1XQdvc0egvXa7To8lL/O1qM75BE1KE0pE8RY1YXLstK/ZEFA==
+extract-react-types@^0.20.1:
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.20.1.tgz#b3bfba443c7e55416a44cd7396306e841d0a521f"
+  integrity sha512-8G6yHWXDADqugv7e5zRJBAIHOG6CUq75Uu8VP5bNWZDym2PCHo+j9kBDaUv1aOyJ+F+02AV9rNqhSLIPxx6SUw==
   dependencies:
     "@aparna036/babel-explode-module" "^2.0.1"
     "@babel/core" "^7.4.4"
