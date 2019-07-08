@@ -1,0 +1,1 @@
+Update extract-react-types to support new features in that package
