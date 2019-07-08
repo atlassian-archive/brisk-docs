@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/file-viewer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "This package is used for rendering examples and their source code",
   "main": "dist/file-viewer.cjs.js",
   "module": "dist/file-viewer.esm.js",

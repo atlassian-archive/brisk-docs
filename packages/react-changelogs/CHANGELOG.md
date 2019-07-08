@@ -1,11 +1,19 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.7
+
+### Patch Changes
+
+- d6ad582: Update extract-react-types to support new features in that package
+
 ## 0.1.6
+
 ### Patch Changes
 
 - 76dc8dc: Updated the extract react loader version
 
 ## 0.1.5
+
 ### Patch Changes
 
 - fc6c572: Convert classes to hooks against advisement from react team
