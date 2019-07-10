@@ -40,7 +40,8 @@
   "preconstruct": {
     "packages": [
       "packages/react-changelogs",
-      "packages/file-viewer"
+      "packages/file-viewer",
+      "packages/website"
     ]
   },
   "dependencies": {

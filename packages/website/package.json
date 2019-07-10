@@ -2,7 +2,8 @@
   "name": "@brisk-docs/website",
   "version": "0.7.4",
   "description": "The Brisk website documenter",
-  "main": "src/bin/index.js",
+  "main": "dist/website.cjs.js",
+  "module": "dist/website.esm.js",
   "maintainers": [
     "Dean Pisani",
     "Aparna Raj",
