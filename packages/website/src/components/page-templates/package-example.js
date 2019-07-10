@@ -16,7 +16,7 @@ import LinkButton from '../link-button';
 import PackageNavContent from '../navigation/package-nav-content';
 import NavigationWrapper from '../navigation-wrapper';
 import PageTitle from '../page-title';
-import CodeView from '../code-example/code-view';
+import ExampleInfoPanel from '../example-info-panel';
 
 const PageContent = styled.div`
   display: flex;
@@ -188,7 +188,7 @@ class PackageExample extends React.Component {
               )}
             </WidthDetector>
             {showCodeViewButton && (
-              <CodeView
+              <ExampleInfoPanel
                 isExpanded={isCodeViewExpanded}
                 fileContents={fileContents}
               />

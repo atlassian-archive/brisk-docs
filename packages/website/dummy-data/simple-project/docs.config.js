@@ -1,4 +1,5 @@
 const path = require('path');
+const badExtension = require('../bad-example-extension');
 
 module.exports = () => ({
   packages: path.join(__dirname, 'packages', '*'),
@@ -12,4 +13,5 @@ module.exports = () => ({
   ],
   siteName: 'Dummy Data Docs',
   favicon: path.join(__dirname, 'favicon.ico'),
+  extensions: [badExtension],
 });

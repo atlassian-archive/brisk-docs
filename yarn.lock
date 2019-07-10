@@ -65,6 +65,14 @@
     "@babel/runtime" "^7.0.0"
     prop-types "^15.5.10"
 
+"@atlaskit/analytics-next@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-5.0.2.tgz#e440cdb5de33afb17706da8f3f1f131ad2e35ca8"
+  integrity sha512-nzbTQeL1lMy2KapLAQzhZulECDJJDWqcj7l8eapGQuKwMG5aT4SR48kdEuXDHxjuoyCNEBi7/xr8x27GzQ3rCw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.5.10"
+
 "@atlaskit/analytics@^4.0.7":
   version "4.0.7"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/analytics/-/analytics-4.0.7.tgz#eb60bf2aa03e5370e0c269a368fe1992810c38f5"
@@ -576,6 +584,19 @@
     lodash.set "^4.3.2"
     prop-types "^15.5.10"
 
+"@atlaskit/tabs@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tabs/-/tabs-11.0.0.tgz#aa9e42d01660e65ce63db92e4d7a356b25af6f2e"
+  integrity sha512-5MnKuLuWBD5XRjv496fcphHGtB+DaQkkeizo0IQ3pejtKnkZe6o+fYK5PQVylgdWPPAKp3g9TJ/rrFdiY+N4aA==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.0.2"
+    "@atlaskit/theme" "^9.1.1"
+    "@babel/runtime" "^7.0.0"
+    classnames "^2.2.5"
+    css-element-queries "^0.3.2"
+    debounce "^1.0.0"
+    keycode "^2.1.7"
+
 "@atlaskit/theme@^4.0.4":
   version "4.1.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/theme/-/theme-4.1.0.tgz#b3fec7722861af4b6dd9ee524bd57bf878e3bf09"
@@ -622,6 +643,15 @@
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.0.1.tgz#d7568c4e5a958a0f7c83f5de0039545cc6944dc7"
   integrity sha512-gAkxxaYwDcZqhgdKKqiCA9bLSPjEr31YuK9C//0sAnsf9ddgE95tuKx7qrISr9xwGhr9dxnDINuM70EM1AFamw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+
+"@atlaskit/theme@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.1.1.tgz#c7377a29dce89191671bd78e1aaa21dfa2a78b68"
+  integrity sha512-VdKaThfdusSJRDX8gdlZxLNOJPf+3v8khk1+F7NAEktfkmk+VMGYrgeav/QJL6eXx0dgjRYq+unI4gTQYQpA/Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
@@ -5189,6 +5219,11 @@ css-color-keywords@^1.0.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
   integrity sha1-/qJhbcZ2spYmhrOvjb2+GAskTgU=
 
+css-element-queries@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/css-element-queries/-/css-element-queries-0.3.2.tgz#535d80891b3af21395d005f19905fe5154b5ccff"
+  integrity sha1-U12AiRs68hOV0AXxmQX+UVS1zP8=
+
 css-loader@1.0.0:
   version "1.0.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/css-loader/-/css-loader-1.0.0.tgz#9f46aaa5ca41dbe31860e3b62b8e23c42916bf56"
@@ -5413,6 +5448,11 @@ deasync@^0.1.14:
   dependencies:
     bindings "~1.2.1"
     node-addon-api "^1.6.0"
+
+debounce@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug-log@^1.0.0:
   version "1.0.1"
@@ -9196,6 +9236,11 @@ lodash.flatmap@^4.5.0:
   version "4.5.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/lodash.flatmap/-/lodash.flatmap-4.5.0.tgz#ef8cbf408f6e48268663345305c6acc0b778702e"
   integrity sha1-74y/QI9uSCaGYzRTBcaswLd4cC4=
+
+lodash.flatten@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
+  integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
 
 lodash.flattendeep@^4.4.0:
   version "4.4.0"

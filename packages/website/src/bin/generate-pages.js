@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const generatePages = require('./page-generator');
+const generateExtensionsList = require('./generate-extensions-list');
 
 const packageRoot = path.resolve(__dirname, '..', '..');
 
@@ -22,6 +23,7 @@ module.exports = async ({
   packagesDescription,
   readMePath,
   customPackageFields,
+  extensions,
 }) => {
   const componentsPath = path.resolve(
     packageRoot,
@@ -50,6 +52,7 @@ module.exports = async ({
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
   const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
+  const extensionsPath = path.resolve(packageRoot, 'data/extensions-list.js');
 
   fs.ensureFileSync(pagesListPath);
   fs.writeFileSync(
@@ -66,4 +69,6 @@ module.exports = async ({
     metaPath,
     JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
   );
+
+  fs.writeFileSync(extensionsPath, generateExtensionsList(extensions || []));
 };

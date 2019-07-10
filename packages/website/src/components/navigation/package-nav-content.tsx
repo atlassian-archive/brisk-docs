@@ -7,6 +7,7 @@ import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 import { NestedExamplePage, ExamplePage, DocsPage } from '../../../types';
+import ExtensionsConsumer from '../extensions';
 
 const GetLink = ({ id, pagePath }: ExamplePage) => (
   <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
@@ -29,6 +30,18 @@ const renderSubExamplesTree = (subExamples: NestedExamplePage[]) => {
     </>
   );
 };
+
+const renderExtensions = ({ packageName }) => (
+  <ExtensionsConsumer extensionPoint="package-navigation">
+    {extensions =>
+      extensions.map(({ Component, meta }) => (
+        <Group heading={meta.heading} hasSeparator>
+          <Component packageName={packageName} />
+        </Group>
+      ))
+    }
+  </ExtensionsConsumer>
+);
 
 export type SomeProps = {
   homePath: string;
@@ -80,6 +93,7 @@ const NavContent = ({
             {subExamples && subExamples.length > 0
               ? renderSubExamplesTree(subExamples)
               : null}
+            {renderExtensions({ packageName })}
           </div>
         )}
       </MenuSection>
