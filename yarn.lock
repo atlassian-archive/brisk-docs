@@ -219,7 +219,7 @@
     fbjs "^1.0.0"
     mkdirp "^0.5.1"
 
-"@atlaskit/docs@^6.0.1", "@atlaskit/docs@^6.0.2":
+"@atlaskit/docs@^6.0.1":
   version "6.0.2"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/docs/-/docs-6.0.2.tgz#f6147cb42c717276f70caab4d52e82d9624af2a5"
   integrity sha512-8ny+elxCQ9H5nS7gY/I6NKNeGEYXcQjmd2kij5Z7dlKtpf6w6/FyeBDgdjDmmczwZYPLrRB1g8svuMgBg4P9Bg==
