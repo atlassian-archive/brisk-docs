@@ -1,0 +1,1 @@
+# Generate pages build stage

@@ -6,10 +6,12 @@ import runWebsite from './stages/run-website';
 
 export default () => {
   const initialConfiguration = {};
-  return scanMetadata(initialConfiguration)
-    .then(generateWebsiteInfo)
-    .then(generatePages)
-    .then(buildWebsite)
-    .then(runWebsite)
-    .then(() => {});
+  return scanMetadata(initialConfiguration, {})
+    .then(result => generateWebsiteInfo(result, {}))
+    .then(result => generatePages(result, {}))
+    .then(result => buildWebsite(result, {}))
+    .then(result => runWebsite(result, {}))
+    .then(() => {
+      console.log('Thanks for documenting with brisk-docs! 🎿');
+    });
 };

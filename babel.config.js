@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['next/babel', '@zeit/next-typescript/babel'],
+  presets: ['@babel/preset-env', '@babel/react', '@babel/preset-typescript'],
   plugins: [
     'emotion',
     [
