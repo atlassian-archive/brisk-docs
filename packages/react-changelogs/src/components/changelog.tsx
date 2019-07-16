@@ -57,7 +57,7 @@ const LogItem = styled.div`
   ${(p: { major: boolean }) =>
     p.major
       ? `
-          &:not(:first-child) {
+          &:not(:first-of-type) {
             border-top: 2px solid ${colors.N30};
             margin-top: ${gutter}px;
             padding-top: ${gutter}px;
