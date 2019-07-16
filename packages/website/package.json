@@ -2,7 +2,8 @@
   "name": "@brisk-docs/website",
   "version": "0.7.4",
   "description": "The Brisk website documenter",
-  "main": "src/bin/index.js",
+  "main": "dist/website.cjs.js",
+  "module": "dist/website.esm.js",
   "maintainers": [
     "Dean Pisani",
     "Aparna Raj",
@@ -21,7 +22,11 @@
     "start": "node src/bin/index.js start"
   },
   "bin": {
-    "brisk": "src/bin/index.js"
+    "brisk": "src/bin/index.js",
+    "brisk-next": "bin.js"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   },
   "files": [
     "src",
@@ -33,7 +38,9 @@
     "next.config.js",
     "next-externals.js",
     "types.ts",
-    "tsconfig.json"
+    "tsconfig.json",
+    "bin.js",
+    "dist"
   ],
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",

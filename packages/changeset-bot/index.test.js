@@ -17,7 +17,7 @@ describe('changeset-bot', () => {
     const app = probot.load(changesetBot);
 
     // just return a test token
-    app.app = () => 'test';
+    app.app = () => 'test.ts';
   });
 
   it('should add a comment when there is no comment', async () => {

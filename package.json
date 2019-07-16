@@ -20,6 +20,7 @@
     "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
     "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
     "docs": "node packages/website/src/bin/index.js dev",
+    "docs-next": "node packages/website/bin.js",
     "prettier": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn check:types",
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
@@ -40,7 +41,8 @@
   "preconstruct": {
     "packages": [
       "packages/react-changelogs",
-      "packages/file-viewer"
+      "packages/file-viewer",
+      "packages/website"
     ]
   },
   "dependencies": {

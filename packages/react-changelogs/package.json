@@ -34,11 +34,13 @@
     "@atlaskit/css-reset": "^3.0.5",
     "@atlaskit/pagination": "^10.0.1",
     "@atlaskit/theme": "^6.0.0",
+    "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@emotion/core": "^10.0.9",
+    "@emotion/styled": "^10.0.9",
     "prismjs": "^1.15.0",
     "react-addons-text-content": "^0.0.4",
     "react-markdown": "^2.5.0",
-    "semver": "^5.4.1",
-    "styled-components": "^3.2.6"
+    "semver": "^5.4.1"
   }
 }

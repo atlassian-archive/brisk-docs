@@ -1,13 +1,13 @@
 import * as React from 'react';
 // @ts-ignore - The types for ReactMarkdown are wrong and do not think it has a default export
 import ReactMarkdown from 'react-markdown';
-import styled, { css } from 'styled-components';
-import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
+import styled from '@emotion/styled';
+import { gridSize, colors, borderRadius } from '@atlaskit/theme';
 import Pagination from '@atlaskit/pagination';
 import filterChangelog from '../utils/filter-changelog';
 import divideChangelog from '../utils/divide-changelog';
 
-const gutter = math.multiply(gridSize, 3);
+const gutter = gridSize() * 3;
 
 const H3 = styled.h3`
   color: ${colors.N200};
@@ -56,8 +56,8 @@ const LogItem = styled.div`
 
   ${(p: { major: boolean }) =>
     p.major
-      ? css`
-          &:not(:first-child) {
+      ? `
+          &:not(:first-of-type) {
             border-top: 2px solid ${colors.N30};
             margin-top: ${gutter}px;
             padding-top: ${gutter}px;
