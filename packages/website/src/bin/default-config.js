@@ -7,7 +7,6 @@ module.exports = {
     description: 'View the documentation for this project',
   },
   packages: ['./packages/**/*'],
-  useManifests: false,
   siteName: 'Brisk Docs',
   webpack: identityFunc,
   showSubExamples: false,

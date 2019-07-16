@@ -141,24 +141,6 @@ describe('Get package info utility', () => {
     expect(packageInfoAlternate[2].id).toEqual('mock-package-3');
   });
 
-  it('reads manifest.json instead of package.json when use manifest option is enabled', async () => {
-    const manifestAppFixturePath = await copyFixtureIntoTempDir(
-      __dirname,
-      'mock-packages-manifests',
-    );
-
-    const packageInfoAlternate = getPackageInfo(
-      [path.join(manifestAppFixturePath, 'packages', '*')],
-      { useManifests: true },
-    );
-
-    expect(packageInfoAlternate[0].id).toEqual('manifest-app-1');
-    expect(packageInfoAlternate[0].maintainers).toEqual([
-      'cdebourgh',
-      'wcollins',
-    ]);
-  });
-
   it('hides the other examples according to the showSubExamples config', async () => {
     expect(packageInfo[0].subExamplesPaths).toEqual([]);
   });
