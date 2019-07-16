@@ -30,7 +30,7 @@ if (!cwd) {
 
 const { webpack: clientWebpack } = handleConfig(cwd, configPath);
 
-const babelExlude = filePath => {
+const babelExclude = filePath => {
   if (/next-server[\\/]dist[\\/]lib/.test(filePath)) {
     return false;
   }
@@ -55,7 +55,7 @@ module.exports = withTypescript(
               // than the project root (in tests and such)
               // This solves that, but is very much a hack, and can't be relied upon going forwards.
               loader.include.push(path.join(__dirname, '..'));
-              loader.exclude = babelExlude;
+              loader.exclude = babelExclude;
             }
             if (loader.use.loader === 'next-babel-loader') {
               loader.use = ['thread-loader', loader.use];
