@@ -54,7 +54,6 @@
     "@atlaskit/checkbox": "^7.0.0",
     "@atlaskit/code": "^9.0.0",
     "@atlaskit/css-reset": "^3.0.5",
-    "@atlaskit/docs": "^6.0.2",
     "@atlaskit/drawer": "^2.7.1",
     "@atlaskit/dropdown-menu": "^6.1.26",
     "@atlaskit/dynamic-table": "^10.0.23",
