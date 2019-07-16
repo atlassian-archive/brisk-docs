@@ -85,21 +85,6 @@ const getPackageDefinition = pkgPath => {
 };
 
 /**
- * Gets the contents of the manifest.json in a directory, if it exists
- * @param pkgPath
- * @returns a manifest definition, or null
- */
-const getManifestDefinition = pkgPath => {
-  const manifestPath = path.resolve(pkgPath, 'manifest.json');
-
-  if (fs.existsSync(manifestPath)) {
-    return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-  }
-
-  return null;
-};
-
-/**
  * Scans all packages and gathers information that will be shown in the docs website
  * @param packagesPatterns array of glob patterns for directories to be included
  * @param options configuration options
@@ -108,13 +93,12 @@ const getManifestDefinition = pkgPath => {
  */
 module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
   const defaultOptions = {
-    useManifests: false,
     showSubExamples: false,
     showExamples: true,
     customPackageFields: [],
   };
 
-  const { useManifests, showSubExamples, showExamples, customPackageFields } = {
+  const { showSubExamples, showExamples, customPackageFields } = {
     ...defaultOptions,
     ...options,
   };
@@ -123,12 +107,8 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
     .map(pkgPath => {
       const pkgId = path.basename(pkgPath);
 
-      // Get information about the package, either by its package.json
-      // or a manifest.json if supported
+      // Get information about the package by its package.json
       let pkgInfo = getPackageDefinition(pkgPath);
-      if (!pkgInfo && useManifests) {
-        pkgInfo = getManifestDefinition(pkgPath);
-      }
 
       if (!pkgInfo) {
         // This isn't a package. Return false so it isn't included in the docs.
