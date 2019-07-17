@@ -147,6 +147,18 @@ describe('Get package info utility', () => {
     assertExamples(packageInfo[2], 'mock-package3');
   });
 
+  it('can accept an array of paths', () => {
+    const packageInfoAlternate = getPackageInfo([
+      path.join(cwd, 'packages', 'mock-package1'),
+      path.join(cwd, 'packages', 'mock-package2'),
+      path.join(cwd, 'packages', 'mock-package3'),
+    ]);
+
+    expect(packageInfoAlternate[0].id).toEqual('mock-package-1');
+    expect(packageInfoAlternate[1].id).toEqual('mock-package-2');
+    expect(packageInfoAlternate[2].id).toEqual('mock-package-3');
+  });
+
   it('hides the other examples according to the showSubExamples config', async () => {
     expect(packageInfo[0].subExamplesPaths).toEqual([]);
   });

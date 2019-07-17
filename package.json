@@ -20,6 +20,7 @@
     "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
     "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
     "docs": "node packages/website/src/bin/index.js dev",
+    "docs-next": "node packages/website/bin.js",
     "prettier": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn check:types",
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
@@ -40,7 +41,8 @@
   "preconstruct": {
     "packages": [
       "packages/react-changelogs",
-      "packages/file-viewer"
+      "packages/file-viewer",
+      "packages/website"
     ]
   },
   "dependencies": {
@@ -52,7 +54,6 @@
     "@atlaskit/checkbox": "^7.0.0",
     "@atlaskit/code": "^9.0.0",
     "@atlaskit/css-reset": "^3.0.5",
-    "@atlaskit/docs": "^6.0.2",
     "@atlaskit/drawer": "^2.7.1",
     "@atlaskit/dropdown-menu": "^6.1.26",
     "@atlaskit/dynamic-table": "^10.0.23",
@@ -78,7 +79,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
-    "@changesets/cli": "^1.2.0",
+    "@changesets/cli": "^1.3.0",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@emotion/styled-base": "^10.0.10",
@@ -101,7 +102,7 @@
     "emotion-server": "^9.2.12",
     "eslint-plugin-emotion": "^10.0.7",
     "express": "^4.16.4",
-    "extract-react-types-loader": "^0.3.3",
+    "extract-react-types-loader": "^0.3.7",
     "filenamify": "^4.0.0",
     "fs-extra": "^7.0.1",
     "git-url-parse": "^11.1.2",

@@ -1,5 +1,12 @@
 # @brisk-docs/website
 
+## 0.7.4
+
+### Patch Changes
+
+- d6ad582: Update extract-react-types to support new features in that package
+- 9c2ac03: The package Id is being set as the name from the package.json while generating pages. The display name in the all packages home page and nav content has been set as the file name.
+
 ## 0.7.3
 
 ### Patch Changes

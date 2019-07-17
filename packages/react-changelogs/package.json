@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/react-changelogs",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "This package is used for displaying changelogs from your projects",
   "main": "dist/react-changelogs.cjs.js",
   "module": "dist/react-changelogs.esm.js",
@@ -23,7 +23,7 @@
     "@types/jest": "^21.1.2",
     "@types/react": "^16.4.18",
     "@types/semver": "^5.5.0",
-    "extract-react-types-loader": "^0.3.3",
+    "extract-react-types-loader": "^0.3.7",
     "jest": "^24.1.0",
     "react-test-renderer": "^16.0.0",
     "ts-jest": "^24.0.0",
@@ -34,11 +34,13 @@
     "@atlaskit/css-reset": "^3.0.5",
     "@atlaskit/pagination": "^10.0.1",
     "@atlaskit/theme": "^6.0.0",
+    "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@emotion/core": "^10.0.9",
+    "@emotion/styled": "^10.0.9",
     "prismjs": "^1.15.0",
     "react-addons-text-content": "^0.0.4",
     "react-markdown": "^2.5.0",
-    "semver": "^5.4.1",
-    "styled-components": "^3.2.6"
+    "semver": "^5.4.1"
   }
 }

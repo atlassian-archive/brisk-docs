@@ -14,7 +14,6 @@ const packageRoot = path.resolve(__dirname, '..', '..');
 module.exports = async ({
   packagesPaths,
   docsList,
-  useManifests,
   webpackConfiguration,
   showExamples,
   showSubExamples,
@@ -37,7 +36,6 @@ module.exports = async ({
     packageRoot,
     componentsPath,
     {
-      useManifests,
       webpackConfiguration,
       showSubExamples,
       showExamples,

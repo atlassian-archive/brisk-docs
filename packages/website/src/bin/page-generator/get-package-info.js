@@ -75,21 +75,6 @@ const getPackageDefinition = pkgPath => {
 };
 
 /**
- * Gets the contents of the manifest.json in a directory, if it exists
- * @param pkgPath
- * @returns a manifest definition, or null
- */
-const getManifestDefinition = pkgPath => {
-  const manifestPath = path.resolve(pkgPath, 'manifest.json');
-
-  if (fs.existsSync(manifestPath)) {
-    return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-  }
-
-  return null;
-};
-
-/**
  * Retrieves a list of all packages in the pattern using the jobsite filter workspaces.
  * @param packagesPatterns array of paths
  * @returns An array of package paths
@@ -113,19 +98,12 @@ module.exports = async function getPackagesInfo(
   options = {},
 ) {
   const defaultOptions = {
-    useManifests: false,
     showSubExamples: false,
     showExamples: true,
     customPackageFields: [],
   };
 
-  const {
-    useManifests,
-    showSubExamples,
-    showExamples,
-    customPackageFields,
-    rootDir,
-  } = {
+  const { showSubExamples, showExamples, customPackageFields, rootDir } = {
     ...defaultOptions,
     ...options,
   };
@@ -141,12 +119,8 @@ module.exports = async function getPackagesInfo(
       const pkgPath = path.resolve(process.cwd(), p);
       const pkgId = path.basename(pkgPath);
 
-      // Get information about the package, either by its package.json
-      // or a manifest.json if supported
-      let pkgInfo = getPackageDefinition(pkgPath);
-      if (!pkgInfo && useManifests) {
-        pkgInfo = getManifestDefinition(pkgPath);
-      }
+      // Get information about the package by its package.json
+      const pkgInfo = getPackageDefinition(pkgPath);
 
       if (!pkgInfo) {
         // This isn't a package. Return false so it isn't included in the docs.

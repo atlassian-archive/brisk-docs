@@ -1,0 +1,9 @@
+{
+  "releases": [
+    { "name": "changeset-bot", "type": "patch" },
+    { "name": "@brisk-docs/file-viewer", "type": "patch" },
+    { "name": "@brisk-docs/react-changelogs", "type": "patch" },
+    { "name": "@brisk-docs/website", "type": "patch" }
+  ],
+  "dependents": []
+}

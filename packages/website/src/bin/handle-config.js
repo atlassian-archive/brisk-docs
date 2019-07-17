@@ -61,7 +61,7 @@ const processConfig = (cwd, providedConfig = {}) => {
  * Handles finding the config file if it exists
  * @param cwd
  * @param providedConfigPath
- * @returns {{packagesPaths: String[], docsPath: String, useManifests: Boolean }}
+ * @returns {{packagesPaths: String[], docsPath: String}}
  */
 const loadConfig = (cwd, providedConfigPath) => {
   const defaultConfigPath = path.join(cwd, 'docs.config.js');
