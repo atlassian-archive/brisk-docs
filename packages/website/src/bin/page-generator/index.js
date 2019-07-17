@@ -109,9 +109,8 @@ function generatePackagePages(packageInfo, generatorConfig, patterns) {
     // const parent = parentDir && pkg.pkgPath.match(`^${parentDir}/(.*)/.*`)[1];
 
     const parentDir = patterns
-      .map(dir => pkg.pkgPath.match(`^${dir}/(.*)/.*`))
+      .map(dir => pkg.workspacePath.match(`^${dir}/(.*)/.*`))
       .find(a => a);
-
     const parent = parentDir && parentDir[1];
 
     const homePageData = {};
@@ -391,8 +390,10 @@ module.exports = async function generatePages(
   if (options.customPackageFields) {
     pkgOpts.customPackageFields = options.customPackageFields;
   }
-
-  const packageInfo = getPackageInfo(packagesPaths, pkgOpts);
+  if (options.rootDir) {
+    pkgOpts.rootDir = options.rootDir;
+  }
+  const packageInfo = await getPackageInfo(packagesPaths, pkgOpts);
 
   const generatorConfig = {
     pagesPath,

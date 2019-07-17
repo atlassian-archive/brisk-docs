@@ -45,9 +45,8 @@ const processConfig = (cwd, providedConfig = {}) => {
 
   const readMePath = path.resolve(cwd, 'README.md');
   const packagesConfig = resolvePathsConfig(packages);
-  const packagesPaths = packagesConfig.map(packagesPath =>
-    path.resolve(cwd, packagesPath),
-  );
+
+  const packagesPaths = packagesConfig.map(p => p);
 
   return {
     docsList,

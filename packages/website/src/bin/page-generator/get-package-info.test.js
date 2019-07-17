@@ -9,7 +9,7 @@ describe('Get package info utility', () => {
 
   beforeAll(async () => {
     cwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-packages');
-    packageInfo = getPackageInfo([path.join(cwd, 'packages', '/*')]);
+    packageInfo = await getPackageInfo(['packages/*'], { rootDir: cwd });
   });
 
   it('returns a list of packages', async () => {
@@ -27,26 +27,26 @@ describe('Get package info utility', () => {
   it('finds the path to the package dir', async () => {
     expect(packageInfo[0]).toHaveProperty(
       'pkgPath',
-      path.join(cwd, 'packages', 'mock-package1'),
+      path.join(process.cwd(), 'packages', 'mock-package1'),
     );
     expect(packageInfo[1]).toHaveProperty(
       'pkgPath',
-      path.join(cwd, 'packages', 'mock-package2'),
+      path.join(process.cwd(), 'packages', 'mock-package2'),
     );
     expect(packageInfo[2]).toHaveProperty(
       'pkgPath',
-      path.join(cwd, 'packages', 'mock-package3'),
+      path.join(process.cwd(), 'packages', 'mock-package3'),
     );
   });
 
   it('finds the path to the package README dir, and returns an empty path if the README does not exist', async () => {
     expect(packageInfo[0]).toHaveProperty(
       'readmePath',
-      path.join(cwd, 'packages', 'mock-package1', 'README.md'),
+      path.join(process.cwd(), 'packages', 'mock-package1', 'README.md'),
     );
     expect(packageInfo[1]).toHaveProperty(
       'readmePath',
-      path.join(cwd, 'packages', 'mock-package2', 'README.md'),
+      path.join(process.cwd(), 'packages', 'mock-package2', 'README.md'),
     );
     expect(packageInfo[2]).toHaveProperty('readmePath', '');
   });
@@ -62,7 +62,7 @@ describe('Get package info utility', () => {
                   {
                     id: 'nesting-now-supported',
                     path: path.join(
-                      cwd,
+                      process.cwd(),
                       'packages',
                       pkgName,
                       'docs',
@@ -79,7 +79,7 @@ describe('Get package info utility', () => {
           {
             id: 'extended-info',
             path: path.join(
-              cwd,
+              process.cwd(),
               'packages',
               pkgName,
               'docs',
@@ -90,7 +90,7 @@ describe('Get package info utility', () => {
           {
             id: 'special-usecase',
             path: path.join(
-              cwd,
+              process.cwd(),
               'packages',
               pkgName,
               'docs',
@@ -111,15 +111,33 @@ describe('Get package info utility', () => {
       expect(pkgInfo.examplesPaths).toEqual([
         {
           id: 'example1',
-          path: path.join(cwd, 'packages', pkgName, 'examples', 'example1.js'),
+          path: path.join(
+            process.cwd(),
+            'packages',
+            pkgName,
+            'examples',
+            'example1.js',
+          ),
         },
         {
           id: 'example2',
-          path: path.join(cwd, 'packages', pkgName, 'examples', 'example2.js'),
+          path: path.join(
+            process.cwd(),
+            'packages',
+            pkgName,
+            'examples',
+            'example2.js',
+          ),
         },
         {
           id: 'example3',
-          path: path.join(cwd, 'packages', pkgName, 'examples', 'example3.js'),
+          path: path.join(
+            process.cwd(),
+            'packages',
+            pkgName,
+            'examples',
+            'example3.js',
+          ),
         },
       ]);
     };
@@ -127,36 +145,6 @@ describe('Get package info utility', () => {
     assertExamples(packageInfo[0], 'mock-package1');
     assertExamples(packageInfo[1], 'mock-package2');
     assertExamples(packageInfo[2], 'mock-package3');
-  });
-
-  it('can accept an array of paths', () => {
-    const packageInfoAlternate = getPackageInfo([
-      path.join(cwd, 'packages', 'mock-package1'),
-      path.join(cwd, 'packages', 'mock-package2'),
-      path.join(cwd, 'packages', 'mock-package3'),
-    ]);
-
-    expect(packageInfoAlternate[0].id).toEqual('mock-package-1');
-    expect(packageInfoAlternate[1].id).toEqual('mock-package-2');
-    expect(packageInfoAlternate[2].id).toEqual('mock-package-3');
-  });
-
-  it('reads manifest.json instead of package.json when use manifest option is enabled', async () => {
-    const manifestAppFixturePath = await copyFixtureIntoTempDir(
-      __dirname,
-      'mock-packages-manifests',
-    );
-
-    const packageInfoAlternate = getPackageInfo(
-      [path.join(manifestAppFixturePath, 'packages', '*')],
-      { useManifests: true },
-    );
-
-    expect(packageInfoAlternate[0].id).toEqual('manifest-app-1');
-    expect(packageInfoAlternate[0].maintainers).toEqual([
-      'cdebourgh',
-      'wcollins',
-    ]);
   });
 
   it('hides the other examples according to the showSubExamples config', async () => {
@@ -172,6 +160,30 @@ describe('Get package info utility', () => {
   });
 });
 
+describe('Test array of packages', () => {
+  let cwd;
+  let packageInfo;
+
+  beforeAll(async () => {
+    cwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-packages');
+    process.chdir(cwd);
+    packageInfo = await getPackageInfo(
+      [
+        'packages/mock-package1',
+        'packages/mock-package2',
+        'packages/mock-package3',
+      ],
+      { rootDir: cwd },
+    );
+  });
+
+  it('can accept an array of paths', () => {
+    expect(packageInfo[0].id).toEqual('mock-package-1');
+    expect(packageInfo[1].id).toEqual('mock-package-2');
+    expect(packageInfo[2].id).toEqual('mock-package-3');
+  });
+});
+
 describe('Test the sub examples package', () => {
   let cwd;
   let packageInfo;
@@ -181,10 +193,11 @@ describe('Test the sub examples package', () => {
       __dirname,
       'mock-package-with-sub-examples',
     );
-    packageInfo = getPackageInfo(
-      [path.join(cwd, 'packages', 'mock-package1')],
-      { showSubExamples: true },
-    );
+    process.chdir(cwd);
+    packageInfo = await getPackageInfo(['packages/mock-package1'], {
+      showSubExamples: true,
+      rootDir: cwd,
+    });
   });
 
   it('finds the paths of all the sub examples in a package', async () => {
@@ -192,12 +205,18 @@ describe('Test the sub examples package', () => {
       expect(pkgInfo.subExamplesPaths).toEqual([
         {
           id: '/src',
-          path: path.join(cwd, 'packages', pkgName, 'src', 'examples.js'),
+          path: path.join(
+            process.cwd(),
+            'packages',
+            pkgName,
+            'src',
+            'examples.js',
+          ),
         },
         {
           id: '/src/test-examples',
           path: path.join(
-            cwd,
+            process.cwd(),
             'packages',
             pkgName,
             'src',
@@ -208,7 +227,7 @@ describe('Test the sub examples package', () => {
         {
           id: '/src/view',
           path: path.join(
-            cwd,
+            process.cwd(),
             'packages',
             pkgName,
             'src',
@@ -219,7 +238,7 @@ describe('Test the sub examples package', () => {
         {
           id: '/src/view/sub-dir',
           path: path.join(
-            cwd,
+            process.cwd(),
             'packages',
             pkgName,
             'src',
@@ -241,10 +260,10 @@ describe('hiding examples', () => {
       __dirname,
       'mock-package-with-sub-examples',
     );
-    const packageInfo = getPackageInfo(
-      [path.join(cwd, 'packages', 'mock-package1')],
-      { showExamples: false },
-    );
+    const packageInfo = await getPackageInfo(['packages/mock-package1'], {
+      showExamples: false,
+      rootDir: cwd,
+    });
 
     expect(packageInfo[0].examplesPaths).toEqual([]);
   });
@@ -253,10 +272,11 @@ describe('hiding examples', () => {
       __dirname,
       'mock-package-with-sub-examples',
     );
-    const packageInfo = getPackageInfo(
-      [path.join(cwd, 'packages', 'mock-package1')],
-      { showSubExamples: true, showExamples: false },
-    );
+    const packageInfo = await getPackageInfo(['packages/mock-package1'], {
+      showSubExamples: true,
+      showExamples: false,
+      rootDir: cwd,
+    });
 
     expect(packageInfo[0].subExamplesPaths).toEqual([]);
   });

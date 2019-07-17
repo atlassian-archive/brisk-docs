@@ -6,10 +6,11 @@ import generatePages from './index';
 
 const defaultPagesPath = path.resolve(__dirname, '../../../default-pages');
 
+/* eslint-disable no-param-reassign */
 async function runGeneratePages({
   docsFixture,
   docsList,
-  options,
+  options = {},
   packagesFixture,
   packageGlob = '/*',
   packageRoot,
@@ -19,9 +20,10 @@ async function runGeneratePages({
 
   const docsCwd = await copyFixtureIntoTempDir(__dirname, docsFixture);
 
-  const packagesPaths = [path.join(packagesCwd, 'packages', packageGlob)];
+  // const packagesPaths = [path.join(packagesCwd, 'packages', packageGlob)];
+  const packagesPaths = [`packages${packageGlob}`];
   const componentsPath = await createTempDir();
-
+  options.rootDir = packagesCwd;
   const actualDocsList = docsList
     ? docsList.map(d => ({ ...d, docsPath: path.join(docsCwd, d.docsPath) }))
     : [
@@ -41,7 +43,7 @@ async function runGeneratePages({
     ? path.join(packagesCwd, packageReadme)
     : undefined;
 
-  return generatePages(
+  const testPages = await generatePages(
     packagesPaths,
     actualDocsList,
     resolvedPackageRoot,
@@ -49,6 +51,7 @@ async function runGeneratePages({
     options,
     readmePath,
   );
+  return testPages;
 }
 
 function getOutput(thePath) {
@@ -517,15 +520,16 @@ describe('File modification tests', () => {
   let pagesPath;
   let packageRoot;
   let componentsPath;
+  let packagesCwd;
 
   beforeEach(async () => {
-    const packagesCwd = await copyFixtureIntoTempDir(
+    packagesCwd = await copyFixtureIntoTempDir(
       __dirname,
       'simple-mock-packages',
     );
     const docsCwd = await copyFixtureIntoTempDir(__dirname, 'simple-mock-docs');
 
-    packagesPath = path.join(packagesCwd, 'packages');
+    packagesPath = 'packages';
     docsPath = path.join(docsCwd, 'docs');
     packageRoot = await createTempDir();
     pagesPath = path.join(packageRoot, 'pages');
@@ -548,6 +552,7 @@ describe('File modification tests', () => {
       [{ docsPath, name: 'docs', urlPath: 'docs' }],
       packageRoot,
       componentsPath,
+      { rootDir: packagesCwd },
     );
 
     expect(fs.existsSync(firstDocsPage)).toEqual(true);

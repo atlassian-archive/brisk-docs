@@ -8,7 +8,7 @@ describe('website configuration processor', () => {
     const config = processConfig(mockCwd, {});
 
     expect(config).toEqual({
-      packagesPaths: ['/c/w/d/packages/**/*'],
+      packagesPaths: ['./packages/**/*'],
       docsList: [
         {
           description: 'View the documentation for this project',
@@ -41,7 +41,7 @@ describe('website configuration processor', () => {
   it('accepts an packages path as a string', () => {
     const config = processConfig(mockCwd, { packages: 'some/other/packages' });
 
-    expect(config.packagesPaths).toEqual(['/c/w/d/some/other/packages']);
+    expect(config.packagesPaths).toEqual(['some/other/packages']);
   });
 
   it('accepts packages paths as an array of strings', () => {
@@ -50,8 +50,8 @@ describe('website configuration processor', () => {
     });
 
     expect(config.packagesPaths).toEqual([
-      '/c/w/d/some/other/packages',
-      '/c/w/d/some/better/packages',
+      'some/other/packages',
+      'some/better/packages',
     ]);
   });
 

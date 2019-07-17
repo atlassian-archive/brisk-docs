@@ -1,0 +1,20 @@
+{
+  "name": "simple-mock-packages",
+  "version": "1.0.0",
+  "description": "This is a root mock package to be used for doc website",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Test1",
+  "license": "",
+  "bolt": {
+    "version": "^0.23.2",
+    "workspaces": [
+      "packages/*"
+    ]
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "bolt": "^0.23.2"
+  }
+}

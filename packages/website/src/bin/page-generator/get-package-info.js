@@ -4,8 +4,9 @@
 
 const path = require('path');
 const fs = require('fs');
-const flatMap = require('lodash.flatmap');
+const flatten = require('lodash.flatten');
 const glob = require('glob');
+const { filterWorkspaces } = require('jobsite');
 const getDocsInfo = require('./get-docs-info');
 const getMarkdownMeta = require('./get-markdown-meta');
 
@@ -52,17 +53,6 @@ const isExample = examplePath =>
   extensions.includes(path.extname(examplePath));
 
 /**
- * Resolves a list of glob patterns and returns all of the valid directories matching the patterns.
- * @param searchPatterns array of globs
- * @returns An array of absolute paths
- */
-const getAllDirectories = searchPatterns =>
-  flatMap(searchPatterns, pattern => glob.sync(pattern)).filter(
-    dirPath =>
-      fs.statSync(dirPath).isDirectory() && !dirPath.includes('node_modules'),
-  );
-
-/**
  * Resolves a list of glob patterns and returns all of the valid examples recursively within a package.
  * @returns Array array of absolute paths
  * @param pattern
@@ -100,13 +90,28 @@ const getManifestDefinition = pkgPath => {
 };
 
 /**
+ * Retrieves a list of all packages in the pattern using the jobsite filter workspaces.
+ * @param packagesPatterns array of paths
+ * @returns An array of package paths
+ */
+async function getAllWorkSpaces(packagesPatterns) {
+  const filteredWorkspaces = await Promise.all(
+    packagesPatterns.map(pattern => filterWorkspaces(pattern)),
+  );
+  return flatten(filteredWorkspaces);
+}
+
+/**
  * Scans all packages and gathers information that will be shown in the docs website
  * @param packagesPatterns array of glob patterns for directories to be included
  * @param options configuration options
  * @returns An array of objects representing info about each package, and an array
  * of file paths of source files that should be built before being used.
  */
-module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
+module.exports = async function getPackagesInfo(
+  packagesPatterns,
+  options = {},
+) {
   const defaultOptions = {
     useManifests: false,
     showSubExamples: false,
@@ -114,13 +119,26 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
     customPackageFields: [],
   };
 
-  const { useManifests, showSubExamples, showExamples, customPackageFields } = {
+  const {
+    useManifests,
+    showSubExamples,
+    showExamples,
+    customPackageFields,
+    rootDir,
+  } = {
     ...defaultOptions,
     ...options,
   };
 
-  return getAllDirectories(packagesPatterns)
-    .map(pkgPath => {
+  if (rootDir) {
+    process.chdir(rootDir);
+  }
+
+  const allWorkspaces = await getAllWorkSpaces(packagesPatterns);
+  return allWorkspaces
+    .map(p => {
+      const workspacePath = p;
+      const pkgPath = path.resolve(process.cwd(), p);
       const pkgId = path.basename(pkgPath);
 
       // Get information about the package, either by its package.json
@@ -197,6 +215,7 @@ module.exports = function getPackagesInfo(packagesPatterns, options = {}) {
         docsPaths,
         subExamplesPaths,
         pkgFile,
+        workspacePath,
       };
 
       packageFields.forEach(field => {
