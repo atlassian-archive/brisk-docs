@@ -17,7 +17,6 @@ describe('website configuration processor', () => {
           urlPath: 'docs',
         },
       ],
-      useManifests: false,
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
       readMePath: '/c/w/d/README.md',
@@ -56,9 +55,9 @@ describe('website configuration processor', () => {
   });
 
   it('passes through flags', () => {
-    const config = processConfig(mockCwd, { useManifests: true });
+    const config = processConfig(mockCwd, { showSubExamples: true });
 
-    expect(config.useManifests).toEqual(true);
+    expect(config.showSubExamples).toEqual(true);
   });
 
   it('accepts a webpack function', () => {

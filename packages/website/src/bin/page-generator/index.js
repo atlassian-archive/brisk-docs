@@ -379,9 +379,6 @@ module.exports = async function generatePages(
   const pkgOpts = {};
 
   // loose check to pass through `false` values
-  if (options.useManifests != null) {
-    pkgOpts.useManifests = options.useManifests;
-  }
   if (options.showSubExamples != null) {
     pkgOpts.showSubExamples = options.showSubExamples;
   }
