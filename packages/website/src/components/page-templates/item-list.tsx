@@ -54,7 +54,7 @@ const renderRow = (item: Page) => ({
               item.pagePath.match(/^\//) ? item.pagePath : `./${item.pagePath}`
             }
           >
-            {item.id}
+            {() => item.id}
           </Link>
         </RowCell>
       ),

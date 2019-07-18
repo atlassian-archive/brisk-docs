@@ -6,6 +6,7 @@ module.exports = {
     name: 'Docs',
     description: 'View the documentation for this project',
   },
+  links: [],
   packages: ['./packages/**/*'],
   siteName: 'Brisk Docs',
   webpack: identityFunc,

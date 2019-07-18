@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { withRouter, SingletonRouter } from 'next/router';
-import * as PropTypes from 'prop-types';
 import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import { PageStatusContext } from './common/page-status-context';
 
@@ -29,15 +28,24 @@ anchor, as it means you don't have to think about this problem space.
 
 export type Props = {
   href: string;
-  children: React.ReactChild;
+  includeShortcutIcon?: boolean; // default true - only has an effect for external links
+  passHref?: boolean; // for forwarding to a next/link
+  children: (isExternal: boolean) => React.ReactChild;
   router?: SingletonRouter;
 };
 
-const SwitchLink = ({ href, children, router, ...rest }: Props) => {
+const SwitchLink = ({
+  href,
+  children,
+  includeShortcutIcon = true,
+  passHref,
+  router,
+  ...rest
+}: Props) => {
   if (!href || href.indexOf('#') === 0) {
     return (
       <a href={href} {...rest}>
-        {children}
+        {children(false)}
       </a>
     );
   }
@@ -45,7 +53,8 @@ const SwitchLink = ({ href, children, router, ...rest }: Props) => {
   if (href.indexOf('http') === 0) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
-        {children} <ShortcutIcon label={href} size="small" />
+        {children(true)}{' '}
+        {includeShortcutIcon && <ShortcutIcon label={href} size="small" />}
       </a>
     );
   }
@@ -93,19 +102,10 @@ const SwitchLink = ({ href, children, router, ...rest }: Props) => {
   }
 
   return (
-    <Link href={newHref}>
-      <a {...rest}>{children}</a>
+    <Link href={newHref} passHref={passHref}>
+      <a {...rest}>{children(false)}</a>
     </Link>
   );
 };
 
-SwitchLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  router: PropTypes.shape({
-    asPath: PropTypes.string,
-    pathname: PropTypes.string,
-  }),
-};
-
-export default withRouter(SwitchLink as any) as SwitchLink;
+export default withRouter(SwitchLink as any) as typeof SwitchLink;

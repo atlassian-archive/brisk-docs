@@ -20,6 +20,7 @@ module.exports = async ({
   packagesDescription,
   readMePath,
   customPackageFields,
+  links,
 }) => {
   const componentsPath = path.resolve(
     packageRoot,
@@ -60,6 +61,10 @@ module.exports = async ({
   );
   fs.writeFileSync(
     metaPath,
-    JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
+    JSON.stringify(
+      { siteName, packagesDescription, links, ...rest },
+      undefined,
+      2,
+    ),
   );
 };

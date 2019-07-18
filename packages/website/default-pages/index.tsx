@@ -2,14 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 
+import LinkIcon from '@atlaskit/icon/glyph/link';
 import MediaDocIcon from '@atlaskit/icon/glyph/media-services/document';
 import PackagesIcon from '@atlaskit/icon/glyph/component';
+import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import { colors, math, gridSize } from '@atlaskit/theme';
 import WidthDetector from '@atlaskit/width-detector';
 
 import { Section } from '../src/components/page';
 import Panel, { PanelGrid } from '../src/components/panel';
-import Meta from '../src/components/meta-context';
+import Meta, { LinkObject } from '../src/components/meta-context';
 import pageInfo from '../src/pages-list';
 
 const WINDOW_BREAKPOINT = 800;
@@ -19,6 +21,7 @@ interface DocumentObject {
   description?: string;
   urlPath: string;
 }
+
 const Page = styled.div`
   background-color: ${colors.B500};
   position: fixed;
@@ -81,6 +84,18 @@ class HomePage extends React.Component {
     };
   };
 
+  getLinkPanelProps = (link: LinkObject) => {
+    return {
+      href: link.href,
+      label: link.label,
+      description: link.description || '',
+      ExternalIconComponent: ShortcutIcon,
+      IconComponent: LinkIcon,
+      color: colors.N400,
+      imgSrc: '/static/simplify.svg',
+    };
+  };
+
   render() {
     const { displayAsColumn } = this.state;
     return (
@@ -111,6 +126,11 @@ class HomePage extends React.Component {
                             {...this.getDocsPanelProps(context[i])}
                           />
                         ))}
+                      {context.links.map((link, idx) => (
+                        // generic links don't have a good key
+                        // eslint-disable-next-line react/no-array-index-key
+                        <Panel key={idx} {...this.getLinkPanelProps(link)} />
+                      ))}
                     </PanelGrid>
                   </Section>
                 </>
