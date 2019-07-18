@@ -102,6 +102,7 @@ describe('Generate pages build stage', () => {
       'docs/path/other/home.js',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
+      undefined,
     );
   });
 
@@ -132,6 +133,7 @@ describe('Generate pages build stage', () => {
       'docs/path/other/main.js',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
+      undefined,
     );
   });
 
@@ -184,6 +186,7 @@ describe('Generate pages build stage', () => {
       'examples/path/other/home.js',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
+      undefined,
     );
   });
 
@@ -218,6 +221,7 @@ describe('Generate pages build stage', () => {
       '/other/package/changelog',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
+      undefined,
     );
   });
 

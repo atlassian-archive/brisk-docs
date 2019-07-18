@@ -88,11 +88,7 @@ const generateGenericPage = (
   { websitePath, pageData, title }: GenericPage,
   config: { pagesPath: string; wrappersPath: string },
 ) => {
-  if (title) {
-    generateFn(`${websitePath}.js`, pageData, config, title);
-  } else {
-    generateFn(`${websitePath}.js`, pageData, config);
-  }
+  generateFn(`${websitePath}.js`, pageData, config, title);
 };
 
 export default createStage(
@@ -145,22 +141,13 @@ export default createStage(
 
     input.changelogPages.forEach(
       ({ websitePath, changelogPath, pageData, title }) => {
-        if (title) {
-          generateChangelogPage(
-            `${websitePath}.js`,
-            changelogPath,
-            pageData,
-            generatorConfig,
-            title,
-          );
-        } else {
-          generateChangelogPage(
-            `${websitePath}.js`,
-            changelogPath,
-            pageData,
-            generatorConfig,
-          );
-        }
+        generateChangelogPage(
+          `${websitePath}.js`,
+          changelogPath,
+          pageData,
+          generatorConfig,
+          title,
+        );
       },
     );
 
