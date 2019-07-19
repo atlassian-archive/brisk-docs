@@ -11,16 +11,14 @@ import WidthDetector from '@atlaskit/width-detector';
 
 import { Section } from '../src/components/page';
 import Panel, { PanelGrid } from '../src/components/panel';
-import Meta, { LinkObject } from '../src/components/meta-context';
-import pageInfo from '../src/pages-list';
+import Meta, {
+  LinkObject,
+  DocumentObject,
+  ReadMeObject,
+  PackagesObject,
+} from '../src/components/meta-context';
 
 const WINDOW_BREAKPOINT = 800;
-interface DocumentObject {
-  docsPath: string;
-  name: string;
-  description?: string;
-  urlPath: string;
-}
 
 const Page = styled.div`
   background-color: ${colors.B500};
@@ -53,23 +51,25 @@ class HomePage extends React.Component {
     }
   }, 100);
 
-  getReadmePanelProps = () => {
+  getReadmePanelProps = ({ imgSrc }: ReadMeObject) => {
     return {
+      href: '/readme',
       IconComponent: MediaDocIcon,
       label: 'Get Started',
       color: colors.R400,
       description: 'Everything you need to get up and running',
-      imgSrc: '/static/code.png',
+      imgSrc: imgSrc || '/static/code.png',
     };
   };
 
-  getPackagesPanelProps = (desc: string) => {
+  getPackagesPanelProps = ({ description, imgSrc }: PackagesObject) => {
     return {
+      href: '/packages',
       IconComponent: PackagesIcon,
       label: 'Packages',
       color: colors.R400,
-      description: desc,
-      imgSrc: '/static/code.png',
+      description,
+      imgSrc: imgSrc || '/static/code.png',
     };
   };
 
@@ -80,7 +80,7 @@ class HomePage extends React.Component {
       label: doc.name,
       color: colors.Y400,
       description: doc.description || '',
-      imgSrc: '/static/file_cabinet.png',
+      imgSrc: doc.imgSrc || '/static/file_cabinet.png',
     };
   };
 
@@ -92,7 +92,7 @@ class HomePage extends React.Component {
       ExternalIconComponent: ShortcutIcon,
       IconComponent: LinkIcon,
       color: colors.N400,
-      imgSrc: '/static/simplify.svg',
+      imgSrc: link.imgSrc || '/static/simplify.svg',
     };
   };
 
@@ -108,24 +108,18 @@ class HomePage extends React.Component {
                   <Heading>{context.siteName}</Heading>
                   <Section>
                     <PanelGrid displayAsColumn={displayAsColumn}>
-                      {Object.keys(pageInfo).find(x => x === 'readme') && (
-                        <Panel href="/readme" {...this.getReadmePanelProps()} />
+                      {context.readMe && (
+                        <Panel {...this.getReadmePanelProps(context.readMe)} />
                       )}
                       <Panel
-                        href="/packages"
-                        {...this.getPackagesPanelProps(
-                          context.packagesDescription,
-                        )}
+                        {...this.getPackagesPanelProps(context.packages)}
                       />
-                      {Object.keys(pageInfo)
-                        .slice(1)
-                        .filter(x => x !== 'readme')
-                        .map((key, i) => (
-                          <Panel
-                            key={key}
-                            {...this.getDocsPanelProps(context[i])}
-                          />
-                        ))}
+                      {context.docs.map(doc => (
+                        <Panel
+                          key={doc.name}
+                          {...this.getDocsPanelProps(doc)}
+                        />
+                      ))}
                       {context.links.map((link, idx) => (
                         // generic links don't have a good key
                         // eslint-disable-next-line react/no-array-index-key

@@ -4,19 +4,41 @@ export interface LinkObject {
   label: string;
   description?: string;
   href: string;
+  imgSrc?: string;
+}
+
+export interface DocumentObject {
+  docsPath: string;
+  name: string;
+  description?: string;
+  imgSrc?: string;
+  urlPath: string;
+}
+
+export interface ReadMeObject {
+  imgSrc?: string;
+}
+
+export interface PackagesObject {
+  description: string;
+  imgSrc?: string;
 }
 
 interface ContextInterface {
-  [key: string]: any; // docs
   siteName: string;
-  packagesDescription: string;
+  packages: PackagesObject;
+  readMe?: ReadMeObject;
   links: LinkObject[];
+  docs: DocumentObject[];
 }
 
 const ContextMeta = React.createContext<ContextInterface>({
   siteName: '',
-  packagesDescription: '',
+  packages: {
+    description: '',
+  },
   links: [],
+  docs: [],
 });
 
 export default ContextMeta;

@@ -8,6 +8,7 @@ module.exports = () => ({
       name: 'Docs',
       description: 'Read the full documentation for this project',
       urlPath: 'docco',
+      imgSrc: '/static/simplify.svg',
     },
     {
       path: path.join(__dirname, 'tutorial'),
@@ -21,6 +22,7 @@ module.exports = () => ({
     {
       label: 'Get accomplished today!',
       href: '/docco/guides/how-to-be-accomplished',
+      imgSrc: '/static/file_cabinet.png',
     },
     {
       label: 'Get a job!',
@@ -34,6 +36,8 @@ module.exports = () => ({
     path.join(__dirname, 'otherpackages', '*'),
   ],
   packagesDescription: 'A custom description for the packages section',
+  packagesImgSrc: '/static/simplify.svg',
+
   siteName: 'Complete Config Project',
   showExamples: true,
   showSubExamples: true,
@@ -45,4 +49,5 @@ module.exports = () => ({
     return config;
   },
   readMePath: path.join(__dirname, 'index.md'),
+  readMeImgSrc: '/static/simplify.svg',
 });
