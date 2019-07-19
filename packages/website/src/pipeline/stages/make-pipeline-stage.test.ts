@@ -8,10 +8,9 @@ describe('Pipeline stage generator', () => {
 
     const runStage = createStage('test-stage', step);
     const stageInput = {};
-    const stageConfig = {};
-    const result = await runStage(stageInput, stageConfig);
+    const result = await runStage(stageInput);
 
-    expect(step).toHaveBeenCalledWith(stageInput, stageConfig);
+    expect(step).toHaveBeenCalledWith(stageInput);
     expect(result).toBe('result');
   });
 
@@ -35,7 +34,7 @@ describe('Pipeline stage generator', () => {
     });
 
     const runStage = createStage('test-stage', () => Promise.resolve());
-    runStage({}, {});
+    runStage({});
 
     return expect(getPerformanceMetric).resolves.toEqual(expect.any(Number));
   });
