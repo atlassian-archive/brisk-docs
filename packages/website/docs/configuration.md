@@ -12,14 +12,109 @@ module.exports = () => ({
 
 the returned object may have the following properties:
 
-| Option   | Description                                                                                                                         |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| packages | Path or array of paths of packages to show. Glob patterns are allowed                                                               |
-| docs     | Path to the directory where project docs live                                                                                       |
-| siteName | Display name for the project as displayed in the website                                                                            |
-| webpack  | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
-| favicon  | Absolute path to an .ico file to use as the site's favicon                                                                          |
-| customPackageFields  | Array of fields from the relevant package.json to display on the package home page |
+| Option               | Description                                                                                                                         |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| customPackageFields  | Array of fields from the relevant package.json to display on the package home page. This augments the default set.                  |
+| docs                 | Object (or array of Object) describing the project docs.                                                                            |
+| favicon              | Absolute path to an .ico file to use as the site's favicon  e.g. `path.join(__dirname, 'favicon.ico')`                              |
+| packages             | Path or array of paths of packages to show. Glob patterns are allowed.  e.g. `path.join(__dirname, 'packages', '*')`                |
+| packagesDescription  | Optional String to replace the default description for the packages section                                                         |
+| readMePath           | Optional String path to an alternative specific mdx file to use as the "Get Started" page.                                          |
+| showExamples         | Optional Boolean (default true) to include/exclude examples                                                                         |
+| showSubExamples      | Optional Boolean to include/exclude subExamples within packages                                                                 |
+| siteName             | String Display name for the project as displayed in the website                                                                     |
+| webpack              | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
+
+### customPackageFields
+
+Type: optional `string[]`
+
+Array of fields from the relevant package.json to display on the package home page. These are added to the default set.
+
+e.g. `['author', 'dependencies']`
+
+### docs
+
+Type: optional `object` or `object[]`
+defaults to:
+```js
+{
+  path: './docs',
+  name: 'Docs',
+  description: 'View the documentation for this project',
+}
+```
+
+Object describing documentation sections
+
+ * `path`: `string` of the absolute path to the documentation section's directory e.g. `path.join(__dirname, 'docs')`
+ * `name`: `string` to use for the documentation section e.g. `'Docs'`
+ * `description`: Optional `string` description to refer to e.g. `'Documentation is contained within this section.'`
+ * `urlPath`: Optional `string` specifying the URL subpath to use. e.g `'docs'`. If not supplied, this will be inferred from the directory name.
+
+For a given path, if it does not exist, that section will not be generated.
+
+ ### favicon
+
+Type: optional `string` defaults to `path.join(__dirname, 'favicon.ico')`
+
+Absolute path to an `.ico` file to use as the site's favicon. If the file does not exist, a default favicon will be added to the site.
+
+e.g. `path.join(__dirname, 'new_favicon.ico')`
+
+### packages
+
+Type: `string` or `string[]`
+
+Path or array of paths of packages to show. Glob patterns are allowed.
+
+The "name" used is based on the directory name that the package is in. The URL path generated is based on the `name` in the `package.json`.
+Note that packages with the same name (`name` in their `package.json`) will collide with each other.
+
+e.g. `path.join(__dirname, 'packages', '*')`
+
+### packagesDescription
+
+Type: optional `string` defaults to `'View documentation about individual packages'`
+
+String to replace the default description for the packages section.
+
+e.g. `'This is the documentation for the packages.'`
+
+### readMePath
+
+Type: optional `string` default 'README.md'
+
+If the file at `readMePath` exists, a "Get Started" page is generated at `/readme`.
+
+### showExamples
+
+Type: optional `boolean` default `true`
+
+Whether to generate examples pages or not.
+
+### showSubExamples
+
+Type: optional `boolean` default `false`
+
+Specifies whether to include/exclude nested examples within packages. If true, e.g. `packageName/src/examples.js` and `packageName/lib/examples.js`
+will be found and presented as examples.
+
+`showExamples` must be `true` for this option to take effect.
+
+### siteName
+
+Type: `string`
+
+Display name for the project as displayed in the website
+
+e.g. `Fancy Docs`
+
+### webpack
+
+Type: optional `Function` customizing webpack's configuration. Defaults to `identity`
+
+See [Configuring webpack](./configuring-webpack) for more details.
 
 ## Nested configuration
 

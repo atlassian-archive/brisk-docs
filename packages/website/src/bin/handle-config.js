@@ -37,8 +37,11 @@ const processConfig = (cwd, providedConfig = {}) => {
     const { name, description, path: docPath, urlPath } = doc;
 
     if (!name) throw new Error('name must be provided for all the docs items');
-
+    if (!docPath) {
+      throw new Error('path must be provided for all the docs items');
+    }
     const docsPath = path.resolve(cwd, docPath);
+
     const certainUrlPath = urlPath || path.relative(cwd, docsPath);
     return { docsPath, name, description, urlPath: certainUrlPath };
   });
@@ -50,11 +53,13 @@ const processConfig = (cwd, providedConfig = {}) => {
   );
 
   return {
-    docsList,
-    packagesPaths,
+    // readMePath/customPackageFields should be overridable by config
     readMePath,
     customPackageFields,
     ...rest,
+    // docsList/packagesPaths should not be overridden. They are computed from provided docs/packages config.
+    docsList,
+    packagesPaths,
   };
 };
 
