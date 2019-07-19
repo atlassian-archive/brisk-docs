@@ -1,0 +1,1 @@
+Move page writing functionality into generate-pages pipeline stage.
