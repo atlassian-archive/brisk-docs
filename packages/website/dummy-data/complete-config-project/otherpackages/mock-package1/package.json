@@ -1,0 +1,28 @@
+{
+  "name": "mock-package-1",
+  "version": "1.0.0",
+  "description": "This is a mock package to be used for doc website",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Test1",
+  "maintainers": [
+    "Peter Y",
+    "Ben C",
+    "Dean P",
+    "Aparna R"
+  ],
+  "license": "",
+  "repository": {
+    "type" : "git",
+    "url" : "fake-repo-fix-later",
+    "directory": "packages/website"
+  },
+  "dependencies": {
+    "@atlaskit/avatar": "^14.1.8",
+    "@atlaskit/dropdown-menu": "^6.1.26",
+    "@atlaskit/dynamic-table": "^10.0.23",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "styled-components": "^3.2.6"
+  }
+}
