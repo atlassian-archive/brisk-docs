@@ -119,7 +119,7 @@
     "next-images": "^1.1.1",
     "outdent": "^0.7.0",
     "preconstruct": "^0.0.62",
-    "pretty-proptypes": "^0.6.0",
+    "pretty-proptypes": "^0.6.6",
     "prismjs": "^1.15.0",
     "probot": "^7.2.0",
     "prop-types": "^15.6.2",
