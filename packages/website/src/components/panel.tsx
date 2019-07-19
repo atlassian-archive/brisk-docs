@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Props as IconProps } from '@atlaskit/icon/glyph/shortcut';
 import { colors, gridSize, math } from '@atlaskit/theme';
-import Link from 'next/link';
+import SwitchLink from './switch-link';
 
 export const PanelGrid = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const loadInAnimation = keyframes`
     }
 `;
 
-const PanelStyle = styled.a`
+const PanelLink = styled(SwitchLink)`
   background-color: white;
   border-radius: 3px;
   color: ${colors.N900};
@@ -89,33 +90,56 @@ export type Props = {
   description: string;
   imgSrc: string;
   IconComponent: React.ComponentType<any>;
+  ExternalIconComponent?: React.ComponentType<any>;
 };
 
 const Panel = ({
   href,
+  ExternalIconComponent,
   IconComponent,
   label,
   color,
   description,
   imgSrc,
 }: Props) => (
-  <Link href={href} passHref>
-    <PanelStyle>
-      <PanelHeader>
-        <PanelIcon color={color}>
-          <IconComponent
-            label={label}
-            primaryColor={colors.N0}
-            secondaryColor={color}
-            size="medium"
-          />
-        </PanelIcon>
-        <PanelLabel>{label}</PanelLabel>
-      </PanelHeader>
-      <p>{description}</p>
-      <PanelImage alt={`${label} graphic`} src={imgSrc} />
-    </PanelStyle>
-  </Link>
+  <PanelLink href={href} passHref includeShortcutIcon={false}>
+    {(isExternal: boolean) => (
+      <>
+        <PanelHeader>
+          <PanelIcon color={color}>
+            <InternalExternalIcon
+              isExternal={isExternal}
+              internalIcon={IconComponent}
+              externalIcon={ExternalIconComponent}
+              label={label}
+              primaryColor={colors.N0}
+              secondaryColor={color}
+              size="medium"
+            />
+          </PanelIcon>
+          <PanelLabel>{label}</PanelLabel>
+        </PanelHeader>
+        <p>{description}</p>
+        <PanelImage alt={`${label} graphic`} src={imgSrc} />
+      </>
+    )}
+  </PanelLink>
 );
 
 export default Panel;
+
+type InternalExternalIconProps = {
+  internalIcon: React.ComponentType<any>;
+  externalIcon?: React.ComponentType<any>;
+  isExternal: boolean;
+} & IconProps;
+
+const InternalExternalIcon = ({
+  internalIcon,
+  externalIcon,
+  isExternal,
+  ...props
+}: InternalExternalIconProps) => {
+  const Component = isExternal && externalIcon ? externalIcon : internalIcon;
+  return <Component {...props} />;
+};

@@ -17,6 +17,7 @@ describe('website configuration processor', () => {
           urlPath: 'docs',
         },
       ],
+      links: [],
       siteName: 'Brisk Docs',
       webpack: expect.any(Function),
       readMePath: '/c/w/d/README.md',

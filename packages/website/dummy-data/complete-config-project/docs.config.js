@@ -17,6 +17,18 @@ module.exports = () => ({
     },
   ],
   favicon: path.join(__dirname, 'favicon.ico'),
+  links: [
+    {
+      label: 'Get accomplished today!',
+      href: '/docco/guides/how-to-be-accomplished',
+    },
+    {
+      label: 'Get a job!',
+      description:
+        'Browse the available Atlassian career opportunities and join the team.',
+      href: 'https://www.atlassian.com/company/careers/all-jobs',
+    },
+  ],
   packages: [
     path.join(__dirname, 'packages', '*'),
     path.join(__dirname, 'otherpackages', '*'),
