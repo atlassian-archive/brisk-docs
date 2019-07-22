@@ -51,6 +51,11 @@ module.exports = async ({
         }
       : undefined;
 
+  const packagesMeta = {
+    description: packagesDescription,
+    imgSrc: packagesImgSrc,
+  };
+
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
   const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
@@ -71,10 +76,7 @@ module.exports = async ({
     JSON.stringify(
       {
         siteName,
-        packages: {
-          description: packagesDescription,
-          imgSrc: packagesImgSrc,
-        },
+        packages: packagesMeta,
         links,
         readMe,
         docs: docsList,

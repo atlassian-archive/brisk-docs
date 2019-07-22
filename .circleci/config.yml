@@ -83,12 +83,12 @@ jobs:
       - run: *install-bolt
 
       - run:
-          name: Build website
-          command: bolt build:website
+          name: Build website (using complete-config-project)
+          command: bolt build:website:complete
 
       - run:
-          name: Start up website
-          command: bolt start:website
+          name: Start up website (using complete-config-project)
+          command: bolt start:website:complete
           background: true
 
       - run:
