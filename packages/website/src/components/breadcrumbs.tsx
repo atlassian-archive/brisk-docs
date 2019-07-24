@@ -1,8 +1,10 @@
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
 import titleCase from 'title-case';
+// @ts-ignore
 import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import styled from '@emotion/styled';
+// @ts-ignore
 import { gridSize, math } from '@atlaskit/theme';
 import Link from 'next/link';
 

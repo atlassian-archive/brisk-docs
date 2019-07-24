@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
+// @ts-ignore
 import Table from '@atlaskit/dynamic-table';
 import styled from '@emotion/styled';
+// @ts-ignore
 import { gridSize } from '@atlaskit/theme';
 import titleCase from 'title-case';
 

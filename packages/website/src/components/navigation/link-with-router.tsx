@@ -1,21 +1,19 @@
 import * as React from 'react';
+import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
+// @ts-ignore
 import { Item } from '@atlaskit/navigation-next';
+// @ts-ignore
 import { colors } from '@atlaskit/theme';
 
 import LinkComponent from './link-component';
 
-// TODO TSFix - find out if we can actually get the prop types of withRouter
-// here instead of defining our own
 export type Props = {
   text: string;
   href: string;
   id?: string;
-  router: {
-    pathname: string;
-  };
   isHeading?: boolean;
-};
+} & WithRouterProps;
 
 const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
   <Item

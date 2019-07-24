@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+// @ts-ignore
 import { gridSize, math } from '@atlaskit/theme';
 
 const containerWidth = {

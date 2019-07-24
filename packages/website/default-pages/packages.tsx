@@ -1,8 +1,10 @@
 import * as React from 'react';
+// @ts-ignore
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
 import Link from 'next/link';
+// @ts-ignore
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
@@ -11,13 +13,14 @@ import NavigationWrapper from '../src/components/navigation-wrapper';
 import AllPackagesNavContent from '../src/components/navigation/all-packages-nav-content';
 
 import data from '../src/pages-list';
-// @ts-ignore - ts cannot resolve file when it doesn't exist, which it won't always
+
+// @ts-ignore
 import meta2 from '../data/packages-data.json';
 import PageTitle from '../src/components/page-title';
 
 import { PackageInfo, PackageMetadata } from '../types';
 
-const meta: PackageMetadata = meta2;
+const meta = meta2 as any as PackageMetadata;
 
 const gridSize = gridSizeFn();
 

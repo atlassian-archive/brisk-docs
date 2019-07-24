@@ -1,6 +1,7 @@
 import * as React from 'react';
-import App, { Container, NextAppContext } from 'next/app';
+import App, { Container, AppContext as NextAppContext } from 'next/app';
 import '@atlaskit/css-reset';
+// @ts-ignore
 import { MDXProvider } from '@mdx-js/tag';
 import components from '../src/components/mdx';
 import Meta, { metadata } from '../src/components/meta-context';

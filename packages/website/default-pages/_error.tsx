@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+// @ts-ignore
 import { colors } from '@atlaskit/theme';
-import { NextContext } from 'next';
+import { NextPageContext as NextContext } from 'next';
 
 import LinkButton from '../src/components/link-button';
 
@@ -50,8 +51,8 @@ class NotFound extends React.Component<Props> {
     const statusCode = res ? res.statusCode : error;
 
     let pageType = '';
-    const isPackage = packagesPath.exec(asPath);
-    const isDoc = docsPath.exec(asPath);
+    const isPackage = asPath && packagesPath.exec(asPath);
+    const isDoc = asPath && docsPath.exec(asPath);
 
     if (isPackage) {
       pageType = 'packages';

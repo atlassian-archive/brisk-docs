@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+// @ts-ignore
 import { MenuSection, Separator, Group } from '@atlaskit/navigation-next';
 import titleCase from 'title-case';
 import LinkWithRouter from './link-with-router';

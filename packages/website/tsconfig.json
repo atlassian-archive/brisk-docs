@@ -3,7 +3,6 @@
     "outDir": "build",
     "allowJs": false,
     "alwaysStrict": true,
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -28,10 +27,21 @@
     "target": "esnext",
     "noEmit": true,
     "module": "esnext",
-    "lib": ["dom", "es2017"],
-    },
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true
+  },
   "include": [
     "**/*"
   ],
-  "typeRoots": ["./typings", "./node_modules/@types"],
+  "typeRoots": [
+    "./typings",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

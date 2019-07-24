@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+// @ts-ignore
 import { math, gridSize } from '@atlaskit/theme';
 
 import Breadcrumbs, { isPathRoot } from './breadcrumbs';

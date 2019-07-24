@@ -1,11 +1,10 @@
-// TODO:
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as React from 'react';
 import {
   ContainerHeader,
   HeaderSection,
   ItemAvatar,
+  // @ts-ignore
 } from '@atlaskit/navigation-next';
+// @ts-ignore
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 

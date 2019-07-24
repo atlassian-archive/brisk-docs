@@ -5,7 +5,9 @@ import TableTree, {
   Rows,
   Row,
   Cell,
+  // @ts-ignore
 } from '@atlaskit/table-tree';
+// @ts-ignore
 import SectionMessage from '@atlaskit/section-message';
 import titleCase from 'title-case';
 import Page, { Section, Title } from '../page';

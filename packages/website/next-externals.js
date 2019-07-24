@@ -34,6 +34,8 @@ module.exports = (cwd, name, target) =>
             { basedir: cwd, preserveSymlinks: true },
             // eslint-disable-next-line consistent-return
             (err, res) => {
+
+              // return callback();
               if (err) {
                 return callback();
               }
@@ -42,7 +44,16 @@ module.exports = (cwd, name, target) =>
                 return callback();
               }
 
+              if (request.match(/\.json$/)) {
+                // uhh idk man. ../../package.json can't be resolved as cjs
+                // console.log({request, res});
+                return callback();
+              }
+
               if (res.match(/@atlaskit/)) {
+                return callback();
+              }
+              if (res.match(/@atlassian/)) {
                 return callback();
               }
               if (res.match(/@brisk-docs/)) {
@@ -71,7 +82,16 @@ module.exports = (cwd, name, target) =>
                 return callback();
               }
 
+              if (res.match(/jira-frontend/)) {
+                // console.log({res, request})
+                return callback(null, request);
+              }
               if (res.match(/node_modules[/\\].*\.js$/)) {
+
+                if (res.match(/react-intl/)) {
+                  console.log('cjs', {res, request})
+                  return callback(null, request);
+                }
                 return callback(undefined, `commonjs ${request}`);
               }
 
@@ -81,3 +101,7 @@ module.exports = (cwd, name, target) =>
         },
       ]
     : [];
+
+
+    // skip externals - it's just an optimisation anyway, right?
+    module.exports = () => [];

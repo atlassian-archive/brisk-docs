@@ -108,4 +108,4 @@ const SwitchLink = ({
   );
 };
 
-export default withRouter(SwitchLink as any) as typeof SwitchLink;
+export default withRouter(SwitchLink as any) as any as typeof SwitchLink;

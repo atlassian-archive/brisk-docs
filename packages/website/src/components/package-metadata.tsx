@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+// @ts-ignore
 import GitUrlParse from 'git-url-parse';
 import titleCase from 'title-case';
+// @ts-ignore
 import { colors, gridSize, math } from '@atlaskit/theme';
 
 const MetaDataWrapper = styled.section`

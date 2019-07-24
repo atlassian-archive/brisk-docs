@@ -5,7 +5,9 @@ import {
   ItemAvatar,
   MenuSection,
   Group,
+  // @ts-ignore
 } from '@atlaskit/navigation-next';
+// @ts-ignore
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import titleCase from 'title-case';

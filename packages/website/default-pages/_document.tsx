@@ -3,7 +3,7 @@ import Document, {
   Head,
   Main,
   NextScript,
-  NextDocumentContext,
+  DocumentContext as NextDocumentContext,
 } from 'next/document';
 import { extractCritical } from 'emotion-server';
 import { ServerStyleSheet } from 'styled-components';
@@ -16,9 +16,9 @@ export type Props = {
 };
 
 export default class MyDocument extends Document<Props> {
-  static getInitialProps({ renderPage }: NextDocumentContext) {
+  static async getInitialProps({ renderPage }: NextDocumentContext) {
     const sheet = new ServerStyleSheet();
-    const page = renderPage(App => props =>
+    const page = await renderPage(App => props =>
       sheet.collectStyles(<App {...props} />),
     );
     let emotionStyles = {};

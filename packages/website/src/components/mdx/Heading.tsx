@@ -1,5 +1,7 @@
 import * as React from 'react';
+// @ts-ignore
 import reactAddonsTextContent from 'react-addons-text-content';
+// @ts-ignore
 import snakeCase from 'lodash.snakecase';
 
 function dashcase(children?: React.ReactChild) {

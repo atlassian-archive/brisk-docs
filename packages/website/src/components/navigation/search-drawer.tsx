@@ -4,7 +4,9 @@ import {
   ResultBase,
   ResultItemGroup,
 } from '@atlaskit/quick-search';
+// @ts-ignore
 import Drawer from '@atlaskit/drawer';
+// @ts-ignore
 import capitalize from 'lodash.capitalize';
 import data from '../../pages-list';
 import Link from './link-component';

@@ -28,15 +28,15 @@ type Maintainers = string | string[];
 
 type Repository = string | { type: string; url: string; directory?: string };
 
-type PackageMeta = {
+export type PackageMeta = {
   id: string;
-  description: string;
+  description?: string;
   version: string;
   maintainers?: Maintainers;
   repository?: Repository;
 };
 
-export declare type PackageMetadata = {
+export interface PackageMetadata {
   metaData: PackageMeta[];
 };
 

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+// @ts-ignore
 import Tree from '@atlaskit/tree';
+// @ts-ignore
 import { colors } from '@atlaskit/theme';
 import LinkWithRouter from './link-with-router';
 import { Page } from '../../../types';

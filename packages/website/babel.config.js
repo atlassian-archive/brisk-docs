@@ -31,6 +31,7 @@ let babelConfig = {
     '@babel/proposal-object-rest-spread',
     '@babel/transform-runtime',
     'transform-dynamic-import',
+    '@babel/plugin-transform-flow-strip-types',
   ],
 };
 

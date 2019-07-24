@@ -8,6 +8,7 @@ the options available to you.
 */
 import * as React from 'react';
 
+// @ts-ignore
 import Button from '@atlaskit/button';
 import Link from 'next/link';
 

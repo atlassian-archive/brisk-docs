@@ -1,4 +1,5 @@
 import * as React from 'react';
+// @ts-ignore
 import { AkCode } from '@atlaskit/code';
 
 export type Props = {

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
+// @ts-ignore
 import debounce from 'lodash.debounce';
 
 import LinkIcon from '@atlaskit/icon/glyph/link';
 import MediaDocIcon from '@atlaskit/icon/glyph/media-services/document';
 import PackagesIcon from '@atlaskit/icon/glyph/component';
 import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
+// @ts-ignore
 import { colors, math, gridSize } from '@atlaskit/theme';
 import WidthDetector from '@atlaskit/width-detector';
 
@@ -43,7 +45,7 @@ class HomePage extends React.Component {
     displayAsColumn: false,
   };
 
-  debouncedDetect = debounce(width => {
+  debouncedDetect = debounce((width: number) => {
     if (width <= WINDOW_BREAKPOINT) {
       this.setState({ displayAsColumn: true });
     } else {

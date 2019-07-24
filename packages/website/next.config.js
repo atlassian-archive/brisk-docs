@@ -58,22 +58,31 @@ module.exports = withTypescript(
               loader.exclude = babelExclude;
             }
             if (loader.use.loader === 'next-babel-loader') {
+              // loader.include.push(cwd);
+              // We want to transpile things even if they're not within brisk-docs.
+              // loader.exclude is used to exclude particular things instead
+              delete loader.include;
               loader.use = ['thread-loader', loader.use];
             }
           });
 
           // Website modules should take precedence over the node_modules of the consumer.
-          config.resolve.modules.push(__dirname, 'node_modules');
+          // config.resolve.modules.push(__dirname, 'node_modules');
+          // config.resolve.modules.unshift(path.join(__dirname, 'node_modules')); 
+          // // first resolve node_modules
+          // config.resolve.modules.unshift('node_modules');
 
           // Adding items to globalScope in the website
           config.plugins.push(
             new webpack.ProvidePlugin({
               Props: ['pretty-proptypes', 'default'],
               FileViewer: ['@brisk-docs/file-viewer', 'default'],
+              Lazy: [path.join(__dirname, './src/components/mdx/Lazy'), 'default'],
             }),
           );
 
-          return clientWebpack(config);
+          const fullConfig = clientWebpack(config);
+          return fullConfig;
         },
       }),
     ),

@@ -5,6 +5,7 @@ import {
   GlobalNav,
   LayoutManager,
   NavigationProvider,
+  // @ts-ignore
 } from '@atlaskit/navigation-next';
 import LinkComponent from './navigation/link-component';
 import SearchDrawer from './navigation/search-drawer';
