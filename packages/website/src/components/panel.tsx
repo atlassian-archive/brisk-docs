@@ -102,10 +102,15 @@ const Panel = ({
   description,
   imgSrc,
 }: Props) => (
-  <PanelLink href={href} passHref includeShortcutIcon={false}>
+  <PanelLink
+    data-testid="PanelLink"
+    href={href}
+    passHref
+    includeShortcutIcon={false}
+  >
     {(isExternal: boolean) => (
       <>
-        <PanelHeader>
+        <PanelHeader data-testid="PanelHeader">
           <PanelIcon color={color}>
             <InternalExternalIcon
               isExternal={isExternal}
@@ -117,10 +122,14 @@ const Panel = ({
               size="medium"
             />
           </PanelIcon>
-          <PanelLabel>{label}</PanelLabel>
+          <PanelLabel data-testid="PanelLabel">{label}</PanelLabel>
         </PanelHeader>
         <p>{description}</p>
-        <PanelImage alt={`${label} graphic`} src={imgSrc} />
+        <PanelImage
+          data-testid="PanelImage"
+          alt={`${label} graphic`}
+          src={imgSrc}
+        />
       </>
     )}
   </PanelLink>
