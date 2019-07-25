@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/website",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "The Brisk website documenter",
   "main": "dist/website.cjs.js",
   "module": "dist/website.esm.js",
@@ -72,8 +72,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
-    "@brisk-docs/file-viewer": "^0.2.2",
-    "@brisk-docs/react-changelogs": "^0.1.8",
+    "@brisk-docs/file-viewer": "^0.2.3",
+    "@brisk-docs/react-changelogs": "^0.1.9",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",

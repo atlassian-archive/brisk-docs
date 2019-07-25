@@ -1,5 +1,11 @@
 # @brisk-docs/file-viewer
 
+## 0.2.3
+
+### Patch Changes
+
+- 23c4f43: Patch release - previous release does not include built dists
+
 ## 0.2.2
 
 ### Patch Changes

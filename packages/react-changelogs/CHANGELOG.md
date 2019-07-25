@@ -1,5 +1,11 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.9
+
+### Patch Changes
+
+- 23c4f43: Patch release - previous release does not include built dists
+
 ## 0.1.8
 
 ### Patch Changes
