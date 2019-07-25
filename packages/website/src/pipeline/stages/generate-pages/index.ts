@@ -1,5 +1,8 @@
 import createStage from '../make-pipline-stage';
-import {
+// @ts-ignore: Importing non-ts file with no definition
+const pageWriters = require('./page-writers');
+
+const {
   generatePackageDocPage,
   generateProjectDocPage,
   generateDocsHomePage,
@@ -8,8 +11,7 @@ import {
   generateExamplePage,
   generateChangelogPage,
   generateHomePage,
-  // @ts-ignore: Implicit any
-} from './page-writers';
+} = pageWriters;
 
 interface GenericPage {
   // The path this page should appear at in the finished website
