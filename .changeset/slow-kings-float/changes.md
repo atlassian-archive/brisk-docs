@@ -1,1 +1,0 @@
-Use emotion instead of styled components.

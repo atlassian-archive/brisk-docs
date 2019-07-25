@@ -1,5 +1,11 @@
 # @brisk-docs/file-viewer
 
+## 0.2.2
+
+### Patch Changes
+
+- 6dbc7dc: Fix babel configs for building packages to produce working dists for node scripts.
+
 ## 0.2.1
 
 ### Patch Changes

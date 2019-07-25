@@ -1,1 +1,0 @@
-arbitrary links can now be specified for the homepage
