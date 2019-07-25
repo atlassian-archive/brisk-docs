@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 const commandLineArgs = require('command-line-args');
 
-const { dev, build, start, exportWebsite } = require('./run-website');
+const {
+  dev,
+  build,
+  start,
+  exportWebsite,
+  generate,
+  pToBWebsite,
+} = require('./run-website');
 
 const mainDefinitions = [{ name: 'command', defaultOption: true }];
 const mainOptions = commandLineArgs(mainDefinitions, {
@@ -49,6 +56,18 @@ switch (mainOptions.command) {
   }
   case 'export': {
     exportWebsite(options.config, nextOptions).catch(handleError);
+    break;
+  }
+  case 'generate': {
+    generate(options.config, nextOptions).catch(handleError);
+    break;
+  }
+  case 'parcel-dev': {
+    pToBWebsite('dev', options.config, nextOptions).catch(handleError);
+    break;
+  }
+  case 'parcel-build': {
+    pToBWebsite('build', options.config, nextOptions).catch(handleError);
     break;
   }
   default:

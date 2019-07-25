@@ -79,7 +79,17 @@ const exportWebsite = async (configPath, nextOptions = []) => {
   );
 };
 
+const pToBWebsite = async (command, configPath, nextOptions = []) => {
+  spawnNextProcess(command, configPath, ...nextOptions);
+};
+
+const generate = async configPath => {
+  await preNextScripts(configPath);
+};
+
 module.exports.dev = dev;
 module.exports.build = build;
 module.exports.start = start;
 module.exports.exportWebsite = exportWebsite;
+module.exports.generate = generate;
+module.exports.pToBWebsite = pToBWebsite;

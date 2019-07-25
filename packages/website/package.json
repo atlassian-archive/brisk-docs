@@ -19,7 +19,10 @@
     "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
     "export:site": "node src/bin/index.js export --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node src/bin/index.js start"
+    "start": "node src/bin/index.js start",
+    "generates": "node src/bin/index.js generate --config=dummy-data/simple-project/docs.config.js",
+    "parcel:dev": "node src/bin/index.js parcel-dev",
+    "parcel:build": "node src/bin/index.js parcel-build"
   },
   "bin": {
     "brisk": "src/bin/index.js",

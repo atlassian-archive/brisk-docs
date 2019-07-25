@@ -30,7 +30,10 @@
     "release": "yarn build && changeset release",
     "prepare:docs": "bolt && yarn build:docs && yarn export",
     "postinstall": "preconstruct dev",
-    "bolt:fix": "bolt-check --fix"
+    "bolt:fix": "bolt-check --fix",
+    "generates": "bolt w @brisk-docs/website run generates",
+    "parcel:dev": "bolt w @brisk-docs/website run parcel:dev",
+    "parcel:build":  "bolt w @brisk-docs/website run parcel:build"
   },
   "bolt": {
     "version": "^0.23.2",
