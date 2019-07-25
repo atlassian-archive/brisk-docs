@@ -1,5 +1,11 @@
 # @brisk-docs/website
 
+## 0.8.1
+
+### Patch Changes
+
+- 23c4f43: Patch release - previous release does not include built dists
+
 ## 0.8.0
 
 ### Minor Changes
