@@ -204,7 +204,7 @@ const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
   generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
 
-export {
+module.exports = {
   generateHomePage,
   generateChangelogPage,
   generatePackageDocPage,

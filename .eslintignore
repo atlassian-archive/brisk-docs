@@ -2,8 +2,7 @@ node_modules
 .next
 out
 
-packages/website/pages/packages
-packages/website/pages/docs
+packages/website/pages
 
 packages/website/data/**/*.json
 
