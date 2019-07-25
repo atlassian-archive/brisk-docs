@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/react-changelogs",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "This package is used for displaying changelogs from your projects",
   "main": "dist/react-changelogs.cjs.js",
   "module": "dist/react-changelogs.esm.js",

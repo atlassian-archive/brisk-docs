@@ -1,5 +1,12 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.8
+
+### Patch Changes
+
+- 6dbc7dc: Fix babel configs for building packages to produce working dists for node scripts.
+- 6dbc7dc: Use emotion instead of styled components.
+
 ## 0.1.7
 
 ### Patch Changes

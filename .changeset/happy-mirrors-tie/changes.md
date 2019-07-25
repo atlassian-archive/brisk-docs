@@ -1,1 +1,0 @@
-Update pretty proptypes dependency
