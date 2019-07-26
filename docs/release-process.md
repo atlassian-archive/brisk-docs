@@ -37,3 +37,6 @@ We need to add safeguards to cover this out, so, when releasing also do:
 * PR the changes from this script back into master - get a review of changelogs, and packages will be published
 * Once merged, re-pull master, manually run `yarn release`, push tags
 * Let everyone know it's safe to merge PRs again
+
+yarn changeset release
+yarn release
