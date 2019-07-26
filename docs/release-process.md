@@ -33,7 +33,7 @@ We need to add safeguards to cover this out, so, when releasing also do:
   - [http://localhost:8080/packages/eslint-plugin-tangerine/](http://localhost:8080/packages/eslint-plugin-tangerine/)
 
 * Declare a release is being organised, block merging to master
-* Have a release manager run `changeset bump`
+* Have a release manager run `yarn changeset bump`
 * PR the changes from this script back into master - get a review of changelogs, and packages will be published
-* Once merged, re-pull master, manually run `changeset release`, push tags
+* Once merged, re-pull master, manually run `yarn release`, push tags
 * Let everyone know it's safe to merge PRs again
