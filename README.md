@@ -20,3 +20,7 @@ in, even if you don't need the complete set of things that brisk does:
 - [react changelogs]('./packages/react-changelogs) - Component that accepts raw changelog files and formats them for display. Allows filtering to semver versions
 - [extract-react-types](https://extract-react-types.com/) - a way to extract and display types for components, works on both flow and typescript
 - [codesandboxer](https://github.com/codesandbox/codesandboxer) - Deploy a single file to codesandbox to make your code easy to share and collaborate on - can be used from node or from within a react app
+
+## Contributing
+
+For more information on how to contribute to Brisk, see [contributing](./CONTRIBUTING.md).
