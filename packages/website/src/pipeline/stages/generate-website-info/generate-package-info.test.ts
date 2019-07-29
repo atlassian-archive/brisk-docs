@@ -17,6 +17,9 @@ const mockData: PackageGroup[] = [
         },
         packageTitle: 'Package 1 title',
         changelogPath: '/content/packages/package-1/CHANGELOG.md',
+        docs: [],
+        examples: [],
+        subExamples: [],
       },
     ],
   },
@@ -29,6 +32,9 @@ const mockData: PackageGroup[] = [
         customPackageFields: {},
         readmePath: '/content/packages/package-2/README.md',
         readmeMeta: {},
+        docs: [],
+        examples: [],
+        subExamples: [],
       },
       {
         id: 'package-3',
@@ -36,6 +42,9 @@ const mockData: PackageGroup[] = [
         customPackageFields: {},
         readmePath: '/content/packages/package-3/README.md',
         readmeMeta: {},
+        docs: [],
+        examples: [],
+        subExamples: [],
       },
     ],
   },
@@ -152,5 +161,126 @@ describe('Package website info generator', () => {
       },
       title: 'Examples',
     });
+  });
+
+  it('processes docs website information', () => {
+    const mockDataWithDocs = [
+      {
+        groupId: 'group-1',
+        packages: [
+          {
+            id: 'package-1',
+            name: 'Package One',
+            customPackageFields: {},
+            readmePath: '/content/packages/package-1/README.md',
+            readmeMeta: {},
+            examples: [],
+            subExamples: [],
+            docs: [
+              {
+                id: 'doc-home-1',
+                meta: {},
+                children: [
+                  {
+                    id: 'doc-1',
+                    meta: {},
+                    markdownPath: 'content/markdown-1.md',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    const { sitemap, pages } = generatePackageInfo(mockDataWithDocs);
+
+    expect(sitemap[0].docs).toContainEqual(
+      expect.objectContaining({ id: 'doc-home-1' }),
+    );
+
+    expect(pages.docsHomePages).toContainEqual(
+      expect.objectContaining({
+        websitePath: 'packages/package-1/docs/doc-home-1',
+      }),
+    );
+    expect(pages.docsPages).toContainEqual(
+      expect.objectContaining({
+        websitePath: 'packages/package-1/docs/doc-home-1/doc-1',
+      }),
+    );
+  });
+
+  it('outputs top level examples', () => {
+    const mockDataWithExamples = [
+      {
+        groupId: 'group-1',
+        packages: [
+          {
+            id: 'package-1',
+            name: 'Package One',
+            customPackageFields: {},
+            readmePath: '/content/packages/package-1/README.md',
+            readmeMeta: {},
+            docs: [],
+            examples: [
+              {
+                id: 'example-1',
+                exampleModulePath: 'content/example-1.js',
+              },
+            ],
+            subExamples: [],
+          },
+        ],
+      },
+    ];
+    const { sitemap, pages } = generatePackageInfo(mockDataWithExamples);
+
+    expect(pages.examplesPages).toHaveLength(1);
+    expect(pages.examplesPages[0].websitePath).toEqual(
+      'packages/package-1/examples/example-1',
+    );
+
+    expect(sitemap[0].examples).toHaveLength(1);
+    expect(sitemap[0].examples[0].id).toEqual('example-1');
+  });
+
+  it('outputs package sub-examples', () => {
+    const mockDataWithExamples = [
+      {
+        groupId: 'group-1',
+        packages: [
+          {
+            id: 'package-1',
+            name: 'Package One',
+            customPackageFields: {},
+            readmePath: '/content/packages/package-1/README.md',
+            readmeMeta: {},
+            docs: [],
+            examples: [],
+            subExamples: [
+              {
+                id: 'sub-examples-group-1',
+                children: [
+                  {
+                    id: 'sub-example-1',
+                    exampleModulePath: 'content/sub-example-1.js',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    const { sitemap, pages } = generatePackageInfo(mockDataWithExamples);
+
+    expect(pages.examplesPages).toHaveLength(1);
+    expect(pages.examplesPages[0].websitePath).toEqual(
+      'packages/package-1/subExamples/sub-examples-group-1/sub-example-1',
+    );
+
+    expect(sitemap[0].subExamples).toHaveLength(1);
+    expect(sitemap[0].subExamples[0].id).toEqual('sub-examples-group-1');
   });
 });

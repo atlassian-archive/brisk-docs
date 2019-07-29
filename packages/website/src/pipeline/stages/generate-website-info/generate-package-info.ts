@@ -1,5 +1,4 @@
 import path from 'path';
-import flatMap from 'lodash.flatmap';
 import titleCase from 'title-case';
 
 import {
@@ -9,6 +8,16 @@ import {
   GenericPage,
 } from '../common/page-specs';
 
+import generateDocsInfo, {
+  DocsTree,
+  DocsSitemapEntry,
+} from './generate-docs-info';
+
+import generateExamplesInfo, {
+  ExampleItem,
+  ExampleTreeNode,
+  ExampleSitemapEntry,
+} from './generate-examples-info';
 
 interface PackageInfo {
   id: string;
@@ -25,8 +34,12 @@ interface PackageInfo {
   packageTitle?: string;
   // Absolute path to the changelog for the package
   changelogPath?: string;
-  // Docs tree for this package
-  // docs: DocsTree;
+  // Nested docs for this package
+  docs: DocsTree[];
+  // Top level examples for this package
+  examples: ExampleItem[];
+  // Tree of inner package examples
+  subExamples: ExampleTreeNode[];
 }
 
 export interface PackageGroup {
@@ -45,9 +58,9 @@ interface PackageSitemap {
   changelogPath: string | null;
   docPath: string;
   examplePath: string;
-  // docs: {}[];
-  // examples: {}[];
-  // subExamples: {}[];
+  docs: DocsSitemapEntry[];
+  examples: ExampleSitemapEntry[];
+  subExamples: ExampleSitemapEntry[];
   // Display name for the package to show in the nav etc
   packageTitle?: string; // this can be removed during Links refactor.
 }
@@ -62,6 +75,9 @@ interface PackageMeta {
   [customField: string]: any;
 }
 
+/**
+ * Generates pages and website info for a single package
+ */
 const generatePackageInfo = (
   pkg: PackageInfo,
   groupId?: string,
@@ -71,10 +87,13 @@ const generatePackageInfo = (
   pages: {
     homePage: DocPage;
     changelogPage?: ChangelogPage;
-    docsHomePage: GenericPage;
+    docsPages: DocPage[];
+    docsHomePages: GenericPage[];
     examplesHomePage: GenericPage;
+    examplePages: ExamplePage[];
   };
 } => {
+  // Extra data to be put in all the pages
   const pageData = { id: pkg.id, packageName: pkg.name };
 
   const meta = {
@@ -110,11 +129,16 @@ const generatePackageInfo = (
   }
 
   const docPath = path.join(homePath, 'docs');
-  const docsHomePage = {
-    websitePath: docPath,
-    pageData,
-    title: 'Documents',
-  };
+  const docsInfo = generateDocsInfo(pkg.docs, docPath, pageData);
+
+  const docsHomePages = [
+    {
+      websitePath: docPath,
+      pageData,
+      title: 'Documents',
+    },
+    ...docsInfo.pages.docsHomePages,
+  ];
 
   const examplePath = path.join(homePath, 'examples');
   const examplesHomePage: GenericPage = {
@@ -122,6 +146,26 @@ const generatePackageInfo = (
     pageData,
     title: 'Examples',
   };
+
+  const examplePages: ExamplePage[] = [];
+
+  const examplesPath = path.join(homePath, 'examples');
+  const examplesInfo = generateExamplesInfo(
+    pkg.examples,
+    examplesPath,
+    pageData,
+  );
+
+  examplePages.push(...examplesInfo.pages.examplePages);
+
+  const subExamplesPath = path.join(homePath, 'subExamples');
+  const subExamplesInfo = generateExamplesInfo(
+    pkg.subExamples,
+    subExamplesPath,
+    pageData,
+  );
+
+  examplePages.push(...subExamplesInfo.pages.examplePages);
 
   // const docs = scanAndGenerate(pkg.docsPaths, path.join(homePath, 'docs'), {
   //   ...generatorConfig,
@@ -236,17 +280,19 @@ const generatePackageInfo = (
     changelogPath: displayChangelog ? path.join('/', changelogPath) : null,
     docPath: path.join('/', docPath),
     examplePath: path.join('/', examplePath),
-    // docs,
-    // examples,
-    // subExamples: formatSubExamples(),
+    docs: docsInfo.sitemap,
+    examples: examplesInfo.sitemap,
+    subExamples: subExamplesInfo.sitemap,
     packageTitle: pkg.packageTitle, // this can be removed during Links refactor.
   };
 
   const pages = {
     homePage,
     changelogPage,
-    docsHomePage,
-    examplesHomePage
+    docsPages: docsInfo.pages.docsPages,
+    docsHomePages,
+    examplesHomePage,
+    examplePages,
   };
 
   return { sitemap, meta, pages };
@@ -255,30 +301,50 @@ const generatePackageInfo = (
 interface PackagePages {
   packageHomePages: DocPage[];
   changelogPages: ChangelogPage[];
+  docsPages: DocPage[];
   docsHomePages: GenericPage[];
   examplesHomePages: GenericPage[];
+  examplesPages: ExamplePage[];
 }
 
 export default (
   packageGroups: PackageGroup[],
 ): { sitemap: PackageSitemap[]; meta: PackageMeta[]; pages: PackagePages } => {
-  const packagesInfo = flatMap(packageGroups, ({ groupId, packages }) => {
-    return packages.map(p => generatePackageInfo(p, groupId));
+  const pages: PackagePages = {
+    packageHomePages: [],
+    changelogPages: [],
+    docsPages: [],
+    docsHomePages: [],
+    examplesHomePages: [],
+    examplesPages: [],
+  };
+
+  const sitemap: PackageSitemap[] = [];
+  const meta: PackageMeta[] = [];
+
+  // Flatten the website info from all the packages
+  packageGroups.forEach(({ groupId, packages }) => {
+    packages.forEach(pkg => {
+      const packageInfo = generatePackageInfo(pkg, groupId);
+
+      sitemap.push(packageInfo.sitemap);
+      meta.push(packageInfo.meta);
+
+      pages.examplesHomePages.push(packageInfo.pages.examplesHomePage);
+      pages.docsPages.push(...packageInfo.pages.docsPages);
+      pages.docsHomePages.push(...packageInfo.pages.docsHomePages);
+      pages.packageHomePages.push(packageInfo.pages.homePage);
+      pages.examplesPages.push(...packageInfo.pages.examplePages);
+
+      if (packageInfo.pages.changelogPage) {
+        pages.changelogPages.push(packageInfo.pages.changelogPage);
+      }
+    });
   });
 
-  // @ts-ignore: Typescript doesnt understand filtering out undefined
-  const changelogPages: ChangelogPage[] = packagesInfo
-    .map(i => i.pages.changelogPage)
-    .filter(p => p);
-
   return {
-    sitemap: packagesInfo.map(i => i.sitemap),
-    meta: packagesInfo.map(i => i.meta),
-    pages: {
-      packageHomePages: packagesInfo.map(i => i.pages.homePage),
-      changelogPages,
-      docsHomePages: packagesInfo.map(i => i.pages.docsHomePage),
-      examplesHomePages: packagesInfo.map(i => i.pages.examplesHomePage),
-    },
+    sitemap,
+    meta,
+    pages,
   };
 };

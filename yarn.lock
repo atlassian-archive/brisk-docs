@@ -9146,7 +9146,7 @@ lodash.escape@^4.0.1:
 
 lodash.flatmap@^4.5.0:
   version "4.5.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/lodash.flatmap/-/lodash.flatmap-4.5.0.tgz#ef8cbf408f6e48268663345305c6acc0b778702e"
+  resolved "https://registry.yarnpkg.com/lodash.flatmap/-/lodash.flatmap-4.5.0.tgz#ef8cbf408f6e48268663345305c6acc0b778702e"
   integrity sha1-74y/QI9uSCaGYzRTBcaswLd4cC4=
 
 lodash.flattendeep@^4.4.0:

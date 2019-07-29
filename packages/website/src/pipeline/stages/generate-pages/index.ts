@@ -93,6 +93,7 @@ export default createStage(
         fullscreenExampleWebsitePath,
         exampleModulePath,
         pageData,
+        title,
       }) => {
         generateExamplePage(
           `${websitePath}.js`,
@@ -100,6 +101,7 @@ export default createStage(
           exampleModulePath,
           pageData,
           generatorConfig,
+          title
         );
       },
     );

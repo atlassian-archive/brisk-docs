@@ -29,6 +29,8 @@ export interface ExamplePage {
   exampleModulePath: string;
   // Additional data used by the page
   pageData: object;
+  // Window title for this page
+  title?: string;
 }
 
 export interface ChangelogPage {

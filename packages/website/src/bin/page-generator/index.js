@@ -20,7 +20,6 @@ const {
 const packagesData = [];
 
 const scanAndGenerate = (docs, docsPath, generatorConfig, name) => {
-  console.log(docs);
   const pageData = generatorConfig.pageData || {};
   const generateDocFunc =
     generatorConfig.type === 'pkg-doc'

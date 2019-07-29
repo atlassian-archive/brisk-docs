@@ -18,6 +18,7 @@ describe('Docs tree info generator', () => {
     const { pages, sitemap } = generateDocsInfo(
       docs,
       'website/docs',
+      {},
       'docs-key',
     );
 
@@ -59,9 +60,14 @@ describe('Docs tree info generator', () => {
       },
     ];
 
-    const { pages } = generateDocsInfo(docs, 'website/docs', 'docs-key', {
-      extraData: 'baz',
-    });
+    const { pages } = generateDocsInfo(
+      docs,
+      'website/docs',
+      {
+        extraData: 'baz',
+      },
+      'docs-key',
+    );
 
     expect(pages.docsPages[0].pageData).toEqual({
       key: 'docs-key',
@@ -92,6 +98,7 @@ describe('Docs tree info generator', () => {
     const { pages, sitemap } = generateDocsInfo(
       docs,
       'website/docs',
+      {},
       'docs-key',
     );
 
@@ -130,7 +137,7 @@ describe('Docs tree info generator', () => {
       },
     ];
 
-    const { pages } = generateDocsInfo(docs, 'website/docs', 'docs-key');
+    const { pages } = generateDocsInfo(docs, 'website/docs', {}, 'docs-key');
 
     expect(pages.docsHomePages).toEqual([
       {
@@ -187,6 +194,7 @@ describe('Docs tree info generator', () => {
     const { pages, sitemap } = generateDocsInfo(
       docs,
       'website/docs',
+      {},
       'docs-key',
     );
 

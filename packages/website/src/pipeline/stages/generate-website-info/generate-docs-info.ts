@@ -13,7 +13,7 @@ export type DocsTree = {
   children?: DocsTree[];
 };
 
-interface DocsSitemapEntry {
+export interface DocsSitemapEntry {
   // id of the root page in the sitemap entry
   id: string;
   // metadata about the root page in the sitemap entry
@@ -25,7 +25,7 @@ interface DocsSitemapEntry {
 }
 
 // Website information about a collection of docs
-interface DocsInfo {
+export interface DocsInfo {
   // The hierarchy of docs as it appears in the website
   sitemap: DocsSitemapEntry[];
   // Specs for all the pages that appear in the sitemap
@@ -37,10 +37,12 @@ interface DocsInfo {
 
 const generateDocsInfo = (
   docs: DocsTree[],
-  docsPath: string, // website path to the root page for where the docs will be placed
+  // website path to the root page for where the docs will be placed
+  docsPath: string,
+  // additional data to be embedded in each page
+  pageData: object,
   // identifier for which docs section is being generated
-  key: string,
-  pageData: object = {},
+  key?: string,
 ): DocsInfo => {
   const docsPages: DocPage[] = [];
   const docsHomePages: GenericPage[] = [];
@@ -82,8 +84,8 @@ const generateDocsInfo = (
       const childDocsInfo = generateDocsInfo(
         childDocs,
         websitePath,
-        key,
         pageData,
+        key,
       );
       docsPages.push(...childDocsInfo.pages.docsPages);
       docsHomePages.push(...childDocsInfo.pages.docsHomePages);
