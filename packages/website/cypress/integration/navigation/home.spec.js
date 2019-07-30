@@ -25,9 +25,9 @@ describe('Home page tests', () => {
   });
 
   it('should navigate to the docs page from the docs panel', () => {
-    cy.get('[href="docs"]').click();
+    cy.get('[href="docco"]').click();
 
-    cy.url().should('include', '/docs');
+    cy.url().should('include', '/docco');
     // cy.screenshot('docs-page);
   });
 });

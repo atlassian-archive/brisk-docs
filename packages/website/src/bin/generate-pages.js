@@ -13,20 +13,21 @@ const packageRoot = path.resolve(__dirname, '..', '..');
 
 module.exports = async ({
   packagesPaths,
+  packagesImgSrc,
   docsList,
   showExamples,
   showSubExamples,
   siteName,
   packagesDescription,
   readMePath,
+  readMeImgSrc,
   customPackageFields,
+  links,
 }) => {
   const componentsPath = path.resolve(
     packageRoot,
     './src/components/page-templates',
   );
-
-  const { ...rest } = docsList;
 
   const pagesList = await generatePages(
     packagesPaths,
@@ -42,6 +43,18 @@ module.exports = async ({
   );
 
   const { packages, metaData, ...rests } = pagesList;
+
+  const readMe =
+    pagesList.readme.length > 0
+      ? {
+          imgSrc: readMeImgSrc,
+        }
+      : undefined;
+
+  const packagesMeta = {
+    description: packagesDescription,
+    imgSrc: packagesImgSrc,
+  };
 
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
@@ -60,6 +73,16 @@ module.exports = async ({
   );
   fs.writeFileSync(
     metaPath,
-    JSON.stringify({ siteName, packagesDescription, ...rest }, undefined, 2),
+    JSON.stringify(
+      {
+        siteName,
+        packages: packagesMeta,
+        links,
+        readMe,
+        docs: docsList,
+      },
+      undefined,
+      2,
+    ),
   );
 };

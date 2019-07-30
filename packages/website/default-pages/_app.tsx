@@ -39,8 +39,7 @@ export default class MyApp extends App<Props> {
     return (
       <Meta.Provider value={metadata}>
         <Container>
-          {/* TODO: TSFix We are passing in undefined here as we convert to typescript, but this prop is optional and we should be able to remove this */}
-          <Title title={undefined} />
+          <Title />
           <MDXProvider components={components}>
             <Component {...pageProps} />
           </MDXProvider>

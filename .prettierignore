@@ -1,3 +1,6 @@
 .next
 *.json
 dist
+/out
+/packages/website/pages
+/cypress

@@ -1,5 +1,33 @@
 # @brisk-docs/website
 
+## 0.8.1
+
+### Patch Changes
+
+- 23c4f43: Patch release - previous release does not include built dists
+
+## 0.8.0
+
+### Minor Changes
+
+- 017909a: Remove the possibility of specifying docsList/packagesPaths from config.
+
+  Before this change, specifying `docsList` or `packagesPaths` would override
+  the intended configuration of the `docs`/`packages` entries.
+
+  - 7014ef8: Allow homepage tile images to be customised
+
+- 371f5ff: Remove the useManifests option
+- 81f4f9a: arbitrary links can now be specified for the homepage
+- 6dbc7dc: Add scaffolding for new website build pipeline. This is available as a brisk-next command.
+- 4a3311b: Move page writing functionality into generate-pages pipeline stage.
+
+### Patch Changes
+
+- a53f861: Removed unused dependency
+- bf043e9: Update pretty proptypes dependency
+- 6dbc7dc: Fix babel configs for building packages to produce working dists for node scripts.
+
 ## 0.7.4
 
 ### Patch Changes

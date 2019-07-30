@@ -17,6 +17,7 @@ the returned object may have the following properties:
 | customPackageFields  | Array of fields from the relevant package.json to display on the package home page. This augments the default set.                  |
 | docs                 | Object (or array of Object) describing the project docs.                                                                            |
 | favicon              | Absolute path to an .ico file to use as the site's favicon  e.g. `path.join(__dirname, 'favicon.ico')`                              |
+| links                | Optional array of Object with links to display on the homepage                                                                      |
 | packages             | Path or array of paths of packages to show. Glob patterns are allowed.  e.g. `path.join(__dirname, 'packages', '*')`                |
 | packagesDescription  | Optional String to replace the default description for the packages section                                                         |
 | readMePath           | Optional String path to an alternative specific mdx file to use as the "Get Started" page.                                          |
@@ -54,13 +55,41 @@ Object describing documentation sections
 
 For a given path, if it does not exist, that section will not be generated.
 
- ### favicon
+### favicon
 
 Type: optional `string` defaults to `path.join(__dirname, 'favicon.ico')`
 
 Absolute path to an `.ico` file to use as the site's favicon. If the file does not exist, a default favicon will be added to the site.
 
 e.g. `path.join(__dirname, 'new_favicon.ico')`
+
+### links
+
+Type: optional `object[]` defaults to `[]`
+
+Array of links to arbitrary places. These will be tiles at the end of all other tiles on the homepage.
+
+Each link has the following shape:
+
+ * `label`: `string` to display on the home page tile
+ * `description`: Optional `string` to display on the home page tile
+ * `href`: `string` full URL (to external site) or internal link e.g. `/packages`
+
+e.g.
+```js
+  [
+    {
+      label: 'Get accomplished today!',
+      href: '/docco/guides/how-to-be-accomplished'
+    },
+    {
+      label: 'Get a job!',
+      description: 'Browse the available Atlassian career opportunities and join the team.',
+      href: 'https://www.atlassian.com/company/careers/all-jobs'
+    },
+  ]
+
+```
 
 ### packages
 

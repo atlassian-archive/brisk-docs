@@ -6,7 +6,7 @@ import SwitchLink from '../../src/components/switch-link';
 const children = 'some text';
 
 const initialProps = {
-  children: 'some text',
+  children: () => 'some text',
   href: '/atlaskit',
 };
 
@@ -29,7 +29,7 @@ describe('<SwitchLink />', () => {
     expect(component.prop('href')).toEqual('#Hello');
   });
 
-  it('renders as an anchor when the link is external', () => {
+  it('renders an anchor with a shortcut icon when the link is external', () => {
     const wrapper = mount(
       <SwitchLink {...initialProps} href="https://atlassian.com" />,
     );
@@ -39,6 +39,22 @@ describe('<SwitchLink />', () => {
     expect(component.text()).toContain(children);
     expect(component.prop('href')).toEqual('https://atlassian.com');
     expect(wrapper.find('ShortcutIcon')).toHaveLength(1);
+  });
+
+  it('renders an anchor without a shortcut icon when the link is external but enableShortcutIcon is disabled', () => {
+    const wrapper = mount(
+      <SwitchLink
+        {...initialProps}
+        href="https://atlassian.com"
+        includeShortcutIcon={false}
+      />,
+    );
+    const component = wrapper.find('a');
+
+    expect(component.exists()).toBeTruthy();
+    expect(component.text()).toContain(children);
+    expect(component.prop('href')).toEqual('https://atlassian.com');
+    expect(wrapper.find('ShortcutIcon')).toHaveLength(0);
   });
 
   it('renders a Link component for relative links', () => {

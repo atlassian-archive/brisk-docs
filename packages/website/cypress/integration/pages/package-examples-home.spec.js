@@ -4,6 +4,6 @@ describe('Package examples home page tests', () => {
   });
 
   it('has the correct page title', () => {
-    cy.title().should('eq', 'Examples - Dummy Data Docs');
+    cy.title().should('eq', 'Examples - Complete Config Project');
   });
 });

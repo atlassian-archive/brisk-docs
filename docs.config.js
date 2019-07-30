@@ -7,11 +7,24 @@ const docs = [
   },
 ];
 
+const links = [];
+
 if (process.env && process.env.CONTEXT !== 'production') {
   docs.push({
     path: './example-pages',
     name: 'Example Pages',
-    description: 'This is a collection of example pages for how pages ',
+    description: 'This is a collection of example pages.',
+  });
+
+  links.push({
+    href: '/example-pages/guide-1',
+    label: 'Example guide 1',
+    description: 'This is an example arbitrary internal link.',
+  });
+  links.push({
+    href: 'https://atlaskit.atlassian.com',
+    label: 'Atlaskit',
+    description: 'This is an example arbitrary external link.',
   });
 }
 
@@ -20,4 +33,5 @@ module.exports = () => ({
   packages: ['./packages/*'],
   showSubExamples: true,
   docs,
+  links,
 });

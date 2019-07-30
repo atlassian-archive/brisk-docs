@@ -74,7 +74,9 @@ class DocsTable extends React.Component<DocsTableProps, DocsTableState> {
                 <Cell singleLine>{getTitle(page)}</Cell>
                 <Cell>
                   <Link href={page.pagePath}>
-                    {page.pagePath.replace(new RegExp(`^/?${docKey}/`), '')}
+                    {() =>
+                      page.pagePath.replace(new RegExp(`^/?${docKey}/`), '')
+                    }
                   </Link>
                 </Cell>
               </Row>
