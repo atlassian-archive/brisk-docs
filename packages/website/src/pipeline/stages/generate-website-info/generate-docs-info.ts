@@ -2,16 +2,25 @@ import path from 'path';
 
 import { DocPage, GenericPage } from '../common/page-specs';
 
-export type DocsTree = {
+export interface DocsItem {
   // Id of the root page in the tree
   id: string;
   // Metadata about the doc page
   meta: object;
   // Absolute path to the user generated markdown for this doc
-  markdownPath?: string;
+  markdownPath: string;
+}
+
+export interface DocsGroup {
+  // Id of the root page in the tree
+  id: string;
+  // Metadata about the doc page
+  meta: object;
   // Child docs from this docs item
-  children?: DocsTree[];
-};
+  children: DocsTreeNode[];
+}
+
+export type DocsTreeNode = DocsGroup | DocsItem;
 
 export interface DocsSitemapEntry {
   // id of the root page in the sitemap entry
@@ -35,8 +44,11 @@ export interface DocsInfo {
   };
 }
 
+const isDocsGroup = (docsNode: any): docsNode is DocsGroup =>
+  !!docsNode.children;
+
 const generateDocsInfo = (
-  docs: DocsTree[],
+  docs: DocsTreeNode[],
   // website path to the root page for where the docs will be placed
   docsPath: string,
   // additional data to be embedded in each page
@@ -51,18 +63,20 @@ const generateDocsInfo = (
   docs.forEach(doc => {
     const websitePath = path.join(docsPath, doc.id);
 
-    if (doc.children) {
+    if (isDocsGroup(doc)) {
       // If the children contains a readme, use it as the index for this group
       // in the tree. Otherwise, create a home page to act as the index.
-      const isReadme = ({ markdownPath }: DocsTree): boolean =>
-        !!markdownPath && path.basename(markdownPath) === 'readme.md';
+      const isReadme = (docsNode: DocsTreeNode): boolean =>
+        !isDocsGroup(docsNode) &&
+        path.basename(docsNode.markdownPath) === 'readme.md';
+
       const readme = doc.children.find(isReadme);
       const childDocs = doc.children.filter(c => !isReadme(c));
 
-      if (readme && readme.markdownPath) {
+      if (readme) {
         docsPages.push({
           websitePath,
-          markdownPath: readme.markdownPath,
+          markdownPath: (readme as DocsItem).markdownPath,
           pageData: { ...pageData, key },
           meta: readme.meta,
         });
@@ -96,7 +110,7 @@ const generateDocsInfo = (
         meta: doc.meta,
         children: childDocsInfo.sitemap,
       });
-    } else if (doc.markdownPath) {
+    } else {
       docsPages.push({
         websitePath,
         markdownPath: doc.markdownPath,

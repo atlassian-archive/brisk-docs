@@ -146,7 +146,7 @@ describe('Generate pages build stage', () => {
           fullscreenExampleWebsitePath: 'package/path/examples/example1-full',
           exampleModulePath: '/examples/path/example1',
           pageData: { value: 'foo' },
-          title: 'PAGE_TITLE'
+          title: 'PAGE_TITLE',
         },
       ],
     });
@@ -157,7 +157,7 @@ describe('Generate pages build stage', () => {
       '/examples/path/example1',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
-      'PAGE_TITLE'
+      'PAGE_TITLE',
     );
   });
 

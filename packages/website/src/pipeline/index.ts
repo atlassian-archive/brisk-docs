@@ -7,7 +7,13 @@ import runWebsite from './stages/run-website';
 export default () => {
   const initialConfiguration = {};
   return scanMetadata(initialConfiguration)
-    .then(result => generateWebsiteInfo(result))
+    .then(() =>
+      generateWebsiteInfo({
+        packages: [],
+        projectDocs: [],
+        readmePath: '',
+      }),
+    )
     .then(() =>
       generatePages({
         wrappersPath: '',

@@ -9,7 +9,7 @@ import {
 } from '../common/page-specs';
 
 import generateDocsInfo, {
-  DocsTree,
+  DocsTreeNode,
   DocsSitemapEntry,
 } from './generate-docs-info';
 
@@ -35,7 +35,7 @@ interface PackageInfo {
   // Absolute path to the changelog for the package
   changelogPath?: string;
   // Nested docs for this package
-  docs: DocsTree[];
+  docs: DocsTreeNode[];
   // Top level examples for this package
   examples: ExampleItem[];
   // Tree of inner package examples
@@ -50,7 +50,7 @@ export interface PackageGroup {
 }
 
 // A structure representing the content in the website about a single package
-interface PackageSitemap {
+export interface PackageSitemap {
   parentId?: string;
   packageId: string;
   homePath: string;
@@ -66,7 +66,7 @@ interface PackageSitemap {
 }
 
 // Extra info about packages used by the website outside the sitemap.
-interface PackageMeta {
+export interface PackageMeta {
   // id of a package
   id: string;
   // names of extra fields to be displayed in the website
@@ -166,111 +166,6 @@ const generatePackageInfo = (
   );
 
   examplePages.push(...subExamplesInfo.pages.examplePages);
-
-  // const docs = scanAndGenerate(pkg.docsPaths, path.join(homePath, 'docs'), {
-  //   ...generatorConfig,
-  //   pageData,
-  //   type: 'pkg-doc',
-  // });
-
-  // const examples = pkg.examplesPaths.map(example => {
-  //   const pagePath = path.join(homePath, 'examples', example.id);
-  //
-  //   const rawPagesPath = path.join(homePath, 'examples/isolated', example.id);
-  //   const isolatedPath = path.join('/', `${rawPagesPath}`);
-  //   const pageTitle = titleCase(example.id);
-  //
-  //   generateExamplePage(
-  //     `${pagePath}.js`,
-  //     `${rawPagesPath}.js`,
-  //     example.path,
-  //     { ...pageData, isolatedPath, pageTitle },
-  //     generatorConfig,
-  //     pageTitle,
-  //   );
-  //
-  //   return {
-  //     id: example.id,
-  //     pagePath: path.join('/', pagePath),
-  //     isolatedPath,
-  //   };
-  // });
-
-  // const subExamples = pkg.subExamplesPaths.map(example => {
-  //   const pagePath = path.join(
-  //     homePath,
-  //     `subExamples/${example.id}`,
-  //     'examples',
-  //   );
-  //
-  //   const rawPagesPath = path.join(
-  //     homePath,
-  //     `subExamples/${example.id}/isolated`,
-  //     'examples',
-  //   );
-  //   const isolatedPath = path.join('/', `${rawPagesPath}`);
-  //
-  //   generateExamplePage(
-  //     `${pagePath}.js`,
-  //     `${rawPagesPath}.js`,
-  //     example.path,
-  //     { ...pageData, isolatedPath },
-  //     generatorConfig,
-  //     'Examples',
-  //   );
-  //
-  //   return {
-  //     id: `${example.id}/examples`,
-  //     pagePath: path.join('/', pagePath),
-  //     isolatedPath,
-  //     folderPath: example.id,
-  //   };
-  // });
-
-  /**
-   * Recursively scans through the folder structure from folder path and generate children
-   * for each sub example
-   * @param folders the folder array
-   * @param children
-   * @param subExample each item in subExample
-   */
-  // const processSubExamples = (folders, children, subExample) => {
-  //   const [folder, ...rest] = folders;
-  //   const requiresFurtherNesting = !!rest.length;
-  //
-  //   let addToFolder = children.find(child => child.id === folder);
-  //   if (!addToFolder) {
-  //     children.push({
-  //       id: folder,
-  //       children: [],
-  //     });
-  //     addToFolder = children.find(child => child.id === folder);
-  //   }
-  //
-  //   if (requiresFurtherNesting) {
-  //     processSubExamples(rest, addToFolder.children, subExample);
-  //   } else {
-  //     // When it reach the last element add it as a plain object and delete the [] children array.
-  //     addToFolder.pagePath = subExample.pagePath;
-  //     addToFolder.isolatedPath = subExample.isolatedPath;
-  //     delete addToFolder.children;
-  //   }
-  // };
-
-  /**
-   * Recursively scans through the top level sub examples and generate a tree structure
-   * @returns array like sub examples structure
-   */
-  // const formatSubExamples = () => {
-  //   const formatted = [];
-  //   subExamples.forEach(subExample => {
-  //     const folders = subExample.id.split('/').filter(Boolean);
-  //     processSubExamples(folders, formatted, subExample);
-  //   });
-  //
-  //   return formatted;
-  // };
-  //
 
   const sitemap: PackageSitemap = {
     parentId: groupId,

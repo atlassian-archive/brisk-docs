@@ -1,8 +1,8 @@
-import generateDocsInfo, { DocsTree } from './generate-docs-info';
+import generateDocsInfo, { DocsTreeNode } from './generate-docs-info';
 
 describe('Docs tree info generator', () => {
   it('Creates page specs for input docs and adds them to the sitemap', () => {
-    const docs: DocsTree[] = [
+    const docs: DocsTreeNode[] = [
       {
         id: 'doc-1',
         markdownPath: '/content/doc-1.md',
@@ -52,7 +52,7 @@ describe('Docs tree info generator', () => {
   });
 
   it('Adds extra page info to each doc', () => {
-    const docs: DocsTree[] = [
+    const docs: DocsTreeNode[] = [
       {
         id: 'doc-1',
         markdownPath: '/content/doc-1.md',
@@ -76,7 +76,7 @@ describe('Docs tree info generator', () => {
   });
 
   it('Generates page spec for child pages in the docs tree and adds them to the sitemap', () => {
-    const docs: DocsTree[] = [
+    const docs: DocsTreeNode[] = [
       {
         id: 'doc-1',
         children: [
@@ -117,7 +117,7 @@ describe('Docs tree info generator', () => {
   });
 
   it('Creates a docs home page for every level of docs nesting', () => {
-    const docs: DocsTree[] = [
+    const docs: DocsTreeNode[] = [
       {
         id: 'doc-1',
         children: [
@@ -172,7 +172,7 @@ describe('Docs tree info generator', () => {
   });
 
   it('Uses a readme instead of a docs home page if one is present', () => {
-    const docs: DocsTree[] = [
+    const docs: DocsTreeNode[] = [
       {
         id: 'doc-1',
         children: [

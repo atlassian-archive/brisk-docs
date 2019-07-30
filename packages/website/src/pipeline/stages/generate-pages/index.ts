@@ -1,10 +1,5 @@
 import createStage from '../make-pipline-stage';
-import {
-  ChangelogPage,
-  DocPage,
-  ExamplePage,
-  GenericPage,
-} from '../common/page-specs';
+import { PagesSpec, GenericPage } from '../common/page-specs';
 
 import {
   generatePackageDocPage,
@@ -18,28 +13,12 @@ import {
   // @ts-ignore: Implicit any
 } from './page-writers';
 
-export interface StageInput {
+export type StageInput = {
   // Absolute path to directory containing page wrapper components
   wrappersPath: string;
   // Absolute path to the output pages directory
   pagesPath: string;
-  // List of package level docs to be generated
-  packageDocPages: DocPage[];
-  // List of project level docs to be generated
-  projectDocPages: DocPage[];
-  // List of docs index pages to be generated.
-  docsHomePages: GenericPage[];
-  // List of home pages for docs sections
-  docsMainPages: GenericPage[];
-  // List of examples to be generated
-  examplePages: ExamplePage[];
-  // List of examples index pages to be generated.
-  examplesHomePages: GenericPage[];
-  // List of changelogs to be generated
-  changelogPages: ChangelogPage[];
-  // List of package landing pages to be generated
-  packageHomePages: DocPage[];
-}
+} & PagesSpec;
 
 export type StageOutput = void;
 
@@ -101,7 +80,7 @@ export default createStage(
           exampleModulePath,
           pageData,
           generatorConfig,
-          title
+          title,
         );
       },
     );

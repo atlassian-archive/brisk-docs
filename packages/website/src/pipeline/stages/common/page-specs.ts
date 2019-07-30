@@ -43,3 +43,23 @@ export interface ChangelogPage {
   // Window title for this page
   title?: string;
 }
+
+// A specification for what pages should be created in the website
+export interface PagesSpec {
+  // List of package level docs to be generated
+  packageDocPages: DocPage[];
+  // List of project level docs to be generated
+  projectDocPages: DocPage[];
+  // List of docs index pages to be generated.
+  docsHomePages: GenericPage[];
+  // List of home pages for docs sections
+  docsMainPages: GenericPage[];
+  // List of examples to be generated
+  examplePages: ExamplePage[];
+  // List of examples index pages to be generated.
+  examplesHomePages: GenericPage[];
+  // List of changelogs to be generated
+  changelogPages: ChangelogPage[];
+  // List of package landing pages to be generated
+  packageHomePages: DocPage[];
+}
