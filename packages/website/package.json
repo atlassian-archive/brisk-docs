@@ -11,6 +11,17 @@
     "Ben Conolly"
   ],
   "license": "MIT",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/proposal-object-rest-spread"
+    ]
+  },
   "scripts": {
     "debug:generate": "node --inspect-brk src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
     "debug:next": "yarn dev --debug-next",
@@ -22,7 +33,8 @@
     "start": "node src/bin/index.js start",
     "generates": "node src/bin/index.js generate --config=dummy-data/simple-project/docs.config.js",
     "parcel:dev": "node src/bin/index.js parcel-dev",
-    "parcel:build": "node src/bin/index.js parcel-build"
+    "parcel:build": "node src/bin/index.js parcel-build",
+    "run:webpack": "webpack-dev-server --open"
   },
   "bin": {
     "brisk": "src/bin/index.js",
@@ -78,6 +90,7 @@
     "@mdx-js/loader": "^0.17.5",
     "@mdx-js/mdx": "^0.15.0",
     "@mdx-js/tag": "^0.17.5",
+    "@types/react": "^16.4.18",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
     "@zeit/next-typescript": "^1.1.1",
@@ -112,6 +125,8 @@
     "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
     "react-dom": "^16.8.4",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "remark-frontmatter": "^1.3.2",
     "remark-parse": "^6.0.3",
     "resolve": "^1.10.0",
@@ -121,13 +136,16 @@
     "title-case": "^2.1.1",
     "unified": "^7.1.0",
     "unist-util-visit": "^1.3.0",
-    "webpack": "4.28.4"
+    "webpack": "4.28.4",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@types/fs-extra": "^8.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
+    "html-webpack-plugin": "^3.2.0",
     "mock-fs": "^4.10.1",
     "ts-loader": "^5.3.3"
   }

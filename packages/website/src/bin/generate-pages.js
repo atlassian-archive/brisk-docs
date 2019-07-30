@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const generatePages = require('./page-generator');
+const getEntryPage = require('./generate-entry-page');
 
 const packageRoot = path.resolve(__dirname, '..', '..');
 
@@ -47,6 +48,7 @@ module.exports = async ({
   const pagesListPath = path.resolve(packageRoot, 'data/pages-list.json');
   const packagesDataPath = path.resolve(packageRoot, 'data/packages-data.json');
   const metaPath = path.resolve(packageRoot, 'data/site-meta.json');
+  const entryPath = path.resolve(packageRoot, 'entry.js');
 
   fs.ensureFileSync(pagesListPath);
   fs.writeFileSync(
@@ -67,4 +69,7 @@ module.exports = async ({
       2,
     ),
   );
+
+  fs.ensureFileSync(entryPath);
+  fs.writeFileSync(entryPath, getEntryPage(packages, rests));
 };

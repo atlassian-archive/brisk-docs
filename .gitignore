@@ -20,6 +20,7 @@ scratchings.js
 /packages/website/typings
 /packages/**/bundles
 /packages/**/**/yarn.lock
+/packages/website/entry.js
 
 dist
 out

@@ -16,3 +16,8 @@ All of these commands spawns a Next process which is handled inside of `packages
 to play around with any new changes. The output is generated inside the .next folder
 If you would like to clean everything and start from the beginning again do a `bolt clean` at the root and repeat the steps again.
 
+For P2B-39
+- Added index.html, client.js and entry.js(which is dynamically generated with Routes to all the pages in the website using react-router)
+- The logic for this entry.js creation is in `packages/website/src/bin/generate-entry-page.js`
+- Also added a webpack sample config also to check if the pages are build using the entry point.
+- In the initial commit webpack build fails for loading CSS and MDXTag which is not handled in the webpack.config

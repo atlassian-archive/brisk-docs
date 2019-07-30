@@ -33,7 +33,8 @@
     "bolt:fix": "bolt-check --fix",
     "generates": "bolt w @brisk-docs/website run generates",
     "parcel:dev": "bolt w @brisk-docs/website run parcel:dev",
-    "parcel:build":  "bolt w @brisk-docs/website run parcel:build"
+    "parcel:build":  "bolt w @brisk-docs/website run parcel:build",
+    "run:webpack": "bolt w @brisk-docs/website run run:webpack"
   },
   "bolt": {
     "version": "^0.23.2",
@@ -131,6 +132,8 @@
     "react-addons-text-content": "^0.0.4",
     "react-dom": "^16.8.4",
     "react-markdown": "^2.5.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "remark-frontmatter": "^1.3.2",
     "remark-parse": "^6.0.3",
     "resolve": "^1.10.0",
@@ -145,7 +148,9 @@
     "unified": "^7.1.0",
     "unist-util-visit": "^1.3.0",
     "wait-on": "^3.2.0",
-    "webpack": "4.28.4"
+    "webpack": "4.28.4",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
@@ -160,7 +165,6 @@
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-styled-components": "^1.10.0",
     "bolt": "^0.23.2",
-    "css-loader": "^1.0.0",
     "cypress": "^3.1.5",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
@@ -175,6 +179,7 @@
     "eslint-plugin-react": "^7.12.4",
     "extracted-loader": "^1.0.7",
     "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.1.0",
     "json-loader": "^0.5.7",
     "mock-fs": "^4.10.1",
