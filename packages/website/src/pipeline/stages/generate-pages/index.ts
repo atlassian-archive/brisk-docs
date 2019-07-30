@@ -1,14 +1,10 @@
 import createStage from '../make-pipline-stage';
-<<<<<<< HEAD
 import { PagesSpec, GenericPage } from '../common/page-specs';
 
-import {
-=======
 // @ts-ignore: Importing non-ts file with no definition
 const pageWriters = require('./page-writers');
 
 const {
->>>>>>> fba76ef64e4fd086afbb76e1fa7f440c2716e6b8
   generatePackageDocPage,
   generateProjectDocPage,
   generateDocsHomePage,
