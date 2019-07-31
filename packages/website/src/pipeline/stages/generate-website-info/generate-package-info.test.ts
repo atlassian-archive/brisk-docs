@@ -54,20 +54,20 @@ describe('Package website info generator', () => {
   it('processes the packages from groups and sets the parent field on the sitemap entries', () => {
     const { sitemap } = generatePackageInfo(mockData);
 
-    expect(sitemap).toHaveLength(3);
-
-    expect(sitemap[0]).toMatchObject({
-      packageId: 'package-1',
-      parentId: 'group-1',
-    });
-    expect(sitemap[1]).toMatchObject({
-      packageId: 'package-2',
-      parentId: 'group-2',
-    });
-    expect(sitemap[2]).toMatchObject({
-      packageId: 'package-3',
-      parentId: 'group-2',
-    });
+    expect(sitemap).toMatchObject([
+      {
+        packageId: 'package-1',
+        parentId: 'group-1',
+      },
+      {
+        packageId: 'package-2',
+        parentId: 'group-2',
+      },
+      {
+        packageId: 'package-3',
+        parentId: 'group-2',
+      },
+    ]);
   });
 
   it('outputs package metadata using custom package fields', () => {
@@ -236,13 +236,13 @@ describe('Package website info generator', () => {
     ];
     const { sitemap, pages } = generatePackageInfo(mockDataWithExamples);
 
-    expect(pages.examplesPages).toHaveLength(1);
-    expect(pages.examplesPages[0].websitePath).toEqual(
-      'packages/package-1/examples/example-1',
-    );
+    expect(pages.examplesPages).toMatchObject([
+      {
+        websitePath: 'packages/package-1/examples/example-1',
+      },
+    ]);
 
-    expect(sitemap[0].examples).toHaveLength(1);
-    expect(sitemap[0].examples[0].id).toEqual('example-1');
+    expect(sitemap[0].examples).toMatchObject([{ id: 'example-1' }]);
   });
 
   it('outputs package sub-examples', () => {
@@ -275,12 +275,15 @@ describe('Package website info generator', () => {
     ];
     const { sitemap, pages } = generatePackageInfo(mockDataWithExamples);
 
-    expect(pages.examplesPages).toHaveLength(1);
-    expect(pages.examplesPages[0].websitePath).toEqual(
-      'packages/package-1/subExamples/sub-examples-group-1/sub-example-1',
-    );
+    expect(pages.examplesPages).toMatchObject([
+      {
+        websitePath:
+          'packages/package-1/subExamples/sub-examples-group-1/sub-example-1',
+      },
+    ]);
 
-    expect(sitemap[0].subExamples).toHaveLength(1);
-    expect(sitemap[0].subExamples[0].id).toEqual('sub-examples-group-1');
+    expect(sitemap[0].subExamples).toMatchObject([
+      { id: 'sub-examples-group-1' },
+    ]);
   });
 });

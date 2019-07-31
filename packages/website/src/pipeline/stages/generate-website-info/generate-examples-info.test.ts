@@ -102,12 +102,11 @@ describe('Examples website info generator', () => {
       {},
     );
 
-    expect(pages.examplePages[0].websitePath).toEqual(
-      'website/examples/group-1/group-2/example-1',
-    );
-    expect(pages.examplePages[0].fullscreenExampleWebsitePath).toEqual(
-      'website/examples/group-1/group-2/isolated/example-1',
-    );
+    expect(pages.examplePages[0]).toMatchObject({
+      websitePath: 'website/examples/group-1/group-2/example-1',
+      fullscreenExampleWebsitePath:
+        'website/examples/group-1/group-2/isolated/example-1',
+    });
 
     expect(sitemap).toEqual([
       {

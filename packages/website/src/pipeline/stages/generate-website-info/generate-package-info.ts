@@ -43,7 +43,7 @@ interface PackageInfo {
 }
 
 export interface PackageGroup {
-  // An id for the group pf packages. Package groups are specified in the
+  // An id for the group of packages. Package groups are specified in the
   // website config as file patterns.
   groupId?: string;
   packages: PackageInfo[];

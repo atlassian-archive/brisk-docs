@@ -1,6 +1,6 @@
 import filenamify from 'filenamify';
 
-import createStage from '../make-pipline-stage';
+import createStage from '../make-pipeline-stage';
 import generatePackageInfo, {
   PackageSitemap,
   PackageGroup,
@@ -36,17 +36,17 @@ interface ProjectDocsSitemap {
 interface Sitemap {
   packages: PackageSitemap[];
   docs: ProjectDocsSitemap;
-  // data used by the readme nav
-  readme?: {
-    id: string;
-    pagePath: string;
-  }[];
 }
 
 export interface StageOutput {
   pages: PagesSpec;
   sitemap: Sitemap;
   packagesMeta: PackageMeta[];
+  // data used by the readme nav
+  readmePageData?: {
+    id: string;
+    pagePath: string;
+  }[];
 }
 
 export default createStage(
@@ -63,7 +63,7 @@ export default createStage(
     const projectDocPages: DocPage[] = [];
     const docsMainPages: GenericPage[] = [];
 
-    const readmeSitemap = [{ id: 'packages', pagePath: '/packages' }];
+    const readmePageData = [{ id: 'packages', pagePath: '/packages' }];
 
     projectDocs.forEach(({ name, websitePath, docs }) => {
       const docsKey = filenamify(
@@ -84,7 +84,7 @@ export default createStage(
       projectDocsHomePages.push(...docsInfo.pages.docsHomePages);
       projectDocPages.push(...docsInfo.pages.docsPages);
 
-      readmeSitemap.push({ id: docsKey, pagePath: `/${websitePath}` });
+      readmePageData.push({ id: docsKey, pagePath: `/${websitePath}` });
     });
 
     projectDocPages.push({
@@ -98,8 +98,8 @@ export default createStage(
       sitemap: {
         packages: packageInfo.sitemap,
         docs: projectDocsSitemap,
-        readme: readmeSitemap,
       },
+      readmePageData,
       packagesMeta: packageInfo.meta,
       pages: {
         packageHomePages: packageInfo.pages.packageHomePages,

@@ -1,4 +1,4 @@
-import createStage from '../make-pipline-stage';
+import createStage from '../make-pipeline-stage';
 import { PagesSpec, GenericPage } from '../common/page-specs';
 
 // @ts-ignore: Importing non-ts file with no definition

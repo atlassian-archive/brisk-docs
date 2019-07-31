@@ -102,18 +102,17 @@ describe('Docs tree info generator', () => {
       'docs-key',
     );
 
-    expect(pages.docsPages).toHaveLength(2);
-    expect(pages.docsPages[0].websitePath).toEqual('website/docs/doc-1/doc-2');
-    expect(pages.docsPages[1].websitePath).toEqual('website/docs/doc-1/doc-3');
+    expect(pages.docsPages).toMatchObject([
+      { websitePath: 'website/docs/doc-1/doc-2' },
+      { websitePath: 'website/docs/doc-1/doc-3' },
+    ]);
 
     const rootPage = sitemap[0];
-    expect(rootPage.children).toHaveLength(2);
-
     expect(rootPage.pagePath).toEqual('website/docs/doc-1');
-    // @ts-ignore children may be undefined
-    expect(rootPage.children[0].pagePath).toEqual('website/docs/doc-1/doc-2');
-    // @ts-ignore children may be undefined
-    expect(rootPage.children[1].pagePath).toEqual('website/docs/doc-1/doc-3');
+    expect(rootPage.children).toMatchObject([
+      { pagePath: 'website/docs/doc-1/doc-2' },
+      { pagePath: 'website/docs/doc-1/doc-3' },
+    ]);
   });
 
   it('Creates a docs home page for every level of docs nesting', () => {

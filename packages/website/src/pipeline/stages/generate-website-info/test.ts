@@ -12,7 +12,7 @@ describe('Generate website info build stage', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('generates a root readme page and required data in the sitemap', async () => {
+  it('generates a root readme page and required data in the output', async () => {
     const output = await generateWebsiteInfoStage({
       packages: [],
       projectDocs: projectDocsData,
@@ -26,7 +26,7 @@ describe('Generate website info build stage', () => {
       meta: { data: 'readme' },
     });
 
-    expect(output.sitemap.readme).toEqual([
+    expect(output.readmePageData).toEqual([
       { id: 'packages', pagePath: '/packages' },
       { id: 'helpful-guides', pagePath: '/docs/guides' },
     ]);

@@ -1,5 +1,5 @@
 import { PerformanceObserver } from 'perf_hooks';
-import createStage from './make-pipline-stage';
+import createStage from './make-pipeline-stage';
 
 describe('Pipeline stage generator', () => {
   it('creates a run property from the given function', async () => {

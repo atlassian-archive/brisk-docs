@@ -200,6 +200,16 @@ Object {
       },
     ],
   },
+  "readmePageData": Array [
+    Object {
+      "id": "packages",
+      "pagePath": "/packages",
+    },
+    Object {
+      "id": "helpful-guides",
+      "pagePath": "/docs/guides",
+    },
+  ],
   "sitemap": Object {
     "docs": Object {
       "helpful-guides": Array [
@@ -287,16 +297,6 @@ Object {
             "id": "sub-examples-group-1",
           },
         ],
-      },
-    ],
-    "readme": Array [
-      Object {
-        "id": "packages",
-        "pagePath": "/packages",
-      },
-      Object {
-        "id": "helpful-guides",
-        "pagePath": "/docs/guides",
       },
     ],
   },
