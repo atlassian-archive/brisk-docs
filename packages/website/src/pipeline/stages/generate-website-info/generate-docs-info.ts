@@ -68,7 +68,7 @@ const generateDocsInfo = (
       // in the tree. Otherwise, create a home page to act as the index.
       const isReadme = (docsNode: DocsTreeNode): boolean =>
         !isDocsGroup(docsNode) &&
-        path.basename(docsNode.markdownPath) === 'readme.md';
+        path.basename(docsNode.markdownPath).toLowerCase() === 'readme.md';
 
       const readme = doc.children.find(isReadme);
       const childDocs = doc.children.filter(c => !isReadme(c));
