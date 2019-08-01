@@ -257,13 +257,11 @@ export default () => (
 
 exports[`Generate pages package pages generation creates examples pages for each package 2`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example1')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -281,20 +279,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 3`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example2')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -312,20 +306,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 4`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example3')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -343,9 +333,7 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 5`] = `
@@ -359,13 +347,11 @@ export default () => (
 
 exports[`Generate pages package pages generation creates examples pages for each package 6`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example1')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -383,20 +369,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 7`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example2')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -414,20 +396,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 8`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example3')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -445,9 +423,7 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 9`] = `
@@ -461,13 +437,11 @@ export default () => (
 
 exports[`Generate pages package pages generation creates examples pages for each package 10`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example1')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -485,20 +459,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 11`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example2')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -516,20 +486,16 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 12`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example3')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -547,9 +513,7 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
 `;
 
 exports[`Generate readme page at the root level creates a readme page for the root level file 1`] = `

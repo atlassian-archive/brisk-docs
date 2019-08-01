@@ -2,13 +2,11 @@
 
 exports[`Page templates creates js for a package example pages 1`] = `
 "import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../example';
 import Wrapper from '../wrappers/package-example';
+import * as Components from '../example';
 
-const DynamicComponent = dynamic(import('../example')
-.then(Components => {
-return () => ( 
+export default () => ( 
 <Wrapper data={{\\"pageTitle\\":\\"\\"}} fileContents={fileContents}>
       {
         [{ 
@@ -26,7 +24,5 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>"
+  );"
 `;

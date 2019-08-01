@@ -15,7 +15,7 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
   configPath,
 );
 
-let babelConfig = {
+let babelConfigNext = {
   presets: ['next/babel', '@zeit/next-typescript/babel'],
   plugins: [
     'emotion',
@@ -42,10 +42,10 @@ if (
   clientBabelConfig &&
   fse.existsSync(path.resolve(cwd, clientBabelConfig))
 ) {
-  babelConfig.extends = path.resolve(cwd, clientBabelConfig);
+  babelConfigNext.extends = path.resolve(cwd, clientBabelConfig);
 } else if (loadBabel) {
   // option to pass the required babel configs as function suppose the above scenario is not supported for a consumer.
-  babelConfig = loadBabel(babelConfig);
+  babelConfigNext = loadBabel(babelConfigNext);
 }
 
-module.exports = babelConfig;
+module.exports = babelConfigNext;

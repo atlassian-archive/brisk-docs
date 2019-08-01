@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 import titleCase from 'title-case';
 import PackageHomeWrapper, { Description } from './package-home';
 import { PageStatusContext } from '../common/page-status-context';
@@ -58,9 +59,11 @@ describe('package home wrapper component', () => {
       repository: { url: 'git.url' },
     };
     const wrapper = mount(
-      <PackageHomeWrapper data={pkgData}>
-        <div>Hello</div>
-      </PackageHomeWrapper>,
+      <Router>
+        <PackageHomeWrapper data={pkgData}>
+          <div>Hello</div>
+        </PackageHomeWrapper>
+      </Router>,
     );
 
     const linkButtons = wrapper.find('LinkButton');

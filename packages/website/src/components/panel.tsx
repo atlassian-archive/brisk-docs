@@ -94,6 +94,7 @@ export type Props = {
 };
 
 const Panel = ({
+  // passHref
   href,
   ExternalIconComponent,
   IconComponent,
@@ -102,7 +103,7 @@ const Panel = ({
   description,
   imgSrc,
 }: Props) => (
-  <PanelLink href={href} passHref includeShortcutIcon={false}>
+  <PanelLink href={href} includeShortcutIcon={false}>
     {(isExternal: boolean) => (
       <>
         <PanelHeader>

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
@@ -89,9 +89,7 @@ const renderRow = ({
         key: packageId,
         content: (
           <RowCell>
-            <Link href={homePath}>
-              <a>{display}</a>
-            </Link>
+            <Link to={homePath}>{display}</Link>
           </RowCell>
         ),
       },

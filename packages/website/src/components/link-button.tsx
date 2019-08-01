@@ -9,7 +9,7 @@ the options available to you.
 import * as React from 'react';
 
 import Button from '@atlaskit/button';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 /** Note: Render components need to be defined standalone. Defining them inline will create a
  * new function reference each time and cause re-mounts on each render. */
@@ -21,8 +21,8 @@ const LinkButtonRenderComponent = ({
   href: string;
   children: React.ReactNode;
 }) => (
-  <Link href={href}>
-    <a {...rest}>{children}</a>
+  <Link to={href} {...rest}>
+    {children}
   </Link>
 );
 

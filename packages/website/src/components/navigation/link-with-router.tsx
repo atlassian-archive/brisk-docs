@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter } from 'next/router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Item } from '@atlaskit/navigation-next';
 import { colors } from '@atlaskit/theme';
 
@@ -11,9 +11,7 @@ export type Props = {
   text: string;
   href: string;
   id?: string;
-  router: {
-    pathname: string;
-  };
+  router: RouteComponentProps<any>;
   isHeading?: boolean;
 };
 
@@ -34,9 +32,10 @@ const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
     })}
     text={text}
     href={href}
-    isSelected={router.pathname === href}
+    isSelected={router.location.pathname === href}
     component={LinkComponent}
   />
 );
 
+// @ts-ignore
 export default withRouter(LinkWithRouter);
