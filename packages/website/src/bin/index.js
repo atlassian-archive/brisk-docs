@@ -26,7 +26,7 @@ const handleError = err => {
 
 switch (mainOptions.command) {
   case 'dev': {
-    dev(options.config).catch(handleError);
+    dev(options.config, options.port).catch(handleError);
     break;
   }
   case 'build': {

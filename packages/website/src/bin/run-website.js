@@ -3,6 +3,7 @@ const path = require('path');
 
 const handleConfig = require('./handle-config');
 const generatePages = require('./generate-pages');
+const createParcelServer = require('./parcel-server');
 
 const cwd = process.cwd();
 const staticRoot = path.resolve(__dirname, '..', '..', 'static');
@@ -17,10 +18,17 @@ const prepare = async configPath => {
   const config = handleConfig(cwd, configPath);
   await loadFavicon(config);
   await generatePages(config);
+  return config;
 };
 
-const dev = async () => {
-  throw new Error('not implemented');
+const dev = async (configPath, port) => {
+  const { packagesPaths } = await prepare(configPath);
+  return createParcelServer({
+    port,
+    staticRoot,
+    packagesPaths,
+    pagesRoot: path.resolve(cwd, 'pages'),
+  });
 };
 
 const build = async () => {
