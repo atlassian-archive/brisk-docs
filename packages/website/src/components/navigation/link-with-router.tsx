@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Item } from '@atlaskit/navigation-next';
 import { colors } from '@atlaskit/theme';
@@ -7,15 +7,17 @@ import LinkComponent from './link-component';
 
 // TODO TSFix - find out if we can actually get the prop types of withRouter
 // here instead of defining our own
-export type Props = {
+export type Props = RouteComponentProps & {
   text: string;
   href: string;
   id?: string;
-  router: RouteComponentProps<any>;
+  // router: {
+  //   pathname: string;
+  // };
   isHeading?: boolean;
 };
 
-const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
+const LinkWithRouter = ({ text, href, location, isHeading }: Props) => (
   <Item
     // @ts-ignore
     styles={styles => ({
@@ -32,10 +34,9 @@ const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
     })}
     text={text}
     href={href}
-    isSelected={router.location.pathname === href}
+    isSelected={location.pathname === href}
     component={LinkComponent}
   />
 );
 
-// @ts-ignore
 export default withRouter(LinkWithRouter);

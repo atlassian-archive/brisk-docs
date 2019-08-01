@@ -1,6 +1,6 @@
 // Component that can be used as the component prop in nav items
 
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export type Props = {
