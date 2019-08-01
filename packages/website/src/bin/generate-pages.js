@@ -42,9 +42,9 @@ module.exports = async ({
     readMePath,
   );
 
-  console.log("Number of packages: ", pagesList.packages.length);
-
   const { packages, metaData, ...rests } = pagesList;
+
+  console.log('Numer of packages: ', packages.length);
 
   const readMe =
     pagesList.readme.length > 0
