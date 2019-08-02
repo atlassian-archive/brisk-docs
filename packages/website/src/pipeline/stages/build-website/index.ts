@@ -1,4 +1,4 @@
-import createStage from '../make-pipline-stage';
+import createStage from '../make-pipeline-stage';
 
 interface StageInput {}
 

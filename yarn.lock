@@ -2435,6 +2435,18 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
+"@types/lodash.flatmap@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.flatmap/-/lodash.flatmap-4.5.6.tgz#5f1ea80cebe403f0fbfcc1b5ad75cd09dd8b5785"
+  integrity sha512-ELNrUL9q+MB7AACaHivWIsKDFDgYhHE3/svXhqvDJgONtn2c467Cy87nEb7CEDvfaGCPv91lPaW596I8s5oiNQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.136"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.136.tgz#413e85089046b865d960c9ff1d400e04c31ab60f"
+  integrity sha512-0GJhzBdvsW2RUccNHOBkabI8HZVdOXmXbXhuKlDEd5Vv12P7oAVGfomGp3Ne21o5D/qu1WmthlNKFaoZJJeErA==
+
 "@types/lodash@4.14.87":
   version "4.14.87"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
@@ -9136,7 +9148,7 @@ lodash.escape@^4.0.1:
 
 lodash.flatmap@^4.5.0:
   version "4.5.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/lodash.flatmap/-/lodash.flatmap-4.5.0.tgz#ef8cbf408f6e48268663345305c6acc0b778702e"
+  resolved "https://registry.yarnpkg.com/lodash.flatmap/-/lodash.flatmap-4.5.0.tgz#ef8cbf408f6e48268663345305c6acc0b778702e"
   integrity sha1-74y/QI9uSCaGYzRTBcaswLd4cC4=
 
 lodash.flattendeep@^4.4.0:
