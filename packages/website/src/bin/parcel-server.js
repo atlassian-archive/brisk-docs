@@ -56,6 +56,7 @@ module.exports = async function createParcelServer({
     const pagePath = await resolve(pagesRoot, req.url);
     if (pagePath == null) {
       res.sendStatus(404);
+      return;
     }
 
     let bundlePaths = pageToBundles.get(pagePath);
