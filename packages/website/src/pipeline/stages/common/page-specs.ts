@@ -13,7 +13,7 @@ export interface DocPage {
   // The path this page should appear at in the finished website
   websitePath: string;
   // An absolute path to the location of the user generated markdown content
-  markdownPath: string;
+  markdownPath?: string;
   // Additional data used by the page
   pageData: object;
   // Metadata about the page

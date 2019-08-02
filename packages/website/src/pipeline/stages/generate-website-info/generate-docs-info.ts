@@ -1,26 +1,7 @@
 import path from 'path';
 
 import { DocPage, GenericPage } from '../common/page-specs';
-
-export interface DocsItem {
-  // Id of the root page in the tree
-  id: string;
-  // Metadata about the doc page
-  meta: object;
-  // Absolute path to the user generated markdown for this doc
-  markdownPath: string;
-}
-
-export interface DocsGroup {
-  // Id of the root page in the tree
-  id: string;
-  // Metadata about the doc page
-  meta: object;
-  // Child docs from this docs item
-  children: DocsTreeNode[];
-}
-
-export type DocsTreeNode = DocsGroup | DocsItem;
+import { DocsGroup, DocsItem, DocsTreeNode } from '../common/project-info';
 
 export interface DocsSitemapEntry {
   // id of the root page in the sitemap entry

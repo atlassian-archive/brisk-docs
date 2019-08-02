@@ -1,32 +1,18 @@
 import filenamify from 'filenamify';
 
 import createStage from '../make-pipeline-stage';
-import generatePackageInfo, {
-  PackageSitemap,
-  PackageGroup,
-  PackageMeta,
-} from './generate-package-info';
+import generatePackageInfo, { PackageMeta, PackageSitemap } from './generate-package-info';
 import { DocPage, GenericPage, PagesSpec } from '../common/page-specs';
-import generateDocsInfo, {
-  DocsSitemapEntry,
-  DocsTreeNode,
-} from './generate-docs-info';
-
-// A group of docs to be shown on the top level of the website
-export interface ProjectDocsSection {
-  name: string;
-  docs: DocsTreeNode[];
-  // User configurable path for where this group of docs should live on the website
-  websitePath: string;
-}
+import generateDocsInfo, { DocsSitemapEntry } from './generate-docs-info';
+import { PackageInfo, ProjectDocsSection } from '../common/project-info';
 
 export interface StageInput {
   // A list of packages to create pages for, segmented into groups
-  packages: PackageGroup[];
+  packages: PackageInfo[];
   // sections of docs
   projectDocs: ProjectDocsSection[];
   // Absolute path to the project's README
-  readmePath: string;
+  readmePath?: string;
 }
 
 interface ProjectDocsSitemap {

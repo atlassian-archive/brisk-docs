@@ -1,4 +1,5 @@
-import generateDocsInfo, { DocsTreeNode } from './generate-docs-info';
+import generateDocsInfo from './generate-docs-info';
+import { DocsTreeNode } from '../common/project-info';
 
 describe('Docs tree info generator', () => {
   it('Creates page specs for input docs and adds them to the sitemap', () => {

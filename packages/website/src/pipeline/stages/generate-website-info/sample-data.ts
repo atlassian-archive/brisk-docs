@@ -1,68 +1,62 @@
-import { PackageGroup } from './generate-package-info';
-import { ProjectDocsSection } from './index';
 
-export const singlePackageData: PackageGroup[] = [
+import { PackageInfo, ProjectDocsSection } from '../common/project-info';
+
+export const singlePackageData: PackageInfo[] = [
   {
-    packages: [
+    id: 'package-1',
+    name: 'package one',
+    changelogPath: '/content/packages/package-1/CHANGELOG.md',
+    readmePath: '/content/packages/package-1',
+    readmeMeta: {
+      labels: ['important', 'must-read'],
+    },
+    packageFields: {
+      author: 'Jane Austen',
+    },
+    docs: [
       {
-        id: 'package-1',
-        name: 'package one',
-        changelogPath: '/content/packages/package-1/CHANGELOG.md',
-        readmePath: '/content/packages/package-1',
-        readmeMeta: {
-          labels: ['important', 'must-read'],
-        },
-        customPackageFields: {
-          author: 'Jane Austen',
-        },
-        docs: [
+        id: 'docs-subject-1',
+        meta: {},
+        children: [
           {
-            id: 'docs-subject-1',
-            meta: {},
-            children: [
-              {
-                id: 'doc-1',
-                meta: {
-                  outdated: true,
-                },
-                markdownPath:
-                  '/content/packages/package-1/docs/docs-subject-1/doc-1.md',
-              },
-            ],
-          },
-          {
-            id: 'doc-2',
-            meta: {},
-            markdownPath: '/content/packages/package-1/docs/doc-2.md',
+            id: 'doc-1',
+            meta: {
+              outdated: true,
+            },
+            markdownPath:
+              '/content/packages/package-1/docs/docs-subject-1/doc-1.md',
           },
         ],
-        examples: [
+      },
+      {
+        id: 'doc-2',
+        meta: {},
+        markdownPath: '/content/packages/package-1/docs/doc-2.md',
+      },
+    ],
+    examples: [
+      {
+        id: 'example-1',
+        exampleModulePath: '/content/packages/package-1/examples/example-1.js',
+      },
+      {
+        id: 'example-2',
+        exampleModulePath: '/content/packages/package-1/examples/example-2.js',
+      },
+    ],
+    subExamples: [
+      {
+        id: 'sub-example-1',
+        exampleModulePath:
+          '/content/packages/package-1/src/examples/sub-example-1.js',
+      },
+      {
+        id: 'sub-examples-group-1',
+        children: [
           {
-            id: 'example-1',
+            id: 'sub-example-2',
             exampleModulePath:
-              '/content/packages/package-1/examples/example-1.js',
-          },
-          {
-            id: 'example-2',
-            exampleModulePath:
-              '/content/packages/package-1/examples/example-2.js',
-          },
-        ],
-        subExamples: [
-          {
-            id: 'sub-example-1',
-            exampleModulePath:
-              '/content/packages/package-1/src/examples/sub-example-1.js',
-          },
-          {
-            id: 'sub-examples-group-1',
-            children: [
-              {
-                id: 'sub-example-2',
-                exampleModulePath:
-                  '/content/packages/package-1/src/examples/sub-examples-group-1/sub-example-2.js',
-              },
-            ],
+              '/content/packages/package-1/src/examples/sub-examples-group-1/sub-example-2.js',
           },
         ],
       },
