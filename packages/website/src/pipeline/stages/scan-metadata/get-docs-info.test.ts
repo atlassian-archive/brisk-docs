@@ -59,11 +59,14 @@ describe('Get docs info utility', () => {
     expect(docsInfo![2].meta).toEqual({ title: 'Doc 3' });
 
     // nested docs
+    // @ts-ignore
     expect(docsInfo![2].children[0].meta).toEqual({
       title: 'Doc 3 1',
       readingTime: '1 second',
     });
+    // @ts-ignore
     expect(docsInfo![2].children[1].meta).toEqual({ title: 'Doc 3 2' });
+    // @ts-ignore
     expect(docsInfo![2].children[1].children[0].meta).toEqual({
       title: 'Doc 3 2 1',
       usefulness: 'yes',
@@ -170,6 +173,7 @@ describe('Custom doc sorting', () => {
   });
 
   it('sorts nested doc-3-2 before doc-3-1', () => {
+    // @ts-ignore
     const docs3Children = docsInfo![2].children;
     expect(docs3Children[0]).toMatchObject({
       id: 'doc-3-2',

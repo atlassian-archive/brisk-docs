@@ -91,6 +91,7 @@
     "@types/js-yaml": "^3.12.1",
     "@types/lodash": "^4.14.123",
     "@types/lodash.flatten": "^4.4.6",
+    "@types/mock-fs": "^3.6.30",
     "@types/next": "^8.0.3",
     "@types/prismjs": "^1.16.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
