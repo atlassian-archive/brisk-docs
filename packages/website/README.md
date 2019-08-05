@@ -20,7 +20,7 @@ npm run brisk dev
 To produce a static build of the website that can be statically hosted:
 
 ```shell
-npm run brisk build && npm run brisk export:
+npm run brisk build && npm run brisk export
 ```
 
 ## Organising your documentation
