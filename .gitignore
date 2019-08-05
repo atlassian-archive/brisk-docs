@@ -14,6 +14,8 @@ yarn-error.log
 scratchings.js
 
 /packages/website/pages
+/packages/website/pages-next
+
 
 /packages/website/data
 /packages/website/static/favicon.ico

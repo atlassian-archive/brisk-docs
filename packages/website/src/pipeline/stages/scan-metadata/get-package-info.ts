@@ -34,6 +34,7 @@ const getPackagesFromPatterns = async (
   // find all packages that aren't inside node_modules
   const foundPackages = await Promise.all(
     matchedPaths.map(async dirPath => {
+      console.log(dirPath);
       const stats = await fs.stat(dirPath);
       if (stats.isDirectory() && !dirPath.includes('node_modules')) {
         const pkgJSONPath = path.resolve(dirPath, 'package.json');
@@ -153,8 +154,9 @@ const getSubExamplesInPackage = async (
       async (fName): Promise<ExampleTreeNode | null> => {
         const dir = path.resolve(packagePath, fName);
         const stats = await fs.stat(dir);
-        // find all directories in the project except the top level examples
-        if (stats.isDirectory() && path.basename(dir) !== 'examples') {
+        // find all directories in the project except the top level examples and node_modules
+        const excludedDirs = ['examples', 'node_modules'];
+        if (stats.isDirectory() && !excludedDirs.includes(path.basename(dir))) {
           return getNestedExamples(dir);
         }
 
