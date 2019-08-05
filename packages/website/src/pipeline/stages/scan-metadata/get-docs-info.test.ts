@@ -103,7 +103,13 @@ describe('docs-with-readmes', () => {
           children: [
             {
               id: 'README',
-              markdownPath: path.join(cwd, 'docs', 'doc-3', 'doc-3-2', 'README.md'),
+              markdownPath: path.join(
+                cwd,
+                'docs',
+                'doc-3',
+                'doc-3-2',
+                'README.md',
+              ),
             },
           ],
         },

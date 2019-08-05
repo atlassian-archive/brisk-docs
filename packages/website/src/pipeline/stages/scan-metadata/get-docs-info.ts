@@ -47,9 +47,7 @@ const sortDirectory = (processedDir: DocsTreeNode[], dirPath: string) => {
   }
 };
 
-const processDirectory = (
-  dirPath: string,
-): DocsTreeNode[] | null => {
+const processDirectory = (dirPath: string): DocsTreeNode[] | null => {
   if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
     return null;
   }

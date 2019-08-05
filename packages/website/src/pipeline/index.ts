@@ -9,11 +9,9 @@ export default () => {
     rootPath: '',
     packagePathPatterns: [],
     customPackageFields: [],
-    docs: []
+    docs: [],
   })
-    .then((projectData) =>
-      generateWebsiteInfo(projectData),
-    )
+    .then(projectData => generateWebsiteInfo(projectData))
     .then(websiteInfo =>
       generatePages({
         wrappersPath: '',

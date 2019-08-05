@@ -1,7 +1,10 @@
 import filenamify from 'filenamify';
 
 import createStage from '../make-pipeline-stage';
-import generatePackageInfo, { PackageMeta, PackageSitemap } from './generate-package-info';
+import generatePackageInfo, {
+  PackageMeta,
+  PackageSitemap,
+} from './generate-package-info';
 import { DocPage, GenericPage, PagesSpec } from '../common/page-specs';
 import generateDocsInfo, { DocsSitemapEntry } from './generate-docs-info';
 import { PackageInfo, ProjectDocsSection } from '../common/project-info';

@@ -1,4 +1,3 @@
-
 import { PackageInfo, ProjectDocsSection } from '../common/project-info';
 
 export const singlePackageData: PackageInfo[] = [

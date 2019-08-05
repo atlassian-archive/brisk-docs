@@ -1,10 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import createStage from '../make-pipeline-stage';
-import {
-  PackageInfo,
-  ProjectDocsSection,
-} from '../common/project-info';
+import { PackageInfo, ProjectDocsSection } from '../common/project-info';
 
 import getPackageInfo from './get-package-info';
 import getDocsInfo from './get-docs-info';
