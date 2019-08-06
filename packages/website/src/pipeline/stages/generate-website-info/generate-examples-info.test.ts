@@ -1,7 +1,5 @@
-import generateExamplesInfo, {
-  ExampleItem,
-  ExampleTreeNode,
-} from './generate-examples-info';
+import generateExamplesInfo from './generate-examples-info';
+import { ExampleItem, ExampleTreeNode } from '../common/project-info';
 
 describe('Examples website info generator', () => {
   it('creates example pages and adds them to the sitemap', () => {

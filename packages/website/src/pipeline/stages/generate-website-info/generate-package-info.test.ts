@@ -1,52 +1,35 @@
-import generatePackageInfo, { PackageGroup } from './generate-package-info';
+import generatePackageInfo from './generate-package-info';
+import { PackageInfo } from '../common/project-info';
 
-const mockData: PackageGroup[] = [
+const mockData: PackageInfo[] = [
   {
-    groupId: 'group-1',
-    packages: [
-      {
-        id: 'package-1',
-        name: 'Package One',
-        customPackageFields: {
-          customField1: 'foo',
-          customField2: 'bar',
-        },
-        readmePath: '/content/packages/package-1/README.md',
-        readmeMeta: {
-          metaField1: 'baz',
-        },
-        packageTitle: 'Package 1 title',
-        changelogPath: '/content/packages/package-1/CHANGELOG.md',
-        docs: [],
-        examples: [],
-        subExamples: [],
-      },
-    ],
+    id: 'package-1',
+    parentId: 'group-1',
+    name: 'Package One',
+    packageFields: {
+      customField1: 'foo',
+      customField2: 'bar',
+    },
+    readmePath: '/content/packages/package-1/README.md',
+    readmeMeta: {
+      metaField1: 'baz',
+    },
+    packageTitle: 'Package 1 title',
+    changelogPath: '/content/packages/package-1/CHANGELOG.md',
+    docs: [],
+    examples: [],
+    subExamples: [],
   },
+
   {
-    groupId: 'group-2',
-    packages: [
-      {
-        id: 'package-2',
-        name: 'Package Two',
-        customPackageFields: {},
-        readmePath: '/content/packages/package-2/README.md',
-        readmeMeta: {},
-        docs: [],
-        examples: [],
-        subExamples: [],
-      },
-      {
-        id: 'package-3',
-        name: 'Package Three',
-        customPackageFields: {},
-        readmePath: '/content/packages/package-3/README.md',
-        readmeMeta: {},
-        docs: [],
-        examples: [],
-        subExamples: [],
-      },
-    ],
+    id: 'package-2',
+    name: 'Package Two',
+    packageFields: {},
+    readmePath: '/content/packages/package-2/README.md',
+    readmeMeta: {},
+    docs: [],
+    examples: [],
+    subExamples: [],
   },
 ];
 
@@ -61,11 +44,7 @@ describe('Package website info generator', () => {
       },
       {
         packageId: 'package-2',
-        parentId: 'group-2',
-      },
-      {
-        packageId: 'package-3',
-        parentId: 'group-2',
+        parentId: undefined,
       },
     ]);
   });
@@ -73,7 +52,7 @@ describe('Package website info generator', () => {
   it('outputs package metadata using custom package fields', () => {
     const { meta } = generatePackageInfo(mockData);
 
-    expect(meta).toHaveLength(3);
+    expect(meta).toHaveLength(2);
 
     expect(meta[0]).toEqual({
       id: 'package-1',
@@ -99,7 +78,7 @@ describe('Package website info generator', () => {
 
     expect(sitemap[0].homePath).toEqual('/packages/package-1');
 
-    expect(pages.packageHomePages).toHaveLength(3);
+    expect(pages.packageHomePages).toHaveLength(2);
     expect(pages.packageHomePages).toContainEqual({
       websitePath: 'packages/package-1',
       markdownPath: '/content/packages/package-1/README.md',
@@ -136,7 +115,7 @@ describe('Package website info generator', () => {
 
     expect(sitemap[0].docPath).toEqual('/packages/package-1/docs');
 
-    expect(pages.docsHomePages).toHaveLength(3);
+    expect(pages.docsHomePages).toHaveLength(2);
     expect(pages.docsHomePages[0]).toEqual({
       websitePath: 'packages/package-1/docs',
       pageData: {
@@ -152,7 +131,7 @@ describe('Package website info generator', () => {
 
     expect(sitemap[0].examplePath).toEqual('/packages/package-1/examples');
 
-    expect(pages.examplesHomePages).toHaveLength(3);
+    expect(pages.examplesHomePages).toHaveLength(2);
     expect(pages.examplesHomePages[0]).toEqual({
       websitePath: 'packages/package-1/examples',
       pageData: {
@@ -166,27 +145,22 @@ describe('Package website info generator', () => {
   it('processes docs website information', () => {
     const mockDataWithDocs = [
       {
-        groupId: 'group-1',
-        packages: [
+        id: 'package-1',
+        name: 'Package One',
+        packageFields: {},
+        readmePath: '/content/packages/package-1/README.md',
+        readmeMeta: {},
+        examples: [],
+        subExamples: [],
+        docs: [
           {
-            id: 'package-1',
-            name: 'Package One',
-            customPackageFields: {},
-            readmePath: '/content/packages/package-1/README.md',
-            readmeMeta: {},
-            examples: [],
-            subExamples: [],
-            docs: [
+            id: 'doc-home-1',
+            meta: {},
+            children: [
               {
-                id: 'doc-home-1',
+                id: 'doc-1',
                 meta: {},
-                children: [
-                  {
-                    id: 'doc-1',
-                    meta: {},
-                    markdownPath: 'content/markdown-1.md',
-                  },
-                ],
+                markdownPath: 'content/markdown-1.md',
               },
             ],
           },
@@ -214,24 +188,19 @@ describe('Package website info generator', () => {
   it('outputs top level examples', () => {
     const mockDataWithExamples = [
       {
-        groupId: 'group-1',
-        packages: [
+        id: 'package-1',
+        name: 'Package One',
+        packageFields: {},
+        readmePath: '/content/packages/package-1/README.md',
+        readmeMeta: {},
+        docs: [],
+        examples: [
           {
-            id: 'package-1',
-            name: 'Package One',
-            customPackageFields: {},
-            readmePath: '/content/packages/package-1/README.md',
-            readmeMeta: {},
-            docs: [],
-            examples: [
-              {
-                id: 'example-1',
-                exampleModulePath: 'content/example-1.js',
-              },
-            ],
-            subExamples: [],
+            id: 'example-1',
+            exampleModulePath: 'content/example-1.js',
           },
         ],
+        subExamples: [],
       },
     ];
     const { sitemap, pages } = generatePackageInfo(mockDataWithExamples);
@@ -248,25 +217,20 @@ describe('Package website info generator', () => {
   it('outputs package sub-examples', () => {
     const mockDataWithExamples = [
       {
-        groupId: 'group-1',
-        packages: [
+        id: 'package-1',
+        name: 'Package One',
+        packageFields: {},
+        readmePath: '/content/packages/package-1/README.md',
+        readmeMeta: {},
+        docs: [],
+        examples: [],
+        subExamples: [
           {
-            id: 'package-1',
-            name: 'Package One',
-            customPackageFields: {},
-            readmePath: '/content/packages/package-1/README.md',
-            readmeMeta: {},
-            docs: [],
-            examples: [],
-            subExamples: [
+            id: 'sub-examples-group-1',
+            children: [
               {
-                id: 'sub-examples-group-1',
-                children: [
-                  {
-                    id: 'sub-example-1',
-                    exampleModulePath: 'content/sub-example-1.js',
-                  },
-                ],
+                id: 'sub-example-1',
+                exampleModulePath: 'content/sub-example-1.js',
               },
             ],
           },

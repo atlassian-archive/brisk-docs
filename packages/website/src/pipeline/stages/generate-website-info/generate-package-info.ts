@@ -8,46 +8,13 @@ import {
   GenericPage,
 } from '../common/page-specs';
 
-import generateDocsInfo, {
-  DocsTreeNode,
-  DocsSitemapEntry,
-} from './generate-docs-info';
+import generateDocsInfo, { DocsSitemapEntry } from './generate-docs-info';
 
 import generateExamplesInfo, {
-  ExampleItem,
-  ExampleTreeNode,
   ExampleSitemapEntry,
 } from './generate-examples-info';
 
-interface PackageInfo {
-  id: string;
-  name: string;
-  // Extra package.json fields to display
-  customPackageFields: {
-    [field: string]: any;
-  };
-  // Absolute path to the README of the package
-  readmePath: string;
-  // Metdata extracted from the README frontmatter
-  readmeMeta: object;
-  // Display name for the package. This can be removed during Links refactor.
-  packageTitle?: string;
-  // Absolute path to the changelog for the package
-  changelogPath?: string;
-  // Nested docs for this package
-  docs: DocsTreeNode[];
-  // Top level examples for this package
-  examples: ExampleItem[];
-  // Tree of inner package examples
-  subExamples: ExampleTreeNode[];
-}
-
-export interface PackageGroup {
-  // An id for the group of packages. Package groups are specified in the
-  // website config as file patterns.
-  groupId?: string;
-  packages: PackageInfo[];
-}
+import { PackageInfo } from '../common/project-info';
 
 // A structure representing the content in the website about a single package
 export interface PackageSitemap {
@@ -80,7 +47,6 @@ export interface PackageMeta {
  */
 const generatePackageInfo = (
   pkg: PackageInfo,
-  groupId?: string,
 ): {
   sitemap: PackageSitemap;
   meta: PackageMeta;
@@ -98,8 +64,8 @@ const generatePackageInfo = (
 
   const meta = {
     id: pkg.id,
-    customPackageFields: Object.keys(pkg.customPackageFields),
-    ...pkg.customPackageFields,
+    customPackageFields: Object.keys(pkg.packageFields),
+    ...pkg.packageFields,
   };
 
   const homePath = path.join('packages', pkg.id);
@@ -108,8 +74,8 @@ const generatePackageInfo = (
     markdownPath: pkg.readmePath,
     pageData: {
       ...pageData,
-      ...pkg.customPackageFields,
-      customPackageFields: Object.keys(pkg.customPackageFields),
+      ...pkg.packageFields,
+      customPackageFields: Object.keys(pkg.packageFields),
     },
     meta: { title: titleCase(pkg.id) },
   };
@@ -168,7 +134,7 @@ const generatePackageInfo = (
   examplePages.push(...subExamplesInfo.pages.examplePages);
 
   const sitemap: PackageSitemap = {
-    parentId: groupId,
+    parentId: pkg.parentId,
     packageId: pkg.id,
     homePath: path.join('/', homePath),
     homeMeta: pkg.readmeMeta,
@@ -203,7 +169,7 @@ interface PackagePages {
 }
 
 export default (
-  packageGroups: PackageGroup[],
+  packages: PackageInfo[],
 ): { sitemap: PackageSitemap[]; meta: PackageMeta[]; pages: PackagePages } => {
   const pages: PackagePages = {
     packageHomePages: [],
@@ -218,23 +184,21 @@ export default (
   const meta: PackageMeta[] = [];
 
   // Flatten the website info from all the packages
-  packageGroups.forEach(({ groupId, packages }) => {
-    packages.forEach(pkg => {
-      const packageInfo = generatePackageInfo(pkg, groupId);
+  packages.forEach(pkg => {
+    const packageInfo = generatePackageInfo(pkg);
 
-      sitemap.push(packageInfo.sitemap);
-      meta.push(packageInfo.meta);
+    sitemap.push(packageInfo.sitemap);
+    meta.push(packageInfo.meta);
 
-      pages.examplesHomePages.push(packageInfo.pages.examplesHomePage);
-      pages.docsPages.push(...packageInfo.pages.docsPages);
-      pages.docsHomePages.push(...packageInfo.pages.docsHomePages);
-      pages.packageHomePages.push(packageInfo.pages.homePage);
-      pages.examplesPages.push(...packageInfo.pages.examplePages);
+    pages.examplesHomePages.push(packageInfo.pages.examplesHomePage);
+    pages.docsPages.push(...packageInfo.pages.docsPages);
+    pages.docsHomePages.push(...packageInfo.pages.docsHomePages);
+    pages.packageHomePages.push(packageInfo.pages.homePage);
+    pages.examplesPages.push(...packageInfo.pages.examplePages);
 
-      if (packageInfo.pages.changelogPage) {
-        pages.changelogPages.push(packageInfo.pages.changelogPage);
-      }
-    });
+    if (packageInfo.pages.changelogPage) {
+      pages.changelogPages.push(packageInfo.pages.changelogPage);
+    }
   });
 
   return {

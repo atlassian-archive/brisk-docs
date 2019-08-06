@@ -5,27 +5,18 @@ import buildWebsite from './stages/build-website';
 import runWebsite from './stages/run-website';
 
 export default () => {
-  const initialConfiguration = {};
-  return scanMetadata(initialConfiguration)
-    .then(() =>
-      generateWebsiteInfo({
-        packages: [],
-        projectDocs: [],
-        readmePath: '',
-      }),
-    )
-    .then(() =>
+  return scanMetadata({
+    rootPath: '',
+    packagePathPatterns: [],
+    customPackageFields: [],
+    docs: [],
+  })
+    .then(projectData => generateWebsiteInfo(projectData))
+    .then(websiteInfo =>
       generatePages({
         wrappersPath: '',
         pagesPath: '',
-        packageDocPages: [],
-        projectDocPages: [],
-        docsHomePages: [],
-        docsMainPages: [],
-        examplePages: [],
-        examplesHomePages: [],
-        changelogPages: [],
-        packageHomePages: [],
+        ...websiteInfo.pages,
       }),
     )
     .then(() => buildWebsite({}))

@@ -2,19 +2,7 @@ import path from 'path';
 import titleCase from 'title-case';
 
 import { ExamplePage } from '../common/page-specs';
-
-export interface ExampleGroup {
-  id: string;
-  children: ExampleTreeNode[];
-}
-
-export interface ExampleItem {
-  id: string;
-  // Absolute path to the example file
-  exampleModulePath: string;
-}
-
-export type ExampleTreeNode = ExampleGroup | ExampleItem;
+import { ExampleItem, ExampleTreeNode } from '../common/project-info';
 
 export interface ExampleSitemapEntry {
   id: string;
