@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "debug:generate": "node --inspect-brk src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
-    "debug:next": "yarn dev --debug-next",
+    "debug:next": "yarn dev --debug",
     "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
     "dev:complete": "node src/bin/index.js dev --config=dummy-data/complete-config-project/docs.config.js",
     "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
@@ -46,6 +46,8 @@
     "dist"
   ],
   "dependencies": {
+    "@parcel/core": "2.0.0-alpha.0",
+    "@parcel/config-default": "2.0.0-alpha.0",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
