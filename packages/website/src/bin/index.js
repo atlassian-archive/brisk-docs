@@ -15,19 +15,9 @@ const argv = mainOptions._unknown || [];
 const cliOptions = [
   { name: 'config', type: String },
   { name: 'port', alias: 'p', type: Number },
-  { name: 'debug-next', alias: 'd', type: Boolean },
+  { name: 'debug', alias: 'd', type: Boolean },
 ];
 const options = commandLineArgs(cliOptions, { argv, camelCase: true });
-
-const nextOptions = [];
-
-if (options.port) nextOptions.push(`--port ${options.port}`);
-
-if (options.debugNext) nextOptions.push('debug-next');
-
-if (mainOptions.command === undefined) {
-  throw new Error(`No command supplied`);
-}
 
 const handleError = err => {
   console.error(err);
@@ -36,19 +26,19 @@ const handleError = err => {
 
 switch (mainOptions.command) {
   case 'dev': {
-    dev(options.config, nextOptions).catch(handleError);
+    dev(options.config, options.port).catch(handleError);
     break;
   }
   case 'build': {
-    build(options.config, nextOptions).catch(handleError);
+    build(options.config).catch(handleError);
     break;
   }
   case 'start': {
-    start(options.config, nextOptions).catch(handleError);
+    start(options.config).catch(handleError);
     break;
   }
   case 'export': {
-    exportWebsite(options.config, nextOptions).catch(handleError);
+    exportWebsite(options.config).catch(handleError);
     break;
   }
   default:

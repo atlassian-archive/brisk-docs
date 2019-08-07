@@ -58,6 +58,11 @@ const SwitchLink = ({
       </a>
     );
   }
+  return (
+    <a href={href} {...rest}>
+      {children(true)}{' '}
+    </a>
+  );
 
   let newHref = href.replace(/\.md$/, '');
 
@@ -95,6 +100,7 @@ const SwitchLink = ({
       router &&
       urlHasTrailingSlash(router) === false
     ) {
+      return 'something-wrong';
       const urlSegments = router.pathname.split('/');
       const lastUrlSegment = urlSegments[urlSegments.length - 1];
       newHref = `./${lastUrlSegment}/${newHref}`;
