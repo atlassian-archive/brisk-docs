@@ -46,8 +46,7 @@
     "dist"
   ],
   "dependencies": {
-    "@parcel/core": "2.0.0-alpha.0",
-    "@parcel/config-default": "2.0.0-alpha.0",
+    "@emotion/babel-preset-css-prop": "^10.0.14",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",

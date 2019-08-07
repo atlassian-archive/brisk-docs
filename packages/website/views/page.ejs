@@ -4,6 +4,7 @@
     <script>
       window.__BRISK_ENTRY_ASSET_ID = "<%= pageEntryAsset %>";
     </script>
+    <link rel="stylesheet" src="https://unpkg.com/@atlaskit/css-reset@5.0.5/dist/bundle.css" />
     <% for (const script of scripts) { %>
       <script src="<%= script %>" defer></script>
     <% } %>
