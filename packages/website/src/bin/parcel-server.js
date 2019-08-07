@@ -109,11 +109,11 @@ module.exports = async function createParcelServer({
 
     res.render('page', {
       pageEntryAsset: bundlePaths.pageEntryAsset,
-      scripts: bundlePaths.scripts.map(bundlePath =>
-        path.posix.relative(DIST_DIR, bundlePath),
+      scripts: bundlePaths.scripts.map(
+        bundlePath => `/${path.posix.relative(DIST_DIR, bundlePath)}`,
       ),
-      stylesheets: bundlePaths.stylesheets.map(bundlePath =>
-        path.posix.relative(DIST_DIR, bundlePath),
+      stylesheets: bundlePaths.stylesheets.map(
+        bundlePath => `/${path.posix.relative(DIST_DIR, bundlePath)}`,
       ),
     });
   });
