@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { MenuSection, Separator, Group } from '@atlaskit/navigation-next';
 import titleCase from 'title-case';

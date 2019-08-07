@@ -3,6 +3,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import Meta, { metadata } from './components/meta-context';
 
 const pageEntryModule = parcelRequire(__BRISK_ENTRY_ASSET_ID);
@@ -11,12 +12,18 @@ const PageEntryComponent =
     ? pageEntryModule.default
     : pageEntryModule;
 
+console.log(PageEntryComponent);
+
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   render() {
     return (
       <Meta.Provider value={metadata}>
-        <PageEntryComponent />
+        <BrowserRouter>
+          <Switch>
+            <PageEntryComponent />
+          </Switch>
+        </BrowserRouter>
       </Meta.Provider>
     );
   }

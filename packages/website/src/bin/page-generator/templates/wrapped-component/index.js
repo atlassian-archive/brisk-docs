@@ -1,4 +1,5 @@
 const outdent = require('outdent');
+const getRoutePath = require('../getRoute');
 
 /**
  * wrappedComponentTemplate - template for a page containing one
@@ -17,14 +18,19 @@ const wrappedComponentTemplate = (
   data = {},
 ) => outdent`
   import React from 'react';
+  import { Route } from 'react-router-dom';
   import Component from '${componentPath}';
   import Wrapper from '${wrapperPath}';
 
-  export default () => (
+  const view = () => (
     <Wrapper data={${JSON.stringify(data)}}>
         <Component />
     </Wrapper>
   );
+  
+  export default () => <Route path='/${getRoutePath(
+    data.pagePath,
+  )}' component={view}/>
 `;
 
 module.exports = wrappedComponentTemplate;

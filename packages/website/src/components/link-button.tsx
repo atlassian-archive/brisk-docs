@@ -6,10 +6,10 @@ Passes all props other than component directly into `@atlaskit/button`.
 See the [@atlaskit/button](https://atlaskit.atlassian.com/packages/core/button) docs for
 the options available to you.
 */
-import * as React from 'react';
+import React from 'react';
 
 import Button from '@atlaskit/button';
-import Link from 'next/link';
+import { NavLink } from 'react-router-dom';
 
 /** Note: Render components need to be defined standalone. Defining them inline will create a
  * new function reference each time and cause re-mounts on each render. */
@@ -21,9 +21,9 @@ const LinkButtonRenderComponent = ({
   href: string;
   children: React.ReactNode;
 }) => (
-  <Link href={href}>
-    <a {...rest}>{children}</a>
-  </Link>
+  <NavLink to={href} {...rest}>
+    {children}
+  </NavLink>
 );
 
 const LinkButton = (props: typeof Button) => (

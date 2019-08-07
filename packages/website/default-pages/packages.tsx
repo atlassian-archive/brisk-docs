@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
-import styled from 'styled-components';
-import Link from 'next/link';
+// import styled from 'styled-components';
+import { NavLink, Route } from 'react-router-dom';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
@@ -88,25 +88,23 @@ const renderRow = ({
       {
         key: packageId,
         content: (
-          <RowCell>
-            <Link href={homePath}>
-              <a>{display}</a>
-            </Link>
-          </RowCell>
+          <div>
+            <NavLink to={homePath}>{display}</NavLink>
+          </div>
         ),
       },
       {
         key: 'description',
-        content: <RowCell>{metaData.description}</RowCell>,
+        content: <div>{metaData.description}</div>,
       },
       {
         key: 'version',
         shouldTruncate: true,
-        content: <RowCell>{metaData.version}</RowCell>,
+        content: <div>{metaData.version}</div>,
       },
       {
         key: 'maintainers',
-        content: <RowCell>{MaintainersToString(metaData.maintainers)}</RowCell>,
+        content: <div>{MaintainersToString(metaData.maintainers)}</div>,
       },
     ],
   };
@@ -129,10 +127,10 @@ const PackagesList = () => (
 );
 
 // Tabular data
-const RowCell = styled.div`
-  padding-bottom: ${gridSize}px;
-  padding-top: ${gridSize}px;
-`;
+// const RowCell = styled.div`
+//   padding-bottom: ${gridSize}px;
+//   padding-top: ${gridSize}px;
+// `;
 
 const Index = () => (
   <>
@@ -144,4 +142,5 @@ const Index = () => (
     </NavigationWrapper>
   </>
 );
-export default Index;
+
+export default () => <Route path="/packages" component={Index} />;

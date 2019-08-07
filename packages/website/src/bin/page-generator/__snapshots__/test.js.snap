@@ -2,268 +2,321 @@
 
 exports[`Additional items in the docs tests creates pages for each markdown file in docs and guides folder 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../jest-fixture/docs/testdoc.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/testdoc.js","pageTitle":"Testdoc"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/testdoc' component={view}/>
 `;
 
 exports[`Additional items in the docs tests creates pages for each markdown file in docs and guides folder 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../jest-fixture/guides/testguide.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"guides","pagePath":"guides/testguide.js","pageTitle":"Testguide"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/guides/testguide' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 1`] = `
 import React from 'react';
 import Wrapper from '../../../jest-fixture/documents-index';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/index.js","pageTitle":"docs","pageType":"docs"}} />
 );
+export default () => <Route path='/docs' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 2`] = `
 import React from 'react';
 import Wrapper from '../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","id":"doc-3","children":[{"id":"doc-3-1","meta":{"title":"Doc 3 1","readingTime":"1 second"},"pagePath":"doc-3/doc-3-1"},{"id":"doc-3-2","meta":{"title":"Doc 3 2"},"pagePath":"doc-3/doc-3-2"}],"pagePath":"docs/doc-3/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
+export default () => <Route path='/docs/doc-3' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates an index/home page for each level of nesting 3`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","id":"doc-3-2","children":[{"id":"doc-3-2-1","meta":{"title":"Doc 3 2 1","usefulness":"yes"},"pagePath":"doc-3-2/doc-3-2-1"}],"pagePath":"docs/doc-3/doc-3-2/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
+export default () => <Route path='/docs/doc-3/doc-3-2' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates pages for each markdown file 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../jest-fixture/docs/doc-1.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-1.js","pageTitle":"Document One"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-1' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates pages for each markdown file 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../jest-fixture/docs/doc-2.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-2.js","pageTitle":"Doc 2"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-2' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates pages for each markdown file 3`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../jest-fixture/docs/doc-3/doc-3-1.md';
 import Wrapper from '../../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-3/doc-3-1.js","pageTitle":"Doc 3 1"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-3/doc-3-1' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation creates pages for each markdown file 4`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/docs/doc-3/doc-3-2/doc-3-2-1.md';
 import Wrapper from '../../../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-3/doc-3-2/doc-3-2-1.js","pageTitle":"Doc 3 2 1"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-3/doc-3-2/doc-3-2-1' component={view}/>
 `;
 
 exports[`Generate pages docs pages generation with differing name and path creates pages for each markdown file based on docsPath rather than name 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../jest-fixture/guides/testguide.md';
 import Wrapper from '../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"cool-doc-stuff","pagePath":"guides/testguide.js","pageTitle":"Testguide"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/guides/testguide' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates a home page per package 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../jest-fixture/packages/mock-package1/README.md';
 import Wrapper from '../../../../jest-fixture/package-home';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","description":"This is a mock package to be used for doc website","name":"mock-package-1","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-1/index.js","pageTitle":"Mock Package 1"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-1' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates a home page per package 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../jest-fixture/packages/mock-package2/README.md';
 import Wrapper from '../../../../jest-fixture/package-home';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-2/index.js","pageTitle":"Mock Package 2"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-2' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates a home page per package 3`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../jest-fixture/packages/mock-package2/README.md';
 import Wrapper from '../../../../jest-fixture/package-home';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","description":"This is a mock package2 to be used for doc website","name":"mock-package-2","version":"1.0.0","customPackageFields":["description","maintainers","name","repository","version"],"pagePath":"packages/mock-package-2/index.js","pageTitle":"Mock Package 2"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-2' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
+export default () => <Route path='/packages/mock-package-1/docs' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package1/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/extended-info.js","pageTitle":"Extended Information"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-1/docs/extended-info' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-1 3`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package1/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-1/docs/special-usecase' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
+export default () => <Route path='/packages/mock-package-2/docs' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package2/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/extended-info.js","pageTitle":"Extended Info"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-2/docs/extended-info' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-2 3`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package2/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-2/docs/special-usecase' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/index.js","pageTitle":"Documents","pageType":"docs"}} />
 );
+export default () => <Route path='/packages/mock-package-3/docs' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package3/docs/extended-info.md';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/extended-info.js","pageTitle":"Extended Info"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-3/docs/extended-info' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates docs pages for each package: mock-package-3 3`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/packages/mock-package3/docs/special-usecase.mdx';
 import Wrapper from '../../../../../jest-fixture/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/docs/special-usecase.js","pageTitle":"Special Usecase"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/packages/mock-package-3/docs/special-usecase' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 1`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","pagePath":"packages/mock-package-1/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
+export default () => <Route path='/packages/mock-package-1/examples' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 2`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example1')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -281,20 +334,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-1/examples/isolated/example1' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 3`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example2')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -312,20 +362,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-1/examples/isolated/example2' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 4`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package1/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package1/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package1/examples/example3')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-1","packageName":"mock-package-1","isolatedPath":"/packages/mock-package-1/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -343,29 +390,27 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-1/examples/isolated/example3' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 5`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","pagePath":"packages/mock-package-2/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
+export default () => <Route path='/packages/mock-package-2/examples' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 6`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example1')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -383,20 +428,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-2/examples/isolated/example1' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 7`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example2')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -414,20 +456,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-2/examples/isolated/example2' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 8`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package2/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package2/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package2/examples/example3')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-2","packageName":"mock-package-2","isolatedPath":"/packages/mock-package-2/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -445,29 +484,27 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-2/examples/isolated/example3' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 9`] = `
 import React from 'react';
 import Wrapper from '../../../../../jest-fixture/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","pagePath":"packages/mock-package-3/examples/index.js","pageTitle":"Examples","pageType":"examples"}} />
 );
+export default () => <Route path='/packages/mock-package-3/examples' component={view}/>
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 10`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example1';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example1';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example1')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example1","pageTitle":"Example1"}} fileContents={fileContents}>
       {
         [{ 
@@ -485,20 +522,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-3/examples/isolated/example1' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 11`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example2';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example2';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example2')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example2","pageTitle":"Example2"}} fileContents={fileContents}>
       {
         [{ 
@@ -516,20 +550,17 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-3/examples/isolated/example2' component={view}/> 
 `;
 
 exports[`Generate pages package pages generation creates examples pages for each package 12`] = `
 import React from 'react';
-import dynamic from 'next/dynamic';
 import fileContents from '!!raw-loader!../../../../../jest-fixture/packages/mock-package3/examples/example3';
 import Wrapper from '../../../../../jest-fixture/package-example';
+import * as Components from '../../../../../jest-fixture/packages/mock-package3/examples/example3';
 
-const DynamicComponent = dynamic(import('../../../../../jest-fixture/packages/mock-package3/examples/example3')
-.then(Components => {
-return () => ( 
+const view = () => ( 
 <Wrapper data={{"id":"mock-package-3","packageName":"mock-package-3","isolatedPath":"/packages/mock-package-3/examples/isolated/example3","pageTitle":"Example3"}} fileContents={fileContents}>
       {
         [{ 
@@ -547,43 +578,51 @@ return () => (
         ]
       }
   </Wrapper>
-  )
-}));
-export default () => <DynamicComponent/>
+  );
+export default () => <Route path='//packages/mock-package-3/examples/isolated/example3' component={view}/> 
 `;
 
 exports[`Generate readme page at the root level creates a readme page for the root level file 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../jest-fixture/README.md';
 import Wrapper from '../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"readme","pagePath":"readme.js","pageTitle":"readme"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/readme' component={view}/>
 `;
 
 exports[`readmes in the docs should generate a page for each child readme 1`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../jest-fixture/docs/doc-3/readme.md';
 import Wrapper from '../../../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-3/readme/index.js","pageTitle":"Doc 3"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-3/readme' component={view}/>
 `;
 
 exports[`readmes in the docs should generate a page for each child readme 2`] = `
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../../../../../../jest-fixture/docs/doc-3/doc-3-2/README.md';
 import Wrapper from '../../../../../../jest-fixture/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{"key":"docs","pagePath":"docs/doc-3/doc-3-2/README/index.js","pageTitle":"Doc 3 2"}}>
       <Component />
   </Wrapper>
 );
+
+export default () => <Route path='/docs/doc-3/doc-3-2/README' component={view}/>
 `;

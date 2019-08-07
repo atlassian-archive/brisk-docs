@@ -1,4 +1,5 @@
 const outdent = require('outdent');
+const getRoutePath = require('../getRoute');
 
 /**
  * basicSingleComponentTemplate - Template for a page that renders a single component
@@ -12,9 +13,12 @@ const basicSingleComponentTemplate = (wrapperPath, data = {}) => outdent`
     import React from 'react';
     import Wrapper from '${wrapperPath}';
 
-    export default () => (
+    const view = () => (
       <Wrapper data={${JSON.stringify(data)}} />
     );
+    export default () => <Route path='/${getRoutePath(
+      data.pagePath || data.isolatedPath,
+    )}' component={view}/>
 `;
 
 module.exports = basicSingleComponentTemplate;

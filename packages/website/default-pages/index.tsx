@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
+import { Route } from 'react-router';
 
 import LinkIcon from '@atlaskit/icon/glyph/link';
 import MediaDocIcon from '@atlaskit/icon/glyph/media-services/document';
@@ -137,4 +138,5 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+// export default HomePage;
+export default () => <Route exact path="/" component={HomePage} />;

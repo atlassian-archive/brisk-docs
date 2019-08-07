@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Heading from './Heading';
 import Link from '../switch-link';
 import HorizontalRule from './HorizontalRule';

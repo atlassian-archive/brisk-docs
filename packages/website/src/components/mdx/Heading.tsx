@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import reactAddonsTextContent from 'react-addons-text-content';
 import snakeCase from 'lodash.snakecase';
 

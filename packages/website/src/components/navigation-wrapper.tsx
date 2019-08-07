@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import DocumentsIcon from '@atlaskit/icon/glyph/documents';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import {

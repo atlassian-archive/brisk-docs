@@ -1,5 +1,5 @@
 // This example demonstrates a react component written in tsx
-import * as React from 'react';
+import React from 'react';
 
 export interface HelloProps {
   compiler: string;
