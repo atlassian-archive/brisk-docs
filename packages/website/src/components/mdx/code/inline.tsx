@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AkCode } from '@atlaskit/code';
 
 export type Props = {

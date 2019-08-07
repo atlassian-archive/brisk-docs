@@ -41,14 +41,17 @@ describe('Page templates', () => {
     assertNoAbsoluteImports(output);
     expect(output).toMatchInlineSnapshot(`
 "import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../README.md';
 import Wrapper from '../wrappers/package-home';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}}>
       <Component />
   </Wrapper>
-);"
+);
+
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 
@@ -67,9 +70,10 @@ export default () => (
 "import React from 'react';
 import Wrapper from '../wrappers/package-home';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}} />
-);"
+);
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 
@@ -88,14 +92,17 @@ export default () => (
     assertNoAbsoluteImports(output);
     expect(output).toMatchInlineSnapshot(`
 "import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../README.md';
 import Wrapper from '../wrappers/package-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
       <Component />
   </Wrapper>
-);"
+);
+
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 
@@ -141,9 +148,10 @@ export default () => (
 "import React from 'react';
 import Wrapper from '../wrappers/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\",\\"pageType\\":\\"docs\\"}} />
-);"
+);
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 
@@ -162,9 +170,10 @@ export default () => (
 "import React from 'react';
 import Wrapper from '../wrappers/item-list';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"\\",\\"pageType\\":\\"examples\\"}} />
-);"
+);
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 
@@ -183,14 +192,17 @@ export default () => (
     assertNoAbsoluteImports(output);
     expect(output).toMatchInlineSnapshot(`
 "import React from 'react';
+import { Route } from 'react-router-dom';
 import Component from '../README.md';
 import Wrapper from '../wrappers/project-docs';
 
-export default () => (
+const view = () => (
   <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
       <Component />
   </Wrapper>
-);"
+);
+
+export default () => <Route path='/output' component={view}/>"
 `);
   });
 });

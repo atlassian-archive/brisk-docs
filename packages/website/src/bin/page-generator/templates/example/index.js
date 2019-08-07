@@ -1,4 +1,5 @@
 const outdent = require('outdent');
+const getRoutePath = require('../getRoute');
 
 /**
  * exampleTemplate - template for an example page where the source code
@@ -12,13 +13,11 @@ const outdent = require('outdent');
  */
 const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     import React from 'react';
-    import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
     import Wrapper from '${wrapperPath}';
+    import * as Components from '${componentPath}';
     
-    const DynamicComponent = dynamic(import('${componentPath}')
-    .then(Components => {
-    return () => ( 
+    const view = () => ( 
     <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
           {
             [{ 
@@ -36,9 +35,10 @@ const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
             ]
           }
       </Wrapper>
-      )
-    }));
-    export default () => <DynamicComponent/>
+      );
+    export default () => <Route path='/${getRoutePath(
+      data.pagePath || data.isolatedPath,
+    )}' component={view}/> 
 `;
 
 module.exports = exampleTemplate;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { MenuSection } from '@atlaskit/navigation-next';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';

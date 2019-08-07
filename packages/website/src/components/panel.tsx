@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Props as IconProps } from '@atlaskit/icon/glyph/shortcut';
 import { colors, gridSize, math } from '@atlaskit/theme';

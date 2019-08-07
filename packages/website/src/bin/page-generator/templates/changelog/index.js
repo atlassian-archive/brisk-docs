@@ -1,4 +1,5 @@
 const outdent = require('outdent');
+const getRoutePath = require('../getRoute');
 
 /**
  * changelogTemplate - template for generating a changelog page
@@ -14,11 +15,14 @@ const changelogTemplate = (changelogPath, wrapperPath, data = {}) => outdent`
   import changelog from '!!raw-loader!${changelogPath}';
   import Wrapper from '${wrapperPath}';
 
-  export default () => (
+  const view = () => (
     <Wrapper data={${JSON.stringify(data)}}>
         {changelog}
     </Wrapper>
   );
+  export default () => <Route path='/${getRoutePath(
+    data.pagePath,
+  )}' component={view}/>
 `;
 
 module.exports = changelogTemplate;

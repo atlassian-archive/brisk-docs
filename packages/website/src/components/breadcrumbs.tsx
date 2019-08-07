@@ -1,10 +1,10 @@
 /* eslint-disable react/no-multi-comp */
-import * as React from 'react';
+import React from 'react';
 import titleCase from 'title-case';
 import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import styled from '@emotion/styled';
 import { gridSize, math } from '@atlaskit/theme';
-import Link from 'next/link';
+import { NavLink } from 'react-router-dom';
 
 const Header = styled.div`
   left: 0;
@@ -27,7 +27,7 @@ const NextLink = React.forwardRef(
     ref: React.Ref<HTMLAnchorElement>,
   ) => {
     return (
-      <Link href={href}>
+      <NavLink to={href}>
         <a
           ref={ref}
           className={className}
@@ -36,7 +36,7 @@ const NextLink = React.forwardRef(
         >
           {children}
         </a>
-      </Link>
+      </NavLink>
     );
   },
 );

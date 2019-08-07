@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
 import styled from '@emotion/styled';
 import Prism from 'prismjs';

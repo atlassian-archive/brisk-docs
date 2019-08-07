@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-
 import SwitchLink from '../../src/components/switch-link';
 
 const children = 'some text';
@@ -57,12 +56,13 @@ describe('<SwitchLink />', () => {
     expect(wrapper.find('ShortcutIcon')).toHaveLength(0);
   });
 
-  it('renders a Link component for relative links', () => {
-    const wrapper = mount(<SwitchLink {...initialProps} />);
-    const component = wrapper.find('Link');
-
-    expect(component.exists()).toBeTruthy();
-    expect(component.text()).toEqual(children);
-    expect(component.prop('href')).toEqual(initialProps.href);
-  });
+  // TODO: Need to re-test when re-implement the relative links in SwitchLink
+  // it('renders a Link component for relative links', () => {
+  //   const wrapper = mount(<SwitchLink {...initialProps} />);
+  //   const component = wrapper.find('Link');
+  //
+  //   expect(component.exists()).toBeTruthy();
+  //   expect(component.text()).toEqual(children);
+  //   expect(component.prop('href')).toEqual(initialProps.href);
+  // });
 });

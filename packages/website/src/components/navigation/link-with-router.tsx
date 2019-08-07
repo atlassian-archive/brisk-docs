@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { withRouter } from 'next/router';
 import { Item } from '@atlaskit/navigation-next';
 import { colors } from '@atlaskit/theme';

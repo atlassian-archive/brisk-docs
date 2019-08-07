@@ -1,7 +1,7 @@
 // Component that can be used as the component prop in nav items
 
-import * as React from 'react';
-import Link from 'next/link';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export type Props = {
   className: string;
@@ -17,9 +17,9 @@ class LinkComponent extends React.Component<Props> {
     const { className, children, href } = this.props;
 
     return (
-      <Link href={href}>
-        <a className={className}>{children}</a>
-      </Link>
+      <NavLink to={href} className={className}>
+        {children}
+      </NavLink>
     );
   }
 }

@@ -107,6 +107,8 @@ module.exports = async function createParcelServer({
       pageToBundles.set(pagePath, bundlePaths);
     }
 
+    console.log('entry', req.url, pagePath, bundlePaths.pageEntryAsset);
+
     res.render('page', {
       pageEntryAsset: bundlePaths.pageEntryAsset,
       scripts: bundlePaths.scripts.map(bundlePath =>
