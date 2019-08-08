@@ -14,8 +14,6 @@ yarn-error.log
 scratchings.js
 
 /packages/website/pages
-/packages/website/pages-next
-
 
 /packages/website/data
 /packages/website/static/favicon.ico
@@ -29,3 +27,6 @@ out
 deploy
 !deploy/changeset-bot/changeset-bot.sd.yml
 !deploy/changeset-bot/Dockerfile
+
+.parcel-cache
+packages/website/.dist

@@ -14,7 +14,7 @@ export default () => {
   // TODO: Use less flakey way to get these paths
   const pkgRoot = path.resolve(__dirname, '..', '..');
   const wrappersPath = path.resolve(pkgRoot, `./src/components/page-templates`);
-  const pagesPath = path.resolve(pkgRoot, `./pages-next`);
+  const pagesPath = path.resolve(pkgRoot, `./pages`);
 
   return scanMetadata({
     rootPath: cwd,
@@ -31,8 +31,8 @@ export default () => {
       }),
     )
     .then(() => buildWebsite({}))
-    .then(result => runWebsite(result))
-    .then(() => {
-      console.log('Thanks for documenting with brisk-docs! 🎿');
-    });
+    .then(result => runWebsite({ port: '3001', staticRoot: pkgRoot }));
+  // .then(() => {
+  //   console.log('Thanks for documenting with brisk-docs! 🎿');
+  // });
 };
