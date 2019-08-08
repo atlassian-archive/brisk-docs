@@ -1,5 +1,9 @@
 import commandLineArgs from 'command-line-args';
-import { devPipeline } from './pipeline';
+import {
+  devPipeline,
+  generatePagesPipeline,
+  startServerPipeline,
+} from './pipeline';
 
 const mainDefinitions = [{ name: 'command', defaultOption: true }];
 const mainOptions = commandLineArgs(mainDefinitions, {
@@ -34,6 +38,12 @@ const runBinary = () => {
     case 'start': {
       throw new Error('not implemented');
       //   break;
+    }
+    case 'start-server': {
+      return startServerPipeline(options.port).catch(handleError);
+    }
+    case 'generate': {
+      return generatePagesPipeline(options.config).catch(handleError);
     }
     case 'export': {
       throw new Error('not implemented');
