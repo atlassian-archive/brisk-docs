@@ -1,3 +1,6 @@
+// This page exists simple to run experiments in - if it does get merged in,
+// changing it however or doing whatever with it is fine. It should probably
+// not end up in prod
 import React from 'react';
 import styled from 'styled-components';
 import { css, cx } from 'emotion';
