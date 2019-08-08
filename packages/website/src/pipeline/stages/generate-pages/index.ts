@@ -13,6 +13,8 @@ const {
   generateExamplePage,
   generateChangelogPage,
   generateHomePage,
+  addBasePages,
+  cleanPages,
 } = pageWriters;
 
 export type StageInput = {
@@ -20,6 +22,8 @@ export type StageInput = {
   wrappersPath: string;
   // Absolute path to the output pages directory
   pagesPath: string;
+  // The absolute path to the root of the package.
+  packageRoot: string;
 } & PagesSpec;
 
 export type StageOutput = void;
@@ -41,6 +45,8 @@ export default createStage(
   'generate-pages',
   async (input: StageInput): Promise<StageOutput> => {
     const { pagesPath, wrappersPath } = input;
+    await cleanPages(pagesPath);
+    await addBasePages(input.packageRoot, pagesPath);
 
     const generatorConfig = { pagesPath, wrappersPath };
 

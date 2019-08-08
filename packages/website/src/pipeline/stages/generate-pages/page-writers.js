@@ -204,6 +204,27 @@ const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
   generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
 
+const addBasePages = async (packageRoot, pagesPath) => {
+  const defaultPagesPath = path.join(packageRoot, 'default-pages');
+  await fs.copy(defaultPagesPath, pagesPath);
+};
+
+/**
+ * Clean up packages and docs so we don't have ghost pages
+ * @param pagesPath the absolute path to the `/pages` directory in next
+ * @param docsList list of documents
+ */
+const cleanPages = async pagesPath => {
+  // This error handling should likely be lifted to when we start executing the whole thing
+  if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
+    throw new Error(
+      "We were worried we were going to erase files from the wrong place so we're stopping",
+    );
+  }
+
+  await fs.remove(pagesPath);
+};
+
 module.exports = {
   generateHomePage,
   generateChangelogPage,
@@ -213,4 +234,6 @@ module.exports = {
   generateExamplesHomePage,
   generateProjectDocPage,
   generateDocumentsMainPage,
+  addBasePages,
+  cleanPages,
 };

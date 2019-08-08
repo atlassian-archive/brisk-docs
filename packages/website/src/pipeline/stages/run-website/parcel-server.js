@@ -25,8 +25,6 @@ async function resolve(pagesRoot, request) {
     return;
   }
 
-  console.log(base, 'let us see');
-
   for (const basename of [base, path.join(base, 'index')]) {
     for (const extension of extensions) {
       const filePath = basename + extension;
@@ -51,7 +49,7 @@ module.exports = async function createParcelServer({ port, staticRoot }) {
   app.set('views', path.resolve(staticRoot, 'views'));
 
   app.use(express.static(DIST_DIR));
-  app.use('/static', express.static(staticRoot));
+  app.use('/static', express.static(path.join(staticRoot, 'static')));
   const pageToBundles = new Map();
 
   app.get('*', async (req, res) => {

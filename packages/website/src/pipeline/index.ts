@@ -27,6 +27,7 @@ export default () => {
       generatePages({
         wrappersPath,
         pagesPath,
+        packageRoot: pkgRoot,
         ...websiteInfo.pages,
       }),
     )
