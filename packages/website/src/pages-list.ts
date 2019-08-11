@@ -8,13 +8,13 @@
 import pageInfo from '../data/pages-list.json';
 import { PackageInfo, DocsPage } from '../types';
 
-type Info = {
+export type PageInfo = {
   packages: PackageInfo[];
   readme?: DocsPage[];
 } & {
   [key: string]: DocsPage[];
 };
 
-const data: Info = pageInfo;
+const data: PageInfo = pageInfo;
 
 export default data;
