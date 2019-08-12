@@ -225,6 +225,39 @@ const cleanPages = async pagesPath => {
   await fs.remove(pagesPath);
 };
 
+const generateDataPages = (input) => {
+  const pagesListPath = path.resolve(input.packageRoot, 'data/pages-list.json');
+  writeFile(pagesListPath, JSON.stringify({ packages: input.sitemap.packages, ...input.sitemap.docs, readMe: input.readmePageData }, undefined, 2));
+
+  const packagesDataPath = path.resolve(input.packageRoot, 'data/packages-data.json');
+  writeFile(packagesDataPath, JSON.stringify({ metaData: input.packagesMeta }, undefined, 2))
+
+  const readMe =
+    input.readmePageData && input.readmePageData.length > 0
+      ? {
+        imgSrc: input.readMeImgSrc,
+      }
+      : undefined;
+
+  const packagesMeta = {
+    description: input.packagesDescription,
+    imgSrc: input.packagesImgSrc,
+  };
+
+  const metaPath = path.resolve(input.packageRoot, 'data/site-meta.json');
+  writeFile(metaPath, JSON.stringify(
+    {
+      siteName: input.siteName,
+      packages: packagesMeta,
+      links: input.links,
+      readMe,
+      docs: input.docs,
+    },
+    undefined,
+    2,
+  ));
+};
+
 module.exports = {
   generateHomePage,
   generateChangelogPage,
@@ -236,4 +269,6 @@ module.exports = {
   generateDocumentsMainPage,
   addBasePages,
   cleanPages,
+  writeFile,
+  generateDataPages,
 };

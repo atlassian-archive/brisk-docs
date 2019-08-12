@@ -26,7 +26,8 @@ const devPipeline = (configPath?: string) => {
         wrappersPath,
         pagesPath,
         packageRoot: pkgRoot,
-        ...websiteInfo.pages,
+        ...websiteInfo,
+        ...config
       }),
     )
     .then(() => {

@@ -10,12 +10,12 @@ const defaultConfig: UserConfig = {
     name: 'Docs',
     description: 'View the documentation for this project',
   },
-  // links: [],
+  links: [],
   packages: ['./packages/**/*'],
-  // siteName: 'Brisk Docs',
+  siteName: 'Brisk Docs',
   // webpack: identityFunc,
   // showSubExamples: false,
-  // packagesDescription: 'View documentation about individual packages',
+  packagesDescription: 'View documentation about individual packages',
   customPackageFields: ['license', 'maintainers', 'name', 'version'],
 };
 

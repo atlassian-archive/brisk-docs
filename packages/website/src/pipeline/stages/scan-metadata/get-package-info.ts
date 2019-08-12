@@ -34,7 +34,7 @@ const getPackagesFromPatterns = async (
   // find all packages that aren't inside node_modules
   const foundPackages = await Promise.all(
     matchedPaths.map(async dirPath => {
-      console.log(dirPath);
+      console.log('package-info', dirPath);
       const stats = await fs.stat(dirPath);
       if (stats.isDirectory() && !dirPath.includes('node_modules')) {
         const pkgJSONPath = path.resolve(dirPath, 'package.json');

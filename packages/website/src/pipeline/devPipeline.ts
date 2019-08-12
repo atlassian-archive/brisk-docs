@@ -29,10 +29,11 @@ const devPipeline = (configPath?: string, maybePort?: string) => {
         wrappersPath,
         pagesPath,
         packageRoot: pkgRoot,
-        ...websiteInfo.pages,
+        ...websiteInfo,
+        ...config
       }),
     )
-    .then(() => buildWebsite({}))
+    .then(() => buildWebsite({ pagesPath, pkgRoot })) // TODO: this step is specific only for parcel now. Need to modify based on ENV variable maybe
     .then(result => runWebsite({ port, staticRoot: pkgRoot }));
   // .then(() => {
   //   console.log('Thanks for documenting with brisk-docs! 🎿');

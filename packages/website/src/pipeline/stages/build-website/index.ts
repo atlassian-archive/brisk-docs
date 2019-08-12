@@ -4,11 +4,14 @@ import path from 'path';
 import createStage from '../make-pipeline-stage';
 import getAppPage from './_app-template';
 
-interface StageInput {}
+const { writeFile } = require('../generate-pages/page-writers');
 
 // Boilerplate, uncomment when used
 // interface StageConfig {}
-
+interface StageInput {
+  pagesPath: string;
+  pkgRoot: string;
+}
 interface StageOutput {}
 
 const flattenDir = async (dirPath: string): Promise<Array<string>> => {
@@ -32,9 +35,10 @@ const flattenDir = async (dirPath: string): Promise<Array<string>> => {
 
 export default createStage(
   'build-website',
-  async (pagesDir: string): Promise<StageOutput> => {
-    const allPages = await flattenDir(pagesDir);
-
-    return getAppPage(allPages.map(page => page.replace(pagesDir, '')));
+  async ( { pagesPath, pkgRoot }: StageInput): Promise<StageOutput> => {
+    const allPages = await flattenDir(pagesPath);
+    const app = getAppPage(allPages.map(page => page.replace(pagesPath, '')));
+    writeFile(path.join(pkgRoot, '_app.js'), app);
+    return app;
   },
 );

@@ -13,6 +13,11 @@ export interface BriskConfiguration {
   customPackageFields: string[];
   docs: ProjectDocsConfig[];
   packagesPaths: string[];
+  siteName: string;
+  packagesDescription?: string;
+  links?: string[];
+  readMeImgSrc?: string;
+  packagesImgSrc?: string;
 }
 
 // User supplied brisk config
@@ -32,4 +37,10 @@ export interface UserConfig {
   docs: UserDocsConfig | UserDocsConfig[];
   // Path or array of paths of packages to show. Glob patterns are allowed. e.g. `path.join(__dirname, 'packages', '*')`
   packages: string[];
+
+  siteName: string;
+  packagesDescription?: string;
+  links?: string[];
+  readMeImgSrc?: string;
+  packagesImgSrc?: string;
 }
