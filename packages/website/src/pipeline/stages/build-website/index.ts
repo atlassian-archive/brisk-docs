@@ -35,7 +35,7 @@ const flattenDir = async (dirPath: string): Promise<Array<string>> => {
 
 export default createStage(
   'build-website',
-  async ( { pagesPath, pkgRoot }: StageInput): Promise<StageOutput> => {
+  async ({ pagesPath, pkgRoot }: StageInput): Promise<StageOutput> => {
     const allPages = await flattenDir(pagesPath);
     const app = getAppPage(allPages.map(page => page.replace(pagesPath, '')));
     writeFile(path.join(pkgRoot, '_app.js'), app);

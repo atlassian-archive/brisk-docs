@@ -5,21 +5,30 @@ export default (allPages: Array<string>) => {
     page =>
       `<Route path="${
         page.split('.')[0]
-      }" component={import("./pages${page}")} />`,
+      }" component={() => <HackyLoader promise={import("./pages${page}")} />} />`,
   );
 
   return outdent`
-    import React from 'react';
-    import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router";
-    import HomePage from './pages';
+    import React, { useState } from 'react';
+    import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
+    const HackyLoader = ({ promise }) => {
+      const [Comp, setComp] = useState(null);
+      promise.then(res => setComp(res));
+      if (Comp) return <Comp.default />;
+      return <div>Loading</div>;
+    };
+    
 
     export default () => (
         <Router>
             <Switch>
-                <Route exact path='/' component={HomePage}/>
+                <Route exact path='/' component={() => <HackyLoader promise={import("./pages")} />}/>
                 ${routes.join('\n      ')}
                 <Redirect to='/'/>
             </Switch>
         </Router>
     );`;
 };
+
+// Smoe notes: Can we change the redirect to a 404 page?

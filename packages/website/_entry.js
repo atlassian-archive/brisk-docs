@@ -6,12 +6,8 @@ import App from './_app';
 
 const Client = () => (
   <Meta.Provider value={metadata}>
-    <>
-      {' '}
-      <App />{' '}
-    </>
+    <App />
   </Meta.Provider>
 );
 
-// eslint-disable-next-line no-undef
 ReactDOM.render(<Client />, document.getElementById('app'));

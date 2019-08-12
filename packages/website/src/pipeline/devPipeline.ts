@@ -30,7 +30,7 @@ const devPipeline = (configPath?: string, maybePort?: string) => {
         pagesPath,
         packageRoot: pkgRoot,
         ...websiteInfo,
-        ...config
+        ...config,
       }),
     )
     .then(() => buildWebsite({ pagesPath, pkgRoot })) // TODO: this step is specific only for parcel now. Need to modify based on ENV variable maybe

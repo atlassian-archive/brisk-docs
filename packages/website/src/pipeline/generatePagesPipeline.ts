@@ -4,6 +4,7 @@ import scanMetadata from './stages/scan-metadata';
 import generateWebsiteInfo from './stages/generate-website-info';
 import generatePages from './stages/generate-pages';
 import getConfiguration from './stages/get-configuration/handle-config';
+import buildWebsite from './stages/build-website';
 
 const devPipeline = (configPath?: string) => {
   const cwd = process.cwd();
@@ -27,9 +28,11 @@ const devPipeline = (configPath?: string) => {
         pagesPath,
         packageRoot: pkgRoot,
         ...websiteInfo,
-        ...config
+        ...config,
       }),
     )
+    .then(() => buildWebsite({ pagesPath, pkgRoot })) // TODO: this step is specific only for parcel now. Need to modify based on ENV variable maybe
+
     .then(() => {
       console.log('Thanks for documenting with brisk-docs! 🎿');
     });
