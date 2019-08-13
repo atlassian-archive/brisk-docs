@@ -117,6 +117,7 @@
     "raw-loader": "^1.0.0",
     "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
+    "react-async-component": "^2.0.0",
     "react-dom": "^16.8.4",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

@@ -5,25 +5,26 @@ export default (allPages: Array<string>) => {
     page =>
       `<Route path="${
         page.split('.')[0]
-      }" component={() => <HackyLoader promise={import("./pages${page}")} />} />`,
+      }" component={AsyncLoadPages(import('./pages${page}'))} />`,
   );
 
   return outdent`
-    import React, { useState } from 'react';
+    import React from 'react';
     import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+    import { asyncComponent } from 'react-async-component';
 
-    const HackyLoader = ({ promise }) => {
-      const [Comp, setComp] = useState(null);
-      promise.then(res => setComp(res));
-      if (Comp) return <Comp.default />;
-      return <div>Loading</div>;
-    };
+    const AsyncLoadPages = (promise) => asyncComponent({
+        resolve: () => promise,
+        LoadingComponent: () => <div>Loading</div>,
+        ErrorComponent:({ error }) => <div>There is an error. {error.message} </div>
+    });
+
     
 
     export default () => (
         <Router>
             <Switch>
-                <Route exact path='/' component={() => <HackyLoader promise={import("./pages")} />}/>
+                <Route exact path='/' component={AsyncLoadPages(import('./pages'))} />
                 ${routes.join('\n      ')}
                 <Redirect to='/'/>
             </Switch>
