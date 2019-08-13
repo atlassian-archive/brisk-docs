@@ -18,8 +18,7 @@ module.exports = async function createParcelServer({ port, staticRoot }) {
   const parcelWatchSubscription = await new Parcel({
     entries: [buildEntryPage],
     defaultConfig,
-    killWorkers: false,
-    sourceMaps: false,
+    sourceMaps: true,
     targets: {
       main: {
         distDir: DIST_DIR,
@@ -34,6 +33,7 @@ module.exports = async function createParcelServer({ port, staticRoot }) {
   const app = express();
   app.use(express.static(DIST_DIR));
   app.use('/static', express.static(path.join(staticRoot, 'static')));
+  app.use('/__parcel_source_root', express.static(path.join(staticRoot)));
 
   app.get('*', async (req, res) => {
     // NOTE: This is likely a temporary solution to make debugging
