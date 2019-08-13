@@ -12,6 +12,7 @@ const defaultConfig = {
 
 module.exports = async function createParcelServer({ port, staticRoot }) {
   const buildEntryPage = path.resolve(staticRoot, 'index.html');
+  const buildEntryPage2 = path.resolve(staticRoot, '.dist', 'index.html');
   const DIST_DIR = path.resolve(staticRoot, '.dist');
 
   const parcelWatchSubscription = await new Parcel({
@@ -48,7 +49,7 @@ module.exports = async function createParcelServer({ port, staticRoot }) {
           }`,
         );
     } else {
-      res.sendFile(buildEntryPage);
+      res.sendFile(buildEntryPage2);
     }
   });
 
