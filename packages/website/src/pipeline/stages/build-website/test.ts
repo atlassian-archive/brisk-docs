@@ -1,3 +1,10 @@
+import path from 'path';
+import buildWebsite from './';
+
 describe('Build website stage', () => {
-  it.skip('needs tests', () => {});
+  it('needs tests', async () => {
+    const pagesPath = path.resolve(__dirname, '..', '..', '..', '..', 'pages');
+    const allPages = await buildWebsite(pagesPath);
+    console.log(allPages);
+  });
 });

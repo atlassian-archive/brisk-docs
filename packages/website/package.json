@@ -12,21 +12,22 @@
   ],
   "license": "MIT",
   "scripts": {
-    "debug:generate": "node --inspect-brk src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
+    "debug:generate": "node --inspect-brk bin.js dev --config=dummy-data/simple-project/docs.config.js",
     "debug:next": "yarn dev --debug",
-    "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
-    "dev:complete": "node src/bin/index.js dev --config=dummy-data/complete-config-project/docs.config.js",
-    "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
-    "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
-    "build:site:complete": "node src/bin/index.js build --config=dummy-data/complete-config-project/docs.config.js",
-    "export:site": "node src/bin/index.js export --config=dummy-data/simple-project/docs.config.js",
+    "dev": "node bin.js dev --config=dummy-data/simple-project/docs.config.js",
+    "dev:complete": "node bin.js dev --config=dummy-data/complete-config-project/docs.config.js",
+    "dev:webpack": "node bin.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
+    "build:site": "node bin.js build --config=dummy-data/simple-project/docs.config.js",
+    "build:site:complete": "node bin.js build --config=dummy-data/complete-config-project/docs.config.js",
+    "export:site": "node bin.js export --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node src/bin/index.js start",
-    "start:complete": "node src/bin/index.js start --config=dummy-data/complete-config-project/docs.config.js"
+    "start": "node bin.js start",
+    "start:complete": "node bin.js start --config=dummy-data/complete-config-project/docs.config.js",
+    "generate": "node bin.js generate --config=dummy-data/simple-project/docs.config.js",
+    "parcel": "node bin.js start-server --port=3001"
   },
   "bin": {
-    "brisk": "src/bin/index.js",
-    "brisk-next": "bin.js"
+    "brisk": "bin.js"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -46,8 +47,6 @@
     "dist"
   ],
   "dependencies": {
-    "@parcel/core": "2.0.0-alpha.0",
-    "@parcel/config-default": "2.0.0-alpha.0",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
@@ -81,6 +80,12 @@
     "@mdx-js/loader": "^0.17.5",
     "@mdx-js/mdx": "^0.15.0",
     "@mdx-js/tag": "^0.17.5",
+    "@types/js-yaml": "^3.12.1",
+    "@types/lodash.flatten": "^4.4.6",
+    "@types/mock-fs": "^3.6.30",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-mdx": "^1.2.0",
+    "@zeit/next-typescript": "^1.1.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-styled-components": "^1.10.0",
@@ -100,9 +105,11 @@
     "lodash.capitalize": "^4.2.1",
     "lodash.debounce": "^4.0.8",
     "lodash.flatmap": "^4.5.0",
+    "lodash.flatten": "^4.4.0",
     "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
     "next": "^8.0.4",
+    "next-images": "^1.1.1",
     "outdent": "^0.7.0",
     "pretty-proptypes": "^0.6.6",
     "prismjs": "^1.15.0",
@@ -110,7 +117,10 @@
     "raw-loader": "^1.0.0",
     "react": "^16.8.4",
     "react-addons-text-content": "^0.0.4",
+    "react-async-component": "^2.0.0",
     "react-dom": "^16.8.4",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "remark-frontmatter": "^1.3.2",
     "remark-parse": "^6.0.3",
     "resolve": "^1.10.0",
@@ -125,6 +135,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@types/fs-extra": "^8.0.0",
+    "@types/lodash.flatmap": "^4.5.6",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "mock-fs": "^4.10.1",

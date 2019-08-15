@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generate website info build stage builds a website specification for a simple project 1`] = `
+Object {
+  "packagesMeta": Array [
+    Object {
+      "author": "Jane Austen",
+      "customPackageFields": Array [
+        "author",
+      ],
+      "id": "package-1",
+    },
+  ],
+  "pages": Object {
+    "changelogPages": Array [
+      Object {
+        "changelogPath": "/content/packages/package-1/CHANGELOG.md",
+        "pageData": Object {
+          "id": "package-1",
+          "packageName": "package one",
+        },
+        "title": "Changelog",
+        "websitePath": "packages/package-1/changelog",
+      },
+    ],
+    "docsHomePages": Array [
+      Object {
+        "pageData": Object {
+          "children": Array [
+            Object {
+              "id": "guide-2",
+              "meta": Object {},
+              "pagePath": "docs/guides/guide-group-1/guide-2",
+            },
+          ],
+          "id": "guide-group-1",
+          "key": "helpful-guides",
+        },
+        "websitePath": "docs/guides/guide-group-1",
+      },
+      Object {
+        "pageData": Object {
+          "id": "package-1",
+          "packageName": "package one",
+        },
+        "title": "Documents",
+        "websitePath": "packages/package-1/docs",
+      },
+      Object {
+        "pageData": Object {
+          "children": Array [
+            Object {
+              "id": "doc-1",
+              "meta": Object {
+                "outdated": true,
+              },
+              "pagePath": "packages/package-1/docs/docs-subject-1/doc-1",
+            },
+          ],
+          "id": "docs-subject-1",
+          "key": undefined,
+        },
+        "websitePath": "packages/package-1/docs/docs-subject-1",
+      },
+    ],
+    "docsMainPages": Array [
+      Object {
+        "pageData": Object {
+          "key": "helpful-guides",
+        },
+        "title": "Helpful Guides",
+        "websitePath": "docs/guides",
+      },
+    ],
+    "examplePages": Array [
+      Object {
+        "exampleModulePath": "/content/packages/package-1/examples/example-1.js",
+        "fullscreenExampleWebsitePath": "packages/package-1/examples/isolated/example-1",
+        "pageData": Object {
+          "id": "package-1",
+          "isolatedPath": "/packages/package-1/examples/isolated/example-1",
+          "packageName": "package one",
+          "pageTitle": "Example 1",
+        },
+        "title": "Example 1",
+        "websitePath": "packages/package-1/examples/example-1",
+      },
+      Object {
+        "exampleModulePath": "/content/packages/package-1/examples/example-2.js",
+        "fullscreenExampleWebsitePath": "packages/package-1/examples/isolated/example-2",
+        "pageData": Object {
+          "id": "package-1",
+          "isolatedPath": "/packages/package-1/examples/isolated/example-2",
+          "packageName": "package one",
+          "pageTitle": "Example 2",
+        },
+        "title": "Example 2",
+        "websitePath": "packages/package-1/examples/example-2",
+      },
+      Object {
+        "exampleModulePath": "/content/packages/package-1/src/examples/sub-example-1.js",
+        "fullscreenExampleWebsitePath": "packages/package-1/subExamples/isolated/sub-example-1",
+        "pageData": Object {
+          "id": "package-1",
+          "isolatedPath": "/packages/package-1/subExamples/isolated/sub-example-1",
+          "packageName": "package one",
+          "pageTitle": "Sub Example 1",
+        },
+        "title": "Sub Example 1",
+        "websitePath": "packages/package-1/subExamples/sub-example-1",
+      },
+      Object {
+        "exampleModulePath": "/content/packages/package-1/src/examples/sub-examples-group-1/sub-example-2.js",
+        "fullscreenExampleWebsitePath": "packages/package-1/subExamples/sub-examples-group-1/isolated/sub-example-2",
+        "pageData": Object {
+          "isolatedPath": "/packages/package-1/subExamples/sub-examples-group-1/isolated/sub-example-2",
+          "pageTitle": "Sub Example 2",
+        },
+        "title": "Sub Example 2",
+        "websitePath": "packages/package-1/subExamples/sub-examples-group-1/sub-example-2",
+      },
+    ],
+    "examplesHomePages": Array [
+      Object {
+        "pageData": Object {
+          "id": "package-1",
+          "packageName": "package one",
+        },
+        "title": "Examples",
+        "websitePath": "packages/package-1/examples",
+      },
+    ],
+    "packageDocPages": Array [
+      Object {
+        "markdownPath": "/content/packages/package-1/docs/docs-subject-1/doc-1.md",
+        "meta": Object {
+          "outdated": true,
+        },
+        "pageData": Object {
+          "id": "package-1",
+          "key": undefined,
+          "packageName": "package one",
+        },
+        "websitePath": "packages/package-1/docs/docs-subject-1/doc-1",
+      },
+      Object {
+        "markdownPath": "/content/packages/package-1/docs/doc-2.md",
+        "meta": Object {},
+        "pageData": Object {
+          "id": "package-1",
+          "key": undefined,
+          "packageName": "package one",
+        },
+        "websitePath": "packages/package-1/docs/doc-2",
+      },
+    ],
+    "packageHomePages": Array [
+      Object {
+        "markdownPath": "/content/packages/package-1",
+        "meta": Object {
+          "title": "Package 1",
+        },
+        "pageData": Object {
+          "author": "Jane Austen",
+          "customPackageFields": Array [
+            "author",
+          ],
+          "id": "package-1",
+          "packageName": "package one",
+        },
+        "websitePath": "packages/package-1",
+      },
+    ],
+    "projectDocPages": Array [
+      Object {
+        "markdownPath": "/content/guides/guide-1.md",
+        "meta": Object {},
+        "pageData": Object {
+          "key": "helpful-guides",
+        },
+        "websitePath": "docs/guides/guide-1",
+      },
+      Object {
+        "markdownPath": "/content/guides/guide-group-1/guide-2.md",
+        "meta": Object {},
+        "pageData": Object {
+          "key": "helpful-guides",
+        },
+        "websitePath": "docs/guides/guide-group-1/guide-2",
+      },
+      Object {
+        "markdownPath": "/content/README.md",
+        "meta": Object {
+          "data": "readme",
+        },
+        "pageData": Object {
+          "key": "readme",
+        },
+        "websitePath": "readme",
+      },
+    ],
+  },
+  "readmePageData": Array [
+    Object {
+      "id": "packages",
+      "pagePath": "/packages",
+    },
+    Object {
+      "id": "helpful-guides",
+      "pagePath": "/docs/guides",
+    },
+  ],
+  "sitemap": Object {
+    "docs": Object {
+      "helpful-guides": Array [
+        Object {
+          "id": "guide-1",
+          "meta": Object {},
+          "pagePath": "docs/guides/guide-1",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "guide-2",
+              "meta": Object {},
+              "pagePath": "docs/guides/guide-group-1/guide-2",
+            },
+          ],
+          "id": "guide-group-1",
+          "meta": Object {},
+          "pagePath": "docs/guides/guide-group-1",
+        },
+      ],
+    },
+    "packages": Array [
+      Object {
+        "changelogPath": "/packages/package-1/changelog",
+        "docPath": "/packages/package-1/docs",
+        "docs": Array [
+          Object {
+            "children": Array [
+              Object {
+                "id": "doc-1",
+                "meta": Object {
+                  "outdated": true,
+                },
+                "pagePath": "packages/package-1/docs/docs-subject-1/doc-1",
+              },
+            ],
+            "id": "docs-subject-1",
+            "meta": Object {},
+            "pagePath": "packages/package-1/docs/docs-subject-1",
+          },
+          Object {
+            "id": "doc-2",
+            "meta": Object {},
+            "pagePath": "packages/package-1/docs/doc-2",
+          },
+        ],
+        "examplePath": "/packages/package-1/examples",
+        "examples": Array [
+          Object {
+            "id": "example-1",
+            "isolatedPagePath": "/packages/package-1/examples/isolated/example-1",
+            "pagePath": "/packages/package-1/examples/example-1",
+          },
+          Object {
+            "id": "example-2",
+            "isolatedPagePath": "/packages/package-1/examples/isolated/example-2",
+            "pagePath": "/packages/package-1/examples/example-2",
+          },
+        ],
+        "homeMeta": Object {
+          "labels": Array [
+            "important",
+            "must-read",
+          ],
+        },
+        "homePath": "/packages/package-1",
+        "packageId": "package-1",
+        "packageTitle": undefined,
+        "parentId": undefined,
+        "subExamples": Array [
+          Object {
+            "id": "sub-example-1",
+            "isolatedPagePath": "/packages/package-1/subExamples/isolated/sub-example-1",
+            "pagePath": "/packages/package-1/subExamples/sub-example-1",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "id": "sub-example-2",
+                "isolatedPagePath": "/packages/package-1/subExamples/sub-examples-group-1/isolated/sub-example-2",
+                "pagePath": "/packages/package-1/subExamples/sub-examples-group-1/sub-example-2",
+              },
+            ],
+            "id": "sub-examples-group-1",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;

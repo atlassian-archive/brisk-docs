@@ -2,10 +2,10 @@ import * as React from 'react';
 import Table from '@atlaskit/dynamic-table';
 
 import styled from 'styled-components';
-import Link from 'next/link';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
+import SwitchLink from '../src/components/switch-link';
 import Page, { Title, Section } from '../src/components/page';
 import NavigationWrapper from '../src/components/navigation-wrapper';
 import AllPackagesNavContent from '../src/components/navigation/all-packages-nav-content';
@@ -89,9 +89,7 @@ const renderRow = ({
         key: packageId,
         content: (
           <RowCell>
-            <Link href={homePath}>
-              <a>{display}</a>
-            </Link>
+            <SwitchLink href={homePath}>{() => display}</SwitchLink>
           </RowCell>
         ),
       },

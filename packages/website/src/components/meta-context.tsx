@@ -8,7 +8,7 @@ export interface LinkObject {
 }
 
 export interface DocumentObject {
-  docsPath: string;
+  path: string;
   name: string;
   description?: string;
   imgSrc?: string;
