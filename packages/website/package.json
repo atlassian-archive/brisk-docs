@@ -47,6 +47,8 @@
     "dist"
   ],
   "dependencies": {
+    "@parcel/core": "2.0.0-alpha.1.1",
+    "@parcel/config-default": "2.0.0-alpha.1.1",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
@@ -75,6 +77,7 @@
     "@babel/runtime": "^7.4.3",
     "@brisk-docs/file-viewer": "^0.2.3",
     "@brisk-docs/react-changelogs": "^0.1.9",
+    "@brisk-docs/parcel-reporter-loc": "2.0.0-alpha.0",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
