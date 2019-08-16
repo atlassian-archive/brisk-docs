@@ -1,44 +1,28 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-function linkParcel() {
+async function linkParcel() {
   const parcelHome = process.argv[2];
 
   if (!parcelHome) {
     console.warn('no parcel home provided');
     return;
   }
+  const nodeModulesParcel = path.resolve(__dirname, '../node_modules/@parcel');
 
-  const parcelCore = path.resolve(parcelHome, 'packages', 'core', 'core');
-  const parcelConfig = path.resolve(
-    parcelHome,
-    'packages',
-    'configs',
-    'default',
-  );
-  const nodeCore = path.resolve(
-    process.cwd(),
-    'node_modules',
-    '@parcel',
-    'core',
-  );
-  const nodeConfig = path.resolve(
-    process.cwd(),
-    'node_modules',
-    '@parcel',
-    'config-default',
-  );
+  try {
+    await fs.remove(nodeModulesParcel);
+    await fs.ensureSymlink(
+      path.resolve(parcelHome, 'node_modules/@parcel'),
+      nodeModulesParcel,
+    );
+  } catch (e) {
+    console.error(e);
+  }
 
-  Promise.all([
-    fs.ensureSymlink(parcelCore, nodeCore),
-    fs.ensureSymlink(parcelConfig, nodeConfig),
-  ])
-    .then(() => {
-      console.log(
-        'symlink to parcel should have been successful. Good luck deving!',
-      );
-    })
-    .catch(e => console.error(e));
+  console.log(
+    'symlink to parcel should have been successful. Good luck deving!',
+  );
 }
 
 linkParcel();

@@ -1,0 +1,4 @@
+{
+  "extends": ["@parcel/config-default"],
+  "reporters": ["...", "@brisk-docs/parcel-reporter-loc"]
+}
