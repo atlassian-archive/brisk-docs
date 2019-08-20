@@ -153,8 +153,9 @@ const getSubExamplesInPackage = async (
       async (fName): Promise<ExampleTreeNode | null> => {
         const dir = path.resolve(packagePath, fName);
         const stats = await fs.stat(dir);
-        // find all directories in the project except the top level examples
-        if (stats.isDirectory() && path.basename(dir) !== 'examples') {
+        // find all directories in the project except the top level examples and node_modules
+        const excludedDirs = ['examples', 'node_modules'];
+        if (stats.isDirectory() && !excludedDirs.includes(path.basename(dir))) {
           return getNestedExamples(dir);
         }
 

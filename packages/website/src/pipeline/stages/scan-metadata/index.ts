@@ -2,17 +2,9 @@ import fs from 'fs-extra';
 import path from 'path';
 import createStage from '../make-pipeline-stage';
 import { PackageInfo, ProjectDocsSection } from '../common/project-info';
-
+import { ProjectDocsConfig } from '../common/configuration-options';
 import getPackageInfo from './get-package-info';
 import getDocsInfo from './get-docs-info';
-
-interface ProjectDocsConfig {
-  // absolute path to the docs in the filesystem
-  path: string;
-  name: string;
-  // path in the website to display these docs
-  urlPath: string;
-}
 
 interface StageInput {
   // Absolute path to the root of the project
@@ -60,10 +52,11 @@ export default createStage(
       docs.map(({ path: docsPath, name, urlPath }) => {
         const docsInfo = getDocsInfo(docsPath);
         if (docsInfo) {
+          const websitePath = urlPath || path.relative(rootPath, docsPath);
           return {
             docs: docsInfo,
             name,
-            websitePath: urlPath,
+            websitePath,
           };
         }
 

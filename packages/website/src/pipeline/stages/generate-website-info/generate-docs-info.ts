@@ -70,7 +70,7 @@ const generateDocsInfo = (
             children: childDocs.map(child => ({
               id: child.id,
               meta: child.meta,
-              pagePath: path.join(websitePath, child.id),
+              pagePath: path.join(`/${websitePath}`, child.id),
             })),
           },
         });
@@ -87,7 +87,7 @@ const generateDocsInfo = (
 
       sitemap.push({
         id: doc.id,
-        pagePath: websitePath,
+        pagePath: path.join('/', websitePath),
         meta: doc.meta,
         children: childDocsInfo.sitemap,
       });
@@ -101,7 +101,7 @@ const generateDocsInfo = (
 
       sitemap.push({
         id: doc.id,
-        pagePath: websitePath,
+        pagePath: path.join('/', websitePath),
         meta: doc.meta,
       });
     }

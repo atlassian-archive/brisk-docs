@@ -17,12 +17,14 @@ const DocsNavContent = ({ docId }: { docId: string }) => {
 
   // NOTE this is not ideal - once we ahve better data mapping this should come
   // form the root.
+  console.log(pageInfo[docId], docId, pageInfo);
   const homeUrl =
     pageInfo[docId][0] &&
     pageInfo[docId][0].pagePath.split &&
     pageInfo[docId][0].pagePath.split('/')[1]
       ? `/${pageInfo[docId][0].pagePath.split('/')[1]}`
       : docId;
+
 
   return (
     <>

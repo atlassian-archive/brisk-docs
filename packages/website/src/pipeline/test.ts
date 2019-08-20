@@ -1,7 +1,7 @@
-import pipeline from './index';
+import { devPipeline } from './index';
 
 describe('Website pipeline integration', () => {
   it('finishes', () => {
-    return expect(pipeline()).resolves.toBeUndefined();
+    return expect(devPipeline()).resolves.toBeUndefined();
   });
 });
