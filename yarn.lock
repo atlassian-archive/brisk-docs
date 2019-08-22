@@ -3520,6 +3520,14 @@ babel-loader@^8.0.5:
     mkdirp "^0.5.1"
     util.promisify "^1.0.0"
 
+babel-merge@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/babel-merge/-/babel-merge-3.0.0.tgz#9bd368d48116dab18b8f3e8022835479d80f3b50"
+  integrity sha512-eBOBtHnzt9xvnjpYNI5HmaPp/b2vMveE5XggzqHnQeHJ8mFIBrBv6WZEVIj5jJ2uwTItkqKo9gWzEEcBxEq0yw==
+  dependencies:
+    deepmerge "^2.2.1"
+    object.omit "^3.0.0"
+
 babel-messages@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
@@ -5420,7 +5428,7 @@ deep-object-diff@^1.1.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/deep-object-diff/-/deep-object-diff-1.1.0.tgz#d6fabf476c2ed1751fc94d5ca693d2ed8c18bc5a"
   integrity sha512-b+QLs5vHgS+IoSNcUE4n9HP2NwcHj7aqnJWsjPtuG75Rh5TOaGt0OjAYInh77d5T16V5cRDC+Pw/6ZZZiETBGw==
 
-deepmerge@^2.0.1:
+deepmerge@^2.0.1, deepmerge@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
@@ -7992,9 +8000,9 @@ is-extendable@^0.1.0, is-extendable@^0.1.1:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/is-extendable/-/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"
   integrity sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=
 
-is-extendable@^1.0.1:
+is-extendable@^1.0.0, is-extendable@^1.0.1:
   version "1.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/is-extendable/-/is-extendable-1.0.1.tgz#a7470f9e426733d81bd81e1155264e3a3507cab4"
+  resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-1.0.1.tgz#a7470f9e426733d81bd81e1155264e3a3507cab4"
   integrity sha512-arnXMxT1hhoKo9k1LZdmlNyJdDDfy2v0fXjFlmok4+i8ul/6WlbVge9bhM74OpNPQPMGUToDtz+KXa1PneJxOA==
   dependencies:
     is-plain-object "^2.0.4"
@@ -10295,6 +10303,13 @@ object.getownpropertydescriptors@^2.0.3:
   dependencies:
     define-properties "^1.1.2"
     es-abstract "^1.5.1"
+
+object.omit@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object.omit/-/object.omit-3.0.0.tgz#0e3edc2fce2ba54df5577ff529f6d97bd8a522af"
+  integrity sha512-EO+BCv6LJfu+gBIF3ggLicFebFLN5zqzz/WWJlMFfkMyGth+oBkhxzDl0wx2W4GkLzuQs/FsSkXZb2IMWQqmBQ==
+  dependencies:
+    is-extendable "^1.0.0"
 
 object.pick@^1.3.0:
   version "1.3.0"

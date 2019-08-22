@@ -8,76 +8,100 @@ const resolve = require('resolve');
 module.exports = (cwd, name, target) =>
   name === 'server' && target !== 'serverless'
     ? [
-        // eslint-disable-next-line consistent-return
-        (context, request, callback) => {
-          const notExternalModules = [
-            'next/app',
-            'next/document',
-            'next/link',
-            'next/router',
-            'next/error',
-            'string-hash',
-            'hoist-non-react-statics',
-            'htmlescape',
-            'next/dynamic',
-            'next/constants',
-            'next/config',
-            'next/head',
-          ];
+      // eslint-disable-next-line consistent-return
+      (context, request, callback) => {
+        const notExternalModules = [
+          'next/app',
+          'next/document',
+          'next/link',
+          'next/router',
+          'next/error',
+          'string-hash',
+          'hoist-non-react-statics',
+          'htmlescape',
+          'next/dynamic',
+          'next/constants',
+          'next/config',
+          'next/head',
+        ];
 
-          if (notExternalModules.indexOf(request) !== -1) {
-            return callback();
-          }
+        if (notExternalModules.indexOf(request) !== -1) {
+          return callback();
+        }
 
-          resolve(
-            request,
-            { basedir: cwd, preserveSymlinks: true },
-            // eslint-disable-next-line consistent-return
-            (err, res) => {
-              if (err) {
-                return callback();
+        resolve(
+          request,
+          { basedir: cwd, preserveSymlinks: true },
+          // eslint-disable-next-line consistent-return
+          (err, res) => {
+
+            // return callback();
+            if (err) {
+              return callback();
+            }
+
+            if (!res) {
+              return callback();
+            }
+
+            if (request.match(/\.json$/)) {
+              // uhh idk man. ../../package.json can't be resolved as cjs
+              // console.log({request, res});
+              return callback();
+            }
+
+            if (res.match(/@atlaskit/)) {
+              return callback();
+            }
+            if (res.match(/@atlassian/)) {
+              return callback();
+            }
+            if (res.match(/@brisk-docs/)) {
+              return callback();
+            }
+
+            // Default pages have to be transpiled
+            if (
+              res.match(/next[/\\]dist[/\\]/) ||
+              res.match(/node_modules[/\\]@babel[/\\]runtime[/\\]/) ||
+              res.match(/node_modules[/\\]@babel[/\\]runtime-corejs2[/\\]/)
+            ) {
+              return callback();
+            }
+
+            // Webpack itself has to be compiled because it doesn't always use module relative paths
+            if (
+              res.match(/node_modules[/\\]webpack/) ||
+              res.match(/node_modules[/\\]css-loader/)
+            ) {
+              return callback();
+            }
+
+            // styled-jsx has to be transpiled
+            if (res.match(/node_modules[/\\]styled-jsx/)) {
+              return callback();
+            }
+
+            if (res.match(/jira-frontend/)) {
+              // console.log({res, request})
+              return callback(null, request);
+            }
+            if (res.match(/node_modules[/\\].*\.js$/)) {
+
+              if (res.match(/react-intl/)) {
+                console.log('cjs', {res, request})
+                return callback(null, request);
               }
+              return callback(undefined, `commonjs ${request}`);
+            }
 
-              if (!res) {
-                return callback();
-              }
-
-              if (res.match(/@atlaskit/)) {
-                return callback();
-              }
-              if (res.match(/@brisk-docs/)) {
-                return callback();
-              }
-
-              // Default pages have to be transpiled
-              if (
-                res.match(/next[/\\]dist[/\\]/) ||
-                res.match(/node_modules[/\\]@babel[/\\]runtime[/\\]/) ||
-                res.match(/node_modules[/\\]@babel[/\\]runtime-corejs2[/\\]/)
-              ) {
-                return callback();
-              }
-
-              // Webpack itself has to be compiled because it doesn't always use module relative paths
-              if (
-                res.match(/node_modules[/\\]webpack/) ||
-                res.match(/node_modules[/\\]css-loader/)
-              ) {
-                return callback();
-              }
-
-              // styled-jsx has to be transpiled
-              if (res.match(/node_modules[/\\]styled-jsx/)) {
-                return callback();
-              }
-
-              if (res.match(/node_modules[/\\].*\.js$/)) {
-                return callback(undefined, `commonjs ${request}`);
-              }
-
-              callback();
-            },
-          );
-        },
-      ]
+            callback();
+          },
+        );
+      },
+    ]
     : [];
+
+
+// skip externals - it's just an optimisation anyway, right?
+module.exports = () => [];

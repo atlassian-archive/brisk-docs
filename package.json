@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
+    "babel-merge": "^3.0.0",
     "@atlaskit/banner": "^8.0.1",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
