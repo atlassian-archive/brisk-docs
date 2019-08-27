@@ -72,6 +72,7 @@ module.exports = withTypescript(
             new webpack.ProvidePlugin({
               Props: ['pretty-proptypes', 'default'],
               FileViewer: ['@brisk-docs/file-viewer', 'default'],
+              Lazy: [path.join(__dirname, './src/components/mdx/Lazy'), 'default'],
             }),
           );
 

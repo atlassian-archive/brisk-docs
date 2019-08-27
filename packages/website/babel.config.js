@@ -41,7 +41,7 @@ let babelConfig = {
 if (
   cwd !== __dirname &&
   clientBabelConfig &&
-  fse.existsSync(path.resolve(cwd, clientBabelConfig))
+  fse.existsSync(path.resolve(cwd, clientBabelConfig) && merge)
 ) {
   // babelConfig.extends = path.resolve(cwd, clientBabelConfig);
   const clientBabel = require(path.resolve(cwd, clientBabelConfig));

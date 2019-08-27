@@ -44,11 +44,11 @@ module.exports = (cwd, name, target) =>
               return callback();
             }
 
-            if (request.match(/\.json$/)) {
-              // uhh idk man. ../../package.json can't be resolved as cjs
-              // console.log({request, res});
-              return callback();
-            }
+            // if (request.match(/\.json$/)) {
+            //   // uhh idk man. ../../package.json can't be resolved as cjs
+            //   // console.log({request, res});
+            //   return callback();
+            // }
 
             if (res.match(/@atlaskit/)) {
               return callback();
