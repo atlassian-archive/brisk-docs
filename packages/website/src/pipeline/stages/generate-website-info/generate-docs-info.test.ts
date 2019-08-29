@@ -42,12 +42,12 @@ describe('Docs tree info generator', () => {
       {
         id: 'doc-1',
         meta: { value: 'foo' },
-        pagePath: 'website/docs/doc-1',
+        pagePath: '/website/docs/doc-1',
       },
       {
         id: 'doc-2',
         meta: { value: 'bar' },
-        pagePath: 'website/docs/doc-2',
+        pagePath: '/website/docs/doc-2',
       },
     ]);
   });
@@ -109,10 +109,10 @@ describe('Docs tree info generator', () => {
     ]);
 
     const rootPage = sitemap[0];
-    expect(rootPage.pagePath).toEqual('website/docs/doc-1');
+    expect(rootPage.pagePath).toEqual('/website/docs/doc-1');
     expect(rootPage.children).toMatchObject([
-      { pagePath: 'website/docs/doc-1/doc-2' },
-      { pagePath: 'website/docs/doc-1/doc-3' },
+      { pagePath: '/website/docs/doc-1/doc-2' },
+      { pagePath: '/website/docs/doc-1/doc-3' },
     ]);
   });
 
@@ -149,7 +149,7 @@ describe('Docs tree info generator', () => {
             {
               id: 'doc-2',
               meta: { value: 'foo' },
-              pagePath: 'website/docs/doc-1/doc-2',
+              pagePath: '/website/docs/doc-1/doc-2',
             },
           ],
         },
@@ -163,7 +163,7 @@ describe('Docs tree info generator', () => {
             {
               id: 'doc-3',
               meta: { value: 'bar' },
-              pagePath: 'website/docs/doc-1/doc-2/doc-3',
+              pagePath: '/website/docs/doc-1/doc-2/doc-3',
             },
           ],
         },

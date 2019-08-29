@@ -4,7 +4,6 @@ import generatePages from './stages/generate-pages';
 import runWebsite from './stages/run-website';
 import allPaths from './getAllPaths';
 
-// @ts-ignore
 const devPipeline = (configPath?: string, nextOptions?: string[]) => {
   const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = allPaths(
     configPath,
@@ -37,9 +36,6 @@ const devPipeline = (configPath?: string, nextOptions?: string[]) => {
         nextOptions,
       }),
     );
-  // .then(() => {
-  //   console.log('Thanks for documenting with brisk-docs! 🎿');
-  // });
 };
 
 export default devPipeline;

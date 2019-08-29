@@ -1,7 +1,7 @@
 import createStage from '../make-pipeline-stage';
 
 // @ts-ignore: Importing non-ts file with no definition
-const CreateNextServer = require('./next-server');
+const createNextServer = require('./next-server');
 
 interface StageInput {}
 
@@ -11,6 +11,6 @@ interface StageInput {}
 export default createStage(
   'run-website',
   async (input: StageInput): Promise<void> => {
-    CreateNextServer(input);
+    createNextServer(input);
   },
 );

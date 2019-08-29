@@ -5,39 +5,18 @@ import {
   exportServerPipeline,
 } from './pipeline';
 
-// @ts-ignore: Importing non-ts file with no definition
-const commandLineArgs = require('command-line-args');
-
-const mainDefinitions = [{ name: 'command', defaultOption: true }];
-const mainOptions = commandLineArgs(mainDefinitions, {
-  stopAtFirstUnknown: true,
-});
-
-// We have no control over this dangling underscore
-// eslint-disable-next-line no-underscore-dangle
-const argv = mainOptions._unknown || [];
+// @ts-ignore
+import getCommandLineOptions from './get-command-line-options';
 
 const handleError = (err: any) => {
   console.error(err);
   process.exit(1);
 };
 
-const cliOptions = [
-  { name: 'config', type: String },
-  { name: 'port', alias: 'p', type: Number },
-  { name: 'debug', alias: 'd', type: Boolean },
-];
-const options = commandLineArgs(cliOptions, { argv, camelCase: true });
-
-// TODO: Do this only if the server is Next Js. Do the check for parcel/next here in future
-const nextOptions: string[] = [];
-
-if (options.port) nextOptions.push(`--port ${options.port}`);
-
-if (options.debugNext) nextOptions.push('debug-next');
+const { command, options, nextOptions } = getCommandLineOptions();
 
 const runBinary = () => {
-  switch (mainOptions.command) {
+  switch (command) {
     case 'dev': {
       return devPipeline(options.config, nextOptions).catch(handleError);
     }
@@ -59,7 +38,7 @@ const runBinary = () => {
       );
     }
     default:
-      throw new Error(`Cannot run unknown command, ${mainOptions.command}`);
+      throw new Error(`Cannot run unknown command, ${command}`);
   }
 };
 

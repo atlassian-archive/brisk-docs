@@ -1,6 +1,6 @@
 import createStage from '../make-pipeline-stage';
 // @ts-ignore
-import CreateNextServer from '../run-website/next-server';
+import createNextServer from '../run-website/next-server';
 
 interface StageInput {}
 
@@ -12,6 +12,6 @@ interface StageOutput {}
 export default createStage(
   'build-website',
   async (input: StageInput): Promise<StageOutput> => {
-    return CreateNextServer(input);
+    return createNextServer(input);
   },
 );

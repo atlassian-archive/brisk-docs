@@ -82,7 +82,7 @@ describe('Generate website info build stage', () => {
               {
                 id: 'doc-1',
                 meta: {},
-                pagePath: 'docs/amazing/section-1/doc-1',
+                pagePath: '/docs/amazing/section-1/doc-1',
               },
             ],
             id: 'section-1',
@@ -103,12 +103,12 @@ describe('Generate website info build stage', () => {
             {
               id: 'doc-1',
               meta: {},
-              pagePath: 'docs/amazing/section-1/doc-1',
+              pagePath: '/docs/amazing/section-1/doc-1',
             },
           ],
           id: 'section-1',
           meta: {},
-          pagePath: 'docs/amazing/section-1',
+          pagePath: '/docs/amazing/section-1',
         },
       ]);
     });
