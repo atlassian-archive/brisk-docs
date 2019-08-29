@@ -17,65 +17,75 @@ describe('Generate pages build stage integration', () => {
     const input: StageInput = {
       pagesPath,
       wrappersPath,
-      packageDocPages: [
-        {
-          websitePath: 'package-docs/doc1',
-          markdownPath: '/content/package-docs/doc1',
-          pageData: {},
-          meta: {},
-        },
-      ],
-      projectDocPages: [
-        {
-          websitePath: 'project-docs/doc1',
-          markdownPath: '/content/project-docs/doc1',
-          pageData: {},
-          meta: {},
-        },
-      ],
-      docsHomePages: [
-        {
-          websitePath: 'docs-home-pages/home1',
-          pageData: {},
-          title: 'home1-title',
-        },
-      ],
-      docsMainPages: [
-        {
-          websitePath: 'docs-main-pages/main1',
-          pageData: {},
-          title: 'main1-title',
-        },
-      ],
-      examplePages: [
-        {
-          websitePath: 'examples/example1',
-          fullscreenExampleWebsitePath: 'examples/example1-full',
-          exampleModulePath: '/content/examples/example1',
-          pageData: {},
-        },
-      ],
-      examplesHomePages: [
-        {
-          websitePath: 'examples-home-pages/home1',
-          pageData: {},
-        },
-      ],
-      changelogPages: [
-        {
-          websitePath: 'changelogs/changelog1',
-          changelogPath: '/content/changelogs/changelog1',
-          pageData: {},
-        },
-      ],
-      packageHomePages: [
-        {
-          websitePath: 'package-home-pages/home1',
-          markdownPath: '/content/package1/README',
-          pageData: {},
-          meta: {},
-        },
-      ],
+      pages: {
+        packageDocPages: [
+          {
+            websitePath: 'package-docs/doc1',
+            markdownPath: '/content/package-docs/doc1',
+            pageData: {},
+            meta: {},
+          },
+        ],
+        projectDocPages: [
+          {
+            websitePath: 'project-docs/doc1',
+            markdownPath: '/content/project-docs/doc1',
+            pageData: {},
+            meta: {},
+          },
+        ],
+        docsHomePages: [
+          {
+            websitePath: 'docs-home-pages/home1',
+            pageData: {},
+            title: 'home1-title',
+          },
+        ],
+        docsMainPages: [
+          {
+            websitePath: 'docs-main-pages/main1',
+            pageData: {},
+            title: 'main1-title',
+          },
+        ],
+        examplePages: [
+          {
+            websitePath: 'examples/example1',
+            fullscreenExampleWebsitePath: 'examples/example1-full',
+            exampleModulePath: '/content/examples/example1',
+            pageData: {},
+          },
+        ],
+        examplesHomePages: [
+          {
+            websitePath: 'examples-home-pages/home1',
+            pageData: {},
+          },
+        ],
+        changelogPages: [
+          {
+            websitePath: 'changelogs/changelog1',
+            changelogPath: '/content/changelogs/changelog1',
+            pageData: {},
+          },
+        ],
+        packageHomePages: [
+          {
+            websitePath: 'package-home-pages/home1',
+            markdownPath: '/content/package1/README',
+            pageData: {},
+            meta: {},
+          },
+        ],
+      },
+      packageRoot: '',
+      sitemap: { packages: [], docs: { docs: [] } },
+      readmePageData: [],
+      packagesMeta: [],
+      customPackageFields: [],
+      packagesPaths: [],
+      docs: [],
+      siteName: '',
     };
 
     await generatePagesStage(input);

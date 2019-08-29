@@ -16,14 +16,24 @@ jest.mock('./page-writers', () => ({
 const inputBase = {
   wrappersPath: 'WRAPPERS_PATH',
   pagesPath: 'PAGES_PATH',
-  packageDocPages: [],
-  projectDocPages: [],
-  docsHomePages: [],
-  docsMainPages: [],
-  examplePages: [],
-  examplesHomePages: [],
-  changelogPages: [],
-  packageHomePages: [],
+  pages: {
+    packageDocPages: [],
+    projectDocPages: [],
+    docsHomePages: [],
+    docsMainPages: [],
+    examplePages: [],
+    examplesHomePages: [],
+    changelogPages: [],
+    packageHomePages: [],
+  },
+  packageRoot: '',
+  sitemap: { packages: [], docs: { docs: [] } },
+  readmePageData: [],
+  packagesMeta: [],
+  customPackageFields: [],
+  packagesPaths: [],
+  docs: [],
+  siteName: '',
 };
 
 describe('Generate pages build stage', () => {
@@ -34,14 +44,17 @@ describe('Generate pages build stage', () => {
   it('generates package docs', async () => {
     await generatePagesStage({
       ...inputBase,
-      packageDocPages: [
-        {
-          websitePath: 'package/path/docs/doc1',
-          markdownPath: '/markdown/path/doc1',
-          pageData: { value: 'foo' },
-          meta: { value: 'bar' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        packageDocPages: [
+          {
+            websitePath: 'package/path/docs/doc1',
+            markdownPath: '/markdown/path/doc1',
+            pageData: { value: 'foo' },
+            meta: { value: 'bar' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generatePackageDocPage).toHaveBeenCalledWith(
@@ -56,14 +69,17 @@ describe('Generate pages build stage', () => {
   it('generates project/system docs', async () => {
     await generatePagesStage({
       ...inputBase,
-      projectDocPages: [
-        {
-          websitePath: 'docs/path/docs/doc1',
-          markdownPath: '/markdown/path/doc1',
-          pageData: { value: 'foo' },
-          meta: { value: 'bar' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        projectDocPages: [
+          {
+            websitePath: 'docs/path/docs/doc1',
+            markdownPath: '/markdown/path/doc1',
+            pageData: { value: 'foo' },
+            meta: { value: 'bar' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateProjectDocPage).toHaveBeenCalledWith(
@@ -78,17 +94,20 @@ describe('Generate pages build stage', () => {
   it('generates docs home pages', async () => {
     await generatePagesStage({
       ...inputBase,
-      docsHomePages: [
-        {
-          websitePath: 'docs/path/home',
-          pageData: { value: 'foo' },
-          title: 'TITLE',
-        },
-        {
-          websitePath: 'docs/path/other/home',
-          pageData: { value: 'foo' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        docsHomePages: [
+          {
+            websitePath: 'docs/path/home',
+            pageData: { value: 'foo' },
+            title: 'TITLE',
+          },
+          {
+            websitePath: 'docs/path/other/home',
+            pageData: { value: 'foo' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateDocsHomePage).toHaveBeenCalledWith(
@@ -109,17 +128,20 @@ describe('Generate pages build stage', () => {
   it('generates docs main pages', async () => {
     await generatePagesStage({
       ...inputBase,
-      docsMainPages: [
-        {
-          websitePath: 'docs/path/main',
-          pageData: { value: 'foo' },
-          title: 'TITLE',
-        },
-        {
-          websitePath: 'docs/path/other/main',
-          pageData: { value: 'foo' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        docsMainPages: [
+          {
+            websitePath: 'docs/path/main',
+            pageData: { value: 'foo' },
+            title: 'TITLE',
+          },
+          {
+            websitePath: 'docs/path/other/main',
+            pageData: { value: 'foo' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateDocumentsMainPage).toHaveBeenCalledWith(
@@ -140,15 +162,18 @@ describe('Generate pages build stage', () => {
   it('generates examples', async () => {
     await generatePagesStage({
       ...inputBase,
-      examplePages: [
-        {
-          websitePath: 'package/path/examples/example1',
-          fullscreenExampleWebsitePath: 'package/path/examples/example1-full',
-          exampleModulePath: '/examples/path/example1',
-          pageData: { value: 'foo' },
-          title: 'PAGE_TITLE',
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        examplePages: [
+          {
+            websitePath: 'package/path/examples/example1',
+            fullscreenExampleWebsitePath: 'package/path/examples/example1-full',
+            exampleModulePath: '/examples/path/example1',
+            pageData: { value: 'foo' },
+            title: 'PAGE_TITLE',
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateExamplePage).toHaveBeenCalledWith(
@@ -164,17 +189,20 @@ describe('Generate pages build stage', () => {
   it('generates examples home pages', async () => {
     await generatePagesStage({
       ...inputBase,
-      examplesHomePages: [
-        {
-          websitePath: 'examples/path/home',
-          pageData: { value: 'foo' },
-          title: 'TITLE',
-        },
-        {
-          websitePath: 'examples/path/other/home',
-          pageData: { value: 'foo' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        examplesHomePages: [
+          {
+            websitePath: 'examples/path/home',
+            pageData: { value: 'foo' },
+            title: 'TITLE',
+          },
+          {
+            websitePath: 'examples/path/other/home',
+            pageData: { value: 'foo' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateExamplesHomePage).toHaveBeenCalledWith(
@@ -195,19 +223,22 @@ describe('Generate pages build stage', () => {
   it('generates package changelogs', async () => {
     await generatePagesStage({
       ...inputBase,
-      changelogPages: [
-        {
-          websitePath: 'package/path/changelog',
-          changelogPath: '/package/changelog',
-          pageData: { value: 'foo' },
-          title: 'TITLE',
-        },
-        {
-          websitePath: 'other/package/path/changelog',
-          changelogPath: '/other/package/changelog',
-          pageData: { value: 'foo' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        changelogPages: [
+          {
+            websitePath: 'package/path/changelog',
+            changelogPath: '/package/changelog',
+            pageData: { value: 'foo' },
+            title: 'TITLE',
+          },
+          {
+            websitePath: 'other/package/path/changelog',
+            changelogPath: '/other/package/changelog',
+            pageData: { value: 'foo' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateChangelogPage).toHaveBeenCalledWith(
@@ -230,14 +261,17 @@ describe('Generate pages build stage', () => {
   it('generates package home pages', async () => {
     await generatePagesStage({
       ...inputBase,
-      packageHomePages: [
-        {
-          websitePath: 'package/path',
-          markdownPath: '/markdown/path/package1',
-          pageData: { value: 'foo' },
-          meta: { value: 'bar' },
-        },
-      ],
+      pages: {
+        ...inputBase.pages,
+        packageHomePages: [
+          {
+            websitePath: 'package/path',
+            markdownPath: '/markdown/path/package1',
+            pageData: { value: 'foo' },
+            meta: { value: 'bar' },
+          },
+        ],
+      },
     });
 
     expect(pageWriters.generateHomePage).toHaveBeenCalledWith(
