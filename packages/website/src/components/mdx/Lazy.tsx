@@ -3,9 +3,9 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 export default <Props extends {}>({
-                                    componentPromise, // TODO rename
-                                    getProps = () => ({} as Props),
-                                  }: {
+  componentPromise, // TODO rename
+  getProps = () => ({} as Props),
+}: {
   componentPromise: () => Promise<React.ComponentClass<Props>>;
   getProps: () => Props;
 }) => {

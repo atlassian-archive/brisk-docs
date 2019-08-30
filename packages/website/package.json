@@ -73,6 +73,7 @@
     "@zeit/next-mdx": "^1.2.0",
     "@zeit/next-typescript": "^1.1.1",
     "babel-loader": "^8.0.5",
+    "babel-merge": "^3.0.0",
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-styled-components": "^1.10.0",
     "babel-plugin-transform-dynamic-import": "^2.1.0",

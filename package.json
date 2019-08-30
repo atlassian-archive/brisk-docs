@@ -45,7 +45,6 @@
   },
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
-    "babel-merge": "^3.0.0",
     "@atlaskit/banner": "^8.0.1",
     "@atlaskit/breadcrumbs": "^8.0.0",
     "@atlaskit/button": "^8.2.4",
@@ -94,6 +93,7 @@
     "@zeit/next-mdx": "^1.2.0",
     "@zeit/next-typescript": "^1.1.1",
     "babel-loader": "^8.0.5",
+    "babel-merge": "^3.0.0",
     "babel-plugin-transform-dynamic-import": "^2.1.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "bolt-check": "^0.2.0",
