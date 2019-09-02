@@ -17,7 +17,7 @@ const customBabelConfig = path.join(
   'custom-babel-project/docs.config',
 );
 
-describe('Website generation integration tests', () => {
+describe.skip('Website generation integration tests', () => {
   it('can build a project with a custom Webpack configuration', () => {
     // assert that the website builds without error
     return build(customWebpackConfig);

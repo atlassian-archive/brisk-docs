@@ -30,7 +30,7 @@ Object {
             Object {
               "id": "guide-2",
               "meta": Object {},
-              "pagePath": "docs/guides/guide-group-1/guide-2",
+              "pagePath": "/docs/guides/guide-group-1/guide-2",
             },
           ],
           "id": "guide-group-1",
@@ -54,7 +54,7 @@ Object {
               "meta": Object {
                 "outdated": true,
               },
-              "pagePath": "packages/package-1/docs/docs-subject-1/doc-1",
+              "pagePath": "/packages/package-1/docs/docs-subject-1/doc-1",
             },
           ],
           "id": "docs-subject-1",
@@ -216,19 +216,19 @@ Object {
         Object {
           "id": "guide-1",
           "meta": Object {},
-          "pagePath": "docs/guides/guide-1",
+          "pagePath": "/docs/guides/guide-1",
         },
         Object {
           "children": Array [
             Object {
               "id": "guide-2",
               "meta": Object {},
-              "pagePath": "docs/guides/guide-group-1/guide-2",
+              "pagePath": "/docs/guides/guide-group-1/guide-2",
             },
           ],
           "id": "guide-group-1",
           "meta": Object {},
-          "pagePath": "docs/guides/guide-group-1",
+          "pagePath": "/docs/guides/guide-group-1",
         },
       ],
     },
@@ -244,17 +244,17 @@ Object {
                 "meta": Object {
                   "outdated": true,
                 },
-                "pagePath": "packages/package-1/docs/docs-subject-1/doc-1",
+                "pagePath": "/packages/package-1/docs/docs-subject-1/doc-1",
               },
             ],
             "id": "docs-subject-1",
             "meta": Object {},
-            "pagePath": "packages/package-1/docs/docs-subject-1",
+            "pagePath": "/packages/package-1/docs/docs-subject-1",
           },
           Object {
             "id": "doc-2",
             "meta": Object {},
-            "pagePath": "packages/package-1/docs/doc-2",
+            "pagePath": "/packages/package-1/docs/doc-2",
           },
         ],
         "examplePath": "/packages/package-1/examples",

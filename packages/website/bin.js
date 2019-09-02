@@ -3,6 +3,6 @@
 
 'use strict';
 
-const runPipeline = require('./').default;
+const runBinary = require('./').default;
 
-runPipeline().catch(e => console.error(e));
+runBinary().catch(e => console.error(e));

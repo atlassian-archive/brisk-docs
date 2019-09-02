@@ -204,6 +204,89 @@ const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
   generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
 
+/**
+ * Clean up packages and docs so we don't have ghost pages
+ * @param pagesPath the absolute path to the `/pages` directory in next
+ * @param docsList list of documents
+ */
+const cleanPages = async pagesPath => {
+  // This error handling should likely be lifted to when we start executing the whole thing
+  if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
+    throw new Error(
+      "We were worried we were going to erase files from the wrong place so we're stopping",
+    );
+  }
+
+  await fs.remove(pagesPath);
+};
+
+/**
+ * Adds the default pages into the pages directory
+ * @param packageRoot root path of packages
+ * @param pagesPath the pages directory path
+ */
+const addBasePages = async (packageRoot, pagesPath) => {
+  const defaultPagesPath = path.join(packageRoot, 'default-pages');
+  await fs.copy(defaultPagesPath, pagesPath);
+};
+
+/**
+ * Generates the JSONs in the data folder
+ * @param input the path and contents for generating JSON
+ */
+const generateDataPages = input => {
+  const pagesListPath = path.resolve(input.packageRoot, 'data/pages-list.json');
+  writeFile(
+    pagesListPath,
+    JSON.stringify(
+      {
+        packages: input.sitemap.packages,
+        ...input.sitemap.docs,
+        readme: input.readmePageData,
+      },
+      undefined,
+      2,
+    ),
+  );
+
+  const packagesDataPath = path.resolve(
+    input.packageRoot,
+    'data/packages-data.json',
+  );
+  writeFile(
+    packagesDataPath,
+    JSON.stringify({ metaData: input.packagesMeta }, undefined, 2),
+  );
+
+  const readMe =
+    input.readmePageData && input.readmePageData.length > 0
+      ? {
+          imgSrc: input.readMeImgSrc,
+        }
+      : undefined;
+
+  const packagesMeta = {
+    description: input.packagesDescription,
+    imgSrc: input.packagesImgSrc,
+  };
+
+  const metaPath = path.resolve(input.packageRoot, 'data/site-meta.json');
+  writeFile(
+    metaPath,
+    JSON.stringify(
+      {
+        siteName: input.siteName,
+        packages: packagesMeta,
+        links: input.links,
+        readMe,
+        docs: input.docs,
+      },
+      undefined,
+      2,
+    ),
+  );
+};
+
 module.exports = {
   generateHomePage,
   generateChangelogPage,
@@ -213,4 +296,8 @@ module.exports = {
   generateExamplesHomePage,
   generateProjectDocPage,
   generateDocumentsMainPage,
+  addBasePages,
+  cleanPages,
+  writeFile,
+  generateDataPages,
 };
