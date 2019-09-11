@@ -19,7 +19,7 @@ const withImages = require('next-images');
 const path = require('path');
 
 const getExternals = require('./un-src/next-externals');
-const handleConfig = require('./handle-config');
+const handleConfig = require('./handle-config').default;
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
 const cwd = process.env.DOCS_WEBSITE_CWD;

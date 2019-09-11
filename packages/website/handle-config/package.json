@@ -1,0 +1,7 @@
+{
+    "main":"dist/website.cjs.js",
+    "module":"dist/website.esm.js",
+    "preconstruct": {
+        "source": "../src/handle-config"
+    }
+}

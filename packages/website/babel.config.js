@@ -1,7 +1,7 @@
 const fse = require('fs-extra');
 const path = require('path');
 
-const handleConfig = require('./handle-config');
+const handleConfig = require('./handle-config').default;
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
 const cwd = process.env.DOCS_WEBSITE_CWD;

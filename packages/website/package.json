@@ -44,6 +44,7 @@
     "tsconfig.json",
     "bin.js",
     "dist",
+    "handle-config",
     "un-src"
   ],
   "dependencies": {
