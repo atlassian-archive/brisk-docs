@@ -48,7 +48,6 @@ const generateGenericPage = (
 export default createStage(
   'generate-pages',
   async (input: StageInput): Promise<StageOutput> => {
-    console.log(input);
     const { pagesPath, wrappersPath } = input;
     await cleanPages(pagesPath);
     await addBasePages(input.packageRoot, pagesPath);
