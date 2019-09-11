@@ -27,4 +27,4 @@ const wrappedComponentTemplate = (
   );
 `;
 
-module.exports = wrappedComponentTemplate;
+export default wrappedComponentTemplate;

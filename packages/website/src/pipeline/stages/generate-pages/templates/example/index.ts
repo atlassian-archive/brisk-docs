@@ -41,4 +41,4 @@ const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     export default () => <DynamicComponent/>
 `;
 
-module.exports = exampleTemplate;
+export default exampleTemplate;

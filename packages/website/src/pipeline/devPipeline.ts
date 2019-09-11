@@ -4,12 +4,10 @@ import generatePages from './stages/generate-pages';
 import runWebsite from './stages/run-website';
 import allPaths from './getAllPaths';
 
-const devPipeline = (configPath?: string, nextOptions?: string[]) => {
-  const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = allPaths(
+const devPipeline = async (configPath?: string, nextOptions?: string[]) => {
+  const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = await allPaths(
     configPath,
   );
-
-  // const port = maybePort || '3001';
 
   return scanMetadata({
     rootPath,

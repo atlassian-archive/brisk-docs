@@ -21,4 +21,4 @@ const changelogTemplate = (changelogPath, wrapperPath, data = {}) => outdent`
   );
 `;
 
-module.exports = changelogTemplate;
+export default changelogTemplate;

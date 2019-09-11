@@ -1,6 +1,6 @@
-const { spawnSync } = require('child_process');
+import { spawnSync } from 'child_process';
 
-module.exports = async function spawnNextProcess({
+export default async function spawnNextProcess({
   command,
   configPath,
   pkgRoot,
@@ -40,4 +40,4 @@ module.exports = async function spawnNextProcess({
   if (status !== 0) {
     throw new Error(`Next ${command} failed with exit code ${status}`);
   }
-};
+}

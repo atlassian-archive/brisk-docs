@@ -109,6 +109,7 @@
     "next": "^8.0.4",
     "next-images": "^1.1.1",
     "outdent": "^0.7.0",
+    "pkg-dir": "^4.2.0",
     "pretty-proptypes": "^0.6.6",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",

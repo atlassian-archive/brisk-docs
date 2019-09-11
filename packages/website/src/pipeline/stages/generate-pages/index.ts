@@ -3,8 +3,7 @@ import { GenericPage } from '../common/page-specs';
 import { BriskConfiguration } from '../common/configuration-options';
 import { StageOutput as WebsiteInfoSpec } from '../generate-website-info';
 
-// @ts-ignore: Importing non-ts file with no definition
-const pageWriters = require('./page-writers');
+import * as pageWriters from './page-writers';
 
 const {
   generatePackageDocPage,

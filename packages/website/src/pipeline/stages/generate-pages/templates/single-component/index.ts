@@ -17,4 +17,4 @@ const basicSingleComponentTemplate = (wrapperPath, data = {}) => outdent`
     );
 `;
 
-module.exports = basicSingleComponentTemplate;
+export default basicSingleComponentTemplate;

@@ -1,12 +1,12 @@
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
-const {
+import {
   changelogTemplate,
   exampleTemplate,
   singleComponentTemplate,
   wrappedComponentTemplate,
-} = require('./templates');
+} from './templates';
 
 const writeFile = (pagePath, content) => {
   fs.ensureFileSync(pagePath);
@@ -100,11 +100,11 @@ const generateNonComponentPage = (
   );
 };
 
-const generateHomePage = (pagePath, readmePath, data, config, meta) => {
+export const generateHomePage = (pagePath, readmePath, data, config, meta) => {
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, meta);
 };
 
-const generateChangelogPage = (
+export const generateChangelogPage = (
   pagePath,
   changelogPath,
   data,
@@ -137,11 +137,17 @@ const generateChangelogPage = (
   writeFile(path.join(pagesPath, pagePath), source);
 };
 
-const generatePackageDocPage = (pagePath, markdownPath, data, config, meta) => {
+export const generatePackageDocPage = (
+  pagePath,
+  markdownPath,
+  data,
+  config,
+  meta,
+) => {
   generateBasicPage(pagePath, markdownPath, data, 'package-docs', config, meta);
 };
 
-const generateExamplePage = (
+export const generateExamplePage = (
   pagePath,
   rawPagesPath,
   exampleModulePath,
@@ -174,11 +180,16 @@ const generateExamplePage = (
   );
 };
 
-const generateDocsHomePage = (pagePath, data, config, title = '') => {
+export const generateDocsHomePage = (pagePath, data, config, title = '') => {
   generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
 };
 
-const generateDocumentsMainPage = (pagePath, data, config, title = '') => {
+export const generateDocumentsMainPage = (
+  pagePath,
+  data,
+  config,
+  title = '',
+) => {
   generateNonComponentPage(
     pagePath,
     data,
@@ -189,7 +200,12 @@ const generateDocumentsMainPage = (pagePath, data, config, title = '') => {
   );
 };
 
-const generateExamplesHomePage = (pagePath, data, config, title = '') => {
+export const generateExamplesHomePage = (
+  pagePath,
+  data,
+  config,
+  title = '',
+) => {
   generateNonComponentPage(
     pagePath,
     data,
@@ -200,7 +216,13 @@ const generateExamplesHomePage = (pagePath, data, config, title = '') => {
   );
 };
 
-const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
+export const generateProjectDocPage = (
+  pagePath,
+  markdownPath,
+  data,
+  config,
+  meta,
+) => {
   generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
 
@@ -209,7 +231,7 @@ const generateProjectDocPage = (pagePath, markdownPath, data, config, meta) => {
  * @param pagesPath the absolute path to the `/pages` directory in next
  * @param docsList list of documents
  */
-const cleanPages = async pagesPath => {
+export const cleanPages = async pagesPath => {
   // This error handling should likely be lifted to when we start executing the whole thing
   if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
     throw new Error(
@@ -225,7 +247,7 @@ const cleanPages = async pagesPath => {
  * @param packageRoot root path of packages
  * @param pagesPath the pages directory path
  */
-const addBasePages = async (packageRoot, pagesPath) => {
+export const addBasePages = async (packageRoot, pagesPath) => {
   const defaultPagesPath = path.join(packageRoot, 'default-pages');
   await fs.copy(defaultPagesPath, pagesPath);
 };
@@ -234,7 +256,7 @@ const addBasePages = async (packageRoot, pagesPath) => {
  * Generates the JSONs in the data folder
  * @param input the path and contents for generating JSON
  */
-const generateDataPages = input => {
+export const generateDataPages = input => {
   const pagesListPath = path.resolve(input.packageRoot, 'data/pages-list.json');
   writeFile(
     pagesListPath,
@@ -285,19 +307,4 @@ const generateDataPages = input => {
       2,
     ),
   );
-};
-
-module.exports = {
-  generateHomePage,
-  generateChangelogPage,
-  generatePackageDocPage,
-  generateExamplePage,
-  generateDocsHomePage,
-  generateExamplesHomePage,
-  generateProjectDocPage,
-  generateDocumentsMainPage,
-  addBasePages,
-  cleanPages,
-  writeFile,
-  generateDataPages,
 };
