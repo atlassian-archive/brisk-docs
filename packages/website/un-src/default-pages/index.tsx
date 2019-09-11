@@ -9,14 +9,14 @@ import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import { colors, math, gridSize } from '@atlaskit/theme';
 import WidthDetector from '@atlaskit/width-detector';
 
-import { Section } from '../src/components/page';
-import Panel, { PanelGrid } from '../src/components/panel';
+import { Section } from '../components/page';
+import Panel, { PanelGrid } from '../components/panel';
 import Meta, {
   LinkObject,
   DocumentObject,
   ReadMeObject,
   PackagesObject,
-} from '../src/components/meta-context';
+} from '../components/meta-context';
 
 const WINDOW_BREAKPOINT = 800;
 

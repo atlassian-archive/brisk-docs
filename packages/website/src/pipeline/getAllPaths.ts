@@ -8,7 +8,10 @@ const getPathData = async (configPath?: string) => {
 
   const pkgRoot = await pkgDir(__dirname);
   if (!pkgRoot) throw new Error('could not resolve pkg root');
-  const wrappersPath = path.resolve(pkgRoot, `./src/components/page-templates`);
+  const wrappersPath = path.resolve(
+    pkgRoot,
+    `./un-src/components/page-templates`,
+  );
   const pagesPath = path.resolve(pkgRoot, `./pages`);
 
   return {

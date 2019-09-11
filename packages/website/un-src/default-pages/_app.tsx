@@ -2,9 +2,9 @@ import * as React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import '@atlaskit/css-reset';
 import { MDXProvider } from '@mdx-js/tag';
-import components from '../src/components/mdx';
-import Meta, { metadata } from '../src/components/meta-context';
-import Title from '../src/components/page-title';
+import components from '../components/mdx';
+import Meta, { metadata } from '../components/meta-context';
+import Title from '../components/page-title';
 
 export type Props = {
   pageProps: any;

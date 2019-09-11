@@ -6,16 +6,16 @@ import Link from 'next/link';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
-import Page, { Title, Section } from '../src/components/page';
-import NavigationWrapper from '../src/components/navigation-wrapper';
-import AllPackagesNavContent from '../src/components/navigation/all-packages-nav-content';
+import Page, { Title, Section } from '../components/page';
+import NavigationWrapper from '../components/navigation-wrapper';
+import AllPackagesNavContent from '../components/navigation/all-packages-nav-content';
 
-import data from '../src/pages-list';
+import data from '../pages-list';
 // @ts-ignore - ts cannot resolve file when it doesn't exist, which it won't always
-import meta2 from '../data/packages-data.json';
-import PageTitle from '../src/components/page-title';
+import meta2 from '../../data/packages-data.json';
+import PageTitle from '../components/page-title';
 
-import { PackageInfo, PackageMetadata } from '../types';
+import { PackageInfo, PackageMetadata } from '../../types';
 
 const meta: PackageMetadata = meta2;
 

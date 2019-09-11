@@ -248,7 +248,7 @@ export const cleanPages = async pagesPath => {
  * @param pagesPath the pages directory path
  */
 export const addBasePages = async (packageRoot, pagesPath) => {
-  const defaultPagesPath = path.join(packageRoot, 'default-pages');
+  const defaultPagesPath = path.join(packageRoot, 'un-src', 'default-pages');
   await fs.copy(defaultPagesPath, pagesPath);
 };
 

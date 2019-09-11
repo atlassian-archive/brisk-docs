@@ -1,16 +1,13 @@
 const fse = require('fs-extra');
 const path = require('path');
 
-const handleConfig = require('./src/bin/handle-config');
+const handleConfig = require('./handle-config');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
-let cwd = process.env.DOCS_WEBSITE_CWD;
+const cwd = process.env.DOCS_WEBSITE_CWD;
 
 if (!cwd) {
-  throw new Error('NOPE');
-  // I'm not 1000% happy with this, let's talk about it:
-  // For local dev
-  cwd = process.cwd();
+  throw new Error('DOCS_WEBSITE_CWD is not defined');
 }
 
 const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(

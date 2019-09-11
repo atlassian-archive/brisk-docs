@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import SwitchLink from '../../src/components/switch-link';
+import SwitchLink from '../../un-src/components/switch-link';
 
 const children = 'some text';
 
