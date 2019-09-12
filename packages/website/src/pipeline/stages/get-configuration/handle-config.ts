@@ -46,7 +46,7 @@ const processConfig = (
 
   const docsConfig = Array.isArray(docs) ? docs : [docs];
   const docsList: ProjectDocsConfig[] = docsConfig.map(doc => {
-    const { name, path: docPath, urlPath } = doc;
+    const { name, path: docPath, urlPath, imgSrc, description } = doc;
 
     if (!name) throw new Error('name must be provided for all the docs items');
     if (!docPath) {
@@ -54,7 +54,7 @@ const processConfig = (
     }
     const docsPath = path.resolve(cwd, docPath);
 
-    return { name, path: docsPath, urlPath };
+    return { name, path: docsPath, urlPath, imgSrc, description };
   });
 
   const readmePath = path.resolve(cwd, 'README.md');

@@ -4,6 +4,7 @@ export interface ProjectDocsConfig {
   name: string;
   // path in the website to display these docs
   urlPath?: string;
+  imgPath?: string;
 }
 
 export interface BriskConfiguration {
