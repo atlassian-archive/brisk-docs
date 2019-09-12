@@ -1,13 +1,23 @@
-const { spawnSync } = require('child_process');
+import { spawnSync } from 'child_process';
 
-module.exports = async function spawnNextProcess({
+export default async function spawnNextProcess({
   command,
   configPath,
   pkgRoot,
   rootPath,
-  nextOptions,
+  nextOptions = [],
+}: {
+  command: string;
+  configPath?: string;
+  pkgRoot: string;
+  rootPath: string;
+  nextOptions?: string[];
 }) {
-  const envVariables = {
+  const envVariables: {
+    FORCE_EXTRACT_REACT_TYPES: boolean;
+    DOCS_WEBSITE_CWD: string;
+    DOCS_WEBSITE_CONFIG_PATH?: string;
+  } = {
     FORCE_EXTRACT_REACT_TYPES: true,
     DOCS_WEBSITE_CWD: rootPath,
   };
@@ -26,6 +36,7 @@ module.exports = async function spawnNextProcess({
   const { status } = spawnSync(
     `${nodeEnv} ${nextBin} ${command} ${filteredArgs.join(' ')}`,
     [],
+    // @ts-ignore
     {
       stdio: 'inherit',
       shell: true,
@@ -40,4 +51,4 @@ module.exports = async function spawnNextProcess({
   if (status !== 0) {
     throw new Error(`Next ${command} failed with exit code ${status}`);
   }
-};
+}

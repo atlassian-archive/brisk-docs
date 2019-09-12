@@ -9,7 +9,11 @@ const outdent = require('outdent');
  *
  * @returns {string} source code for the page
  */
-const changelogTemplate = (changelogPath, wrapperPath, data = {}) => outdent`
+const changelogTemplate = (
+  changelogPath: string,
+  wrapperPath: string,
+  data = {},
+) => outdent`
   import React from 'react';
   import changelog from '!!raw-loader!${changelogPath}';
   import Wrapper from '${wrapperPath}';
@@ -21,4 +25,4 @@ const changelogTemplate = (changelogPath, wrapperPath, data = {}) => outdent`
   );
 `;
 
-module.exports = changelogTemplate;
+export default changelogTemplate;

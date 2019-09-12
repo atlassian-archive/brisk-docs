@@ -12,38 +12,41 @@
   ],
   "license": "MIT",
   "scripts": {
-    "debug:generate": "node --inspect-brk src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
+    "debug:generate": "node --inspect-brk bin.js dev --config=dummy-data/simple-project/docs.config.js",
     "debug:next": "yarn dev --debug-next",
-    "dev": "node src/bin/index.js dev --config=dummy-data/simple-project/docs.config.js",
-    "dev:complete": "node src/bin/index.js dev --config=dummy-data/complete-config-project/docs.config.js",
-    "dev:webpack": "node src/bin/index.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
-    "build:site": "node src/bin/index.js build --config=dummy-data/simple-project/docs.config.js",
-    "build:site:complete": "node src/bin/index.js build --config=dummy-data/complete-config-project/docs.config.js",
-    "export:site": "node src/bin/index.js export --config=dummy-data/simple-project/docs.config.js",
+    "dev": "node bin.js dev --config=dummy-data/simple-project/docs.config.js",
+    "dev:complete": "node bin.js dev --config=dummy-data/complete-config-project/docs.config.js",
+    "dev:webpack": "node bin.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
+    "build:site": "node bin.js build --config=dummy-data/simple-project/docs.config.js",
+    "build:site:complete": "node bin.js build --config=dummy-data/complete-config-project/docs.config.js",
+    "export:site": "node bin.js export --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
-    "start": "node src/bin/index.js start",
-    "start:complete": "node src/bin/index.js start --config=dummy-data/complete-config-project/docs.config.js"
+    "start": "node bin.js start",
+    "start:complete": "node bin.js start --config=dummy-data/complete-config-project/docs.config.js"
   },
   "bin": {
-    "brisk": "src/bin/index.js",
-    "brisk-next": "bin.js"
+    "brisk": "bin.js"
   },
   "engines": {
     "node": ">=10.0.0"
   },
+  "preconstruct": {
+    "entrypoints": [
+      ".",
+      "handle-config"
+    ]
+  },
   "files": [
-    "src",
-    "default-pages",
     "static",
-    "custom-plugins",
+    "default-pages",
     "babel.config.js",
-    "generate-pages.js",
     "next.config.js",
-    "next-externals.js",
     "types.ts",
     "tsconfig.json",
     "bin.js",
-    "dist"
+    "dist",
+    "handle-config",
+    "un-src"
   ],
   "dependencies": {
     "@atlaskit/avatar": "^14.1.8",
@@ -110,6 +113,7 @@
     "next": "^8.0.4",
     "next-images": "^1.1.1",
     "outdent": "^0.7.0",
+    "pkg-dir": "^4.2.0",
     "pretty-proptypes": "^0.6.6",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
 import { NextContext } from 'next';
 
-import LinkButton from '../src/components/link-button';
+import LinkButton from '../un-src/components/link-button';
 
 const Page = styled.div`
   background-color: ${colors.B500};

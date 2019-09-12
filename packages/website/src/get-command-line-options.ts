@@ -1,6 +1,6 @@
-const commandLineArgs = require('command-line-args');
+import commandLineArgs from 'command-line-args';
 
-module.exports = function getCommandLineOptions() {
+export default function getCommandLineOptions() {
   const mainDefinitions = [{ name: 'command', defaultOption: true }];
   const mainOptions = commandLineArgs(mainDefinitions, {
     stopAtFirstUnknown: true,
@@ -25,4 +25,4 @@ module.exports = function getCommandLineOptions() {
   if (options.debugNext) nextOptions.push('debug-next');
 
   return { command: mainOptions.command, options, nextOptions };
-};
+}

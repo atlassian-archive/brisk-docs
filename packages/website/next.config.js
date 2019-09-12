@@ -6,7 +6,7 @@ const webpack = require('webpack');
 
 const frontmatter = require('remark-frontmatter');
 // eslint-disable-next-line
-const images = require('./custom-plugins/mdx-image-loader');
+const images = require('./un-src/custom-plugins/mdx-image-loader');
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -18,8 +18,8 @@ const withCSS = require('@zeit/next-css');
 const withImages = require('next-images');
 const path = require('path');
 
-const getExternals = require('./next-externals');
-const handleConfig = require('./src/bin/handle-config');
+const getExternals = require('./un-src/next-externals');
+const handleConfig = require('./handle-config').default;
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
 const cwd = process.env.DOCS_WEBSITE_CWD;

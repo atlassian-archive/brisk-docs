@@ -10,7 +10,11 @@ const outdent = require('outdent');
  *
  * @returns {string} source code for the page
  */
-const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
+const exampleTemplate = (
+  componentPath: string,
+  wrapperPath: string,
+  data = {},
+) => outdent`
     import React from 'react';
     import dynamic from 'next/dynamic';
     import fileContents from '!!raw-loader!${componentPath}';
@@ -41,4 +45,4 @@ const exampleTemplate = (componentPath, wrapperPath, data = {}) => outdent`
     export default () => <DynamicComponent/>
 `;
 
-module.exports = exampleTemplate;
+export default exampleTemplate;

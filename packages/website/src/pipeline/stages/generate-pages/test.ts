@@ -45,6 +45,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates package docs', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -70,6 +71,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates project/system docs', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -95,6 +97,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates docs home pages', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -129,6 +132,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates docs main pages', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -163,6 +167,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates examples', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -190,6 +195,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates examples home pages', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -224,6 +230,7 @@ describe('Generate pages build stage', () => {
   });
 
   it('generates package changelogs', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {
@@ -249,7 +256,6 @@ describe('Generate pages build stage', () => {
       '/package/changelog',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
-      'TITLE',
     );
 
     expect(pageWriters.generateChangelogPage).toHaveBeenCalledWith(
@@ -257,11 +263,11 @@ describe('Generate pages build stage', () => {
       '/other/package/changelog',
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
-      undefined,
     );
   });
 
   it('generates package home pages', async () => {
+    // @ts-ignore
     await generatePagesStage({
       ...inputBase,
       pages: {

@@ -3,8 +3,7 @@ import { GenericPage } from '../common/page-specs';
 import { BriskConfiguration } from '../common/configuration-options';
 import { StageOutput as WebsiteInfoSpec } from '../generate-website-info';
 
-// @ts-ignore: Importing non-ts file with no definition
-const pageWriters = require('./page-writers');
+import * as pageWriters from './page-writers';
 
 const {
   generatePackageDocPage,
@@ -48,7 +47,6 @@ const generateGenericPage = (
 export default createStage(
   'generate-pages',
   async (input: StageInput): Promise<StageOutput> => {
-    console.log(input);
     const { pagesPath, wrappersPath } = input;
     await cleanPages(pagesPath);
     await addBasePages(input.packageRoot, pagesPath);
@@ -59,9 +57,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generatePackageDocPage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },
@@ -71,9 +70,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generateProjectDocPage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },
@@ -99,13 +99,12 @@ export default createStage(
     );
 
     input.pages.changelogPages.forEach(
-      ({ websitePath, changelogPath, pageData, title }) => {
+      ({ websitePath, changelogPath, pageData }) => {
         generateChangelogPage(
           `${websitePath}.js`,
-          changelogPath,
+          changelogPath!,
           pageData,
           generatorConfig,
-          title,
         );
       },
     );
@@ -114,9 +113,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generateHomePage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },
