@@ -38,6 +38,7 @@
   },
   "files": [
     "static",
+    "default-pages",
     "babel.config.js",
     "next.config.js",
     "types.ts",

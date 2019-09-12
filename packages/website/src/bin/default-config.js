@@ -1,10 +1,6 @@
-import identityFunc from 'lodash.identity';
+const identityFunc = require('lodash.identity');
 
-import { UserConfig } from '../common/configuration-options';
-
-// type FilledConfig =
-
-const defaultConfig: UserConfig = {
+module.exports = {
   docs: {
     path: './docs',
     name: 'Docs',
@@ -18,5 +14,3 @@ const defaultConfig: UserConfig = {
   packagesDescription: 'View documentation about individual packages',
   customPackageFields: ['license', 'maintainers', 'name', 'version'],
 };
-
-export default defaultConfig;

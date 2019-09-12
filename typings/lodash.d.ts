@@ -17,6 +17,12 @@ declare module 'lodash.snakecase' {
   export default snakeCase;
 }
 
+declare module 'lodash.identity' {
+  import { identity } from 'lodash';
+
+  export default identity;
+}
+
 declare module 'lodash.capitalize' {
   import { capitalize } from 'lodash';
 

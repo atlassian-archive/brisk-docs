@@ -11,6 +11,8 @@ export interface BriskConfiguration {
   readmePath?: string;
   // Array of fields from the relevant package.json to display on the package home page. These are added to the default set.
   customPackageFields: string[];
+  webpack: (t: any) => any;
+  showSubExamples: boolean;
   docs: ProjectDocsConfig[];
   packagesPaths: string[];
   siteName: string;
@@ -34,6 +36,8 @@ export interface UserConfig {
   readMePath?: string;
   // Array of fields from the relevant package.json to display on the package home page. These are added to the default set.
   customPackageFields: string[];
+  webpack: (t: any) => any;
+  showSubExamples: boolean;
   docs: UserDocsConfig | UserDocsConfig[];
   // Path or array of paths of packages to show. Glob patterns are allowed. e.g. `path.join(__dirname, 'packages', '*')`
   packages: string[];
