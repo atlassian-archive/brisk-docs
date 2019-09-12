@@ -38,7 +38,7 @@ describe('Home page', () => {
           href: 'http://localhost:3000/readme',
           img: {
             alt: 'Get Started graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: '/static/simplify.svg',
           },
           target: '',
         },
@@ -48,7 +48,7 @@ describe('Home page', () => {
           href: 'http://localhost:3000/packages',
           img: {
             alt: 'Packages graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: '/static/simplify.svg',
           },
           target: '',
         },
@@ -58,7 +58,7 @@ describe('Home page', () => {
           href: 'http://localhost:3000/docco',
           img: {
             alt: 'Docs graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: '/static/simplify.svg',
           },
           target: '',
         },
@@ -68,7 +68,7 @@ describe('Home page', () => {
           href: 'http://localhost:3000/tut',
           img: {
             alt: 'Tutorial graphic',
-            src: 'http://localhost:3000/static/file_cabinet.png',
+            src: '/static/file_cabinet.png',
           },
           target: '',
         },
@@ -78,7 +78,7 @@ describe('Home page', () => {
           href: 'http://localhost:3000/docco/guides/how-to-be-accomplished',
           img: {
             alt: 'Get accomplished today! graphic',
-            src: 'http://localhost:3000/static/file_cabinet.png',
+            src: '/static/file_cabinet.png',
           },
           target: '',
         },
@@ -89,7 +89,7 @@ describe('Home page', () => {
           href: 'https://www.atlassian.com/company/careers/all-jobs',
           img: {
             alt: 'Get a job! graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: '/static/simplify.svg',
           },
           target: '_blank',
         },
