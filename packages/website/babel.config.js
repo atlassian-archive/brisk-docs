@@ -1,5 +1,6 @@
 const fse = require('fs-extra');
 const path = require('path');
+const merge = require('babel-merge');
 
 const handleConfig = require('./handle-config').default;
 
@@ -42,7 +43,10 @@ if (
   clientBabelConfig &&
   fse.existsSync(path.resolve(cwd, clientBabelConfig))
 ) {
-  babelConfig.extends = path.resolve(cwd, clientBabelConfig);
+  /* eslint-disable global-require */
+  /* eslint-disable import/no-dynamic-require */
+  const clientBabel = require(path.resolve(cwd, clientBabelConfig));
+  babelConfig = merge(babelConfig, clientBabel);
 } else if (loadBabel) {
   // option to pass the required babel configs as function suppose the above scenario is not supported for a consumer.
   babelConfig = loadBabel(babelConfig);

@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const frontmatter = require('remark-frontmatter');
 // eslint-disable-next-line
 const images = require('./un-src/custom-plugins/mdx-image-loader');
+
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -58,18 +59,24 @@ module.exports = withTypescript(
               loader.exclude = babelExclude;
             }
             if (loader.use.loader === 'next-babel-loader') {
+              delete loader.include;
               loader.use = ['thread-loader', loader.use];
             }
           });
 
           // Website modules should take precedence over the node_modules of the consumer.
-          config.resolve.modules.push(__dirname, 'node_modules');
+          // TODO: commented to solve module resolutions issues
+          // config.resolve.modules.push(__dirname, 'node_modules');
 
           // Adding items to globalScope in the website
           config.plugins.push(
             new webpack.ProvidePlugin({
               Props: ['pretty-proptypes', 'default'],
               FileViewer: ['@brisk-docs/file-viewer', 'default'],
+              Lazy: [
+                path.join(__dirname, './un-src/components/mdx/Lazy'),
+                'default',
+              ],
             }),
           );
 

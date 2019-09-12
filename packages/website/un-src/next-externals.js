@@ -48,7 +48,14 @@ module.exports = (cwd, name, target) =>
               if (res.match(/@brisk-docs/)) {
                 return callback();
               }
-
+              if (res.match(/@atlassian/)) {
+                return callback();
+              }
+              if (request.match(/\.json$/)) {
+                // uhh idk man. ../../package.json can't be resolved as cjs
+                // console.log({request, res});
+                return callback();
+              }
               // Default pages have to be transpiled
               if (
                 res.match(/next[/\\]dist[/\\]/) ||
