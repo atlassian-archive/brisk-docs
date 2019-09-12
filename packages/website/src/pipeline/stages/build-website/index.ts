@@ -2,16 +2,17 @@ import createStage from '../make-pipeline-stage';
 // @ts-ignore
 import createNextServer from '../run-website/next-server';
 
-interface StageInput {}
-
-// Boilerplate, uncomment when used
-// interface StageConfig {}
-
-interface StageOutput {}
+interface StageInput {
+  command: string;
+  configPath?: string;
+  pkgRoot: string;
+  rootPath: string;
+  nextOptions?: string[];
+}
 
 export default createStage(
   'build-website',
-  async (input: StageInput): Promise<StageOutput> => {
+  async (input: StageInput): Promise<void> => {
     return createNextServer(input);
   },
 );

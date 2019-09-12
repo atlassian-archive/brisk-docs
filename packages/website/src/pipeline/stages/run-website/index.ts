@@ -3,7 +3,13 @@ import createStage from '../make-pipeline-stage';
 // @ts-ignore: Importing non-ts file with no definition
 import createNextServer from './next-server';
 
-interface StageInput {}
+interface StageInput {
+  command: string;
+  configPath?: string;
+  pkgRoot: string;
+  rootPath: string;
+  nextOptions?: string[];
+}
 
 // Boilerplate, uncomment when used
 // interface StageConfig {}

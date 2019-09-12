@@ -57,9 +57,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generatePackageDocPage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },
@@ -69,9 +70,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generateProjectDocPage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },
@@ -97,13 +99,12 @@ export default createStage(
     );
 
     input.pages.changelogPages.forEach(
-      ({ websitePath, changelogPath, pageData, title }) => {
+      ({ websitePath, changelogPath, pageData }) => {
         generateChangelogPage(
           `${websitePath}.js`,
-          changelogPath,
+          changelogPath!,
           pageData,
           generatorConfig,
-          title,
         );
       },
     );
@@ -112,9 +113,10 @@ export default createStage(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generateHomePage(
           `${websitePath}.js`,
-          markdownPath,
+          markdownPath!,
           pageData,
           generatorConfig,
+          // @ts-ignore
           meta,
         );
       },

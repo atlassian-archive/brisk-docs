@@ -5,9 +5,19 @@ export default async function spawnNextProcess({
   configPath,
   pkgRoot,
   rootPath,
-  nextOptions,
+  nextOptions = [],
+}: {
+  command: string;
+  configPath?: string;
+  pkgRoot: string;
+  rootPath: string;
+  nextOptions?: string[];
 }) {
-  const envVariables = {
+  const envVariables: {
+    FORCE_EXTRACT_REACT_TYPES: boolean;
+    DOCS_WEBSITE_CWD: string;
+    DOCS_WEBSITE_CONFIG_PATH?: string;
+  } = {
     FORCE_EXTRACT_REACT_TYPES: true,
     DOCS_WEBSITE_CWD: rootPath,
   };
@@ -26,6 +36,7 @@ export default async function spawnNextProcess({
   const { status } = spawnSync(
     `${nodeEnv} ${nextBin} ${command} ${filteredArgs.join(' ')}`,
     [],
+    // @ts-ignore
     {
       stdio: 'inherit',
       shell: true,

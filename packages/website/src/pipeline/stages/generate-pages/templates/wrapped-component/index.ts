@@ -12,8 +12,8 @@ const outdent = require('outdent');
  * @returns {type} source code for the page
  */
 const wrappedComponentTemplate = (
-  componentPath,
-  wrapperPath,
+  componentPath: string,
+  wrapperPath: string,
   data = {},
 ) => outdent`
   import React from 'react';

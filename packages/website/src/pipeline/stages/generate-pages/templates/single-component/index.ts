@@ -8,7 +8,10 @@ const outdent = require('outdent');
  *
  * @returns {string} source code for the page
  */
-const basicSingleComponentTemplate = (wrapperPath, data = {}) => outdent`
+const basicSingleComponentTemplate = (
+  wrapperPath: string,
+  data = {},
+) => outdent`
     import React from 'react';
     import Wrapper from '${wrapperPath}';
 

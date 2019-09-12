@@ -5,8 +5,8 @@ import buildWebsite from './stages/build-website';
 import allPaths from './getAllPaths';
 
 // TODO: build pipeline will have a build step and no run step
-const buildPipeline = (configPath?: string, nextOptions?: string[]) => {
-  const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = allPaths(
+const buildPipeline = async (configPath?: string, nextOptions?: string[]) => {
+  const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = await allPaths(
     configPath,
   );
 

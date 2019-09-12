@@ -1,6 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
 
+import { StageOutput as WebsiteInfoSpec } from '../generate-website-info';
+import { BriskConfiguration } from '../common/configuration-options';
+
 import {
   changelogTemplate,
   exampleTemplate,
@@ -8,7 +11,20 @@ import {
   wrappedComponentTemplate,
 } from './templates';
 
-const writeFile = (pagePath, content) => {
+export type StageInput = {
+  // Absolute path to directory containing page wrapper components
+  wrappersPath: string;
+  // Absolute path to the output pages directory
+  pagesPath: string;
+  // The absolute path to the root of the package.
+  packageRoot: string;
+} & WebsiteInfoSpec &
+  BriskConfiguration;
+
+type Config = { wrappersPath: string; pagesPath: string };
+type Meta = { title: string };
+
+const writeFile = (pagePath: string, content: string) => {
   fs.ensureFileSync(pagePath);
   fs.writeFileSync(pagePath, content);
 };
@@ -18,17 +34,17 @@ const writeFile = (pagePath, content) => {
  * @param from absolute path of the js file doing the import
  * @param to absolute path of the file being imported
  */
-const getImportPath = (from, to) => {
+const getImportPath = (from: string, to: string) => {
   const fromDir = path.dirname(from);
   return path.relative(fromDir, to).replace('.js', '');
 };
 
 const getGenericPageInfo = (
-  pagesPath,
-  pagePath,
-  componentPath,
-  wrappersPath,
-  wrapperName,
+  pagesPath: string,
+  pagePath: string,
+  componentPath: string,
+  wrappersPath: string,
+  wrapperName: string,
 ) => {
   const absolutePagePath = path.resolve(pagesPath, pagePath);
   const componentImportPath = componentPath
@@ -47,12 +63,12 @@ const getGenericPageInfo = (
 };
 
 const generateBasicPage = (
-  pagePath,
-  componentPath,
-  data,
-  wrapperName,
-  { wrappersPath, pagesPath },
-  meta,
+  pagePath: string,
+  componentPath: string,
+  data: Object,
+  wrapperName: string,
+  { wrappersPath, pagesPath }: Config,
+  meta: Meta,
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
@@ -76,12 +92,12 @@ const generateBasicPage = (
 };
 
 const generateNonComponentPage = (
-  pagePath,
-  data,
-  wrapperName,
-  { wrappersPath, pagesPath },
-  type,
-  title,
+  pagePath: string,
+  data: Object,
+  wrapperName: string,
+  { wrappersPath, pagesPath }: Config,
+  type: string,
+  title: string,
 ) => {
   const absolutePagePath = path.resolve(pagesPath, pagePath);
   const packageHomeWrapperPath = getImportPath(
@@ -100,16 +116,21 @@ const generateNonComponentPage = (
   );
 };
 
-export const generateHomePage = (pagePath, readmePath, data, config, meta) => {
+export const generateHomePage = (
+  pagePath: string,
+  readmePath: string,
+  data: Object,
+  config: Config,
+  meta: Meta,
+) => {
   generateBasicPage(pagePath, readmePath, data, 'package-home', config, meta);
 };
 
 export const generateChangelogPage = (
-  pagePath,
-  changelogPath,
-  data,
-  config,
-  title = '',
+  pagePath: string,
+  changelogPath: string,
+  data: Object,
+  config: Config,
 ) => {
   const componentPath = changelogPath;
   const wrapperName = 'package-changelog';
@@ -130,29 +151,28 @@ export const generateChangelogPage = (
         componentImportPath,
         packageHomeWrapperPath,
         templateData,
-        title,
       )
-    : singleComponentTemplate(packageHomeWrapperPath, templateData, title);
+    : singleComponentTemplate(packageHomeWrapperPath, templateData);
 
   writeFile(path.join(pagesPath, pagePath), source);
 };
 
 export const generatePackageDocPage = (
-  pagePath,
-  markdownPath,
-  data,
-  config,
-  meta,
+  pagePath: string,
+  markdownPath: string,
+  data: Object,
+  config: Config,
+  meta: Meta,
 ) => {
   generateBasicPage(pagePath, markdownPath, data, 'package-docs', config, meta);
 };
 
 export const generateExamplePage = (
-  pagePath,
-  rawPagesPath,
-  exampleModulePath,
-  data,
-  config,
+  pagePath: string,
+  rawPagesPath: string,
+  exampleModulePath: string,
+  data: Object,
+  config: Config,
   title = '',
 ) => {
   const componentPath = exampleModulePath;
@@ -171,23 +191,28 @@ export const generateExamplePage = (
 
   writeFile(
     path.join(pagesPath, pagePath),
-    exampleTemplate(componentImportPath, packageHomeWrapperPath, pageData),
+    exampleTemplate(componentImportPath!, packageHomeWrapperPath, pageData),
   );
 
   writeFile(
     path.join(pagesPath, rawPagesPath),
-    singleComponentTemplate(path.join('..', componentImportPath), pageData),
+    singleComponentTemplate(path.join('..', componentImportPath!), pageData),
   );
 };
 
-export const generateDocsHomePage = (pagePath, data, config, title = '') => {
+export const generateDocsHomePage = (
+  pagePath: string,
+  data: Object,
+  config: Config,
+  title = '',
+) => {
   generateNonComponentPage(pagePath, data, 'item-list', config, 'docs', title);
 };
 
 export const generateDocumentsMainPage = (
-  pagePath,
-  data,
-  config,
+  pagePath: string,
+  data: Object,
+  config: Config,
   title = '',
 ) => {
   generateNonComponentPage(
@@ -201,9 +226,9 @@ export const generateDocumentsMainPage = (
 };
 
 export const generateExamplesHomePage = (
-  pagePath,
-  data,
-  config,
+  pagePath: string,
+  data: Object,
+  config: Config,
   title = '',
 ) => {
   generateNonComponentPage(
@@ -217,11 +242,11 @@ export const generateExamplesHomePage = (
 };
 
 export const generateProjectDocPage = (
-  pagePath,
-  markdownPath,
-  data,
-  config,
-  meta,
+  pagePath: string,
+  markdownPath: string,
+  data: Object,
+  config: Config,
+  meta: Meta,
 ) => {
   generateBasicPage(pagePath, markdownPath, data, 'project-docs', config, meta);
 };
@@ -231,7 +256,7 @@ export const generateProjectDocPage = (
  * @param pagesPath the absolute path to the `/pages` directory in next
  * @param docsList list of documents
  */
-export const cleanPages = async pagesPath => {
+export const cleanPages = async (pagesPath: string) => {
   // This error handling should likely be lifted to when we start executing the whole thing
   if (typeof pagesPath !== 'string' || pagesPath.length < 1) {
     throw new Error(
@@ -247,7 +272,7 @@ export const cleanPages = async pagesPath => {
  * @param packageRoot root path of packages
  * @param pagesPath the pages directory path
  */
-export const addBasePages = async (packageRoot, pagesPath) => {
+export const addBasePages = async (packageRoot: string, pagesPath: string) => {
   const defaultPagesPath = path.join(packageRoot, 'default-pages');
   await fs.copy(defaultPagesPath, pagesPath);
 };
@@ -256,7 +281,7 @@ export const addBasePages = async (packageRoot, pagesPath) => {
  * Generates the JSONs in the data folder
  * @param input the path and contents for generating JSON
  */
-export const generateDataPages = input => {
+export const generateDataPages = (input: StageInput) => {
   const pagesListPath = path.resolve(input.packageRoot, 'data/pages-list.json');
   writeFile(
     pagesListPath,

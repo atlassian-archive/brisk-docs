@@ -14,6 +14,7 @@ describe('Generate pages build stage integration', () => {
   });
 
   it('creates files for website pages', async () => {
+    // @ts-ignore
     const input: StageInput = {
       pagesPath,
       wrappersPath,
