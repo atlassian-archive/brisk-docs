@@ -35,7 +35,7 @@ For guides and docs relating to your project or repository as a whole, Brisk Doc
 
 Brisk Docs has first class support for multi-package repos. All packages found in the `/packages` directory of your project will have documentation generated automatically.
 
-Read more about package documentation in our [package documentation guide.](./docs/writing-package-docs)
+Read more about package documentation in our [package documentation guide.](./docs/writing-package-docs.md)
 
 ## Using MDX
 
