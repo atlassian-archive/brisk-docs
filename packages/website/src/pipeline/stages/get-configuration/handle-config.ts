@@ -42,7 +42,13 @@ const processConfig = (
   providedConfig: PartialConfig,
 ): BriskConfiguration => {
   const config = { ...defaultConfig, ...providedConfig };
-  const { docs, packages, customPackageFields, ...rest } = config;
+  const {
+    docs,
+    packages,
+    customPackageFields,
+    templates = [],
+    ...rest
+  } = config;
 
   const docsConfig = Array.isArray(docs) ? docs : [docs];
   const docsList: ProjectDocsConfig[] = docsConfig.map(doc => {
@@ -63,10 +69,35 @@ const processConfig = (
     path.resolve(cwd, packagesPath),
   );
 
+  const acceptedTemplates = ['package:home'];
+
+  const errors = templates
+    .map(({ page }) => {
+      if (!acceptedTemplates.includes(page)) {
+        // eslint-disable-next-line
+        return `unrecognised template option: ${page} - we currently support templates for: ${acceptedTemplates.join(
+          ',',
+        )} - if you need a new template please raise an issue: https://github.com/brisk-docs/brisk-docs`;
+      }
+      return null;
+    })
+    .filter(a => a);
+
+  if (errors.length > 0) {
+    errors.forEach(console.error);
+    throw new Error('exiting due to unparseable config');
+  }
+
+  const modifiedTemplates = templates.map(({ component, ...r }) => ({
+    ...r,
+    component: path.resolve(cwd, component),
+  }));
+
   return {
     // readMePath/customPackageFields should be overridable by config
     readmePath,
     customPackageFields,
+    templates: modifiedTemplates,
     ...rest,
     // docsList/packagesPaths should not be overridden. They are computed from provided docs/packages config.
     docs: docsList,

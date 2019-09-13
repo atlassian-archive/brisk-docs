@@ -1,3 +1,5 @@
+import { TemplateSpecifier } from '../../../../types';
+
 export interface ProjectDocsConfig {
   // absolute path to the docs in the filesystem
   path: string;
@@ -21,6 +23,7 @@ export interface BriskConfiguration {
   links?: string[];
   readMeImgSrc?: string;
   packagesImgSrc?: string;
+  templates: TemplateSpecifier[];
 }
 
 // User supplied brisk config
@@ -48,4 +51,5 @@ export interface UserConfig {
   links?: string[];
   readMeImgSrc?: string;
   packagesImgSrc?: string;
+  templates?: TemplateSpecifier[];
 }
