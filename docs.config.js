@@ -34,11 +34,4 @@ module.exports = () => ({
   showSubExamples: true,
   docs,
   links,
-  templates: [
-    {
-      page: 'package:home',
-      position: 'above',
-      component: 'some-thing',
-    },
-  ],
 });

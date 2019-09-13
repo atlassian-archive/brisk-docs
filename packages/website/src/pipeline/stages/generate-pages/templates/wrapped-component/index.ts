@@ -7,7 +7,8 @@ const getTemplateAtPosition = (
   position: 'above' | 'below' | 'replace',
 ) => {
   const template = templates.find(t => t.position === position);
-  if (template) return `<Template${position} />`;
+  if (template)
+    return `<Template${position} data={data} pageComponent={Component} />`;
   return '';
 };
 
@@ -43,10 +44,13 @@ const wrappedComponentTemplate = (
   ${getTemplateImports(templates)}
 
 
+  const data = ${JSON.stringify(data)}
+
   export default () => (
-    <Wrapper data={${JSON.stringify(data)}}>
-        ${getTemplateAtPosition(templates, 'above')}
-        <Component />
+    <Wrapper data={data}>
+      ${getTemplateAtPosition(templates, 'above')}
+      ${getTemplateAtPosition(templates, 'replace') || '<Component />'}
+      ${getTemplateAtPosition(templates, 'below')}
     </Wrapper>
   );
 `;
