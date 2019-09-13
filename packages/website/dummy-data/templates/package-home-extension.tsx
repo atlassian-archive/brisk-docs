@@ -5,14 +5,16 @@ export default ({
 }: {
   data: { name: string; version: string };
   pageComponent: React.ElementType;
-}) => (
-  <div
-    style={{
-      fontSize: '14px',
-    }}
-  >
-    <code>
-      npm install {data.name}@^{data.version}
-    </code>
-  </div>
-);
+}) =>
+  // @ts-ignore
+  console.log(data) || (
+    <div
+      style={{
+        fontSize: '14px',
+      }}
+    >
+      <code>
+        npm install {data.name}@^{data.version}
+      </code>
+    </div>
+  );
