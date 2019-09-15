@@ -70,7 +70,7 @@ const generateBasicPage = (
   wrapperName: string,
   { wrappersPath, pagesPath }: Config,
   meta: Meta,
-  templates: TemplateSpecifier[],
+  templates?: TemplateSpecifier[],
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
