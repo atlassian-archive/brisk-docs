@@ -125,7 +125,7 @@ export const generateHomePage = (
   data: Object,
   config: Config,
   meta: Meta,
-  templates: TemplateSpecifier[] = [],
+  templates: TemplateSpecifier[],
 ) => {
   generateBasicPage(
     pagePath,
