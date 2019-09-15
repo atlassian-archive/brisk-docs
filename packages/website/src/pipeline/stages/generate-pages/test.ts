@@ -37,6 +37,7 @@ const inputBase = {
   packagesPaths: [],
   docs: [],
   siteName: '',
+  templates: [],
 };
 
 describe('Generate pages build stage', () => {
@@ -289,6 +290,7 @@ describe('Generate pages build stage', () => {
       { value: 'foo' },
       { wrappersPath: 'WRAPPERS_PATH', pagesPath: 'PAGES_PATH' },
       { value: 'bar' },
+      [],
     );
   });
 });
