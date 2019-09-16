@@ -87,6 +87,7 @@ describe('Generate pages build stage integration', () => {
       packagesPaths: [],
       docs: [],
       siteName: '',
+      templates: [],
     };
 
     await generatePagesStage(input);
