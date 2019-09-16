@@ -76,6 +76,7 @@ const generatePackageInfo = (
       ...pageData,
       ...pkg.packageFields,
       customPackageFields: Object.keys(pkg.packageFields),
+      ...pkg.readmeMeta,
     },
     meta: { title: titleCase(pkg.id) },
   };
@@ -186,6 +187,8 @@ export default (
   // Flatten the website info from all the packages
   packages.forEach(pkg => {
     const packageInfo = generatePackageInfo(pkg);
+
+    console.log(pkg.readmeMeta);
 
     sitemap.push(packageInfo.sitemap);
     meta.push(packageInfo.meta);
