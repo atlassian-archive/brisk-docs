@@ -188,8 +188,6 @@ export default (
   packages.forEach(pkg => {
     const packageInfo = generatePackageInfo(pkg);
 
-    console.log(pkg.readmeMeta);
-
     sitemap.push(packageInfo.sitemap);
     meta.push(packageInfo.meta);
 
