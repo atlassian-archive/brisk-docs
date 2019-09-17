@@ -76,6 +76,7 @@ const generatePackageInfo = (
       ...pageData,
       ...pkg.packageFields,
       customPackageFields: Object.keys(pkg.packageFields),
+      ...pkg.readmeMeta,
     },
     meta: { title: titleCase(pkg.id) },
   };
