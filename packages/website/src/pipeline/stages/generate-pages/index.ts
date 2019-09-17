@@ -66,6 +66,9 @@ export default createStage(
       },
     );
 
+    // FINDME: This is the point to modify the page urls - but we should trace it back
+    // so websitePath is the modified path here for projectDocPages
+
     input.pages.projectDocPages.forEach(
       ({ websitePath, markdownPath, meta, pageData }) => {
         generateProjectDocPage(

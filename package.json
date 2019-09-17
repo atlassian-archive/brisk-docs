@@ -12,6 +12,7 @@
     "build": "preconstruct build",
     "dev:website": "bolt w @brisk-docs/website run dev",
     "build:website": "bolt w @brisk-docs/website run build:site",
+    "dev:complete": "bolt w @brisk-docs/website run dev:complete",
     "build:website:complete": "bolt w @brisk-docs/website run build:site:complete",
     "start:website": "bolt w @brisk-docs/website run start",
     "start:website:complete": "bolt w @brisk-docs/website run start:complete",

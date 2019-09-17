@@ -7,7 +7,10 @@ export interface DocsSitemapEntry {
   // id of the root page in the sitemap entry
   id: string;
   // metadata about the root page in the sitemap entry
-  meta: object;
+  meta: {
+    route?: string;
+    [key: string]: any;
+  };
   // path to this doc page in the website
   pagePath: string;
   // Child docs to this one
@@ -33,7 +36,7 @@ const generateDocsInfo = (
   // website path to the root page for where the docs will be placed
   docsPath: string,
   // additional data to be embedded in each page
-  pageData: object,
+  pageData: DocsSitemapEntry,
   // identifier for which docs section is being generated
   key?: string,
 ): DocsInfo => {
@@ -55,10 +58,14 @@ const generateDocsInfo = (
       const childDocs = doc.children.filter(c => !isReadme(c));
 
       if (readme) {
+        const updatedPageData = { ...pageData, key };
+        if (readme.meta && readme.meta.path) {
+          updatedPageData.pagePath = readme.meta.path;
+        }
         docsPages.push({
           websitePath,
           markdownPath: (readme as DocsItem).markdownPath,
-          pageData: { ...pageData, key },
+          pageData: updatedPageData,
           meta: readme.meta,
         });
       } else {
@@ -67,11 +74,17 @@ const generateDocsInfo = (
           pageData: {
             key,
             id: doc.id,
-            children: childDocs.map(child => ({
-              id: child.id,
-              meta: child.meta,
-              pagePath: path.join(`/${websitePath}`, child.id),
-            })),
+            children: childDocs.map(child => {
+              const pagePath =
+                child.meta && child.meta.route
+                  ? child.meta.route
+                  : path.join(`/${websitePath}`, child.id);
+              return {
+                id: child.id,
+                meta: child.meta,
+                pagePath,
+              };
+            }),
           },
         });
       }
@@ -106,6 +119,8 @@ const generateDocsInfo = (
       });
     }
   });
+
+  console.log(docsPages);
 
   return {
     sitemap,

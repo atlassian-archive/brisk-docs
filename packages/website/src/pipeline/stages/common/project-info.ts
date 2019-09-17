@@ -2,7 +2,7 @@ export interface DocsItem {
   // Id of the root page in the tree
   id: string;
   // Metadata about the doc page
-  meta: object;
+  meta: { route?: string; [key: string]: any };
   // Absolute path to the user generated markdown for this doc
   markdownPath: string;
 }
@@ -11,7 +11,7 @@ export interface DocsGroup {
   // Id of the root page in the tree
   id: string;
   // Metadata about the doc page
-  meta: object;
+  meta: { route?: string; [key: string]: any };
   // Child docs from this docs item
   children: DocsTreeNode[];
 }
