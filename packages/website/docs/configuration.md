@@ -12,19 +12,20 @@ module.exports = () => ({
 
 the returned object may have the following properties:
 
-| Option               | Description                                                                                                                         |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| customPackageFields  | Array of fields from the relevant package.json to display on the package home page. This augments the default set.                  |
-| docs                 | Object (or array of Object) describing the project docs.                                                                            |
-| favicon              | Absolute path to an .ico file to use as the site's favicon  e.g. `path.join(__dirname, 'favicon.ico')`                              |
-| links                | Optional array of Object with links to display on the homepage                                                                      |
-| packages             | Path or array of paths of packages to show. Glob patterns are allowed.  e.g. `path.join(__dirname, 'packages', '*')`                |
-| packagesDescription  | Optional String to replace the default description for the packages section                                                         |
-| readMePath           | Optional String path to an alternative specific mdx file to use as the "Get Started" page.                                          |
-| showExamples         | Optional Boolean (default true) to include/exclude examples                                                                         |
-| showSubExamples      | Optional Boolean to include/exclude subExamples within packages                                                                 |
-| siteName             | String Display name for the project as displayed in the website                                                                     |
-| webpack              | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
+| Option              | Description                                                                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| customPackageFields | Array of fields from the relevant package.json to display on the package home page. This augments the default set.                  |
+| docs                | Object (or array of Object) describing the project docs.                                                                            |
+| favicon             | Absolute path to an .ico file to use as the site's favicon e.g. `path.join(__dirname, 'favicon.ico')`                               |
+| links               | Optional array of Object with links to display on the homepage                                                                      |
+| packages            | Path or array of paths of packages to show. Glob patterns are allowed. e.g. `path.join(__dirname, 'packages', '*')`                 |
+| packagesDescription | Optional String to replace the default description for the packages section                                                         |
+| readMePath          | Optional String path to an alternative specific mdx file to use as the "Get Started" page.                                          |
+| showExamples        | Optional Boolean (default true) to include/exclude examples                                                                         |
+| showSubExamples     | Optional Boolean to include/exclude subExamples within packages                                                                     |
+| siteName            | String Display name for the project as displayed in the website                                                                     |
+| templates           | Set up templates for particular kinds of pages in brisk                                                                             |
+| webpack             | A function used to customise the website's webpack configuration. see [Configuring webpack](./configuring-webpack) for more details |
 
 ### customPackageFields
 
@@ -38,6 +39,7 @@ e.g. `['author', 'dependencies']`
 
 Type: optional `object` or `object[]`
 defaults to:
+
 ```js
 {
   path: './docs',
@@ -48,10 +50,10 @@ defaults to:
 
 Object describing documentation sections
 
- * `path`: `string` of the absolute path to the documentation section's directory e.g. `path.join(__dirname, 'docs')`
- * `name`: `string` to use for the documentation section e.g. `'Docs'`
- * `description`: Optional `string` description to refer to e.g. `'Documentation is contained within this section.'`
- * `urlPath`: Optional `string` specifying the URL subpath to use. e.g `'docs'`. If not supplied, this will be inferred from the directory name.
+- `path`: `string` of the absolute path to the documentation section's directory e.g. `path.join(__dirname, 'docs')`
+- `name`: `string` to use for the documentation section e.g. `'Docs'`
+- `description`: Optional `string` description to refer to e.g. `'Documentation is contained within this section.'`
+- `urlPath`: Optional `string` specifying the URL subpath to use. e.g `'docs'`. If not supplied, this will be inferred from the directory name.
 
 For a given path, if it does not exist, that section will not be generated.
 
@@ -71,24 +73,25 @@ Array of links to arbitrary places. These will be tiles at the end of all other 
 
 Each link has the following shape:
 
- * `label`: `string` to display on the home page tile
- * `description`: Optional `string` to display on the home page tile
- * `href`: `string` full URL (to external site) or internal link e.g. `/packages`
+- `label`: `string` to display on the home page tile
+- `description`: Optional `string` to display on the home page tile
+- `href`: `string` full URL (to external site) or internal link e.g. `/packages`
 
 e.g.
-```js
-  [
-    {
-      label: 'Get accomplished today!',
-      href: '/docco/guides/how-to-be-accomplished'
-    },
-    {
-      label: 'Get a job!',
-      description: 'Browse the available Atlassian career opportunities and join the team.',
-      href: 'https://www.atlassian.com/company/careers/all-jobs'
-    },
-  ]
 
+```js
+[
+  {
+    label: 'Get accomplished today!',
+    href: '/docco/guides/how-to-be-accomplished',
+  },
+  {
+    label: 'Get a job!',
+    description:
+      'Browse the available Atlassian career opportunities and join the team.',
+    href: 'https://www.atlassian.com/company/careers/all-jobs',
+  },
+];
 ```
 
 ### packages
@@ -143,7 +146,63 @@ e.g. `Fancy Docs`
 
 Type: optional `Function` customizing webpack's configuration. Defaults to `identity`
 
-See [Configuring webpack](./configuring-webpack) for more details.
+See [Configuring webpack](./configuring-webpack.md) for more details.
+
+### templates
+
+Type: optional `object[]` defaults to `[]`
+
+Allows you to specify a component to be rendered on a page. This feature is still experimental.
+
+To add a template to a page, you can add an object to the array of the shape
+
+```json
+{
+  // the page you want to display this template component ont
+  "page": string,
+  // the position you want to display the template component in
+  "position": string,
+  // a path to the component you wish to render
+  "component": string
+}
+```
+
+Current pages that support templates:
+
+- `package:home`
+
+Positions for template are: `above`, `below`, and `replace`
+
+`component` accepts a string which is a path to a file we will load. We treat this file as a react component to load on the website.
+
+We pass two props to this component: `data` and `pageComponent`. To get an idea of what is being passed, you could add the following component as a template.
+
+```js
+import React from 'react';
+
+export default ({ data }) => console.log(data) || null;
+```
+
+You can also style the page contents using something such as:
+
+```js
+import React from 'react';
+
+export default ({ pageComponent: Component }) => (
+  <div
+    style={{
+      textAlign: 'center',
+      color: 'rebeccapurple',
+      backgroundColor: 'hotpink',
+      borderRadius: '16px',
+      padding: '8px',
+      marginTop: '16px',
+    }}
+  >
+    <Component />
+  </div>
+);
+```
 
 ## Nested configuration
 

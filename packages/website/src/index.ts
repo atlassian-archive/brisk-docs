@@ -3,6 +3,7 @@ import {
   buildPipeline,
   startServerPipeline,
   exportServerPipeline,
+  buildPagesPipeline,
 } from './pipeline';
 
 // @ts-ignore
@@ -19,6 +20,9 @@ const runBinary = () => {
   switch (command) {
     case 'dev': {
       return devPipeline(options.config, nextOptions).catch(handleError);
+    }
+    case 'build-pages': {
+      return buildPagesPipeline(options.config).catch(handleError);
     }
     case 'build': {
       return buildPipeline(options.config, nextOptions).catch(handleError);

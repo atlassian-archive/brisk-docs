@@ -1,4 +1,25 @@
+import { TemplateSpecifier } from '../../../../../../types';
+
 const outdent = require('outdent');
+
+const getTemplateAtPosition = (
+  templates: TemplateSpecifier[],
+  position: 'above' | 'below' | 'replace',
+) => {
+  const template = templates.find(t => t.position === position);
+  if (template)
+    return `<Template${position} data={data} pageComponent={Component} />`;
+  return '';
+};
+
+const getTemplateImports = (templates: TemplateSpecifier[]) => {
+  return templates
+    .map(
+      ({ component, position }) =>
+        `import Template${position} from '${component}'`,
+    )
+    .join('\n');
+};
 
 /**
  * wrappedComponentTemplate - template for a page containing one
@@ -15,14 +36,21 @@ const wrappedComponentTemplate = (
   componentPath: string,
   wrapperPath: string,
   data = {},
+  templates: TemplateSpecifier[] = [],
 ) => outdent`
   import React from 'react';
   import Component from '${componentPath}';
   import Wrapper from '${wrapperPath}';
+  ${getTemplateImports(templates)}
+
+
+  const data = ${JSON.stringify(data)}
 
   export default () => (
-    <Wrapper data={${JSON.stringify(data)}}>
-        <Component />
+    <Wrapper data={data}>
+      ${getTemplateAtPosition(templates, 'above')}
+      ${getTemplateAtPosition(templates, 'replace') || '<Component />'}
+      ${getTemplateAtPosition(templates, 'below')}
     </Wrapper>
   );
 `;

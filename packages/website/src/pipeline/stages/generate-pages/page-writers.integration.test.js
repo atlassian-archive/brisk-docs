@@ -34,6 +34,7 @@ describe('Page templates', () => {
       {},
       { wrappersPath, pagesPath },
       { title: 'My Package' },
+      [],
     );
 
     const output = getOutput('output.js');
@@ -44,9 +45,15 @@ describe('Page templates', () => {
 import Component from '../README.md';
 import Wrapper from '../wrappers/package-home';
 
+
+
+const data = {\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}
+
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Package\\"}}>
-      <Component />
+  <Wrapper data={data}>
+    
+    <Component />
+    
   </Wrapper>
 );"
 `);
@@ -59,6 +66,7 @@ export default () => (
       {},
       { wrappersPath, pagesPath },
       { title: 'My Package' },
+      [],
     );
 
     const output = getOutput('output.js');
@@ -91,9 +99,15 @@ export default () => (
 import Component from '../README.md';
 import Wrapper from '../wrappers/package-docs';
 
+
+
+const data = {\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}
+
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
-      <Component />
+  <Wrapper data={data}>
+    
+    <Component />
+    
   </Wrapper>
 );"
 `);
@@ -186,9 +200,15 @@ export default () => (
 import Component from '../README.md';
 import Wrapper from '../wrappers/project-docs';
 
+
+
+const data = {\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}
+
 export default () => (
-  <Wrapper data={{\\"pagePath\\":\\"output.js\\",\\"pageTitle\\":\\"My Doc\\"}}>
-      <Component />
+  <Wrapper data={data}>
+    
+    <Component />
+    
   </Wrapper>
 );"
 `);

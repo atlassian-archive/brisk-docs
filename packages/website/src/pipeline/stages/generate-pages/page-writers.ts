@@ -10,6 +10,7 @@ import {
   singleComponentTemplate,
   wrappedComponentTemplate,
 } from './templates';
+import { TemplateSpecifier } from '../../../../types';
 
 export type StageInput = {
   // Absolute path to directory containing page wrapper components
@@ -69,6 +70,7 @@ const generateBasicPage = (
   wrapperName: string,
   { wrappersPath, pagesPath }: Config,
   meta: Meta,
+  templates?: TemplateSpecifier[],
 ) => {
   const { componentImportPath, packageHomeWrapperPath } = getGenericPageInfo(
     pagesPath,
@@ -85,6 +87,7 @@ const generateBasicPage = (
         componentImportPath,
         packageHomeWrapperPath,
         templateData,
+        templates,
       )
     : singleComponentTemplate(packageHomeWrapperPath, templateData);
 
@@ -122,8 +125,17 @@ export const generateHomePage = (
   data: Object,
   config: Config,
   meta: Meta,
+  templates: TemplateSpecifier[],
 ) => {
-  generateBasicPage(pagePath, readmePath, data, 'package-home', config, meta);
+  generateBasicPage(
+    pagePath,
+    readmePath,
+    data,
+    'package-home',
+    config,
+    meta,
+    templates.filter(t => t.page === 'package:home'),
+  );
 };
 
 export const generateChangelogPage = (

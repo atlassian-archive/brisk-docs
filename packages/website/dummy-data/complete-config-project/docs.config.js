@@ -50,4 +50,16 @@ module.exports = () => ({
   },
   readMePath: path.join(__dirname, 'index.md'),
   readMeImgSrc: '/static/simplify.svg',
+  templates: [
+    {
+      page: 'package:home',
+      position: 'above',
+      component: 'dummy-data/templates/package-home-extension',
+    },
+    {
+      page: 'package:home',
+      position: 'replace',
+      component: 'dummy-data/templates/package-home-replacement',
+    },
+  ],
 });

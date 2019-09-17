@@ -56,3 +56,17 @@ export declare type PackageInfo = {
   parentId?: string;
   packageTitle?: string;
 };
+
+export type pageType =
+  | 'package:changelog'
+  | 'package:doc'
+  | 'package:exampe'
+  | 'package:home'
+  | 'doc:doc';
+
+export type TemplateSpecifier = {
+  page: pageType;
+  position: 'above' | 'below' | 'replace';
+  // Path to the component from the docs config
+  component: string;
+};

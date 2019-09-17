@@ -35,5 +35,8 @@
     "packages/website/**/*",
     "typings/**/*"
   ],
+  "exclude": [
+    "packages/website/pages/**/*"
+  ],
   "typeRoots": ["./typings", "./node_modules/@types"]
 }

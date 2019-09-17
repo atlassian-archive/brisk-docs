@@ -118,6 +118,7 @@ export default createStage(
           generatorConfig,
           // @ts-ignore
           meta,
+          input.templates,
         );
       },
     );
