@@ -79,6 +79,7 @@ describe('Package website info generator', () => {
     expect(sitemap[0].homePath).toEqual('/packages/package-1');
 
     expect(pages.packageHomePages).toHaveLength(2);
+
     expect(pages.packageHomePages).toContainEqual({
       websitePath: 'packages/package-1',
       markdownPath: '/content/packages/package-1/README.md',
@@ -88,6 +89,7 @@ describe('Package website info generator', () => {
         customPackageFields: ['customField1', 'customField2'],
         customField1: 'foo',
         customField2: 'bar',
+        metaField1: 'baz',
       },
       meta: { title: 'Package 1' },
     });

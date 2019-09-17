@@ -1,3 +1,7 @@
+---
+Hypnotherapy: 'I totes think this is fine'
+---
+
 # Project Title
 
 One Paragraph of project description goes here. This is ReadMe for the package 3.

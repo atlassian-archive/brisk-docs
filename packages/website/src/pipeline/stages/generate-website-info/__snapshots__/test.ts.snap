@@ -166,6 +166,10 @@ Object {
             "author",
           ],
           "id": "package-1",
+          "labels": Array [
+            "important",
+            "must-read",
+          ],
           "packageName": "package one",
         },
         "websitePath": "packages/package-1",
