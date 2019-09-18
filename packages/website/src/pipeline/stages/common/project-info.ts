@@ -54,6 +54,9 @@ export interface PackageInfo {
   examples: ExampleItem[];
   // Tree of inner package examples
   subExamples: ExampleTreeNode[];
+  pkg: {
+    [key: string]: any;
+  };
 }
 
 // A group of docs to be shown on the top level of the website

@@ -171,6 +171,7 @@ Object {
             "must-read",
           ],
           "packageName": "package one",
+          "pkg": Object {},
         },
         "websitePath": "packages/package-1",
       },

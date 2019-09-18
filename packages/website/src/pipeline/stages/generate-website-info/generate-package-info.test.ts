@@ -19,9 +19,11 @@ const mockData: PackageInfo[] = [
     docs: [],
     examples: [],
     subExamples: [],
+    pkg: {},
   },
 
   {
+    pkg: {},
     id: 'package-2',
     name: 'Package Two',
     packageFields: {},
@@ -90,6 +92,7 @@ describe('Package website info generator', () => {
         customField1: 'foo',
         customField2: 'bar',
         metaField1: 'baz',
+        pkg: {},
       },
       meta: { title: 'Package 1' },
     });
@@ -147,6 +150,7 @@ describe('Package website info generator', () => {
   it('processes docs website information', () => {
     const mockDataWithDocs = [
       {
+        pkg: {},
         id: 'package-1',
         name: 'Package One',
         packageFields: {},
@@ -190,6 +194,7 @@ describe('Package website info generator', () => {
   it('outputs top level examples', () => {
     const mockDataWithExamples = [
       {
+        pkg: {},
         id: 'package-1',
         name: 'Package One',
         packageFields: {},
@@ -226,6 +231,7 @@ describe('Package website info generator', () => {
         readmeMeta: {},
         docs: [],
         examples: [],
+        pkg: {},
         subExamples: [
           {
             id: 'sub-examples-group-1',
