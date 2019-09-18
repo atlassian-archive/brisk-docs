@@ -2065,12 +2065,45 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@changesets/cli@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-1.3.0.tgz#66c77f1ac22fa9e37f7f910560dadfe6d2b28826"
-  integrity sha512-pUi2OrsZfpqgwgcoB9xVQhfkg9tSqQAB99+8NES30BaQAKoOXOPCQgAZ4RTw3xU20JfIM9IQf5Y2Rb5EAoiVaA==
+"@changesets/apply-release-plan@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/apply-release-plan/-/apply-release-plan-0.2.0.tgz#d21f09219baf547730ddb2621d00901fb08bb0fc"
+  integrity sha512-JriymaBqDUMd31urB3Z0M69fqUbLq8CdtJH0DTOjQbXMpyMhvzQy18ks6f6HQXB5m19Xt82V6pOMMKHveZHdhQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
+    "@changesets/config" "^0.2.0"
+    "@changesets/get-version-range-type" "^0.1.0"
+    "@changesets/git" "^0.2.0"
+    "@changesets/types" "^0.2.0"
+    fs-extra "^7.0.1"
+    get-workspaces "^0.5.0"
+    lodash.startcase "^4.4.0"
+    outdent "^0.5.0"
+    prettier "^1.14.3"
+    resolve-from "^5.0.0"
+
+"@changesets/assemble-release-plan@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/assemble-release-plan/-/assemble-release-plan-0.2.0.tgz#5861fefcdb53292ce13a43bb764939a69f63d627"
+  integrity sha512-QTzLAK5S56paEBFkOhUkdofm+RSK+5H/JXzATlKcYqHgAjHdh1yiLZiziP8Zkbxj5LVnb+JG3iMOEMNntE+HKg==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/types" "^0.2.0"
+    semver "^5.4.1"
+
+"@changesets/cli@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-2.0.1.tgz#6b095cf0257f97c2a2fb42767d3d692d557dec79"
+  integrity sha512-EeEwgwkgpYWoSBChzAQqme+bTajK87zoSCYgjN+CDjOoQju6CzyUxf2cp42RR84F7eeyOKyjcXQ8RDNM8zG6+w==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/apply-release-plan" "^0.2.0"
+    "@changesets/assemble-release-plan" "^0.2.0"
+    "@changesets/config" "^0.2.0"
+    "@changesets/get-release-plan" "^0.1.0"
+    "@changesets/git" "^0.2.0"
+    "@changesets/read" "^0.2.0"
+    "@changesets/types" "^0.2.0"
     "@types/semver" "^6.0.0"
     "@types/uuid" "^3.4.4"
     boxen "^1.3.0"
@@ -2080,7 +2113,8 @@
     enquirer "^2.3.0"
     fs-extra "^7.0.1"
     fuzzy "^0.1.3"
-    get-workspaces "^0.4.0"
+    get-dependents-graph "^0.1.0"
+    get-workspaces "^0.5.0"
     globby "^9.2.0"
     human-id "^1.0.2"
     is-ci "^2.0.0"
@@ -2090,12 +2124,72 @@
     p-limit "^2.2.0"
     pkg-dir "^4.1.0"
     prettier "^1.14.3"
-    projector-spawn "^1.0.1"
     semver "^5.4.1"
     spawndamnit "^2.0.0"
     term-size "^2.1.0"
     tty-table "^2.7.0"
     uuid "^3.3.2"
+
+"@changesets/config@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/config/-/config-0.2.0.tgz#3118e0b8afd5c01ef581c9c11be02ecae4f8ee45"
+  integrity sha512-vaVjNMVoaDd03anr84CVRGGcsIKamCzoSPw0fhUUud8CU/CzMdySmC/j8p3rAGPR5kOL9X/jmwkqHXLgYCxV4g==
+  dependencies:
+    "@changesets/types" "^0.2.0"
+    fs-extra "^7.0.1"
+
+"@changesets/get-release-plan@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@changesets/get-release-plan/-/get-release-plan-0.1.0.tgz#6e5743972b4678bc275528c920feb5e324e0f4dd"
+  integrity sha512-iQiNWt532B/Y7gXV0qEH9CR0FKYD5trcemMpJyXiDBVZsxmQuAfkWz0ZSuqDSvMxZ9HkCsag41mSGf8H5Qc9sA==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/assemble-release-plan" "^0.2.0"
+    "@changesets/config" "^0.2.0"
+    "@changesets/read" "^0.2.0"
+    "@changesets/types" "^0.2.0"
+    get-dependents-graph "^0.1.0"
+    get-workspaces "^0.5.0"
+
+"@changesets/get-version-range-type@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@changesets/get-version-range-type/-/get-version-range-type-0.1.0.tgz#d160eb4cc7414e6e03ed9e6eee8d5d496dc223a0"
+  integrity sha512-PMKa5POyCDznF0JXPltVBCXZGduXVf1kgwuDrYAhRPdz/ReWElWYACdiuieagt9HCE8sjNXb5qTWd7o68tgRVA==
+
+"@changesets/git@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/git/-/git-0.2.0.tgz#8c98b74baefeb15435ede78ab64cd04fac8d4a4b"
+  integrity sha512-An9oT+A+p4TEYRg1F5nmPGx9BV0SI+pme/xElPbDv6CXeqtWF3sccCsoAvrrAYnqUN34xeYganzxyvX+MlKRXQ==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/types" "^0.2.0"
+    get-workspaces "^0.5.0"
+    pkg-dir "^4.1.0"
+    spawndamnit "^2.0.0"
+
+"@changesets/parse@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/parse/-/parse-0.2.0.tgz#824d3e20635d59de77b47695a03e273e39c85c95"
+  integrity sha512-dzvn13/uhbPkPGMSreRFOJKGAROu4/JgHaH1Kdz0SjN8GspY5UOjRV+oSfn2DFBmrXY2xLImNH2FTOK6Vl9pCg==
+  dependencies:
+    "@changesets/types" "^0.2.0"
+    js-yaml "^3.13.1"
+
+"@changesets/read@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/read/-/read-0.2.0.tgz#6d1780faf7154c6198d77027dba380db549e61fc"
+  integrity sha512-z/CLY6WC4a17cAtuTg0odwcG2h4TDFnDhX9rxlRmAJYP5DKcNt7rY2AvgjsxY9pvyj4NTGaCuzY36cYoT7zdWg==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/git" "^0.2.0"
+    "@changesets/parse" "^0.2.0"
+    "@changesets/types" "^0.2.0"
+    fs-extra "^7.0.1"
+
+"@changesets/types@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@changesets/types/-/types-0.2.0.tgz#b4c49bca5fefb7727af4989e238037814ec7bbea"
+  integrity sha512-I25L1NHQ9Dbo7/JrOCDHEdtRXlJTWgj28Kw6HaXENdrB1tpWgBMb2K+g3i0GvB5dCNsKVQNeAKsX6VuJkuvqeQ==
 
 "@cypress/listr-verbose-renderer@0.4.1":
   version "0.4.1"
@@ -7219,6 +7313,17 @@ get-caller-file@^1.0.1:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
 
+get-dependents-graph@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/get-dependents-graph/-/get-dependents-graph-0.1.0.tgz#0d697b34e60eecef94f5236ebe977d9357aa6856"
+  integrity sha512-uUlw+oZ7/eHYln9TxwnqGbR0xtj83tjqH4OOmATWRx73syv0fNqzuph6rG+rXCh0oUxQI9CFcc17p4ZORTP49Q==
+  dependencies:
+    "@changesets/types" "^0.2.0"
+    chalk "^2.1.0"
+    fs-extra "^7.0.1"
+    get-workspaces "^0.5.0"
+    semver "^5.4.1"
+
 get-func-name@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/get-func-name/-/get-func-name-2.0.0.tgz#ead774abee72e20409433a066366023dd6887a41"
@@ -7254,10 +7359,10 @@ get-workspaces@^0.3.0:
     fs-extra "^7.0.1"
     globby "^9.2.0"
 
-get-workspaces@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/get-workspaces/-/get-workspaces-0.4.0.tgz#512dedc0e9a96b0c17035af363236299247f4cc8"
-  integrity sha512-O4pSctjkmrLRs8GxnaQ/xy16PWoZpEUzpgtBAj9UIYNrtag1rRnFOyvJULIMPhpbZKOlswmrS5Ku6pjt35Yj+g==
+get-workspaces@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/get-workspaces/-/get-workspaces-0.5.0.tgz#bc00b6d158f409a70ba54cc95e58bf29cfe4df1e"
+  integrity sha512-S7/ItnunHBgGgyNIosz52YxGRWzizqvo+yzT8gYvRwKenFMIF/ZWsTXLhHrASWcSM5baJPzxNW+ny6ixJ5uQ7A==
   dependencies:
     fs-extra "^7.0.1"
     globby "^9.2.0"
@@ -11308,13 +11413,6 @@ project-bin-path@^1.1.0:
   dependencies:
     find-up "^2.1.0"
 
-projector-spawn@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/projector-spawn/-/projector-spawn-1.0.1.tgz#0849a9a54d5a76a9293d8240b4374417653312cb"
-  integrity sha1-CEmppU1adqkpPYJAtDdEF2UzEss=
-  dependencies:
-    cross-spawn "^5.1.0"
-
 promise-events@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/promise-events/-/promise-events-0.1.4.tgz#3c88fae97e448da68f7fcf19d4ee308d6e432d5b"
@@ -12314,6 +12412,11 @@ resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
   integrity sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
+
+resolve-from@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
+  integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
 resolve-url@^0.2.1:
   version "0.2.1"
