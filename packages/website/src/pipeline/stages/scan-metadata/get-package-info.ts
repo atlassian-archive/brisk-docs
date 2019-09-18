@@ -238,6 +238,7 @@ export default async ({
         docs: getDocsInfo(path.join(directoryPath, 'docs')) || [],
         examples,
         subExamples,
+        pkg: packageDefinition,
       };
 
       return packageInfo;

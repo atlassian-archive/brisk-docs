@@ -60,6 +60,7 @@ export const singlePackageData: PackageInfo[] = [
         ],
       },
     ],
+    pkg: {},
   },
 ];
 
