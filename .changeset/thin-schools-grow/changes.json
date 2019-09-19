@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@brisk-docs/website", "type": "minor" }],
-  "dependents": []
-}
