@@ -1,5 +1,28 @@
 # @brisk-docs/website
 
+## 0.9.0
+
+### Minor Changes
+
+- Pipeline stages integration for brisk website
+- Add scan metadata pipeline stage to website
+- Implemented generate-website-info build pipeline stage
+- Add `template` option to pages
+
+  NB: initial implementation is only for `package:home` with other pages being added on request.
+
+  - website's CLI code is now being built
+
+- Add lazy-loading component and solve render issues with some external components
+
+  (NB: This feature was originally introduced as a hotfix in 0.7.5, and has since been re-added)
+
+### Patch Changes
+
+- Frontmatter from the package `readme` is now passed through to the home page `data` object
+
+  Combined with `templates`, this feature should allow you to full customise the home page.
+
 ## 0.8.1
 
 ### Patch Changes
