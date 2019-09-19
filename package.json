@@ -29,8 +29,7 @@
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
-    "bump": "changeset bump",
-    "release": "yarn build && changeset release",
+    "release": "yarn build && changeset publish",
     "prepare:docs": "bolt && yarn build:docs && yarn export",
     "postinstall": "preconstruct dev",
     "bolt:fix": "bolt-check --fix"

@@ -1,11 +1,12 @@
 const getReleaseLine = async changeset => {
+  console.log(changeset);
   const [firstLine, ...futureLines] = changeset.summary
     .split('\n')
     .map(l => l.trimRight());
 
-  return `- ${changeset.commit}: ${firstLine}\n${futureLines
-    .map(l => `  ${l}`)
-    .join('\n')}`;
+  return `- ${
+    changeset.commit ? `${changeset.commit}: ` : ''
+  }${firstLine}\n${futureLines.map(l => `  ${l}`).join('\n')}`;
 };
 
 const getDependencyReleaseLine = async (changesets, dependenciesUpdated) => {
