@@ -18,25 +18,26 @@ export type Props = {
 };
 
 const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
-  <Item
-    // @ts-ignore
-    styles={styles => ({
-      ...styles,
-      itemBase: {
-        ...styles.itemBase,
-        paddingLeft: '4px',
-        height: '32px',
-      },
-      textWrapper: {
-        ...styles.textWrapper,
-        color: isHeading ? colors.N800 : colors.N200,
-      },
-    })}
-    text={text}
-    href={href}
-    isSelected={router.pathname === href}
-    component={LinkComponent}
-  />
+  // <Item
+  //   // @ts-ignore
+  //   styles={styles => ({
+  //     ...styles,
+  //     itemBase: {
+  //       ...styles.itemBase,
+  //       paddingLeft: '4px',
+  //       height: '32px',
+  //     },
+  //     textWrapper: {
+  //       ...styles.textWrapper,
+  //       color: isHeading ? colors.N800 : colors.N200,
+  //     },
+  //   })}
+  //   text={text}
+  //   href={href}
+  //   isSelected={router.pathname === href}
+  //   component={LinkComponent}
+  // />
+  <p>{text}</p>
 );
 
 export default withRouter(LinkWithRouter);
