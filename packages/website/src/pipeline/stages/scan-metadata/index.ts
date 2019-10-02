@@ -16,6 +16,7 @@ interface StageInput {
   // User defined readme file to use as the get started page
   readmePath?: string;
   docs: ProjectDocsConfig[];
+  showSubExamples: boolean;
 }
 
 // Boilerplate, uncomment when used
@@ -38,11 +39,13 @@ export default createStage(
     customPackageFields,
     readmePath,
     docs,
+    showSubExamples,
   }: StageInput): Promise<StageOutput> => {
     const packages = await getPackageInfo({
       packagePathPatterns,
       customPackageFields,
       cwd: rootPath,
+      showSubExamples,
     });
 
     const resolvedReadme = readmePath || path.join(rootPath, 'README.md');

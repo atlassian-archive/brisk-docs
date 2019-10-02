@@ -15,6 +15,7 @@ const buildPipeline = async (configPath?: string, nextOptions?: string[]) => {
     packagePathPatterns: config.packagesPaths,
     customPackageFields: config.customPackageFields,
     docs: config.docs,
+    showSubExamples: config.showSubExamples,
   })
     .then(projectData => generateWebsiteInfo(projectData))
     .then(websiteInfo =>
