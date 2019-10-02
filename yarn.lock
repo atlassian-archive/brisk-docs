@@ -9854,6 +9854,13 @@ gatsby-plugin-page-creator@^2.1.23:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
+gatsby-plugin-styled-components@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.1.8.tgz#afc6633301d91baabb9a2d102674e3925b14f92d"
+  integrity sha512-TtCGZWO1+XeiwHuZx8hCEYZUOwdoh4wdQAH4/UYJuf0ZrpufdcOCfyZr0fHwQuvYm/G8EKD50u6WS2sm5s3/5w==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
 gatsby-plugin-typescript@^2.1.11:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.1.11.tgz#cc687c0547b16ea6a22a0eb9ce25609b5cdd0978"

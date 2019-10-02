@@ -17,16 +17,15 @@ const devPipeline = async (configPath?: string, nextOptions?: string[], gatsbyOp
     docs: config.docs,
   })
     .then(projectData => generateWebsiteInfo(projectData))
-    // DONT REWRITE PAGES/ for now
-    // .then(websiteInfo =>
-    //   generatePages({
-    //     wrappersPath,
-    //     pagesPath,
-    //     packageRoot: pkgRoot,
-    //     ...websiteInfo,
-    //     ...config,
-    //   }),
-    // )
+    .then(websiteInfo =>
+      generatePages({
+        wrappersPath,
+        pagesPath,
+        packageRoot: pkgRoot,
+        ...websiteInfo,
+        ...config,
+      }),
+    )
     .then(() =>
     // DONT RUN NEXT FOR NOW
       // runWebsite({

@@ -28,11 +28,6 @@ export default async function spawnGatsbyProcess({
   const nodeEnv = 'PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src';
   let gatsbyBin = 'gatsby';
 
-  // const filteredArgs = nextOptions.filter(arg => arg !== 'debug-next');
-  // if (nextOptions.length !== filteredArgs.length) {
-  //   nextBin = `node --inspect-brk $(${nodeEnv} which next)`;
-  // }
-
   const { status } = spawnSync(
     `${nodeEnv} ${gatsbyBin} ${command} ${gatsbyOptions.join(' ')}`,
     [],

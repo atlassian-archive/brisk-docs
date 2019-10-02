@@ -28,6 +28,7 @@ let babelConfig = {
         displayName: true,
         preprocess: false,
       },
+      'website'
     ],
     '@babel/proposal-class-properties',
     '@babel/proposal-object-rest-spread',

@@ -8,6 +8,7 @@ const path = require('path');
 module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -19,7 +20,14 @@ module.exports = {
       resolve: require.resolve(`gatsby-plugin-page-creator`),
       options: {
         path: `${__dirname}/pages`,
-        ignore: ['**/packages/**/subExamples/**']
+        validatePath: (relativePath, isValid) => {
+          console.log(relativePath);
+          // Filter page creation based on criteria,
+          // the second argument is the default validatePath function
+          if (!isValid(relativePath)) return false
+          if (relativePath.indexOf("subExamples") !== -1) return false
+          return true
+        },
       },
     },
     {

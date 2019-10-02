@@ -31,7 +31,7 @@ if (process.env && process.env.CONTEXT !== 'production') {
 module.exports = () => ({
   siteName: 'Brisk Docs Docs',
   packages: ['./packages/*'],
-  showSubExamples: true,
+  showSubExamples: false,
   docs,
   links,
 });
