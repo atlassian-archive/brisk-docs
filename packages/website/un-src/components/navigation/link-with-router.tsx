@@ -1,9 +1,7 @@
 import * as React from 'react';
-// import { withRouter } from 'next/router';
 import { Item } from '@atlaskit/navigation-next';
 import { colors } from '@atlaskit/theme';
-
-// import LinkComponent from './link-component';
+import { Location } from '@reach/router';
 import { Link } from 'gatsby';
 
 // TODO TSFix - find out if we can actually get the prop types of withRouter
@@ -12,33 +10,40 @@ export type Props = {
   text: string;
   href: string;
   id?: string;
-  router: {
-    pathname: string;
-  };
   isHeading?: boolean;
 };
 
-const LinkWithRouter = ({ text, href, router, isHeading }: Props) => (
-  <Link to={href}>{text}</Link>
-  // <Item
-  //   // @ts-ignore
-  //   styles={styles => ({
-  //     ...styles,
-  //     itemBase: {
-  //       ...styles.itemBase,
-  //       paddingLeft: '4px',
-  //       height: '32px',
-  //     },
-  //     textWrapper: {
-  //       ...styles.textWrapper,
-  //       color: isHeading ? colors.N800 : colors.N200,
-  //     },
-  //   })}
-  //   text={text}
-  //   href={href}
-  //   isSelected={router.pathname === href}
-  //   component={LinkComponent}
-  // />
-);
+const NavLink = ({ text, href, isHeading }) => {
+  return (
+    <Location>
+      {locationProps => {
+        const pathName = locationProps.location.pathname;
+        return (
+          <Item
+            // @ts-ignore
+            styles={styles => ({
+              ...styles,
+              itemBase: {
+                ...styles.itemBase,
+                paddingLeft: '4px',
+                height: '32px',
+              },
+              textWrapper: {
+                ...styles.textWrapper,
+                color: isHeading ? colors.N800 : colors.N200,
+              },
+            })}
+            isSelected={pathName === href}
+            text={text}
+            href={href}
+            component={({ className, children, href }) => {
+              return ( <Link className={className} to={href}>{children}</Link>)
+            }}
+          />
+        )
+      }}
+    </Location>
+  )
+}
 
-export default LinkWithRouter;
+export default NavLink;

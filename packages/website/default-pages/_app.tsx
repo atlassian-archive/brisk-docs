@@ -3,9 +3,8 @@ import '@atlaskit/css-reset';
 import { MDXProvider } from '@mdx-js/tag';
 import components from '../un-src/components/mdx';
 import Meta, { metadata } from '../un-src/components/meta-context';
-import Title from '../un-src/components/page-title';
 
-export default class Layout extends React.Component<any> {
+export default class AppProvider extends React.Component<any> {
   // static async getInitialProps({ Component, ctx }: NextAppContext) {
   //   let pageProps = {};
 
@@ -30,7 +29,6 @@ export default class Layout extends React.Component<any> {
   render() {
     return (
       <Meta.Provider value={metadata}>
-        <Title />
         <MDXProvider components={components}>
           {this.props.children}
         </MDXProvider>
