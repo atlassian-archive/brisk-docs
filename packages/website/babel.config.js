@@ -20,7 +20,11 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
 let babelConfig = {
   presets: ['babel-preset-gatsby'],
   plugins: [
-    'emotion',
+    [
+      'emotion',
+      {},
+      'website'
+    ],
     [
       'styled-components',
       {
@@ -30,10 +34,26 @@ let babelConfig = {
       },
       'website'
     ],
-    '@babel/proposal-class-properties',
-    '@babel/proposal-object-rest-spread',
-    '@babel/transform-runtime',
-    'transform-dynamic-import',
+    [
+      '@babel/proposal-class-properties',
+      {},
+      'website'
+    ],
+    [
+      '@babel/proposal-object-rest-spread',
+      {},
+      'website'
+    ],
+    [
+      '@babel/transform-runtime',
+      {},
+      'website'
+    ],
+    [
+      'transform-dynamic-import',
+      {},
+      'website'
+    ]
   ],
 };
 

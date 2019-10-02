@@ -1,8 +1,8 @@
 const React = require("react")
 const Layout = require("./pages/_app.tsx").default
 
-exports.wrapPageElement = ({ element, props }) => {
+exports.wrapRootElement = ({ element }) => {
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it
-  return <Layout {...props}>{element}</Layout>
+  return <Layout>{element}</Layout>
 }

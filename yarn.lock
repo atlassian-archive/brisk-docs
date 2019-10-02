@@ -9800,6 +9800,13 @@ gatsby-page-utils@^0.0.23:
     micromatch "^3.1.10"
     slash "^3.0.0"
 
+gatsby-plugin-emotion@^2.0:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-2.0.7.tgz#c89a1e3eef8ae4654d3dee8bd89875f651c6743c"
+  integrity sha512-UTw2cltGH5e9vWvU4XskXrvRgrFiFOTUzFG6yrPwQiNoLM0FFVvvz2/mwD3waugbxBqSxb5wLoimZECOC2KNtw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-mdx@^1.0.46:
   version "1.0.46"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.46.tgz#872b9b222d775b4e8f7f1374dca759866bbe2483"

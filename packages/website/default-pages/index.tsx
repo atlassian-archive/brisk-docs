@@ -58,7 +58,7 @@ class HomePage extends React.Component {
       label: 'Get Started',
       color: colors.R400,
       description: 'Everything you need to get up and running',
-      imgSrc: imgSrc || '/static/code.png',
+      imgSrc: imgSrc || '/code.png',
     };
   };
 
@@ -69,7 +69,7 @@ class HomePage extends React.Component {
       label: 'Packages',
       color: colors.R400,
       description,
-      imgSrc: imgSrc || '/static/code.png',
+      imgSrc: imgSrc || '/code.png',
     };
   };
 
@@ -80,7 +80,7 @@ class HomePage extends React.Component {
       label: doc.name,
       color: colors.Y400,
       description: doc.description || '',
-      imgSrc: doc.imgSrc || '/static/file_cabinet.png',
+      imgSrc: doc.imgSrc || '/file_cabinet.png',
     };
   };
 
@@ -92,7 +92,7 @@ class HomePage extends React.Component {
       ExternalIconComponent: ShortcutIcon,
       IconComponent: LinkIcon,
       color: colors.N400,
-      imgSrc: link.imgSrc || '/static/simplify.svg',
+      imgSrc: link.imgSrc || '/simplify.svg',
     };
   };
 
