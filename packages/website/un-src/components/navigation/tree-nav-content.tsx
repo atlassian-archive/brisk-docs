@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import Tree from '@atlaskit/tree';
 import { colors } from '@atlaskit/theme';
-import NavLink from './link-with-router';
+import NavLink from './nav-link';
 import { Page } from '../../../types';
 import { getTitle } from '../../model/page';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Item } from '@atlaskit/navigation-next';
 import { colors } from '@atlaskit/theme';
 import { Location } from '@reach/router';
-import { Link } from 'gatsby';
+import LinkComponent from './link-component';
 
 // TODO TSFix - find out if we can actually get the prop types of withRouter
 // here instead of defining our own
@@ -36,9 +36,7 @@ const NavLink = ({ text, href, isHeading }) => {
             isSelected={pathName === href}
             text={text}
             href={href}
-            component={({ className, children, href }) => {
-              return ( <Link className={className} to={href}>{children}</Link>)
-            }}
+            component={LinkComponent}
           />
         )
       }}

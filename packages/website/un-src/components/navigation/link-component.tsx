@@ -1,7 +1,7 @@
 // Component that can be used as the component prop in nav items
 
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from 'gatsby';
 
 export type Props = {
   className: string;
@@ -15,12 +15,19 @@ export type Props = {
 class LinkComponent extends React.Component<Props> {
   render() {
     const { className, children, href } = this.props;
-
+    const internal = /^\/(?!\/)/.test(href);
+    if (internal) {
+      return (
+        <Link to={href} className={className}>
+          {children}
+        </Link>
+      );
+    }
     return (
-      <Link href={href}>
-        <a className={className}>{children}</a>
-      </Link>
-    );
+      <a href={href} className={className}>
+        {children}
+      </a>
+    )
   }
 }
 

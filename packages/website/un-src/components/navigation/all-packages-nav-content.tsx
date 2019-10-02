@@ -9,7 +9,7 @@ import {
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import titleCase from 'title-case';
-import NavLink from './link-with-router';
+import NavLink from './nav-link';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
 const gridSize = gridSizeFn();
