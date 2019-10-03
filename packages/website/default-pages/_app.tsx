@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '@atlaskit/css-reset';
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import components from '../un-src/components/mdx';
 import Meta, { metadata } from '../un-src/components/meta-context';
 
