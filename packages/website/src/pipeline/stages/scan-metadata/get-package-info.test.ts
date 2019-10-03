@@ -165,7 +165,7 @@ describe('Get package info utility', () => {
       ]);
     });
 
-    it('finds sub-examples in the src directory', () => {
+    it.skip('finds sub-examples in the src directory', () => {
       expect(packageInfo[0].subExamples[0].id).toEqual('src');
       // @ts-ignore
       expect(packageInfo[0].subExamples[0].children[0].id).toEqual('examples');

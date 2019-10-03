@@ -8,8 +8,7 @@ module.exports = {
   ],
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.([tj]sx?)$",
   transformIgnorePatterns: [
-    'node_modules/(?!(@atlaskit)/)',
-    `node_modules/(?!(gatsby)/)`
+    'node_modules/(?!(@atlaskit|gatsby)/)',
   ],
   moduleFileExtensions: [
     "ts", "tsx", "js", "jsx", "json", "node"
