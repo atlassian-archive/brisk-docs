@@ -10,7 +10,6 @@ import { gridSize as gridSizeFn } from '@atlaskit/theme';
 import titleCase from 'title-case';
 
 /** @jsx jsx */
-// @ts-ignore
 import { jsx } from '@emotion/core';
 
 const gridSize = gridSizeFn();

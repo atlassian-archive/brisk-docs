@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const funaliases = require('../../../website/relevant-file-name');
 // This is just how you deal with these configs
 // having this lint rule turned on leads to so many
 // errors further down
@@ -79,6 +80,18 @@ module.exports = withTypescript(
               ],
             }),
           );
+          config.resolve.mainFields.push('atlaskit:src');
+
+          if (config.resolve.extensions) {
+            config.resolve.extensions.concat(['.js', '.ts', '.tsx']);
+          } else {
+            config.resolve.extensions = ['.js', '.ts', '.tsx'];
+          }
+          
+          config.resolve.alias = {
+            ...config.resolve.alias,
+            ...funaliases,
+          }
 
           return clientWebpack(config);
         },

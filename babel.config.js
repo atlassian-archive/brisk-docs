@@ -1,7 +1,6 @@
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/react', '@babel/preset-typescript'],
+  presets: ['@babel/flow', '@babel/preset-env', '@babel/react', '@babel/preset-typescript'],
   plugins: [
-    'emotion',
     [
       'styled-components',
       {
@@ -10,6 +9,7 @@ module.exports = {
         preprocess: false,
       },
     ],
+    'emotion',
     '@babel/proposal-class-properties',
     '@babel/proposal-object-rest-spread',
     '@babel/transform-runtime',

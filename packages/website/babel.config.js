@@ -17,7 +17,7 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
 );
 
 let babelConfig = {
-  presets: ['next/babel', '@zeit/next-typescript/babel'],
+  presets: ['@babel/flow', 'next/babel', '@zeit/next-typescript/babel'],
   plugins: [
     'emotion',
     [
