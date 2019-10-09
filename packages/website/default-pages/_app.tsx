@@ -1,6 +1,5 @@
 import * as React from 'react';
 import '@atlaskit/css-reset';
-import { MDXProvider } from '@mdx-js/tag';
 import components from '../un-src/components/mdx';
 import Meta, { metadata } from '../un-src/components/meta-context';
 import Title from '../un-src/components/page-title';
@@ -31,9 +30,7 @@ export default class Layout extends React.Component<any> {
     return (
       <Meta.Provider value={metadata}>
         <Title />
-        <MDXProvider components={components}>
-          {this.props.children}
-        </MDXProvider>
+        <MDXProvider components={components}>{this.props.children}</MDXProvider>
       </Meta.Provider>
     );
   }

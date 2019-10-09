@@ -10,6 +10,7 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-emotion`,
+    `my-plugin-exploration`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,7 +21,7 @@ module.exports = {
     {
       resolve: require.resolve(`gatsby-plugin-page-creator`),
       options: {
-        path: `${__dirname}/pages`
+        path: `${__dirname}/pages`,
       },
     },
     {
@@ -29,5 +30,5 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
       },
     },
-  ]
-}
+  ],
+};
