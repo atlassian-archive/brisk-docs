@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 import Meta from './meta-context';
 
 export type Props = {
@@ -9,9 +9,9 @@ export type Props = {
 const PageTitle = ({ title }: Props) => (
   <Meta.Consumer>
     {({ siteName }: { siteName: string }) => (
-      <Head>
+      <Helmet>
         <title>{title ? `${title} - ${siteName}` : siteName}</title>
-      </Head>
+      </Helmet>
     )}
   </Meta.Consumer>
 );

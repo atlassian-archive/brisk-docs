@@ -4,7 +4,7 @@ import titleCase from 'title-case';
 import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import styled from '@emotion/styled';
 import { gridSize, math } from '@atlaskit/theme';
-import Link from 'next/link';
+import { Link } from 'gatsby';
 
 const Header = styled.div`
   left: 0;
@@ -27,15 +27,13 @@ const NextLink = React.forwardRef(
     ref: React.Ref<HTMLAnchorElement>,
   ) => {
     return (
-      <Link href={href}>
-        <a
-          ref={ref}
-          className={className}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          {children}
-        </a>
+      <Link
+        to={href}
+        ref={ref}
+        className={className}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}>
+        {children}
       </Link>
     );
   },

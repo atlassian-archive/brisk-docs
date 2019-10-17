@@ -9,7 +9,7 @@ import {
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import titleCase from 'title-case';
-import LinkWithRouter from './link-with-router';
+import NavLink from './nav-link';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 
 const gridSize = gridSizeFn();
@@ -152,7 +152,7 @@ const AllPackagesNavContent = ({ data }: Props) => {
               {data
                 .filter(x => !x.parentId)
                 .map(pkg => (
-                  <LinkWithRouter
+                  <NavLink
                     key={pkg.packageId}
                     text={
                       pkg.packageTitle

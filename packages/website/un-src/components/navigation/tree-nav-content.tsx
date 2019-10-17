@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import Tree from '@atlaskit/tree';
 import { colors } from '@atlaskit/theme';
-import LinkWithRouter from './link-with-router';
+import NavLink from './nav-link';
 import { Page } from '../../../types';
 import { getTitle } from '../../model/page';
 
@@ -86,7 +86,7 @@ const TreeItem = ({ item, provided }: TreeItemProps) => {
   if (data.href) {
     return (
       <div ref={provided.innerRef} {...provided.draggableProps}>
-        <LinkWithRouter
+        <NavLink
           isHeading={isHeading}
           href={data.href}
           id={id}
