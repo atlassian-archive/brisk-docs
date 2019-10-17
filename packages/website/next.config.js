@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const funaliases = require('../../../website/relevant-file-name');
+// const funaliases = require('../../../website/relevant-file-name');
 // This is just how you deal with these configs
 // having this lint rule turned on leads to so many
 // errors further down
@@ -90,7 +90,7 @@ module.exports = withTypescript(
           
           config.resolve.alias = {
             ...config.resolve.alias,
-            ...funaliases,
+            // ...funaliases,
           }
 
           return clientWebpack(config);
