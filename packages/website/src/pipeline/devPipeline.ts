@@ -3,7 +3,6 @@ import generateWebsiteInfo from './stages/generate-website-info';
 import generatePages from './stages/generate-pages';
 import runWebsite from './stages/run-website';
 import allPaths from './getAllPaths';
-import fs from 'fs';
 
 const devPipeline = async (configPath?: string, nextOptions?: string[]) => {
   const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = await allPaths(
@@ -18,7 +17,6 @@ const devPipeline = async (configPath?: string, nextOptions?: string[]) => {
   })
     .then(projectData => generateWebsiteInfo(projectData))
     .then(websiteInfo => {
-      fs.writeFileSync('./metadata.json', JSON.stringify(websiteInfo, null, 1), 'utf-8')
       return generatePages({
         wrappersPath,
         pagesPath,
@@ -35,7 +33,8 @@ const devPipeline = async (configPath?: string, nextOptions?: string[]) => {
         rootPath,
         nextOptions,
       }),
-    ).catch((e) => {
+    )
+    .catch(e => {
       console.trace(e);
     });
 };

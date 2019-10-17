@@ -324,16 +324,6 @@
     babel-runtime "^6.26.0"
     uuid "^3.1.0"
 
-"@atlaskit/icon@^16.0.1":
-  version "16.0.2"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/@atlaskit/icon/-/icon-16.0.2.tgz#c60b1f9c458c1e5eb189f97039d2aedcb2717c34"
-  integrity sha512-7+4KtLkpedYghgs+jV3IoWhtnvtQQorT3Vc1dkZJyDUJ3t3LwDnTYP2SnJ8uZIlnQZRQ4pm5R7m2FFrpTwvSwQ==
-  dependencies:
-    "@atlaskit/theme" "^7.0.1"
-    "@babel/runtime" "^7.0.0"
-    babel-runtime "^6.26.0"
-    uuid "^3.1.0"
-
 "@atlaskit/icon@^16.0.5":
   version "16.0.5"
   resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-16.0.5.tgz#21d23dbe9a1bc3d7dd064634375d177679070b3d"
@@ -351,6 +341,15 @@
   dependencies:
     "@atlaskit/theme" "^9.0.0"
     "@babel/runtime" "^7.0.0"
+    uuid "^3.1.0"
+
+"@atlaskit/icon@^19.0.8":
+  version "19.0.8"
+  resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-19.0.8.tgz#9628f6f5d9bf93baedfeb006d4fc719d008e1401"
+  integrity sha512-SpxL7y79Gr1F7diitMvbk55y1qISiyEF22mnLPr8ZbWtnP6FwuQgN2FU/yWikaBWuPNAjv3SE9E3K+ycbB1j1A==
+  dependencies:
+    "@atlaskit/theme" "^9.1.6"
+    tslib "^1.9.3"
     uuid "^3.1.0"
 
 "@atlaskit/inline-dialog@^9.0.14":
@@ -622,6 +621,15 @@
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.0.1.tgz#d7568c4e5a958a0f7c83f5de0039545cc6944dc7"
   integrity sha512-gAkxxaYwDcZqhgdKKqiCA9bLSPjEr31YuK9C//0sAnsf9ddgE95tuKx7qrISr9xwGhr9dxnDINuM70EM1AFamw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+
+"@atlaskit/theme@^9.1.6":
+  version "9.2.5"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.2.5.tgz#9ef23134c104402a683d3cabe8b59debb22e57a1"
+  integrity sha512-Ja9x9pjZNqy5ZW8KbSxV7xHKcslPXH8XGdPEU7r+Vb8k8g/l+47ex//r8RVOgpqvNQSjxZneZXycv5KVcWuvJQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     exenv "^1.2.2"
@@ -1865,14 +1873,6 @@
   dependencies:
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
-
-"@babel/runtime-corejs2@^7.4.3":
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.4.3.tgz#40271fc260e570fb356da984e42e5990bd275860"
-  integrity sha512-anTLTF7IK8Hd5f73zpPzt875I27UaaTWARJlfMGgnmQhvEe1uNHQRKBUbXL0Gc0VEYiVzsHsTPso5XdK8NGvFg==
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.2"
 
 "@babel/runtime@7.1.2":
   version "7.1.2"
@@ -5164,11 +5164,6 @@ core-js@^2.4.1, core-js@^2.5.7:
   version "2.6.3"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/core-js/-/core-js-2.6.3.tgz#4b70938bdffdaf64931e66e2db158f0892289c49"
   integrity sha512-l00tmFFZOBHtYhN4Cz7k32VM7vTn3rE2ANjQDxdEN6zmXZ/xq1jQuutnmHvMG1ZJ7xd72+TA5YpUK8wz3rWsfQ==
-
-core-js@^2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
-  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
