@@ -32,7 +32,8 @@
     "release": "yarn build && changeset publish",
     "prepare:docs": "bolt && yarn build:docs && yarn export",
     "postinstall": "preconstruct dev",
-    "bolt:fix": "bolt-check --fix"
+    "bolt:fix": "bolt-check --fix",
+    "brisk:pack": "bolt && bolt build && cd ./packages/website && yarn pack"
   },
   "bolt": {
     "version": "^0.23.2",
