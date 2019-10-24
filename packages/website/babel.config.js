@@ -16,44 +16,23 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
   configPath,
 );
 
-
 let babelConfig = {
-  presets: ['babel-preset-gatsby'],
+  presets: [],
   plugins: [
-    [
-      'emotion',
-      {},
-      'website'
-    ],
-    [
-      'styled-components',
-      {
-        ssr: true,
-        displayName: true,
-        preprocess: false,
-      },
-      'website'
-    ],
-    [
-      '@babel/proposal-class-properties',
-      {},
-      'website'
-    ],
-    [
-      '@babel/proposal-object-rest-spread',
-      {},
-      'website'
-    ],
-    [
-      '@babel/transform-runtime',
-      {},
-      'website'
-    ],
-    [
-      'transform-dynamic-import',
-      {},
-      'website'
-    ]
+    // ['emotion', {}, 'website'],
+    // [
+    //   'styled-components',
+    //   {
+    //     ssr: true,
+    //     displayName: true,
+    //     preprocess: false,
+    //   },
+    //   'website',
+    // ],
+    // ['@babel/proposal-class-properties', {}, 'website'],
+    // ['@babel/proposal-object-rest-spread', {}, 'website'],
+    // ['@babel/transform-runtime', {}, 'website'],
+    // ['transform-dynamic-import', {}, 'website'],
   ],
 };
 
@@ -68,10 +47,16 @@ if (
   /* eslint-disable global-require */
   /* eslint-disable import/no-dynamic-require */
   const clientBabel = require(path.resolve(cwd, clientBabelConfig));
-  babelConfig = merge(babelConfig, clientBabel);
+  babelConfig = clientBabel;
+  // babelConfig = merge(babelConfig, clientBabel);
 } else if (loadBabel) {
   // option to pass the required babel configs as function suppose the above scenario is not supported for a consumer.
   babelConfig = loadBabel(babelConfig);
 }
+
+fse.writeFileSync(
+  './output-babel-config.json',
+  JSON.stringify(babelConfig, undefined, 2),
+);
 
 module.exports = babelConfig;

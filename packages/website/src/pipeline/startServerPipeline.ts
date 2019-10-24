@@ -1,4 +1,4 @@
-import runWebsite from './stages/run-website';
+import runGatsby from './stages/run-gatsby';
 import allPaths from './getAllPaths';
 
 const startSeverPipeline = async (
@@ -7,12 +7,19 @@ const startSeverPipeline = async (
 ) => {
   const { rootPath, pkgRoot } = await allPaths(configPath);
 
-  return runWebsite({
-    command: 'start',
+  // return runWebsite({
+  //   command: 'start',
+  //   configPath,
+  //   pkgRoot,
+  //   rootPath,
+  //   nextOptions,
+  // });
+  runGatsby({
+    command: 'develop',
     configPath,
     pkgRoot,
     rootPath,
-    nextOptions,
+    // gatsbyOptions,
   });
 };
 

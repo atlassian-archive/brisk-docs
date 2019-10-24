@@ -25,6 +25,24 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: path.resolve(process.cwd(), '..', '..', '..'),
+        // This syntax matches all FILES that are not .md, but does not match on folders
+        // If it matches on folders, this plugin does not run successfully
+        ignore: ['**/.cache/**/*', '**/*.!(md)'],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: path.resolve(process.cwd(), '..', '..', '..'),
+        // This syntax matches all FILES that are not .md, but does not match on folders
+        // If it matches on folders, this plugin does not run successfully
+        ignore: ['**/.cache/**/*', '**/*.!(mdx)'],
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
