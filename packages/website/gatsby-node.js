@@ -1,4 +1,4 @@
-const funAliases = require('/Users/bconolly/Development/atlaskit/website/relevant-file-name.json');
+const funAliases = require('/Users/clee/Thinkmill/projects/atlaskit/website/relevant-file-name.json');
 
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   actions.setWebpackConfig({
