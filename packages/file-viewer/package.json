@@ -14,7 +14,7 @@
     "dist"
   ],
   "peerDependencies": {
-    "react": "^16.8.4",
+    "react": "16.10.2",
     "react-dom": "^16.8.4"
   },
   "devDependencies": {
