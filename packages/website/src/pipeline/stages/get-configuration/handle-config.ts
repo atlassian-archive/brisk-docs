@@ -30,13 +30,6 @@ const resolvePathsConfig = (entry: any): string[] => {
 
 type PartialConfig = { [P in keyof UserConfig]?: UserConfig[P] };
 
-/**
- * Reads a user supplied config file, validates the contents, and
- * reformats it in a normalised way
- * @param cwd
- * @param config
- * @returns {{packagesPaths: *, docsPath: *}}
- */
 const processConfig = (
   cwd: string,
   providedConfig: PartialConfig,
@@ -47,6 +40,7 @@ const processConfig = (
     packages,
     customPackageFields,
     templates = [],
+    gatsbyNode = {},
     ...rest
   } = config;
 
@@ -102,6 +96,7 @@ const processConfig = (
     // docsList/packagesPaths should not be overridden. They are computed from provided docs/packages config.
     docs: docsList,
     packagesPaths,
+    gatsbyNode,
   };
 };
 

@@ -1,13 +1,15 @@
-const funAliases = require('/Users/clee/Thinkmill/projects/atlaskit/website/relevant-file-name.json');
+const handleConfig = require('./handle-config').default;
+
+const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
+const cwd = process.env.DOCS_WEBSITE_CWD;
+
+if (!cwd) {
+  throw new Error('DOCS_WEBSITE_CWD is not defined');
+}
+
+const { gatsbyNode } = handleConfig(cwd, configPath);
 
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
-      extensions: ['.js', '.ts', '.tsx'],
-      alias: funAliases,
-    },
-  });
   const config = getConfig();
 
   config.module.rules = [
@@ -17,19 +19,8 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
     ),
     // Recreate it with custom exclude filter
     {
-      // Called without any arguments, `loaders.js` will return an
-      // object like:
-      // {
-      //   options: undefined,
-      //   loader: '/path/to/node_modules/gatsby/dist/utils/babel-loader.js',
-      // }
-      // Unless you're replacing Babel with a different transpiler, you probably
-      // want this so that Gatsby will apply its required Babel
-      // presets/plugins.  This will also merge in your configuration from
-      // `babel.config.js`.
       ...loaders.js(),
       test: /\.jsx?$/,
-      // Exclude all node_modules from transpilation, except for 'swiper' and 'dom7'
       exclude: modulePath =>
         /node_modules/.test(modulePath) &&
         /*
@@ -42,29 +33,9 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
         ),
     },
   ];
-  // This will completely replace the webpack config with the modified object.
   actions.replaceWebpackConfig(config);
 };
 
-// const funAliases = require('/Users/bconolly/Development/atlaskit/website/relevant-file-name.json');
-
-// exports.onCreateWebpackConfig = async ({ actions, loaders }) => {
-//   console.log(loaders);
-//   actions.setWebpackConfig({
-//     resolve: {
-//       mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
-//       extensions: ['.js', '.ts', '.tsx'],
-//       alias: funAliases,
-//     },
-//     module: {
-//       rules: [
-//         {
-//           test: /(\.js|\.ts|\.tsx|\.jsx)$/,
-//           include: /node_modules\/@brisk-docs/,
-//           exclude: /node_modules\/@brisk-docs\/website\/node_modules/,
-//           loader: 'babel-loader',
-//         },
-//       ],
-//     },
-//   });
-// };
+Object.entries(gatsbyNode).forEach(([key, value]) => {
+  exports[key] = value;
+});

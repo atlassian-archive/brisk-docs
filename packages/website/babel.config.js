@@ -1,6 +1,6 @@
 const fse = require('fs-extra');
 const path = require('path');
-const merge = require('babel-merge');
+// const merge = require('babel-merge');
 
 const handleConfig = require('./handle-config').default;
 
@@ -18,22 +18,7 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
 
 let babelConfig = {
   presets: [],
-  plugins: [
-    // ['emotion', {}, 'website'],
-    // [
-    //   'styled-components',
-    //   {
-    //     ssr: true,
-    //     displayName: true,
-    //     preprocess: false,
-    //   },
-    //   'website',
-    // ],
-    // ['@babel/proposal-class-properties', {}, 'website'],
-    // ['@babel/proposal-object-rest-spread', {}, 'website'],
-    // ['@babel/transform-runtime', {}, 'website'],
-    // ['transform-dynamic-import', {}, 'website'],
-  ],
+  plugins: [],
 };
 
 // to merge the consumer level babel.config
@@ -53,10 +38,5 @@ if (
   // option to pass the required babel configs as function suppose the above scenario is not supported for a consumer.
   babelConfig = loadBabel(babelConfig);
 }
-
-fse.writeFileSync(
-  './output-babel-config.json',
-  JSON.stringify(babelConfig, undefined, 2),
-);
 
 module.exports = babelConfig;
