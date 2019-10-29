@@ -17,8 +17,11 @@ const { babelConfig: clientBabelConfig, loadBabel } = handleConfig(
 );
 
 let babelConfig = {
-  presets: [],
-  plugins: [],
+  presets: ['@babel/react'],
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    '@babel/syntax-dynamic-import',
+  ],
 };
 
 // to merge the consumer level babel.config
