@@ -12,8 +12,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "debug:generate": "node --inspect-brk bin.js dev --config=dummy-data/simple-project/docs.config.js",
-    "debug:next": "yarn dev --debug-next",
     "dev": "node bin.js dev --config=dummy-data/simple-project/docs.config.js",
     "dev:complete": "node bin.js dev --config=dummy-data/complete-config-project/docs.config.js",
     "dev:webpack": "node bin.js dev --config=dummy-data/custom-webpack-project/docs.config.js",
@@ -22,7 +20,7 @@
     "export:site": "node bin.js export --config=dummy-data/simple-project/docs.config.js",
     "build": "echo no build set yet for website",
     "start": "node bin.js start",
-    "start:complete": "node bin.js start --config=dummy-data/complete-config-project/docs.config.js"
+    "start:complete": "node bin.js dev --config=dummy-data/complete-config-project/docs.config.js"
   },
   "bin": {
     "brisk": "bin.js"

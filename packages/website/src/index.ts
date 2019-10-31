@@ -32,10 +32,6 @@ const runBinary = () => {
         handleError,
       );
     }
-    // case 'start': {
-    //   throw new Error('not implemented');
-    //   //   break;
-    // }
     case 'export': {
       return exportServerPipeline(nextOptions, options.config).catch(
         handleError,

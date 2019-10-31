@@ -1,4 +1,4 @@
-version: 3
+version: 4
 
 job-setup: &job-setup
   docker:
@@ -81,10 +81,6 @@ jobs:
       - restore_cache: *restore-cache
 
       - run: *install-bolt
-
-      - run:
-          name: Build website (using complete-config-project)
-          command: bolt build:website:complete
 
       - run:
           name: Start up website (using complete-config-project)
