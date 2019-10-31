@@ -65,6 +65,8 @@ const getParentId = (
   packagePath: string,
   globPatterns: string[],
 ): string | undefined => {
+  if (globPatterns.includes(packagePath)) return undefined;
+
   // This finds the parent folder id by matching the package directory against
   // the user defined package glob paths. This method only accounts for globs of
   // the format <path>/* or <path>/*/**.
@@ -75,6 +77,8 @@ const getParentId = (
   const parentDir = baseDirectories
     .map(dir => packagePath.match(`^${dir}/(.*)/.*`))
     .find(a => !!a && a[1] !== '/');
+
+  console.log(parentDir);
 
   if (parentDir && parentDir[1]) {
     return parentDir[1];
