@@ -89,9 +89,7 @@ const renderRow = ({
         key: packageId,
         content: (
           <RowCell>
-            <Link to={homePath}>
-              {display}
-            </Link>
+            <Link to={homePath}>{display}</Link>
           </RowCell>
         ),
       },

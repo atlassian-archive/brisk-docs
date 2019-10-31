@@ -86,12 +86,7 @@ const TreeItem = ({ item, provided }: TreeItemProps) => {
   if (data.href) {
     return (
       <div ref={provided.innerRef} {...provided.draggableProps}>
-        <NavLink
-          isHeading={isHeading}
-          href={data.href}
-          id={id}
-          text={text}
-        />
+        <NavLink isHeading={isHeading} href={data.href} id={id} text={text} />
       </div>
     );
   }

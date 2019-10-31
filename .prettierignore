@@ -2,5 +2,7 @@
 *.json
 dist
 /out
+brisk-out
+.cache
 /packages/website/pages
 /cypress

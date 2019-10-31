@@ -32,7 +32,8 @@ const NextLink = React.forwardRef(
         ref={ref}
         className={className}
         onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}>
+        onMouseLeave={onMouseLeave}
+      >
         {children}
       </Link>
     );

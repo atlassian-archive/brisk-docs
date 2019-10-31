@@ -12,9 +12,7 @@ const components = {
   h5: (props: {}) => <Heading {...props} tag="h5" />,
   h6: (props: {}) => <Heading {...props} tag="h6" />,
   a: ({ children, ...props }: { children: React.ReactChild; href: string }) => {
-    return (
-      <Link {...props}>{children}</Link>
-    )
+    return <Link {...props}>{children}</Link>;
   },
   code: CodeBlock,
   inlineCode: InlineCode,
