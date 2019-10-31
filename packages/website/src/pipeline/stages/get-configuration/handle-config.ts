@@ -54,7 +54,13 @@ const processConfig = (
     }
     const docsPath = path.resolve(cwd, docPath);
 
-    return { name, path: docsPath, urlPath, imgSrc, description };
+    return {
+      name,
+      path: docsPath,
+      urlPath: urlPath || docPath,
+      imgSrc,
+      description,
+    };
   });
 
   const readmePath = path.resolve(cwd, 'README.md');
