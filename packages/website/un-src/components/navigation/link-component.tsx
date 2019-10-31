@@ -15,7 +15,7 @@ export type Props = {
 // ref errors from styled-components).
 /* eslint-disable-next-line  react/prefer-stateless-function */
 
-const LinkComponent = ({
+const LinkComponent: React.ComponentType<Props> = ({
   className,
   children,
   href,

@@ -28,7 +28,7 @@ const loadInAnimation = keyframes`
     }
 `;
 
-const PanelLink = styled(SwitchLink)`
+const PanelLink: React.ComponentType<any> = styled(SwitchLink)`
   background-color: white;
   border-radius: 3px;
   color: ${colors.N900};
