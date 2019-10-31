@@ -8,7 +8,7 @@ export type Props = {
   children: React.ReactChild;
   includeShortcutIcon?: boolean; // default true - only has an effect for external links
   href: string;
-  className: string;
+  className?: string;
 };
 
 // @atlaskit/item requires a class to be passed to it (otherwise we get

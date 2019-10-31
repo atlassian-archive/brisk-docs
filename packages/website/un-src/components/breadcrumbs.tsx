@@ -29,7 +29,7 @@ const NextLink = React.forwardRef(
     return (
       <Link
         to={href}
-        ref={ref}
+        ref={() => ref}
         className={className}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

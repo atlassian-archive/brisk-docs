@@ -6,7 +6,7 @@ import SwitchLink from '../../un-src/components/switch-link';
 const children = 'some text';
 
 const initialProps = {
-  children: () => 'some text',
+  children: 'some text',
   href: '/atlaskit',
 };
 
