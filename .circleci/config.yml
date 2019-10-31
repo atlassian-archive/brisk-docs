@@ -1,8 +1,8 @@
-version: 2
+version: 3
 
 job-setup: &job-setup
   docker:
-    - image: circleci/node:8.11.3-browsers
+    - image: circleci/node:10.13.0
   working_directory: ~/repo
 
 restore-cache: &restore-cache
