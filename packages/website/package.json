@@ -102,6 +102,7 @@
     "lodash.flatten": "^4.4.0",
     "lodash.identity": "^3.0.0",
     "lodash.snakecase": "^4.1.1",
+    "next": "^9.1.2",
     "outdent": "^0.7.0",
     "pkg-dir": "^4.2.0",
     "pretty-proptypes": "^0.6.6",
