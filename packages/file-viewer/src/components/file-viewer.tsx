@@ -54,6 +54,7 @@ const FileViewer = ({ Component, source, title }: Props) => {
 
       {isSourceVisible ? (
         <CodeStyle>
+          {/* eslint-disable-next-line react/no-danger */}
           <code dangerouslySetInnerHTML={{ __html: highlighted }} />
         </CodeStyle>
       ) : null}

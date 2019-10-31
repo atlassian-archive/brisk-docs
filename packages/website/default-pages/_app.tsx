@@ -27,9 +27,11 @@ export default class AppProvider extends React.Component<any> {
   }
 
   render() {
+    const { children } = this.props;
+
     return (
       <Meta.Provider value={metadata}>
-        <MDXProvider components={components}>{this.props.children}</MDXProvider>
+        <MDXProvider components={components}>{children}</MDXProvider>
       </Meta.Provider>
     );
   }

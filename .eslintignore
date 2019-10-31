@@ -1,6 +1,7 @@
 node_modules
 .next
 out
+brisk-out
 
 packages/website/pages
 

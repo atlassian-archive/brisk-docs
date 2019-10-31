@@ -1,11 +1,11 @@
 import React from 'react';
 import Title from '../un-src/components/page-title';
 
-const Layout = (props) => (
+const Layout = ({ children }: { children: any }) => (
   <>
     <Title />
-    {props.children}
+    {children}
   </>
-)
+);
 
 export default Layout;

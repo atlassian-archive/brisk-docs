@@ -3,7 +3,7 @@ import allPaths from './getAllPaths';
 
 const startSeverPipeline = async (
   configPath?: string,
-  nextOptions?: string[],
+  gatsbyOptions?: string[],
 ) => {
   const { rootPath, pkgRoot } = await allPaths(configPath);
 
@@ -19,7 +19,7 @@ const startSeverPipeline = async (
     configPath,
     pkgRoot,
     rootPath,
-    // gatsbyOptions,
+    gatsbyOptions,
   });
 };
 

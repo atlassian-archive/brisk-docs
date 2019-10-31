@@ -9,6 +9,7 @@
   ],
   "plugins": ["emotion"],
   "rules": {
+    "no-console": "off",
     "import/no-unresolved": "off",
     "emotion/jsx-import": "error",
     "react/jsx-filename-extension": "off",

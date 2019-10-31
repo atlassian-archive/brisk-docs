@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Props as IconProps } from '@atlaskit/icon/glyph/shortcut';
 import { colors, gridSize, math } from '@atlaskit/theme';
 import SwitchLink from './switch-link';
 
@@ -103,13 +102,10 @@ const Panel = ({
   imgSrc,
 }: Props) => {
   const internal = /^(\/|\.\/|\.\.\/)(?!\/)/.test(href);
-  const IconSwitch = !internal && ExternalIconComponent ? ExternalIconComponent : IconComponent;
+  const IconSwitch =
+    !internal && ExternalIconComponent ? ExternalIconComponent : IconComponent;
   return (
-    <PanelLink
-      data-testid="PanelLink"
-      href={href}
-      includeShortcutIcon={false}
-    >
+    <PanelLink data-testid="PanelLink" href={href} includeShortcutIcon={false}>
       <PanelHeader data-testid="PanelHeader">
         <PanelIcon color={color}>
           <IconSwitch
@@ -128,7 +124,7 @@ const Panel = ({
         src={imgSrc}
       />
     </PanelLink>
-  )
-}
+  );
+};
 
 export default Panel;

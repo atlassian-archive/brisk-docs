@@ -13,7 +13,9 @@ export type Props = {
   isHeading?: boolean;
 };
 
-const NavLink = ({ text, href, isHeading }) => {
+type Props = { text: string; href: string; isHeading: boolean };
+
+const NavLink = ({ text, href, isHeading }: Props) => {
   return (
     <Location>
       {locationProps => {
@@ -38,10 +40,10 @@ const NavLink = ({ text, href, isHeading }) => {
             href={href}
             component={LinkComponent}
           />
-        )
+        );
       }}
     </Location>
-  )
-}
+  );
+};
 
 export default NavLink;
