@@ -59,10 +59,10 @@ describe('<SwitchLink />', () => {
 
   it('renders a Link component for relative links', () => {
     const wrapper = mount(<SwitchLink {...initialProps} />);
-    const component = wrapper.find('Link');
+    const component = wrapper.find('GatsbyLink');
 
     expect(component.exists()).toBeTruthy();
     expect(component.text()).toEqual(children);
-    expect(component.prop('href')).toEqual(initialProps.href);
+    expect(component.prop('to')).toEqual(initialProps.href);
   });
 });

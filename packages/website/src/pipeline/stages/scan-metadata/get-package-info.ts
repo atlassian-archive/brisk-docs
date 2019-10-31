@@ -78,8 +78,6 @@ const getParentId = (
     .map(dir => packagePath.match(`^${dir}/(.*)/.*`))
     .find(a => !!a && a[1] !== '/');
 
-  console.log(parentDir);
-
   if (parentDir && parentDir[1]) {
     return parentDir[1];
   }

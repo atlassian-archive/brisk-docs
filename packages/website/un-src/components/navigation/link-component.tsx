@@ -37,7 +37,7 @@ const LinkComponent: React.ComponentType<Props> = ({
       target="_blank"
       rel="noopener noreferrer"
     >
-      {children}{' '}
+      {children}
       {includeShortcutIcon && <ShortcutIcon label={href} size="small" />}
     </a>
   );
