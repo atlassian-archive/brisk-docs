@@ -26,7 +26,7 @@ export default async function spawnGatsbyProcess({
   }
 
   const nodeEnv = 'PATH=$(npm bin):$PATH; NODE_PATH=$NODE_PATH:$PWD/src';
-  let gatsbyBin = 'gatsby';
+  const gatsbyBin = 'gatsby';
 
   const { status } = spawnSync(
     `${nodeEnv} ${gatsbyBin} ${command} ${gatsbyOptions.join(' ')}`,

@@ -1,15 +1,10 @@
 import scanMetadata from './stages/scan-metadata';
 import generateWebsiteInfo from './stages/generate-website-info';
 import generatePages from './stages/generate-pages';
-import runWebsite from './stages/run-website';
 import runGatsby from './stages/run-gatsby';
 import allPaths from './getAllPaths';
 
-const devPipeline = async (
-  configPath?: string,
-  nextOptions?: string[],
-  gatsbyOptions?: string[],
-) => {
+const devPipeline = async (configPath?: string, gatsbyOptions?: string[]) => {
   const { rootPath, wrappersPath, pagesPath, pkgRoot, config } = await allPaths(
     configPath,
   );
@@ -32,14 +27,6 @@ const devPipeline = async (
       }),
     )
     .then(() =>
-      // DONT RUN NEXT FOR NOW
-      // runWebsite({
-      //   command: 'dev',
-      //   configPath,
-      //   pkgRoot,
-      //   rootPath,
-      //   nextOptions,
-      // })
       runGatsby({
         command: 'develop',
         configPath,

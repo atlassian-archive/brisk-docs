@@ -14,6 +14,7 @@ yarn-error.log
 /cypress
 **/cypress/screenshots
 
+brisk-out
 scratchings.js
 
 /packages/website/pages

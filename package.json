@@ -30,7 +30,7 @@
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
     "release": "yarn build && changeset publish",
-    "prepare:docs": "bolt && yarn build:docs && yarn export",
+    "prepare:docs": "bolt && NODE_ENV=production yarn v-brisk build",
     "postinstall": "preconstruct dev",
     "bolt:fix": "bolt-check --fix",
     "brisk:pack": "bolt && bolt build && cd ./packages/website && yarn pack",
