@@ -1,5 +1,11 @@
 # @brisk-docs/file-viewer
 
+## 0.2.4
+
+### Patch Changes
+
+- 4a3112c: Update react dependency
+
 ## 0.2.3
 
 ### Patch Changes

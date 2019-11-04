@@ -1,5 +1,11 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.10
+
+### Patch Changes
+
+- 4a3112c: Update react dependency
+
 ## 0.1.9
 
 ### Patch Changes

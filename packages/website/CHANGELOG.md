@@ -1,5 +1,17 @@
 # @brisk-docs/website
 
+## 1.0.0
+
+### Major Changes
+
+- 4a3112c: Switch website to use gatsby instead of Next.js. Rename `website` to `gatsby generator` for clarity.
+
+### Patch Changes
+
+- Updated dependencies [4a3112c]:
+  - @brisk-docs/file-viewer@undefined
+  - @brisk-docs/react-changelogs@undefined
+
 ## 0.9.0
 
 ### Minor Changes
