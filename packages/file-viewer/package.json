@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/file-viewer",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "This package is used for rendering examples and their source code",
   "main": "dist/file-viewer.cjs.js",
   "module": "dist/file-viewer.esm.js",
@@ -10,9 +10,7 @@
   ],
   "author": "Peter Yu",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "react": "16.10.2",
     "react-dom": "^16.8.4"
