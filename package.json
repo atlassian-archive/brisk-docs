@@ -72,6 +72,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@changesets/changelog-git": "^0.1.1",
     "@changesets/cli": "^2.3.2",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",

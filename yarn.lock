@@ -2356,6 +2356,13 @@
     "@changesets/types" "^0.4.0"
     semver "^5.4.1"
 
+"@changesets/changelog-git@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@changesets/changelog-git/-/changelog-git-0.1.1.tgz#6557428fbb45d168709fa45527df248d2dc7339f"
+  integrity sha512-gqGtfyqYCSN7Z30ByZFIRiXesqAWxmeIGRpLqtoI3dwvSaCrNPCOBJv02ZPbPeFVYgXmUCWvIj6CIFWLuwiXcA==
+  dependencies:
+    "@changesets/types" "^0.4.0"
+
 "@changesets/cli@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-2.3.2.tgz#f21c980dc8491e6509df1cffd8083d149ba88134"
