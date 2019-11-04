@@ -1,7 +1,7 @@
 {
-    "main":"dist/website.cjs.js",
-    "module":"dist/website.esm.js",
-    "preconstruct": {
-        "source": "../src/handle-config"
-    }
+  "main": "dist/gatsby-generator.cjs.js",
+  "module": "dist/gatsby-generator.esm.js",
+  "preconstruct": {
+    "source": "../src/handle-config"
+  }
 }

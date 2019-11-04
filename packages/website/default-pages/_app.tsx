@@ -5,16 +5,6 @@ import components from '../un-src/components/mdx';
 import Meta, { metadata } from '../un-src/components/meta-context';
 
 export default class AppProvider extends React.Component<any> {
-  // static async getInitialProps({ Component, ctx }: NextAppContext) {
-  //   let pageProps = {};
-
-  //   if (Component.getInitialProps) {
-  //     pageProps = await Component.getInitialProps(ctx);
-  //   }
-
-  //   return { pageProps };
-  // }
-
   componentDidMount() {
     /**
      * Set a marker on body indicating that we've rendered on the client side (componentDidMount does not execute on the server).

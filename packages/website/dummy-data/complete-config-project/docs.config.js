@@ -17,7 +17,7 @@ module.exports = () => ({
       urlPath: 'tut',
     },
   ],
-  favicon: path.join(__dirname, 'favicon.ico'),
+  favicon: path.join(__dirname, 'snowboarder.png'),
   links: [
     {
       label: 'Get accomplished today!',

@@ -7,13 +7,6 @@ const startSeverPipeline = async (
 ) => {
   const { rootPath, pkgRoot } = await allPaths(configPath);
 
-  // return runWebsite({
-  //   command: 'start',
-  //   configPath,
-  //   pkgRoot,
-  //   rootPath,
-  //   nextOptions,
-  // });
   runGatsby({
     command: 'develop',
     configPath,

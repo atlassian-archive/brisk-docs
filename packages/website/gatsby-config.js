@@ -4,7 +4,19 @@ Only plugins can export async functions, so we are nesting our config like so
 const path = require('path');
 const findWorkspaceRoot = require('find-workspaces-root').default;
 
+const handleConfig = require('./handle-config').default;
+
+const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
+const cwd = process.env.DOCS_WEBSITE_CWD;
+
+if (!cwd) {
+  throw new Error('DOCS_WEBSITE_CWD is not defined');
+}
+
+const config = handleConfig(cwd, configPath);
+
 async function getConfig() {
+  // This wants to be the actual root - making it the config root or local cwd may cause issues
   const wsRoot = await findWorkspaceRoot(process.cwd());
 
   return {
@@ -27,18 +39,22 @@ async function getConfig() {
         },
       },
       {
-        resolve: `gatsby-source-filesystem`,
-        options: {
-          path: wsRoot,
-          // This syntax matches all FILES that are not .md, but does not match on folders
-          // If it matches on folders, this plugin does not run successfully
-          ignore: ['**/.cache/**/*', '**/*.!(mdx)'],
-        },
-      },
-      {
         resolve: `gatsby-plugin-mdx`,
         options: {
           extensions: [`.mdx`, `.md`],
+        },
+      },
+      {
+        resolve: `gatsby-plugin-manifest`,
+        options: {
+          name: config.siteName,
+          short_name: config.siteName,
+          start_url: '/',
+          // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+          // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+          display: 'browser',
+          // TODO: get favicons working again
+          icon: config.favicon,
         },
       },
     ],

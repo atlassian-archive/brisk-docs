@@ -4,9 +4,7 @@ describe('Home page', () => {
   });
 
   it('should have a favicon', () => {
-    cy.get('link[type="image/x-icon"]')
-      .should('have.attr', 'href', '/static/favicon.ico')
-      .should('have.attr', 'rel', 'icon');
+    cy.get('link[rel="icon"]').should('have.attr', 'href');
   });
 
   it('should display the expected set of links', () => {
@@ -35,50 +33,50 @@ describe('Home page', () => {
         {
           label: 'Get Started',
           description: 'Everything you need to get up and running',
-          href: 'http://localhost:3000/readme',
+          href: 'http://localhost:8000/readme',
           img: {
             alt: 'Get Started graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: 'http://localhost:8000/static/simplify.svg',
           },
           target: '',
         },
         {
           label: 'Packages',
           description: 'A custom description for the packages section',
-          href: 'http://localhost:3000/packages',
+          href: 'http://localhost:8000/packages',
           img: {
             alt: 'Packages graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: 'http://localhost:8000/static/simplify.svg',
           },
           target: '',
         },
         {
           label: 'Docs',
           description: 'Read the full documentation for this project',
-          href: 'http://localhost:3000/docco',
+          href: 'http://localhost:8000/docco',
           img: {
             alt: 'Docs graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: 'http://localhost:8000/static/simplify.svg',
           },
           target: '',
         },
         {
           label: 'Tutorial',
           description: 'Get started by following a tutorial',
-          href: 'http://localhost:3000/tut',
+          href: 'http://localhost:8000/tut',
           img: {
             alt: 'Tutorial graphic',
-            src: 'http://localhost:3000/static/file_cabinet.png',
+            src: 'http://localhost:8000/static/file_cabinet.png',
           },
           target: '',
         },
         {
           label: 'Get accomplished today!',
           description: '',
-          href: 'http://localhost:3000/docco/guides/how-to-be-accomplished',
+          href: 'http://localhost:8000/docco/guides/how-to-be-accomplished',
           img: {
             alt: 'Get accomplished today! graphic',
-            src: 'http://localhost:3000/static/file_cabinet.png',
+            src: 'http://localhost:8000/static/file_cabinet.png',
           },
           target: '',
         },
@@ -89,7 +87,7 @@ describe('Home page', () => {
           href: 'https://www.atlassian.com/company/careers/all-jobs',
           img: {
             alt: 'Get a job! graphic',
-            src: 'http://localhost:3000/static/simplify.svg',
+            src: 'http://localhost:8000/static/simplify.svg',
           },
           target: '_blank',
         },

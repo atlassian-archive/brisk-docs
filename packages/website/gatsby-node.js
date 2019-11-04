@@ -24,13 +24,13 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
       exclude: modulePath =>
         /node_modules/.test(modulePath) &&
         /*
-          The logic for the below two regexes + boolean is we want to include things in @brisk-docs/website, but exclude things in its node_modules.
-          This is complicated by the fact that we must do this by the exclude list, making it a double negative
+          What this regex is saying is:
+          Do not exclude:
+            - files in node_modules
+            - that are in a @brisk-docs scoped package
+            - BUT still exclude things in the node_modules of that package
         */
-        !(
-          /node_modules\/@brisk-docs\/website/.test(modulePath) &&
-          !/node_modules\/@brisk-docs\/website\/node_modules/.test(modulePath)
-        ),
+        !/node_modules\/@brisk-docs\/[^/]+\/(?!node_modules)/.test(modulePath),
     },
   ];
   actions.replaceWebpackConfig(config);

@@ -75,7 +75,7 @@ class HomePage extends React.Component {
 
   getDocsPanelProps = (doc: DocumentObject) => {
     return {
-      href: doc.urlPath,
+      href: `/${doc.urlPath}`,
       IconComponent: MediaDocIcon,
       label: doc.name,
       color: colors.Y400,

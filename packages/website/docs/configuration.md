@@ -16,7 +16,7 @@ the returned object may have the following properties:
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | customPackageFields | Array of fields from the relevant package.json to display on the package home page. This augments the default set.                  |
 | docs                | Object (or array of Object) describing the project docs.                                                                            |
-| favicon             | Absolute path to an .ico file to use as the site's favicon e.g. `path.join(__dirname, 'favicon.ico')`                               |
+| favicon             | Absolute path to an .png file to use as the site's favicon e.g. `path.join(__dirname, 'favicon.png')`                               |
 | links               | Optional array of Object with links to display on the homepage                                                                      |
 | packages            | Path or array of paths of packages to show. Glob patterns are allowed. e.g. `path.join(__dirname, 'packages', '*')`                 |
 | packagesDescription | Optional String to replace the default description for the packages section                                                         |
@@ -59,11 +59,11 @@ For a given path, if it does not exist, that section will not be generated.
 
 ### favicon
 
-Type: optional `string` defaults to `path.join(__dirname, 'favicon.ico')`
+Type: optional `string` defaults to `path.join(__dirname, 'favicon.png')`
 
-Absolute path to an `.ico` file to use as the site's favicon. If the file does not exist, a default favicon will be added to the site.
+Absolute path to an `.png` file to use as the site's favicon. If the file does not exist, a default favicon will be added to the site.
 
-e.g. `path.join(__dirname, 'new_favicon.ico')`
+e.g. `path.join(__dirname, 'new_favicon.png')`
 
 ### links
 

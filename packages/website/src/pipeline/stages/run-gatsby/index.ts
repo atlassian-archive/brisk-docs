@@ -16,7 +16,5 @@ interface StageInput {
 
 export default createStage(
   'run-gatsby',
-  async (input: StageInput): Promise<void> => {
-    createGatsbyServer(input);
-  },
+  async (input: StageInput): Promise<void> => createGatsbyServer(input),
 );

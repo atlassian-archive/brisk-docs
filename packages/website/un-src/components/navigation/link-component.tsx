@@ -20,12 +20,18 @@ const LinkComponent: React.ComponentType<Props> = ({
   children,
   href,
   includeShortcutIcon = true,
+  ...rest
 }: Props) => {
   const internal = /^(\/|\.\/|\.\.\/)(?!\/)/.test(href);
   if (internal) {
     const newHref = href.replace(/\.md$/, '');
     return (
-      <Link to={newHref} className={className}>
+      <Link
+        to={newHref}
+        className={className}
+        // @ts-ignore
+        data-testid={rest['data-testid']}
+      >
         {children}
       </Link>
     );
@@ -36,6 +42,8 @@ const LinkComponent: React.ComponentType<Props> = ({
       className={className}
       target="_blank"
       rel="noopener noreferrer"
+      // @ts-ignore
+      data-testid={rest['data-testid']}
     >
       {children}
       {includeShortcutIcon && <ShortcutIcon label={href} size="small" />}
