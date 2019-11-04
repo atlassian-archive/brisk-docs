@@ -2,8 +2,6 @@
 Only plugins can export async functions, so we are nesting our config like so
 */
 const path = require('path');
-const findWorkspaceRoot = require('find-workspaces-root').default;
-
 const handleConfig = require('./handle-config').default;
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
@@ -16,9 +14,6 @@ if (!cwd) {
 const config = handleConfig(cwd, configPath);
 
 async function getConfig() {
-  // This wants to be the actual root - making it the config root or local cwd may cause issues
-  const wsRoot = await findWorkspaceRoot(process.cwd());
-
   return {
     plugins: [
       `gatsby-plugin-typescript`,
