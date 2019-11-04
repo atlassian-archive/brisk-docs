@@ -36,6 +36,11 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   actions.replaceWebpackConfig(config);
 };
 
+/*
+This map is being used TEMPORARILY because our project is not yet enough gatsby-like to use layered
+gatsby-node instances (the way gatsby plugins would), but we still need to allow users to provide this
+info.
+*/
 Object.entries(gatsbyNode).forEach(([key, value]) => {
   exports[key] = value;
 });
