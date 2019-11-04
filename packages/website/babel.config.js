@@ -1,6 +1,5 @@
 const fse = require('fs-extra');
 const path = require('path');
-// const merge = require('babel-merge');
 
 const handleConfig = require('./handle-config').default;
 
@@ -24,9 +23,6 @@ let babelConfig = {
   ],
 };
 
-// to merge the consumer level babel.config
-// condition required to support dev testing of our website which otherwise throws Configuration cycle detected loading error.
-// if the consumer provides a babel.config extend here
 if (
   cwd !== __dirname &&
   clientBabelConfig &&
@@ -36,9 +32,7 @@ if (
   /* eslint-disable import/no-dynamic-require */
   const clientBabel = require(path.resolve(cwd, clientBabelConfig));
   babelConfig = clientBabel;
-  // babelConfig = merge(babelConfig, clientBabel);
 } else if (loadBabel) {
-  // option to pass the required babel configs as function suppose the above scenario is not supported for a consumer.
   babelConfig = loadBabel(babelConfig);
 }
 
