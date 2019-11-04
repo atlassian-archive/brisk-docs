@@ -24,6 +24,7 @@ export interface BriskConfiguration {
   readMeImgSrc?: string;
   packagesImgSrc?: string;
   templates: TemplateSpecifier[];
+  gatsbyNode?: { [key: string]: Function };
 }
 
 // User supplied brisk config
@@ -52,4 +53,5 @@ export interface UserConfig {
   readMeImgSrc?: string;
   packagesImgSrc?: string;
   templates?: TemplateSpecifier[];
+  gatsbyNode?: { [key: string]: Function };
 }

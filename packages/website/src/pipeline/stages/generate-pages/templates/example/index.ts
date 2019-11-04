@@ -15,34 +15,31 @@ const exampleTemplate = (
   wrapperPath: string,
   data = {},
 ) => outdent`
-    import React from 'react';
-    import dynamic from 'next/dynamic';
-    import fileContents from '!!raw-loader!${componentPath}';
-    import Wrapper from '${wrapperPath}';
-    
-    const DynamicComponent = dynamic(import('${componentPath}')
-    .then(Components => {
-    return () => ( 
-    <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
-          {
-            [{ 
-                name: 'default', 
-                component: <Components.default /> 
-              }, 
-              ...Object.keys(Components).filter(componentName => componentName !== 'default')
-              .map(componentName => {
-                const Component = Components[componentName];
-                return {
-                  name: componentName,
-                  component: <Component />
-                }
-              })
-            ]
+import React from 'react';
+import fileContents from '!!raw-loader!${componentPath}';
+import * as Components from '${componentPath}';
+import Wrapper from '${wrapperPath}';
+
+const Example = () => ( 
+  <Wrapper data={${JSON.stringify(data)}} fileContents={fileContents}>
+    {
+      [{ 
+          name: 'default', 
+          component: <Components.default /> 
+        }, 
+        ...Object.keys(Components).filter(componentName => componentName !== 'default')
+        .map(componentName => {
+          const Component = Components[componentName];
+          return {
+            name: componentName,
+            component: <Component />
           }
-      </Wrapper>
-      )
-    }));
-    export default () => <DynamicComponent/>
+        })
+      ]
+    }
+  </Wrapper>
+)
+export default Example
 `;
 
 export default exampleTemplate;

@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import { MenuSection, Separator, Group } from '@atlaskit/navigation-next';
 import titleCase from 'title-case';
-import LinkWithRouter from './link-with-router';
+import NavLink from './nav-link';
 import pageInfo from '../../pages-list';
 import NavHeader from './nav-header';
 import TreeNavContent, { arrayToTreeItems } from './tree-nav-content';
 import { NestedExamplePage, ExamplePage, DocsPage } from '../../../types';
 
 const GetLink = ({ id, pagePath }: ExamplePage) => (
-  <LinkWithRouter key={id} text={titleCase(id)} href={pagePath} />
+  <NavLink key={id} text={titleCase(id)} href={pagePath} />
 );
 
 const renderSubExamplesTree = (subExamples: NestedExamplePage[]) => {
@@ -63,11 +63,11 @@ const NavContent = ({
       <MenuSection id="package-section" parentId="index-section">
         {({ className }: { className: string }) => (
           <div className={className}>
-            <LinkWithRouter text="Home" href={homePath} />
+            <NavLink text="Home" href={homePath} />
             <Separator />
             {changelogPath && (
               <>
-                <LinkWithRouter text="Changelog" href={changelogPath} />
+                <NavLink text="Changelog" href={changelogPath} />
                 <Separator />
               </>
             )}

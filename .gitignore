@@ -5,12 +5,16 @@ node_modules
 .idea
 .vscode
 
+.cache
+*.tgz
+
 package-lock.json
 yarn-error.log
 
 /cypress
 **/cypress/screenshots
 
+brisk-out
 scratchings.js
 
 /packages/website/pages
@@ -18,7 +22,9 @@ scratchings.js
 /packages/website/data
 /packages/website/static/favicon.ico
 /packages/website/typings
+
 /packages/**/bundles
+/packages/website/public
 /packages/**/**/yarn.lock
 
 dist

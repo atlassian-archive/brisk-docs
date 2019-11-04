@@ -65,6 +65,8 @@ const getParentId = (
   packagePath: string,
   globPatterns: string[],
 ): string | undefined => {
+  if (globPatterns.includes(packagePath)) return undefined;
+
   // This finds the parent folder id by matching the package directory against
   // the user defined package glob paths. This method only accounts for globs of
   // the format <path>/* or <path>/*/**.
@@ -173,12 +175,14 @@ export default async ({
   packagePathPatterns,
   customPackageFields,
   cwd,
+  showSubExamples,
 }: {
   packagePathPatterns: string[];
   // user defined package.json fields to include in the output
   customPackageFields: string[];
   // absolute path to the working directory to search in
   cwd: string;
+  showSubExamples: boolean;
 }): Promise<PackageInfo[]> => {
   const packages = await getPackagesFromPatterns(packagePathPatterns, cwd);
 
@@ -224,7 +228,9 @@ export default async ({
         ? await getExamplesInDirectory(examplesPath)
         : [];
 
-      const subExamples = await getSubExamplesInPackage(directoryPath);
+      const subExamples = showSubExamples
+        ? await getSubExamplesInPackage(directoryPath)
+        : [];
 
       const packageInfo: PackageInfo = {
         id,

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Props as IconProps } from '@atlaskit/icon/glyph/shortcut';
 import { colors, gridSize, math } from '@atlaskit/theme';
 import SwitchLink from './switch-link';
 
@@ -29,7 +28,7 @@ const loadInAnimation = keyframes`
     }
 `;
 
-const PanelLink = styled(SwitchLink)`
+const PanelLink: React.ComponentType<any> = styled(SwitchLink)`
   background-color: white;
   border-radius: 3px;
   color: ${colors.N900};
@@ -101,54 +100,31 @@ const Panel = ({
   color,
   description,
   imgSrc,
-}: Props) => (
-  <PanelLink
-    data-testid="PanelLink"
-    href={href}
-    passHref
-    includeShortcutIcon={false}
-  >
-    {(isExternal: boolean) => (
-      <>
-        <PanelHeader data-testid="PanelHeader">
-          <PanelIcon color={color}>
-            <InternalExternalIcon
-              isExternal={isExternal}
-              internalIcon={IconComponent}
-              externalIcon={ExternalIconComponent}
-              label={label}
-              primaryColor={colors.N0}
-              secondaryColor={color}
-              size="medium"
-            />
-          </PanelIcon>
-          <PanelLabel data-testid="PanelLabel">{label}</PanelLabel>
-        </PanelHeader>
-        <p>{description}</p>
-        <PanelImage
-          data-testid="PanelImage"
-          alt={`${label} graphic`}
-          src={imgSrc}
-        />
-      </>
-    )}
-  </PanelLink>
-);
+}: Props) => {
+  const internal = /^(\/|\.\/|\.\.\/)(?!\/)/.test(href);
+  const IconSwitch =
+    !internal && ExternalIconComponent ? ExternalIconComponent : IconComponent;
+  return (
+    <PanelLink data-testid="PanelLink" href={href} includeShortcutIcon={false}>
+      <PanelHeader data-testid="PanelHeader">
+        <PanelIcon color={color}>
+          <IconSwitch
+            label={label}
+            primaryColor={colors.N0}
+            secondaryColor={color}
+            size="medium"
+          />
+        </PanelIcon>
+        <PanelLabel data-testid="PanelLabel">{label}</PanelLabel>
+      </PanelHeader>
+      <p>{description}</p>
+      <PanelImage
+        data-testid="PanelImage"
+        alt={`${label} graphic`}
+        src={imgSrc}
+      />
+    </PanelLink>
+  );
+};
 
 export default Panel;
-
-type InternalExternalIconProps = {
-  internalIcon: React.ComponentType<any>;
-  externalIcon?: React.ComponentType<any>;
-  isExternal: boolean;
-} & IconProps;
-
-const InternalExternalIcon = ({
-  internalIcon,
-  externalIcon,
-  isExternal,
-  ...props
-}: InternalExternalIconProps) => {
-  const Component = isExternal && externalIcon ? externalIcon : internalIcon;
-  return <Component {...props} />;
-};

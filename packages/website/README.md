@@ -7,19 +7,19 @@ docs alongside your code. It is aimed at documenting packages in a mono-repo
 
 Start by installing Brisk Docs in your project
 
-```shell
+```
 npm install @brisk-docs/website
 ```
 
 To start your docs website locally:
 
-```shell
+```
 npm run brisk dev
 ```
 
 To produce a static build of the website that can be statically hosted:
 
-```shell
+```
 npm run brisk build && npm run brisk export
 ```
 

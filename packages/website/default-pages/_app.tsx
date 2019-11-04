@@ -1,27 +1,10 @@
 import * as React from 'react';
-import App, { Container, NextAppContext } from 'next/app';
 import '@atlaskit/css-reset';
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import components from '../un-src/components/mdx';
 import Meta, { metadata } from '../un-src/components/meta-context';
-import Title from '../un-src/components/page-title';
 
-export type Props = {
-  pageProps: any;
-  Component: any;
-};
-
-export default class MyApp extends App<Props> {
-  static async getInitialProps({ Component, ctx }: NextAppContext) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
+export default class AppProvider extends React.Component<any> {
   componentDidMount() {
     /**
      * Set a marker on body indicating that we've rendered on the client side (componentDidMount does not execute on the server).
@@ -34,16 +17,11 @@ export default class MyApp extends App<Props> {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { children } = this.props;
 
     return (
       <Meta.Provider value={metadata}>
-        <Container>
-          <Title />
-          <MDXProvider components={components}>
-            <Component {...pageProps} />
-          </MDXProvider>
-        </Container>
+        <MDXProvider components={components}>{children}</MDXProvider>
       </Meta.Provider>
     );
   }

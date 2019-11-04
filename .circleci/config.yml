@@ -1,8 +1,8 @@
-version: 2
+version: 4
 
 job-setup: &job-setup
   docker:
-    - image: circleci/node:8.11.3-browsers
+    - image: circleci/node:10.13.0
   working_directory: ~/repo
 
 restore-cache: &restore-cache
@@ -83,17 +83,13 @@ jobs:
       - run: *install-bolt
 
       - run:
-          name: Build website (using complete-config-project)
-          command: bolt build:website:complete
-
-      - run:
           name: Start up website (using complete-config-project)
           command: bolt start:website:complete
           background: true
 
       - run:
           name: Cypress Suite
-          command: node_modules/.bin/wait-on http://localhost:3000 && bolt cypress:run
+          command: node_modules/.bin/wait-on http://localhost:8000 && bolt cypress:run
 
 workflows:
   version: 2

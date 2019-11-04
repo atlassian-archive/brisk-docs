@@ -7,7 +7,7 @@ import {
 import Drawer from '@atlaskit/drawer';
 import capitalize from 'lodash.capitalize';
 import data from '../../pages-list';
-import Link from './link-component';
+import LinkComponent from './link-component';
 import { Page } from '../../../types';
 
 const prettyTitle = (id: string) =>
@@ -143,7 +143,7 @@ class SearchDrawer extends React.Component<Props> {
         onClose={closeDrawer}
       >
         <QuickSearch
-          linkComponent={Link}
+          linkComponent={LinkComponent}
           onSearchInput={event =>
             this.setState({ query: event.currentTarget.value })
           }
