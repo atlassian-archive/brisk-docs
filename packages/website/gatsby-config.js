@@ -28,6 +28,14 @@ async function getConfig() {
         },
       },
       {
+        resolve: `gatsby-source-contentful`,
+        options: {
+          spaceId: process.env.CONTENTFUL_SPACE_ID,
+          accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+          forceFullSync: true
+        },
+      },
+      {
         resolve: require.resolve(`gatsby-plugin-page-creator`),
         options: {
           path: `${__dirname}/pages`,
@@ -49,7 +57,7 @@ async function getConfig() {
           // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
           display: 'browser',
           // TODO: get favicons working again
-          icon: config.favicon,
+          icon: config.favicon ? config.favicon : path.resolve(__dirname, 'static/folder_with_files.png'),
         },
       },
     ],

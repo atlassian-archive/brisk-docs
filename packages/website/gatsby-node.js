@@ -36,6 +36,34 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   actions.replaceWebpackConfig(config);
 };
 
+// TODO: We should move this out of Brisk
+exports.createPages = async function createGuidelines({ actions, graphql }) {
+  const { data } = await graphql(`
+    query {
+      allContentfulGuideline {
+        edges {
+           node {
+             title
+             slug
+             content {
+              json
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  data.allContentfulGuideline.edges.forEach(edge => {
+    const { slug } = edge.node;
+    actions.createPage({
+      path: slug,
+      component: require.resolve(`./default-pages/_guideline.tsx`),
+      context: { slug },
+    })
+  })
+}
+
 /*
 This map is being used TEMPORARILY because our project is not yet enough gatsby-like to use layered
 gatsby-node instances (the way gatsby plugins would), but we still need to allow users to provide this
