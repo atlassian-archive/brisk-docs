@@ -1,5 +1,11 @@
 # @brisk-docs/website
 
+## 1.0.1
+
+### Patch Changes
+
+- e7279f8: Fix getConfig to not export a promise, as this breaks in later versions of gatsby
+
 ## 1.0.0
 
 ### Major Changes

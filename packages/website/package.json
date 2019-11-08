@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/gatsby-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Brisk website documenter",
   "main": "dist/gatsby-generator.cjs.js",
   "module": "dist/gatsby-generator.esm.js",
