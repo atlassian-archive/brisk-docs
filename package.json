@@ -29,7 +29,7 @@
     "quick-pack": "yarn build && cd packages/website && yarn pack"
   },
   "bolt": {
-    "version": "^0.23.2",
+    "version": "^0.24.3",
     "workspaces": [
       "packages/*"
     ]

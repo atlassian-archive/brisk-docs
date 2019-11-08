@@ -48,7 +48,9 @@ module.exports = {
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: 'browser',
         // TODO: get favicons working again
-        icon: config.favicon,
+        icon: config.favicon
+          ? config.favicon
+          : path.resolve(__dirname, 'static/skier.png'),
       },
     },
   ],
