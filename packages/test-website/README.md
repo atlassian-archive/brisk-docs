@@ -2,6 +2,8 @@
 
 > Run `gatsby develop` to load a brisk site, without running a brisk command first.
 
+Why? Allowing the user to run `gatsby develop` gives them full access to writing their own gatsby layer bits (`gatsby-config` and `gatsby-node`) so they can modify gatsby's behaviour, extending or overwriting brisk, very easy. Once you want to be using gatsby, it's annoying to have to run brisk THEN gatsby, so let's see if we can move it all to gatsby bits.
+
 ## Current status
 
 You can include the brisk plugin in your gatsby config like so:
