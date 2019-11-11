@@ -1,0 +1,7 @@
+{
+    "name": "@brisk-docs/gatsby-plugin",
+    "version": "1.0.0",
+    "dependencies": {
+        "gatsby": "1.0.0"
+    }
+}
