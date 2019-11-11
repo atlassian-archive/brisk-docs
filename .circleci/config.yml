@@ -19,7 +19,7 @@ save-cache: &save-cache
 
 install-bolt: &install-bolt
   name: Install Bolt
-  command: sudo yarn global add bolt@^0.23.2 && bolt
+  command: sudo yarn global add bolt@^0.24.3 && bolt
 
 jobs:
   install:
