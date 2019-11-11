@@ -1,0 +1,9 @@
+{
+    "name": "@brisk-docs/test-website",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "@brisk-docs/gatsby-plugin": "^0.0.0",
+        "gatsby": "^2.17.10"
+    }
+}

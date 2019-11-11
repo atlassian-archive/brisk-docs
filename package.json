@@ -26,7 +26,8 @@
     "bolt:fix": "manypkg fix",
     "start:website:complete": "bolt w @brisk-docs/gatsby-generator run start:complete",
     "v-brisk": "node packages/website/bin.js",
-    "quick-pack": "yarn build && cd packages/website && yarn pack"
+    "quick-pack": "yarn build && cd packages/website && yarn pack",
+    "dev": "yarn v-brisk build-pages && cd packages/test-website && yarn gatsby develop"
   },
   "bolt": {
     "version": "^0.24.3",
@@ -123,7 +124,7 @@
     "extracted-loader": "^1.0.7",
     "filenamify": "^4.0.0",
     "fs-extra": "^7.0.1",
-    "gatsby": "^2.15.28",
+    "gatsby": "^2.17.10",
     "gatsby-plugin-emotion": "^2.0",
     "gatsby-plugin-manifest": "^2.2.26",
     "gatsby-plugin-mdx": "^1.0.46",

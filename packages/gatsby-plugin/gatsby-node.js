@@ -1,13 +1,13 @@
-const handleConfig = require('./handle-config').default;
+const handleConfig = require('@brisk-docs/gatsby-generator/handle-config')
+  .default;
+const getPkgDir = require('pkg-dir');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
-const cwd = process.env.DOCS_WEBSITE_CWD;
+const briskPkgPath = getPkgDir.sync(
+  require.resolve('@brisk-docs/gatsby-generator'),
+);
 
-if (!cwd) {
-  throw new Error('DOCS_WEBSITE_CWD is not defined');
-}
-
-const { gatsbyNode } = handleConfig(cwd, configPath);
+const { gatsbyNode } = handleConfig(briskPkgPath, configPath);
 
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   const config = getConfig();

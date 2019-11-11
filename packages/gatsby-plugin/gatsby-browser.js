@@ -1,6 +1,8 @@
 const React = require('react');
-const AppProvider = require('./pages/_app.tsx').default;
-const Layout = require('./pages/_layout.tsx').default;
+const AppProvider = require('@brisk-docs/gatsby-generator/pages/_app.tsx')
+  .default;
+const Layout = require('@brisk-docs/gatsby-generator/pages/_layout.tsx')
+  .default;
 
 /* eslint-disable react/prop-types */
 

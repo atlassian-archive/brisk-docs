@@ -30,6 +30,7 @@ scratchings.js
 
 dist
 out
+public
 
 deploy
 !deploy/changeset-bot/changeset-bot.sd.yml
