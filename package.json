@@ -23,7 +23,7 @@
     "prepare:docs": "yarn && NODE_ENV=production yarn v-brisk build",
     "postinstall": "preconstruct dev && manypkg check",
     "ws:fix": "manypkg fix",
-    "start:website:complete": "cd packages/gatsby-generator && yarn start:complete",
+    "start:website:complete": "cd complete-test-website && yarn bad-start-script",
     "quick-pack": "yarn build && yarn quick-pack:generator && yarn quick-pack:plugin",
     "quick-pack:generator": "cd packages/gatsby-generator && yarn pack",
     "quick-pack:plugin": "cd packages/gatsby-plugin && yarn pack",
@@ -31,7 +31,8 @@
   },
   "workspaces": [
     "packages/*",
-    "website"
+    "website",
+    "complete-test-website"
   ],
   "preconstruct": {
     "packages": [

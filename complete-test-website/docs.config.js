@@ -54,12 +54,12 @@ module.exports = () => ({
     {
       page: 'package:home',
       position: 'above',
-      component: 'dummy-data/templates/package-home-extension',
+      component: 'templates/package-home-extension',
     },
     {
       page: 'package:home',
       position: 'replace',
-      component: 'dummy-data/templates/package-home-replacement',
+      component: 'templates/package-home-replacement',
     },
   ],
 });
