@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "gatsby": "^2.17.10",
         "@brisk-docs/gatsby-generator": "^1.0.1",
-        "@brisk-docs/gatsby-plugin": "^0.0.0"
+        "@brisk-docs/gatsby-plugin": "^0.0.0",
+        "gatsby": "^2.17.10"
     },
     "scripts": {
         "start": "brisk build-pages && gatsby develop"
