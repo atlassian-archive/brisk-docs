@@ -4263,11 +4263,6 @@ array-back@^2.0.0:
   dependencies:
     typical "^2.6.1"
 
-array-differ@^1.0.0:
-  version "1.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/array-differ/-/array-differ-1.0.0.tgz#eff52e3758249d33be402b8bb8e564bb2b5d4031"
-  integrity sha1-7/UuN1gknTO+QCuLuOVkuytdQDE=
-
 array-equal@^1.0.0:
   version "1.0.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/array-equal/-/array-equal-1.0.0.tgz#8c2a5ef2472fd9ea742b04c77a75093ba2757c93"
@@ -4371,7 +4366,7 @@ arraybuffer.slice@~0.0.7:
   resolved "https://registry.yarnpkg.com/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz#3bbc4275dd584cc1b10809b89d4e8b63a69e7675"
   integrity sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==
 
-arrify@^1.0.0, arrify@^1.0.1:
+arrify@^1.0.1:
   version "1.0.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
@@ -4967,7 +4962,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.x.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.25.0, babel-runtime@^6.26.0:
+babel-runtime@6.x.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -5527,21 +5522,6 @@ bytes@3.1.0:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
-bytewise-core@^1.2.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/bytewise-core/-/bytewise-core-1.2.3.tgz#3fb410c7e91558eb1ab22a82834577aa6bd61d42"
-  integrity sha1-P7QQx+kVWOsasiqCg0V3qmvWHUI=
-  dependencies:
-    typewise-core "^1.2"
-
-bytewise@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/bytewise/-/bytewise-1.1.0.tgz#1d13cbff717ae7158094aa881b35d081b387253e"
-  integrity sha1-HRPL/3F65xWAlKqIGzXQgbOHJT4=
-  dependencies:
-    bytewise-core "^1.2.2"
-    typewise "^1.0.3"
-
 cacache@^12.0.2:
   version "12.0.3"
   resolved "https://registry.yarnpkg.com/cacache/-/cacache-12.0.3.tgz#be99abba4e1bf5df461cd5a2c1071fc432573390"
@@ -5978,11 +5958,6 @@ chrome-trace-event@^1.0.2:
   dependencies:
     tslib "^1.9.0"
 
-chunkd@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/chunkd/-/chunkd-1.0.0.tgz#4ead4a3704bcce510c4bb4d4a8be30c557836dd1"
-  integrity sha512-xx3Pb5VF9QaqCotolyZ1ywFBgyuJmu6+9dLiqBxgelEse9Xsr3yUlpoX3O4Oh11M00GT2kYMsRByTKIMJW2Lkg==
-
 ci-info@2.0.0, ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
@@ -5992,11 +5967,6 @@ ci-info@^1.0.0, ci-info@^1.5.0:
   version "1.6.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/ci-info/-/ci-info-1.6.0.tgz#2ca20dbb9ceb32d4524a683303313f0304b1e497"
   integrity sha512-vsGdkwSCDpWmP80ncATX7iea5DWQemg1UgCW5J8tqjU3lYw4FBYuj89J0CTVomA7BEfvSZd84GmHko+MxFQU2A==
-
-ci-parallel-vars@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ci-parallel-vars/-/ci-parallel-vars-1.0.0.tgz#af97729ed1c7381911ca37bcea263d62638701b3"
-  integrity sha512-u6dx20FBXm+apMi+5x7UVm6EH7BL1gc4XrcnQewjcB7HWRcor/V5qWc3RG2HwpgDJ26gIi2DSEu3B7sXynAw/g==
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -6020,11 +5990,6 @@ classnames@^2.2.5:
   version "2.2.6"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
-
-clean-stack@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.3.0.tgz#9e821501ae979986c46b1d66d2d432db2fd4ae31"
-  integrity sha1-noIVAa6XmYbEax1m0tQy2y/UrjE=
 
 clean-stack@^2.0.0:
   version "2.2.0"
@@ -6156,14 +6121,6 @@ clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
-
-cmd-shim@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/cmd-shim/-/cmd-shim-2.0.2.tgz#6fcbda99483a8fd15d7d30a196ca69d688a2efdb"
-  integrity sha1-b8vamUg6j9FdfTChlspp1oii79s=
-  dependencies:
-    graceful-fs "^4.1.2"
-    mkdirp "~0.5.0"
 
 co@^4.6.0:
   version "4.6.0"
@@ -7353,11 +7310,6 @@ detect-indent@^4.0.0:
   dependencies:
     repeating "^2.0.0"
 
-detect-indent@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
-  integrity sha1-OHHMCmoALow+Wzz38zYmRnXwa50=
-
 detect-indent@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
@@ -7368,7 +7320,7 @@ detect-libc@^1.0.2, detect-libc@^1.0.3:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-detect-newline@2.1.0, detect-newline@^2.1.0:
+detect-newline@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
   integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
@@ -9743,7 +9695,7 @@ get-stream@^5.0.0:
   dependencies:
     pump "^3.0.0"
 
-get-value@^2.0.2, get-value@^2.0.3, get-value@^2.0.6:
+get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
@@ -12995,21 +12947,6 @@ memory-fs@^0.4.0, memory-fs@^0.4.1:
     errno "^0.1.3"
     readable-stream "^2.0.1"
 
-meow@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/meow/-/meow-4.0.1.tgz#d48598f6f4b1472f35bf6317a95945ace347f975"
-  integrity sha512-xcSBHD5Z86zaOc+781KrupuHAzeGXSLtiAOmBsiLDiPSaYSB6hdew2ng9EBAnZ62jagG9MHAOdxpDi/lWBFJ/A==
-  dependencies:
-    camelcase-keys "^4.0.0"
-    decamelize-keys "^1.0.0"
-    loud-rejection "^1.0.0"
-    minimist "^1.1.3"
-    minimist-options "^3.0.1"
-    normalize-package-data "^2.3.4"
-    read-pkg-up "^3.0.0"
-    redent "^2.0.0"
-    trim-newlines "^2.0.0"
-
 meow@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
@@ -13202,7 +13139,7 @@ minimatch@3.0.3:
   dependencies:
     brace-expansion "^1.0.0"
 
-minimatch@^3.0.0, minimatch@^3.0.3, minimatch@^3.0.4:
+minimatch@^3.0.3, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -13222,7 +13159,7 @@ minimist@0.0.8:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
 
-minimist@1.2.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, "minimist@~ 1.2.0":
+minimist@1.2.0, minimist@^1.1.1, minimist@^1.2.0, "minimist@~ 1.2.0":
   version "1.2.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
@@ -13298,7 +13235,7 @@ mkdirp@0.5.0:
   dependencies:
     minimist "0.0.8"
 
-mkdirp@0.5.1, mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
+mkdirp@0.5.1, mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
@@ -13364,16 +13301,6 @@ multicast-dns@^6.0.1:
   dependencies:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
-
-multimatch@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/multimatch/-/multimatch-2.1.0.tgz#9c7906a22fb4c02919e2f5f75161b4cdbd4b2a2b"
-  integrity sha1-nHkGoi+0wCkZ4vX3UWG0zb1LKis=
-  dependencies:
-    array-differ "^1.0.0"
-    array-union "^1.0.1"
-    arrify "^1.0.0"
-    minimatch "^3.0.0"
 
 multipipe@^1.0.2:
   version "1.0.2"
@@ -14609,13 +14536,6 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-pkg-up@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-2.0.0.tgz#c819ac728059a461cab1c3889a2be3c49a004d7f"
-  integrity sha1-yBmscoBZpGHKscOImivjxJoATX8=
-  dependencies:
-    find-up "^2.1.0"
-
 pn@^1.1.0:
   version "1.1.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
@@ -15193,13 +15113,6 @@ progress@^2.0.0, progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
-
-project-bin-path@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/project-bin-path/-/project-bin-path-1.1.1.tgz#7a8b3817f54c41a14cd5a6e904ca5400c34fc17b"
-  integrity sha512-PL6otyI6ZUnraSi801zwPYRfo+FkPKTvjj5iD9LIVDPo9GLW508K54uUvcS06aLMWyvRdEU6VURT2JhGEfU8/A==
-  dependencies:
-    find-up "^2.1.0"
 
 promise-inflight@^1.0.1:
   version "1.0.1"
@@ -15800,13 +15713,6 @@ read-chunk@^3.2.0:
   dependencies:
     pify "^4.0.1"
     with-open-file "^0.1.6"
-
-read-cmd-shim@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/read-cmd-shim/-/read-cmd-shim-1.0.1.tgz#2d5d157786a37c055d22077c32c53f8329e91c7b"
-  integrity sha1-LV0Vd4ajfAVdIgd8MsU/gynpHHs=
-  dependencies:
-    graceful-fs "^4.1.2"
 
 read-file-async@^1.0.0:
   version "1.0.0"
@@ -17222,16 +17128,6 @@ sockjs@0.3.19:
     faye-websocket "^0.10.0"
     uuid "^3.0.1"
 
-sort-asc@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/sort-asc/-/sort-asc-0.2.0.tgz#00a49e947bc25d510bfde2cbb8dffda9f50eb2fc"
-  integrity sha1-AKSelHvCXVEL/eLLuN/9qfUOsvw=
-
-sort-desc@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/sort-desc/-/sort-desc-0.2.0.tgz#280c1bdafc6577887cedbad1ed2e41c037976646"
-  integrity sha1-KAwb2vxld4h87brR7S5BwDeXZkY=
-
 sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
@@ -17245,18 +17141,6 @@ sort-keys@^2.0.0:
   integrity sha1-ZYU1WEhh7JfXMNbPQYIuH1ZoQSg=
   dependencies:
     is-plain-obj "^1.0.0"
-
-sort-object@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/sort-object/-/sort-object-3.0.2.tgz#daf2b693f611f7dd2a21b82b805e4eac230f755e"
-  integrity sha1-2vK2k/YR990qIbgrgF5OrCMPdV4=
-  dependencies:
-    bytewise "^1.1.0"
-    get-value "^2.0.2"
-    is-extendable "^0.1.1"
-    sort-asc "^0.2.0"
-    sort-desc "^0.2.0"
-    union-value "^0.2.3"
 
 source-list-map@^1.1.1:
   version "1.1.2"
@@ -17933,30 +17817,6 @@ tar@^5.0.5:
     mkdirp "^0.5.0"
     yallist "^4.0.0"
 
-task-graph-runner@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/task-graph-runner/-/task-graph-runner-1.0.2.tgz#dfc73e4f92d74b974a854ccd3b2a8c7f1fbf4137"
-  integrity sha512-ua9VE+cJ4LVT1TcSl31vFi50NaPFFyAUdjsqpXuooe8AZm1nBP443swgNRjA3CxatSZKtP6vacErIbClMSCmTA==
-  dependencies:
-    array-includes "^3.0.3"
-
-temp-dir@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-1.0.0.tgz#0a7c0ea26d3a39afa7e0ebea9c1fc0bc4daa011d"
-  integrity sha1-CnwOom06Oa+n4OvqnB/AvE2qAR0=
-
-temp-write@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/temp-write/-/temp-write-3.4.0.tgz#8cff630fb7e9da05f047c74ce4ce4d685457d492"
-  integrity sha1-jP9jD7fp2gXwR8dM5M5NaFRX1JI=
-  dependencies:
-    graceful-fs "^4.1.2"
-    is-stream "^1.1.0"
-    make-dir "^1.0.0"
-    pify "^3.0.0"
-    temp-dir "^1.0.0"
-    uuid "^3.0.1"
-
 term-size@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
@@ -18418,18 +18278,6 @@ typescript@^3.2.1:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3333.tgz#171b2c5af66c59e9431199117a3bcadc66fdcfd6"
   integrity sha512-JjSKsAfuHBE/fB2oZ8NxtRTk5iGcg6hkYXMnZ3Wc+b2RSqejEqTaem11mHASMnFilHrax3sLK0GDzcJrekZYLw==
 
-typewise-core@^1.2, typewise-core@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/typewise-core/-/typewise-core-1.2.0.tgz#97eb91805c7f55d2f941748fa50d315d991ef195"
-  integrity sha1-l+uRgFx/VdL5QXSPpQ0xXZke8ZU=
-
-typewise@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/typewise/-/typewise-1.0.3.tgz#1067936540af97937cc5dcf9922486e9fa284651"
-  integrity sha1-EGeTZUCvl5N8xdz5kiSG6fooRlE=
-  dependencies:
-    typewise-core "^1.2.0"
-
 typical@^2.6.1:
   version "2.6.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/typical/-/typical-2.6.1.tgz#5c080e5d661cbbe38259d2e70a3c7253e873881d"
@@ -18537,16 +18385,6 @@ unified@^8.4.1:
     is-plain-obj "^2.0.0"
     trough "^1.0.0"
     vfile "^4.0.0"
-
-union-value@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/union-value/-/union-value-0.2.4.tgz#7375152786679057e7b37aa676e83468fc0274f0"
-  integrity sha1-c3UVJ4ZnkFfns3qmdug0aPwCdPA=
-  dependencies:
-    arr-union "^3.1.0"
-    get-value "^2.0.6"
-    is-extendable "^0.1.1"
-    set-value "^0.4.3"
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -19563,11 +19401,6 @@ yargs@^9.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
-
-yarn@^1.9.4:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.13.0.tgz#affa9c956739548024068532a902cf18c9cb523f"
-  integrity sha512-Unfw2eefv8imt4ZMPhvFVP44WCz38huDxkHs+Yqrx4wBTK75Tr0mh3V4rh+2Nw5iQq0rcM/VafotCZo9qTb5DA==
 
 yauzl@2.4.1:
   version "2.4.1"
