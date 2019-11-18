@@ -57,7 +57,7 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - install: *install
+      - run: *install
 
       - run:
           name: Jest Suite
