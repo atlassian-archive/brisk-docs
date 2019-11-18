@@ -39,7 +39,7 @@ export default async function spawnGatsbyProcess({
         ...process.env,
         ...envVariables,
       },
-      cwd: '/Users/bconolly/Development/brisk-docs/packages/test-website',
+      cwd: pkgRoot,
     },
   );
 
