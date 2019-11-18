@@ -18,14 +18,14 @@ yarn-error.log
 brisk-out
 scratchings.js
 
-/packages/website/pages
+/packages/gatsby-generator/pages
 
-/packages/website/data
-/packages/website/static/favicon.ico
-/packages/website/typings
+/packages/gatsby-generator/data
+/packages/gatsby-generator/static/favicon.ico
+/packages/gatsby-generator/typings
 
 /packages/**/bundles
-/packages/website/public
+/packages/gatsby-generator/public
 /packages/**/**/yarn.lock
 
 dist

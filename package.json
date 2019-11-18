@@ -25,7 +25,9 @@
     "ws:fix": "manypkg fix",
     "start:website:complete": "cd packages/website && yarn start:complete",
     "brisk": "node packages/website/bin.js",
-    "quick-pack": "yarn build && cd packages/website && yarn pack",
+    "quick-pack": "yarn build && yarn quick-pack:generator && yarn quick-pack:plugin",
+    "quick-pack:generator": "cd packages/website && yarn pack",
+    "quick-pack:plugin": "cd packages/gatsby-plugin && yarn pack",
     "dev": "yarn v-brisk build-pages && cd packages/test-website && yarn gatsby develop"
   },
   "workspaces": [
