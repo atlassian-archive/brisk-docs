@@ -10,35 +10,34 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build": "preconstruct build",
-    "build:docs": "NODE_ENV=production node packages/website/bin.js build",
-    "clean": "yarn clean:caches && yarn clean:dist && yarn clean:modules",
-    "clean:caches": "rm -rf packages/website/pages && rm -rf packages/website/.cache",
-    "clean:dist": "bolt ws exec --parallel -- rm -rf dist",
-    "clean:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
+    "clean": "yarn clean:caches && yarn clean:modules",
+    "clean:caches": "rm -rf packages/gatsby-generator/pages && rm -rf packages/gatsby-generator/.cache",
+    "clean:modules": "node scripts/clean.js && rm -rf node_modules",
     "prettier": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn check:types",
     "lint:prettier": "prettier --list-different \"**/*.{js,ts,tsx}\"",
     "lint:eslint": "yarn eslint . --ext .ts,.tsx,.js",
     "check:types": "yarn tsc",
     "release": "yarn build && changeset publish",
-    "prepare:docs": "bolt && NODE_ENV=production yarn v-brisk build",
+    "prepare:docs": "NODE_ENV=production cd brisk-docs-website && brisk build-pages && gatsby build",
     "postinstall": "preconstruct dev && manypkg check",
-    "bolt:fix": "manypkg fix",
-    "start:website:complete": "bolt w @brisk-docs/gatsby-generator run start:complete",
-    "v-brisk": "node packages/website/bin.js",
-    "quick-pack": "yarn build && cd packages/website && yarn pack"
+    "ws:fix": "manypkg fix",
+    "start:website:complete": "cd complete-test-website && yarn start",
+    "quick-pack": "yarn build && yarn quick-pack:generator && yarn quick-pack:plugin",
+    "quick-pack:generator": "cd packages/gatsby-generator && yarn pack",
+    "quick-pack:plugin": "cd packages/gatsby-plugin && yarn pack",
+    "dev": "cd brisk-docs-website && brisk build-pages && gatsby develop"
   },
-  "bolt": {
-    "version": "^0.24.3",
-    "workspaces": [
-      "packages/*"
-    ]
-  },
+  "workspaces": [
+    "packages/*",
+    "website",
+    "complete-test-website"
+  ],
   "preconstruct": {
     "packages": [
-      "packages/react-changelogs",
       "packages/file-viewer",
-      "packages/website"
+      "packages/react-changelogs",
+      "packages/gatsby-generator"
     ]
   },
   "dependencies": {
@@ -102,7 +101,6 @@
     "babel-plugin-styled-components": "1.10.0",
     "babel-plugin-transform-dynamic-import": "^2.1.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "bolt": "^0.24.3",
     "command-line-args": "^5.0.2",
     "cypress": "^3.1.5",
     "emotion": "^9.1.3",
@@ -123,7 +121,7 @@
     "extracted-loader": "^1.0.7",
     "filenamify": "^4.0.0",
     "fs-extra": "^7.0.1",
-    "gatsby": "^2.15.28",
+    "gatsby": "^2.17.10",
     "gatsby-plugin-emotion": "^2.0",
     "gatsby-plugin-manifest": "^2.2.26",
     "gatsby-plugin-mdx": "^1.0.46",
@@ -132,6 +130,7 @@
     "gatsby-plugin-styled-components": "^3.1.8",
     "gatsby-plugin-typescript": "^2.1.11",
     "gatsby-source-filesystem": "^2.1.28",
+    "get-workspaces": "^0.5.2",
     "git-url-parse": "^11.1.2",
     "glob": "^7.1.3",
     "jest": "^24.1.0",
@@ -160,6 +159,7 @@
     "react-test-renderer": "^16.0.0",
     "remark-frontmatter": "^1.3.2",
     "remark-parse": "^6.0.3",
+    "rimraf": "^3.0.0",
     "semver": "^5.4.1",
     "styled-components": "^3.2.6",
     "title-case": "^2.1.1",

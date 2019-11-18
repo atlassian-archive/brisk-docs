@@ -1,8 +1,8 @@
 {
   "baseUrl": "http://localhost:8000",
-  "integrationFolder": "packages/website/cypress/integration",
-  "fixturesFolder": "packages/website/cypress/fixtures",
-  "screenshotsFolder": "packages/website/cypress/screenshots",
-  "supportFile": "packages/website/cypress/support/index.js",
+  "integrationFolder": "packages/gatsby-generator/cypress/integration",
+  "fixturesFolder": "packages/gatsby-generator/cypress/fixtures",
+  "screenshotsFolder": "packages/gatsby-generator/cypress/screenshots",
+  "supportFile": "packages/gatsby-generator/cypress/support/index.js",
   "video": false
 }

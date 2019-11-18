@@ -1,4 +1,4 @@
-version: 4
+version: 5
 
 job-setup: &job-setup
   docker:
@@ -17,9 +17,9 @@ save-cache: &save-cache
     - ~/.cache
   key: v3-dependencies-{{ checksum "yarn.lock" }}
 
-install-bolt: &install-bolt
-  name: Install Bolt
-  command: sudo yarn global add bolt@^0.24.3 && bolt
+install-packages: &install-packages
+  name: Install Packages
+  command: yarn
 
 jobs:
   install:
@@ -31,7 +31,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache: *restore-cache
 
-      - run: *install-bolt
+      - run:
+          name: Yarn Install
+          command: yarn
 
       - run:
           name: Install Cypress
@@ -46,13 +48,11 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - run: *install-bolt
-
       - save_cache: *save-cache
 
       - run:
           name: Lint Files
-          command: bolt lint
+          command: yarn lint
 
   unit_tests:
     <<: *job-setup
@@ -61,7 +61,7 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - run: *install-bolt
+      - run: *install-packages
 
       - run:
           name: Jest Suite
@@ -80,11 +80,11 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - run: *install-bolt
+      - run: *install-packages
 
       - run:
           name: Start up website (using complete-config-project)
-          command: bolt start:website:complete
+          command: yarn start:website:complete
           background: true
 
       - run:

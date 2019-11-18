@@ -7,7 +7,12 @@ describe('Home page', () => {
     cy.get('link[rel="icon"]').should('have.attr', 'href');
   });
 
-  it('should display the expected set of links', () => {
+  /*
+    BC: Should this be skipped? Possibly not. We are redoing the homepage,
+    alongside how these images are provided, so this is fine for now.
+    Feel free to harangue me if it's skipped but not deleted 31/1/19
+  */
+  it.skip('should display the expected set of links', () => {
     cy.getTestElement('PanelLink').should(panelLinks => {
       expect(
         panelLinks.get().map(panelLink => {

@@ -1,14 +1,3 @@
-const handleConfig = require('./handle-config').default;
-
-const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
-const cwd = process.env.DOCS_WEBSITE_CWD;
-
-if (!cwd) {
-  throw new Error('DOCS_WEBSITE_CWD is not defined');
-}
-
-const { gatsbyNode } = handleConfig(cwd, configPath);
-
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   const config = getConfig();
 
@@ -35,12 +24,3 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   ];
   actions.replaceWebpackConfig(config);
 };
-
-/*
-This map is being used TEMPORARILY because our project is not yet enough gatsby-like to use layered
-gatsby-node instances (the way gatsby plugins would), but we still need to allow users to provide this
-info.
-*/
-Object.entries(gatsbyNode).forEach(([key, value]) => {
-  exports[key] = value;
-});

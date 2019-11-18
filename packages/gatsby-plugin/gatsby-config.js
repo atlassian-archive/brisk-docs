@@ -2,16 +2,16 @@
 Only plugins can export async functions, so we are nesting our config like so
 */
 const path = require('path');
-const handleConfig = require('./handle-config').default;
+const handleConfig = require('@brisk-docs/gatsby-generator/handle-config')
+  .default;
+const getPkgDir = require('pkg-dir');
 
 const configPath = process.env.DOCS_WEBSITE_CONFIG_PATH;
-const cwd = process.env.DOCS_WEBSITE_CWD;
+const briskPkgPath = getPkgDir.sync(
+  require.resolve('@brisk-docs/gatsby-generator'),
+);
 
-if (!cwd) {
-  throw new Error('DOCS_WEBSITE_CWD is not defined');
-}
-
-const config = handleConfig(cwd, configPath);
+const config = handleConfig(briskPkgPath, configPath);
 
 module.exports = {
   plugins: [
@@ -23,13 +23,13 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: path.resolve(__dirname, 'pages/'),
+        path: path.resolve(briskPkgPath, 'pages/'),
       },
     },
     {
       resolve: require.resolve(`gatsby-plugin-page-creator`),
       options: {
-        path: `${__dirname}/pages`,
+        path: `${briskPkgPath}/pages`,
       },
     },
     {

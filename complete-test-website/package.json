@@ -1,0 +1,14 @@
+{
+    "name": "@brisk-docs/test-project-all-config",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "@brisk-docs/gatsby-generator": "^1.0.1",
+        "@brisk-docs/gatsby-plugin": "^0.0.0",
+        "gatsby": "^2.17.10",
+        "react": "16.10.2"
+    },
+    "scripts": {
+        "start": "brisk build-pages && gatsby develop"
+    }
+}

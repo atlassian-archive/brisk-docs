@@ -1,6 +1,7 @@
 const docs = [
   {
-    path: './docs',
+    path: '../docs',
+    urlPath: 'docs',
     name: 'Docs',
     description:
       'Information about brisk as a whole, and contributing to brisk',
@@ -11,7 +12,8 @@ const links = [];
 
 if (process.env && process.env.CONTEXT !== 'production') {
   docs.push({
-    path: './example-pages',
+    path: '../example-pages',
+    urlPath: 'example-pages',
     name: 'Example Pages',
     description: 'This is a collection of example pages.',
   });
@@ -30,7 +32,7 @@ if (process.env && process.env.CONTEXT !== 'production') {
 
 module.exports = () => ({
   siteName: 'Brisk Docs Docs',
-  packages: ['./packages/*'],
+  packages: ['../packages/*'],
   showSubExamples: false,
   docs,
   links,
