@@ -3,11 +3,11 @@ node_modules
 out
 brisk-out
 
-packages/website/pages
+packages/gatsby-generator/pages
 
-packages/website/data/**/*.json
+packages/gatsby-generator/data/**/*.json
 
-packages/website/bundles/**/*.js
+packages/gatsby-generator/bundles/**/*.js
 
 packages/**/dist/**/*
 

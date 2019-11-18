@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@brisk-docs/gatsby-plugin": "^0.0.0",
+    "@brisk-docs/gatsby-generator": "^1.0.1",
     "gatsby": "^2.17.10"
   }
 }

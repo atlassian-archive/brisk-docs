@@ -10,9 +10,9 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build": "preconstruct build",
-    "build:docs": "NODE_ENV=production node packages/website/bin.js build",
+    "build:docs": "NODE_ENV=production node packages/gatsby-generator/bin.js build",
     "clean": "yarn clean:caches && yarn clean:modules",
-    "clean:caches": "rm -rf packages/website/pages && rm -rf packages/website/.cache",
+    "clean:caches": "rm -rf packages/gatsby-generator/pages && rm -rf packages/gatsby-generator/.cache",
     "clean:modules": "node scripts/clean.js && rm -rf node_modules",
     "prettier": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn check:types",
@@ -23,21 +23,21 @@
     "prepare:docs": "yarn && NODE_ENV=production yarn v-brisk build",
     "postinstall": "preconstruct dev && manypkg check",
     "ws:fix": "manypkg fix",
-    "start:website:complete": "cd packages/website && yarn start:complete",
-    "brisk": "node packages/website/bin.js",
+    "start:website:complete": "cd packages/gatsby-generator && yarn start:complete",
     "quick-pack": "yarn build && yarn quick-pack:generator && yarn quick-pack:plugin",
-    "quick-pack:generator": "cd packages/website && yarn pack",
+    "quick-pack:generator": "cd packages/gatsby-generator && yarn pack",
     "quick-pack:plugin": "cd packages/gatsby-plugin && yarn pack",
-    "dev": "yarn v-brisk build-pages && cd packages/test-website && yarn gatsby develop"
+    "dev": "cd website && yarn brisk build-pages && yarn gatsby develop"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "website"
   ],
   "preconstruct": {
     "packages": [
       "packages/file-viewer",
       "packages/react-changelogs",
-      "packages/website"
+      "packages/gatsby-generator"
     ]
   },
   "dependencies": {

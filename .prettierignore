@@ -4,5 +4,5 @@ dist
 /out
 brisk-out
 .cache
-/packages/website/pages
+/packages/gatsby-generator/pages
 /cypress
