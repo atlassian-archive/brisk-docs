@@ -57,6 +57,8 @@ jobs:
 
       - restore_cache: *restore-cache
 
+      - install: *install
+
       - run:
           name: Jest Suite
           command: yarn jest --ci --runInBand --coverage --reporters=default --reporters=jest-junit
