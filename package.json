@@ -22,11 +22,11 @@
     "prepare:docs": "yarn && NODE_ENV=production yarn brisk build",
     "postinstall": "preconstruct dev && manypkg check",
     "ws:fix": "manypkg fix",
-    "start:website:complete": "cd complete-test-website && yarn bad-start-script",
+    "start:website:complete": "cd complete-test-website && yarn start",
     "quick-pack": "yarn build && yarn quick-pack:generator && yarn quick-pack:plugin",
     "quick-pack:generator": "cd packages/gatsby-generator && yarn pack",
     "quick-pack:plugin": "cd packages/gatsby-plugin && yarn pack",
-    "dev": "cd website && yarn brisk build-pages && yarn gatsby develop"
+    "dev": "cd brisk-docs-website && brisk build-pages && gatsby develop"
   },
   "workspaces": [
     "packages/*",

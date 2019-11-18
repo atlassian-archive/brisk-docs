@@ -8,6 +8,6 @@
         "@brisk-docs/gatsby-plugin": "^0.0.0"
     },
     "scripts": {
-        "bad-start-script": "brisk build-pages && gatsby develop"
+        "start": "brisk build-pages && gatsby develop"
     }
 }
