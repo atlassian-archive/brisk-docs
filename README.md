@@ -4,9 +4,9 @@
 
 Brisk is an Atlassian Initiative to help with documenting code. It contains two main parts:
 
-## [The Brisk Website Generator](./packages/website)
+## [The Brisk Website Generator](./packages/gatsby-generator)
 
-This is packaged as `@brisk-docs/website` and is designed as an all-inclusive documentation
+This is packaged as `@brisk-docs/gatsby-plugin` and is designed as an all-inclusive documentation
 tool for mono-repos containing react components and other packages. Check out [the package's documentation](./packages/website)
 for more information on how to use it.
 
