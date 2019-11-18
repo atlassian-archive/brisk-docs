@@ -80,7 +80,7 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - run: *install
+      - run: *install-packages
 
       - run:
           name: Start up website (using complete-config-project)
