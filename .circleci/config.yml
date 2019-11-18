@@ -17,6 +17,10 @@ save-cache: &save-cache
     - ~/.cache
   key: v3-dependencies-{{ checksum "yarn.lock" }}
 
+install-packages: &install-packages
+  name: Install Packages
+  command: yarn
+
 jobs:
   install:
     <<: *job-setup
@@ -57,7 +61,7 @@ jobs:
 
       - restore_cache: *restore-cache
 
-      - run: *install
+      - run: *install-packages
 
       - run:
           name: Jest Suite
@@ -75,6 +79,8 @@ jobs:
       - checkout
 
       - restore_cache: *restore-cache
+
+      - run: *install
 
       - run:
           name: Start up website (using complete-config-project)
