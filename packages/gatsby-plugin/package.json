@@ -1,9 +1,9 @@
 {
   "name": "@brisk-docs/gatsby-plugin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "dependencies": {
-    "@brisk-docs/gatsby-generator": "1.0.1",
+    "@brisk-docs/gatsby-generator": "1.1.0",
     "fs-extra": "^7.0.1",
     "pkg-dir": "^4.2.0"
   },

@@ -1,5 +1,11 @@
 # @brisk-docs/file-viewer
 
+## 0.2.5
+
+### Patch Changes
+
+- 36693fd: Safety bump
+
 ## 0.2.4
 
 ### Patch Changes

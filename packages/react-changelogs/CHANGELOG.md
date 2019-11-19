@@ -1,5 +1,11 @@
 # @brisk-docs/react-changelogs
 
+## 0.1.11
+
+### Patch Changes
+
+- 36693fd: Safety bump
+
 ## 0.1.10
 
 ### Patch Changes

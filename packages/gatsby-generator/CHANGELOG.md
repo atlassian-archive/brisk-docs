@@ -1,5 +1,18 @@
 # @brisk-docs/website
 
+## 1.1.0
+
+### Minor Changes
+
+- 36693fd: Switch gatsby to run using a plugin, not controlled directly by brisk
+
+### Patch Changes
+
+- 3c58139: Fix default for icon
+- Updated dependencies [36693fd]
+  - @brisk-docs/file-viewer@0.2.5
+  - @brisk-docs/react-changelogs@0.1.11
+
 ## 1.0.1
 
 ### Patch Changes

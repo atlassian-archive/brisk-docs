@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/react-changelogs",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "This package is used for displaying changelogs from your projects",
   "main": "dist/react-changelogs.cjs.js",
   "module": "dist/react-changelogs.esm.js",
@@ -11,9 +11,7 @@
   ],
   "author": "Aparna Raj",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "react": "16.10.2",
     "react-dom": "^16.8.4"

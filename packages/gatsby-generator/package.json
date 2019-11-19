@@ -1,6 +1,6 @@
 {
   "name": "@brisk-docs/gatsby-generator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The Brisk website documenter",
   "main": "dist/gatsby-generator.cjs.js",
   "module": "dist/gatsby-generator.esm.js",
@@ -65,8 +65,8 @@
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.3",
-    "@brisk-docs/file-viewer": "^0.2.4",
-    "@brisk-docs/react-changelogs": "^0.1.10",
+    "@brisk-docs/file-viewer": "^0.2.5",
+    "@brisk-docs/react-changelogs": "^0.1.11",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@mdx-js/loader": "^0.17.5",
