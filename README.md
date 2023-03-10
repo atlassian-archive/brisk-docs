@@ -1,3 +1,5 @@
+## This repo is no longer maintained and has been archived for historic purposes.
+
 # Brisk Docs
 
 > Tools to document your mono-repos and React Packages
